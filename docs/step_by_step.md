@@ -60,7 +60,7 @@ Checklist ปฏิบัติสำหรับสร้างระบบ `ha
 
 - [x] DigitalOcean Spaces — bucket `sacred` ([Control Panel](https://cloud.digitalocean.com/spaces/sacred))
 - [x] region `sgp1` (Singapore) — endpoint `https://sgp1.digitaloceanspaces.com`
-- [ ] Access key / secret — เก็บใน `.env` หรือ GitHub Secrets เท่านั้น ไม่ commit repo
+- [ ] Access key / secret — เก็บใน `.env` หรือ GitHub Secrets เท่านั้น · **อย่า paste ใน chat, issue, หรือ commit repo**
 - [ ] Droplet, GitHub Actions — defer Phase 6
 
 prefix ใน bucket (ตาม convention):
