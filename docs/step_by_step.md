@@ -50,9 +50,11 @@ Checklist ปฏิบัติสำหรับสร้างระบบ `ha
 
 ### 0.3 เครื่องมือบนเครื่อง dev
 
-- [ ] ติดตั้ง Git
-- [ ] ติดตั้ง Docker Desktop (Windows)
-- [ ] ติดตั้ง Node.js 20+ (สำหรับ build Vue)
+- [x] ติดตั้ง Git — `2.45.2.windows.1`
+- [x] ติดตั้ง Docker Desktop (Windows) — Docker `29.2.0`, Compose `v5.0.2`, daemon รันได้
+- [x] ติดตั้ง Node.js 20+ (สำหรับ build Vue) — Node `v24.4.1`, npm `11.5.2`
+
+ตรวจสอบบนเครื่อง dev วันที่ 2026-06-21 — ไม่ต้องติดตั้งเพิ่ม ก่อน Phase 1 รัน `docker compose up` ได้ทันทีเมื่อ scaffold พร้อม
 
 ### 0.4 Definition of Ready (ก่อนเริ่มแต่ละงาน)
 
