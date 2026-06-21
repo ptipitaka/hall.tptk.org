@@ -56,6 +56,23 @@ Checklist ปฏิบัติสำหรับสร้างระบบ `ha
 
 ตรวจสอบบนเครื่อง dev วันที่ 2026-06-21 — ไม่ต้องติดตั้งเพิ่ม ก่อน Phase 1 รัน `docker compose up` ได้ทันทีเมื่อ scaffold พร้อม
 
+### 0.3b Infrastructure เตรียมแล้ว (ไม่บังคับก่อน Phase 1)
+
+- [x] DigitalOcean Spaces — bucket `sacred` ([Control Panel](https://cloud.digitalocean.com/spaces/sacred))
+- [ ] บันทึก region ของ bucket (เช่น `sgp1`) สำหรับ `AWS_S3_ENDPOINT_URL` เมื่อตั้ง production
+- [ ] Access key / secret — เก็บใน `.env` หรือ GitHub Secrets เท่านั้น ไม่ commit repo
+- [ ] Droplet, GitHub Actions — defer Phase 6
+
+prefix ใน bucket (ตาม convention):
+
+```
+sacred/
+├── archive/{bookCode}/{pageNo}.jpg   # สแกน
+└── backups/                          # pg_dump รายวัน
+```
+
+Phase 1–5: **ยังไม่ต้อง** ตั้ง `USE_SPACES=True` — พัฒนาด้วย `media/` local
+
 ### 0.4 Definition of Ready (ก่อนเริ่มแต่ละงาน)
 
 - [ ] Scope ชัด (in / out) สอดคล้องมติ
@@ -248,8 +265,9 @@ Checklist ปฏิบัติสำหรับสร้างระบบ `ha
 
 ### 6.2 DigitalOcean Spaces
 
-- [ ] bucket และ credentials จาก DO Control Panel
-- [ ] ตั้ง `AWS_`* env บน production
+- [x] bucket `sacred` สร้างแล้ว — [Control Panel](https://cloud.digitalocean.com/spaces/sacred)
+- [ ] บันทึก region และ endpoint (`AWS_S3_ENDPOINT_URL`)
+- [ ] ตั้ง `AWS_*` env บน production (หรือ Droplet `.env`)
 - [ ] แยก prefix `backups/` จาก `archive/`
 
 ### 6.3 GitHub Actions

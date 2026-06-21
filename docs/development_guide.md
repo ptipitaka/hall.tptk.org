@@ -64,6 +64,7 @@
 | **Auth**          | Django auth + Wagtail groups/permissions                                          |
 | **Frontend**      | หน้า interactive ใช้ Vue · ที่เหลือ Django template                               |
 | **Media**         | สแกน/PDF: path ใน Spaces + metadata ใน `archive/` · ไม่อัปโหลดสแกนผ่าน Wagtail admin |
+| **Spaces**        | bucket `sacred` สร้างแล้วบน DO — [Control Panel](https://cloud.digitalocean.com/spaces/sacred) · prefix `archive/` (สแกน) และ `backups/` (DB) |
 | **Deploy**        | Droplet all-in-one · `git push` → **GitHub Actions** → SSH deploy · ไม่มี staging · **ตั้ง Droplet + Actions ภายหลัง** (พัฒนา local ก่อน) |
 | **Backup**        | `pg_dump` รายวัน → DigitalOcean Spaces                                            |
 | **Import ข้อมูล** | Django management commands / scripts ใน repo                                      |
@@ -156,7 +157,9 @@ docker compose up --build
 | Deploy (บน Droplet) | `SSH_HOST`, ใช้ใน GitHub Secrets ไม่ใส่ใน `.env` ของ repo                                      | —                            | GitHub Actions              |
 
 
-**Spaces endpoint ตัวอย่าง:** `https://<region>.digitaloceanspaces.com` (เช่น `sgp1`)
+**Spaces endpoint ตัวอย่าง:** `https://<region>.digitaloceanspaces.com` (เช่น `sgp1`) · bucket: `sacred` → URL สาธารณะมักเป็น `https://sacred.<region>.digitaloceanspaces.com`
+
+**หมายเหตุ Spaces:** bucket สร้างแล้ว แต่ **Phase 1–5 ยังไม่เชื่อม Django** — dev ใช้ `USE_SPACES=False` และ `media/` local · ใส่ `AWS_*` ใน `.env` เฉพาะเมื่อทดสอบ Spaces หรือตั้ง production (Phase 6) · **อย่า commit credentials**
 
 ### คำสั่งที่ใช้บ่อย (local)
 
