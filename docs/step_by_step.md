@@ -45,8 +45,8 @@ Checklist ปฏิบัติสำหรับสร้างระบบ `ha
 ### 0.2 Repository
 
 - [x] สร้าง repo public — [ptipitaka/hall.tptk.org](https://github.com/ptipitaka/hall.tptk.org)
-- [ ] clone หรือเชื่อม local กับ remote (`git remote add origin …` ถ้ายังไม่มี)
-- [ ] push docs และ scaffold แรกไป `main` (เมื่อพร้อม)
+- [x] clone หรือเชื่อม local กับ remote (`origin` → `https://github.com/ptipitaka/hall.tptk.org.git`)
+- [x] push docs และ scaffold แรกไป `main`
 
 ### 0.3 เครื่องมือบนเครื่อง dev
 
@@ -297,7 +297,7 @@ Checklist ปฏิบัติสำหรับสร้างระบบ `ha
 
 | Phase | งานหลัก                   | สถานะ |
 | ----- | ------------------------- | ----- |
-| 0     | เตรียมความพร้อม           | ⬜     |
+| 0     | เตรียมความพร้อม           | 🔶     |
 | 1     | Scaffold Wagtail + Docker | ⬜     |
 | 2     | Snippets + import CSV     | ⬜     |
 | 3     | Archive models            | ⬜     |
