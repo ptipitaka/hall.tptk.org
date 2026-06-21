@@ -1,0 +1,12 @@
+{% extends "coderedcms/pages/base.html" %}
+
+{% block body_class %}{% if page.content_type.model == "webpage" and page.specific.scroll_background_enabled %}has-scroll-bg{% endif %}{% if page.slug == "home" %} sacred-home{% endif %}{% endblock %}
+
+{% block navbar %}
+{% include "coderedcms/includes/scroll_background.html" %}
+{% include "coderedcms/snippets/navbar.html" %}
+{% endblock %}
+
+{% block footer %}
+{% include "coderedcms/snippets/footer.html" %}
+{% endblock %}

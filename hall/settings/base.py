@@ -1,6 +1,7 @@
 """Shared Django settings for hall.tptk.org."""
 
 import os
+import sys
 from pathlib import Path
 
 import dj_database_url
@@ -16,11 +17,20 @@ ALLOWED_HOSTS = [
 ]
 
 INSTALLED_APPS = [
-    "home",
+    "website",
     "snippets",
     "archive",
+    "coderedcms",
+    "django_bootstrap5",
+    "modelcluster",
+    "taggit",
+    "wagtailcache",
+    "wagtailseo",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.settings",
+    "wagtail.contrib.table_block",
+    "wagtail_html_editor",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -30,26 +40,30 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
-    "modelcluster",
-    "taggit",
+    "wagtail_localize",
+    "wagtail_localize.locales",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [
+    "wagtailcache.cache.UpdateCacheMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "wagtailcache.cache.FetchFromCacheMiddleware",
 ]
 
 ROOT_URLCONF = "hall.urls"
@@ -65,6 +79,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "wagtail.contrib.settings.context_processors.settings",
             ],
         },
     },
@@ -87,10 +102,22 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-LANGUAGE_CODE = "th"
+LANGUAGE_CODE = "en"
 TIME_ZONE = "Asia/Bangkok"
 USE_I18N = True
 USE_TZ = True
+
+WAGTAIL_I18N_ENABLED = True
+LANGUAGES = WAGTAIL_CONTENT_LANGUAGES = [
+    ("en", "English"),
+    ("th", "ไทย"),
+    ("zh", "中文"),
+]
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -111,10 +138,25 @@ USE_SPACES = os.environ.get("USE_SPACES", "False").lower() in ("true", "1", "yes
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+LOGIN_URL = "wagtailadmin_login"
+LOGIN_REDIRECT_URL = "wagtailadmin_home"
+
 WAGTAIL_SITE_NAME = "hall.tptk.org"
+WAGTAIL_ENABLE_UPDATE_CHECK = False
+
+WAGTAIL_HTML_EDITOR = {
+    "emmet": True,
+    "indent_size": 2,
+    "indent_with_tabs": False,
+    "theme": "auto",
+}
+
+WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
 WAGTAILADMIN_BASE_URL = os.environ.get(
     "WAGTAILADMIN_BASE_URL", "http://localhost:8000"
 )
+
+TAGGIT_CASE_INSENSITIVE = True
 
 WAGTAILSEARCH_BACKENDS = {
     "default": {
@@ -135,3 +177,11 @@ LOGGING = {
         "level": "INFO",
     },
 }
+
+if "test" in sys.argv:
+    DJANGO_TASKS = {
+        "default": {
+            "BACKEND": "django_tasks.backends.immediate.ImmediateBackend",
+        }
+    }
+    WAGTAIL_CACHE = False

@@ -1,0 +1,22 @@
+{% load wagtailimages_tags %}
+{% if page.content_type.model == "webpage" %}
+{% with webpage=page.specific %}
+{% if webpage.scroll_background_enabled %}
+<div
+  id="scroll-bg"
+  class="scroll-bg"
+  data-max-opacity="{{ webpage.scroll_bg_opacity }}"
+  aria-hidden="true"
+>
+  {% for item in webpage.scroll_backgrounds.all %}
+  {% image item.image fill-1920x1080 format-webp preserve-svg as bg %}
+  <div
+    class="scroll-bg__layer"
+    data-layer="{{ forloop.counter0 }}"
+    style="background-image: url('{{ bg.url }}');"
+  ></div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+{% endif %}

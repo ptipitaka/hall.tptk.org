@@ -45,9 +45,13 @@ Thumbs.db
 *.pdf
 *.jpg
 *.jpeg
-*.png
 *.tif
 *.tiff
+!static/branding/**
+
+# Branding assets for SACRED site (committed)
+!static/branding/*.png
+!static/branding/*.webp
 
 # Test / coverage
 .coverage

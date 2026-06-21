@@ -1,0 +1,9 @@
+Gentium Plus
+Copyright (c) 2003-2023 SIL International (https://www.sil.org/),
+with Reserved Font Names "Gentium" and "SIL".
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+https://scripts.sil.org/OFL
+
+Self-hosted webfont files in this directory are from Google Fonts
+(Gentium Plus, OFL-1.1).

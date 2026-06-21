@@ -1,8 +1,11 @@
-Django>=5.1,<5.2
-wagtail>=6.3,<7
+coderedcms==6.0.*
+wagtail>=7.4,<7.5
+wagtail-html-editor>=1.0.1,<2
+wagtail-localize>=1.13,<2
+Django>=5.2,<5.3
 psycopg[binary]>=3.2
 dj-database-url>=2.2
 gunicorn>=23.0
 whitenoise>=6.8
-django-storages[s3]>=1.14
+django-storages[s3]>=1.14,<2
 boto3>=1.35
