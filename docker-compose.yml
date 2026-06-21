@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-hall}
+      POSTGRES_USER: ${POSTGRES_USER:-hall}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hall}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-hall} -d ${POSTGRES_DB:-hall}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      DJANGO_SETTINGS_MODULE: hall.settings.dev
+      DATABASE_URL: postgres://${POSTGRES_USER:-hall}:${POSTGRES_PASSWORD:-hall}@db:5432/${POSTGRES_DB:-hall}
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  media_data:

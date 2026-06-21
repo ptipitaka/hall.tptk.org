@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ page.title }}{% endblock %} — hall.tptk.org</title>
+    <link rel="stylesheet" href="{% static 'css/hall.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="site-header">
+        <a href="/" class="site-title">hall.tptk.org</a>
+    </header>
+    <main class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <p>Tipitaka Hall — digital twin ของเนื้อหาสแกน</p>
+    </footer>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

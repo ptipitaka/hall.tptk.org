@@ -12,7 +12,7 @@ Public repo สำหรับพัฒนาระบบใหม่แทน `
 - [Checklist ทีละขั้น](docs/step_by_step.md)
 - [Migrate Discussion](docs/migrate_discussion.md)
 
-## เริ่มต้น (เมื่อ scaffold พร้อม)
+## เริ่มต้น (local)
 
 ```bash
 git clone https://github.com/ptipitaka/hall.tptk.org.git
@@ -21,4 +21,36 @@ cp .env.example .env
 docker compose up --build
 ```
 
-ตอนนี้โปรเจกอยู่ระหว่างจัดทำ docs และ scaffold — ดู [step_by_step.md](docs/step_by_step.md) สำหรับลำดับงาน
+เปิด:
+
+- Site: http://localhost:8000
+- Wagtail admin: http://localhost:8000/admin/
+
+สร้าง superuser (ครั้งแรก):
+
+```bash
+docker compose exec web python manage.py createsuperuser
+```
+
+## คำสั่งที่ใช้บ่อย
+
+```bash
+docker compose up              # รัน dev
+docker compose exec web python manage.py migrate
+docker compose exec web python manage.py test
+docker compose down
+```
+
+Frontend (Vue islands — Phase 5):
+
+```bash
+cd frontend && npm install && npm run build
+```
+
+## โครงสร้างหลัก
+
+- `hall/` — Django project + settings (`dev` / `production`)
+- `home/` — Wagtail `HomePage`
+- `snippets/` — catalog metadata (Phase 2)
+- `archive/` — segment + ตรวจทาน (Phase 3+)
+- `frontend/` — Vite multi-entry (`edition`, `master`)
