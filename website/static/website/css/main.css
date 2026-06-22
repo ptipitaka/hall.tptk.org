@@ -1,0 +1,13 @@
+/*
+ * Tipiṭaka Hall site styles — single entry point.
+ * Load fonts (gentium-plus.css, noto-serif-thai.css) before this file.
+ */
+@import url("tokens.css");
+@import url("typography.css");
+@import url("bootstrap-theme.css");
+@import url("scroll-background.css");
+@import url("layout.css");
+@import url("sacred-home.css");
+@import url("sacred-goals.css");
+@import url("goal-detail.css");
+@import url("scroll-reveal.css");

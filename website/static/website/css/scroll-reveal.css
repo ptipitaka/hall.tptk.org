@@ -1,0 +1,63 @@
+/* Scroll reveal animations (ported from Omeka bookshelf _homepage.scss) */
+
+@media (prefers-reduced-motion: no-preference) {
+  .sacred-home .home-hero .home-fullname:not(.is-visible),
+  .sacred-home .home-hero .home-title:not(.is-visible),
+  .sacred-home .home-hero .home-title-divider:not(.is-visible),
+  .sacred-home .home-hero .home-acronym:not(.is-visible),
+  .sacred-home .home-section-title:not(.is-visible),
+  .sacred-home .home-principle:not(.is-visible),
+  .sacred-home .home-cases-fold:not(.is-visible),
+  .sacred-home .home-goals .home-goal-card:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(var(--hall-reveal-offset));
+  }
+
+  .sacred-home .card.home-goal-card.home-reveal {
+    transition:
+      opacity var(--hall-reveal-duration) var(--hall-reveal-easing),
+      transform var(--hall-reveal-duration) var(--hall-reveal-easing),
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .home-reveal {
+    opacity: 0;
+    transition:
+      opacity var(--hall-reveal-duration) var(--hall-reveal-easing),
+      transform var(--hall-reveal-duration) var(--hall-reveal-easing);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .home-reveal--up {
+    transform: translateY(var(--hall-reveal-offset));
+  }
+
+  .home-reveal--left {
+    transform: translateX(calc(-1 * var(--hall-reveal-offset)));
+  }
+
+  .home-reveal--right {
+    transform: translateX(var(--hall-reveal-offset));
+  }
+
+  .home-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 767.98px) {
+    .home-reveal--left,
+    .home-reveal--right {
+      transform: translateY(var(--hall-reveal-offset));
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

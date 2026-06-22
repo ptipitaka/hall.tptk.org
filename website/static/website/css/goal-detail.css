@@ -1,0 +1,40 @@
+/* Goal detail child pages */
+
+.goal-detail {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  text-align: center;
+}
+
+.goal-detail-title {
+  margin: 0 0 28px;
+  font-size: 30px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.goal-detail-title::after {
+  content: "";
+  display: block;
+  width: 96px;
+  height: 3px;
+  margin: 14px auto 0;
+  background: var(--accent);
+}
+
+.goal-detail-body {
+  font-size: 19px;
+  line-height: 1.8;
+  text-align: center;
+  text-wrap: balance;
+  color: #333;
+}
+
+.goal-detail-body p {
+  margin: 0 0 18px;
+}
+
+.goal-detail-body p:last-child {
+  margin-bottom: 0;
+}

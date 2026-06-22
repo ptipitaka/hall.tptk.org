@@ -4,11 +4,9 @@
 {% block custom_assets %}
 <link rel="stylesheet" href="{% static 'website/css/gentium-plus.css' %}">
 <link rel="stylesheet" href="{% static 'website/css/noto-serif-thai.css' %}">
-<link rel="stylesheet" href="{% static 'website/css/custom.css' %}">
+<link rel="stylesheet" href="{% static 'website/css/main.css' %}">
 {% endblock %}
 
 {% block custom_scripts %}
-<script src="{% static 'website/js/scroll-background.js' %}"></script>
-<script src="{% static 'website/js/scroll-reveal.js' %}"></script>
-<script src="{% static 'website/js/custom.js' %}"></script>
+<script type="module" src="{% static 'website/js/main.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,32 @@
+/* Design tokens — Tipitaka Hall brand (matches static/branding/logo.png) */
+
+:root,
+[data-bs-theme="light"] {
+  --hall-brand: #682122;
+  --hall-brand-rgb: 104, 33, 34;
+  --hall-brand-hover: #531a1b;
+  --hall-brand-active: #4a1718;
+  --hall-brand-light: #f5e8e8;
+  --accent: var(--hall-brand);
+
+  --bs-primary: #682122;
+  --bs-primary-rgb: 104, 33, 34;
+  --bs-primary-text-emphasis: #411415;
+  --bs-primary-bg-subtle: #f5e8e8;
+  --bs-primary-border-subtle: #d4a0a1;
+
+  --bs-link-color: #682122;
+  --bs-link-color-rgb: 104, 33, 34;
+  --bs-link-hover-color: #531a1b;
+  --bs-link-hover-color-rgb: 83, 26, 27;
+
+  --bs-focus-ring-color: rgba(104, 33, 34, 0.25);
+
+  /* Scroll reveal (synced with js/components/scroll-reveal.js) */
+  --hall-reveal-duration: 0.7s;
+  --hall-reveal-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --hall-reveal-offset: 28px;
+  --hall-reveal-hero-start: 150ms;
+  --hall-reveal-hero-stagger: 100ms;
+  --hall-reveal-goal-stagger: 120ms;
+}

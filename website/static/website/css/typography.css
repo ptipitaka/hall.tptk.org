@@ -1,0 +1,23 @@
+/* Locale-specific font stacks (face rules live in gentium-plus.css / noto-serif-thai.css) */
+
+html[lang^="en"] {
+  --hall-font-en: "Gentium Plus", Georgia, "Times New Roman", Times, serif;
+  --bs-body-font-family: var(--hall-font-en);
+  --bs-font-sans-serif: var(--hall-font-en);
+  --bs-heading-font-family: var(--hall-font-en);
+}
+
+html[lang^="en"] body {
+  font-family: var(--hall-font-en);
+}
+
+html[lang^="th"] {
+  --hall-font-th: "Noto Serif Thai", "Sarabun", "Garuda", "Thonburi", serif;
+  --bs-body-font-family: var(--hall-font-th);
+  --bs-font-sans-serif: var(--hall-font-th);
+  --bs-heading-font-family: var(--hall-font-th);
+}
+
+html[lang^="th"] body {
+  font-family: var(--hall-font-th);
+}

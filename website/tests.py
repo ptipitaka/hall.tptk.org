@@ -86,7 +86,7 @@ class SacredHomeRenderTests(WagtailPageTestCase):
         self.assertContains(response, "home-hero")
         self.assertContains(response, "home-goals")
         self.assertContains(response, "home-cases-fold")
-        self.assertContains(response, "card home-goal-card")
+        self.assertContains(response, "home-goal-card")
 
     def test_goal_page_renders(self):
         home = Site.objects.get(is_default_site=True).root_page

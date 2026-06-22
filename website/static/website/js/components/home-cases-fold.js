@@ -1,4 +1,5 @@
-(function () {
+/** Principle section "…" cases fold toggle. */
+export function initHomeCasesFold() {
   function toggleHomeCases(toggle) {
     var fold = toggle.closest(".home-cases-fold");
     if (!fold) {
@@ -26,4 +27,4 @@
       toggleHomeCases(toggle);
     }
   });
-})();
+}

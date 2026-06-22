@@ -1,0 +1,43 @@
+/* Bootstrap dist CSS hardcodes button colors — override at class level. */
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #682122;
+  --bs-btn-border-color: #682122;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #531a1b;
+  --bs-btn-hover-border-color: #4a1718;
+  --bs-btn-focus-shadow-rgb: 104, 33, 34;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #4a1718;
+  --bs-btn-active-border-color: #451516;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #682122;
+  --bs-btn-disabled-border-color: #682122;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #682122;
+  --bs-btn-border-color: #682122;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #682122;
+  --bs-btn-hover-border-color: #682122;
+  --bs-btn-focus-shadow-rgb: 104, 33, 34;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #531a1b;
+  --bs-btn-active-border-color: #4a1718;
+  --bs-btn-disabled-color: #682122;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #682122;
+}
+
+.link-primary {
+  color: rgba(104, 33, 34, var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: rgba(104, 33, 34, var(--bs-link-underline-opacity, 1)) !important;
+}
+
+.link-primary:hover,
+.link-primary:focus {
+  color: rgba(83, 26, 27, var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: rgba(83, 26, 27, var(--bs-link-underline-opacity, 1)) !important;
+}

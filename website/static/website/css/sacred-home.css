@@ -1,0 +1,161 @@
+/* SACRED homepage — hero, sections, principle (ported from tipitakahall.org) */
+
+.home-hero,
+.home-section {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.home-hero {
+  text-align: center;
+  padding-top: 48px;
+  padding-bottom: 24px;
+  margin-bottom: 72px;
+}
+
+.home-acronym {
+  margin-top: 10px;
+}
+
+.home-eyebrow {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+}
+
+.home-eyebrow--acronym {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.acronym-letter {
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.home-title {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.home-title-divider {
+  width: 120px;
+  height: 3px;
+  margin: 16px auto 18px;
+  background: var(--accent);
+}
+
+.home-fullname {
+  margin: 0 0 28px;
+  font-size: 17px;
+  color: #666;
+}
+
+.home-section {
+  margin-bottom: 96px;
+  padding-top: 12px;
+}
+
+.home-section-title {
+  margin: 0 0 34px;
+  font-size: 26px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.home-section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin: 12px auto 0;
+  background: var(--accent);
+}
+
+.home-principle {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 19px;
+  line-height: 1.8;
+  text-align: center;
+  text-wrap: balance;
+  color: #333;
+}
+
+.home-cases {
+  max-width: 720px;
+  margin: 24px auto 0;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.home-case {
+  margin: 0 0 24px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.home-case:last-child {
+  margin-bottom: 0;
+}
+
+.home-case-mark {
+  display: inline-block;
+  margin-bottom: 4px;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.home-cases-fold .home-cases-body {
+  display: none;
+}
+
+.home-cases-fold .home-cases-toggle {
+  display: inline;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  white-space: nowrap;
+}
+
+.home-cases-fold .home-cases-toggle:hover .home-cases-more,
+.home-cases-fold .home-cases-toggle:focus-visible .home-cases-more {
+  opacity: 1;
+}
+
+.home-cases-fold .home-cases-toggle:focus-visible .home-cases-more {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 2px;
+}
+
+.home-cases-fold .home-cases-more {
+  display: inline;
+  margin-left: 1px;
+  font-size: 1.05em;
+  line-height: 1;
+  font-weight: 600;
+  color: var(--accent);
+  opacity: 0.75;
+  letter-spacing: 0.08em;
+  transition: opacity 0.15s ease;
+}
+
+.home-cases-fold.is-open .home-cases-body {
+  display: block;
+}
+
+.home-section--goals {
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-bottom: 34px;
+}
