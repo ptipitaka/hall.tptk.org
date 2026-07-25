@@ -1,0 +1,4 @@
+build/aux/
+volumes/*/out/
+volumes/*/source/
+volumes/*/tex/body.generated.tex

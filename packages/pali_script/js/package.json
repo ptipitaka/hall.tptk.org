@@ -1,0 +1,17 @@
+{
+  "name": "@hall/pali-script",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pāli Thai ↔ Roman (IAST) script converter",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node --test test/roundtrip.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,21 @@
+% !TeX program = lualatex
+% !TeX root = main.tex
+% CS Roman Thai Tipiṭaka text — 25Khu08
+\documentclass[11pt,twoside,openany]{memoir}
+
+\input{shared/style/preamble}
+
+\begin{document}
+% Front: Mātikā from segments with in_toc (page numbers = body printed pages).
+\pagestyle{plain}
+\pagenumbering{roman}
+% babel-thai may reset \contentsname — set immediately before use.
+\renewcommand{\contentsname}{มาติกา}
+\tableofcontents*
+% Body must open on a recto (right-hand / odd) page.
+\cleardoublepage
+% Body resets arabic page 1 at Namo / content start (see body.generated).
+\pagenumbering{arabic}
+\pagestyle{plain}
+\input{volumes/25Khu08/tex/body.generated}
+\end{document}

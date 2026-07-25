@@ -58,3 +58,12 @@ Thumbs.db
 htmlcov/
 .pytest_cache/
 .mypy_cache/
+
+# Scratch extract output (regenerate: python scripts/extract_catalog_volumes.py)
+scripts/output/*
+!scripts/output/.gitkeep
+
+# CS Roman extract staging (regenerable); track volumes/<id>/data/ instead
+books/cs-roman/output/*
+!books/cs-roman/output/.gitkeep
+books/cs-roman/source/*.pdf

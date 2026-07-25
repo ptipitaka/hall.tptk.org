@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "source": "books/cs-roman/source/18Khu01.pdf",
+  "content_start_pdf_page": 26,
+  "layout": {
+    "word_space": 2.5,
+    "line_space": 1.25,
+    "par_indent": "21.6pt",
+    "par_skip": "6.3pt",
+    "gatha_stanza_skip": "6.3pt",
+    "gatha_indent": "65pt",
+    "emergency_stretch": "2.5em"
+  }
+}

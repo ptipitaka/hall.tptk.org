@@ -1,0 +1,402 @@
+% =========================================================================
+% book-macros.tex — ตามแบบจัดหน้า CS Roman Tipiṭaka
+% =========================================================================
+
+\newcommand{\csromanheadtitle}{}
+\newcommand{\csromanheadpitaka}{}
+% Store plain text only — generated bodies may wrap titles in \textbf.
+\newcommand{\setcsromanhead}[1]{%
+  \renewcommand{\csromanheadtitle}{\csromanplainarg{#1}}%
+}
+\newcommand{\setcsromanpitaka}[1]{%
+  \renewcommand{\csromanheadpitaka}{\csromanplainarg{#1}}%
+}
+
+% Limited vertical stretch before the forced page break so under-full
+% page-synced sheets can settle toward the text-block bottom (≤2\baselineskip).
+\newcommand{\csromanpage}[1]{%
+  \par
+  \vspace{0pt plus 2\baselineskip}%
+  \clearpage
+  \setcounter{page}{#1}%
+}
+
+% Running heads — academic / TeX book practice:
+%   recede behind body (smaller, medium weight, never bold);
+%   folio and title share one face (same size / weight / shape);
+%   even: page | piṭaka | (empty)
+%   odd:  (empty) | gambhīra | page
+% No footer page numbers; no head rule (CS Roman has none).
+\newcommand{\csromanrunheadfont}{%
+  \normalfont\small\mdseries\upshape
+}
+\newcommand{\csromanrunhead}[1]{{\csromanrunheadfont #1}}
+\makepagestyle{csroman}
+\makeevenhead{csroman}%
+  {\csromanrunhead{\thepage}}%
+  {\csromanrunhead{\csromanheadpitaka}}%
+  {}
+\makeoddhead{csroman}%
+  {}%
+  {\csromanrunhead{\csromanheadtitle}}%
+  {\csromanrunhead{\thepage}}
+\makeevenfoot{csroman}{}{}{}
+\makeoddfoot{csroman}{}{}{}
+\makeheadrule{csroman}{\textwidth}{0pt}
+\makefootrule{csroman}{\textwidth}{0pt}{0pt}
+\pagestyle{csroman}
+
+% Opening sheet: no running head / page number (like source p.1).
+\makepagestyle{plain}
+\makeevenhead{plain}{}{}{}
+\makeoddhead{plain}{}{}{}
+\makeevenfoot{plain}{}{}{}
+\makeoddfoot{plain}{}{}{}
+\makeheadrule{plain}{\textwidth}{0pt}
+\makefootrule{plain}{\textwidth}{0pt}{0pt}
+
+% --- Structural headings (CS Roman 01Vin01 opening page, measured) -------
+% Opening stack y0 targets (print p.1): 89.4 / 147.6 / 207.7 / 237.1 / 281.0 / 315.6
+% → inter-band \vskip ≈ 42 / 24 / 14 / 32 / 19 bp (after glyph box of prior line).
+% Use Scale=1 here so babelfont Scale=1.1 does not inflate absolute sizes.
+% Zero \parskip inside these macros so gaps are only the explicit \vskip.
+
+% Strip accidental \textbf from generated heading bodies when the macro
+% sets its own weight (running heads / piṭaka: medium, not bold).
+\newcommand{\csromanplainarg}[1]{%
+  \begingroup
+  \renewcommand{\textbf}[1]{##1}%
+  #1%
+  \endgroup
+}
+
+\newcommand{\csromanheadingfont}[3]{%
+  % #1 size bp, #2 baselineskip bp, #3 text
+  \addfontfeatures{Scale=1}%
+  \fontsize{#1}{#2}\selectfont
+  #3%
+}
+
+\newcommand{\pitaka}[1]{%
+  \par
+  \Needspace{4\baselineskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  % Source Vinayapiṭaka ≈16 bp, medium weight (not bold).
+  % Use \centering (not center env) to avoid trivlist \topsep.
+  \csromanheadingfont{16bp}{20bp}{\mdseries\csromanplainarg{#1}\par}%
+  \nointerlineskip
+  % After-skip −20% (was 33bp).
+  \vskip 26.4bp\relax
+  \endgroup
+  \setcsromanpitaka{#1}%
+}
+
+\newcommand{\gambhira}[1]{%
+  \par
+  \Needspace{5\baselineskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  % Source Pārājikapāḷi ≈36 bp bold (in-page title, not running head).
+  \csromanheadingfont{36bp}{42bp}{\bfseries\csromanplainarg{#1}\par}%
+  \nointerlineskip
+  % After-skips −20% (were 34bp / 24bp).
+  \vskip 27.2bp\relax
+  % Source rule ≈33 bp wide (~0.09\textwidth).
+  \noindent\makebox[\textwidth]{\rule{0.09\textwidth}{0.5pt}}\par
+  \nointerlineskip
+  \vskip 19.2bp\relax
+  \endgroup
+  \setcsromanhead{#1}%
+  \pagestyle{csroman}%
+  \thispagestyle{plain}%
+}
+
+\newcommand{\namakkaram}[1]{%
+  \par
+  \Needspace{3\baselineskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  \csromanheadingfont{12bp}{16bp}{\mdseries #1\par}%
+  \nointerlineskip
+  % After-skip −20% (was 32bp).
+  \vskip 25.6bp\relax
+  \endgroup
+}
+
+\newcommand{\chapterhead}[1]{%
+  \par
+  \Needspace{3.5\baselineskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  % Source chapter (e.g. Verañjakaṇḍa) ≈16 bp bold.
+  \csromanheadingfont{16bp}{20bp}{\bfseries #1\par}%
+  \nointerlineskip
+  % After-skip −20% (was 15bp).
+  \vskip 12bp\relax
+  \endgroup
+}
+
+% Generic section headers under cha: heading_kind h1…h6.
+% Best-practice ladder (textbook): never below body (~12 bp ≈ Sarabun 11pt×1.1);
+% use size steps only above the floor; pair equal sizes and differentiate with
+% weight / italic / spacing. More space above than below so the head attaches
+% to the section it introduces.
+%
+%   h1  14 bp bold          — sole size step under cha (16 bp)
+%   h2  13 bp bold          — pair with h3
+%   h3  13 bp medium        — same size as h2, lighter weight
+%   h4  12 bp bold          — body-size band
+%   h5  12 bp italic        — style contrast (not size)
+%   h6  12 bp medium        — quietest; spacing mainly
+%
+% Legacy aliases: \titlehead → h1, \subhead → h2.
+\newcommand{\csromanheaderspec}[1]{%
+  \ifcase#1\relax
+  \or % 1
+    \def\csromanheaderfontsize{14bp}%
+    \def\csromanheaderbaselineskip{18bp}%
+    \def\csromanheaderface{\bfseries\upshape}%
+    \def\csromanheaderbeforeskip{8pt}%
+    \def\csromanheaderafterskip{5pt}%
+    \def\csromanheaderneed{3\baselineskip}%
+  \or % 2
+    \def\csromanheaderfontsize{13bp}%
+    \def\csromanheaderbaselineskip{17bp}%
+    \def\csromanheaderface{\bfseries\upshape}%
+    \def\csromanheaderbeforeskip{7pt}%
+    \def\csromanheaderafterskip{4pt}%
+    \def\csromanheaderneed{2.75\baselineskip}%
+  \or % 3 — same size as h2; weight differs
+    \def\csromanheaderfontsize{13bp}%
+    \def\csromanheaderbaselineskip{17bp}%
+    \def\csromanheaderface{\mdseries\upshape}%
+    \def\csromanheaderbeforeskip{5.5pt}%
+    \def\csromanheaderafterskip{3.5pt}%
+    \def\csromanheaderneed{2.5\baselineskip}%
+  \or % 4 — body size, bold
+    \def\csromanheaderfontsize{12bp}%
+    \def\csromanheaderbaselineskip{16bp}%
+    \def\csromanheaderface{\bfseries\upshape}%
+    \def\csromanheaderbeforeskip{5pt}%
+    \def\csromanheaderafterskip{3pt}%
+    \def\csromanheaderneed{2.25\baselineskip}%
+  \or % 5 — body size, italic (style, not shrinkage)
+    \def\csromanheaderfontsize{12bp}%
+    \def\csromanheaderbaselineskip{16bp}%
+    \def\csromanheaderface{\mdseries\itshape}%
+    \def\csromanheaderbeforeskip{4pt}%
+    \def\csromanheaderafterskip{2.5pt}%
+    \def\csromanheaderneed{2\baselineskip}%
+  \or % 6 — body size, medium upright; tightest band
+    \def\csromanheaderfontsize{12bp}%
+    \def\csromanheaderbaselineskip{16bp}%
+    \def\csromanheaderface{\mdseries\upshape}%
+    \def\csromanheaderbeforeskip{3.5pt}%
+    \def\csromanheaderafterskip{2pt}%
+    \def\csromanheaderneed{2\baselineskip}%
+  \else
+    \def\csromanheaderfontsize{14bp}%
+    \def\csromanheaderbaselineskip{18bp}%
+    \def\csromanheaderface{\bfseries\upshape}%
+    \def\csromanheaderbeforeskip{8pt}%
+    \def\csromanheaderafterskip{5pt}%
+    \def\csromanheaderneed{3\baselineskip}%
+  \fi
+}
+
+\newcommand{\csromanheader}[2]{%
+  % #1 = 1..6, #2 = text
+  \csromanheaderspec{#1}%
+  \Needspace{\csromanheaderneed}%
+  \vspace{\csromanheaderbeforeskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  \csromanheadingfont{\csromanheaderfontsize}{\csromanheaderbaselineskip}{%
+    \csromanheaderface #2\par
+  }%
+  \endgroup
+  \vspace{\csromanheaderafterskip}%
+}
+
+\newcommand{\titlehead}[1]{\csromanheader{1}{#1}}
+\newcommand{\subhead}[1]{\csromanheader{2}{#1}}
+
+% TOC marker (hyperref-safe).
+% Level: chapter|section|subsection|subsubsection|paragraph|subparagraph.
+\newcommand{\csromantocmark}[2]{%
+  \phantomsection
+  \addcontentsline{toc}{#1}{#2}%
+}
+
+% Section closers (niṭṭhitaṃ): centered, medium weight.
+% Source CS Roman stacks consecutive closers with ≈18 bp clear gap
+% between line boxes (not a full blank paragraph each). Avoid the
+% center environment — its trivlist \topsep/\parskip inflated the band.
+\newcommand{\nitthitam}[1]{%
+  \par
+  \Needspace{2\baselineskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  \nointerlineskip
+  % Source ≈18 bp clear between stacked closers; prefer a bit more
+  % space above the first closer than below each line.
+  \vskip 12bp\relax
+  {\normalsize\mdseries\csromanplainarg{#1}\par}%
+  \nointerlineskip
+  \vskip 6bp\relax
+  \endgroup
+}
+
+% End-of-section rule under niṭṭhitaṃ (CS Roman short centered line).
+\newcommand{\nitthitamruled}[1]{%
+  \par
+  \Needspace{2.5\baselineskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  \nointerlineskip
+  \vskip 12bp\relax
+  {\normalsize\mdseries\csromanplainarg{#1}\par}%
+  \nointerlineskip
+  \vskip 5bp\relax
+  \noindent\makebox[\textwidth]{\rule{0.15\linewidth}{0.4pt}}\par
+  \nointerlineskip
+  \vskip 6bp\relax
+  \endgroup
+}
+
+% --- Body prose (CS Roman: first-line indent, NOT hanging) ---------------
+
+% ข้อมีเลข: เลขอยู่บนบรรทัดแรกที่ย่อหน้า บรรทัดถัดไปชิดขอบซ้าย
+\newcommand{\proseitem}[2]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  \indent\textbf{#1.}\hspace{0.33em}#2\par
+}
+
+% ย่อหน้าธรรมดา / ข้อเดิมไม่มีเลขซ้ำ — ย่อบรรทัดแรก
+\newcommand{\prose}[1]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  #1\par
+}
+
+% ต่อกลางย่อหน้าข้ามหน้า — ไม่ย่อ (ชิดซ้าย) ไม่ซ้ำเลข
+\newcommand{\prosecont}[1]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  \noindent #1\par
+}
+
+% Hanging paragraph: body lines align under the first glyph after the item label
+% (e.g. under ป of “338. ปฏิคฺคณฺหาติ…”, not under “338.”).
+% Keep the whole unit in one group so \parskip does not split the block.
+% (Do not name macros \begin… / \end… — those are reserved for environments.)
+\newlength{\hanginglabelwidth}
+\newlength{\hangingbodyindent}
+\setlength{\hangingbodyindent}{2\tipitakahang}
+\newcommand{\csromanhangingbegin}{%
+  \par
+  \begingroup
+  \setlength{\parskip}{0pt}%
+}
+\newcommand{\hangingheaditem}[2]{%
+  \settowidth{\hanginglabelwidth}{\textbf{#1.}\hspace{0.33em}}%
+  \setlength{\hangingbodyindent}{\dimexpr\tipitakahang+\hanginglabelwidth\relax}%
+  \hangindent=0pt
+  \hangafter=1
+  \indent\textbf{#1.}\hspace{0.33em}#2\par
+}
+\newcommand{\hangingheadline}[1]{%
+  \setlength{\hangingbodyindent}{\tipitakahang}%
+  \hangindent=0pt
+  \hangafter=1
+  \indent #1\par
+}
+\newcommand{\hangingbody}[1]{%
+  \noindent\hspace{\hangingbodyindent}#1\par
+}
+\newcommand{\csromanhangingend}{%
+  \endgroup
+  \vspace{\tipitakaparskip}%
+}
+
+\newcommand{\orphannote}[1]{%
+  \par\vspace{0.3em}%
+  \noindent{\footnotesize #1\par}%
+}
+
+% Uddāna / gāthā: block indent ≈ CS Roman (x0 − prose left ≈ 65 pt).
+% One บท (stanza) ends with \gathaclose (vspace). Mid-บท lines use \gatha.
+% Layout comes from JSON source_layout (bat_line vs wak_line), not line count.
+\newlength{\gathaindent}
+\setlength{\gathaindent}{65pt}
+\newcommand{\gatha}[1]{%
+  \par
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \noindent\hspace{\gathaindent}#1\par
+  \endgroup
+}
+\newcommand{\gathaclose}[1]{%
+  \par
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \noindent\hspace{\gathaindent}#1\par
+  \endgroup
+  \vspace{\gathastanzaskip}%
+}
+
+% Apparatus footnote: mark is * or + (does not advance the numbered footnote counter).
+\makeatletter
+\newcommand{\csromansymbolfootnote}[2]{%
+  \begingroup
+  \def\@thefnmark{#1}%
+  \@footnotemark
+  \@footnotetext{#2}%
+  \endgroup
+}
+\makeatother
+
+% pot-ma-gyi (CS ``. .``): 1em gap after the visible sentence stop (``{{sp1}}``).
+\newcommand{\csromanspacer}{\hspace{1em}}
+
+% Per-segment interword override (segments.json ``word_space``).
+% #1 = scale vs the current font's interword glue (already includes preamble
+% WordSpace). Generator passes target/preamble, e.g. 1.2/2.5.
+\newcommand{\csromanwordspacebegin}[1]{%
+  \begingroup
+  \spaceskip=#1\fontdimen2\font
+    plus #1\fontdimen3\font
+    minus #1\fontdimen4\font
+  \relax
+}
+\newcommand{\csromanwordspaceend}{\endgroup}
+
+% Volume / page layout from segments.json ``layout`` + ``page_layout``.
+% Args: word_space factor (vs font WordSpace), line_space, par_indent,
+% par_skip, gatha_stanza_skip, gatha_indent, emergency_stretch.
+\newcommand{\csromanlayoutapply}[7]{%
+  \spaceskip=#1\fontdimen2\font
+    plus #1\fontdimen3\font
+    minus #1\fontdimen4\font
+  \relax
+  \linespread{#2}\selectfont
+  \setlength{\tipitakahang}{#3}%
+  \setlength{\parindent}{\tipitakahang}%
+  \setlength{\tipitakaparskip}{#4 plus 1pt minus 0.5pt}%
+  \setlength{\parskip}{\tipitakaparskip}%
+  \setlength{\gathastanzaskip}{#5}%
+  \setlength{\gathaindent}{#6}%
+  \setlength{\emergencystretch}{#7}%
+}

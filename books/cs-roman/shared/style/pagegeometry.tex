@@ -1,0 +1,25 @@
+% Page size locked to CS Roman 01Vin01 MediaBox (499 × 709 PDF bp).
+% Use bp (not TeX pt) so the PDF MediaBox matches the Distiller source exactly.
+\setstocksize{709bp}{499bp}
+\settrimmedsize{709bp}{499bp}{*}
+\setlength{\binding}{0mm}
+% Measured on source: flush x≈62.6 bp, right content edge leaves ≈59.4 bp.
+\setlrmarginsandblock{62.6bp}{59.4bp}{*}
+% Running-head band measured on CS Roman 01Vin01:
+%   header y≈50.4, body start y≈90.7,
+%   median bottom gap on full prose pages ≈72.
+\setulmarginsandblock{90.7bp}{72bp}{*}
+% Page number lives in the header (CS Roman); keep a small footskip only.
+\setheadfoot{14pt}{12pt}
+% Place the running head near the measured header band.
+\setheaderspaces{50.4bp}{*}{*}
+\checkandfixthelayout
+\AtBeginDocument{%
+  \checkandfixthelayout
+  \stockwidth=499bp\relax
+  \stockheight=709bp\relax
+  \paperwidth=499bp\relax
+  \paperheight=709bp\relax
+  \pagewidth=499bp\relax
+  \pageheight=709bp\relax
+}

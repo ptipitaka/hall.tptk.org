@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pali-script"
+version = "0.1.0"
+description = "Pāli Thai ↔ Roman (IAST) script converter for hall.tptk.org"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pali_script*"]

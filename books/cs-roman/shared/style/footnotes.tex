@@ -1,0 +1,245 @@
+% =========================================================================
+% footnotes.tex — mixed 1/2-column footnotes for CS Roman
+% =========================================================================
+% Rule (per page, walk notes in order):
+%   • long note (natural width > half measure) → full-width row
+%   • consecutive short notes are buffered, then flushed:
+%       – even count → pair row-wise:  1  2 / 3  4
+%       – odd count  → first full-width, then pair the rest
+%         (matches CS Roman: 1 long, 2 medium, * + side-by-side)
+%   • odd trailing short after pairing → left cell only
+% Patches \@footnotetext / \@makecol after footmisc + hyperref (AtBeginDocument).
+
+\makeatletter
+
+% Full-width separator above footnotes (LaTeX default is ~0.4\columnwidth).
+\def\footnoterule{%
+  \kern-3\p@
+  \hrule\@width\columnwidth\@height.4pt
+  \kern2.6\p@
+}
+
+\newtoks\csromanfn@toks
+\newtoks\csromanfn@shortbuf
+\newcount\csromanfn@n
+\newcount\csromanfn@nshort
+\newif\ifcsromanfn@hasleft
+\newdimen\csromanfn@colsep
+\newdimen\csromanfn@colw
+\newdimen\csromanfn@nat
+\newdimen\csromanfn@ht
+\newbox\csromanfn@box
+\newbox\csromanfn@left
+\newbox\csromanfn@right
+
+\csromanfn@colsep=1.25em
+
+\def\csromanfn@reset{%
+  \global\csromanfn@toks{}%
+  \global\csromanfn@shortbuf{}%
+  \global\csromanfn@n=\z@
+  \global\csromanfn@nshort=\z@
+  \global\csromanfn@hasleftfalse
+  \global\setbox\csromanfn@left=\box\voidb@x
+  \global\setbox\csromanfn@right=\box\voidb@x
+}
+
+% #1=mark #2=body #3=0 short / 1 long
+\long\def\csromanfn@append#1#2#3{%
+  \toks@=\expandafter{\the\csromanfn@toks\csromanfn@do{#1}{#2}{#3}}%
+  \global\csromanfn@toks=\expandafter{\the\toks@}%
+}
+
+\long\def\csromanfn@buffershort#1#2{%
+  \toks@=\expandafter{\the\csromanfn@shortbuf\csromanfn@short{#1}{#2}}%
+  \global\csromanfn@shortbuf=\expandafter{\the\toks@}%
+  \global\advance\csromanfn@nshort\@ne
+}
+
+% Typeset one stored note with the current \hsize / \@makefntext.
+\long\def\csromanfn@typesetone#1#2{%
+  \def\@thefnmark{#1}%
+  \@makefntext{%
+    \rule\z@\footnotesep\ignorespaces#2\@finalstrut\strutbox}%
+  \par
+}
+
+\long\def\csromanfn@typesetlong#1#2{%
+  \hsize\columnwidth
+  \columnwidth\columnwidth
+  \linewidth\columnwidth
+  \@parboxrestore
+  \leftskip\z@\@plus\z@\rightskip\z@\@plus\z@
+  \csromanfn@typesetone{#1}{#2}%
+}
+
+% Build one note as a \vtop of half-measure width.
+\long\def\csromanfn@makenotebox#1#2{%
+  \global\setbox\csromanfn@box=\vtop{%
+    \reset@font\footnotesize
+    % footmisc hang uses \columnwidth (not \hsize) for \parshape.
+    \hsize\csromanfn@colw
+    \columnwidth\csromanfn@colw
+    \linewidth\csromanfn@colw
+    \@parboxrestore
+    \leftskip\z@\@plus\z@\rightskip\z@\@plus\z@
+    \csromanfn@typesetone{#1}{#2}%
+  }%
+}
+
+\def\csromanfn@emitrow{%
+  % Do not wrap cells in \vtop{\hrule...\box} — the rule starts a new
+  % "line" and TeX inserts \baselineskip above the note (~1 line extra).
+  \noindent
+  \hbox to\columnwidth{%
+    \hbox to\csromanfn@colw{\box\csromanfn@left\hss}%
+    \hskip\csromanfn@colsep
+    \hbox to\csromanfn@colw{%
+      \ifvoid\csromanfn@right \else \box\csromanfn@right \fi
+      \hss
+    }%
+  }\par
+  \global\csromanfn@hasleftfalse
+}
+
+% Pair short notes left-to-right on a row.
+\long\def\csromanfn@pairshort#1#2{%
+  \csromanfn@makenotebox{#1}{#2}%
+  \ifcsromanfn@hasleft
+    \global\setbox\csromanfn@right=\box\csromanfn@box
+    \csromanfn@emitrow
+  \else
+    \global\setbox\csromanfn@left=\box\csromanfn@box
+    \global\csromanfn@haslefttrue
+  \fi
+}
+
+% Odd-run: first short is full-width; later shorts pair.
+\newif\ifcsromanfn@shortfull
+\long\def\csromanfn@emitshort#1#2{%
+  \ifcsromanfn@shortfull
+    \csromanfn@typesetlong{#1}{#2}%
+    \csromanfn@shortfullfalse
+  \else
+    \csromanfn@pairshort{#1}{#2}%
+  \fi
+}
+
+\def\csromanfn@flushshorts{%
+  \ifnum\csromanfn@nshort>\z@
+    \global\csromanfn@hasleftfalse
+    \global\setbox\csromanfn@left=\box\voidb@x
+    \global\setbox\csromanfn@right=\box\voidb@x
+    % Odd count: lead short on its own full-width row, then pair.
+    \ifodd\csromanfn@nshort
+      \csromanfn@shortfulltrue
+    \else
+      \csromanfn@shortfullfalse
+    \fi
+    \let\csromanfn@short\csromanfn@emitshort
+    \the\csromanfn@shortbuf
+    \ifcsromanfn@hasleft
+      \global\setbox\csromanfn@right=\box\voidb@x
+      \csromanfn@emitrow
+    \fi
+    \global\csromanfn@shortbuf{}%
+    \global\csromanfn@nshort=\z@
+  \fi
+}
+
+% Walk stored notes: buffer shorts between longs.
+\long\def\csromanfn@walkone#1#2#3{%
+  \ifnum#3>\z@
+    \csromanfn@flushshorts
+    \csromanfn@typesetlong{#1}{#2}%
+  \else
+    \csromanfn@buffershort{#1}{#2}%
+  \fi
+}
+
+\def\csromanfn@buildfootins{%
+  % \@makecol draws \footnoterule above \footins — do not embed another.
+  \global\setbox\footins=\vbox\bgroup
+    \reset@font\footnotesize
+    \floatingpenalty\@MM
+    \global\csromanfn@shortbuf{}%
+    \global\csromanfn@nshort=\z@
+    \let\csromanfn@do\csromanfn@walkone
+    \the\csromanfn@toks
+    \csromanfn@flushshorts
+  \egroup
+}
+
+\long\def\csromanfn@footnotetext#1{%
+  \global\advance\csromanfn@n\@ne
+  \edef\csromanfn@mark{\@thefnmark}%
+  % One-line test at half measure.
+  \settowidth\csromanfn@nat{%
+    \reset@font\footnotesize
+    \hbox{\normalfont\@thefnmark\hspace{\footnotemargin}#1}%
+  }%
+  \ifdim\csromanfn@nat>\csromanfn@colw
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  % Expand mark only; keep note body verbatim. Flag: 1 long / 0 short.
+  \if@tempswa
+    \expandafter\csromanfn@append\expandafter{\csromanfn@mark}{#1}{1}%
+  \else
+    \expandafter\csromanfn@append\expandafter{\csromanfn@mark}{#1}{0}%
+  \fi
+  % Height for insert reservation at the width that will be used.
+  \setbox\csromanfn@box=\vbox{%
+    \reset@font\footnotesize
+    \if@tempswa
+      \hsize\columnwidth
+      \columnwidth\columnwidth
+      \linewidth\columnwidth
+    \else
+      \hsize\csromanfn@colw
+      \columnwidth\csromanfn@colw
+      \linewidth\csromanfn@colw
+    \fi
+    \@parboxrestore
+    \protected@edef\@currentlabel{%
+      \csname p@footnote\endcsname\@thefnmark
+    }%
+    \@makefntext{%
+      \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
+    \par
+  }%
+  \csromanfn@ht=\dimexpr\ht\csromanfn@box+\dp\csromanfn@box\relax
+  \if@tempswa
+    % Long: full-width row — reserve full height.
+    \insert\footins{%
+      \floatingpenalty\@MM
+      \vbox to\csromanfn@ht{}%
+    }%
+  \else
+    % Short: expects a pair on one row — reserve ~half height.
+    \insert\footins{%
+      \floatingpenalty\@MM
+      \vbox to\dimexpr.5\csromanfn@ht\relax{}%
+    }%
+  \fi
+}
+
+\def\csromanfn@makecol{%
+  \ifnum\csromanfn@n>\z@
+    \csromanfn@buildfootins
+  \fi
+  \csromanfn@saved@makecol
+  \csromanfn@reset
+}
+
+\AtBeginDocument{%
+  \csromanfn@colw=\dimexpr(\columnwidth-\csromanfn@colsep)/2\relax
+  \csromanfn@reset
+  \let\csromanfn@saved@footnotetext\@footnotetext
+  \let\csromanfn@saved@makecol\@makecol
+  \let\@footnotetext\csromanfn@footnotetext
+  \let\@makecol\csromanfn@makecol
+}
+
+\makeatother

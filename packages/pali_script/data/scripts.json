@@ -1,0 +1,17 @@
+{
+  "scripts": [
+    {
+      "code": "roman",
+      "name_en": "Roman",
+      "name_native": "Roman",
+      "ranges": [[0, 383], [7680, 7935]]
+    },
+    {
+      "code": "thai",
+      "name_en": "Thai",
+      "name_native": "ไทย",
+      "ranges": [[3584, 3711]]
+    }
+  ],
+  "pivot": "roman"
+}

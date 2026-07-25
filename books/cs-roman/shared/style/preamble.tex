@@ -1,0 +1,87 @@
+% !TeX program = lualatex
+% =========================================================================
+% preamble.tex — ตามแบบจัดหน้า CS Roman (01Vin01 หน้าพิมพ์ 1 = PDF 24)
+% =========================================================================
+
+\RequirePackage{iftex}
+\RequireLuaTeX
+
+\input{shared/style/pagegeometry}
+
+\usepackage[
+  main=thai,
+  english,
+  provide=*,
+]{babel}
+
+% CS Roman: คำศัพท์บาลีพิมพ์เว้นระหว่างคำ (ไม่ติดกันแบบไทยทั่วไป)
+% จึงตัดบรรทัดได้เฉพาะที่ช่องว่าง — ไม่อนุญาตให้ตัดกลางคำ
+\babelprovide[hyphenrules=nohyphenation]{thai}
+
+\babelfont{rm}[
+  Path           = shared/fonts/,
+  Extension      = .ttf,
+  UprightFont    = *-Regular,
+  BoldFont       = *-Bold,
+  ItalicFont     = *-Italic,
+  BoldItalicFont = *-BoldItalic,
+  Ligatures      = TeX,
+  % Source body ≈12 pt VZTime; Sarabun 11pt × 1.1 ≈ 12.1 pt.
+  % Tuned so prose median line_ratio stays in ~0.95–1.05 vs CS Roman.
+  Scale          = 1.1,
+  % Pāli is space-separated — widen interword space toward Roman line counts.
+  % Volume/page/segment overrides: segments.json ``layout`` / ``page_layout`` /
+  % segment ``word_space`` (see SCHEMA.md). Generator emits \csromanlayoutapply.
+  WordSpace      = 2.5,
+]{Sarabun}
+
+% Thai stack (ิ/ี + ํ, ฺ, ุ/ู) needs more leading than Latin; tight lead looks uneven.
+% memoir 11pt \baselineskip ≈ 13.6 pt; × 1.25 ≈ 17.0 pt (was 1.152 / ~15.7 pt).
+% Defaults below match DEFAULT_LAYOUT in scripts/cs_roman_segments.py; body.tex
+% may re-apply via \csromanlayoutapply from segments.json.
+\linespread{1.25}\selectfont
+\normalsize
+\newlength{\tipitakahang}
+\setlength{\tipitakahang}{21.6pt}
+\setlength{\parindent}{\tipitakahang}
+% Body vertical rhythm (measured para gap ≈23 pt ⇒ +≈6.3 pt over body lead):
+%   \tipitakaparskip  — gap between prose paragraphs
+%   \gathastanzaskip  — gap after each gāthā บท (defaults equal to parskip)
+\newlength{\tipitakaparskip}
+\newlength{\gathastanzaskip}
+\setlength{\tipitakaparskip}{6.3pt plus 1pt minus 0.5pt}
+\setlength{\gathastanzaskip}{\tipitakaparskip}
+\setlength{\parskip}{\tipitakaparskip}
+\setlength{\emergencystretch}{2.5em}
+\frenchspacing
+% Ragged bottom: page-sync leaves variable leftover space; flushbottom would
+% stretch heading gaps on short pages (especially the opening title stack).
+% Residual fill is limited to \vspace{0pt plus 2\baselineskip} in \csromanpage.
+\raggedbottom
+
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[bottom,hang,stable,perpage]{footmisc}
+\setlength{\footnotemargin}{0.85em}
+\usepackage{needspace}
+
+\usepackage[
+  unicode=true,
+  bookmarks=true,
+  hidelinks,
+  pdfencoding=auto,
+  pageanchor=false,
+]{hyperref}
+
+\usepackage{memhfixc}
+
+\input{shared/style/book-macros}
+\input{shared/style/footnotes}
+
+% Volume TOC from segments with in_toc (written via \csromantocmark).
+\renewcommand{\contentsname}{มาติกา}
+\settocdepth{subsubsection}
+\maxtocdepth{subsubsection}
+\setsecnumdepth{none}
+\maxsecnumdepth{none}

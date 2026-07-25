@@ -1,0 +1,313 @@
+"""Unit tests for cs-roman segments schema v1 normalize/validate."""
+
+from __future__ import annotations
+
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+from cs_roman_segments import (  # noqa: E402
+    DEFAULT_LAYOUT,
+    SCHEMA_VERSION,
+    compact_segment,
+    doc_layout,
+    effective_layout,
+    effective_word_space,
+    layout_path_for,
+    load_document,
+    migrate_segment_word_space,
+    normalize_content,
+    normalize_document,
+    normalize_layout,
+    save_document,
+    seg_word_space,
+    validate_document,
+)
+
+
+class CsRomanSegmentsTests(unittest.TestCase):
+    def test_compact_omits_empty_and_unused(self) -> None:
+        seg = {
+            "page": 1,
+            "order": 1,
+            "item": None,
+            "segment_type": "prose",
+            "text": [
+                {"script": "roman", "value": "Hello", "runs": [{"value": "Hello", "bold": False}]},
+                {"script": "thai", "value": "เฮลโล", "runs": [{"value": "เฮลโล", "bold": False}]},
+            ],
+            "pdf_page": 24,
+            "flags": [],
+            "notes": [],
+            "symbol_notes": {},
+            "needs_review": False,
+            "review_reasons": [],
+            "in_toc": False,
+        }
+        out = compact_segment(seg)
+        self.assertNotIn("item", out)
+        self.assertNotIn("pdf_page", out)
+        self.assertNotIn("flags", out)
+        self.assertNotIn("notes", out)
+        self.assertNotIn("needs_review", out)
+        self.assertNotIn("in_toc", out)
+        for entry in out["text"]:
+            self.assertNotIn("runs", entry)
+
+    def test_compact_keeps_bold_runs_and_gatha_without_ids(self) -> None:
+        seg = {
+            "page": 2,
+            "order": 5,
+            "segment_type": "gatha",
+            "source_layout": "bat_line",
+            "bats": [
+                {
+                    "bat": 1,
+                    "waks": [
+                        {
+                            "wak": 1,
+                            "role": "sadap",
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "ก",
+                                    "runs": [{"value": "ก", "bold": True}],
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+            "flags": [],
+            "notes": [],
+            "symbol_notes": {},
+            "needs_review": False,
+            "review_reasons": [],
+        }
+        out = compact_segment(seg)
+        self.assertEqual(out["bats"][0]["waks"][0]["text"][0]["runs"][0]["bold"], True)
+        self.assertNotIn("bat", out["bats"][0])
+        self.assertNotIn("wak", out["bats"][0]["waks"][0])
+        self.assertNotIn("role", out["bats"][0]["waks"][0])
+
+    def test_compact_drops_segment_word_space(self) -> None:
+        seg = {
+            "page": 3,
+            "order": 2,
+            "segment_type": "prose",
+            "item": 10,
+            "text": [{"script": "thai", "value": "ตตฺร เจ"}],
+            "word_space": 1.2,
+            "flags": [],
+            "notes": [],
+        }
+        out = compact_segment(seg)
+        self.assertNotIn("word_space", out)
+
+    def test_migrate_segment_word_space_to_page_layout(self) -> None:
+        doc = {
+            "segments": [
+                {"page": 3, "order": 10, "segment_type": "prose"},
+                {
+                    "page": 3,
+                    "order": 11,
+                    "segment_type": "prose",
+                    "word_space": 1.2,
+                },
+                {"page": 4, "order": 12, "segment_type": "prose"},
+            ]
+        }
+        migrated = migrate_segment_word_space(doc)
+        self.assertNotIn("word_space", migrated["segments"][1])
+        self.assertEqual(
+            migrated["page_layout"]["3"]["segments"]["2"]["word_space"],
+            1.2,
+        )
+
+    def test_validate_rejects_segment_word_space(self) -> None:
+        base = {
+            "schema_version": SCHEMA_VERSION,
+            "source": "books/cs-roman/source/01Vin01.pdf",
+            "content_start_pdf_page": 24,
+            "segments": [
+                {
+                    "page": 1,
+                    "order": 1,
+                    "segment_type": "prose",
+                    "text": [{"script": "thai", "value": "ก"}],
+                    "word_space": 1.5,
+                }
+            ],
+        }
+        errors = validate_document(base)
+        self.assertTrue(any("word_space" in e and "page_layout" in e for e in errors))
+
+    def test_normalize_document_schema(self) -> None:
+        doc = normalize_document(
+            {
+                "source": "books/cs-roman/source/01Vin01.pdf",
+                "text_format": "legacy prose",
+                "heading_assignment": {"matika_entries": 1},
+                "content_start_pdf_page": 24,
+                "segments": [
+                    {
+                        "page": 1,
+                        "order": 1,
+                        "segment_type": "title",
+                        "text": [{"script": "thai", "value": "หัวข้อ"}],
+                        "heading_kind": "h1",
+                        "in_toc": True,
+                        "flags": [],
+                        "notes": [],
+                        "symbol_notes": {},
+                        "needs_review": False,
+                        "review_reasons": [],
+                    }
+                ],
+            }
+        )
+        self.assertEqual(doc["schema_version"], SCHEMA_VERSION)
+        self.assertNotIn("text_format", doc)
+        self.assertNotIn("heading_assignment", doc)
+        self.assertEqual(doc["layout"], DEFAULT_LAYOUT)
+        self.assertNotIn("page_layout", doc)
+        errors = validate_document(doc)
+        self.assertEqual(errors, [])
+        content = normalize_content(doc)
+        self.assertEqual(set(content), {"schema_version", "segments"})
+        layout = normalize_layout(doc)
+        self.assertNotIn("segments", layout)
+        self.assertIn("layout", layout)
+
+    def test_normalize_fills_layout_and_keeps_page_overrides(self) -> None:
+        doc = normalize_document(
+            {
+                "source": "books/cs-roman/source/01Vin01.pdf",
+                "content_start_pdf_page": 24,
+                "layout": {"line_space": 1.15, "word_space": 2.0},
+                "page_layout": {
+                    "10": {
+                        "line_space": 1.1,
+                        "word_space": 1.5,
+                        "par_indent": "20pt",
+                        "par_skip": "5pt",
+                        "gatha_stanza_skip": "5pt",
+                        "gatha_indent": "60pt",
+                        "emergency_stretch": "2em",
+                        "segments": {"1": {"word_space": 1.2}},
+                    },
+                    "bad": {"line_space": 1.0},
+                    "0": {"line_space": 1.0},
+                },
+                "segments": [
+                    {"page": 10, "order": 1, "segment_type": "prose"},
+                ],
+            }
+        )
+        self.assertEqual(doc["layout"]["line_space"], 1.15)
+        self.assertEqual(doc["layout"]["word_space"], 2.0)
+        self.assertEqual(doc["layout"]["par_skip"], DEFAULT_LAYOUT["par_skip"])
+        self.assertEqual(set(doc["layout"]), set(DEFAULT_LAYOUT))
+        self.assertEqual(list(doc["page_layout"]), ["10"])
+        self.assertEqual(doc["page_layout"]["10"]["gatha_indent"], "60pt")
+        self.assertEqual(doc["page_layout"]["10"]["segments"]["1"]["word_space"], 1.2)
+        self.assertEqual(validate_document(doc), [])
+
+    def test_validate_layout_rejects_unknown_and_bad_values(self) -> None:
+        base = {
+            "schema_version": SCHEMA_VERSION,
+            "source": "books/cs-roman/source/01Vin01.pdf",
+            "content_start_pdf_page": 24,
+            "layout": dict(DEFAULT_LAYOUT),
+            "segments": [],
+        }
+        self.assertEqual(validate_document(base), [])
+        bad_key = {
+            **base,
+            "layout": {**DEFAULT_LAYOUT, "font_scale": 1.1},
+        }
+        self.assertTrue(any("unknown" in e for e in validate_document(bad_key)))
+        bad_dim = {
+            **base,
+            "page_layout": {"3": {"par_skip": "wide"}},
+        }
+        self.assertTrue(any("par_skip" in e for e in validate_document(bad_dim)))
+        bad_mult = {
+            **base,
+            "page_layout": {"3": {"line_space": 0}},
+        }
+        self.assertTrue(any("line_space" in e for e in validate_document(bad_mult)))
+
+    def test_effective_layout_precedence_all_keys(self) -> None:
+        page_patch = {
+            "word_space": 1.0,
+            "line_space": 1.1,
+            "par_indent": "18pt",
+            "par_skip": "4pt",
+            "gatha_stanza_skip": "4.5pt",
+            "gatha_indent": "50pt",
+            "emergency_stretch": "3em",
+            "segments": {"1": {"word_space": 0.8}},
+        }
+        doc = {
+            "layout": {**DEFAULT_LAYOUT, "word_space": 2.0, "line_space": 1.2},
+            "page_layout": {"5": page_patch},
+            "segments": [
+                {"page": 5, "order": 1, "segment_type": "prose"},
+            ],
+        }
+        self.assertEqual(doc_layout(doc)["word_space"], 2.0)
+        eff = effective_layout(doc, 5)
+        expected = {**DEFAULT_LAYOUT, **{k: page_patch[k] for k in DEFAULT_LAYOUT}}
+        self.assertEqual(eff, expected)
+        # segments meta must not appear in TeX layout apply dict.
+        self.assertNotIn("segments", eff)
+        self.assertEqual(effective_layout(doc, 6)["word_space"], 2.0)
+        self.assertEqual(seg_word_space(doc, doc["segments"][0]), 0.8)
+        self.assertEqual(
+            effective_word_space(doc, doc["segments"][0], page=5),
+            0.8,
+        )
+        self.assertEqual(effective_word_space(doc, {}, page=5), 1.0)
+
+    def test_split_roundtrip_files(self) -> None:
+        doc = {
+            "schema_version": SCHEMA_VERSION,
+            "source": "books/cs-roman/source/01Vin01.pdf",
+            "content_start_pdf_page": 24,
+            "layout": {**DEFAULT_LAYOUT, "word_space": 1.6},
+            "page_layout": {
+                "322": {"segments": {"1": {"word_space": 1.6}}},
+            },
+            "segments": [
+                {"page": 322, "order": 2159, "segment_type": "prose"},
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            segments_path = root / "01Vin01.segments.json"
+            save_document(segments_path, doc)
+            layout_path = layout_path_for(segments_path)
+            self.assertTrue(layout_path.is_file())
+            content = load_document(segments_path)
+            self.assertEqual(content["layout"]["word_space"], 1.6)
+            self.assertEqual(
+                content["page_layout"]["322"]["segments"]["1"]["word_space"],
+                1.6,
+            )
+            self.assertEqual(validate_document(content), [])
+            raw_content = segments_path.read_text(encoding="utf-8")
+            self.assertNotIn('"layout"', raw_content)
+            self.assertIn('"segments"', raw_content)
+            raw_layout = layout_path.read_text(encoding="utf-8")
+            self.assertIn('"layout"', raw_layout)
+            self.assertNotIn('"segments": [', raw_layout)
+
+
+if __name__ == "__main__":
+    unittest.main()

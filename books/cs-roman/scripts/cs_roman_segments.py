@@ -1,0 +1,1066 @@
+#!/usr/bin/env python3
+"""Typed load/save/normalize for cs-roman segments + layout JSON (schema_version 1).
+
+Content and print config are separate files:
+
+  books/cs-roman/output/<id>.segments.json   # segments only
+  books/cs-roman/output/<id>.layout.json     # source, bounds, layout, page_layout
+  books/cs-roman/volumes/<id>/data/segments.json
+  books/cs-roman/volumes/<id>/data/layout.json
+
+  python books/cs-roman/scripts/cs_roman_segments.py normalize books/cs-roman/output/01Vin01.segments.json
+  python books/cs-roman/scripts/cs_roman_segments.py normalize --all
+  python books/cs-roman/scripts/cs_roman_segments.py validate books/cs-roman/output/01Vin01.segments.json
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+from typing import Any
+
+SCHEMA_VERSION = 1
+
+_CONTENT_KEEP = frozenset({"schema_version", "segments"})
+_LAYOUT_KEEP = frozenset(
+    {
+        "schema_version",
+        "source",
+        "content_start_pdf_page",
+        "content_end_printed_page",
+        "back_matter_start_printed_page",
+        "layout",
+        "page_layout",
+    }
+)
+# Merged in-memory document (content ∪ layout).
+_DOC_KEEP = _CONTENT_KEEP | _LAYOUT_KEEP
+
+# Body-rhythm defaults matching shared/style/preamble.tex + book-macros.tex.
+# Normalize always emits a full ``layout`` object with these keys.
+DEFAULT_LAYOUT: dict[str, float | int | str] = {
+    "word_space": 2.5,
+    "line_space": 1.25,
+    "par_indent": "21.6pt",
+    "par_skip": "6.3pt",
+    "gatha_stanza_skip": "6.3pt",
+    "gatha_indent": "65pt",
+    "emergency_stretch": "2.5em",
+}
+
+_LAYOUT_KEYS = frozenset(DEFAULT_LAYOUT)
+_LAYOUT_MULTIPLIER_KEYS = frozenset({"word_space", "line_space"})
+_LAYOUT_DIMENSION_KEYS = _LAYOUT_KEYS - _LAYOUT_MULTIPLIER_KEYS
+_PAGE_ENTRY_META_KEYS = frozenset({"segments"})
+_SEGMENT_OVERRIDE_KEYS = frozenset({"word_space"})
+_DIMENSION_RE = re.compile(
+    r"^[+]?\d+(?:\.\d+)?(?:pt|bp|em|ex|mm|cm|in|sp|dd|cc|nd|nc)$"
+)
+
+_SEGMENT_TYPES = frozenset(
+    {
+        "prose",
+        "prose_continuation",
+        "verse",
+        "verse_continuation",
+        "gatha",
+        "gatha_continuation",
+        "piṭaka",
+        "gambhīra",
+        "namakkāraṃ",
+        "chapter",
+        "title",
+        "niṭṭhitaṃ",
+        "note",
+        "subhead",
+        "centered",
+    }
+)
+
+_HEADING_KINDS = frozenset(
+    {"nik", "boo", "cha", "h1", "h2", "h3", "h4", "h5", "h6"}
+)
+_SOURCE_LAYOUTS = frozenset({"bat_line", "wak_line", "hanging"})
+_NOTE_MARKER_RE = re.compile(r"\{\{n(\d+)\}\}")
+
+
+def layout_path_for(segments_path: Path) -> Path:
+    """Sibling layout.json path for a segments.json path."""
+    name = segments_path.name
+    if name.endswith(".segments.json"):
+        return segments_path.with_name(
+            name[: -len(".segments.json")] + ".layout.json"
+        )
+    if name == "segments.json":
+        return segments_path.with_name("layout.json")
+    return segments_path.with_name(segments_path.stem + ".layout.json")
+
+
+def runs_have_bold(runs: Any) -> bool:
+    if not isinstance(runs, list):
+        return False
+    return any(isinstance(r, dict) and r.get("bold") for r in runs)
+
+
+def compact_script_entry(entry: dict[str, Any]) -> dict[str, Any]:
+    """Keep script/value; keep runs only when at least one run is bold."""
+    out: dict[str, Any] = {
+        "script": entry.get("script"),
+        "value": entry.get("value") or "",
+    }
+    runs = entry.get("runs")
+    if runs_have_bold(runs):
+        out["runs"] = [
+            {"value": str(r.get("value") or ""), "bold": bool(r.get("bold"))}
+            for r in runs
+            if isinstance(r, dict)
+        ]
+    return out
+
+
+def compact_text_field(text: Any) -> Any:
+    if not isinstance(text, list):
+        return text
+    return [
+        compact_script_entry(e) if isinstance(e, dict) else e for e in text
+    ]
+
+
+def compact_bats(bats: Any) -> list[dict[str, Any]] | None:
+    """Drop bat/wak/role numbers; keep waks[].text only."""
+    if not isinstance(bats, list) or not bats:
+        return None
+    out: list[dict[str, Any]] = []
+    for bat in bats:
+        if not isinstance(bat, dict):
+            continue
+        waks_out: list[dict[str, Any]] = []
+        for wak in bat.get("waks") or []:
+            if not isinstance(wak, dict):
+                continue
+            waks_out.append({"text": compact_text_field(wak.get("text"))})
+        out.append({"waks": waks_out})
+    return out or None
+
+
+def compact_hanging_lines(lines: Any) -> list[Any] | None:
+    if not isinstance(lines, list) or not lines:
+        return None
+    return [compact_text_field(line) for line in lines]
+
+
+def compact_segment(seg: dict[str, Any]) -> dict[str, Any]:
+    """Normalize one segment to schema v1 compact form (no print overrides)."""
+    out: dict[str, Any] = {
+        "page": seg.get("page"),
+        "order": seg.get("order"),
+        "segment_type": seg.get("segment_type") or "prose",
+    }
+    if seg.get("item") is not None:
+        out["item"] = seg.get("item")
+
+    kind = out["segment_type"]
+    if kind in {"gatha", "gatha_continuation"}:
+        bats = compact_bats(seg.get("bats"))
+        if bats is not None:
+            out["bats"] = bats
+        layout = seg.get("source_layout")
+        if layout in _SOURCE_LAYOUTS:
+            out["source_layout"] = layout
+    else:
+        if "text" in seg:
+            out["text"] = compact_text_field(seg.get("text"))
+        layout = seg.get("source_layout")
+        if layout == "hanging":
+            out["source_layout"] = "hanging"
+            hl = compact_hanging_lines(seg.get("hanging_lines"))
+            if hl is not None:
+                out["hanging_lines"] = hl
+
+    flags = [f for f in (seg.get("flags") or []) if f]
+    if flags:
+        out["flags"] = flags
+
+    notes = list(seg.get("notes") or [])
+    if notes:
+        out["notes"] = notes
+
+    symbol_notes = seg.get("symbol_notes") or {}
+    if isinstance(symbol_notes, dict) and symbol_notes:
+        out["symbol_notes"] = dict(symbol_notes)
+
+    if seg.get("needs_review"):
+        out["needs_review"] = True
+        reasons = list(seg.get("review_reasons") or [])
+        if reasons:
+            out["review_reasons"] = reasons
+    elif seg.get("review_reasons"):
+        # Keep reasons even if flag cleared inconsistently.
+        out["review_reasons"] = list(seg["review_reasons"])
+
+    heading_kind = seg.get("heading_kind")
+    if heading_kind:
+        out["heading_kind"] = heading_kind
+    if seg.get("in_toc"):
+        out["in_toc"] = True
+
+    return out
+
+
+def _coerce_word_space(raw: Any) -> float | int | None:
+    """fontspec WordSpace multiplier; omit when unset/invalid."""
+    return _coerce_positive_number(raw)
+
+
+def _coerce_positive_number(raw: Any) -> float | int | None:
+    """Positive int/float; omit when unset/invalid."""
+    if raw is None or raw is False:
+        return None
+    if isinstance(raw, bool):
+        return None
+    if isinstance(raw, int):
+        return raw if raw > 0 else None
+    if isinstance(raw, float):
+        if raw <= 0 or raw != raw:  # NaN
+            return None
+        return int(raw) if raw == int(raw) else raw
+    if isinstance(raw, str) and raw.strip():
+        try:
+            return _coerce_positive_number(float(raw))
+        except ValueError:
+            return None
+    return None
+
+
+def _coerce_dimension(raw: Any) -> str | None:
+    """TeX dimension string (e.g. 6.3pt, 2.5em); omit when unset/invalid."""
+    if raw is None or raw is False or isinstance(raw, bool):
+        return None
+    if isinstance(raw, (int, float)):
+        if raw <= 0 or (isinstance(raw, float) and raw != raw):
+            return None
+        n = int(raw) if float(raw) == int(raw) else raw
+        return f"{n}pt"
+    if isinstance(raw, str):
+        s = raw.strip().replace(" ", "")
+        if not s:
+            return None
+        if _DIMENSION_RE.match(s):
+            return s
+        try:
+            return _coerce_dimension(float(s))
+        except ValueError:
+            return None
+    return None
+
+
+def _coerce_layout_value(key: str, raw: Any) -> float | int | str | None:
+    if key in _LAYOUT_MULTIPLIER_KEYS:
+        return _coerce_positive_number(raw)
+    if key in _LAYOUT_DIMENSION_KEYS:
+        return _coerce_dimension(raw)
+    return None
+
+
+def coerce_layout_patch(raw: Any) -> dict[str, float | int | str] | None:
+    """Sparse layout object (known keys only); None if empty/invalid container."""
+    if not isinstance(raw, dict):
+        return None
+    out: dict[str, float | int | str] = {}
+    for key in DEFAULT_LAYOUT:
+        if key not in raw or raw[key] is None:
+            continue
+        value = _coerce_layout_value(key, raw[key])
+        if value is not None:
+            out[key] = value
+    return out or None
+
+
+def merge_layout(base: dict[str, Any] | None, patch: dict[str, Any] | None) -> dict[str, float | int | str]:
+    """Full layout: DEFAULT_LAYOUT ← base ← patch (layout keys only)."""
+    out: dict[str, float | int | str] = dict(DEFAULT_LAYOUT)
+    for src in (base, patch):
+        if not isinstance(src, dict):
+            continue
+        for key in DEFAULT_LAYOUT:
+            if key not in src or src[key] is None:
+                continue
+            value = _coerce_layout_value(key, src[key])
+            if value is not None:
+                out[key] = value
+    return out
+
+
+def coerce_segment_override(raw: Any) -> dict[str, float | int] | None:
+    """Sparse per-segment print override (currently word_space only)."""
+    if not isinstance(raw, dict):
+        return None
+    out: dict[str, float | int] = {}
+    ws = _coerce_word_space(raw.get("word_space"))
+    if ws is not None:
+        out["word_space"] = ws
+    return out or None
+
+
+def coerce_page_segments(raw: Any) -> dict[str, dict[str, float | int]] | None:
+    """Map 1-based page-local segment index → override; omit when empty."""
+    if not isinstance(raw, dict) or not raw:
+        return None
+    out: dict[str, dict[str, float | int]] = {}
+    for idx_key, patch in raw.items():
+        try:
+            idx = int(idx_key)
+        except (TypeError, ValueError):
+            continue
+        if idx < 1:
+            continue
+        coerced = coerce_segment_override(patch)
+        if coerced:
+            out[str(idx)] = coerced
+    if not out:
+        return None
+    return dict(sorted(out.items(), key=lambda kv: int(kv[0])))
+
+
+def coerce_page_entry(raw: Any) -> dict[str, Any] | None:
+    """One page_layout value: layout keys + optional segments map."""
+    if not isinstance(raw, dict):
+        return None
+    out: dict[str, Any] = {}
+    layout_patch = coerce_layout_patch(
+        {k: v for k, v in raw.items() if k not in _PAGE_ENTRY_META_KEYS}
+    )
+    if layout_patch:
+        out.update(layout_patch)
+    segments = coerce_page_segments(raw.get("segments"))
+    if segments is not None:
+        out["segments"] = segments
+    return out or None
+
+
+def layout_keys_only(page_entry: dict[str, Any] | None) -> dict[str, float | int | str]:
+    """Strip meta keys (e.g. segments) from a page_layout entry."""
+    if not isinstance(page_entry, dict):
+        return {}
+    return {
+        k: v
+        for k, v in page_entry.items()
+        if k in _LAYOUT_KEYS and v is not None
+    }
+
+
+def coerce_page_layout(raw: Any) -> dict[str, dict[str, Any]] | None:
+    """Map printed page → page entry; omit when empty."""
+    if not isinstance(raw, dict) or not raw:
+        return None
+    out: dict[str, dict[str, Any]] = {}
+    for page_key, patch in raw.items():
+        try:
+            page = int(page_key)
+        except (TypeError, ValueError):
+            continue
+        if page < 1:
+            continue
+        coerced = coerce_page_entry(patch)
+        if coerced:
+            out[str(page)] = coerced
+    if not out:
+        return None
+    return dict(sorted(out.items(), key=lambda kv: int(kv[0])))
+
+
+def migrate_segment_word_space(data: dict[str, Any]) -> dict[str, Any]:
+    """Move legacy segment ``word_space`` into ``page_layout[page].segments[n]``.
+
+    ``n`` is the 1-based index among segments on that printed page (by ``order``).
+    """
+    segments = [s for s in (data.get("segments") or []) if isinstance(s, dict)]
+    if not any(s.get("word_space") is not None for s in segments):
+        return data
+
+    data = dict(data)
+    page_layout = dict(coerce_page_layout(data.get("page_layout")) or {})
+    by_page: dict[int, list[dict[str, Any]]] = {}
+    for seg in segments:
+        page = seg.get("page")
+        if isinstance(page, int):
+            by_page.setdefault(page, []).append(seg)
+
+    new_segments: list[dict[str, Any]] = []
+    for seg in segments:
+        seg = dict(seg)
+        ws = _coerce_word_space(seg.pop("word_space", None))
+        page = seg.get("page")
+        if ws is not None and isinstance(page, int):
+            page_segs = sorted(
+                by_page.get(page) or [],
+                key=lambda s: int(s.get("order") or 0),
+            )
+            idx = next(
+                (
+                    i
+                    for i, s in enumerate(page_segs, 1)
+                    if s.get("order") == seg.get("order")
+                ),
+                None,
+            )
+            if idx is not None:
+                page_key = str(page)
+                entry = dict(page_layout.get(page_key) or {})
+                seg_map = dict(entry.get("segments") or {})
+                override = dict(seg_map.get(str(idx)) or {})
+                override["word_space"] = ws
+                seg_map[str(idx)] = override
+                entry["segments"] = dict(
+                    sorted(seg_map.items(), key=lambda kv: int(kv[0]))
+                )
+                page_layout[page_key] = entry
+        new_segments.append(seg)
+
+    data["segments"] = new_segments
+    if page_layout:
+        data["page_layout"] = dict(
+            sorted(page_layout.items(), key=lambda kv: int(kv[0]))
+        )
+    return data
+
+
+def normalize_content(data: dict[str, Any]) -> dict[str, Any]:
+    """Content file: schema_version + compact segments only."""
+    segments = [
+        compact_segment(s) if isinstance(s, dict) else s
+        for s in (data.get("segments") or [])
+    ]
+    return {"schema_version": SCHEMA_VERSION, "segments": segments}
+
+
+def normalize_layout(data: dict[str, Any]) -> dict[str, Any]:
+    """Layout file: source/bounds + layout + page_layout."""
+    out: dict[str, Any] = {"schema_version": SCHEMA_VERSION}
+    if data.get("source") is not None:
+        out["source"] = data["source"]
+    for key in (
+        "content_start_pdf_page",
+        "content_end_printed_page",
+        "back_matter_start_printed_page",
+    ):
+        if key in data and data[key] is not None:
+            out[key] = data[key]
+    out["layout"] = merge_layout(data.get("layout"), None)
+    page_layout = coerce_page_layout(data.get("page_layout"))
+    if page_layout is not None:
+        out["page_layout"] = page_layout
+    return out
+
+
+def normalize_document(data: dict[str, Any]) -> dict[str, Any]:
+    """Merged in-memory document (content + layout). Migrates legacy fields."""
+    data = migrate_segment_word_space(data)
+    content = normalize_content(data)
+    layout = normalize_layout(data)
+    return merge_documents(content, layout)
+
+
+def split_document(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Return (content_doc, layout_doc) after normalize/migrate."""
+    merged = normalize_document(data)
+    return normalize_content(merged), normalize_layout(merged)
+
+
+def merge_documents(
+    content: dict[str, Any] | None,
+    layout: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Merge content + layout files into one in-memory document."""
+    out: dict[str, Any] = {"schema_version": SCHEMA_VERSION}
+    if isinstance(layout, dict):
+        for key in _LAYOUT_KEEP:
+            if key == "schema_version":
+                continue
+            if key in layout and layout[key] is not None:
+                out[key] = layout[key]
+    if isinstance(content, dict) and "segments" in content:
+        out["segments"] = content["segments"]
+    elif isinstance(layout, dict) and "segments" in layout:
+        # Legacy combined file loaded as "layout" side — keep segments.
+        out["segments"] = layout["segments"]
+    else:
+        out["segments"] = []
+    if "layout" not in out:
+        out["layout"] = dict(DEFAULT_LAYOUT)
+    return out
+
+
+def dumps(data: dict[str, Any]) -> str:
+    return json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+
+
+def load(path: Path) -> dict[str, Any]:
+    """Load a single JSON file (no sibling merge)."""
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_document(segments_path: Path, layout_path: Path | None = None) -> dict[str, Any]:
+    """Load segments (+ sibling layout when present) into a merged document.
+
+    Supports legacy combined ``*.segments.json`` that still embeds layout keys.
+    """
+    segments_path = Path(segments_path)
+    content = load(segments_path)
+    layout_file = Path(layout_path) if layout_path is not None else layout_path_for(
+        segments_path
+    )
+    layout: dict[str, Any] | None = None
+    if layout_file.is_file():
+        layout = load(layout_file)
+    elif any(k in content for k in _LAYOUT_KEEP - {"schema_version"}):
+        # Legacy combined file.
+        layout = content
+    return normalize_document(merge_documents(content, layout))
+
+
+def save_content(path: Path, data: dict[str, Any], *, normalize: bool = True) -> None:
+    payload = normalize_content(data) if normalize else data
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(dumps(payload), encoding="utf-8")
+
+
+def save_layout(path: Path, data: dict[str, Any], *, normalize: bool = True) -> None:
+    payload = normalize_layout(data) if normalize else data
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(dumps(payload), encoding="utf-8")
+
+
+def save_document(
+    segments_path: Path,
+    data: dict[str, Any],
+    *,
+    layout_path: Path | None = None,
+    normalize: bool = True,
+) -> None:
+    """Write split content + layout files."""
+    segments_path = Path(segments_path)
+    layout_file = Path(layout_path) if layout_path is not None else layout_path_for(
+        segments_path
+    )
+    if normalize:
+        content, layout = split_document(data)
+    else:
+        content, layout = normalize_content(data), normalize_layout(data)
+    save_content(segments_path, content, normalize=False)
+    save_layout(layout_file, layout, normalize=False)
+
+
+def save(path: Path, data: dict[str, Any], *, normalize: bool = True) -> None:
+    """Save to ``path``.
+
+    - ``*.segments.json`` / ``segments.json`` → content file; also writes/updates
+      sibling layout when ``data`` carries layout keys or the sibling already exists
+      and ``data`` includes bounds/layout fields.
+    - ``*.layout.json`` / ``layout.json`` → layout file only.
+    - Other paths → legacy single-file merged document (tests).
+    """
+    path = Path(path)
+    name = path.name
+    if name.endswith(".layout.json") or name == "layout.json":
+        save_layout(path, data, normalize=normalize)
+        return
+    if name.endswith(".segments.json") or name == "segments.json":
+        layout_file = layout_path_for(path)
+        has_layout_fields = any(
+            k in data and data[k] is not None
+            for k in _LAYOUT_KEEP - {"schema_version"}
+        )
+        if has_layout_fields or layout_file.is_file():
+            if layout_file.is_file() and not has_layout_fields:
+                # Content-only update: preserve existing layout file.
+                save_content(path, data, normalize=normalize)
+                return
+            if layout_file.is_file() and has_layout_fields:
+                # Merge bounds/layout updates onto existing print tuning.
+                existing = load(layout_file)
+                merged = merge_documents(data, existing)
+                # Prefer incoming layout keys when present.
+                for key in _LAYOUT_KEEP - {"schema_version"}:
+                    if key in data and data[key] is not None:
+                        merged[key] = data[key]
+                if "segments" in data:
+                    merged["segments"] = data["segments"]
+                save_document(path, merged, layout_path=layout_file, normalize=normalize)
+                return
+            save_document(path, data, layout_path=layout_file, normalize=normalize)
+            return
+        save_content(path, data, normalize=normalize)
+        return
+
+    payload = normalize_document(data) if normalize else data
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(dumps(payload), encoding="utf-8")
+
+
+def normalize_file(path: Path) -> dict[str, Any]:
+    """Load combined or split inputs, rewrite split files; return stats."""
+    path = Path(path)
+    before = path.stat().st_size
+    layout_file = layout_path_for(path)
+    layout_before = layout_file.stat().st_size if layout_file.is_file() else 0
+
+    if path.name.endswith(".layout.json") or path.name == "layout.json":
+        # Normalize layout alone; leave segments untouched.
+        data = load(path)
+        save_layout(path, data, normalize=True)
+        after = path.stat().st_size
+        return {
+            "path": str(path).replace("\\", "/"),
+            "segments": 0,
+            "bytes_before": before,
+            "bytes_after": after,
+            "schema_version": SCHEMA_VERSION,
+            "layout_path": str(path).replace("\\", "/"),
+        }
+
+    doc = load_document(path)
+    save_document(path, doc, layout_path=layout_file, normalize=True)
+    after = path.stat().st_size
+    layout_after = layout_file.stat().st_size if layout_file.is_file() else 0
+    return {
+        "path": str(path).replace("\\", "/"),
+        "segments": len(doc.get("segments") or []),
+        "bytes_before": before + layout_before,
+        "bytes_after": after + layout_after,
+        "schema_version": SCHEMA_VERSION,
+        "layout_path": str(layout_file).replace("\\", "/"),
+    }
+
+
+# --- accessors (defaults for omitted empty fields) ---
+
+
+def seg_flags(seg: dict[str, Any]) -> list[str]:
+    return list(seg.get("flags") or [])
+
+
+def seg_notes(seg: dict[str, Any]) -> list[str]:
+    return list(seg.get("notes") or [])
+
+
+def seg_symbol_notes(seg: dict[str, Any]) -> dict[str, str]:
+    raw = seg.get("symbol_notes") or {}
+    return dict(raw) if isinstance(raw, dict) else {}
+
+
+def seg_needs_review(seg: dict[str, Any]) -> bool:
+    return bool(seg.get("needs_review"))
+
+
+def seg_review_reasons(seg: dict[str, Any]) -> list[str]:
+    return list(seg.get("review_reasons") or [])
+
+
+def page_local_index(data: dict[str, Any], seg: dict[str, Any]) -> int | None:
+    """1-based index of ``seg`` among segments on the same printed page."""
+    page = seg.get("page")
+    order = seg.get("order")
+    if not isinstance(page, int):
+        return None
+    page_segs = [
+        s
+        for s in (data.get("segments") or [])
+        if isinstance(s, dict) and s.get("page") == page
+    ]
+    page_segs.sort(key=lambda s: int(s.get("order") or 0))
+    for i, s in enumerate(page_segs, 1):
+        if s.get("order") == order:
+            return i
+    return None
+
+
+def seg_word_space(
+    data: dict[str, Any] | None,
+    seg: dict[str, Any] | None = None,
+) -> float | int | None:
+    """Per-segment WordSpace from ``page_layout[page].segments[n]``.
+
+    Backward-compatible call shapes:
+      seg_word_space(doc, seg)
+      seg_word_space(seg)  # legacy: only seg.get("word_space")
+    """
+    if seg is None:
+        # Legacy: first arg is the segment dict.
+        if isinstance(data, dict):
+            return _coerce_word_space(data.get("word_space"))
+        return None
+    assert data is not None
+    page = seg.get("page")
+    if not isinstance(page, int):
+        return _coerce_word_space(seg.get("word_space"))
+    idx = page_local_index(data, seg)
+    if idx is None:
+        return _coerce_word_space(seg.get("word_space"))
+    entry = doc_page_layout(data).get(page) or {}
+    overrides = entry.get("segments") if isinstance(entry, dict) else None
+    if isinstance(overrides, dict):
+        patch = overrides.get(str(idx)) or overrides.get(idx)
+        if isinstance(patch, dict):
+            ws = _coerce_word_space(patch.get("word_space"))
+            if ws is not None:
+                return ws
+    return _coerce_word_space(seg.get("word_space"))
+
+
+def doc_layout(data: dict[str, Any]) -> dict[str, float | int | str]:
+    """Full volume layout (defaults merged)."""
+    return merge_layout(data.get("layout"), None)
+
+
+def doc_page_layout(data: dict[str, Any]) -> dict[int, dict[str, Any]]:
+    """Printed page → page entry (layout keys + optional segments)."""
+    raw = coerce_page_layout(data.get("page_layout")) or {}
+    return {int(page): dict(patch) for page, patch in raw.items()}
+
+
+def effective_layout(
+    data: dict[str, Any], page: int | None = None
+) -> dict[str, float | int | str]:
+    """Volume layout merged with optional ``page_layout[page]`` layout keys."""
+    base = doc_layout(data)
+    if page is None:
+        return base
+    entry = doc_page_layout(data).get(int(page))
+    patch = layout_keys_only(entry)
+    if not patch:
+        return base
+    return merge_layout(base, patch)
+
+
+def effective_word_space(
+    data: dict[str, Any],
+    seg: dict[str, Any],
+    *,
+    page: int | None = None,
+) -> float | int:
+    """Segment override → page → volume layout (always a positive number)."""
+    seg_ws = seg_word_space(data, seg)
+    if seg_ws is not None:
+        return seg_ws
+    page_no = int(page if page is not None else seg.get("page") or 0)
+    layout = effective_layout(data, page_no if page_no > 0 else None)
+    ws = _coerce_positive_number(layout.get("word_space"))
+    return ws if ws is not None else DEFAULT_LAYOUT["word_space"]
+
+
+def _validate_layout_object(
+    raw: Any, *, prefix: str, errors: list[str], allow_partial: bool
+) -> None:
+    if raw is None:
+        return
+    if not isinstance(raw, dict):
+        errors.append(f"{prefix}: need object")
+        return
+    unknown = sorted(set(raw) - _LAYOUT_KEYS)
+    if unknown:
+        errors.append(f"{prefix}: unknown keys: {', '.join(unknown)}")
+    if not allow_partial:
+        missing = sorted(_LAYOUT_KEYS - set(raw))
+        if missing:
+            errors.append(f"{prefix}: missing keys: {', '.join(missing)}")
+    for key in _LAYOUT_KEYS:
+        if key not in raw or raw[key] is None:
+            continue
+        if _coerce_layout_value(key, raw[key]) is None:
+            kind = (
+                "positive number (multiplier)"
+                if key in _LAYOUT_MULTIPLIER_KEYS
+                else "positive TeX dimension (e.g. 6.3pt)"
+            )
+            errors.append(f"{prefix}.{key}: need {kind}, got {raw[key]!r}")
+
+
+def _validate_page_entry(
+    raw: Any,
+    *,
+    prefix: str,
+    errors: list[str],
+    page: int,
+    segments: list[Any],
+) -> None:
+    if raw is None:
+        return
+    if not isinstance(raw, dict):
+        errors.append(f"{prefix}: need object")
+        return
+    unknown = sorted(set(raw) - _LAYOUT_KEYS - _PAGE_ENTRY_META_KEYS)
+    if unknown:
+        errors.append(f"{prefix}: unknown keys: {', '.join(unknown)}")
+    _validate_layout_object(
+        {k: v for k, v in raw.items() if k in _LAYOUT_KEYS},
+        prefix=prefix,
+        errors=errors,
+        allow_partial=True,
+    )
+    seg_map = raw.get("segments")
+    if seg_map is None:
+        return
+    if not isinstance(seg_map, dict):
+        errors.append(f"{prefix}.segments: need object keyed by page-local index")
+        return
+    page_count = sum(
+        1
+        for s in segments
+        if isinstance(s, dict) and s.get("page") == page
+    )
+    for idx_key, patch in seg_map.items():
+        try:
+            idx = int(idx_key)
+        except (TypeError, ValueError):
+            errors.append(f"{prefix}.segments: invalid index {idx_key!r}")
+            continue
+        if idx < 1:
+            errors.append(f"{prefix}.segments: index must be >= 1, got {idx_key!r}")
+            continue
+        if page_count and idx > page_count:
+            errors.append(
+                f"{prefix}.segments.{idx}: index out of range "
+                f"(page {page} has {page_count} segments)"
+            )
+        if not isinstance(patch, dict):
+            errors.append(f"{prefix}.segments.{idx}: need object")
+            continue
+        unknown_seg = sorted(set(patch) - _SEGMENT_OVERRIDE_KEYS)
+        if unknown_seg:
+            errors.append(
+                f"{prefix}.segments.{idx}: unknown keys: {', '.join(unknown_seg)}"
+            )
+        if "word_space" in patch and patch.get("word_space") is not None:
+            if _coerce_word_space(patch.get("word_space")) is None:
+                errors.append(
+                    f"{prefix}.segments.{idx}.word_space: need positive number, "
+                    f"got {patch.get('word_space')!r}"
+                )
+
+
+def validate_document(data: dict[str, Any]) -> list[str]:
+    """Return list of human-readable validation errors (empty = ok)."""
+    errors: list[str] = []
+    version = data.get("schema_version")
+    if version != SCHEMA_VERSION:
+        errors.append(f"schema_version: expected {SCHEMA_VERSION}, got {version!r}")
+    if "segments" not in data or not isinstance(data["segments"], list):
+        errors.append("segments: missing or not a list")
+        return errors
+    if "source" not in data:
+        errors.append("source: missing")
+    if "content_start_pdf_page" not in data:
+        errors.append("content_start_pdf_page: missing")
+
+    unknown_doc = sorted(set(data) - _DOC_KEEP)
+    if unknown_doc:
+        errors.append(f"unexpected document keys: {', '.join(unknown_doc)}")
+
+    if "layout" in data and data.get("layout") is not None:
+        _validate_layout_object(
+            data.get("layout"), prefix="layout", errors=errors, allow_partial=True
+        )
+    if "page_layout" in data and data.get("page_layout") is not None:
+        raw_pages = data.get("page_layout")
+        if not isinstance(raw_pages, dict):
+            errors.append("page_layout: need object keyed by printed page")
+        else:
+            for page_key, patch in raw_pages.items():
+                try:
+                    page = int(page_key)
+                except (TypeError, ValueError):
+                    errors.append(f"page_layout: invalid page key {page_key!r}")
+                    continue
+                if page < 1:
+                    errors.append(f"page_layout: page must be >= 1, got {page_key!r}")
+                    continue
+                _validate_page_entry(
+                    patch,
+                    prefix=f"page_layout.{page}",
+                    errors=errors,
+                    page=page,
+                    segments=data["segments"],
+                )
+
+    for i, seg in enumerate(data["segments"]):
+        if not isinstance(seg, dict):
+            errors.append(f"segments[{i}]: not an object")
+            continue
+        prefix = f"segments[{i}]"
+        if not isinstance(seg.get("page"), int):
+            errors.append(f"{prefix}.page: need int")
+        if not isinstance(seg.get("order"), int):
+            errors.append(f"{prefix}.order: need int")
+        st = seg.get("segment_type")
+        if st not in _SEGMENT_TYPES:
+            errors.append(f"{prefix}.segment_type: unknown {st!r}")
+        hk = seg.get("heading_kind")
+        if hk is not None and hk not in _HEADING_KINDS:
+            errors.append(f"{prefix}.heading_kind: unknown {hk!r}")
+        layout = seg.get("source_layout")
+        if layout is not None and layout not in _SOURCE_LAYOUTS:
+            errors.append(f"{prefix}.source_layout: unknown {layout!r}")
+        if "word_space" in seg:
+            errors.append(
+                f"{prefix}.word_space: must live in "
+                f"page_layout[page].segments[n], not on the segment"
+            )
+        if "pdf_page" in seg:
+            errors.append(f"{prefix}.pdf_page: must not be stored in v1")
+        notes = seg_notes(seg)
+        for field_name in ("text",):
+            text = seg.get(field_name)
+            if isinstance(text, list):
+                for entry in text:
+                    if isinstance(entry, dict):
+                        _check_markers(entry.get("value") or "", notes, errors, prefix)
+                        for run in entry.get("runs") or []:
+                            if isinstance(run, dict):
+                                _check_markers(
+                                    run.get("value") or "", notes, errors, prefix
+                                )
+        for bat in seg.get("bats") or []:
+            if not isinstance(bat, dict):
+                continue
+            if "bat" in bat:
+                errors.append(f"{prefix}.bats[].bat: must not be stored in v1")
+            for wak in bat.get("waks") or []:
+                if not isinstance(wak, dict):
+                    continue
+                if "wak" in wak or "role" in wak:
+                    errors.append(
+                        f"{prefix}.bats[].waks: wak/role must not be stored in v1"
+                    )
+                wt = wak.get("text")
+                if isinstance(wt, list):
+                    for entry in wt:
+                        if isinstance(entry, dict):
+                            _check_markers(
+                                entry.get("value") or "", notes, errors, prefix
+                            )
+    return errors
+
+
+def _check_markers(
+    value: str, notes: list[str], errors: list[str], prefix: str
+) -> None:
+    for m in _NOTE_MARKER_RE.finditer(value):
+        idx = int(m.group(1))
+        if idx < 0 or idx >= len(notes):
+            errors.append(f"{prefix}: marker {{{{n{idx}}}}} out of range for notes")
+
+
+def _default_json_dir() -> Path:
+    from paths import OUTPUT_DIR
+
+    return OUTPUT_DIR
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest="cmd", required=True)
+
+    p_norm = sub.add_parser(
+        "normalize",
+        help="Rewrite to split schema v1 (segments.json + layout.json)",
+    )
+    p_norm.add_argument("paths", nargs="*", type=Path)
+    p_norm.add_argument(
+        "--all",
+        action="store_true",
+        help="Normalize every *.segments.json under books/cs-roman/output",
+    )
+    p_norm.add_argument(
+        "--dir",
+        type=Path,
+        default=_default_json_dir(),
+        help="Directory for --all (default: books/cs-roman/output)",
+    )
+
+    p_val = sub.add_parser("validate", help="Validate schema v1 constraints")
+    p_val.add_argument("paths", nargs="+", type=Path)
+
+    args = parser.parse_args(argv)
+
+    if args.cmd == "normalize":
+        paths: list[Path] = list(args.paths)
+        if args.all:
+            paths.extend(sorted(args.dir.glob("*.segments.json")))
+        if not paths:
+            print("No paths given (use files or --all)", file=sys.stderr)
+            return 1
+        total_before = 0
+        total_after = 0
+        for path in paths:
+            if not path.is_file():
+                print(f"Missing: {path}", file=sys.stderr)
+                return 1
+            stats = normalize_file(path)
+            total_before += stats["bytes_before"]
+            total_after += stats["bytes_after"]
+            pct = (
+                100.0 * (1 - stats["bytes_after"] / stats["bytes_before"])
+                if stats["bytes_before"]
+                else 0.0
+            )
+            layout_note = ""
+            if stats.get("layout_path"):
+                layout_note = f" + {Path(stats['layout_path']).name}"
+            print(
+                f"{path.name}{layout_note}: {stats['segments']} segments, "
+                f"{stats['bytes_before']} -> {stats['bytes_after']} bytes "
+                f"({pct:.1f}% smaller)"
+            )
+        if len(paths) > 1:
+            pct = 100.0 * (1 - total_after / total_before) if total_before else 0.0
+            print(
+                f"Total: {total_before} -> {total_after} bytes ({pct:.1f}% smaller)"
+            )
+        return 0
+
+    if args.cmd == "validate":
+        failed = 0
+        for path in args.paths:
+            if path.name.endswith(".layout.json") or path.name == "layout.json":
+                # Validate layout structure with empty segments (skip index range).
+                layout = load(path)
+                data = merge_documents({"schema_version": SCHEMA_VERSION, "segments": []}, layout)
+                # Soft-validate: missing segments list ok for layout-only; inject.
+                errors = [
+                    e
+                    for e in validate_document(data)
+                    if not e.startswith("segments:")
+                    and "source: missing" not in e
+                    and "content_start_pdf_page: missing" not in e
+                ]
+                # Re-run targeted checks when source/bounds present.
+                if layout.get("source") is None:
+                    errors.append("source: missing")
+                if layout.get("content_start_pdf_page") is None:
+                    errors.append("content_start_pdf_page: missing")
+            else:
+                data = load_document(path)
+                errors = validate_document(data)
+            if errors:
+                failed += 1
+                print(f"FAIL {path}:")
+                for err in errors[:40]:
+                    print(f"  - {err}")
+                if len(errors) > 40:
+                    print(f"  … +{len(errors) - 40} more")
+            else:
+                n = len(data.get("segments") or [])
+                print(f"OK {path} ({n} segments)")
+        return 1 if failed else 0
+
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
