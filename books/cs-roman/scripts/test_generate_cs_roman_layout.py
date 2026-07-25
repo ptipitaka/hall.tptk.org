@@ -22,7 +22,7 @@ class GenerateCsRomanLayoutTests(unittest.TestCase):
         cmd = layout_apply_command(DEFAULT_LAYOUT)
         self.assertTrue(cmd.startswith(r"\csromanlayoutapply{"))
         # word_space 1.6 → factor 1; line_space 1.5; dimensions pass through.
-        self.assertIn("{1}{1.5}{21.6pt}{6.3pt}{6.3pt}{65pt}{2.5em}%", cmd)
+        self.assertIn("{1}{1.5}{21.6pt}{5pt}{6.3pt}{65pt}{2.5em}%", cmd)
 
     def test_page_override_changes_every_slot(self) -> None:
         layout = {

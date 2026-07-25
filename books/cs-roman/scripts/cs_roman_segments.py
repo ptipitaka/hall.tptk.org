@@ -47,7 +47,7 @@ DEFAULT_LAYOUT: dict[str, float | int | str] = {
     "word_space": 1.6,
     "line_space": 1.5,
     "par_indent": "21.6pt",
-    "par_skip": "6.3pt",
+    "par_skip": "5pt",
     "gatha_stanza_skip": "6.3pt",
     "gatha_indent": "65pt",
     "emergency_stretch": "2.5em",
