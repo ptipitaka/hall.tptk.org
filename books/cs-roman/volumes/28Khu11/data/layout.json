@@ -3,8 +3,8 @@
   "source": "books/cs-roman/source/28Khu11.pdf",
   "content_start_pdf_page": 15,
   "layout": {
-    "word_space": 2.5,
-    "line_space": 1.25,
+    "word_space": 1.6,
+    "line_space": 1.5,
     "par_indent": "21.6pt",
     "par_skip": "6.3pt",
     "gatha_stanza_skip": "6.3pt",

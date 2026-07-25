@@ -40,10 +40,12 @@ _LAYOUT_KEEP = frozenset(
 _DOC_KEEP = _CONTENT_KEEP | _LAYOUT_KEEP
 
 # Body-rhythm defaults matching shared/style/preamble.tex + book-macros.tex.
-# Normalize always emits a full ``layout`` object with these keys.
+# Tuned on 01Vin01 as the edition-wide standard; per-volume / page_layout
+# overrides only when a volume must differ. Normalize always emits a full
+# ``layout`` object with these keys.
 DEFAULT_LAYOUT: dict[str, float | int | str] = {
-    "word_space": 2.5,
-    "line_space": 1.25,
+    "word_space": 1.6,
+    "line_space": 1.5,
     "par_indent": "21.6pt",
     "par_skip": "6.3pt",
     "gatha_stanza_skip": "6.3pt",

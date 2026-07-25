@@ -371,9 +371,9 @@
 % pot-ma-gyi (CS ``. .``): 1em gap after the visible sentence stop (``{{sp1}}``).
 \newcommand{\csromanspacer}{\hspace{1em}}
 
-% Per-segment interword override (segments.json ``word_space``).
+% Per-segment interword override (layout.json page_layout segments.word_space).
 % #1 = scale vs the current font's interword glue (already includes preamble
-% WordSpace). Generator passes target/preamble, e.g. 1.2/2.5.
+% WordSpace). Generator passes target/preamble, e.g. 0.8/1.6.
 \newcommand{\csromanwordspacebegin}[1]{%
   \begingroup
   \spaceskip=#1\fontdimen2\font

@@ -29,17 +29,17 @@
   % Source body ≈12 pt VZTime; Sarabun 11pt × 1.1 ≈ 12.1 pt.
   % Tuned so prose median line_ratio stays in ~0.95–1.05 vs CS Roman.
   Scale          = 1.1,
-  % Pāli is space-separated — widen interword space toward Roman line counts.
-  % Volume/page/segment overrides: segments.json ``layout`` / ``page_layout`` /
-  % segment ``word_space`` (see SCHEMA.md). Generator emits \csromanlayoutapply.
-  WordSpace      = 2.5,
+  % Pāli is space-separated — interword tuned on 01Vin01 as edition default.
+  % Volume/page/segment overrides: layout.json ``layout`` / ``page_layout``
+  % (see SCHEMA.md). Generator emits \csromanlayoutapply.
+  WordSpace      = 1.6,
 ]{Sarabun}
 
 % Thai stack (ิ/ี + ํ, ฺ, ุ/ู) needs more leading than Latin; tight lead looks uneven.
-% memoir 11pt \baselineskip ≈ 13.6 pt; × 1.25 ≈ 17.0 pt (was 1.152 / ~15.7 pt).
+% memoir 11pt \baselineskip ≈ 13.6 pt; × 1.5 ≈ 20.4 pt (edition default from 01Vin01).
 % Defaults below match DEFAULT_LAYOUT in scripts/cs_roman_segments.py; body.tex
-% may re-apply via \csromanlayoutapply from segments.json.
-\linespread{1.25}\selectfont
+% may re-apply via \csromanlayoutapply from layout.json.
+\linespread{1.5}\selectfont
 \normalsize
 \newlength{\tipitakahang}
 \setlength{\tipitakahang}{21.6pt}

@@ -21,12 +21,12 @@ class GenerateCsRomanLayoutTests(unittest.TestCase):
     def test_layout_apply_includes_all_keys(self) -> None:
         cmd = layout_apply_command(DEFAULT_LAYOUT)
         self.assertTrue(cmd.startswith(r"\csromanlayoutapply{"))
-        # word_space 2.5 → factor 1; line_space 1.25; dimensions pass through.
-        self.assertIn("{1}{1.25}{21.6pt}{6.3pt}{6.3pt}{65pt}{2.5em}%", cmd)
+        # word_space 1.6 → factor 1; line_space 1.5; dimensions pass through.
+        self.assertIn("{1}{1.5}{21.6pt}{6.3pt}{6.3pt}{65pt}{2.5em}%", cmd)
 
     def test_page_override_changes_every_slot(self) -> None:
         layout = {
-            "word_space": 1.25,
+            "word_space": 0.8,
             "line_space": 1.1,
             "par_indent": "18pt",
             "par_skip": "4pt",
@@ -35,7 +35,7 @@ class GenerateCsRomanLayoutTests(unittest.TestCase):
             "emergency_stretch": "3em",
         }
         cmd = layout_apply_command(layout)
-        self.assertEqual(word_space_factor(1.25), "0.5")
+        self.assertEqual(word_space_factor(0.8), "0.5")
         self.assertIn("{0.5}{1.1}{18pt}{4pt}{4.5pt}{50pt}{3em}%", cmd)
 
     def test_wrap_word_space_only_when_segment_differs(self) -> None:
@@ -48,9 +48,9 @@ class GenerateCsRomanLayoutTests(unittest.TestCase):
             body,
         )
         wrapped = wrap_word_space(
-            seg, body, page_word_space=2.5, segment_word_space=1.0
+            seg, body, page_word_space=1.6, segment_word_space=0.8
         )
-        self.assertEqual(wrapped[0], r"\csromanwordspacebegin{0.4}%")
+        self.assertEqual(wrapped[0], r"\csromanwordspacebegin{0.5}%")
         self.assertEqual(wrapped[-1], r"\csromanwordspaceend")
 
     def test_generate_emits_volume_and_page_layout(self) -> None:
@@ -77,7 +77,7 @@ class GenerateCsRomanLayoutTests(unittest.TestCase):
                         "gatha_stanza_skip": "5pt",
                         "gatha_indent": "60pt",
                         "emergency_stretch": "2em",
-                        "segments": {"1": {"word_space": 1.0}},
+                        "segments": {"1": {"word_space": 0.8}},
                     }
                 },
                 "segments": [
@@ -100,11 +100,12 @@ class GenerateCsRomanLayoutTests(unittest.TestCase):
             text = written.read_text(encoding="utf-8")
             self.assertIn(r"\csromanlayoutapply{1}{1.2}{21.6pt}", text)
             self.assertIn(r"\csromanpage{2}", text)
+            # page word_space 2.0 / preamble 1.6 → 1.25; segment 0.8 / 1.6 → 0.5
             self.assertIn(
-                r"\csromanlayoutapply{0.8}{1.1}{20pt}{5pt}{5pt}{60pt}{2em}%",
+                r"\csromanlayoutapply{1.25}{1.1}{20pt}{5pt}{5pt}{60pt}{2em}%",
                 text,
             )
-            self.assertIn(r"\csromanwordspacebegin{0.4}%", text)
+            self.assertIn(r"\csromanwordspacebegin{0.5}%", text)
         finally:
             for path in (out_path, data_path, layout_path):
                 if path.is_file():

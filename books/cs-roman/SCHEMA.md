@@ -233,11 +233,15 @@ Print tuning lives in **`layout.json`**:
 2. **`page_layout`** — overwrite any subset of those keys for specific printed pages
 3. **`page_layout[page].segments[n]`** — per-segment print overrides on that page
 
+Edition defaults (from 01Vin01 tuning) live in `DEFAULT_LAYOUT` /
+`shared/style/preamble.tex`. Volumes inherit them; use `page_layout` only
+when a printed page must differ.
+
 ```json
 {
   "layout": {
-    "word_space": 2.5,
-    "line_space": 1.25,
+    "word_space": 1.6,
+    "line_space": 1.5,
     "par_indent": "21.6pt",
     "par_skip": "6.3pt",
     "gatha_stanza_skip": "6.3pt",
@@ -245,12 +249,7 @@ Print tuning lives in **`layout.json`**:
     "emergency_stretch": "2.5em"
   },
   "page_layout": {
-    "157": {
-      "line_space": 1.15,
-      "segments": {
-        "3": { "word_space": 1.6 }
-      }
-    },
+    "157": { "line_space": 1.15 },
     "174": { "line_space": 1.00 }
   }
 }
