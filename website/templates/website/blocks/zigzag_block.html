@@ -1,0 +1,38 @@
+<section class="home-section home-section--zigzag {{ self.settings.custom_css_class|default:'' }}"
+  {% if self.settings.custom_id %}id="{{ self.settings.custom_id }}"{% endif %}>
+  {% if self.heading %}
+  <h2 class="home-section-title">{{ self.heading }}</h2>
+  {% endif %}
+  {% if entries_with_side %}
+  <div class="home-zigzag">
+    <div class="home-zigzag-track" aria-hidden="true"></div>
+    {% for item in entries_with_side %}
+    <div class="home-zigzag-entry {{ item.side_class }}">
+      <div class="home-zigzag-node">
+        <span class="home-zigzag-siglum">{{ item.entry.siglum }}</span>
+      </div>
+      {% if item.href %}
+      <a class="home-zigzag-card" href="{{ item.href }}">
+      {% else %}
+      <div class="home-zigzag-card home-zigzag-card--static">
+      {% endif %}
+        <h3>{{ item.entry.title }}</h3>
+        {% if item.entry.description %}
+        <p class="home-zigzag-abstract">{{ item.entry.description }}</p>
+        {% endif %}
+        {% if item.href %}
+        <div class="home-zigzag-cta">
+          <span class="home-zigzag-cta-label">{{ self.cta_label }}</span>
+          <span class="home-zigzag-cta-icon" aria-hidden="true">↗</span>
+        </div>
+        {% endif %}
+      {% if item.href %}
+      </a>
+      {% else %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>

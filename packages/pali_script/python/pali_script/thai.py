@@ -6,6 +6,18 @@ import re
 
 from .data_loader import load_glyphs
 
+# Front vowels in Thai writing order (Pāli uses เ/โ; ไ/ใ kept for legacy symmetry).
+_FRONT = "เโไใ"
+# Final letters of กล้ำ pairs (y r l v h ḷ).
+_GLIDE = "ยรลวฬห"
+
+_SWAP1 = re.compile(rf"([ก-ฮ])([{_FRONT}])")
+_SWAP2 = re.compile(rf"((?:[ก-ฮ]ฺ)*)([ก-ฮ]ฺ)([{_FRONT}])([{_GLIDE}])")
+_UNSWAP_CLUSTER = re.compile(rf"([{_FRONT}])([ก-ฮ]ฺ[{_GLIDE}])")
+# After cluster unswap (…CฺGเ → …CฺGเ), front vowel sits after ฺG — do not move it again.
+# Still unswap normal …วโต / …หโต where the glide is not a กล้ำ pair.
+_UNSWAP_SINGLE = re.compile(rf"(?<!ฺ[{_GLIDE}])([{_FRONT}])([ก-ฮ])")
+
 
 def _thai_meta() -> dict:
     return load_glyphs()["thai"]
@@ -37,8 +49,26 @@ def unbeautify_thai(text: str) -> str:
 
 
 def _swap_front_vowels(text: str) -> str:
-    return re.sub(r"([ก-ฮ])([เโไใ])", r"\2\1", text)
+    """Move front vowels before their host; then before กล้ำ pair base if needed.
+
+    1) Single consonant: กเ → เก, ทฺวเ → ทฺเว
+    2) กล้ำ pair (…CฺเG with G in y/r/l/v/ḷ/h): ทฺเว → เทฺว, นฺทฺเร → นฺเทฺร
+       Preceding coda consonants (สะกด) stay before the front vowel.
+       Skip geminate bases (ยฺย / ลฺล) so ยฺโย stays ยฺโย, not โยฺย.
+    """
+    text = _SWAP1.sub(r"\2\1", text)
+
+    def _glide_pair(m: re.Match[str]) -> str:
+        codas, base_vir, front, glide = m.group(1), m.group(2), m.group(3), m.group(4)
+        if base_vir[0] == glide:
+            return m.group(0)
+        return f"{codas}{front}{base_vir}{glide}"
+
+    return _SWAP2.sub(_glide_pair, text)
 
 
 def _unswap_front_vowels(text: str) -> str:
-    return re.sub(r"([เโไใ])([ก-ฮ])", r"\2\1", text)
+    """Inverse of ``_swap_front_vowels`` before Thai→Roman decode."""
+    text = _UNSWAP_CLUSTER.sub(r"\2\1", text)
+    text = _UNSWAP_SINGLE.sub(r"\2\1", text)
+    return text

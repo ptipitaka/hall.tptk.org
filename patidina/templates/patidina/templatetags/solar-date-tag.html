@@ -1,0 +1,22 @@
+<style>
+    .span-solar-date {
+        font-size: 80px;
+    }
+
+    @media (max-width: 768px) {
+        .span-solar-date {
+            font-size: 60px;
+        }
+    }
+</style>
+
+<div class="container text-center">
+    <div class="fs-md-5">{{ solar_dow }}</div>
+    <div style="margin-top: -10px;">
+        <span class="fw-bold text-danger span-solar-date">
+            {{ solar_date }}
+        </span>
+    </div>
+    <div class="fs-md-5">{{ solar_month }}</div>
+    <div style="font-size: 14pt;">{{ CE }}</div>
+</div>

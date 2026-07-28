@@ -1,0 +1,211 @@
+# VolumePage → CoderedWebPage inheritance change.
+
+import django.db.models.deletion
+import wagtail.fields
+from django.db import migrations, models
+
+
+def _migrate_volumepage_to_coderedpage(apps, schema_editor):
+    connection = schema_editor.connection
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT page_ptr_id, code, description, volume_index, number, part_label,
+                   scroll_bg_opacity, section_id, publisher, published_year, print_number
+            FROM website_volumepage
+            """
+        )
+        rows = cursor.fetchall()
+
+    for (
+        page_ptr_id,
+        code,
+        description,
+        volume_index,
+        number,
+        part_label,
+        scroll_bg_opacity,
+        section_id,
+        publisher,
+        published_year,
+        print_number,
+    ) in rows:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "DELETE FROM website_volumepage WHERE page_ptr_id = %s",
+                [page_ptr_id],
+            )
+            cursor.execute(
+                """
+                INSERT INTO coderedcms_coderedpage (
+                    page_ptr_id,
+                    index_show_subpages,
+                    index_order_by,
+                    index_num_per_page,
+                    custom_template,
+                    content_walls,
+                    canonical_url,
+                    related_num,
+                    related_show
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (page_ptr_id) DO NOTHING
+                """,
+                [page_ptr_id, False, "", 10, "", "[]", "", 3, False],
+            )
+            cursor.execute(
+                """
+                INSERT INTO website_volumepage (
+                    page_ptr_id,
+                    coderedpage_ptr_id,
+                    code,
+                    description,
+                    volume_index,
+                    number,
+                    part_label,
+                    scroll_bg_opacity,
+                    section_id,
+                    publisher,
+                    published_year,
+                    print_number,
+                    body
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                [
+                    page_ptr_id,
+                    page_ptr_id,
+                    code,
+                    description,
+                    volume_index,
+                    number,
+                    part_label,
+                    scroll_bg_opacity,
+                    section_id,
+                    publisher,
+                    published_year,
+                    print_number,
+                    None,
+                ],
+            )
+
+
+def _unmigrate_volumepage_to_coderedpage(apps, schema_editor):
+    connection = schema_editor.connection
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT vp.coderedpage_ptr_id, vp.code, vp.description, vp.volume_index,
+                   vp.number, vp.part_label, vp.scroll_bg_opacity, vp.section_id,
+                   vp.publisher, vp.published_year, vp.print_number
+            FROM website_volumepage vp
+            """
+        )
+        rows = cursor.fetchall()
+
+    for (
+        page_ptr_id,
+        code,
+        description,
+        volume_index,
+        number,
+        part_label,
+        scroll_bg_opacity,
+        section_id,
+        publisher,
+        published_year,
+        print_number,
+    ) in rows:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "DELETE FROM website_volumepage WHERE coderedpage_ptr_id = %s",
+                [page_ptr_id],
+            )
+            cursor.execute(
+                "DELETE FROM coderedcms_coderedpage WHERE page_ptr_id = %s",
+                [page_ptr_id],
+            )
+            cursor.execute(
+                """
+                INSERT INTO website_volumepage (
+                    page_ptr_id,
+                    code,
+                    description,
+                    volume_index,
+                    number,
+                    part_label,
+                    scroll_bg_opacity,
+                    section_id,
+                    publisher,
+                    published_year,
+                    print_number
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                [
+                    page_ptr_id,
+                    code,
+                    description,
+                    volume_index,
+                    number,
+                    part_label,
+                    scroll_bg_opacity,
+                    section_id,
+                    publisher,
+                    published_year,
+                    print_number,
+                ],
+            )
+
+
+class Migration(migrations.Migration):
+
+    atomic = False
+
+    dependencies = [
+        ("coderedcms", "0042_remove_coderedsessionformsubmission_thumbnails_by_path"),
+        ("website", "0019_editionpage_coderedwebpage"),
+    ]
+
+    operations = [
+        migrations.AddField(
+            model_name="volumepage",
+            name="body",
+            field=wagtail.fields.StreamField(
+                [("blank", 0)],
+                blank=True,
+                block_lookup={
+                    0: ("wagtail.blocks.CharBlock", (), {"required": False}),
+                },
+                null=True,
+            ),
+        ),
+        migrations.AddField(
+            model_name="volumepage",
+            name="coderedpage_ptr",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="+",
+                to="coderedcms.coderedpage",
+            ),
+        ),
+        migrations.RunPython(
+            _migrate_volumepage_to_coderedpage,
+            _unmigrate_volumepage_to_coderedpage,
+        ),
+        migrations.RemoveField(
+            model_name="volumepage",
+            name="page_ptr",
+        ),
+        migrations.AlterField(
+            model_name="volumepage",
+            name="coderedpage_ptr",
+            field=models.OneToOneField(
+                auto_created=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                parent_link=True,
+                primary_key=True,
+                serialize=False,
+                to="coderedcms.coderedpage",
+            ),
+        ),
+    ]

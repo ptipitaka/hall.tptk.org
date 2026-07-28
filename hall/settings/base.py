@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "website",
     "snippets",
     "archive",
+    "patidina",
     "coderedcms",
     "django_bootstrap5",
     "modelcluster",
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     "wagtailseo",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.routable_page",
     "wagtail.contrib.settings",
     "wagtail.contrib.table_block",
     "wagtail_html_editor",
@@ -111,7 +113,6 @@ WAGTAIL_I18N_ENABLED = True
 LANGUAGES = WAGTAIL_CONTENT_LANGUAGES = [
     ("en", "English"),
     ("th", "ไทย"),
-    ("zh", "中文"),
 ]
 
 STATICFILES_FINDERS = [
@@ -135,6 +136,20 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 USE_SPACES = os.environ.get("USE_SPACES", "False").lower() in ("true", "1", "yes")
+
+# Preservation scans (ScanFolio) — CDN/Spaces layout, not Wagtail Images.
+# Example: https://sacred.tipitakahall.org/tipitaka/ch/pali2552ro/1/1.png
+SCAN_BASE_URL = os.environ.get(
+    "SCAN_BASE_URL", "https://sacred.tipitakahall.org"
+).rstrip("/")
+SCAN_PREFIX = os.environ.get("SCAN_PREFIX", "tipitaka").strip("/")
+SCAN_FILE_EXT = os.environ.get("SCAN_FILE_EXT", "png").lstrip(".")
+# Serve scan images from SCAN_BASE_URL even in local dev (default True for pilot).
+SCAN_USE_REMOTE = os.environ.get("SCAN_USE_REMOTE", "True").lower() in (
+    "true",
+    "1",
+    "yes",
+)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

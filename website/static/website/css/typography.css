@@ -1,7 +1,10 @@
 /* Locale-specific font stacks (face rules live in gentium-plus.css / noto-serif-thai.css) */
 
-html[lang^="en"] {
+:root {
   --hall-font-en: "Gentium Plus", Georgia, "Times New Roman", Times, serif;
+}
+
+html[lang^="en"] {
   --bs-body-font-family: var(--hall-font-en);
   --bs-font-sans-serif: var(--hall-font-en);
   --bs-heading-font-family: var(--hall-font-en);
@@ -20,4 +23,9 @@ html[lang^="th"] {
 
 html[lang^="th"] body {
   font-family: var(--hall-font-th);
+}
+
+/* Site name stays English (Gentium Plus) on every locale */
+.navbar-brand {
+  font-family: var(--hall-font-en);
 }

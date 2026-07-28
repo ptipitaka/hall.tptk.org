@@ -16,6 +16,10 @@ function goalStaggerMs() {
   return cssMs("--hall-reveal-goal-stagger", 120);
 }
 
+function zigzagStaggerMs() {
+  return cssMs("--hall-reveal-zigzag-stagger", 100);
+}
+
 function markReveal(el, variant, delayMs) {
   if (!el || el.classList.contains("is-visible")) {
     return;
@@ -110,26 +114,21 @@ function setupSections(root) {
   root
     .querySelectorAll(".home-section:not(.home-section--goals)")
     .forEach(function (section) {
-      var isTimeline = section.classList.contains(
-        "home-section--corpus-timeline"
-      );
+      var isZigzag = section.classList.contains("home-section--zigzag");
       var title = section.querySelector(".home-section-title");
 
       if (title) {
         markReveal(title, "up", 0);
       }
 
-      if (isTimeline) {
-        section
-          .querySelectorAll(".home-corpus-timeline-entry")
-          .forEach(function (entry, index) {
-            var variant = entry.classList.contains(
-              "home-corpus-timeline-entry--left"
-            )
-              ? "left"
-              : "right";
-            markReveal(entry, variant, index * 100);
-          });
+      if (isZigzag) {
+        var stagger = zigzagStaggerMs();
+        section.querySelectorAll(".home-zigzag-entry").forEach(function (entry, index) {
+          var variant = entry.classList.contains("home-zigzag-entry--left")
+            ? "left"
+            : "right";
+          markReveal(entry, variant, index * stagger);
+        });
         return;
       }
 

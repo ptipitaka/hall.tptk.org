@@ -1,0 +1,12 @@
+{% extends "website/layouts/shell_default.html" %}
+{% load wagtailcore_tags %}
+
+{% block page_type_pre %}
+{% if page.description %}
+<div class="volume-description">{{ page.description|richtext }}</div>
+{% endif %}
+{% endblock %}
+
+{% block page_type_footer %}
+{% include "website/includes/volume_viewer.html" %}
+{% endblock %}

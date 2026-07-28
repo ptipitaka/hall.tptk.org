@@ -3,6 +3,10 @@ Enrich cs-roman segment JSON: ``text`` string → multi-script list.
 
   [{ "script": "roman", "value": "..." }, { "script": "thai", "value": "..." }]
 
+Bold ``runs`` are preserved across ``--force`` / spacing normalize when spans
+can be remapped. If bold cannot be remapped, enrich warns (does not invent
+bold). Restoring lost bold requires re-extract from the CS Roman PDF.
+
 Example:
   docker compose exec -T web python books/cs-roman/scripts/enrich_cs_roman_thai.py
   docker compose exec -T web python books/cs-roman/scripts/enrich_cs_roman_thai.py \\
@@ -24,15 +28,17 @@ from cs_roman_text import (  # noqa: E402
     SECTION_RULE_FLAG,
     ensure_script_text,
     needs_spacing_normalize,
+    uses_sentence_spacer,
 )
 
 DEFAULT_DIR = OUTPUT_DIR
 
 
-def enrich_document(data: dict, *, force: bool = False) -> tuple[dict, int]:
-    """Return (updated doc, number of segments converted)."""
+def enrich_document(data: dict, *, force: bool = False) -> tuple[dict, int, int]:
+    """Return (updated doc, segments converted, bold_lost count)."""
     data = dict(data)
     converted = 0
+    bold_lost = 0
     segments = []
     for seg in data.get("segments") or []:
         seg = dict(seg)
@@ -41,28 +47,44 @@ def enrich_document(data: dict, *, force: bool = False) -> tuple[dict, int]:
             isinstance(before, list)
             and any(isinstance(e, dict) and e.get("script") == "thai" for e in before)
         )
-        entries, had_rule = ensure_script_text(before, force=force)
+        normalize_spacing = uses_sentence_spacer(
+            str(seg.get("segment_type") or "")
+        )
+        entries, had_rule, lost = ensure_script_text(
+            before, force=force, normalize_spacing=normalize_spacing
+        )
+        if lost:
+            bold_lost += 1
         seg["text"] = entries
         hanging = seg.get("hanging_lines")
         if isinstance(hanging, list) and hanging:
             hl_out: list = []
             for hl in hanging:
-                hl_entries, hl_rule = ensure_script_text(hl, force=force)
+                hl_entries, hl_rule, hl_lost = ensure_script_text(
+                    hl, force=force, normalize_spacing=normalize_spacing
+                )
                 had_rule = had_rule or hl_rule
+                if hl_lost:
+                    bold_lost += 1
                 hl_out.append(hl_entries)
             seg["hanging_lines"] = hl_out
+        # Preserve an existing section_rule flag: after extract/serialize the
+        # trailing ``_____`` is already stripped into the flag, so a later
+        # enrich/--force pass would otherwise clear it (had_rule=False).
+        had_flag = SECTION_RULE_FLAG in (seg.get("flags") or [])
         flags = [f for f in (seg.get("flags") or []) if f != SECTION_RULE_FLAG]
-        if had_rule:
+        if had_rule or had_flag:
             flags.append(SECTION_RULE_FLAG)
         seg["flags"] = flags
         if force or not already or had_rule:
             converted += 1
         segments.append(seg)
     data["segments"] = segments
-    return data, converted
+    return data, converted, bold_lost
 
 
-def enrich_file(path: Path, *, force: bool = False) -> tuple[int, int]:
+def enrich_file(path: Path, *, force: bool = False) -> tuple[int, int, int]:
+    """Return (converted, total, bold_lost)."""
     raw = path.read_text(encoding="utf-8")
     data = json.loads(raw)
     segs = data.get("segments") or []
@@ -77,11 +99,11 @@ def enrich_file(path: Path, *, force: bool = False) -> tuple[int, int]:
     # Still rewrite when sentence-stop / pot-ma-gyi spacing needs {{sp1}}.
     needs_spacing = needs_spacing_normalize(raw)
     if not force and already and not needs_spacing:
-        return 0, len(segs)
+        return 0, len(segs), 0
 
-    data, converted = enrich_document(data, force=force or needs_spacing)
+    data, converted, bold_lost = enrich_document(data, force=force or needs_spacing)
     save_segments(path, data, normalize=True)
-    return converted, len(data["segments"])
+    return converted, len(data["segments"]), bold_lost
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -95,7 +117,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--force",
         action="store_true",
-        help="Re-transliterate even if thai entries already exist",
+        help=(
+            "Re-transliterate even if thai entries already exist "
+            "(preserves bold runs when remappable; warn if lost)"
+        ),
     )
     args = parser.parse_args(argv)
 
@@ -114,8 +139,14 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     for path in targets:
-        converted, total = enrich_file(path, force=args.force)
+        converted, total, bold_lost = enrich_file(path, force=args.force)
         print(f"{path.name}: {converted}/{total} segments -> multi-script text")
+        if bold_lost:
+            print(
+                f"WARNING: {path.name}: bold runs lost on {bold_lost} text field(s); "
+                "re-extract from PDF to restore",
+                file=sys.stderr,
+            )
 
     return 0
 

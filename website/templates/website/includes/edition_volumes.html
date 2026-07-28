@@ -1,0 +1,96 @@
+{% load wagtailcore_tags i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<section class="edition-volumes" id="volumes" aria-labelledby="edition-volumes-heading">
+  <h2 id="edition-volumes-heading">{% trans "Volumes" %}</h2>
+  {% if volume_groups %}
+  <div class="edition-volumes__groups">
+    {% for group in volume_groups %}
+    <section
+      class="edition-volumes__group"
+      aria-labelledby="edition-volumes-group-{{ forloop.counter }}"
+    >
+      <h3 class="edition-volumes__group-heading" id="edition-volumes-group-{{ forloop.counter }}">
+        <span class="edition-volumes__group-name">
+          {% if group.section %}
+            {{ group.section.name }}
+          {% else %}
+            {% trans "Other" %}
+          {% endif %}
+        </span>
+        <span class="edition-volumes__leader" aria-hidden="true"></span>
+        <span class="edition-volumes__count">
+          {% if LANGUAGE_CODE == "th" %}
+            {{ group.count }} เล่ม
+          {% else %}
+            {% blocktranslate count counter=group.count trimmed %}
+              {{ counter }} volume
+            {% plural %}
+              {{ counter }} volumes
+            {% endblocktranslate %}
+          {% endif %}
+        </span>
+      </h3>
+
+      {% if group.volumes %}
+      <ol class="edition-volumes__list list-unstyled">
+        {% for volume in group.volumes %}
+        <li class="edition-volumes__item" value="{{ volume.volume_index }}">
+          <span class="edition-volumes__number">
+            {% firstof volume.number volume.volume_index %}.
+          </span>
+          {% if volume.is_unpublished_stub %}
+          <span class="text-muted">{{ volume.title }}</span>
+          {% else %}
+          <a href="{% pageurl volume %}">{{ volume.title }}</a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+      {% endif %}
+
+      {% for subgroup in group.subgroups %}
+      <section
+        class="edition-volumes__subgroup"
+        aria-labelledby="edition-volumes-subgroup-{{ forloop.parentloop.counter }}-{{ forloop.counter }}"
+      >
+        <h4
+          class="edition-volumes__subgroup-heading"
+          id="edition-volumes-subgroup-{{ forloop.parentloop.counter }}-{{ forloop.counter }}"
+        >
+          <span class="edition-volumes__group-name">{{ subgroup.section.name }}</span>
+          <span class="edition-volumes__leader" aria-hidden="true"></span>
+          <span class="edition-volumes__count">
+            {% if LANGUAGE_CODE == "th" %}
+              {{ subgroup.count }} เล่ม
+            {% else %}
+              {% blocktranslate count counter=subgroup.count trimmed %}
+                {{ counter }} volume
+              {% plural %}
+                {{ counter }} volumes
+              {% endblocktranslate %}
+            {% endif %}
+          </span>
+        </h4>
+        <ol class="edition-volumes__list list-unstyled">
+          {% for volume in subgroup.volumes %}
+          <li class="edition-volumes__item" value="{{ volume.volume_index }}">
+            <span class="edition-volumes__number">
+              {% firstof volume.number volume.volume_index %}.
+            </span>
+            {% if volume.is_unpublished_stub %}
+            <span class="text-muted">{{ volume.title }}</span>
+            {% else %}
+            <a href="{% pageurl volume %}">{{ volume.title }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+      </section>
+      {% endfor %}
+    </section>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-muted">{% trans "No volumes yet." %}</p>
+  {% endif %}
+</section>

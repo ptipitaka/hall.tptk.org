@@ -1,0 +1,39 @@
+---
+description: Run Django/manage.py commands via Docker container, not host venv
+alwaysApply: true
+---
+
+# Docker dev workflow
+
+This project uses **Docker Compose** as the primary dev environment. PostgreSQL runs in the `db` service and is **not** published to `localhost:5432`.
+
+## Always run Django commands in the container
+
+Use `docker compose exec web` (or `docker compose exec -T web` for non-interactive):
+
+```bash
+docker compose exec web python manage.py migrate
+docker compose exec web python manage.py makemigrations
+docker compose exec -T web python manage.py test --keepdb
+docker compose exec web python manage.py shell
+docker compose exec web python manage.py createsuperuser
+```
+
+Use `-T` with `test` so the container does not wait for interactive input. Prefer `--keepdb` to reuse the `test_hall` database between runs (faster, avoids the “database already exists — Type 'yes'…” prompt). If tests behave oddly after schema changes, recreate the test DB once:
+
+```bash
+docker compose exec -T web python manage.py test --noinput
+```
+
+## Do not use host `.venv` for DB-backed commands
+
+Running `python manage.py` from the host `.venv` hits `localhost:5432` and fails (wrong DB / auth errors). Do not try host-first and fall back to Docker after errors.
+
+## Editing vs running
+
+- **Edit code** on the host — the repo is volume-mounted at `/app` in the container.
+- **Run app, migrate, test, seed, shell** — always through the `web` container.
+
+## App URL
+
+Dev server: `http://localhost:8000` (port published from the `web` service).

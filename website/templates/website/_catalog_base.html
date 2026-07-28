@@ -1,0 +1,13 @@
+{% load static %}<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE|default:'en' }}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}{% endblock %} · Tipiṭaka Hall</title>
+</head>
+<body>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

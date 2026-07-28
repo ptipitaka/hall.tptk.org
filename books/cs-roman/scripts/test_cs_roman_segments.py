@@ -16,6 +16,7 @@ from cs_roman_segments import (  # noqa: E402
     SCHEMA_VERSION,
     compact_segment,
     doc_layout,
+    doc_page_layout_reading,
     effective_layout,
     effective_word_space,
     layout_path_for,
@@ -94,6 +95,28 @@ class CsRomanSegmentsTests(unittest.TestCase):
         self.assertNotIn("bat", out["bats"][0])
         self.assertNotIn("wak", out["bats"][0]["waks"][0])
         self.assertNotIn("role", out["bats"][0]["waks"][0])
+
+    def test_compact_keeps_section_no(self) -> None:
+        seg = {
+            "page": 13,
+            "order": 41,
+            "segment_type": "chapter",
+            "heading_kind": "cha",
+            "section_no": 1,
+            "in_toc": True,
+            "text": [
+                {"script": "roman", "value": "Pārājikakaṇḍa"},
+                {"script": "thai", "value": "ปาราชิกกณฺฑ"},
+            ],
+        }
+        out = compact_segment(seg)
+        self.assertEqual(out["section_no"], 1)
+        self.assertEqual(out["heading_kind"], "cha")
+        self.assertTrue(out["in_toc"])
+        self.assertNotIn("item", out)
+
+        bare = compact_segment({**seg, "section_no": None})
+        self.assertNotIn("section_no", bare)
 
     def test_compact_drops_segment_word_space(self) -> None:
         seg = {
@@ -274,6 +297,68 @@ class CsRomanSegmentsTests(unittest.TestCase):
             0.8,
         )
         self.assertEqual(effective_word_space(doc, {}, page=5), 1.0)
+
+    def test_normalize_keeps_empty_page_layout_reading_mode(self) -> None:
+        doc = normalize_layout(
+            {
+                "source": "books/cs-roman/source/01Vin01.pdf",
+                "content_start_pdf_page": 24,
+                "layout": dict(DEFAULT_LAYOUT),
+                "page_layout_reading_mode": {},
+            }
+        )
+        self.assertEqual(doc["page_layout_reading_mode"], {})
+        filled = normalize_layout(
+            {
+                "source": "books/cs-roman/source/01Vin01.pdf",
+                "content_start_pdf_page": 24,
+                "layout": dict(DEFAULT_LAYOUT),
+                "page_layout_reading_mode": {
+                    "100": {"line_space": 1.2},
+                    "bad": {"line_space": 1.0},
+                },
+            }
+        )
+        self.assertEqual(list(filled["page_layout_reading_mode"]), ["100"])
+        self.assertEqual(
+            filled["page_layout_reading_mode"]["100"]["line_space"], 1.2
+        )
+
+    def test_validate_page_layout_reading_mode_rejects_segments(self) -> None:
+        base = {
+            "schema_version": SCHEMA_VERSION,
+            "source": "books/cs-roman/source/01Vin01.pdf",
+            "content_start_pdf_page": 24,
+            "layout": dict(DEFAULT_LAYOUT),
+            "segments": [],
+            "page_layout_reading_mode": {
+                "10": {"line_space": 1.2, "segments": {"1": {"word_space": 1.0}}},
+            },
+        }
+        errors = validate_document(base)
+        self.assertTrue(any("page_layout_reading_mode.10.segments" in e for e in errors))
+        ok = {
+            **base,
+            "page_layout_reading_mode": {"10": {"line_space": 1.2}},
+        }
+        self.assertEqual(validate_document(ok), [])
+
+    def test_effective_layout_reading_uses_reading_map_not_sync(self) -> None:
+        doc = {
+            "layout": dict(DEFAULT_LAYOUT),
+            "page_layout": {"5": {"line_space": 1.1}},
+            "page_layout_reading_mode": {"5": {"line_space": 1.25}},
+            "segments": [],
+        }
+        self.assertEqual(effective_layout(doc, 5)["line_space"], 1.1)
+        self.assertEqual(
+            effective_layout(doc, 5, reading=True)["line_space"], 1.25
+        )
+        self.assertEqual(
+            effective_layout(doc, 6, reading=True)["line_space"],
+            DEFAULT_LAYOUT["line_space"],
+        )
+        self.assertEqual(list(doc_page_layout_reading(doc)), [5])
 
     def test_split_roundtrip_files(self) -> None:
         doc = {

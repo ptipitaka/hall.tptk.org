@@ -1,0 +1,22 @@
+% !TeX program = lualatex
+% !TeX root = main.reading.tex
+% CS Roman Thai Tipiṭaka — 25Khu08 (reading mode: continuous + margin folios)
+\documentclass[11pt,twoside,openany]{memoir}
+
+% Binding-aware margins + outer ฉ.N marks (see pagegeometry-reading.tex).
+\def\csromanusereadinggeometry{1}
+\input{shared/style/preamble}
+
+\begin{document}
+% Front: Mātikā from segments with in_toc (page numbers = physical body pages).
+\pagestyle{plain}
+\pagenumbering{roman}
+% babel-thai may reset \contentsname — set immediately before use.
+\renewcommand{\contentsname}{มาติกา}
+\tableofcontents*
+% Body must open on a recto (right-hand / odd) page.
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{plain}
+\input{volumes/25Khu08/tex/body.reading.generated}
+\end{document}

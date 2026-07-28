@@ -1,0 +1,53 @@
+/* Compact language switcher — navbar title bar */
+
+.hall-lang-switcher {
+  margin: 0;
+}
+
+.hall-lang-switcher__list {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  margin: 0;
+  padding: 0.125rem;
+  list-style: none;
+  border-radius: 999px;
+  background: rgba(var(--hall-brand-rgb), 0.06);
+  border: 1px solid rgba(var(--hall-brand-rgb), 0.12);
+}
+
+.hall-lang-switcher__item {
+  margin: 0;
+}
+
+.hall-lang-switcher__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: var(--hall-brand);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+a.hall-lang-switcher__link:hover {
+  color: var(--hall-brand-hover);
+  background: rgba(var(--hall-brand-rgb), 0.08);
+}
+
+.hall-lang-switcher__link.is-active {
+  color: #fff;
+  background: var(--hall-brand);
+  cursor: default;
+}
+
+.hall-lang-switcher__link.is-unavailable {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

@@ -29,4 +29,9 @@
   --hall-reveal-hero-start: 150ms;
   --hall-reveal-hero-stagger: 100ms;
   --hall-reveal-goal-stagger: 120ms;
+  --hall-reveal-zigzag-stagger: 100ms;
+
+  /* Homepage section rhythm (synced with sacred-home.css) */
+  --hall-section-gap: 96px;
+  --hall-section-title-gap: 34px;
 }

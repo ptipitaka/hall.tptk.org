@@ -1,6 +1,7 @@
 {% extends "coderedcms/pages/base.html" %}
+{% load wagtailcore_tags %}
 
-{% block body_class %}{% if page.content_type.model == "webpage" and page.specific.scroll_background_enabled %}has-scroll-bg{% endif %}{% if page.slug == "home" %} sacred-home{% endif %}{% endblock %}
+{% block body_class %}{% if page.specific.scroll_background_enabled %}has-scroll-bg{% endif %}{% wagtail_site as site %}{% if page.translation_key == site.root_page.translation_key %} sacred-home{% endif %}{% endblock %}
 
 {% block navbar %}
 {% include "coderedcms/includes/scroll_background.html" %}

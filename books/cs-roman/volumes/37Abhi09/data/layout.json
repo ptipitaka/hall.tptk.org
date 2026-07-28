@@ -2,6 +2,8 @@
   "schema_version": 1,
   "source": "books/cs-roman/source/37Abhi09.pdf",
   "content_start_pdf_page": 28,
+  "content_end_printed_page": 494,
+  "back_matter_start_printed_page": 495,
   "layout": {
     "word_space": 1.6,
     "line_space": 1.5,

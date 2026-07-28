@@ -1,0 +1,86 @@
+# Thai translations for patidina UI chrome.
+msgid ""
+msgstr ""
+"Project-Id-Version: patidina\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Week"
+msgstr "สัปดาห์"
+
+msgid "Date"
+msgstr "วันที่"
+
+msgid "Lunar"
+msgstr "จันทรคติ"
+
+msgid "Mahanikaya"
+msgstr "มหานิกาย"
+
+msgid "Dhammayut"
+msgstr "ธรรมยุติ"
+
+msgid "Important days"
+msgstr "วันสำคัญ"
+
+msgid "lunar"
+msgstr "จันทรคติ"
+
+msgid "solar"
+msgstr "สุริยคติ"
+
+msgid "Today is an important day"
+msgstr "วันนี้เป็นวันสำคัญ"
+
+msgid "Uposatha days for the year"
+msgstr "วันพระทั้งปี"
+
+msgid "Uposatha days"
+msgstr "วันพระ"
+
+msgid "Back to Patidina"
+msgstr "กลับ Patidina"
+
+msgid "Calendar"
+msgstr "ปฏิทิน"
+
+msgid "Waxing"
+msgstr "ขึ้น"
+
+msgid "Waning"
+msgstr "แรม"
+
+msgid "Thai lunar calendar"
+msgstr "จันทรคติไทย"
+
+msgid "Mahānikāya"
+msgstr "มหานิกาย"
+
+msgid "Dhammayuttika"
+msgstr "ธรรมยุตติก"
+
+msgid "lunar month %(month)s"
+msgstr "เดือน %(month)s"
+
+msgid "%(phase)s %(day)s of lunar month %(month)s"
+msgstr "%(phase)s %(day)s ค่ำ เดือน %(month)s"
+
+msgid "Month Year"
+msgstr "เดือน ปี"
+
+msgid "Pakkha (8th day)"
+msgstr "ปักข์ (ขึ้น/แรม ๘)"
+
+msgid "Full pakkha (15 days)"
+msgstr "ปักข์ถ้วน (๑๕ ค่ำ)"
+
+msgid "Deficient pakkha (14 days)"
+msgstr "ปักข์ขาด (๑๔ ค่ำ)"
+
+msgid "Meditating Buddha (Dhammayut)"
+msgstr "พระปางนั่งสมาธิ (ธรรมยุติ)"
+
+msgid "Print"
+msgstr "พิมพ์"

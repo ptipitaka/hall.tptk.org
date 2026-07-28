@@ -1,0 +1,491 @@
+{
+  "lunar": [
+    {
+      "moon_phase": "02",
+      "lc_day": "15",
+      "lc_month": "02",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "15",
+      "lc_month_adhikamasa": "02",
+      "details": [
+        {
+          "name": "วันพระอัครสาวกบรรพชา",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Ordination of the Chief Disciples"
+        }
+      ]
+    },
+    {
+      "moon_phase": "01",
+      "lc_day": "07",
+      "lc_month": "03",
+      "moon_phase_adhikamasa": "01",
+      "lc_day_adhikamasa": "07",
+      "lc_month_adhikamasa": "03",
+      "details": [
+        {
+          "name": "วันพระโมคคัลานะสำเร็จเป็นพระอรหันต์",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Ven. Moggallāna attains arahatship"
+        }
+      ]
+    },
+    {
+      "moon_phase": "01",
+      "lc_day": "15",
+      "lc_month": "03",
+      "moon_phase_adhikamasa": "01",
+      "lc_day_adhikamasa": "15",
+      "lc_month_adhikamasa": "04",
+      "details": [
+        {
+          "name": "วันมาฆบูชา",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Māgha Pūjā (Sangha Day)"
+        },
+        {
+          "name": "วันพระสารีบุตรสำเร็จเป็นพระอรหันต์",
+          "buddhist_commemorative_day": true,
+          "sort_order": 1,
+          "name_en": "Ven. Sāriputta attains arahatship"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "15",
+      "lc_month": "04",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "15",
+      "lc_month_adhikamasa": "04",
+      "details": [
+        {
+          "name": "วันเสร็จสิ้นการปฐมสังคายนา",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Conclusion of the First Council"
+        }
+      ]
+    },
+    {
+      "moon_phase": "01",
+      "lc_day": "15",
+      "lc_month": "06",
+      "moon_phase_adhikamasa": "01",
+      "lc_day_adhikamasa": "15",
+      "lc_month_adhikamasa": "07",
+      "details": [
+        {
+          "name": "วันวิสาขบูชา",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Visākha Pūjā (Vesak)"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "01",
+      "lc_month": "06",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "01",
+      "lc_month_adhikamasa": "06",
+      "details": [
+        {
+          "name": "วันเสร็จโปรดพระประยูรญาติ",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Conclusion of teaching the Buddha’s relatives"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "06",
+      "lc_month": "06",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "06",
+      "lc_month_adhikamasa": "06",
+      "details": [
+        {
+          "name": "วันพระราหุลบรรพชา",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Ordination of Ven. Rāhula"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "08",
+      "lc_month": "06",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "08",
+      "lc_month_adhikamasa": "07",
+      "details": [
+        {
+          "name": "วันอัฏฐมีบูชา",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Aṭṭhamī Pūjā"
+        }
+      ]
+    },
+    {
+      "moon_phase": "01",
+      "lc_day": "15",
+      "lc_month": "08",
+      "moon_phase_adhikamasa": "01",
+      "lc_day_adhikamasa": "15",
+      "lc_month_adhikamasa": "09",
+      "details": [
+        {
+          "name": "วันอาสาฬหบูชา",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Āsāḷha Pūjā (Dhamma Day)"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "01",
+      "lc_month": "08",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "01",
+      "lc_month_adhikamasa": "09",
+      "details": [
+        {
+          "name": "วันเข้าพรรษาแรก (ปุริมพรรษา)",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Beginning of the earlier Rains Retreat (purimikā vassūpanāyikā)"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "05",
+      "lc_month": "08",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "05",
+      "lc_month_adhikamasa": "08",
+      "details": [
+        {
+          "name": "วันพระปัญจวัคคีย์สำเร็จเป็นพระอรหันต์",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "The Group of Five attains arahatship"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "01",
+      "lc_month": "10",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "01",
+      "lc_month_adhikamasa": "10",
+      "details": [
+        {
+          "name": "วันเข้าพรรษาหลัง (ปัจฉิมพรรษา)",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Beginning of the later Rains Retreat (pacchimikā vassūpanāyikā)"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "04",
+      "lc_month": "10",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "04",
+      "lc_month_adhikamasa": "10",
+      "details": [
+        {
+          "name": "วันพระอานนท์สำเร็จเป็นพระอรหันต์",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Ven. Ānanda attains arahatship"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "05",
+      "lc_month": "10",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "05",
+      "lc_month_adhikamasa": "10",
+      "details": [
+        {
+          "name": "วันปฐมสังคายนา",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "First Buddhist Council"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "05",
+      "lc_month": "11",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "05",
+      "lc_month_adhikamasa": "11",
+      "details": [
+        {
+          "name": "วันสารทไทย",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Thai Sart Day"
+        }
+      ]
+    },
+    {
+      "moon_phase": "01",
+      "lc_day": "15",
+      "lc_month": "12",
+      "moon_phase_adhikamasa": "01",
+      "lc_day_adhikamasa": "15",
+      "lc_month_adhikamasa": "12",
+      "details": [
+        {
+          "name": "วันออกพรรษาแรก (ปุริมพรรษา)",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "End of the earlier Rains Retreat (purimikā / pavāraṇā)"
+        }
+      ]
+    },
+    {
+      "moon_phase": "01",
+      "lc_day": "15",
+      "lc_month": "13",
+      "moon_phase_adhikamasa": "01",
+      "lc_day_adhikamasa": "15",
+      "lc_month_adhikamasa": "13",
+      "details": [
+        {
+          "name": "วันพระสาริบุตรปรินิพพาน",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Parinibbāna of Ven. Sāriputta"
+        },
+        {
+          "name": "วันออกพรรษาหลัง (ปัจฉิมพรรษา)",
+          "buddhist_commemorative_day": true,
+          "sort_order": 1,
+          "name_en": "End of the later Rains Retreat (pacchimikā / pavāraṇā)"
+        },
+        {
+          "name": "วันลอยกระทง",
+          "buddhist_commemorative_day": true,
+          "sort_order": 2,
+          "name_en": "Loi Krathong"
+        }
+      ]
+    },
+    {
+      "moon_phase": "02",
+      "lc_day": "15",
+      "lc_month": "13",
+      "moon_phase_adhikamasa": "02",
+      "lc_day_adhikamasa": "15",
+      "lc_month_adhikamasa": "13",
+      "details": [
+        {
+          "name": "วันพระโมคคัลานะปรินิพพาน",
+          "buddhist_commemorative_day": true,
+          "sort_order": 0,
+          "name_en": "Parinibbāna of Ven. Moggallāna"
+        }
+      ]
+    }
+  ],
+  "solar": [
+    {
+      "day": 1,
+      "month": 1,
+      "details": [
+        {
+          "name": "วันขึ้นปีใหม่",
+          "sort_order": 0,
+          "name_en": "New Year’s Day"
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "month": 4,
+      "details": [
+        {
+          "name": "วันจักรี",
+          "sort_order": 0,
+          "name_en": "Chakri Memorial Day"
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "month": 4,
+      "details": [
+        {
+          "name": "วันมหาสงกรานต์",
+          "sort_order": 0,
+          "name_en": "Maha Songkran Day"
+        },
+        {
+          "name": "วันผู้สูงอายุแห่งชาติ",
+          "sort_order": 1,
+          "name_en": "National Elderly Day"
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "month": 4,
+      "details": [
+        {
+          "name": "วันสงกรานต์ (วันเถลิงศก)",
+          "sort_order": 0,
+          "name_en": "Songkran (Wan Thaloeng Sok)"
+        }
+      ]
+    },
+    {
+      "day": 15,
+      "month": 4,
+      "details": [
+        {
+          "name": "วันสงกรานต์ (วันเนา)",
+          "sort_order": 0,
+          "name_en": "Songkran (Wan Nao)"
+        },
+        {
+          "name": "วันครอบครัว",
+          "sort_order": 1,
+          "name_en": "Family Day"
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "month": 5,
+      "details": [
+        {
+          "name": "วันฉัตรมงคล",
+          "sort_order": 0,
+          "name_en": "Coronation Day"
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "month": 6,
+      "details": [
+        {
+          "name": "วันเฉลิมพระชนมพรรษา สมเด็จพระนางเจ้าฯ พระบรมราชินี",
+          "sort_order": 0,
+          "name_en": "Birthday of Queen Suthida"
+        }
+      ]
+    },
+    {
+      "day": 28,
+      "month": 7,
+      "details": [
+        {
+          "name": "วันเฉลิมพระชนมพรรษา พระบาทสมเด็จพระเจ้าอยู่หัว",
+          "sort_order": 0,
+          "name_en": "Birthday of His Majesty the King"
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "month": 8,
+      "details": [
+        {
+          "name": "วันเฉลิมพระชนมพรรษา พระบรมราชชนนีพันปีหลวง",
+          "sort_order": 0,
+          "name_en": "Birthday of Queen Sirikit The Queen Mother"
+        },
+        {
+          "name": "วันแม่แห่งชาติ",
+          "sort_order": 1,
+          "name_en": "Mother’s Day"
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "month": 10,
+      "details": [
+        {
+          "name": "วันนวมินทรมหาราช",
+          "sort_order": 0,
+          "name_en": "King Bhumibol Memorial Day"
+        }
+      ]
+    },
+    {
+      "day": 23,
+      "month": 10,
+      "details": [
+        {
+          "name": "วันปิยมหาราช",
+          "sort_order": 0,
+          "name_en": "Chulalongkorn Day"
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "month": 12,
+      "details": [
+        {
+          "name": "วันมหาภูมิพลอดุลยเดชมหาราช",
+          "sort_order": 0,
+          "name_en": "King Bhumibol Adulyadej the Great Day"
+        },
+        {
+          "name": "วันชาติ",
+          "sort_order": 1,
+          "name_en": "National Day"
+        },
+        {
+          "name": "วันพ่อแห่งชาติ",
+          "sort_order": 2,
+          "name_en": "Father’s Day"
+        }
+      ]
+    },
+    {
+      "day": 10,
+      "month": 12,
+      "details": [
+        {
+          "name": "วันรัฐธรรมนูญ",
+          "sort_order": 0,
+          "name_en": "Constitution Day"
+        }
+      ]
+    },
+    {
+      "day": 31,
+      "month": 12,
+      "details": [
+        {
+          "name": "วันสิ้นปี",
+          "sort_order": 0,
+          "name_en": "New Year’s Eve"
+        }
+      ]
+    }
+  ]
+}

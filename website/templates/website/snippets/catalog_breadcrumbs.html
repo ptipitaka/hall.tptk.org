@@ -1,0 +1,26 @@
+{% load i18n %}
+{% if show %}
+<nav class="catalog-breadcrumbs" aria-label="{% trans 'Breadcrumb' %}">
+  {% if parent %}
+  <div class="catalog-breadcrumbs__back d-md-none">
+    <a href="{{ parent.url }}" class="catalog-breadcrumbs__back-link">
+      <span class="catalog-breadcrumbs__back-arrow" aria-hidden="true">←</span>
+      <span class="catalog-breadcrumbs__back-label">{{ parent.title }}</span>
+    </a>
+  </div>
+  {% endif %}
+
+  {% if ancestors %}
+  <ol class="catalog-breadcrumbs__trail d-none d-md-flex">
+    {% for crumb in ancestors %}
+    <li class="catalog-breadcrumbs__item">
+      <a href="{{ crumb.url }}" title="{{ crumb.title }}">{{ crumb.title }}</a>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+</nav>
+{% if breadcrumb_ld_json %}
+<script type="application/ld+json">{{ breadcrumb_ld_json }}</script>
+{% endif %}
+{% endif %}

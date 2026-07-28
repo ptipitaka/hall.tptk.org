@@ -64,27 +64,55 @@ def sync_volume(volume_id: str, *, copy_pdf: bool = False) -> Path:
     json_dst = data / "segments.json"
     if not json_src.is_file():
         raise FileNotFoundError(f"Missing segments JSON: {json_src}")
-    shutil.copy2(json_src, json_dst)
+    _copy_replace(json_src, json_dst)
 
     layout_src = JSON_DIR / f"{volume_id}.layout.json"
     layout_dst = data / "layout.json"
     if layout_src.is_file():
-        shutil.copy2(layout_src, layout_dst)
+        _copy_replace(layout_src, layout_dst)
     elif layout_dst.is_file():
         # Keep an existing volume layout if canonical output has not been split yet.
         pass
     else:
         raise FileNotFoundError(f"Missing layout JSON: {layout_src}")
 
-    sync_transforms_file(
+    sync_optional_json(
         JSON_DIR / f"{volume_id}.transforms.json",
         data / "transforms.json",
+    )
+    sync_optional_json(
+        JSON_DIR / f"{volume_id}.matika.json",
+        data / "matika.json",
     )
     return vol
 
 
+def _copy_replace(src: Path, dst: Path) -> None:
+    """Copy ``src`` → ``dst``, tolerating Windows bind-mount replace quirks."""
+    try:
+        shutil.copy2(src, dst)
+        return
+    except OSError:
+        pass
+    tmp = dst.with_suffix(dst.suffix + ".tmp")
+    try:
+        shutil.copy2(src, tmp)
+        tmp.replace(dst)
+    finally:
+        if tmp.is_file():
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+
+
 def sync_transforms_file(src: Path, dst: Path) -> None:
     """Copy optional transforms.json, or remove a stale volume copy."""
+    sync_optional_json(src, dst)
+
+
+def sync_optional_json(src: Path, dst: Path) -> None:
+    """Copy optional JSON, or remove a stale volume copy."""
     if src.is_file():
         shutil.copy2(src, dst)
     elif dst.is_file():

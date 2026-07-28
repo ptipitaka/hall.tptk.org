@@ -67,3 +67,7 @@ scripts/output/*
 books/cs-roman/output/*
 !books/cs-roman/output/.gitkeep
 books/cs-roman/source/*.pdf
+
+# Vendored reference dump (local only; too large for the repo)
+docs/tipitaka.app-main/
+

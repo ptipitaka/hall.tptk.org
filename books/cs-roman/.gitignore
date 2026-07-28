@@ -1,4 +1,6 @@
 build/aux/
+$auxDir/
 volumes/*/out/
 volumes/*/source/
 volumes/*/tex/body.generated.tex
+volumes/*/tex/body.reading.generated.tex

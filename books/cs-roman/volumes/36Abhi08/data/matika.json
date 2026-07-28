@@ -1,0 +1,1947 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": 3
+    },
+    {
+      "title": "Sahetādhipatimaggaghaṭanā (6)",
+      "page": 257,
+      "kind": "h2",
+      "matched_order": 2388
+    },
+    {
+      "title": "Jhānaduka",
+      "page": 258,
+      "kind": "h2",
+      "matched_order": 2396
+    },
+    {
+      "title": "Jhānasāmaññaghaṭanā (9)",
+      "page": 258,
+      "kind": "h2",
+      "matched_order": 2398
+    },
+    {
+      "title": "Sa-indriyaghaṭanā (9)",
+      "page": 259,
+      "kind": "h2",
+      "matched_order": 2409
+    },
+    {
+      "title": "Samaggaghaṭanā (9)",
+      "page": 260,
+      "kind": "h2",
+      "matched_order": 2419
+    },
+    {
+      "title": "Sa-indriyamaggaghaṭanā (9)",
+      "page": 261,
+      "kind": "h2",
+      "matched_order": 2430
+    },
+    {
+      "title": "Maggaduka",
+      "page": 262,
+      "kind": "h2",
+      "matched_order": 2441
+    },
+    {
+      "title": "Maggasāmaññaghaṭanā (9)",
+      "page": 262,
+      "kind": "h2",
+      "matched_order": 2443
+    },
+    {
+      "title": "Sa-indriyaghaṭanā (9)",
+      "page": 263,
+      "kind": "h2",
+      "matched_order": 2453
+    },
+    {
+      "title": "Sajhānaghaṭanā (9)",
+      "page": 263,
+      "kind": "h2",
+      "matched_order": 2463
+    },
+    {
+      "title": "Sa-indriyajhānaghaṭanā (9)",
+      "page": 264,
+      "kind": "h2",
+      "matched_order": 2473
+    },
+    {
+      "title": "Sādhipati-indriyaghaṭanā (6)",
+      "page": 265,
+      "kind": "h2",
+      "matched_order": 2484
+    },
+    {
+      "title": "Sahetu-indriyaghaṭanā (9)",
+      "page": 266,
+      "kind": "h2",
+      "matched_order": 2491
+    },
+    {
+      "title": "Sahetādhipati-indriyaghaṭanā (6)",
+      "page": 266,
+      "kind": "h2",
+      "matched_order": 2501
+    },
+    {
+      "title": "Sampayuttaduka",
+      "page": 267,
+      "kind": "h2",
+      "matched_order": 2510
+    },
+    {
+      "title": "Sampayuttaghaṭanā (2)",
+      "page": 267,
+      "kind": "h2",
+      "matched_order": 2512
+    },
+    {
+      "title": "Vippayuttaduka",
+      "page": 268,
+      "kind": "h2",
+      "matched_order": 2516
+    },
+    {
+      "title": "Vippayuttaghaṭanā (4)",
+      "page": 268,
+      "kind": "h2",
+      "matched_order": 2518
+    },
+    {
+      "title": "Pakiṇṇakaghaṭanā (5)",
+      "page": 269,
+      "kind": "h2",
+      "matched_order": 2524
+    },
+    {
+      "title": "Sahajātaghaṭanā (4)",
+      "page": 270,
+      "kind": "h2",
+      "matched_order": 2530
+    },
+    {
+      "title": "Atthiduka",
+      "page": 271,
+      "kind": "h2",
+      "matched_order": 2537
+    },
+    {
+      "title": "Atthimissakaghaṭanā (11)",
+      "page": 271,
+      "kind": "h2",
+      "matched_order": 2539
+    },
+    {
+      "title": "Pakiṇṇakaghaṭanā (8)",
+      "page": 273,
+      "kind": "h2",
+      "matched_order": 2552
+    },
+    {
+      "title": "Sahajātaghaṭanā (10)",
+      "page": 275,
+      "kind": "h2",
+      "matched_order": 2563
+    },
+    {
+      "title": "Natthi vigataduka",
+      "page": 277,
+      "kind": "h2",
+      "matched_order": 2577
+    },
+    {
+      "title": "Avigataduka",
+      "page": 277,
+      "kind": "h2",
+      "matched_order": 2579
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 129,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 278,
+      "kind": "h2",
+      "matched_order": 2584
+    },
+    {
+      "title": "Na-ārammaṇadukādi",
+      "page": 280,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Vedanāttika 1. Paṭiccavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2755,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 142,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 294,
+      "kind": "h2",
+      "matched_order": 2757
+    },
+    {
+      "title": "Ārammaṇādi",
+      "page": 294,
+      "kind": "h2",
+      "matched_order": 2761
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 222,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 296,
+      "kind": "h2",
+      "matched_order": 2775
+    },
+    {
+      "title": "Hetudukādi",
+      "page": 296,
+      "kind": "h2",
+      "matched_order": 2777
+    },
+    {
+      "title": "Paccayapaccanīya 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 270,
+      "section_no": 2
+    },
+    {
+      "title": "Nahetu",
+      "page": 296,
+      "kind": "h2",
+      "matched_order": 2786
+    },
+    {
+      "title": "Na-adhipati-ādi",
+      "page": 297,
+      "kind": "h2",
+      "matched_order": 2791
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 641,
+      "section_no": 2
+    },
+    {
+      "title": "Suddha",
+      "page": 299,
+      "kind": "h2",
+      "matched_order": 2815
+    },
+    {
+      "title": "Nahetudukādi",
+      "page": 299,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 115,
+      "section_no": 3
+    },
+    {
+      "title": "Hetuduka",
+      "page": 302,
+      "kind": "h2",
+      "matched_order": 2856
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 524,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 302,
+      "kind": "h2",
+      "matched_order": 2863
+    },
+    {
+      "title": "Na-adhipatidukādi",
+      "page": 304,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Sahajātavāra",
+      "page": 305,
+      "kind": "h1",
+      "matched_order": 2893,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayavāra",
+      "page": 305,
+      "kind": "h1",
+      "matched_order": 2895,
+      "section_no": 3
+    },
+    {
+      "title": "Nissayavāra",
+      "page": 305,
+      "kind": "h1",
+      "matched_order": 2897,
+      "section_no": 4
+    },
+    {
+      "title": "Saṃsaṭṭhavāra",
+      "page": 305,
+      "kind": "h1",
+      "matched_order": 2899,
+      "section_no": 5
+    },
+    {
+      "title": "Sampayuttavāra",
+      "page": 305,
+      "kind": "h1",
+      "matched_order": 2901,
+      "section_no": 6
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Vedanāttika 7. Pañhāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2904,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 624,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 306,
+      "kind": "h2",
+      "matched_order": 2906
+    },
+    {
+      "title": "Ārammaṇa",
+      "page": 306,
+      "kind": "h2",
+      "matched_order": 2910
+    },
+    {
+      "title": "Adhipati",
+      "page": 310,
+      "kind": "h2",
+      "matched_order": 2923
+    },
+    {
+      "title": "Anantara",
+      "page": 311,
+      "kind": "h2",
+      "matched_order": 2937
+    },
+    {
+      "title": "Samanantara",
+      "page": 313,
+      "kind": "h2",
+      "matched_order": 2947
+    },
+    {
+      "title": "Sahajāta",
+      "page": 313,
+      "kind": "h2",
+      "matched_order": 2949
+    },
+    {
+      "title": "Aññamañña nissaya",
+      "page": 314,
+      "kind": "h2",
+      "matched_order": 2954
+    },
+    {
+      "title": "Upanissaya",
+      "page": 314,
+      "kind": "h2",
+      "matched_order": 2956
+    },
+    {
+      "title": "Āsevana",
+      "page": 319,
+      "kind": "h2",
+      "matched_order": 2978
+    },
+    {
+      "title": "Kamma",
+      "page": 319,
+      "kind": "h2",
+      "matched_order": 2982
+    },
+    {
+      "title": "Vipāka",
+      "page": 321,
+      "kind": "h2",
+      "matched_order": 2993
+    },
+    {
+      "title": "Āhārādi",
+      "page": 321,
+      "kind": "h2",
+      "matched_order": 2997
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 632,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 321,
+      "kind": "h2",
+      "matched_order": 3000
+    },
+    {
+      "title": "Hetusabhāga",
+      "page": 322,
+      "kind": "h2",
+      "matched_order": 3003
+    },
+    {
+      "title": "Sāmaññaghaṭanā (2)",
+      "page": 322,
+      "kind": "h2",
+      "matched_order": 3005
+    },
+    {
+      "title": "Sa-indriyamaggaghaṭanā (2)",
+      "page": 322,
+      "kind": "h2",
+      "matched_order": 3007
+    },
+    {
+      "title": "Sādhipati-indriyamaggaghaṭanā (2)",
+      "page": 322,
+      "kind": "h2",
+      "matched_order": 3009
+    },
+    {
+      "title": "Ārammaṇasabhāga",
+      "page": 322,
+      "kind": "h2",
+      "matched_order": 3011
+    },
+    {
+      "title": "Ārammaṇaghaṭanā (1)",
+      "page": 322,
+      "kind": "h2",
+      "matched_order": 3013
+    },
+    {
+      "title": "Adhipatisabhāga",
+      "page": 323,
+      "kind": "h2",
+      "matched_order": 3015
+    },
+    {
+      "title": "Pakiṇṇakaghaṭanā (1)",
+      "page": 323,
+      "kind": "h2",
+      "matched_order": 3017
+    },
+    {
+      "title": "Sahajātaghaṭanā (8)",
+      "page": 323,
+      "kind": "h2",
+      "matched_order": 3019
+    },
+    {
+      "title": "Anantarasabhāga",
+      "page": 323,
+      "kind": "h2",
+      "matched_order": 3024
+    },
+    {
+      "title": "Sahajātādisabhāga",
+      "page": 324,
+      "kind": "h2",
+      "matched_order": 3029
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Upanissayasabhāga",
+      "page": 324,
+      "kind": "h2",
+      "matched_order": 3033
+    },
+    {
+      "title": "Āsevanasabhāga",
+      "page": 324,
+      "kind": "h2",
+      "matched_order": 3037
+    },
+    {
+      "title": "Kammasabhāga",
+      "page": 324,
+      "kind": "h2",
+      "matched_order": 3041
+    },
+    {
+      "title": "Vipākasabhāga",
+      "page": 325,
+      "kind": "h2",
+      "matched_order": 3048
+    },
+    {
+      "title": "Āhārasabhāga",
+      "page": 325,
+      "kind": "h2",
+      "matched_order": 3052
+    },
+    {
+      "title": "Indriyasabhāga",
+      "page": 326,
+      "kind": "h2",
+      "matched_order": 3059
+    },
+    {
+      "title": "Jhānasabhāga",
+      "page": 327,
+      "kind": "h2",
+      "matched_order": 3071
+    },
+    {
+      "title": "Maggasabhāga",
+      "page": 327,
+      "kind": "h2",
+      "matched_order": 3077
+    },
+    {
+      "title": "Sampayuttasabhāga",
+      "page": 328,
+      "kind": "h2",
+      "matched_order": 3087
+    },
+    {
+      "title": "Pañhāvāra-paccanīyuddhāra",
+      "page": null,
+      "kind": "h2",
+      "matched_order": 3093
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 820,
+      "section_no": 2
+    },
+    {
+      "title": "Suddha",
+      "page": 330,
+      "kind": "h2",
+      "matched_order": 3104
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 330,
+      "kind": "h2",
+      "matched_order": 3106
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 394,
+      "section_no": 3
+    },
+    {
+      "title": "Hetusabhāga",
+      "page": 331,
+      "kind": "h2",
+      "matched_order": 3116
+    },
+    {
+      "title": "Sāmaññaghaṭanā",
+      "page": 331,
+      "kind": "h2",
+      "matched_order": 3118
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 973,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetudukādi",
+      "page": 331,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Vipākattika 1. Paṭiccavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 192,
+      "section_no": 3
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 654,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 334,
+      "kind": "h2",
+      "matched_order": 3151
+    },
+    {
+      "title": "Ārammaṇa",
+      "page": 335,
+      "kind": "h2",
+      "matched_order": 3166
+    },
+    {
+      "title": "Adhipati",
+      "page": 336,
+      "kind": "h2",
+      "matched_order": 3172
+    },
+    {
+      "title": "Anantarādi",
+      "page": 337,
+      "kind": "h2",
+      "matched_order": 3180
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 752,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 339,
+      "kind": "h2",
+      "matched_order": 3205
+    },
+    {
+      "title": "Hetudukādi",
+      "page": 339,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayapaccanīya 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 637,
+      "section_no": 2
+    },
+    {
+      "title": "Nahetu",
+      "page": 340,
+      "kind": "h2",
+      "matched_order": 3215
+    },
+    {
+      "title": "Na-ārammaṇādi",
+      "page": 341,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1081,
+      "section_no": 2
+    },
+    {
+      "title": "Suddha",
+      "page": 346,
+      "kind": "h2",
+      "matched_order": 3285
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 347,
+      "kind": "h2",
+      "matched_order": 3288
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 645,
+      "section_no": 3
+    },
+    {
+      "title": "Hetuduka",
+      "page": 347,
+      "kind": "h2",
+      "matched_order": 3296
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1090,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 348,
+      "kind": "h2",
+      "matched_order": 3308
+    },
+    {
+      "title": "Vipākattika 1. Sahajātavāra",
+      "page": 349,
+      "kind": "h1",
+      "matched_order": 3310,
+      "section_no": 3
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": 349,
+      "kind": "h1",
+      "matched_order": 3318,
+      "section_no": 1
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": 349,
+      "kind": "h1",
+      "matched_order": 3320,
+      "section_no": 1
+    },
+    {
+      "title": "Paccayapaccanīya",
+      "page": 349,
+      "kind": "h1",
+      "matched_order": 3322,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayānulomapaccanīya ...",
+      "page": 350,
+      "kind": "h1",
+      "matched_order": 3325,
+      "section_no": 3
+    },
+    {
+      "title": "Paccayapaccanīyānuloma ...",
+      "page": 350,
+      "kind": "h1",
+      "matched_order": 3327,
+      "section_no": 4
+    },
+    {
+      "title": "Vipākattika 3. Paccayavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3330,
+      "section_no": 3
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1057,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 350,
+      "kind": "h2",
+      "matched_order": 3332
+    },
+    {
+      "title": "Ārammaṇādi",
+      "page": 352,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1070,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 357,
+      "kind": "h2",
+      "matched_order": 3405
+    },
+    {
+      "title": "Hetuduka",
+      "page": 358,
+      "kind": "h2",
+      "matched_order": 3407
+    },
+    {
+      "title": "Paccayapaccanīya 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 782,
+      "section_no": 2
+    },
+    {
+      "title": "Nahetu",
+      "page": 358,
+      "kind": "h2",
+      "matched_order": 3412
+    },
+    {
+      "title": "Na-ārammaṇa",
+      "page": 359,
+      "kind": "h2",
+      "matched_order": 3422
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1156,
+      "section_no": 2
+    },
+    {
+      "title": "Suddha",
+      "page": 359,
+      "kind": "h2",
+      "matched_order": 3425
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 359,
+      "kind": "h2",
+      "matched_order": 3427
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 878,
+      "section_no": 3
+    },
+    {
+      "title": "Hetuduka",
+      "page": 360,
+      "kind": "h2",
+      "matched_order": 3432
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1354,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 360,
+      "kind": "h2",
+      "matched_order": 3437
+    },
+    {
+      "title": "Vipākattika 4. Nissayavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3444,
+      "section_no": 3
+    },
+    {
+      "title": "1-4. Paccayacatukka",
+      "page": 360,
+      "kind": "h2",
+      "matched_order": 3445
+    },
+    {
+      "title": "Vipākattika 5. Saṃsaṭṭhavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3453,
+      "section_no": 3
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1097,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 361,
+      "kind": "h2",
+      "matched_order": 3455
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1122,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 361,
+      "kind": "h2",
+      "matched_order": 3458
+    },
+    {
+      "title": "Paccayapaccanīya 1. Vibhaṅgavāra",
+      "page": 361,
+      "kind": "h1",
+      "matched_order": 3462,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": 362,
+      "kind": "h1",
+      "matched_order": 3464,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayānulomapaccanīya ...",
+      "page": 362,
+      "kind": "h1",
+      "matched_order": 3468,
+      "section_no": 3
+    },
+    {
+      "title": "Paccayapaccanīyānuloma ...",
+      "page": 362,
+      "kind": "h1",
+      "matched_order": 3472,
+      "section_no": 4
+    },
+    {
+      "title": "Vipākattika 6. Sampayuttavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3477,
+      "section_no": 3
+    },
+    {
+      "title": "1-4. Paccayacatukka",
+      "page": 362,
+      "kind": "h2",
+      "matched_order": 3478
+    },
+    {
+      "title": "Vipākattika 7. Pañhāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3486,
+      "section_no": 3
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1333,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 363,
+      "kind": "h2",
+      "matched_order": 3488
+    },
+    {
+      "title": "Ārammaṇa",
+      "page": 364,
+      "kind": "h2",
+      "matched_order": 3496
+    },
+    {
+      "title": "Adhipati",
+      "page": 367,
+      "kind": "h2",
+      "matched_order": 3508
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Anantara",
+      "page": 368,
+      "kind": "h2",
+      "matched_order": 3519
+    },
+    {
+      "title": "Sahajāta",
+      "page": 369,
+      "kind": "h2",
+      "matched_order": 3530
+    },
+    {
+      "title": "Aññamañña",
+      "page": 370,
+      "kind": "h2",
+      "matched_order": 3538
+    },
+    {
+      "title": "Nissaya",
+      "page": 371,
+      "kind": "h2",
+      "matched_order": 3547
+    },
+    {
+      "title": "Upanissaya",
+      "page": 372,
+      "kind": "h2",
+      "matched_order": 3556
+    },
+    {
+      "title": "Purejāta",
+      "page": 374,
+      "kind": "h2",
+      "matched_order": 3576
+    },
+    {
+      "title": "Pacchājāta",
+      "page": 375,
+      "kind": "h2",
+      "matched_order": 3585
+    },
+    {
+      "title": "Vipāka",
+      "page": 376,
+      "kind": "h2",
+      "matched_order": 3602
+    },
+    {
+      "title": "Āhāra",
+      "page": 377,
+      "kind": "h2",
+      "matched_order": 3607
+    },
+    {
+      "title": "Jhāna",
+      "page": 378,
+      "kind": "h2",
+      "matched_order": 3616
+    },
+    {
+      "title": "Atthi",
+      "page": 379,
+      "kind": "h2",
+      "matched_order": 3630
+    },
+    {
+      "title": "Natthi vigatāvigata",
+      "page": 382,
+      "kind": "h2",
+      "matched_order": 3648
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1338,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 382,
+      "kind": "h2",
+      "matched_order": 3651
+    },
+    {
+      "title": "Sabhāga",
+      "page": 382,
+      "kind": "h2",
+      "matched_order": 3653
+    },
+    {
+      "title": "Paccanīyuddhāra",
+      "page": 383,
+      "kind": "h1",
+      "matched_order": 3657,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1851,
+      "section_no": 2
+    },
+    {
+      "title": "Suddha",
+      "page": 384,
+      "kind": "h2",
+      "matched_order": 3675
+    },
+    {
+      "title": "Sabhāga",
+      "page": 384,
+      "kind": "h2",
+      "matched_order": 3677
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1086,
+      "section_no": 3
+    },
+    {
+      "title": "Hetusabhāga",
+      "page": 385,
+      "kind": "h2",
+      "matched_order": 3682
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2583,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 385,
+      "kind": "h2",
+      "matched_order": 3689
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Upādinnattika 1. Paṭiccavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 228,
+      "section_no": 4
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1361,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 387,
+      "kind": "h2",
+      "matched_order": 3698
+    },
+    {
+      "title": "Ārammaṇādi",
+      "page": 388,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1586,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 391,
+      "kind": "h2",
+      "matched_order": 3746
+    },
+    {
+      "title": "Hetuduka",
+      "page": 391,
+      "kind": "h2",
+      "matched_order": 3748
+    },
+    {
+      "title": "Paccayapaccanīya 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1133,
+      "section_no": 2
+    },
+    {
+      "title": "Nahetu",
+      "page": 391,
+      "kind": "h2",
+      "matched_order": 3753
+    },
+    {
+      "title": "Na-ārammaṇādi",
+      "page": 392,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2814,
+      "section_no": 2
+    },
+    {
+      "title": "Suddha",
+      "page": 396,
+      "kind": "h2",
+      "matched_order": 3806
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 396,
+      "kind": "h2",
+      "matched_order": 3808
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1204,
+      "section_no": 3
+    },
+    {
+      "title": "Hetuduka",
+      "page": 396,
+      "kind": "h2",
+      "matched_order": 3812
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2862,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 397,
+      "kind": "h2",
+      "matched_order": 3817
+    },
+    {
+      "title": "Upādinnattika 2. Sahajātavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3822,
+      "section_no": 4
+    },
+    {
+      "title": "1-4. Paccayacatukka",
+      "page": 397,
+      "kind": "h2",
+      "matched_order": 3823
+    },
+    {
+      "title": "Upādinnattika 3. Paccayavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3827,
+      "section_no": 4
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2756,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 397,
+      "kind": "h2",
+      "matched_order": 3829
+    },
+    {
+      "title": "Ārammaṇa",
+      "page": 398,
+      "kind": "h2",
+      "matched_order": 3839
+    },
+    {
+      "title": "Adhipati",
+      "page": 399,
+      "kind": "h2",
+      "matched_order": 3848
+    },
+    {
+      "title": "Anantara",
+      "page": 400,
+      "kind": "h2",
+      "matched_order": 3856
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2774,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 400,
+      "kind": "h2",
+      "matched_order": 3859
+    },
+    {
+      "title": "Hetuduka",
+      "page": 400,
+      "kind": "h2",
+      "matched_order": 3861
+    },
+    {
+      "title": "Paccayapaccanīya 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1342,
+      "section_no": 2
+    },
+    {
+      "title": "Nahetu",
+      "page": 401,
+      "kind": "h2",
+      "matched_order": 3866
+    },
+    {
+      "title": "Na-ārammaṇādi",
+      "page": 401,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": 404,
+      "kind": "h1",
+      "matched_order": 3903,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayānulomapaccanīya ...",
+      "page": 404,
+      "kind": "h1",
+      "matched_order": 3905,
+      "section_no": 3
+    },
+    {
+      "title": "Paccayapaccanīyānuloma ...",
+      "page": 404,
+      "kind": "h1",
+      "matched_order": 3907,
+      "section_no": 4
+    },
+    {
+      "title": "Upādinnattika 4. Nissayavāra",
+      "page": 405,
+      "kind": "h1",
+      "matched_order": 3910,
+      "section_no": 4
+    },
+    {
+      "title": "Upādinnattika 5. Saṃsaṭṭhavāra",
+      "page": 405,
+      "kind": "h1",
+      "matched_order": 3914,
+      "section_no": 4
+    },
+    {
+      "title": "Paccayānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3915,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 405,
+      "kind": "h2",
+      "matched_order": 3916
+    },
+    {
+      "title": "Saṅkhyāvāra",
+      "page": 405,
+      "kind": "h2",
+      "matched_order": 3920
+    },
+    {
+      "title": "Paccayapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 108,
+      "section_no": 2
+    },
+    {
+      "title": "Nahetu",
+      "page": 406,
+      "kind": "h2",
+      "matched_order": 3925
+    },
+    {
+      "title": "Upādinnattika 6. Sampayuttavāra",
+      "page": 406,
+      "kind": "h1",
+      "matched_order": 3934,
+      "section_no": 4
+    },
+    {
+      "title": "Upādinnattika 7. Pañhāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 340,
+      "section_no": 4
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2905,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 407,
+      "kind": "h2",
+      "matched_order": 3940
+    },
+    {
+      "title": "Ārammaṇa",
+      "page": 408,
+      "kind": "h2",
+      "matched_order": 3948
+    },
+    {
+      "title": "Adhipati",
+      "page": 410,
+      "kind": "h2",
+      "matched_order": 3956
+    },
+    {
+      "title": "Anantara",
+      "page": 411,
+      "kind": "h2",
+      "matched_order": 3963
+    },
+    {
+      "title": "Samanantara",
+      "page": 412,
+      "kind": "h2",
+      "matched_order": 3971
+    },
+    {
+      "title": "Sahajāta",
+      "page": 412,
+      "kind": "h2",
+      "matched_order": 3973
+    },
+    {
+      "title": "Aññamañña",
+      "page": 413,
+      "kind": "h2",
+      "matched_order": 3984
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Nissaya",
+      "page": 414,
+      "kind": "h2",
+      "matched_order": 3988
+    },
+    {
+      "title": "Upanissaya",
+      "page": 415,
+      "kind": "h2",
+      "matched_order": 3999
+    },
+    {
+      "title": "Purejāta",
+      "page": 418,
+      "kind": "h2",
+      "matched_order": 4011
+    },
+    {
+      "title": "Pacchājāta",
+      "page": 419,
+      "kind": "h2",
+      "matched_order": 4020
+    },
+    {
+      "title": "Āsevana",
+      "page": 421,
+      "kind": "h2",
+      "matched_order": 4031
+    },
+    {
+      "title": "Kamma",
+      "page": 421,
+      "kind": "h2",
+      "matched_order": 4034
+    },
+    {
+      "title": "Vipāka",
+      "page": 422,
+      "kind": "h2",
+      "matched_order": 4043
+    },
+    {
+      "title": "Āhāra",
+      "page": 423,
+      "kind": "h2",
+      "matched_order": 4051
+    },
+    {
+      "title": "Indriya",
+      "page": 425,
+      "kind": "h2",
+      "matched_order": 4066
+    },
+    {
+      "title": "Jhāna",
+      "page": 426,
+      "kind": "h2",
+      "matched_order": 4074
+    },
+    {
+      "title": "Magga",
+      "page": 427,
+      "kind": "h2",
+      "matched_order": 4083
+    },
+    {
+      "title": "Sampayutta",
+      "page": 428,
+      "kind": "h2",
+      "matched_order": 4091
+    },
+    {
+      "title": "Vippayutta",
+      "page": 428,
+      "kind": "h2",
+      "matched_order": 4095
+    },
+    {
+      "title": "Atthi",
+      "page": 430,
+      "kind": "h2",
+      "matched_order": 4107
+    },
+    {
+      "title": "Natthi vigatāvigata",
+      "page": 436,
+      "kind": "h2",
+      "matched_order": 4139
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2999,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 436,
+      "kind": "h2",
+      "matched_order": 4142
+    },
+    {
+      "title": "Sabhāga",
+      "page": 437,
+      "kind": "h2",
+      "matched_order": 4144
+    },
+    {
+      "title": "Paccanīyuddhāra",
+      "page": 437,
+      "kind": "h1",
+      "matched_order": 4148,
+      "section_no": 2
+    },
+    {
+      "title": "Paccayapaccanīya 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3103,
+      "section_no": 2
+    },
+    {
+      "title": "Suddha",
+      "page": 439,
+      "kind": "h2",
+      "matched_order": 4175
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2035,
+      "section_no": 3
+    },
+    {
+      "title": "Hetuduka",
+      "page": 440,
+      "kind": "h2",
+      "matched_order": 4182
+    },
+    {
+      "title": "Hetughaṭanā",
+      "page": 440,
+      "kind": "h2",
+      "matched_order": 4184
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3123,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 440,
+      "kind": "h2",
+      "matched_order": 4189
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Saṃkiliṭṭhattika 1. Paṭiccavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 4194,
+      "section_no": 5
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3331,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 442,
+      "kind": "h2",
+      "matched_order": 4196
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": 443,
+      "kind": "h1",
+      "matched_order": 4207,
+      "section_no": 1
+    },
+    {
+      "title": "Paccayapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3924,
+      "section_no": 2
+    },
+    {
+      "title": "Nahetu",
+      "page": 443,
+      "kind": "h2",
+      "matched_order": 4211
+    },
+    {
+      "title": "Suddha",
+      "page": 444,
+      "kind": "h2",
+      "matched_order": 4215
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2855,
+      "section_no": 3
+    },
+    {
+      "title": "Hetuduka",
+      "page": 444,
+      "kind": "h2",
+      "matched_order": 4218
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3307,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 444,
+      "kind": "h2",
+      "matched_order": 4221
+    },
+    {
+      "title": "Saṃkiliṭṭhattika 7. Pañhāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 4225,
+      "section_no": 5
+    },
+    {
+      "title": "Paccayānuloma 1. Vibhaṅgavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3454,
+      "section_no": 1
+    },
+    {
+      "title": "Hetu",
+      "page": 444,
+      "kind": "h2",
+      "matched_order": 4227
+    },
+    {
+      "title": "Ārammaṇa",
+      "page": 445,
+      "kind": "h2",
+      "matched_order": 4236
+    },
+    {
+      "title": "Adhipati",
+      "page": 447,
+      "kind": "h2",
+      "matched_order": 4245
+    },
+    {
+      "title": "Anantara",
+      "page": 449,
+      "kind": "h2",
+      "matched_order": 4255
+    },
+    {
+      "title": "Samanantarādi",
+      "page": 450,
+      "kind": "h2",
+      "matched_order": 4263
+    },
+    {
+      "title": "Purejāta",
+      "page": 452,
+      "kind": "h2",
+      "matched_order": 4273
+    },
+    {
+      "title": "Pacchājāta",
+      "page": 453,
+      "kind": "h2",
+      "matched_order": 4278
+    },
+    {
+      "title": "Āsevana",
+      "page": 453,
+      "kind": "h2",
+      "matched_order": 4282
+    },
+    {
+      "title": "Kamma",
+      "page": 454,
+      "kind": "h2",
+      "matched_order": 4286
+    },
+    {
+      "title": "Vipāka",
+      "page": 455,
+      "kind": "h2",
+      "matched_order": 4295
+    },
+    {
+      "title": "Āhāra",
+      "page": 455,
+      "kind": "h2",
+      "matched_order": 4300
+    },
+    {
+      "title": "Indriya",
+      "page": 456,
+      "kind": "h2",
+      "matched_order": 4304
+    },
+    {
+      "title": "Paṭṭhānapāḷi paṭhamabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Jhānādi",
+      "page": 456,
+      "kind": "h2",
+      "matched_order": 4308
+    },
+    {
+      "title": "Vippayutta",
+      "page": 456,
+      "kind": "h2",
+      "matched_order": 4310
+    },
+    {
+      "title": "Atthi",
+      "page": 457,
+      "kind": "h2",
+      "matched_order": 4317
+    },
+    {
+      "title": "Natthi vigatāvigata",
+      "page": 460,
+      "kind": "h2",
+      "matched_order": 4333
+    },
+    {
+      "title": "Paccayānuloma 2. Saṅkhyāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3404,
+      "section_no": 1
+    },
+    {
+      "title": "Suddha",
+      "page": 460,
+      "kind": "h2",
+      "matched_order": 4336
+    },
+    {
+      "title": "Hetusabhāga",
+      "page": 460,
+      "kind": "h2",
+      "matched_order": 4338
+    },
+    {
+      "title": "Hetusāmaññaghaṭanā (9)",
+      "page": 460,
+      "kind": "h2",
+      "matched_order": 4340
+    },
+    {
+      "title": "Paccanīyuddhāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1834,
+      "section_no": 2
+    },
+    {
+      "title": "Paccanīya-suddha",
+      "page": 462,
+      "kind": "h2",
+      "matched_order": 4361
+    },
+    {
+      "title": "Paccayānulomapaccanīya",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3295,
+      "section_no": 3
+    },
+    {
+      "title": "Hetuduka",
+      "page": 463,
+      "kind": "h2",
+      "matched_order": 4369
+    },
+    {
+      "title": "Paccayapaccanīyānuloma",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3436,
+      "section_no": 4
+    },
+    {
+      "title": "Nahetuduka",
+      "page": 464,
+      "kind": "h2",
+      "matched_order": 4376
+    }
+  ]
+}

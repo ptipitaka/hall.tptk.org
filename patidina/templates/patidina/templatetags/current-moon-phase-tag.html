@@ -1,0 +1,22 @@
+{% load patidina_tags %}
+
+<style>
+    .resize-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      width: 100%;
+    }
+
+    .resize-80-percent {
+      transform: scale(0.8);
+      transform-origin: center center;
+    }
+</style>
+
+<div class="resize-container">
+    <div class="resize-80-percent">
+        {{ moon_svg|safe }}
+    </div>
+</div>

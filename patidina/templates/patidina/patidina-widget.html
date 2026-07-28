@@ -1,0 +1,36 @@
+<style>
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+</style>
+
+{% load i18n patidina_tags %}
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col d-flex pb-4">
+            <div class="col">
+                {% solar_date_tag ini_solar_date %}
+            </div>
+
+            <div class="col center-content">
+                {% current_moon_phase ini_solar_date %}
+            </div>
+
+            <div class="col">
+                {% lunar_date_tag ini_solar_date %}
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        {% include "patidina/buddhist-calendar-widget.html" %}
+    </div>
+
+    <div class="mt-3 mb-4">
+        <a href="{{ uposatha_url }}">{% translate "Uposatha days for the year" %}</a>
+    </div>
+</div>

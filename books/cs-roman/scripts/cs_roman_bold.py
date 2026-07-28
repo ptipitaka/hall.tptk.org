@@ -21,6 +21,43 @@ from cs_roman_vztime import vztime_to_unicode
 _NOTE_MARKER_RE = re.compile(r"\{\{(?:n\d+|\*|\+|sp1|sp3)\}\}")
 
 
+def marker_ranges(text: str) -> list[tuple[int, int]]:
+    """Index ranges of inline ``{{…}}`` markers in ``text``."""
+    if not text:
+        return []
+    return [m.span() for m in _NOTE_MARKER_RE.finditer(text)]
+
+
+def subtract_marker_ranges(
+    text: str,
+    ranges: list[tuple[int, int]],
+) -> list[tuple[int, int]]:
+    """Drop any bold coverage that falls inside inline markers.
+
+    Short PDF stroke spans such as ``1`` must not paint the digit inside
+    ``{{sp1}}`` (which would split the marker and corrupt Thai runs).
+    """
+    markers = marker_ranges(text)
+    if not ranges or not markers:
+        return _merge_ranges(ranges)
+    out: list[tuple[int, int]] = []
+    for start, end in ranges:
+        pieces = [(start, end)]
+        for ms, me in markers:
+            next_pieces: list[tuple[int, int]] = []
+            for a, b in pieces:
+                if b <= ms or a >= me:
+                    next_pieces.append((a, b))
+                    continue
+                if a < ms:
+                    next_pieces.append((a, ms))
+                if me < b:
+                    next_pieces.append((me, b))
+            pieces = next_pieces
+        out.extend(pieces)
+    return _merge_ranges(out)
+
+
 def bold_span_texts(page: Any) -> list[str]:
     """Unicode strings of stroke (bold) text runs on a PyMuPDF page."""
     if fitz is None:
@@ -75,7 +112,8 @@ def find_span_ranges(text: str, needle: str) -> list[tuple[int, int]]:
         found.append((i, i + len(needle)))
         start = i + len(needle)
     if found:
-        return found
+        # Exact ``find`` can hit digits/letters inside ``{{sp1}}`` / ``{{n0}}``.
+        return subtract_marker_ranges(text, found)
 
     needle_chars = [c for c in needle if not c.isspace()]
     if not needle_chars:
@@ -116,7 +154,7 @@ def find_span_ranges(text: str, needle: str) -> list[tuple[int, int]]:
             i = ti
         else:
             i += 1
-    return results
+    return subtract_marker_ranges(text, results)
 
 
 def bold_ranges_in_text(text: str, bold_spans: list[str]) -> list[tuple[int, int]]:
@@ -130,12 +168,42 @@ def bold_ranges_in_text(text: str, bold_spans: list[str]) -> list[tuple[int, int
         for start, end in find_span_ranges(text, span):
             if not _overlaps(start, end, accepted):
                 accepted.append((start, end))
-    return _merge_ranges(accepted)
+    return subtract_marker_ranges(text, _merge_ranges(accepted))
+
+
+def substantial_bold_ranges(
+    text: str,
+    ranges: list[tuple[int, int]],
+    *,
+    min_coverage: float = 0.6,
+) -> list[tuple[int, int]]:
+    """Keep bold ranges only when they cover most of ``text``.
+
+    Used for ``niṭṭhitaṃ`` closers: major ends are full-line stroke-bold in
+    the source PDF. Short bold lemmas from nearby rule text must not paint
+    a fragment of a plain closer (e.g. ``Vehāsakuṭi`` inside
+    ``Vehāsakuṭisikkhāpadaṃ niṭṭhitaṃ…``).
+    """
+    if not text or not ranges:
+        return []
+    # Ignore extract markers / whitespace when measuring coverage.
+    plain = _NOTE_MARKER_RE.sub("", text)
+    plain_len = sum(1 for c in plain if not c.isspace())
+    if plain_len <= 0:
+        return []
+    bold_chars = 0
+    for start, end in ranges:
+        chunk = text[start:end]
+        chunk = _NOTE_MARKER_RE.sub("", chunk)
+        bold_chars += sum(1 for c in chunk if not c.isspace())
+    if bold_chars / plain_len < min_coverage:
+        return []
+    return ranges
 
 
 def ranges_to_runs(text: str, ranges: list[tuple[int, int]]) -> list[dict[str, Any]] | None:
     """Collapse bold ranges into runs; ``None`` when there is no bold."""
-    merged = _merge_ranges(ranges)
+    merged = subtract_marker_ranges(text, ranges)
     if not merged or not text:
         return None
     runs: list[dict[str, Any]] = []

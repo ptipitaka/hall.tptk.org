@@ -1,0 +1,26 @@
+{% load i18n patidina_tags %}
+
+<div class="row mt-2 mb-5 small sarabun-thin">
+    <div class="col-md-12 mb-2">
+        <div class="sarabun small">
+            {% if lunar_important_days %}
+                <div class="fw-bold" style="font-weight:700;">{% translate "Important days" %} <span class="color:yellow">({% translate "lunar" %})</span></div>
+                {% for day in lunar_important_days %}
+                    {% if not forloop.first %} · {% endif %}
+                    {{ day.lunar_date|arabic_to_thai }} - {{ day.details }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-12 mb-2">
+        <div class="sarabun small">
+            {% if solar_important_days %}
+                <div class="fw-bold" style="font-weight:700;">{% translate "Important days" %} <span class="color:red">({% translate "solar" %})</span></div>
+                {% for day in solar_important_days %}
+                    {% if not forloop.first %} · {% endif %}
+                    {{ day.label }} - {{ day.details }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,509 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "title": "Paṭṭhānapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 3
+    },
+    {
+      "title": "Tatiyabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Hetugocchaka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 5,
+      "section_no": 1
+    },
+    {
+      "title": "Hetuduka",
+      "page": 1,
+      "kind": "h1",
+      "matched_order": 6,
+      "section_no": 1
+    },
+    {
+      "title": "... 21-30-38",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Hetusampayuttaduka",
+      "page": 55,
+      "kind": "h1",
+      "matched_order": 500,
+      "section_no": 3
+    },
+    {
+      "title": "Hetusahetukaduka",
+      "page": 55,
+      "kind": "h1",
+      "matched_order": 501,
+      "section_no": 4
+    },
+    {
+      "title": "Hetuhetusampayuttaduka",
+      "page": 68,
+      "kind": "h1",
+      "matched_order": 632,
+      "section_no": 5
+    },
+    {
+      "title": "... 69-72-74",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Cūḷantaraduka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 795,
+      "section_no": 2
+    },
+    {
+      "title": "Sappaccayaduka",
+      "page": 86,
+      "kind": "h1",
+      "matched_order": 796,
+      "section_no": 7
+    },
+    {
+      "title": "Saṅkhataduka",
+      "page": 90,
+      "kind": "h1",
+      "matched_order": 844,
+      "section_no": 8
+    },
+    {
+      "title": "Sanidassanaduka",
+      "page": 90,
+      "kind": "h1",
+      "matched_order": 849,
+      "section_no": 9
+    },
+    {
+      "title": "... 104-109",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 121-127",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 135-140",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 150-153",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Āsavagocchaka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1477,
+      "section_no": 3
+    },
+    {
+      "title": "... 154-159",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Sāsavaduka",
+      "page": 172,
+      "kind": "h1",
+      "matched_order": 1652,
+      "section_no": 15
+    },
+    {
+      "title": "172-179-183",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Āsavasāsavaduka",
+      "page": 199,
+      "kind": "h1",
+      "matched_order": 1889,
+      "section_no": 17
+    },
+    {
+      "title": "Āsava-āsavasampayuttaduka",
+      "page": 202,
+      "kind": "h1",
+      "matched_order": 1922,
+      "section_no": 18
+    },
+    {
+      "title": "Āsavavippayuttasāsavaduka",
+      "page": 208,
+      "kind": "h1",
+      "matched_order": 1985,
+      "section_no": 19
+    },
+    {
+      "title": "Paṭṭhānapāḷi tatiyabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Saññojanagocchaka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1992,
+      "section_no": 4
+    },
+    {
+      "title": "... 209-214",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Saññojaniyaduka",
+      "page": 222,
+      "kind": "h1",
+      "matched_order": 2132,
+      "section_no": 21
+    },
+    {
+      "title": "222-226-231",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Saññojanasaññojaniyaduka",
+      "page": 244,
+      "kind": "h1",
+      "matched_order": 2344,
+      "section_no": 23
+    },
+    {
+      "title": "Saññojanasaññojanasampayuttaduka",
+      "page": 246,
+      "kind": "h1",
+      "matched_order": 2359,
+      "section_no": 24
+    },
+    {
+      "title": "Saññojanavippayuttasaññojaniyaduka",
+      "page": 252,
+      "kind": "h1",
+      "matched_order": 2422,
+      "section_no": 25
+    },
+    {
+      "title": "Ganthagocchaka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2430,
+      "section_no": 5
+    },
+    {
+      "title": "... 253-258",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Ganthaniyaduka",
+      "page": 267,
+      "kind": "h1",
+      "matched_order": 2570,
+      "section_no": 27
+    },
+    {
+      "title": "... 268-276",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Ganthaganthaniyaduka",
+      "page": 291,
+      "kind": "h1",
+      "matched_order": 2779,
+      "section_no": 29
+    },
+    {
+      "title": "Ganthaganthasampayuttaduka",
+      "page": 293,
+      "kind": "h1",
+      "matched_order": 2793,
+      "section_no": 30
+    },
+    {
+      "title": "Ganthavippayuttaganthaniyaduka",
+      "page": 297,
+      "kind": "h1",
+      "matched_order": 2837,
+      "section_no": 31
+    },
+    {
+      "title": "6-7. Oghayogagocchaka",
+      "page": null,
+      "kind": "h2",
+      "matched_order": 2840
+    },
+    {
+      "title": "32-43. Oghādiduka",
+      "page": 297,
+      "kind": "h2",
+      "matched_order": 2841
+    },
+    {
+      "title": "Nīvaraṇagocchaka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2845,
+      "section_no": 8
+    },
+    {
+      "title": "... 298-305",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Nīvaraṇiyaduka",
+      "page": 314,
+      "kind": "h1",
+      "matched_order": 3000,
+      "section_no": 45
+    },
+    {
+      "title": "... 314-319",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Nīvaraṇanīvaraṇiyaduka",
+      "page": 328,
+      "kind": "h1",
+      "matched_order": 3141,
+      "section_no": 47
+    },
+    {
+      "title": "Nīvaraṇanīvaraṇasampayuttaduka",
+      "page": 330,
+      "kind": "h1",
+      "matched_order": 3160,
+      "section_no": 48
+    },
+    {
+      "title": "Nīvaraṇavippayuttanīvaraṇiyaduka",
+      "page": 336,
+      "kind": "h1",
+      "matched_order": 3220,
+      "section_no": 49
+    },
+    {
+      "title": "Parāmāsagocchaka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3226,
+      "section_no": 9
+    },
+    {
+      "title": "... 337-341",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Parāmaṭṭhaduka",
+      "page": 351,
+      "kind": "h1",
+      "matched_order": 3358,
+      "section_no": 51
+    },
+    {
+      "title": "... 351-356",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Paṭṭhānapāḷi tatiyabhāga",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Parāmāsaparāmaṭṭhaduka",
+      "page": 366,
+      "kind": "h1",
+      "matched_order": 3503,
+      "section_no": 53
+    },
+    {
+      "title": "Parāmāsavippayuttaparāmaṭṭhaduka",
+      "page": 368,
+      "kind": "h1",
+      "matched_order": 3526,
+      "section_no": 54
+    },
+    {
+      "title": "Mahantaraduka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 3534,
+      "section_no": 10
+    },
+    {
+      "title": "... 369-377",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 385-394",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 403-413",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 424-431",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Cittasaṃsaṭṭhaduka",
+      "page": 438,
+      "kind": "h1",
+      "matched_order": 4206,
+      "section_no": 59
+    },
+    {
+      "title": "... 439-448",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 461-468",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Cittānuparivattiduka",
+      "page": 475,
+      "kind": "h1",
+      "matched_order": 4538,
+      "section_no": 62
+    },
+    {
+      "title": "... 476-484",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Cittasaṃsaṭṭhasamuṭṭhānasahabhūduka",
+      "page": 491,
+      "kind": "h1",
+      "matched_order": 4693,
+      "section_no": 64
+    },
+    {
+      "title": "Cittasaṃsaṭṭhasamuṭṭhānānuparivattiduka",
+      "page": 491,
+      "kind": "h1",
+      "matched_order": 4697,
+      "section_no": 65
+    },
+    {
+      "title": "... 492-501",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 516-527",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 537-547",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Upādānagocchaka",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 5326,
+      "section_no": 11
+    },
+    {
+      "title": "... 560-565",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Upādāniyaduka",
+      "page": 576,
+      "kind": "h1",
+      "matched_order": 5479,
+      "section_no": 70
+    },
+    {
+      "title": "... 576-584",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "... 597-598",
+      "page": null,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Upādāna-upādānasampayuttaduka",
+      "page": 600,
+      "kind": "h1",
+      "matched_order": 5679,
+      "section_no": 73
+    },
+    {
+      "title": "Upādānavippayutta-upādāniyaduka",
+      "page": 604,
+      "kind": "h1",
+      "matched_order": 5725,
+      "section_no": 74
+    }
+  ]
+}

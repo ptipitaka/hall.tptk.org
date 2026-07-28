@@ -1,14 +1,16 @@
 """
 StreamField block lists for website pages.
 
-Replaces Wagtail RawHTMLBlock with EnhancedHTMLBlock (CodeMirror) for
-readable, structured HTML editing in the admin.
+- Swaps Wagtail RawHTMLBlock with EnhancedHTMLBlock (CodeMirror) for HTML blocks.
+- Appends project-specific layout blocks (e.g. zigzag).
 """
 
 from django.utils.translation import gettext_lazy as _
 from wagtail_html_editor.blocks import EnhancedHTMLBlock
 
 from coderedcms.blocks import LAYOUT_STREAMBLOCKS
+
+from website.blocks.zigzag_blocks import ZigzagBlock
 
 HTML_BLOCK = EnhancedHTMLBlock(
     icon="code",
@@ -28,4 +30,6 @@ def _with_enhanced_html(blocks_list):
     return updated
 
 
-LAYOUT_STREAMBLOCKS = _with_enhanced_html(LAYOUT_STREAMBLOCKS)
+LAYOUT_STREAMBLOCKS = _with_enhanced_html(LAYOUT_STREAMBLOCKS) + [
+    ("zigzag", ZigzagBlock()),
+]

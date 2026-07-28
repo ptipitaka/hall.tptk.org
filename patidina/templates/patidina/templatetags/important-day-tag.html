@@ -1,0 +1,33 @@
+{% load i18n %}
+{% if lunar_important_days or solar_important_days %}
+    <div class="text-center">
+        <p class="lead">{% translate "Today is an important day" %}</p>
+        {% for day in lunar_important_days %}
+            {% for detail in day.details.all %}
+                <p class='text-primary'>
+                    {% if detail.article_page %}
+                        <a href='{{ detail.article_page.url }}' style='text-decoration:none'>
+                            {{ detail.localized_name }}
+                        </a>
+                    {% else %}
+                        {{ detail.localized_name }}
+                    {% endif %}
+                </p>
+            {% endfor %}
+        {% endfor %}
+
+        {% for day in solar_important_days %}
+            {% for detail in day.details.all %}
+                <p class='text-primary'>
+                    {% if detail.article_page %}
+                        <a href='{{ detail.article_page.url }}' style='text-decoration:none'>
+                            {{ detail.localized_name }}
+                        </a>
+                    {% else %}
+                        {{ detail.localized_name }}
+                    {% endif %}
+                </p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}

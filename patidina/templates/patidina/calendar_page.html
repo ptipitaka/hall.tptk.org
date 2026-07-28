@@ -1,0 +1,15 @@
+{% extends "patidina/_base.html" %}
+{% load patidina_tags %}
+
+{% block title %}ปฏิทิน {{ last_day_of_month|text_month }} {{ last_day_of_month|text_year }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    {% include "patidina/buddhist-calendar-widget.html" %}
+    <p class="mt-3">
+        <a href="{% url 'patidina:widget' %}">กลับ Patidina</a>
+        ·
+        <a href="{% url 'patidina:uposatha_year' first_day_of_month.year %}">วันพระทั้งปี</a>
+    </p>
+</div>
+{% endblock %}

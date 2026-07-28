@@ -9,3 +9,8 @@ gunicorn>=23.0
 whitenoise>=6.8
 django-storages[s3]>=1.14,<2
 boto3>=1.35
+pythaidate==0.2.0
+svgwrite==1.4.3
+ephem>=4.1,<5
+pymupdf>=1.24,<2
+-e packages/pali_script/python

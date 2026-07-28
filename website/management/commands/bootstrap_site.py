@@ -3,11 +3,11 @@ from wagtail.models import Locale
 
 
 class Command(BaseCommand):
-    help = "Ensure Wagtail locales exist for hall.tptk.org (en, th, zh)."
+    help = "Ensure Wagtail locales exist for hall.tptk.org (en, th)."
 
     def handle(self, *args, **options):
         created = []
-        for code in ("en", "th", "zh"):
+        for code in ("en", "th"):
             _locale, was_created = Locale.objects.get_or_create(language_code=code)
             if was_created:
                 created.append(code)
@@ -17,4 +17,4 @@ class Command(BaseCommand):
                 self.style.SUCCESS(f"Created locales: {', '.join(created)}")
             )
         else:
-            self.stdout.write("Locales en, th, zh already exist.")
+            self.stdout.write("Locales en, th already exist.")

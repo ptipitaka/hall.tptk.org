@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 24">
+  <!-- Tibetan national flag (snow lion), simplified for small UI -->
+  <rect width="36" height="24" fill="#f5d20e"/>
+  <defs>
+    <clipPath id="panel"><rect x="1.5" y="1.5" width="33" height="21"/></clipPath>
+  </defs>
+  <g clip-path="url(#panel)">
+    <!-- 12 alternating red/blue rays -->
+    <g transform="translate(18 12)">
+      <path d="M0 0 L0 -20 L10.35 -17.32 Z" fill="#0a3d91"/>
+      <path d="M0 0 L10.35 -17.32 L17.32 -10.35 Z" fill="#c8102e"/>
+      <path d="M0 0 L17.32 -10.35 L20 0 Z" fill="#0a3d91"/>
+      <path d="M0 0 L20 0 L17.32 10.35 Z" fill="#c8102e"/>
+      <path d="M0 0 L17.32 10.35 L10.35 17.32 Z" fill="#0a3d91"/>
+      <path d="M0 0 L10.35 17.32 L0 20 Z" fill="#c8102e"/>
+      <path d="M0 0 L0 20 L-10.35 17.32 Z" fill="#0a3d91"/>
+      <path d="M0 0 L-10.35 17.32 L-17.32 10.35 Z" fill="#c8102e"/>
+      <path d="M0 0 L-17.32 10.35 L-20 0 Z" fill="#0a3d91"/>
+      <path d="M0 0 L-20 0 L-17.32 -10.35 Z" fill="#c8102e"/>
+      <path d="M0 0 L-17.32 -10.35 L-10.35 -17.32 Z" fill="#0a3d91"/>
+      <path d="M0 0 L-10.35 -17.32 L0 -20 Z" fill="#c8102e"/>
+    </g>
+    <!-- Snow mountains -->
+    <path d="M4 20.5 L11 10.5 L14.5 14.5 L18 8.5 L21.5 14.5 L25 10.5 L32 20.5 Z" fill="#fff"/>
+    <!-- Rising sun -->
+    <circle cx="18" cy="10.2" r="2.4" fill="#f5d20e"/>
+    <g stroke="#f5d20e" stroke-width="0.7" stroke-linecap="round">
+      <line x1="18" y1="6.2" x2="18" y2="5"/>
+      <line x1="18" y1="14.2" x2="18" y2="15.4"/>
+      <line x1="14" y1="10.2" x2="12.8" y2="10.2"/>
+      <line x1="22" y1="10.2" x2="23.2" y2="10.2"/>
+      <line x1="15.2" y1="7.4" x2="14.3" y2="6.5"/>
+      <line x1="20.8" y1="7.4" x2="21.7" y2="6.5"/>
+      <line x1="15.2" y1="13" x2="14.3" y2="13.9"/>
+      <line x1="20.8" y1="13" x2="21.7" y2="13.9"/>
+    </g>
+  </g>
+  <!-- Yellow border: hoist, top, bottom (open on fly end) -->
+  <path d="M0 0 H36 V1.5 H1.5 V22.5 H36 V24 H0 Z" fill="#f5d20e"/>
+</svg>

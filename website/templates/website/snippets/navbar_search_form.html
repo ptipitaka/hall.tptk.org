@@ -1,0 +1,8 @@
+{% load django_bootstrap5 coderedcms_tags i18n %}
+<form class="d-flex hall-navbar__search {{ search_class }}" role="search" action="{% url 'crx_search' %}" method="GET">
+  {% get_searchform request as form %}
+  {% for field in form %}
+  {% bootstrap_field field show_label=False wrapper_class=None success_css_class=None server_side_validation=False %}
+  {% endfor %}
+  <button class="btn btn-outline-primary ms-2" type="submit">{% trans "Search" %}</button>
+</form>

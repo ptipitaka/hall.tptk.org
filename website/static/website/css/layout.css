@@ -1,5 +1,469 @@
 /* Wagtail CRX layout tweaks */
 
+/* Catalog index — collections grouped by classification, then tradition */
+.catalog-index {
+  --catalog-thumb-size: 86px;
+  padding-bottom: 3rem;
+}
+
+.catalog-group + .catalog-group {
+  margin-top: 2.5rem;
+}
+
+.catalog-group__heading {
+  margin: 0 0 1rem;
+  font-size: 1.625rem;
+  line-height: 1.3;
+}
+
+.catalog-group__heading::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-top: 0.75rem;
+  background: var(--accent);
+}
+
+.catalog-group__description {
+  margin: -0.25rem 0 1rem;
+  color: #555;
+}
+
+.catalog-group__tradition-group + .catalog-group__tradition-group {
+  margin-top: 2.75rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(var(--hall-brand-rgb), 0.12);
+}
+
+.catalog-group__tradition-heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #444;
+}
+
+.catalog-group__item + .catalog-group__item {
+  border-top: 1px solid rgba(var(--hall-brand-rgb), 0.1);
+}
+
+.catalog-group__link {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 0.7rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.catalog-group__thumb-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--catalog-thumb-size);
+  height: var(--catalog-thumb-size);
+}
+
+/* Shared cover treatment — catalog collections + collection editions */
+.catalog-group__thumb,
+.collection-editions__thumb {
+  border-radius: 0.3rem;
+  box-shadow:
+    0 0 0 1px rgba(120, 80, 40, 0.1),
+    0 0 10px rgba(180, 140, 70, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.catalog-group__thumb {
+  display: block;
+  height: var(--catalog-thumb-size);
+  width: auto;
+  max-width: var(--catalog-thumb-size);
+  object-fit: contain;
+}
+
+.catalog-group__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.catalog-group__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0.4rem 0.5rem;
+}
+
+.catalog-group__title {
+  min-width: 0;
+  font-weight: 700;
+}
+
+.catalog-group__flag {
+  flex-shrink: 0;
+  display: block;
+  width: 1.05rem;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+  transform: translateY(0.05em);
+}
+
+.catalog-group__item-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 0.3rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #555;
+}
+
+.catalog-group__link:hover {
+  color: var(--bs-link-hover-color);
+}
+
+/* Collection page — editions within a work */
+.collection-editions {
+  --edition-thumb-size: 86px;
+}
+
+.collection-editions__heading,
+.collection-editions > h2 {
+  margin: 0 0 1rem;
+  font-size: 1.625rem;
+  line-height: 1.3;
+}
+
+.collection-editions > h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-top: 0.75rem;
+  background: var(--accent);
+}
+
+.collection-editions__group + .collection-editions__group {
+  margin-top: 2.75rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(var(--hall-brand-rgb), 0.12);
+}
+
+.collection-editions__group-heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.collection-editions__item + .collection-editions__item {
+  border-top: 1px solid rgba(var(--hall-brand-rgb), 0.1);
+}
+
+.collection-editions__link {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 0.7rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.collection-editions__thumb-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--edition-thumb-size);
+  height: var(--edition-thumb-size);
+}
+
+.collection-editions__thumb-wrap--placeholder {
+  visibility: hidden;
+}
+
+.collection-editions__thumb {
+  display: block;
+  height: var(--edition-thumb-size);
+  width: auto;
+  max-width: var(--edition-thumb-size);
+  object-fit: contain;
+}
+
+.collection-editions__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.collection-editions__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.65rem;
+}
+
+.collection-editions__title {
+  min-width: 0;
+  font-weight: 700;
+}
+
+.collection-editions__code {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #8a7f76;
+}
+
+/* Quiet bibliographic block under the edition title */
+.edition-catalog-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 2.75rem;
+  width: 100%;
+  margin: 0.85rem 0 0;
+  padding: 0.15rem 0 1.15rem;
+  border-bottom: 1px solid rgba(104, 33, 34, 0.16);
+  line-height: 1.45;
+}
+
+.edition-catalog-meta__col {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 1.15rem;
+  row-gap: 0.4rem;
+  align-content: start;
+  min-width: 0;
+}
+
+/* Flatten pairs so labels share one column width within each col */
+.edition-catalog-meta__pair {
+  display: contents;
+}
+
+.edition-catalog-meta__label {
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #7a6e64;
+}
+
+.edition-catalog-meta__value {
+  min-width: 0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #2a221c;
+}
+
+/* Small: stack right column under left column as one list */
+@media (max-width: 900px) {
+  .edition-catalog-meta {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.4rem;
+  }
+}
+
+/* Narrow: keep label + value on one line; allow long labels to wrap */
+@media (max-width: 520px) {
+  .edition-catalog-meta__col {
+    grid-template-columns: minmax(6.5rem, max-content) minmax(0, 1fr);
+    column-gap: 0.85rem;
+    row-gap: 0.35rem;
+  }
+
+  .edition-catalog-meta__label {
+    white-space: normal;
+  }
+}
+
+.collection-editions__description {
+  margin-top: 0.35rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #555;
+}
+
+.collection-editions__description > :first-child {
+  margin-top: 0;
+}
+
+.collection-editions__description > :last-child {
+  margin-bottom: 0;
+}
+
+.collection-editions__link:hover {
+  color: var(--bs-link-hover-color);
+}
+
+/* Edition page — volumes grouped by piṭaka / nikāya */
+.edition-volumes > h2 {
+  margin: 0 0 1rem;
+  font-size: 1.625rem;
+  line-height: 1.3;
+}
+
+.edition-volumes > h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-top: 0.75rem;
+  background: var(--accent);
+}
+
+.edition-volumes__group + .edition-volumes__group {
+  margin-top: 1.5rem;
+}
+
+.edition-volumes__group-heading,
+.edition-volumes__subgroup-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.edition-volumes__group-heading {
+  font-size: 1.125rem;
+}
+
+.edition-volumes__subgroup-heading {
+  margin-top: 0.85rem;
+  margin-left: 1.25rem;
+  font-size: 1rem;
+}
+
+.edition-volumes__group-name {
+  flex-shrink: 0;
+}
+
+.edition-volumes__leader {
+  flex: 1 1 auto;
+  min-width: 1.5rem;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.35);
+  transform: translateY(-0.35em);
+}
+
+.edition-volumes__count {
+  flex-shrink: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #444;
+  white-space: nowrap;
+}
+
+.edition-volumes__subgroup .edition-volumes__list {
+  margin-left: 1.25rem;
+}
+
+.edition-volumes__list {
+  margin: 0;
+  padding: 0;
+}
+
+.edition-volumes__item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.2rem 0 0.2rem 1.25rem;
+  line-height: 1.45;
+}
+
+.edition-volumes__number {
+  flex-shrink: 0;
+  min-width: 1.75rem;
+  font-variant-numeric: tabular-nums;
+  color: #555;
+}
+
+.edition-volumes__item a {
+  color: var(--bs-link-color, #8b1e1e);
+  text-decoration: none;
+}
+
+.edition-volumes__item a:hover {
+  color: var(--bs-link-hover-color);
+  text-decoration: underline;
+}
+
+/* Catalog breadcrumb — light trail above page titles */
+.catalog-breadcrumbs {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #777;
+}
+
+.catalog-breadcrumbs__trail {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.catalog-breadcrumbs__item {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.catalog-breadcrumbs__item + .catalog-breadcrumbs__item::before {
+  content: "/";
+  margin: 0 0.45em;
+  color: #aaa;
+}
+
+.catalog-breadcrumbs__item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.catalog-breadcrumbs__item a:hover {
+  color: var(--hall-brand);
+  text-decoration: underline;
+}
+
+.catalog-breadcrumbs__back-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  max-width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.catalog-breadcrumbs__back-link:hover {
+  color: var(--hall-brand);
+  text-decoration: underline;
+}
+
+.catalog-breadcrumbs__back-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .crx-grid {
   padding-top: 40px;
   padding-bottom: 40px;

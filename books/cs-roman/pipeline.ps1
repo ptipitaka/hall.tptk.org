@@ -2,13 +2,19 @@
 .SYNOPSIS
   Extract + headings + prepare TeX for cs-roman volumes (Docker web service).
 
+  Prepares both sync and reading drivers/bodies by default. Build PDFs with
+  .\scripts\batch_build_volumes.ps1 (-Mode sync|reading|both).
+
 .EXAMPLE
   .\pipeline.ps1
   .\pipeline.ps1 -Volume 01Vin01
   .\pipeline.ps1 -SkipExtract
+  .\pipeline.ps1 -PrepareMode reading
 #>
 param(
   [string[]]$Volume,
+  [ValidateSet("sync", "reading", "both")]
+  [string]$PrepareMode = "both",
   [switch]$SkipExtract,
   [switch]$SkipHeadings,
   [switch]$SkipPrepare
@@ -49,7 +55,10 @@ if (-not $SkipHeadings) {
 }
 
 if (-not $SkipPrepare) {
-  $prep = @("books/cs-roman/scripts/batch_prepare_volumes.py")
+  $prep = @(
+    "books/cs-roman/scripts/batch_prepare_volumes.py",
+    "--mode", $PrepareMode
+  )
   if ($Volume) {
     foreach ($id in $Volume) {
       $prep += @("--volume", $id)
@@ -58,4 +67,8 @@ if (-not $SkipPrepare) {
   Invoke-WebPython $prep
 }
 
-Write-Host "Pipeline done. Build PDFs with: .\scripts\batch_build_volumes.ps1"
+Write-Host "Pipeline done. Build PDFs with:"
+Write-Host "  cd books/cs-roman"
+Write-Host "  .\scripts\batch_build_volumes.ps1              # sync"
+Write-Host "  .\scripts\batch_build_volumes.ps1 -Mode reading"
+Write-Host "  .\scripts\batch_build_volumes.ps1 -Mode both"

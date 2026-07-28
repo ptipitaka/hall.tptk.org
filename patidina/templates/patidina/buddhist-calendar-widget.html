@@ -1,0 +1,82 @@
+{% load i18n patidina_tags %}
+
+<div class="lead d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <a class="btn btn-sm btn-light" href="{{ prev_calendar_url }}">‹</a>
+    <span style="color:black;">{{ last_day_of_month|text_month }} {{ last_day_of_month|text_year|arabic_to_thai }}</span>
+    <a class="btn btn-sm btn-light" href="{{ next_calendar_url }}">›</a>
+</div>
+
+<div class="patidina-calendar-wrap">
+<table class="text-center patidina-calendar">
+    <colgroup>
+        <col class="patidina-cal-label-col">
+        {% for each_day in days %}
+            <col class="patidina-cal-day-col">
+        {% endfor %}
+    </colgroup>
+    <tr>
+        <td class="sarabun-thin patidina-cal-label">{% translate "Week" %}</td>
+        {% for each_day in days %}
+            {% if each_day.weekday == 6 %}
+                <td class="patidina-cal-day text-danger">{{ each_day|text_weekday }}</td>
+            {% else %}
+                <td class="patidina-cal-day">{{ each_day|text_weekday }}</td>
+            {% endif %}
+        {% endfor %}
+    </tr>
+    <tr>
+        <td class="sarabun-thin patidina-cal-label">{% translate "Date" %}</td>
+        {% for each_day in days_with_important_days %}
+            {% if each_day.solar_important_days %}
+                <td class="patidina-cal-day" style="border-bottom: 2px solid red;">
+                    {{ each_day.day.day }}
+                </td>
+            {% else %}
+                <td class="patidina-cal-day">{{ each_day.day.day }}</td>
+            {% endif %}
+        {% endfor %}
+    </tr>
+    <tr>
+        <td class="sarabun-thin patidina-cal-label">{% translate "Lunar" %}</td>
+        {% for each_day in days_with_moon_phase_changes %}
+            {% if each_day == "ขึ้น" %}
+                <td class="patidina-cal-day" style="border-bottom: 5px solid orange;" title="{% translate "Waxing" %}">🌙</td>
+            {% elif each_day == "แรม" %}
+                <td class="patidina-cal-day" style="border-bottom: 5px solid lightgrey;" title="{% translate "Waning" %}">🌒</td>
+            {% else %}
+                {% with each_day|slice:":1" as first_char %}
+                    {% if first_char == ">" %}
+                        <td class="patidina-cal-day" style="border-bottom: 5px solid orange;">
+                            {{ each_day|slice:"1:"|arabic_to_thai }}
+                        </td>
+                    {% elif first_char == "<" %}
+                        <td class="patidina-cal-day" style="border-bottom: 5px solid lightgrey;">
+                            {{ each_day|slice:"1:"|arabic_to_thai }}
+                        </td>
+                    {% else %}
+                        <td class="patidina-cal-day"></td>
+                    {% endif %}
+                {% endwith %}
+            {% endif %}
+        {% endfor %}
+    </tr>
+    <tr>
+        <td class="sarabun-thin patidina-cal-label">{% translate "Mahanikaya" %}</td>
+        {% for each_day in days %}
+            <td class="patidina-cal-day">
+                {{ each_day|mahanikaya_uposatha }}
+            </td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td class="sarabun-thin patidina-cal-label">{% translate "Dhammayut" %}</td>
+        {% for each_day in days %}
+            <td class="patidina-cal-day">
+                {{ each_day|dhammayut_uposatha }}
+            </td>
+        {% endfor %}
+    </tr>
+</table>
+</div>
+
+{% important_day_of_the_mth_tag first_day_of_month last_day_of_month %}

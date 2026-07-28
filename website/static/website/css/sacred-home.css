@@ -61,12 +61,12 @@
 }
 
 .home-section {
-  margin-bottom: 96px;
+  margin-bottom: var(--hall-section-gap);
   padding-top: 12px;
 }
 
 .home-section-title {
-  margin: 0 0 34px;
+  margin: 0 0 var(--hall-section-title-gap);
   font-size: 26px;
   line-height: 1.3;
   text-align: center;
@@ -157,5 +157,6 @@
 .home-section--goals {
   padding-left: 12px;
   padding-right: 12px;
-  margin-bottom: 34px;
+  /* Title → cards only; full section gap comes from cardgrid below. */
+  margin-bottom: var(--hall-section-title-gap);
 }

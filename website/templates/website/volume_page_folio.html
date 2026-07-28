@@ -1,0 +1,56 @@
+{% extends "coderedcms/pages/web_page_notitle.html" %}
+{% load i18n %}
+
+{% block content_pre_body %}
+<div class="container my-4">
+  <nav class="mb-3" aria-label="{% trans 'Folio navigation' %}">
+    <a href="{{ page.url }}">&larr; {{ page.title }}</a>
+    {% if folio_count %}
+      <span class="text-muted ms-2">{{ sequence }} / {{ folio_count }}</span>
+    {% endif %}
+  </nav>
+
+  <h1 class="h3 mb-3">{{ page.title }} — {% trans "folio" %} {{ sequence }}</h1>
+
+  <div class="d-flex gap-3 mb-3">
+    {% if prev_sequence %}
+      <a class="btn btn-outline-secondary btn-sm" href="{{ page.url }}f/{{ prev_sequence }}/">{% trans "Previous" %}</a>
+    {% else %}
+      <span class="btn btn-outline-secondary btn-sm disabled">{% trans "Previous" %}</span>
+    {% endif %}
+    {% if next_sequence %}
+      <a class="btn btn-outline-secondary btn-sm" href="{{ page.url }}f/{{ next_sequence }}/">{% trans "Next" %}</a>
+    {% else %}
+      <span class="btn btn-outline-secondary btn-sm disabled">{% trans "Next" %}</span>
+    {% endif %}
+  </div>
+
+  {% if folio and folio.status == "present" %}
+    <img
+      src="{{ folio.image_url }}"
+      alt="{% blocktrans with seq=sequence %}Scan folio {{ seq }}{% endblocktrans %}"
+      style="max-width:100%; height:auto;"
+      loading="eager"
+    />
+  {% elif folio %}
+    <p class="text-muted">{% blocktrans with status=folio.status %}Folio unavailable ({{ status }}).{% endblocktrans %}</p>
+  {% else %}
+    <p class="text-muted">{% trans "Folio not found." %}</p>
+  {% endif %}
+
+  <div class="d-flex gap-3 mt-3">
+    {% if prev_sequence %}
+      <a class="btn btn-outline-secondary btn-sm" href="{{ page.url }}f/{{ prev_sequence }}/">{% trans "Previous" %}</a>
+    {% endif %}
+    {% if next_sequence %}
+      <a class="btn btn-outline-secondary btn-sm" href="{{ page.url }}f/{{ next_sequence }}/">{% trans "Next" %}</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block content_post_body %}
+<div class="container">
+  <div id="edition-app" data-volume="{{ page.id }}" data-sequence="{{ sequence }}"></div>
+</div>
+{% endblock %}

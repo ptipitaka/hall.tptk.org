@@ -2,6 +2,8 @@
   "schema_version": 1,
   "source": "books/cs-roman/source/04Vin04.pdf",
   "content_start_pdf_page": 12,
+  "content_end_printed_page": 508,
+  "back_matter_start_printed_page": 509,
   "layout": {
     "word_space": 1.6,
     "line_space": 1.5,

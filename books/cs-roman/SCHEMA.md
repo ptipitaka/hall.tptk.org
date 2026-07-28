@@ -13,7 +13,7 @@ Three file roles:
 Consumers load segments + layout (via `load_document`) into one in-memory
 document. TeX generate also loads transform rules (shared then volume).
 Re-extract rewrites content (+ bounds in layout) but **preserves** existing
-`layout` / `page_layout` tuning. Transform rules are **not** baked into
+`layout` / `page_layout` / `page_layout_reading_mode` tuning. Transform rules are **not** baked into
 `segments.json`; edit rules and rebuild to see them in the PDF.
 
 Format prose that used to be duplicated in every volume file
@@ -44,7 +44,8 @@ applied at extract; conditional / per-volume string fixes live in
 | `content_end_printed_page` | no | Last printed body page kept |
 | `back_matter_start_printed_page` | no | First index / back-matter printed page |
 | `layout` | no* | Volume body-rhythm defaults (see below); normalize always fills all keys |
-| `page_layout` | no | Sparse per-page overrides; omit when empty |
+| `page_layout` | no | Sparse per-page overrides for sync mode (source printed page); omit when empty |
+| `page_layout_reading_mode` | no | Sparse per-page overrides for reading mode (physical PDF page / `\thepage`); empty `{}` kept when present; no `segments` |
 
 \*Absent `layout` is valid before normalize; consumers treat missing keys as
 `DEFAULT_LAYOUT` in `scripts/cs_roman_segments.py` (matches TeX preamble).
@@ -114,16 +115,59 @@ Format-contract rules that define markers / flags stay in Python
 | `page` | yes | Printed page number |
 | `order` | yes | Reading order in the volume |
 | `item` | no | Tipiṭaka item number; `null`/absent for headings & gāthā |
+| `section_no` | no | Outline number printed before a heading (e.g. `1` in `1. Pārājikakaṇḍa`); omit when unnumbered; **not** Tipiṭaka `item` |
 | `segment_type` | yes | Structural kind (see below) |
-| `text` | conditional | Multi-script body (absent on gāthā) |
+| `text` | conditional | Multi-script body (absent on gāthā); heading titles stay bare (no leading outline `N.` prefix) |
 | `notes` | no | Numbered footnote bodies (Roman); omit if empty |
+
+### Compound outline titles (Vinaya)
+
+Some CS Roman headings encode **two outline layers in one line**, e.g.
+printed `1. Cīvaravagga 2. Udositasikkhāpada`:
+
+| Stored field | Example | Role |
+|--------------|---------|------|
+| `section_no` | `1` | Parent outline number (vagga / major unit) |
+| `text` | `Cīvaravagga 2. Udositasikkhāpada` | Parent name + embedded child number + child title |
+
+TeX prefixes `section_no` via `with_section_no` → `1. จีวรวคฺค 2. อุโทสิตสิกฺขาปท`.
+Do **not** put the leading outline `1.` inside `text`. The embedded child
+number (`2.`) stays in `text`.
+
+Keep **one body segment** (combined titles are intentional for readability).
+The separate `*.matika.json` outline still lists parent and child as two rows;
+TeX emits two `\csromantocmark` lines at that segment’s anchor (not the
+compound string as a single TOC title). `heading_kind` on the segment is the
+deeper (child) level for body macros.
+
+### Mātikā outline file (`*.matika.json`)
+
+Written by `assign_cs_roman_heading_levels.py` from the printed Mātikā.
+Canonical: `output/<id>.matika.json`; sync copy: `volumes/<id>/data/matika.json`.
+
+| Field | Role |
+|-------|------|
+| `title` | Bare outline title (no leading `N.`; same convention as body `text`) |
+| `section_no` | Outline number when the Mātikā row is numbered; omit when unnumbered |
+| `page` | Printed page when the row has leaders; else `null` |
+| `kind` | `boo` \| `cha` \| `h1`…`h6` (TOC + heading skeleton) |
+| `matched_order` | Body segment `order` when matched; else `null` |
+
+TOC policy: prefer marks from this file (matched_order → segment anchor;
+unmatched rows with `page` → first segment on that page). Body headings that
+do not match the Mātikā keep optional `heading_kind` for typography but
+`in_toc: false` (except edition title stack `nik` / `boo`).
+
+When a short heading is glued to the pātimokkha uddesa sentence
+(`Ime kho… uddesaṃ āgacchanti.`), extract/fixup **peels** them into a
+heading segment + a following centered `prose` segment.
 | `symbol_notes` | no | `{"*":…}` / `{"+":…}`; omit if empty |
 | `flags` | no | e.g. `section_rule`; omit if empty |
 | `needs_review` | no | Present only when `true` |
 | `review_reasons` | no | Omit if empty |
-| `heading_kind` | no | `nik` \| `boo` \| `cha` \| `h1`…`h6` |
-| `in_toc` | no | Include in Mātikā / memoir TOC |
-| `source_layout` | no | `bat_line` \| `wak_line` \| `hanging` |
+| `heading_kind` | no | `nik` \| `boo` \| `cha` \| `h1`…`h6` — body typography level; assigned from the printed Mātikā skeleton when matched |
+| `in_toc` | no | Body heading matched the Mātikā outline (cache). Memoir TOC is driven by `*.matika.json` when present (body-anchored, structure-expanded); falls back to this flag otherwise |
+| `source_layout` | no | `bat_line` \| `wak_line` \| `hanging` \| `center` |
 | `bats` | gāthā | Nested stanza (see below) |
 | `hanging_lines` | hanging | Body lines under hanging head |
 
@@ -144,6 +188,9 @@ segment-level `word_space` (print overrides live in `layout.json`).
 - `runs` are present **only when at least one run is bold**.
   Otherwise consumers use `value` alone.
 - `join(runs[].value)` equals `value` when `runs` exist.
+- Bold comes from CS Roman PDF fake-bold at **extract** time. `enrich_cs_roman_thai.py`
+  (`--force` / spacing normalize) **preserves** remappable `runs`; it does not
+  re-detect bold from the PDF. If runs are lost, re-extract the volume.
 
 ### Inline markers (in `value` / run values)
 
@@ -151,7 +198,7 @@ segment-level `word_space` (print overrides live in `layout.json`).
 |--------|---------|
 | `{{nN}}` | Numbered footnote → `notes[N]` |
 | `{{*}}` / `{{+}}` | Apparatus → `symbol_notes` |
-| `{{sp1}}` | 1em gap after visible stop; pot-ma-gyi `. .` → `{{sp1}}{{sp1}}`; ordinary `. next` → `.{{sp1}} next` |
+| `{{sp1}}` | 0.5em gap after visible stop on **body** only (`prose` / `gatha` / …); pot-ma-gyi `. .` → `{{sp1}}{{sp1}}` (1.0em); ordinary `. next` → `.{{sp1}} next`. Not used on titles, chapters, closers, or footnote bodies (outline / catalog dots stay word-spaced). |
 | `{{sp3}}` | Legacy alias of `{{sp1}}` (migrated on enrich) |
 
 Notes stay Roman in JSON; TeX transliterates at emit time.
@@ -173,11 +220,26 @@ No top-level `text`. One segment = one บท:
 
 - `source_layout`: `bat_line` (2 printed lines/บท) or `wak_line` (4 lines/บท).
 - Wak order within each bat is fixed; roles (sadap/rap/rong/song) are implied by position.
+- **1 บทครึ่ง** (3 บาท / 6 วรรค): one segment with three `bats` (no inter-stanza
+  gap in TeX). Legacy extracts may still split as full บท + irregular half;
+  the generator joins that pair without `\\[\gathastanzaskip]`.
 
 ### Hanging prose
 
 `source_layout: "hanging"`: `text` is the head line; `hanging_lines` is a list of
 multi-script line entries (same shape as `text`).
+
+### Centered labels
+
+`source_layout: "center"`: first printed line is a short centered label (PDF
+geometry: midpoint ≈ page center, width ≲ 0.55×page), **or** a short segment
+(≲80 characters / ≲2 sentences) sandwiched between two already-centered
+neighbors (e.g. `Evaṃ ekekaṃ…kattabbaṃ.` between `Baddhacakkaṃ.` and
+`Idaṃ saṃkhittaṃ.`). Set at extract / geometry fixup; does not change
+`segment_type`. TeX emits `\csromancenter` (body size, prose leading — not the
+airy `\nitthitam` closer band) for centered prose and plain title labels; true
+section closers (`niṭṭhitaṃ`, samattaṃ formulas) still use `\nitthitam`. Bold
+titles, titles with `section_no`, and `heading_kind` keep their heading macros.
 
 ### `segment_type` vocabulary
 
@@ -190,12 +252,14 @@ multi-script line entries (same shape as `text`).
 | `note` | Orphan / unattached footnote |
 
 `heading_kind` (when set) overrides visual macros in TeX over `segment_type`.
+Under a vagga stack, Mātikā assignment typically uses `h1` = vagga, `h2` =
+sikkhāpada / rule, `h3` = vatthu / paññatti / vibhaṅga.
 
 | Kind | Role | TeX |
 |------|------|-----|
 | `nik` | piṭaka | `\pitaka` |
 | `boo` | book / gambhīra | `\gambhira` |
-| `cha` | major chapter (e.g. kaṇḍa) | `\chapterhead` |
+| `cha` | major chapter (e.g. kaṇḍa) | `\chapterhead` (same page) or `\chapterheadpage` (new sheet: odd/recto, plain, top pad) |
 | `h1`…`h6` | generic section headers under `cha` (large → small) | `\csromanheader{n}` |
 
 Former `tit` / `sub` map to `h1` / `h2`.
@@ -203,9 +267,12 @@ Former `tit` / `sub` map to `h1` / `h2`.
 ## Unit model
 
 - One segment is anchored to one printed page.
-- An unfinished unit on the next page becomes `{kind}_continuation`
-  (in practice almost always `prose_continuation`).
-- A new paragraph under the same `item` is `prose` (not continuation).
+- An itemless body block under the current `item` is stored as `prose`
+  (same or later page). Sentence punctuation (`…ti`, fullstop) does **not**
+  decide continuation — a new paragraph under the same item may start on
+  the next page.
+- Geometry upgrades a flush-left page-start to `{kind}_continuation`
+  (usually `prose_continuation`). An indented page-start stays `prose`.
 - Footnotes stay on the segment where the callout appears.
 - Mid-word page breaks finish the word on the earlier segment.
 
@@ -221,7 +288,7 @@ Former `tit` / `sub` map to `h1` / `h2`.
 
 TeX reads Thai `text` / `runs` (or re-derives Thai after publication
 transforms on Roman), markers, `heading_kind` / `in_toc`, `layout` /
-`page_layout` (including per-segment overrides), gāthā `bats`, hanging
+`page_layout` / `page_layout_reading_mode` (sync segments overrides; reading layout keys only), gāthā `bats`, hanging
 fields, and optional `transforms.json`. It ignores document stats and review
 flags.
 
@@ -230,12 +297,13 @@ flags.
 Print tuning lives in **`layout.json`**:
 
 1. **`layout`** — volume defaults (every supported key; normalize fills gaps)
-2. **`page_layout`** — overwrite any subset of those keys for specific printed pages
-3. **`page_layout[page].segments[n]`** — per-segment print overrides on that page
+2. **`page_layout`** — overwrite any subset of those keys for specific **source printed pages** (sync mode; same numbers as ฉ.N)
+3. **`page_layout[page].segments[n]`** — per-segment print overrides on that sync page
+4. **`page_layout_reading_mode`** — same layout keys for **physical reading-PDF pages** (`\thepage` / running head); not folio ฉ.N; **no `segments`**
 
 Edition defaults (from 01Vin01 tuning) live in `DEFAULT_LAYOUT` /
-`shared/style/preamble.tex`. Volumes inherit them; use `page_layout` only
-when a printed page must differ.
+`shared/style/preamble.tex`. Volumes inherit them; use `page_layout` /
+`page_layout_reading_mode` only when a page must differ.
 
 ```json
 {
@@ -251,6 +319,9 @@ when a printed page must differ.
   "page_layout": {
     "157": { "line_space": 1.15 },
     "174": { "line_space": 1.00 }
+  },
+  "page_layout_reading_mode": {
+    "100": { "line_space": 1.2 }
   }
 }
 ```
@@ -265,19 +336,27 @@ when a printed page must differ.
 | `gatha_indent` | dimension | `\gathaindent` |
 | `emergency_stretch` | dimension | `\emergencystretch` |
 
-**Precedence:** built-in defaults → `layout` → `page_layout[page]` (layout keys)
+**Precedence (sync):** built-in defaults → `layout` → `page_layout[page]` (layout keys)
 → `page_layout[page].segments[n]` (interword only).
+
+**Precedence (reading):** built-in defaults → `layout` → `page_layout_reading_mode[page]`
+(layout keys). Sync `page_layout` is ignored in reading mode.
 
 `n` is the **1-based index among segments on that printed page** (sorted by
 `order`), not the global `order` field. This stays stable when other pages
-gain/lose segments.
+gain/lose segments. Reading mode has no page-local segment index, so
+`page_layout_reading_mode` must not include `segments`.
 
-`page_layout` may override **every** `layout` key. The nested `segments` map is
-meta and is **not** passed to `\csromanlayoutapply`. Page format / geometry is
-not in this object (shared `pagegeometry.tex` only).
+`page_layout` / `page_layout_reading_mode` may override **every** `layout` key.
+The nested `segments` map (sync only) is meta and is **not** passed to
+`\csromanlayoutapply`. Page format / geometry is not in this object (shared
+`pagegeometry.tex` / `pagegeometry-reading.tex` only).
 
-Generator emits `\csromanlayoutapply` at body start and whenever the effective
-layout changes at a page boundary.
+Sync generator emits `\csromanlayoutapply` at body start and whenever the
+effective layout changes at a `\csromanpage` boundary. Reading generator emits
+volume `\csromanlayoutapply`, then `\csromanreadingpagelayoutvolume` /
+`\csromanreadingpagelayoutdef{N}` / `\csromanreadingpagelayoutenable`; TeX
+re-applies when `\value{page}` changes at paragraph begin.
 
 ### Per-segment word spacing
 

@@ -1,0 +1,39 @@
+{% load wagtailcore_tags wagtailimages_tags i18n %}
+<section class="collection-editions" id="editions" aria-labelledby="collection-editions-heading">
+  <h2 id="collection-editions-heading">{% trans "Editions" %}</h2>
+  {% for group in edition_groups %}
+  <section class="collection-editions__group" aria-labelledby="collection-editions-group-{{ forloop.counter }}">
+    <h3 class="collection-editions__group-heading" id="collection-editions-group-{{ forloop.counter }}">
+      {{ group.role.label }}
+    </h3>
+    <ul class="collection-editions__list list-unstyled">
+      {% for edition in group.editions %}
+      <li class="collection-editions__item">
+        <a href="{% pageurl edition %}" class="collection-editions__link">
+          {% if edition.cover_image %}
+            {% if edition.show_cover_thumb %}
+            <span class="collection-editions__thumb-wrap">
+              {% image edition.cover_image height-86 format-webp preserve-svg class="collection-editions__thumb" alt="" %}
+            </span>
+            {% else %}
+            <span class="collection-editions__thumb-wrap collection-editions__thumb-wrap--placeholder" aria-hidden="true"></span>
+            {% endif %}
+          {% endif %}
+          <span class="collection-editions__body">
+            <span class="collection-editions__header">
+              <span class="collection-editions__title">{{ edition.title }}</span>
+              <span class="collection-editions__code">{{ edition.code }}</span>
+            </span>
+            {% if edition.description %}
+            <div class="collection-editions__description">{{ edition.description|richtext }}</div>
+            {% endif %}
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% empty %}
+  <p class="text-muted">{% trans "No editions yet." %}</p>
+  {% endfor %}
+</section>

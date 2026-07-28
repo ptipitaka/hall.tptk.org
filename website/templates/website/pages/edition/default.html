@@ -1,0 +1,9 @@
+{% extends "website/layouts/shell_default.html" %}
+
+{% block page_type_pre %}
+{% include "website/includes/edition_catalog_meta.html" with edition=page %}
+{% endblock %}
+
+{% block page_type_footer %}
+{% include "website/includes/edition_volumes.html" %}
+{% endblock %}

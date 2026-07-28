@@ -1,9 +1,12 @@
 """
 Assign heading_kind / in_toc to cs-roman segment JSON from the volume Mātikā.
 
-Uses the printed Mātikā in the CS Roman PDF (same edition as segments) as the
-primary TOC source. Kinds: nik | boo | cha | h1 | h2 | h3 | h4 | h5 | h6.
-(nik/boo/cha = special stack; h1…h6 = generic section headers under cha.)
+Uses the printed Mātikā in the CS Roman PDF as the structural skeleton for
+heading_kind (and which body headings enter the TOC). Also writes
+``*.matika.json`` — a separate outline used when generating memoir TOC marks
+(body-anchored, structure-expanded; compound headings stay one segment).
+
+Kinds: nik | boo | cha | h1 | h2 | h3 | h4 | h5 | h6.
 
 Example:
   python books/cs-roman/scripts/assign_cs_roman_heading_levels.py \\
@@ -50,14 +53,23 @@ _SKIP_LINE_RE = re.compile(
     r"_{3,}|"
     r"[ivxlcdm]+\.?|"  # roman folio
     r"\.{2,}|"
-    r"\d+"
+    r"\d+(?:-\d+)?"  # page, or page range e.g. Kathāvatthu "1-4"
     r")$",
     re.IGNORECASE,
 )
+_PAGE_NUM_RE = re.compile(r"^(\d+)(?:-(\d+))?$")
 _BOOK_RUNNING_RE = re.compile(r"^.+pāḷi$", re.IGNORECASE)
 _MATIKA_END_RE = re.compile(r"mātikā\s+niṭṭhit", re.IGNORECASE)
 _NUMBERED_RE = re.compile(r"^(\d+)\.\s*(.+)$")
 _KANDA_RE = re.compile(r"kaṇḍa\b", re.IGNORECASE)
+# Numbered peers of kaṇḍa in Vinaya Mātikā (same TOC depth as *kaṇḍa).
+_KANDA_PEER_RE = re.compile(r"adhikaraṇasamatha\b", re.IGNORECASE)
+# Whole vibhaṅga books/parts (not rule-internal “…vibhaṅga” analysis).
+_MAJOR_VIBHANGA_RE = re.compile(
+    r"^(?:bhikkhu|bhikkhunī)vibhaṅga$",
+    re.IGNORECASE,
+)
+_VAGGA_RE = re.compile(r"vagga\b", re.IGNORECASE)
 _RULE_RE = re.compile(
     r"(?:pārājika|sikkhāpada|saṃghādisesa|aniyata|nissaggiya)\b",
     re.IGNORECASE,
@@ -71,6 +83,22 @@ _CLOSER_RE = re.compile(
     r"(?:niṭṭhit|samattaṃ|samatta\b|tassuddāna)",
     re.IGNORECASE,
 )
+# Body compound: "Kosiyavagga 5. Nisīdanasanthatasikkhāpada"
+_COMPOUND_CHILD_RE = re.compile(
+    r"^(.+?)\s+(\d+)\.\s+(.+)$",
+)
+
+_KIND_DEPTH = {
+    "nik": 0,
+    "boo": 1,
+    "cha": 2,
+    "h1": 3,
+    "h2": 4,
+    "h3": 5,
+    "h4": 6,
+    "h5": 7,
+    "h6": 8,
+}
 
 
 @dataclass
@@ -79,6 +107,33 @@ class MatikaEntry:
     page: int | None
     kind: str
     source_page: int  # 1-based PDF page in the Mātikā block
+    section_no: int | None = None
+
+
+def split_outline_title(title: str) -> tuple[int | None, str]:
+    """Split ``N. Title`` into ``(N, Title)``; unnumbered → ``(None, title)``."""
+    text = re.sub(r"\s+", " ", (title or "").strip())
+    m = _NUMBERED_RE.match(text)
+    if not m:
+        return None, text
+    return int(m.group(1)), m.group(2).strip()
+
+
+def _matika_entry(
+    title: str,
+    *,
+    page: int | None,
+    kind: str,
+    source_page: int,
+) -> MatikaEntry:
+    section_no, bare = split_outline_title(title)
+    return MatikaEntry(
+        title=bare,
+        page=page,
+        kind=kind,
+        source_page=source_page,
+        section_no=section_no,
+    )
 
 
 def _roman_text(seg: dict) -> str:
@@ -117,21 +172,46 @@ def _title_tokens(norm: str) -> set[str]:
     return {t for t in re.split(r"\s+", norm) if len(t) >= 3}
 
 
-def classify_matika_title(title: str, *, has_page: bool) -> str:
-    """Infer heading_kind from a Mātikā line (cha / h1 / h2)."""
+def compound_parts(seg: dict) -> tuple[str | None, int | None, str | None]:
+    """
+    Split a compound body heading into (parent_name, child_no, child_name).
+
+    Example: section_no=2, text ``Kosiyavagga 5. Nisīdanasanthatasikkhāpada``
+    → (``Kosiyavagga``, 5, ``Nisīdanasanthatasikkhāpada``).
+    """
+    text = _roman_text(seg).strip()
+    m = _COMPOUND_CHILD_RE.match(text)
+    if not m:
+        return None, None, None
+    return m.group(1).strip(), int(m.group(2)), m.group(3).strip()
+
+
+def classify_matika_title(
+    title: str,
+    *,
+    has_page: bool,
+    under_vagga: bool = False,
+) -> str:
+    """Infer heading_kind from a Mātikā line (boo / cha / h1 / h2 / h3)."""
     bare = _NUMBERED_RE.sub(r"\2", title.strip())
     numbered = bool(_NUMBERED_RE.match(title.strip()))
-    if _KANDA_RE.search(bare):
+    if _MAJOR_VIBHANGA_RE.match(bare):
+        # Bhikkhuvibhaṅga / Bhikkhunīvibhaṅga — major part, not h3 analysis.
+        return "boo"
+    if _KANDA_RE.search(bare) or _KANDA_PEER_RE.search(bare):
+        # e.g. Sekhiyakaṇḍa and peer 8. Adhikaraṇasamatha
         return "cha"
-    if numbered and _RULE_RE.search(bare):
+    if _VAGGA_RE.search(bare) and not _RULE_RE.search(bare):
         return "h1"
+    if numbered and _RULE_RE.search(bare):
+        return "h2" if under_vagga else "h1"
     if numbered and not _SUB_HINT_RE.search(bare) and len(bare) <= 60:
         # e.g. "1. Paṭhamapārājika"
         return "h1"
     if has_page or _SUB_HINT_RE.search(bare):
-        return "h2"
+        return "h3" if under_vagga else "h2"
     if _RULE_RE.search(bare):
-        return "h1"
+        return "h2" if under_vagga else "h1"
     return "h2"
 
 
@@ -169,11 +249,33 @@ def parse_matika(pages: list[tuple[int, str]]) -> list[MatikaEntry]:
     pending_title: str | None = None
     pending_source = 0
     dot_run = 0
+    under_vagga = False
+
+    def _kind_for(title: str, *, has_page: bool) -> str:
+        nonlocal under_vagga
+        kind = classify_matika_title(
+            title, has_page=has_page, under_vagga=under_vagga
+        )
+        bare = _NUMBERED_RE.sub(r"\2", title.strip())
+        if (
+            kind in {"boo", "cha", "nik"}
+            or _KANDA_RE.search(bare)
+            or _KANDA_PEER_RE.search(bare)
+            or _MAJOR_VIBHANGA_RE.match(bare)
+        ):
+            under_vagga = False
+        elif _VAGGA_RE.search(bare) and not _RULE_RE.search(bare):
+            under_vagga = True
+        return kind
 
     def flush_structural(title: str, source_page: int) -> None:
-        kind = classify_matika_title(title, has_page=False)
         entries.append(
-            MatikaEntry(title=title, page=None, kind=kind, source_page=source_page)
+            _matika_entry(
+                title,
+                page=None,
+                kind=_kind_for(title, has_page=False),
+                source_page=source_page,
+            )
         )
 
     for pdf_page, text in pages:
@@ -189,14 +291,13 @@ def parse_matika(pages: list[tuple[int, str]]) -> list[MatikaEntry]:
                 if line.startswith("..."):
                     if pending_title:
                         dot_run += 1
-                elif re.fullmatch(r"\d+", line) and pending_title and dot_run:
+                elif (m := _PAGE_NUM_RE.match(line)) and pending_title and dot_run:
+                    # A range ("1-4") anchors on its start page.
                     entries.append(
-                        MatikaEntry(
-                            title=pending_title,
-                            page=int(line),
-                            kind=classify_matika_title(
-                                pending_title, has_page=True
-                            ),
+                        _matika_entry(
+                            pending_title,
+                            page=int(m.group(1)),
+                            kind=_kind_for(pending_title, has_page=True),
                             source_page=pending_source,
                         )
                     )
@@ -208,8 +309,8 @@ def parse_matika(pages: list[tuple[int, str]]) -> list[MatikaEntry]:
                 if book_title is None:
                     book_title = line
                     entries.append(
-                        MatikaEntry(
-                            title=line,
+                        _matika_entry(
+                            line,
                             page=None,
                             kind="boo",
                             source_page=pdf_page,
@@ -236,6 +337,9 @@ def parse_matika(pages: list[tuple[int, str]]) -> list[MatikaEntry]:
 def fallback_kind(seg: dict, text: str) -> tuple[str | None, bool]:
     """
     Return (heading_kind, in_toc) when no Mātikā match applies.
+
+    ``in_toc`` is True only for edition title stack (nik/boo) so front-matter
+    titles still enter the memoir TOC when absent from the Mātikā block.
     """
     st = seg.get("segment_type") or ""
     if st in {"namakkāraṃ", "niṭṭhitaṃ"} or _CLOSER_RE.search(text):
@@ -245,27 +349,32 @@ def fallback_kind(seg: dict, text: str) -> tuple[str | None, bool]:
     if st == "gambhīra":
         return "boo", True
     if st == "chapter":
-        if _KANDA_RE.search(text) and not re.search(
-            r"sikkhāpada\b", text, re.I
-        ):
-            return "cha", True
+        if _MAJOR_VIBHANGA_RE.match(text.strip()):
+            return "boo", False
+        if (
+            _KANDA_RE.search(text) or _KANDA_PEER_RE.search(text)
+        ) and not re.search(r"sikkhāpada\b", text, re.I):
+            return "cha", False
         if _RULE_RE.search(text) or re.search(r"sikkhāpada\b", text, re.I):
-            return "h1", True
-        return "cha", True
+            return "h1", False
+        return "cha", False
     if st == "title":
         if _CLOSER_RE.search(text):
             return None, False
+        if _MAJOR_VIBHANGA_RE.match(text.strip()):
+            return "boo", False
+        if _KANDA_PEER_RE.search(text):
+            return "cha", False
         if _RULE_RE.search(text) and not _SUB_HINT_RE.search(text):
-            return "h1", True
-        # Numbered rule-like short titles: Dutiyapārājika
+            return "h1", False
         if re.search(
             r"(?:paṭhama|dutiya|tatiya|catuttha).+pārājika\b", text, re.I
         ):
             if "samatta" not in text.lower():
-                return "h1", True
+                return "h1", False
         if re.search(r"sikkhāpada\b", text, re.I):
-            return "h1", True
-        return "h2", True
+            return "h1", False
+        return "h2", False
     return None, False
 
 
@@ -301,13 +410,63 @@ def _score_match(entry_norm: str, seg_norm: str) -> float:
     )
 
 
+def _score_entry_against_segment(entry: MatikaEntry, seg: dict, seg_norm: str) -> float:
+    """Score including compound parent/child parts (one body segment, two outline rows)."""
+    en = normalize_title(entry.title)
+    score = _score_match(en, seg_norm)
+    parent, child_no, child_name = compound_parts(seg)
+    if parent:
+        parent_norm = normalize_title(parent)
+        parent_score = _score_match(en, parent_norm)
+        if parent_score:
+            # Prefer vagga-like entries for the parent half.
+            if _VAGGA_RE.search(parent) and (
+                _VAGGA_RE.search(entry.title) or entry.kind == "h1"
+            ):
+                parent_score += 8
+            score = max(score, parent_score)
+    if child_name:
+        child_norm = normalize_title(child_name)
+        child_score = _score_match(en, child_norm)
+        if (
+            entry.section_no is not None
+            and child_no is not None
+            and entry.section_no == child_no
+        ):
+            child_score += 12
+        if child_score:
+            score = max(score, child_score + 5)
+    if entry.page is not None:
+        page = seg.get("page")
+        if page == entry.page:
+            score += 25
+        elif isinstance(page, int) and abs(page - entry.page) <= 1:
+            score += 10
+    return score
+
+
+def _page_matches(entry: MatikaEntry, seg_page: object) -> bool:
+    """
+    Page-first anchor gate: a printed Mātikā page (e.g. ``... 10``) refers to
+    the body page bearing that same folio/printed number (ฉ.10). When an
+    entry carries a page, only segments on that exact page (or, failing
+    that, the immediately adjacent page — a heading can start right at a
+    page turn) are eligible; this keeps text-fuzzy scoring from pairing an
+    entry with a same-vocabulary segment on a distant, unrelated page (the
+    failure mode seen on non-Vinaya Mātikā, e.g. Kathāvatthu / Paṭṭhāna).
+    """
+    if entry.page is None:
+        return True
+    return isinstance(seg_page, int) and abs(seg_page - entry.page) <= 1
+
+
 def match_entries_to_segments(
     entries: list[MatikaEntry], segments: list[dict]
-) -> tuple[dict[int, MatikaEntry], list[MatikaEntry], list[int]]:
+) -> tuple[dict[int, int], list[int], list[int]]:
     """
-    Map segment index → best Mātikā entry.
+    Map each Mātikā entry index → best segment index (entries may share a segment).
 
-    Returns (matched, unmatched_entries, unmatched_heading_indices).
+    Returns (entry_to_seg, unmatched_entry_idxs, unmatched_heading_idxs).
     """
     heading_idxs = [
         i
@@ -319,12 +478,7 @@ def match_entries_to_segments(
     seg_norms = {
         i: normalize_title(_roman_text(segments[i])) for i in heading_idxs
     }
-    used_segs: set[int] = set()
-    matched: dict[int, MatikaEntry] = {}
-    unmatched_entries: list[MatikaEntry] = []
 
-    # Prefer coarser kinds first so a combined heading like
-    # "Paṭhamapārājika Sudinnabhāṇavāra" keeps h1, not h2.
     kind_rank = {
         "boo": 0,
         "cha": 1,
@@ -336,74 +490,122 @@ def match_entries_to_segments(
         "h6": 7,
         "nik": 8,
     }
-    ordered = sorted(
-        entries,
-        key=lambda e: (
-            kind_rank.get(e.kind, 9),
-            0 if e.page is not None else 1,
-            e.source_page,
-            e.title,
+    ordered_idxs = sorted(
+        range(len(entries)),
+        key=lambda i: (
+            kind_rank.get(entries[i].kind, 9),
+            0 if entries[i].page is not None else 1,
+            entries[i].source_page,
+            entries[i].title,
         ),
     )
 
-    for entry in ordered:
-        if entry.kind == "boo":
-            # Match gambhīra / book title segment once.
-            best_i, best_score = None, 0.0
-            for i in heading_idxs:
-                if i in used_segs:
-                    continue
-                st = segments[i].get("segment_type")
+    entry_to_seg: dict[int, int] = {}
+    # Track which (segment, kind-band) already took a exclusive coarse match.
+    # Multiple entries may share one compound segment.
+    used_exclusive: set[int] = set()
+
+    # Page-first anchoring: entries with a printed page number should only
+    # ever anchor within that folio (± the adjacent page for a heading
+    # sitting right at a page turn). This makes the Mātikā page number the
+    # primary reference (as printed, ``...  10`` -> ฉ.10), and text scoring a
+    # tie-breaker among same-page candidates rather than a document-wide
+    # search — the latter is what let short/generic Abhidhamma titles
+    # (Kathāvatthu, Paṭṭhāna, ...) latch onto unrelated segments elsewhere.
+    on_page: dict[int, list[int]] = {}
+    for i in heading_idxs:
+        p = segments[i].get("page")
+        if isinstance(p, int):
+            on_page.setdefault(p, []).append(i)
+
+    def _candidates_for(entry: MatikaEntry) -> list[int]:
+        if entry.page is None:
+            return heading_idxs
+        exact = on_page.get(entry.page, [])
+        if exact:
+            return exact
+        # No heading segment lands exactly on that folio: allow the
+        # adjacent page only (still page-anchored, never document-wide).
+        return on_page.get(entry.page - 1, []) + on_page.get(entry.page + 1, [])
+
+    for ei in ordered_idxs:
+        entry = entries[ei]
+        best_i, best_score = None, 0.0
+        for i in heading_idxs if entry.kind == "boo" else _candidates_for(entry):
+            st = segments[i].get("segment_type")
+            if entry.kind == "boo":
                 if st not in {"gambhīra", "title", "chapter"}:
                     continue
-                score = _score_match(normalize_title(entry.title), seg_norms[i])
+                if i in used_exclusive:
+                    continue
+                score = _score_match(
+                    normalize_title(entry.title), seg_norms[i]
+                )
                 if st == "gambhīra":
                     score += 15
-                if score > best_score:
-                    best_i, best_score = i, score
-            if best_i is not None and best_score >= 50:
-                matched[best_i] = entry
-                used_segs.add(best_i)
             else:
-                unmatched_entries.append(entry)
-            continue
-
-        en = normalize_title(entry.title)
-        best_i, best_score = None, 0.0
-        for i in heading_idxs:
-            if i in used_segs:
-                continue
-            score = _score_match(en, seg_norms[i])
-            if entry.page is not None:
-                page = segments[i].get("page")
-                if page == entry.page:
-                    score += 25
-                elif isinstance(page, int) and abs(page - entry.page) <= 1:
-                    score += 10
-                elif isinstance(page, int) and abs(page - entry.page) > 5:
-                    score -= 20
+                score = _score_entry_against_segment(
+                    entry, segments[i], seg_norms[i]
+                )
+                parent, _, child_name = compound_parts(segments[i])
+                # Non-compound exclusive: one entry per segment unless compound.
+                if not parent and i in used_exclusive:
+                    score -= 40
             if score > best_score:
                 best_i, best_score = i, score
-        if best_i is not None and best_score >= 55:
-            matched[best_i] = entry
-            used_segs.add(best_i)
-        else:
-            unmatched_entries.append(entry)
+        threshold = 50.0 if entry.kind == "boo" else 40.0
+        if best_i is not None and best_score >= threshold:
+            entry_to_seg[ei] = best_i
+            parent, _, _ = compound_parts(segments[best_i])
+            if not parent or entry.kind in {"boo", "nik", "cha"}:
+                used_exclusive.add(best_i)
 
-    unmatched_heads = [i for i in heading_idxs if i not in used_segs]
-    return matched, unmatched_entries, unmatched_heads
+    unmatched_entries = [i for i in range(len(entries)) if i not in entry_to_seg]
+    matched_segs = set(entry_to_seg.values())
+    unmatched_heads = [i for i in heading_idxs if i not in matched_segs]
+    return entry_to_seg, unmatched_entries, unmatched_heads
+
+
+def build_matika_document(
+    entries: list[MatikaEntry],
+    entry_to_seg: dict[int, int],
+    segments: list[dict],
+) -> dict:
+    """Serialize Mātikā outline with optional body ``matched_order`` anchors."""
+    out: list[dict] = []
+    for i, entry in enumerate(entries):
+        seg_i = entry_to_seg.get(i)
+        order = None
+        if seg_i is not None:
+            order = segments[seg_i].get("order")
+            if order is not None:
+                order = int(order)
+        row: dict = {
+            "title": entry.title,
+            "page": entry.page,
+            "kind": entry.kind,
+            "matched_order": order,
+        }
+        if entry.section_no is not None:
+            row["section_no"] = entry.section_no
+        out.append(row)
+    return {"schema_version": 1, "entries": out}
 
 
 def assign_levels(
     data: dict,
     entries: list[MatikaEntry],
-) -> tuple[dict, dict]:
-    """Return (updated document, report stats)."""
+) -> tuple[dict, dict, dict]:
+    """Return (updated document, report stats, matika document)."""
     data = dict(data)
     segments = [dict(s) for s in (data.get("segments") or [])]
-    matched, unmatched_entries, unmatched_heads = match_entries_to_segments(
+    entry_to_seg, unmatched_entry_idxs, unmatched_heads = match_entries_to_segments(
         entries, segments
     )
+
+    seg_to_entries: dict[int, list[MatikaEntry]] = {}
+    for ei, si in entry_to_seg.items():
+        seg_to_entries.setdefault(si, []).append(entries[ei])
 
     kind_counts: dict[str, int] = {}
     toc_count = 0
@@ -417,11 +619,15 @@ def assign_levels(
             continue
 
         text = _roman_text(seg)
-        if i in matched:
-            entry = matched[i]
-            seg["heading_kind"] = entry.kind
+        if i in seg_to_entries:
+            matched_entries = seg_to_entries[i]
+            # Deepest outline level wins for body typography (child of compound).
+            best = max(
+                matched_entries,
+                key=lambda e: _KIND_DEPTH.get(e.kind, 0),
+            )
+            seg["heading_kind"] = best.kind
             seg["in_toc"] = True
-            # Drop prior weak-heading review when Mātikā confirms.
             reasons = [
                 r
                 for r in (seg.get("review_reasons") or [])
@@ -436,15 +642,13 @@ def assign_levels(
                 seg["heading_kind"] = kind
             else:
                 seg.pop("heading_kind", None)
-            seg["in_toc"] = in_toc
+            seg["in_toc"] = bool(in_toc)
             if (
                 st in {"chapter", "title"}
-                and in_toc
                 and i in unmatched_heads
                 and "heading_level_unmatched_matika"
                 not in (seg.get("review_reasons") or [])
             ):
-                # Only flag when fallback had to guess and title looks soft.
                 if "weak_heading_heuristic" in (seg.get("review_reasons") or []):
                     reasons = list(seg.get("review_reasons") or [])
                     reasons.append("heading_level_unmatched_matika")
@@ -458,15 +662,18 @@ def assign_levels(
         if seg.get("in_toc"):
             toc_count += 1
 
+    matika_doc = build_matika_document(entries, entry_to_seg, segments)
     report = {
         "matika_entries": len(entries),
-        "matika_matched_to_segments": len(matched),
-        "matika_unmatched": len(unmatched_entries),
+        "matika_matched_to_segments": len(entry_to_seg),
+        "matika_unmatched": len(unmatched_entry_idxs),
         "heading_segments_without_matika": len(unmatched_heads),
         "heading_kind_counts": dict(sorted(kind_counts.items())),
         "in_toc_count": toc_count,
         "review_flags_added": review_added,
-        "unmatched_matika_sample": [asdict(e) for e in unmatched_entries[:40]],
+        "unmatched_matika_sample": [
+            asdict(entries[i]) for i in unmatched_entry_idxs[:40]
+        ],
         "unmatched_heading_sample": [
             {
                 "page": segments[i].get("page"),
@@ -485,7 +692,22 @@ def assign_levels(
             continue
         ordered[key] = value
     ordered["segments"] = segments
-    return ordered, report
+    return ordered, report, matika_doc
+
+
+def matika_path_for_segments(json_path: Path) -> Path:
+    """``foo.segments.json`` → ``foo.matika.json``; else ``<stem>.matika.json``."""
+    name = json_path.name
+    if name.endswith(".segments.json"):
+        return json_path.with_name(name.replace(".segments.json", ".matika.json"))
+    return json_path.with_suffix(".matika.json")
+
+
+def save_matika(path: Path, matika_doc: dict) -> None:
+    path.write_text(
+        json.dumps(matika_doc, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 
 def process_file(
@@ -493,6 +715,7 @@ def process_file(
     pdf_path: Path,
     *,
     report_path: Path | None = None,
+    matika_out: Path | None = None,
 ) -> dict:
     doc = fitz.open(pdf_path)
     try:
@@ -507,14 +730,19 @@ def process_file(
         doc.close()
 
     data = json.loads(json_path.read_text(encoding="utf-8"))
-    data, report = assign_levels(data, entries)
+    data, report, matika_doc = assign_levels(data, entries)
     report["pdf"] = str(pdf_path).replace("\\", "/")
     report["json"] = str(json_path).replace("\\", "/")
     report["content_start_pdf_page"] = content_start
     report["matika_pdf_pages"] = [p for p, _ in pages]
 
     save_segments(json_path, data, normalize=True)
+    out_matika = matika_out or matika_path_for_segments(json_path)
+    save_matika(out_matika, matika_doc)
+    report["matika_json"] = str(out_matika).replace("\\", "/")
+
     if report_path is None:
+        # foo.segments.json → foo.segments.heading-report.json
         report_path = json_path.with_suffix(".heading-report.json")
     report_path.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
@@ -544,6 +772,12 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="Write match report JSON (default: <json>.heading-report.json)",
     )
+    parser.add_argument(
+        "--matika-out",
+        type=Path,
+        default=None,
+        help="Write matika outline JSON (default: <stem>.matika.json)",
+    )
     args = parser.parse_args(argv)
 
     json_path = args.json
@@ -557,8 +791,14 @@ def main(argv: list[str] | None = None) -> int:
     if not pdf_path.is_file():
         raise SystemExit(f"Missing PDF: {pdf_path}")
 
-    report = process_file(json_path, pdf_path, report_path=args.report)
+    report = process_file(
+        json_path,
+        pdf_path,
+        report_path=args.report,
+        matika_out=args.matika_out,
+    )
     out_report = args.report or json_path.with_suffix(".heading-report.json")
+    out_matika = report.get("matika_json", "")
     print(
         f"Mātikā {report['matika_entries']} entries "
         f"(PDF pages {report['matika_pdf_pages']}) -> "
@@ -567,6 +807,7 @@ def main(argv: list[str] | None = None) -> int:
         f"in_toc={report['in_toc_count']}"
     )
     print(f"Updated {json_path}")
+    print(f"Matika  {out_matika}")
     print(f"Report  {out_report}")
     return 0
 

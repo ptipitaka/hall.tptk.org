@@ -1,0 +1,77 @@
+{% load i18n static patidina_tags %}
+
+<style>
+    .upcoming-uposadha {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .patidina-meditating-buddha {
+        display: inline-block;
+        width: 1.15em;
+        height: 1.15em;
+        margin: 0 0.1em 0 0;
+        padding: 0;
+        vertical-align: -0.2em;
+        object-fit: contain;
+        object-position: center bottom;
+        overflow: visible;
+    }
+    .upcoming-uposadha__legend {
+        font-size: small;
+        font-weight: lighter;
+        text-align: right;
+    }
+</style>
+
+<table class="upcoming-uposadha table">
+    <thead>
+        <tr>
+            <th>{% translate "Month Year" as month_year %}{{ month_year|fraction_format }}</th>
+            <th colspan="5" class="upcoming-uposadha__legend">
+                <span class="d-block">
+                    🌕 · {% translate "Mahānikāya" %}
+                </span>
+                <span class="d-block text-primary">
+                    <img
+                        class="patidina-meditating-buddha"
+                        src="{% static 'patidina/img/meditating-buddha.png' %}"
+                        alt=""
+                        aria-hidden="true"
+                    >
+                    {% dhammayut_legend_markers %} · {% translate "Dhammayuttika" %}
+                </span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for month, dates in monthly_uposatha.items %}
+            <tr>
+                <td>{{ month|fraction_format }}</td>
+                {% for date in dates %}
+                    {% if date %}
+                        <td
+                            class="text-center small"
+                            style="width:300px !important; {% if date.ld == next_uposatha_day.ld and not show_all_in_year %}border-color:#f0ad4e; border-width:2px; border-style:solid;{% endif %}"
+                        >
+                            {% if date.mahanikaya %}
+                                {{ date.mahanikaya }}
+                            {% elif date.dhammayut %}
+                                <img
+                                    class="patidina-meditating-buddha"
+                                    src="{% static 'patidina/img/meditating-buddha.png' %}"
+                                    alt="{% translate 'Meditating Buddha (Dhammayut)' %}"
+                                    title="{% translate 'Meditating Buddha (Dhammayut)' %}"
+                                >
+                            {% endif %}
+                            {% if date.dhammayut %}<span class="text-primary small">{{ date.dhammayut|dhammayut_marker }}</span>{% endif %}
+                            <br>
+                            {{ date.date|text_weekday }}{{ date.day|arabic_to_thai }}
+                        </td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

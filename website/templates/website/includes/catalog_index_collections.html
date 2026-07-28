@@ -1,0 +1,69 @@
+{% load static wagtailcore_tags wagtailimages_tags i18n %}
+<div class="catalog-index" id="catalog-index">
+  {% for group in catalog_groups %}
+  <section class="catalog-group" aria-labelledby="catalog-group-{{ forloop.counter }}">
+    <h2 class="catalog-group__heading" id="catalog-group-{{ forloop.counter }}">
+      {% if group.classification %}
+        {{ group.classification.title }}
+      {% else %}
+        {% trans "Other collections" %}
+      {% endif %}
+    </h2>
+    {% if group.classification.description %}
+    <p class="catalog-group__description">{{ group.classification.description }}</p>
+    {% endif %}
+    {% for tradition_group in group.tradition_groups %}
+    <section
+      class="catalog-group__tradition-group"
+      aria-labelledby="catalog-group-{{ forloop.parentloop.counter }}-tradition-{{ forloop.counter }}"
+    >
+      <h3
+        class="catalog-group__tradition-heading"
+        id="catalog-group-{{ forloop.parentloop.counter }}-tradition-{{ forloop.counter }}"
+      >
+        {% if tradition_group.tradition %}
+          {{ tradition_group.tradition.name }}
+        {% else %}
+          {% trans "Other traditions" %}
+        {% endif %}
+      </h3>
+      <ul class="catalog-group__list list-unstyled">
+        {% for collection in tradition_group.collections %}
+        <li class="catalog-group__item">
+          <a href="{% pageurl collection %}" class="catalog-group__link">
+            {% if collection.cover_image %}
+            <span class="catalog-group__thumb-wrap">
+              {% image collection.cover_image height-86 format-webp preserve-svg class="catalog-group__thumb" alt="" %}
+            </span>
+            {% endif %}
+            <span class="catalog-group__body">
+              <span class="catalog-group__header">
+                <span class="catalog-group__title">{{ collection.title }}</span>
+                {% if collection.country and collection.country.flag_static_path %}
+                <img
+                  class="catalog-group__flag"
+                  src="{% static collection.country.flag_static_path %}"
+                  alt="{{ collection.country.name }}"
+                  title="{{ collection.country.name }}"
+                  width="28"
+                  height="19"
+                  loading="lazy"
+                  decoding="async"
+                >
+                {% endif %}
+              </span>
+              {% if collection.search_description %}
+              <span class="catalog-group__item-description">{{ collection.search_description }}</span>
+              {% endif %}
+            </span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endfor %}
+  </section>
+  {% empty %}
+  <p class="catalog-index__empty text-muted">{% trans "No collections yet." %}</p>
+  {% endfor %}
+</div>

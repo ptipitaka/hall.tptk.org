@@ -5,10 +5,11 @@ Pipeline:
   1. Read PDF text with PyMuPDF (fitz)
   2. Convert VZTime font encoding → Unicode (cs_roman_vztime)
   3. Split into paragraphs, detect item numbers / headings / notes
-  4. Page-anchor segments; unfinished units → {kind}_continuation
+  4. Page-anchor segments; geometry upgrades flush page-starts → {kind}_continuation
   5. Attach footnotes to the segment where the callout appears ({{n0}})
-  6. Tag uddāna/gāthā runs; group printed lines into บท→บาท→วรรค
-  7. Write JSON for study / later import
+  6. Tag uddāna/gāthā runs (title + gāthā-indent geometry); group into บท→บาท→วรรค
+  7. Geometry: short centered labels → source_layout='center'
+  8. Write JSON for study / later import
 
 Encoding note: anusvara uses ṃ (e.g. saṃghena), not ṅ before g.
 
@@ -40,10 +41,22 @@ except ImportError:  # pragma: no cover
 from paths import OUTPUT_DIR, ensure_import_paths, repo_relative
 
 ensure_import_paths()
-from cs_roman_bold import bold_ranges_in_text, bold_span_texts  # noqa: E402
+from cs_roman_bold import (  # noqa: E402
+    bold_ranges_in_text,
+    bold_span_texts,
+    substantial_bold_ranges,
+)
 from cs_roman_hanging import (  # noqa: E402
+    _is_gatha_geometry_indent,
+    _is_gatha_indent,
+    _match_cached_line,
+    _seg_pdf_page,
     collect_hanging_groups,
     merge_hanging_into_segments,
+    page_body_lines,
+    reclassify_page_start_by_indent,
+    segment_roman_text,
+    tag_center_layout_by_geometry,
 )
 from cs_roman_segments import (  # noqa: E402
     SCHEMA_VERSION,
@@ -55,11 +68,20 @@ from cs_roman_text import (  # noqa: E402
     SECTION_RULE_FLAG,
     prepare_roman_body,
     script_text_entries,
+    strip_sentence_spacers,
+    uses_sentence_spacer,
 )
 from cs_roman_vztime import unmapped_chars, vztime_to_unicode  # noqa: E402
 
-FOOTNOTE_RULE_RE = re.compile(r"^_{6,}$")
-FOOTNOTE_SPLIT_RE = re.compile(r"\n[ \t]*_{6,}[ \t]*(?:\n|$)")
+# Full-width footnote separators in CS Roman text extract (~60 underscores).
+# Decorative title / section rules are much shorter (typically 5–9); do not
+# treat those as footnote splits or the opening page becomes all-notes
+# (seen on 02Vin02 ``________`` under the gambhīra title).
+FOOTNOTE_RULE_RE = re.compile(r"^_{20,}$")
+FOOTNOTE_SPLIT_RE = re.compile(r"\n[ \t]*_{20,}[ \t]*(?:\n|$)")
+# Short/medium centered rules from PDF text (~3–16 underscores).
+SECTION_RULE_LINE_RE = re.compile(r"^_{3,16}$")
+SECTION_RULE_TAIL = " _____"
 ITEM_START_RE = re.compile(r"^(\d+)\s*[-–]\s*(\d+)\.\s*(.*)$")
 ITEM_SINGLE_RE = re.compile(r"^(\d+)\.\s*(.*)$")
 STAR_BLOCK_RE = re.compile(r"^\*\s+(.*)$")
@@ -92,9 +114,24 @@ VARIANT_NOTE_RE = re.compile(
     r"\((Sī|Syā|Ka|PTS|Sīā|C[sS]|Bj|Mr)\)",
 )
 STRUCTURAL_HINT_RE = re.compile(
-    r"(kaṇḍa|vagga|sikkhāpada|bhāṇavāra|uddānagāthā|uddāna|gāthā|gatha|mātikā|"
-    r"niṭṭhita|namo\s+tassa|piṭaka|pāḷi)\b",
+    r"(kaṇḍa|vagga|sikkhāpada|samatha|bhāṇavāra|uddānagāthā|uddāna|gāthā|gatha|"
+    r"mātikā|niṭṭhita|namo\s+tassa|piṭaka|pāḷi)\b",
     re.IGNORECASE,
+)
+# Heading glued to pātimokkha uddesa intro (no blank line in PDF text).
+_UDDESA_SPLIT_RE = re.compile(
+    r"^(?P<title>.+?)\s+(?P<body>Ime kho\b.+)$",
+    re.IGNORECASE | re.DOTALL,
+)
+# Title must *end* on a structural stem (not merely contain one mid-sentence).
+_UDDESA_TITLE_END_RE = re.compile(
+    r"(?:sikkhāpada|vagga|samatha|kaṇḍa)\s*$",
+    re.IGNORECASE,
+)
+# Body must be the pātimokkha uddesa formula (rejects ordinary “Ime kho…” lists).
+_UDDESA_BODY_RE = re.compile(
+    r"^Ime kho\s+(?:panāyasmanto|panāyyāyo)\b.+\buddesaṃ\s+āgacchanti",
+    re.IGNORECASE | re.DOTALL,
 )
 # Titles that open an uddāna / gāthā verse block.
 GATHA_TITLE_RE = re.compile(r"uddānagāthā|uddāna|gāthā|\bgatha\b", re.IGNORECASE)
@@ -117,18 +154,19 @@ NITTHITA_RE = re.compile(r"niṭṭhit", re.IGNORECASE)
 FOOTNOTE_CALLOUT_RE = re.compile(
     r"(?<=[^\s\d])(\d+)(?=[\s,;:.!?”’\"'\-–]|$)"
 )
-# Typical Pāli paragraph endings (…ti. / .”ti. / plain sentence stop).
-_PARAGRAPH_COMPLETE_RE = re.compile(
-    r"(?:[”’'\"]\s*)?ti\.?\s*$|[.!?…][”’'\"]?\s*$",
-    re.IGNORECASE,
-)
-# Trailing case / print-page refs after a finished sentence: (16) (14-15) (๑๔-๑๕).
-_TRAILING_PAREN_REF_RE = re.compile(
-    r"\s*\([0-9๐-๙]+(?:\s*[-–]\s*[0-9๐-๙]+)?\)\s*$"
-)
 # Letters used in Roman Pāli (for mid-word page-break repair).
+_PALI_LETTER_CLASS = r"A-Za-zĀāĪīŪūṄṅÑñṆṇṬṭḌḍḶḷṂṃŒœ"
 _LEADING_WORD_RE = re.compile(
-    r"^([A-Za-zĀāĪīŪūṄṅÑñṆṇṬṭḌḍḶḷṂṃŒœ]+)(.*)$",
+    rf"^([{_PALI_LETTER_CLASS}]+)(.*)$",
+    re.DOTALL,
+)
+# Hyphen-wrapped markers such as CS Roman peyyāla ``-pa-`` (not soft hyphens).
+_HYPHEN_WRAPPED_MARKER_RE = re.compile(
+    rf"^-[{_PALI_LETTER_CLASS}]+-$"
+)
+# False join left by older extract: page-end ``-pa-`` + next-page word → ``-paWORD``.
+_FALSE_PA_JOIN_END_RE = re.compile(
+    rf"^(?P<head>.*\s)-pa(?P<word>[{_PALI_LETTER_CLASS}]+)$",
     re.DOTALL,
 )
 
@@ -143,18 +181,6 @@ _CONTINUABLE_KINDS = frozenset(
         "verse_continuation",
     }
 )
-
-
-def _paragraph_seems_complete(text: str) -> bool:
-    """True when text looks like a finished paragraph (not a mid-page cut)."""
-    t = re.sub(r"\{\{(?:n\d+|\*|\+)\}\}\s*$", "", text).rstrip()
-    if not t:
-        return True
-    # A finished sentence may still carry a trailing (n) / (n-m) marker.
-    t = _TRAILING_PAREN_REF_RE.sub("", t).rstrip()
-    if not t:
-        return True
-    return bool(_PARAGRAPH_COMPLETE_RE.search(t))
 
 
 def _base_kind(kind: str) -> str:
@@ -177,7 +203,22 @@ def _take_leading_word(text: str) -> tuple[str, str]:
     return m.group(1), m.group(2).lstrip()
 
 
-def _repair_mid_word_split(prev_text: str, next_text: str) -> tuple[str, str]:
+def _trailing_token(text: str) -> str:
+    """Last whitespace-separated token; soft hyphens normalized to ``-``."""
+    text = text.rstrip()
+    if not text:
+        return ""
+    return text.split()[-1].replace("\u00ad", "-")
+
+
+def _is_hyphen_wrapped_marker(text: str) -> bool:
+    """True for ``-pa-`` / similar markers; false for soft-hyphen ``pabbaj-``."""
+    return bool(_HYPHEN_WRAPPED_MARKER_RE.fullmatch(_trailing_token(text)))
+
+
+def _repair_mid_word_split(
+    prev_text: str, next_text: str
+) -> tuple[str, str, bool]:
     """
     If the page break splits a word, finish the word on the first segment.
 
@@ -185,20 +226,153 @@ def _repair_mid_word_split(prev_text: str, next_text: str) -> tuple[str, str]:
     previous page. A bare page-end letter (e.g. ``ṭhitā`` / ``hoti.``) is two
     words and must not be joined.
 
-    Returns (updated_prev_text, updated_next_text).
+    Hyphen-wrapped markers such as peyyāla ``-pa-`` keep their trailing hyphen
+    and must not pull the next page's leading word onto ``prev``.
+
+    Returns (updated_prev_text, updated_next_text, joined).
+    ``joined`` is True only when a leading word was moved onto ``prev``.
     """
     prev = prev_text.rstrip()
     nxt = next_text.lstrip()
     if not prev or not nxt:
-        return prev_text, next_text
+        return prev_text, next_text, False
+
+    # ``-pa-`` at page end is a marker, not a soft-hyphenated word break.
+    if _is_hyphen_wrapped_marker(prev):
+        return prev_text, next_text, False
 
     if prev.endswith("-") or prev.endswith("\u00ad"):
         prev = prev.rstrip("-").rstrip("\u00ad")
         word, rest = _take_leading_word(nxt)
         if word:
-            return prev + word, rest
-        return prev, nxt
-    return prev_text, next_text
+            return prev + word, rest, True
+        return prev, nxt, False
+    return prev_text, next_text, False
+
+
+def _split_false_pa_join(text: str) -> tuple[str, str] | None:
+    """If ``text`` ends with ``-paWORD`` (false page join), return (head+-pa-, WORD)."""
+    m = _FALSE_PA_JOIN_END_RE.match(text.rstrip())
+    if not m:
+        return None
+    return f"{m.group('head')}-pa-", m.group("word")
+
+
+def _roman_entry_from_text_field(text: object) -> dict | None:
+    if not isinstance(text, list):
+        return None
+    for entry in text:
+        if isinstance(entry, dict) and entry.get("script") == "roman":
+            return entry
+    return None
+
+
+def _set_roman_value(text_field: object, new_value: str) -> object:
+    """Set roman ``value``; keep bold runs when the edit is a trailing unglue."""
+    if isinstance(text_field, str):
+        return new_value
+    entry = _roman_entry_from_text_field(text_field)
+    if entry is None:
+        return text_field
+    old_value = str(entry.get("value") or "")
+    entry["value"] = new_value
+    runs = entry.get("runs")
+    if isinstance(runs, list) and runs and old_value != new_value:
+        # Prefer patching the last run when it carries the glued tail.
+        last = runs[-1]
+        if isinstance(last, dict):
+            last_val = str(last.get("value") or "")
+            if old_value.endswith(last_val):
+                head_len = len(old_value) - len(last_val)
+                if new_value.startswith(old_value[:head_len]):
+                    last["value"] = new_value[head_len:]
+                    entry["runs"] = runs
+                    return text_field
+        # Structural mismatch — drop runs; enrich --force may remap from spans.
+        entry.pop("runs", None)
+    return text_field
+
+
+def _prepend_roman_value(text_field: object, word: str) -> object:
+    """Prepend ``word`` (+ space when needed) to the roman value / first run."""
+    prefix = word if not word else f"{word} "
+    if isinstance(text_field, str):
+        body = text_field.lstrip()
+        return prefix + body if body else word
+    entry = _roman_entry_from_text_field(text_field)
+    if entry is None:
+        return text_field
+    body = str(entry.get("value") or "").lstrip()
+    entry["value"] = prefix + body if body else word
+    runs = entry.get("runs")
+    if isinstance(runs, list) and runs:
+        first = runs[0]
+        if isinstance(first, dict):
+            first_body = str(first.get("value") or "").lstrip()
+            first["value"] = prefix + first_body if first_body else word
+    return text_field
+
+
+def unglue_false_pa_page_joins(segments: list) -> int:
+    """
+    Undo false ``-pa-`` + next-word joins at page boundaries in stored JSON.
+
+    When a prior extract treated peyyāla ``-pa-`` as a soft hyphen, the leading
+    word of the next page was glued onto the previous segment (e.g.
+    ``-paaññaṃ``). Move that word back to the continuation segment.
+
+    Returns the number of joins repaired.
+    """
+    fixed = 0
+    for i in range(len(segments) - 1):
+        cur = segments[i]
+        nxt = segments[i + 1]
+        if not isinstance(cur, dict) or not isinstance(nxt, dict):
+            continue
+        cur_page = cur.get("page")
+        nxt_page = nxt.get("page")
+        if not isinstance(cur_page, int) or not isinstance(nxt_page, int):
+            continue
+        if nxt_page <= cur_page:
+            continue
+        nxt_kind = str(nxt.get("segment_type") or "")
+        if not nxt_kind.endswith("_continuation"):
+            continue
+        if cur.get("item") != nxt.get("item"):
+            continue
+
+        cur_roman = ""
+        cur_text = cur.get("text")
+        if isinstance(cur_text, str):
+            cur_roman = cur_text
+        else:
+            entry = _roman_entry_from_text_field(cur_text)
+            if entry is not None:
+                cur_roman = str(entry.get("value") or "")
+        split = _split_false_pa_join(cur_roman)
+        if split is None:
+            continue
+        new_prev, word = split
+        cur["text"] = _set_roman_value(cur_text, new_prev)
+        nxt["text"] = _prepend_roman_value(nxt.get("text"), word)
+
+        # Hanging lines may mirror the glued page-end tail — unglue in place.
+        hanging = cur.get("hanging_lines")
+        if isinstance(hanging, list) and hanging:
+            last_hl = hanging[-1]
+            hl_roman = ""
+            if isinstance(last_hl, str):
+                hl_roman = last_hl
+            else:
+                hl_entry = _roman_entry_from_text_field(last_hl)
+                if hl_entry is not None:
+                    hl_roman = str(hl_entry.get("value") or "")
+            hl_split = _split_false_pa_join(hl_roman)
+            if hl_split is not None and hl_split[1] == word:
+                hanging[-1] = _set_roman_value(last_hl, hl_split[0])
+                cur["hanging_lines"] = hanging
+        fixed += 1
+    return fixed
 
 
 # วรรค roles within a standard 4-wak gāthā บท.
@@ -219,9 +393,13 @@ class Segment:
     symbol_notes: dict[str, str] = field(default_factory=dict)
     needs_review: bool = False
     review_reasons: list[str] = field(default_factory=list)
-    # Nested gāthā: one segment = one บท (stanza). Absent for non-gatha kinds.
-    # Also reused for hanging prose: source_layout="hanging" + hanging_lines.
-    source_layout: str | None = None  # "bat_line" | "wak_line" | "hanging"
+    # Outline number before a heading title (e.g. 1 in "1. Pārājikakaṇḍa").
+    # Distinct from Tipiṭaka ``item``; omit / None when the source has no number.
+    section_no: int | str | None = None
+    # Nested gāthā: one segment = one บท (or 1 บทครึ่ง with 3 bats).
+    # Absent for non-gatha kinds.
+    # Also reused for hanging / center: source_layout + optional hanging_lines.
+    source_layout: str | None = None  # bat_line | wak_line | hanging | center
     bats: list[dict] | None = None
     # Hanging-paragraph body lines (roman), when source_layout == "hanging".
     hanging_lines: list[str] | None = None
@@ -278,6 +456,20 @@ def _append_symbol_note_blocks(
         )
 
 
+def _is_section_rule_line(block: str) -> bool:
+    """True for a short underscore-only end-of-section rule (not footnote sep)."""
+    line = _normalize_inline(block).replace(" ", "")
+    return bool(SECTION_RULE_LINE_RE.match(line))
+
+
+def _attach_section_rule_tail(text: str) -> str:
+    """Append a trailing ``_____`` if the body does not already end with one."""
+    body = text.rstrip()
+    if re.search(r"_{3,}\s*$", body):
+        return body
+    return body + SECTION_RULE_TAIL
+
+
 def _is_running_header(block: str, headers: set[str]) -> bool:
     line = _normalize_inline(block)
     if not line:
@@ -288,6 +480,10 @@ def _is_running_header(block: str, headers: set[str]) -> bool:
         return True
     if line in headers:
         return True
+    # Short underscore section rules are attached to the previous body block
+    # in ``_blocks_from_region`` / ``merge_blocks`` — do not discard them here.
+    if _is_section_rule_line(line):
+        return False
     if set(line) <= {"_", " ", "–", "-"}:
         return True
     return False
@@ -328,6 +524,36 @@ def _classify_heading(text: str) -> tuple[str | None, list[str]]:
         if " " not in text or text[0].isupper():
             return "title", ["weak_heading_heuristic"]
     return None, []
+
+
+def peel_glued_uddesa_heading(text: str) -> tuple[str, str] | None:
+    """Split ``Title Ime kho…`` into (heading, uddesa body) when title classifies.
+
+    PDF text often joins a short rule/vagga heading to the pātimokkha uddesa
+    sentence with no blank line, which otherwise fails the 80-char heading gate
+    and is stored as prose with a false Tipiṭaka ``item``.
+    """
+    cleaned = re.sub(r"\s+", " ", strip_sentence_spacers(text or "").strip())
+    if not cleaned:
+        return None
+    m = _UDDESA_SPLIT_RE.match(cleaned)
+    if not m:
+        return None
+    title = m.group("title").strip()
+    body = m.group("body").strip()
+    if not title or not body or len(title) > 80:
+        return None
+    if not _UDDESA_TITLE_END_RE.search(title):
+        return None
+    # Reject mid-sentence titles (allow outline dots after digits: ``1. Name``).
+    if re.search(r"(?<!\d)\.\s+\S", title):
+        return None
+    if not _UDDESA_BODY_RE.search(body):
+        return None
+    heading, _reasons = _classify_heading(title)
+    if heading is None:
+        return None
+    return title, body
 
 
 def _split_body_and_notes(page_text: str) -> tuple[str, str]:
@@ -408,9 +634,16 @@ def _blocks_from_region(
 ) -> list[dict]:
     blocks_out: list[dict] = []
     for raw in _split_blocks(region_text, notes=as_notes):
+        text = _normalize_inline(raw)
+        # Underscore-only short rule on its own line → attach to previous body
+        # block as trailing ``_____`` (becomes ``section_rule`` at serialize).
+        if not as_notes and text and _is_section_rule_line(text):
+            if blocks_out:
+                prev = blocks_out[-1]
+                prev["text"] = _attach_section_rule_tail(str(prev.get("text") or ""))
+            continue
         if _is_running_header(raw, headers):
             continue
-        text = _normalize_inline(raw)
         if not text or FOOTNOTE_RULE_RE.match(text):
             continue
 
@@ -488,6 +721,35 @@ def _blocks_from_region(
 
         item, rest, flags = _parse_item_prefix(text)
         if item is not None:
+            peeled = peel_glued_uddesa_heading(rest)
+            if peeled is not None:
+                title, body = peeled
+                heading, reasons = _classify_heading(title)
+                assert heading is not None
+                blocks_out.append(
+                    {
+                        "kind": heading,
+                        "item": None,
+                        "text": title,
+                        "flags": flags,
+                        "page": printed_page,
+                        "pdf_page": pdf_page,
+                        "section_no": item,
+                        "needs_review": bool(reasons),
+                        "review_reasons": reasons,
+                    }
+                )
+                blocks_out.append(
+                    {
+                        "kind": "prose",
+                        "item": None,
+                        "text": body,
+                        "flags": [],
+                        "page": printed_page,
+                        "pdf_page": pdf_page,
+                    }
+                )
+                continue
             heading, reasons = _classify_heading(rest)
             if heading and len(rest) <= 80:
                 blocks_out.append(
@@ -514,6 +776,35 @@ def _blocks_from_region(
                         "pdf_page": pdf_page,
                     }
                 )
+            continue
+
+        peeled = peel_glued_uddesa_heading(text)
+        if peeled is not None:
+            title, body = peeled
+            heading, reasons = _classify_heading(title)
+            assert heading is not None
+            blocks_out.append(
+                {
+                    "kind": heading,
+                    "item": None,
+                    "text": title,
+                    "flags": [],
+                    "page": printed_page,
+                    "pdf_page": pdf_page,
+                    "needs_review": bool(reasons),
+                    "review_reasons": reasons,
+                }
+            )
+            blocks_out.append(
+                {
+                    "kind": "prose",
+                    "item": None,
+                    "text": body,
+                    "flags": [],
+                    "page": printed_page,
+                    "pdf_page": pdf_page,
+                }
+            )
             continue
 
         heading, reasons = _classify_heading(text)
@@ -606,9 +897,9 @@ def merge_blocks(raw_blocks: list[dict]) -> list[Segment]:
     Build page-anchored segments (one printed page per segment).
 
     Rules:
-    - Unfinished unit continuing on the next page → new segment with
-      ``{kind}_continuation`` (prose_continuation, gatha_continuation, …).
-    - New paragraph under the same item → ``prose`` (not continuation).
+    - Itemless body under the current item → ``prose`` / base kind (same or
+      later page). Geometry later upgrades flush page-starts to
+      ``{kind}_continuation``; indented page-starts stay new paragraphs.
     - Mid-word page break → finish the word on the earlier segment.
     - One printed page per segment (no page span field).
     """
@@ -630,6 +921,7 @@ def merge_blocks(raw_blocks: list[dict]) -> list[Segment]:
             flags=list(block.get("flags") or []),
             needs_review=bool(block.get("needs_review")),
             review_reasons=list(block.get("review_reasons") or []),
+            section_no=block.get("section_no"),
         )
         segments.append(seg)
         idx = len(segments) - 1
@@ -665,6 +957,19 @@ def merge_blocks(raw_blocks: list[dict]) -> list[Segment]:
                 append_new({**block, "kind": "note"})
             continue
 
+        # Separate underscore-only body line → previous segment (not a new one).
+        if (
+            kind not in {"note", "note_continuation"}
+            and _is_section_rule_line(str(block.get("text") or ""))
+        ):
+            target_idx = last_body_idx
+            if target_idx is None and segments:
+                target_idx = len(segments) - 1
+            if target_idx is not None:
+                prev = segments[target_idx]
+                prev.text = _attach_section_rule_tail(prev.text)
+            continue
+
         if (
             kind in {"prose", "gatha", "verse"}
             and block.get("item") is None
@@ -674,37 +979,36 @@ def merge_blocks(raw_blocks: list[dict]) -> list[Segment]:
             prev = segments[last_body_idx]
             block_page = block["page"]
 
-            # Same unit continues on a later printed page.
+            # Cross-page: repair mid-word hyphen splits. A joined hyphen means
+            # the remainder cannot be a new paragraph → continuation. Otherwise
+            # keep base kind; geometry upgrades flush page-starts afterward.
+            text = block["text"]
+            out_kind = kind if kind != "prose" else "prose"
             if (
                 block_page > prev.page
                 and prev.segment_type in _CONTINUABLE_KINDS
-                and not _paragraph_seems_complete(prev.text)
             ):
-                prev_text, next_text = _repair_mid_word_split(
-                    prev.text, block["text"]
+                prev_text, next_text, joined = _repair_mid_word_split(
+                    prev.text, text
                 )
                 prev.text = prev_text
                 if not next_text.strip():
                     # Entire remainder was only the end of a split word.
                     continue
-                append_new(
-                    {
-                        **block,
-                        "item": prev.item,
-                        "kind": _continuation_kind(prev.segment_type),
-                        "text": next_text,
-                    }
-                )
-                continue
+                text = next_text
+                if joined:
+                    out_kind = _continuation_kind(kind)
 
-            # New paragraph under the same item (same or later page).
-            inherited = {
-                **block,
-                "item": prev.item,
-                # New paragraph → base kind (prose), not continuation.
-                "kind": kind if kind != "prose" else "prose",
-            }
-            append_new(inherited)
+            # Same item, same or later page — base kind until geometry / hyphen
+            # repair says this is a continuation.
+            append_new(
+                {
+                    **block,
+                    "item": prev.item,
+                    "kind": out_kind,
+                    "text": text,
+                }
+            )
             continue
 
         # Apparatus * / + paragraphs belong under the current item number.
@@ -739,6 +1043,8 @@ def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
             notes_by_page.setdefault(seg.page, []).append(seg)
 
     used_note_ids: set[int] = set()
+    # One foot-note body per mark per page; later * / + callouts share it.
+    shared_symbol_notes: dict[tuple[int, str], str] = {}
     out: list[Segment] = []
 
     for seg in segments:
@@ -780,17 +1086,31 @@ def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
 
         new_text = FOOTNOTE_CALLOUT_RE.sub(replace_callout, seg.text)
 
-        if "star" in seg.flags and star_notes:
-            note_seg = star_notes[0]
-            symbol_notes["*"] = note_seg.text
-            used_note_ids.add(id(note_seg))
-            new_text = "{{*}}" + new_text
+        # Body * / + callouts always stay in text. Several callouts may share
+        # one foot-note (e.g. two + marks → one "+ …" note at page bottom).
+        if "star" in seg.flags:
+            key = (seg.page, "*")
+            if star_notes:
+                note_seg = star_notes[0]
+                symbol_notes["*"] = note_seg.text
+                shared_symbol_notes[key] = note_seg.text
+                used_note_ids.add(id(note_seg))
+            elif key in shared_symbol_notes:
+                symbol_notes["*"] = shared_symbol_notes[key]
+            if "{{*}}" not in new_text:
+                new_text = "{{*}}" + new_text
 
-        if "plus" in seg.flags and plus_notes:
-            note_seg = plus_notes[0]
-            symbol_notes["+"] = note_seg.text
-            used_note_ids.add(id(note_seg))
-            new_text = "{{+}}" + new_text
+        if "plus" in seg.flags:
+            key = (seg.page, "+")
+            if plus_notes:
+                note_seg = plus_notes[0]
+                symbol_notes["+"] = note_seg.text
+                shared_symbol_notes[key] = note_seg.text
+                used_note_ids.add(id(note_seg))
+            elif key in shared_symbol_notes:
+                symbol_notes["+"] = shared_symbol_notes[key]
+            if "{{+}}" not in new_text:
+                new_text = "{{+}}" + new_text
 
         seg.text = new_text
         seg.notes = notes_out
@@ -817,13 +1137,60 @@ def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
     return out
 
 
+def _gatha_line_body(text: str) -> str:
+    """Strip apparatus markers / quotes for verse-shape checks."""
+    t = (text or "").strip()
+    t = re.sub(r"^\{\{\*\}\}\s*", "", t)
+    t = re.sub(r"^\{\{\+\}\}\s*", "", t)
+    t = re.sub(r"^[\*\+]\s*", "", t)
+    return t.strip(" \t\"'“”«»")
+
+
+def _looks_like_bat_gatha_line(text: str) -> bool:
+    """True for one printed บาท: two วรรค as ``A, B.`` (comma + final stop).
+
+    Bat-line gāthā repeats this shape on every printed line of the block.
+    """
+    body = _gatha_line_body(text)
+    if not body or len(body) > 160:
+        return False
+    return _is_bat_printed_line(body)
+
+
+def _looks_like_gatha_seed_line(text: str) -> bool:
+    """True for a printed line that can start a gāthā run (bat or wak)."""
+    body = _gatha_line_body(text)
+    if not body or len(body) > 160:
+        return False
+    if _is_bat_printed_line(body):
+        return True
+    # wak_line first วรรค
+    return body.endswith(",")
+
+
+def _looks_like_gatha_line(text: str) -> bool:
+    """True for bat_line, wak seed, or short wak/bat closing line."""
+    if _looks_like_gatha_seed_line(text):
+        return True
+    body = _gatha_line_body(text)
+    if not body or len(body) > 160:
+        return False
+    # wak_line second วรรค / short verse close
+    if not re.search(r"[.!?…][\"'\u201c\u201d]?\s*$", body):
+        return False
+    return len(body) <= 120
+
+
 def tag_gatha_segments(segments: list[Segment]) -> list[Segment]:
     """
     After an uddāna/gāthā title, retag short itemless prose lines as ``gatha``.
 
-    Stops at numbered prose, structural headings, apparatus (* / +), or notes.
+    Stops at numbered prose, structural headings, or notes. Apparatus (* / +)
+    on a verse-shaped line stays inside the run; other * / + exits.
     Each tagged segment is still one *printed* line; ``group_gatha_stanzas``
     then folds lines into บท → บาท → วรรค.
+
+    Embedded quotes (no title) are handled by ``tag_gatha_by_geometry``.
     """
     in_gatha = False
     for seg in segments:
@@ -853,7 +1220,9 @@ def tag_gatha_segments(segments: list[Segment]) -> list[Segment]:
             in_gatha = False
             continue
 
-        if set(seg.flags) & {"star", "plus"}:
+        if set(seg.flags) & {"star", "plus"} and not _looks_like_gatha_line(
+            seg.text
+        ):
             in_gatha = False
             continue
 
@@ -874,8 +1243,112 @@ def tag_gatha_segments(segments: list[Segment]) -> list[Segment]:
     return segments
 
 
+def tag_gatha_by_geometry(
+    doc: fitz.Document,
+    segments: list[Segment],
+    *,
+    content_start: int | None = None,
+) -> int:
+    """
+    Retag prose lines in the verse indent that look like gāthā.
+
+    Bat-line blocks: every printed line is ``วรรค, วรรค.`` (comma + stop).
+    Hang / near-hang band accepts only that bat-line shape. Deep gāthā
+    column also allows wak_line seeds (comma-only first วรรค).
+
+    Catches embedded quotes (no uddāna title). Returns how many printed-line
+    segments were retagged.
+    """
+    if fitz is None:
+        raise RuntimeError("PyMuPDF (pymupdf) is required")
+
+    line_cache: dict[int, list] = {}
+    tagged = 0
+    i = 0
+    n = len(segments)
+    while i < n:
+        seg = segments[i]
+        base = _base_kind(seg.segment_type)
+        seed_is_bat = _looks_like_bat_gatha_line(seg.text)
+        if (
+            base != "prose"
+            or seg.bats is not None
+            or seg.source_layout == "hanging"
+            or not (seed_is_bat or _looks_like_gatha_seed_line(seg.text))
+        ):
+            i += 1
+            continue
+
+        pdf_page = _seg_pdf_page(seg, content_start=content_start)
+        if pdf_page is None or pdf_page < 1 or pdf_page > doc.page_count:
+            i += 1
+            continue
+        if pdf_page not in line_cache:
+            line_cache[pdf_page] = page_body_lines(doc[pdf_page - 1])
+        roman = segment_roman_text(seg) or seg.text
+        matched = _match_cached_line(line_cache[pdf_page], roman)
+        if matched is None or not _is_gatha_geometry_indent(matched.x0):
+            i += 1
+            continue
+
+        # Hang-band embedded verse is always bat_line (A, B. on each line).
+        # Wak_line seeds only in the deep gāthā column.
+        if not seed_is_bat and not _is_gatha_indent(matched.x0):
+            i += 1
+            continue
+
+        # Grow a run; bat-line seeds stay bat-shaped on every line.
+        run_end = i + 1
+        while run_end < n:
+            nxt = segments[run_end]
+            nxt_base = _base_kind(nxt.segment_type)
+            shape_ok = (
+                _looks_like_bat_gatha_line(nxt.text)
+                if seed_is_bat
+                else _looks_like_gatha_line(nxt.text)
+            )
+            if (
+                nxt_base != "prose"
+                or nxt.bats is not None
+                or nxt.source_layout == "hanging"
+                or not shape_ok
+            ):
+                break
+            nxt_pdf = _seg_pdf_page(nxt, content_start=content_start)
+            if nxt_pdf is None or nxt_pdf < 1 or nxt_pdf > doc.page_count:
+                break
+            if nxt_pdf not in line_cache:
+                line_cache[nxt_pdf] = page_body_lines(doc[nxt_pdf - 1])
+            nxt_roman = segment_roman_text(nxt) or nxt.text
+            nxt_match = _match_cached_line(line_cache[nxt_pdf], nxt_roman)
+            if nxt_match is None or not _is_gatha_geometry_indent(nxt_match.x0):
+                break
+            run_end += 1
+
+        # Need at least one full บาท (2 วรรค) worth of printed material.
+        if run_end - i < 1:
+            i += 1
+            continue
+
+        for j in range(i, run_end):
+            cur = segments[j]
+            if cur.segment_type.endswith("_continuation"):
+                cur.segment_type = "gatha_continuation"
+            else:
+                cur.segment_type = "gatha"
+            cur.item = None
+            tagged += 1
+        i = run_end
+
+    return tagged
+
+
 def _is_bat_printed_line(text: str) -> bool:
-    """True when one printed line already holds both วรรค of a บาท (A, B.)."""
+    """True when one printed line is one บาท: two วรรค as ``A, B.``.
+
+    Comma separates the วรรค; a final stop closes the บาท. Bat-line gāthā
+    uses this shape on every printed line of the block.
+    """
     t = text.strip()
     if not re.search(r"[.!?…][\"'\u201c\u201d]?\s*$", t):
         return False
@@ -904,11 +1377,29 @@ def _wak_dict(wak_no: int, roman: str) -> dict:
 
 
 def _bat_dict(bat_no: int, wak_a: str, wak_b: str) -> dict:
-    base = 1 if bat_no == 1 else 3
+    # bat 1 → wak 1–2, bat 2 → 3–4, bat 3 → 5–6 (1 บทครึ่ง / 1.5 stanza).
+    base = 2 * (bat_no - 1) + 1
     return {
         "bat": bat_no,
         "waks": [_wak_dict(base, wak_a), _wak_dict(base + 1, wak_b)],
     }
+
+
+def _one_bat_wak_romans(
+    buf: list[tuple[str, str, Segment]],
+) -> list[str] | None:
+    """
+    If ``buf`` is exactly one บาท (two วรรค), return those roman strings.
+
+    Accepts either two already-split units or one unsplit ``A, B.`` bat line.
+    """
+    if len(buf) == 2:
+        return [buf[0][0], buf[1][0]]
+    if len(buf) == 1 and _is_bat_printed_line(buf[0][0]):
+        parts = _split_bat_printed_line(buf[0][0])
+        if parts:
+            return [parts[0], parts[1]]
+    return None
 
 
 def _stanza_from_waks(
@@ -1044,24 +1535,42 @@ def _consume_printed_gatha_lines(
             stanzas.append(stanza)
 
     if buf:
-        # Leftover waks — emit irregular stanza for review.
-        template = buf[0][2]
-        layouts = {u[1] for u in buf}
-        layout = "wak_line" if "wak_line" in layouts else "bat_line"
-        stanza = _stanza_from_waks(
-            [u[0] for u in buf],
-            source_layout=layout,
-            template=template,
-            pages=[u[2].page for u in buf],
-            pdf_pages=[u[2].pdf_page for u in buf],
-        )
-        stanza.needs_review = True
-        if "irregular_gatha_stanza" not in stanza.review_reasons:
-            stanza.review_reasons.append("irregular_gatha_stanza")
-        for u in buf[1:]:
-            stanza.notes.extend(u[2].notes)
-            stanza.symbol_notes.update(u[2].symbol_notes)
-        stanzas.append(stanza)
+        # One leftover บาท after a full บท → 1 บทครึ่ง (3 บาท); keep in one
+        # segment so TeX does not insert \\[\\gathastanzaskip] mid-block.
+        half = _one_bat_wak_romans(buf)
+        last = stanzas[-1] if stanzas else None
+        if (
+            half is not None
+            and last is not None
+            and isinstance(last.bats, list)
+            and len(last.bats) == 2
+        ):
+            last.bats.append(_bat_dict(3, half[0], half[1]))
+            for u in buf:
+                last.notes.extend(u[2].notes)
+                last.symbol_notes.update(u[2].symbol_notes)
+                for fl in u[2].flags:
+                    if fl not in last.flags:
+                        last.flags.append(fl)
+        else:
+            # Other leftovers — emit irregular stanza for review.
+            template = buf[0][2]
+            layouts = {u[1] for u in buf}
+            layout = "wak_line" if "wak_line" in layouts else "bat_line"
+            stanza = _stanza_from_waks(
+                [u[0] for u in buf],
+                source_layout=layout,
+                template=template,
+                pages=[u[2].page for u in buf],
+                pdf_pages=[u[2].pdf_page for u in buf],
+            )
+            stanza.needs_review = True
+            if "irregular_gatha_stanza" not in stanza.review_reasons:
+                stanza.review_reasons.append("irregular_gatha_stanza")
+            for u in buf[1:]:
+                stanza.notes.extend(u[2].notes)
+                stanza.symbol_notes.update(u[2].symbol_notes)
+            stanzas.append(stanza)
 
     return stanzas
 
@@ -1200,13 +1709,25 @@ def extract_pdf(
             )
         )
 
-    segments = group_gatha_stanzas(
-        tag_gatha_segments(attach_notes_sacred_style(merge_blocks(raw)))
-    )
-    # Geometry pass: fold first-indent head + deeper hang lines into one unit.
+    segments = tag_gatha_segments(attach_notes_sacred_style(merge_blocks(raw)))
+    # Fold hanging paragraphs first so hang-body prose is not mistaken for
+    # hang-band embedded gāthā in the next pass.
     pdf_pages = {s.pdf_page for s in segments if s.pdf_page}
     hanging_groups = collect_hanging_groups(doc, pdf_pages=pdf_pages)
     hanging_merged = merge_hanging_into_segments(segments, hanging_groups)
+    # Embedded verse: deep gāthā column or hang / near-hang bat lines (no title).
+    gatha_geometry_tagged = tag_gatha_by_geometry(
+        doc, segments, content_start=content_start
+    )
+    segments = group_gatha_stanzas(segments)
+    # Flush page-start → continuation; indented → keep as new prose.
+    page_start_stats = reclassify_page_start_by_indent(
+        doc, segments, content_start=content_start
+    )
+    # Geometry pass: short centered labels → source_layout='center'.
+    center_stats = tag_center_layout_by_geometry(
+        doc, segments, content_start=content_start
+    )
     review_count = sum(1 for s in segments if s.needs_review)
     type_counts: dict[str, int] = {}
     for s in segments:
@@ -1240,6 +1761,9 @@ def extract_pdf(
             "segments_with_notes": notes_embedded,
             "segments_with_bold": segments_with_bold,
             "hanging_paragraphs_merged": hanging_merged,
+            "gatha_geometry_tagged": gatha_geometry_tagged,
+            "page_start_reclassify": page_start_stats,
+            "center_layout": center_stats,
             "segment_type_counts": dict(sorted(type_counts.items())),
         },
     }
@@ -1249,10 +1773,20 @@ def _wak_text_to_json(
     roman: str,
     *,
     bold_spans: list[str] | None = None,
+    normalize_spacing: bool = True,
 ) -> tuple[list[dict], bool]:
-    prepared, _ = prepare_roman_body(roman)
+    # prepare first for bold alignment; keep had_rule — script_text_entries on
+    # the already-stripped body would always report False.
+    prepared, had_rule = prepare_roman_body(
+        roman, normalize_spacing=normalize_spacing
+    )
     ranges = bold_ranges_in_text(prepared, bold_spans or [])
-    return script_text_entries(prepared, bold_ranges=ranges or None)
+    entries, _ = script_text_entries(
+        prepared,
+        bold_ranges=ranges or None,
+        normalize_spacing=normalize_spacing,
+    )
+    return entries, had_rule
 
 def _bold_spans_for_segment(
     seg: Segment,
@@ -1296,10 +1830,13 @@ def _segment_to_json(
     """
     data = asdict(seg)
     data.pop("pdf_page", None)
+    if data.get("section_no") is None:
+        data.pop("section_no", None)
     flags = [f for f in (data.get("flags") or []) if f != SECTION_RULE_FLAG]
     had_rule = False
     bold_spans = _bold_spans_for_segment(seg, bold_by_pdf_page or {})
 
+    normalize_spacing = uses_sentence_spacer(seg.segment_type)
     if seg.bats is not None:
         # Nested gāthā: no top-level text; serialize each วรรค.
         data.pop("text", None)
@@ -1313,7 +1850,9 @@ def _segment_to_json(
                     entries = roman
                 else:
                     entries, rule = _wak_text_to_json(
-                        str(roman), bold_spans=bold_spans
+                        str(roman),
+                        bold_spans=bold_spans,
+                        normalize_spacing=normalize_spacing,
                     )
                     had_rule = had_rule or rule
                 json_waks.append({"text": entries})
@@ -1321,10 +1860,18 @@ def _segment_to_json(
         data["bats"] = json_bats
         data["source_layout"] = seg.source_layout
     else:
-        prepared, _ = prepare_roman_body(seg.text)
+        # prepare first for bold alignment; keep had_rule from that call.
+        prepared, had_rule = prepare_roman_body(
+            seg.text, normalize_spacing=normalize_spacing
+        )
         ranges = bold_ranges_in_text(prepared, bold_spans)
-        entries, had_rule = script_text_entries(
-            prepared, bold_ranges=ranges or None
+        # Closers: only keep full-line (major) bold; drop lemma bleed.
+        if seg.segment_type == "niṭṭhitaṃ":
+            ranges = substantial_bold_ranges(prepared, ranges)
+        entries, _ = script_text_entries(
+            prepared,
+            bold_ranges=ranges or None,
+            normalize_spacing=normalize_spacing,
         )
         data["text"] = entries
         data.pop("bats", None)
@@ -1333,11 +1880,16 @@ def _segment_to_json(
             hl_out: list[list[dict]] = []
             for line in seg.hanging_lines:
                 hl_entries, hl_rule = _wak_text_to_json(
-                    str(line), bold_spans=bold_spans
+                    str(line),
+                    bold_spans=bold_spans,
+                    normalize_spacing=normalize_spacing,
                 )
                 had_rule = had_rule or hl_rule
                 hl_out.append(hl_entries)
             data["hanging_lines"] = hl_out
+        elif seg.source_layout == "center":
+            data["source_layout"] = "center"
+            data.pop("hanging_lines", None)
         else:
             data.pop("source_layout", None)
             data.pop("hanging_lines", None)
@@ -1448,6 +2000,10 @@ def main(argv: list[str] | None = None) -> int:
                 data["layout"] = existing["layout"]
             if existing.get("page_layout") is not None:
                 data["page_layout"] = existing["page_layout"]
+            if existing.get("page_layout_reading_mode") is not None:
+                data["page_layout_reading_mode"] = existing[
+                    "page_layout_reading_mode"
+                ]
         save_document(out, data, layout_path=layout_out, normalize=True)
         seg_count = stats.get("segment_count", len(data.get("segments") or []))
         print(

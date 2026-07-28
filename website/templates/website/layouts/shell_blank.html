@@ -1,0 +1,14 @@
+{% extends "coderedcms/pages/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content_body %}
+{% for block in page.body %}
+{% include_block block with settings=settings %}
+{% endfor %}
+{% endblock %}
+
+{% block content_post_body %}
+<div class="container pb-5">
+  {% block page_type_footer %}{% endblock %}
+</div>
+{% endblock %}

@@ -8,7 +8,8 @@
   .sacred-home .home-section-title:not(.is-visible),
   .sacred-home .home-principle:not(.is-visible),
   .sacred-home .home-cases-fold:not(.is-visible),
-  .sacred-home .home-goals .home-goal-card:not(.is-visible) {
+  .sacred-home .home-goals .home-goal-card:not(.is-visible),
+  .sacred-home .home-zigzag-entry:not(.is-visible) {
     opacity: 0;
     transform: translateY(var(--hall-reveal-offset));
   }

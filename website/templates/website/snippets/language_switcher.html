@@ -1,0 +1,16 @@
+{% load i18n %}
+<nav class="hall-lang-switcher d-print-none" aria-label="{% trans 'Language' %}">
+  <ul class="hall-lang-switcher__list">
+    {% for item in alternates %}
+    <li class="hall-lang-switcher__item">
+      {% if item.active %}
+      <span class="hall-lang-switcher__link is-active" aria-current="true">{{ item.label }}</span>
+      {% elif item.url %}
+      <a class="hall-lang-switcher__link" href="{{ item.url }}" hreflang="{{ item.code }}" lang="{{ item.code }}">{{ item.label }}</a>
+      {% else %}
+      <span class="hall-lang-switcher__link is-unavailable" aria-disabled="true" title="{% trans 'Translation not available' %}">{{ item.label }}</span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</nav>

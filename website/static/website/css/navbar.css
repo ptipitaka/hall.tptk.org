@@ -1,0 +1,96 @@
+/* Menu items behind hamburger; language switcher + search stay on title bar */
+
+.hall-navbar__utilities {
+  row-gap: 0.5rem;
+}
+
+.hall-navbar__menu-toggler {
+  display: block;
+  border-color: rgba(var(--hall-brand-rgb), 0.25);
+  padding: 0.25rem 0.55rem;
+}
+
+.hall-navbar__menu-toggler:focus {
+  box-shadow: 0 0 0 var(--bs-focus-ring-width) var(--bs-focus-ring-color);
+}
+
+/* CRX navbar-expand-* hides .navbar-toggler on wide screens — keep menu toggler visible */
+.hall-navbar.navbar-expand-sm .hall-navbar__menu-toggler,
+.hall-navbar.navbar-expand-md .hall-navbar__menu-toggler,
+.hall-navbar.navbar-expand-lg .hall-navbar__menu-toggler,
+.hall-navbar.navbar-expand-xl .hall-navbar__menu-toggler,
+.hall-navbar.navbar-expand-xxl .hall-navbar__menu-toggler {
+  display: block;
+}
+
+.hall-navbar__menu {
+  flex-basis: 100%;
+}
+
+.hall-navbar__menu:not(.show):not(.collapsing) {
+  display: none;
+}
+
+/* Override Bootstrap .navbar-expand-* row layout for the hamburger panel only */
+.hall-navbar .hall-navbar__menu .navbar-nav {
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100%;
+  padding: 0.5rem 0 0.75rem;
+  border-top: 1px solid rgba(var(--hall-brand-rgb), 0.1);
+}
+
+.hall-navbar .hall-navbar__menu .nav-item {
+  width: auto;
+  text-align: center;
+}
+
+.hall-navbar .hall-navbar__menu .nav-link {
+  display: inline-block;
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Narrow screens — search moves to bottom of hamburger menu */
+@media (max-width: 991.98px) {
+  .hall-navbar__search--bar {
+    display: none !important;
+  }
+
+  .hall-navbar__menu-search {
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 0 1rem;
+    border-top: 1px solid rgba(var(--hall-brand-rgb), 0.1);
+  }
+
+  .hall-navbar__search--menu {
+    width: 100%;
+    max-width: 20rem;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 992px) {
+  .hall-navbar__menu-search {
+    display: none !important;
+  }
+}
+
+/* Very narrow screens — logo only in title bar */
+@media (max-width: 449.98px) {
+  .hall-navbar__brand-name {
+    display: none;
+  }
+}
+
+/* Print — keep brand; hide language switcher, hamburger, search, menu panel */
+@media print {
+  .hall-lang-switcher,
+  .hall-navbar__utilities,
+  .hall-navbar__menu-toggler,
+  .hall-navbar__menu {
+    display: none !important;
+  }
+}

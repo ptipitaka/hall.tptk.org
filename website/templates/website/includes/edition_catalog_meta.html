@@ -1,0 +1,80 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% with collection=edition.get_parent.specific %}
+{% if collection.tradition or edition.content_languages.all or edition.content_scripts.all or edition.volume_set_count or edition.physical_volume_count or edition.publisher or edition.place_of_publication or edition.published_year or edition.print_number or edition.isbn_number %}
+<div class="edition-catalog-meta">
+  {% if collection.tradition or edition.content_languages.all or edition.content_scripts.all or edition.volume_set_count or edition.physical_volume_count %}
+  <div class="edition-catalog-meta__col">
+    {% if collection.tradition %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "Tradition" %}</span>
+      <span class="edition-catalog-meta__value">{{ collection.tradition.name }}</span>
+    </div>
+    {% endif %}
+    {% if edition.content_languages.all %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "Language" %}</span>
+      <span class="edition-catalog-meta__value">{% for language in edition.content_languages.all %}{% if not forloop.first %}, {% endif %}{{ language.name }}{% endfor %}</span>
+    </div>
+    {% endif %}
+    {% if edition.content_scripts.all %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "Script" %}</span>
+      <span class="edition-catalog-meta__value">{% for script in edition.content_scripts.all %}{% if not forloop.first %}, {% endif %}{{ script.name }}{% endfor %}</span>
+    </div>
+    {% endif %}
+    {% if edition.volume_set_count or edition.physical_volume_count %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "Volumes" %}</span>
+      <span class="edition-catalog-meta__value">
+        {% if edition.volume_set_count and edition.physical_volume_count and edition.physical_volume_count != edition.volume_set_count %}
+          {% blocktranslate with sets=edition.volume_set_count books=edition.physical_volume_count trimmed %}
+            {{ sets }} sets ({{ books }} books)
+          {% endblocktranslate %}
+        {% else %}
+          {% with count=edition.volume_set_count|default:edition.physical_volume_count %}
+            {% if LANGUAGE_CODE == "th" %}{{ count }} เล่ม{% else %}{{ count }}{% endif %}
+          {% endwith %}
+        {% endif %}
+      </span>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if edition.publisher or edition.place_of_publication or edition.print_number or edition.published_year or edition.isbn_number %}
+  <div class="edition-catalog-meta__col">
+    {% if edition.publisher %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "Publisher" %}</span>
+      <span class="edition-catalog-meta__value">{{ edition.publisher }}</span>
+    </div>
+    {% endif %}
+    {% if edition.place_of_publication %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "Place of publication" %}</span>
+      <span class="edition-catalog-meta__value">{{ edition.place_of_publication }}</span>
+    </div>
+    {% endif %}
+    {% if edition.print_number %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "Print number" %}</span>
+      <span class="edition-catalog-meta__value">{{ edition.print_number }}</span>
+    </div>
+    {% endif %}
+    {% if edition.published_year %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "Published year" %}</span>
+      <span class="edition-catalog-meta__value">{{ edition.published_year }}</span>
+    </div>
+    {% endif %}
+    {% if edition.isbn_number %}
+    <div class="edition-catalog-meta__pair">
+      <span class="edition-catalog-meta__label">{% trans "ISBN" %}</span>
+      <span class="edition-catalog-meta__value">{{ edition.isbn_number }}</span>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{% endwith %}

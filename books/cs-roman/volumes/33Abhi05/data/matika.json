@@ -1,0 +1,982 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "title": "Mūlayamakapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 2
+    },
+    {
+      "title": "Mūlavāra-uddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": null,
+      "section_no": 1
+    },
+    {
+      "title": "Kusalapada nayacatukka",
+      "page": 1,
+      "kind": "h1",
+      "matched_order": 4,
+      "section_no": 1
+    },
+    {
+      "title": "Akusalapada nayacatukka",
+      "page": 2,
+      "kind": "h1",
+      "matched_order": 17,
+      "section_no": 2
+    },
+    {
+      "title": "Abyākatapada nayacatukka",
+      "page": 3,
+      "kind": "h1",
+      "matched_order": 30,
+      "section_no": 3
+    },
+    {
+      "title": "Nāmapada nayacatukka",
+      "page": 5,
+      "kind": "h1",
+      "matched_order": 43,
+      "section_no": 4
+    },
+    {
+      "title": "2-10. Hetuvārādi-uddesa",
+      "page": 6,
+      "kind": "h2",
+      "matched_order": 57
+    },
+    {
+      "title": "Mūlavāraniddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": null,
+      "section_no": 1
+    },
+    {
+      "title": "Kusalapada nayacatukka",
+      "page": 6,
+      "kind": "h1",
+      "matched_order": 62,
+      "section_no": 1
+    },
+    {
+      "title": "Akusalapada nayacatukka",
+      "page": 8,
+      "kind": "h1",
+      "matched_order": 76,
+      "section_no": 2
+    },
+    {
+      "title": "Abyākatapada nayacatukka",
+      "page": 11,
+      "kind": "h1",
+      "matched_order": 90,
+      "section_no": 3
+    },
+    {
+      "title": "Nāmapada nayacatukka",
+      "page": 13,
+      "kind": "h1",
+      "matched_order": 105,
+      "section_no": 4
+    },
+    {
+      "title": "2-10. Hetuvārādiniddesa",
+      "page": 15,
+      "kind": "h2",
+      "matched_order": 121
+    },
+    {
+      "title": "Paṇṇattivāra-uddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 131,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanavāra",
+      "page": 17,
+      "kind": "h1",
+      "matched_order": 133,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanamūlacakkavāra",
+      "page": 18,
+      "kind": "h1",
+      "matched_order": 146,
+      "section_no": 2
+    },
+    {
+      "title": "Suddhakhandhavāra",
+      "page": 19,
+      "kind": "h1",
+      "matched_order": 191,
+      "section_no": 3
+    },
+    {
+      "title": "Suddhakhandhamūlacakkavāra",
+      "page": 20,
+      "kind": "h1",
+      "matched_order": 203,
+      "section_no": 4
+    },
+    {
+      "title": "Paṇṇattivāraniddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 230,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanavāra",
+      "page": 21,
+      "kind": "h1",
+      "matched_order": 249,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanamūlacakkavāra",
+      "page": 22,
+      "kind": "h1",
+      "matched_order": 263,
+      "section_no": 2
+    },
+    {
+      "title": "Suddhakhandhavāra",
+      "page": 26,
+      "kind": "h1",
+      "matched_order": 310,
+      "section_no": 3
+    },
+    {
+      "title": "Suddhakhandhamūlacakkavāra",
+      "page": 27,
+      "kind": "h1",
+      "matched_order": 324,
+      "section_no": 4
+    },
+    {
+      "title": "Pavatti 1. Uppādavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 372,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 31,
+      "kind": "h1",
+      "matched_order": 373,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 33,
+      "kind": "h1",
+      "matched_order": 389,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 34,
+      "kind": "h1",
+      "matched_order": 402,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 36,
+      "kind": "h1",
+      "matched_order": 418,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 38,
+      "kind": "h1",
+      "matched_order": 439,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 42,
+      "kind": "h1",
+      "matched_order": 464,
+      "section_no": 6
+    },
+    {
+      "title": "Pavatti 2. Nirodhavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 485,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 44,
+      "kind": "h1",
+      "matched_order": 486,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 46,
+      "kind": "h1",
+      "matched_order": 500,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 47,
+      "kind": "h1",
+      "matched_order": 515,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 49,
+      "kind": "h1",
+      "matched_order": 529,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 51,
+      "kind": "h1",
+      "matched_order": 549,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 54,
+      "kind": "h1",
+      "matched_order": 570,
+      "section_no": 6
+    },
+    {
+      "title": "Pavatti 3. Uppādanirodhavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1499,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 56,
+      "kind": "h1",
+      "matched_order": 590,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 59,
+      "kind": "h1",
+      "matched_order": 612,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 61,
+      "kind": "h1",
+      "matched_order": 631,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 63,
+      "kind": "h1",
+      "matched_order": 650,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 63,
+      "kind": "h1",
+      "matched_order": 654,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 65,
+      "kind": "h1",
+      "matched_order": 674,
+      "section_no": 6
+    },
+    {
+      "title": "Pariññāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 696,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 68,
+      "kind": "h1",
+      "matched_order": 697,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 68,
+      "kind": "h1",
+      "matched_order": 700,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 68,
+      "kind": "h1",
+      "matched_order": 703,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 69,
+      "kind": "h1",
+      "matched_order": 707,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 69,
+      "kind": "h1",
+      "matched_order": 710,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 70,
+      "kind": "h1",
+      "matched_order": 713,
+      "section_no": 6
+    },
+    {
+      "title": "Paṇṇattivāra-uddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 173,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanavāra",
+      "page": 71,
+      "kind": "h1",
+      "matched_order": 723,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanamūlacakkavāra",
+      "page": 72,
+      "kind": "h1",
+      "matched_order": 750,
+      "section_no": 2
+    },
+    {
+      "title": "Suddhāyatanavāra",
+      "page": 73,
+      "kind": "h1",
+      "matched_order": 778,
+      "section_no": 3
+    },
+    {
+      "title": "Suddhāyatanamūlacakkavāra",
+      "page": 74,
+      "kind": "h1",
+      "matched_order": 805,
+      "section_no": 4
+    },
+    {
+      "title": "Paṇṇattivāraniddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 248,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanavāra",
+      "page": 75,
+      "kind": "h1",
+      "matched_order": 832,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanamūlacakkavāra",
+      "page": 78,
+      "kind": "h1",
+      "matched_order": 861,
+      "section_no": 2
+    },
+    {
+      "title": "Suddhāyatanavāra",
+      "page": 79,
+      "kind": "h1",
+      "matched_order": 876,
+      "section_no": 3
+    },
+    {
+      "title": "Suddhāyatanamūlacakkavāra",
+      "page": 80,
+      "kind": "h1",
+      "matched_order": 889,
+      "section_no": 4
+    },
+    {
+      "title": "Pavatti 1. Uppādavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 907,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 81,
+      "kind": "h1",
+      "matched_order": 908,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 90,
+      "kind": "h1",
+      "matched_order": 974,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 95,
+      "kind": "h1",
+      "matched_order": 1018,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 102,
+      "kind": "h1",
+      "matched_order": 1072,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 110,
+      "kind": "h1",
+      "matched_order": 1120,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 123,
+      "kind": "h1",
+      "matched_order": 1190,
+      "section_no": 6
+    },
+    {
+      "title": "Pavatti 2. Nirodhavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1241,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 131,
+      "kind": "h1",
+      "matched_order": 1242,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 136,
+      "kind": "h1",
+      "matched_order": 1281,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 137,
+      "kind": "h1",
+      "matched_order": 1285,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 144,
+      "kind": "h1",
+      "matched_order": 1341,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 151,
+      "kind": "h1",
+      "matched_order": 1388,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 161,
+      "kind": "h1",
+      "matched_order": 1448,
+      "section_no": 6
+    },
+    {
+      "title": "Pavatti 3. Uppādanirodhavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2253,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 169,
+      "kind": "h1",
+      "matched_order": 1500,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 173,
+      "kind": "h1",
+      "matched_order": 1532,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 174,
+      "kind": "h1",
+      "matched_order": 1537,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 182,
+      "kind": "h1",
+      "matched_order": 1593,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 183,
+      "kind": "h1",
+      "matched_order": 1599,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 191,
+      "kind": "h1",
+      "matched_order": 1655,
+      "section_no": 6
+    },
+    {
+      "title": "Pariññāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 705,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 192,
+      "kind": "h1",
+      "matched_order": 1663,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 192,
+      "kind": "h1",
+      "matched_order": 1666,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 192,
+      "kind": "h1",
+      "matched_order": 1669,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 193,
+      "kind": "h1",
+      "matched_order": 1673,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 193,
+      "kind": "h1",
+      "matched_order": 1676,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 194,
+      "kind": "h1",
+      "matched_order": 1679,
+      "section_no": 6
+    },
+    {
+      "title": "Paṇṇattivāra-uddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 721,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanavāra",
+      "page": 195,
+      "kind": "h1",
+      "matched_order": 1689,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanamūlacakkavāra",
+      "page": 196,
+      "kind": "h1",
+      "matched_order": 1704,
+      "section_no": 2
+    },
+    {
+      "title": "Suddhadhātuvāra",
+      "page": 197,
+      "kind": "h1",
+      "matched_order": 1715,
+      "section_no": 3
+    },
+    {
+      "title": "Suddhadhātumūlacakkavāra",
+      "page": 197,
+      "kind": "h1",
+      "matched_order": 1738,
+      "section_no": 4
+    },
+    {
+      "title": "Paṇṇattivāraniddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 266,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanavāra",
+      "page": 198,
+      "kind": "h1",
+      "matched_order": 1753,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanamūlacakkavāra",
+      "page": 201,
+      "kind": "h1",
+      "matched_order": 1782,
+      "section_no": 2
+    },
+    {
+      "title": "Suddhadhātuvāra",
+      "page": 201,
+      "kind": "h1",
+      "matched_order": 1791,
+      "section_no": 3
+    },
+    {
+      "title": "Suddhadhātumūlacakkavāra",
+      "page": 202,
+      "kind": "h1",
+      "matched_order": 1806,
+      "section_no": 4
+    },
+    {
+      "title": "Pavatti 1. Uppādavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1819,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 203,
+      "kind": "h1",
+      "matched_order": 1820,
+      "section_no": 1
+    },
+    {
+      "title": "Pariññāvāra",
+      "page": 204,
+      "kind": "h1",
+      "matched_order": 1829,
+      "section_no": 3
+    },
+    {
+      "title": "Paṇṇattivāra-uddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 765,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanavāra",
+      "page": 205,
+      "kind": "h1",
+      "matched_order": 1838,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanamūlacakkavāra",
+      "page": 206,
+      "kind": "h1",
+      "matched_order": 1849,
+      "section_no": 2
+    },
+    {
+      "title": "Suddhasaccavāra",
+      "page": 207,
+      "kind": "h1",
+      "matched_order": 1877,
+      "section_no": 3
+    },
+    {
+      "title": "Suddhasaccamūlacakkavāra",
+      "page": 207,
+      "kind": "h1",
+      "matched_order": 1888,
+      "section_no": 4
+    },
+    {
+      "title": "Paṇṇattivāraniddesa",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 285,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanavāra",
+      "page": 208,
+      "kind": "h1",
+      "matched_order": 1911,
+      "section_no": 1
+    },
+    {
+      "title": "Padasodhanamūlacakkavāra",
+      "page": 209,
+      "kind": "h1",
+      "matched_order": 1923,
+      "section_no": 2
+    },
+    {
+      "title": "Suddhasaccavāra",
+      "page": 210,
+      "kind": "h1",
+      "matched_order": 1939,
+      "section_no": 3
+    },
+    {
+      "title": "Suddhasaccamūlacakkavāra",
+      "page": 211,
+      "kind": "h1",
+      "matched_order": 1950,
+      "section_no": 4
+    },
+    {
+      "title": "Pavatti 1. Uppādavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1965,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 212,
+      "kind": "h1",
+      "matched_order": 1966,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 216,
+      "kind": "h1",
+      "matched_order": 1994,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 218,
+      "kind": "h1",
+      "matched_order": 2017,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 221,
+      "kind": "h1",
+      "matched_order": 2043,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 225,
+      "kind": "h1",
+      "matched_order": 2069,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 231,
+      "kind": "h1",
+      "matched_order": 2097,
+      "section_no": 6
+    },
+    {
+      "title": "Pavatti 2. Nirodhavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2123,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 234,
+      "kind": "h1",
+      "matched_order": 2124,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 236,
+      "kind": "h1",
+      "matched_order": 2146,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 237,
+      "kind": "h1",
+      "matched_order": 2151,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 239,
+      "kind": "h1",
+      "matched_order": 2171,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 244,
+      "kind": "h1",
+      "matched_order": 2198,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 250,
+      "kind": "h1",
+      "matched_order": 2227,
+      "section_no": 6
+    },
+    {
+      "title": "Pavatti 3. Uppādanirodhavāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 366,
+      "section_no": 2
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 253,
+      "kind": "h1",
+      "matched_order": 2254,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 255,
+      "kind": "h1",
+      "matched_order": 2275,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 255,
+      "kind": "h1",
+      "matched_order": 2279,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 257,
+      "kind": "h1",
+      "matched_order": 2299,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 257,
+      "kind": "h1",
+      "matched_order": 2303,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 263,
+      "kind": "h1",
+      "matched_order": 2331,
+      "section_no": 6
+    },
+    {
+      "title": "Pariññāvāra",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1662,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannavāra",
+      "page": 263,
+      "kind": "h1",
+      "matched_order": 2338,
+      "section_no": 1
+    },
+    {
+      "title": "Atītavāra",
+      "page": 264,
+      "kind": "h1",
+      "matched_order": 2342,
+      "section_no": 2
+    },
+    {
+      "title": "Anāgatavāra",
+      "page": 264,
+      "kind": "h1",
+      "matched_order": 2345,
+      "section_no": 3
+    },
+    {
+      "title": "Paccuppannātītavāra",
+      "page": 264,
+      "kind": "h1",
+      "matched_order": 2348,
+      "section_no": 4
+    },
+    {
+      "title": "Paccuppannānāgatavāra",
+      "page": 264,
+      "kind": "h1",
+      "matched_order": 2351,
+      "section_no": 5
+    },
+    {
+      "title": "Atītānāgatavāra",
+      "page": 265,
+      "kind": "h1",
+      "matched_order": 2355,
+      "section_no": 6
+    }
+  ]
+}

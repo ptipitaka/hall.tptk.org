@@ -29,8 +29,16 @@ Single volume (from already-extracted JSON):
 
 ```powershell
 cd books/cs-roman
-.\build.ps1 -Volume 01Vin01
+.\build.ps1 -Volume 01Vin01              # sync (default): page-faithful sheets
+.\build.ps1 -Volume 02Vin02 -Mode reading  # continuous text + margin ฉ.N (any volume)
 ```
+
+| Mode | Body TeX | PDF |
+|------|----------|-----|
+| `sync` (default) | `tex/body.generated.tex` | `out/<id>.pdf` |
+| `reading` | `tex/body.reading.generated.tex` | `out/<id>.reading.pdf` |
+
+Reading mode keeps the volume `layout` defaults, does not force `\csromanpage`, merges `*_continuation` into the open paragraph, and places `ฉ.N` in the outer margin at each source-folio change. Drivers: `volumes/<id>/tex/main.tex` and `main.reading.tex` (templated by `batch_prepare_volumes.py`).
 
 Full pipeline for all volumes (extract → headings → TeX → PDF):
 
@@ -39,34 +47,37 @@ Full pipeline for all volumes (extract → headings → TeX → PDF):
 docker compose exec -T web python books/cs-roman/scripts/extract_cs_roman_pdf.py books/cs-roman/source --output-dir books/cs-roman/output
 docker compose exec -T web python books/cs-roman/scripts/batch_cs_roman_headings.py
 docker compose exec -T web python books/cs-roman/scripts/batch_prepare_volumes.py
+# default --mode both → sync + reading bodies, main.tex + main.reading.tex, matika sync
 
 # Host TeX Live
 cd books/cs-roman
-.\scripts\batch_build_volumes.ps1
+.\scripts\batch_build_volumes.ps1              # sync PDFs
+.\scripts\batch_build_volumes.ps1 -Mode reading  # reading PDFs
 ```
 
 Or one PowerShell entrypoint from this directory:
 
 ```powershell
 cd books/cs-roman
-.\pipeline.ps1            # extract + headings + prepare (Docker)
-.\scripts\batch_build_volumes.ps1
+.\pipeline.ps1            # extract + headings + prepare sync+reading (Docker)
+.\scripts\batch_build_volumes.ps1 -Mode both
 ```
 
 Steps (per volume):
 
-1. Sync PDF (hardlink from `source/`) + `segments.json` + `layout.json` (+ optional `transforms.json`) into `volumes/<id>/`
-2. Generate `tex/body.generated.tex` from segments (+ footnotes, bold runs, TOC marks, layout; apply `shared`/`volume` transforms on Roman then Thai)
-3. `latexmk -lualatex` → `volumes/<id>/out/<id>.pdf`
+1. Sync PDF (hardlink from `source/`) + `segments.json` + `layout.json` (+ optional `transforms.json` / `matika.json`) into `volumes/<id>/`
+2. Generate `tex/body.generated.tex` and/or `body.reading.generated.tex` from segments (+ footnotes, bold runs, TOC marks, layout; apply `shared`/`volume` transforms on Roman then Thai). TOC prefers `matika.json` when present.
+3. `latexmk -lualatex` → `volumes/<id>/out/<id>.pdf` or `<id>.reading.pdf`
 
 Requires: Python 3.11+, PyMuPDF, editable `pali_script` (`pip install -e packages/pali_script/python`), TeX Live with LuaLaTeX + memoir + babel-thai.
 
 ## Notes
 
-- `body.generated.tex` is auto-generated — edit macros in `shared/style/`, not the body.
-- Each source `page` starts a new sheet with matching `\setcounter{page}{N}` (no “หน้าต้นฉบับ” labels).
+- `body.generated.tex` / `body.reading.generated.tex` are auto-generated — edit macros in `shared/style/`, not the body.
+- Sync mode: each source `page` starts a new sheet with matching `\setcounter{page}{N}`.
+- Reading mode (any volume): physical page numbers in the running head; source folio cited as `ฉ.N` via `\csromanfolio` (outer margin). Geometry: `pagegeometry-reading.tex`. Per-page rhythm: `page_layout_reading_mode` in `layout.json` (physical page keys, not ฉ.N). Headings batch writes `output/<id>.matika.json` for memoir TOC marks.
 - After มาติกา, `\cleardoublepage` forces arabic page 1 onto a recto (right-hand / odd) page.
-- Footer shows the printed page number; running heads show piṭaka / gambhīra titles.
+- Running heads show piṭaka / gambhīra titles and the (mode-dependent) page number.
 - Footnotes: `{{nN}}` → `\footnote{…}` with notes transliterated to Thai (Arabic digits kept).
 - Page geometry targets CS Roman MediaBox **499 × 709 bp** (`shared/style/pagegeometry.tex`).
 - Body page range: `content_start_pdf_page` (Namo tassa) … `content_end_printed_page` (before back-matter indexes). Trim indexes with `python books/cs-roman/scripts/trim_cs_roman_back_matter.py books/cs-roman/output --all`.
@@ -75,6 +86,10 @@ Requires: Python 3.11+, PyMuPDF, editable `pali_script` (`pip install -e package
 - Publication string fixes (conditional / per-volume): edit `shared/transforms.json` and/or
   `output/<id>.transforms.json`, then rebuild — rules apply at generate, not extract.
   See [`SCHEMA.md`](SCHEMA.md) (transforms file).
+- Bold inline `runs`: written at extract (`cs_roman_bold.py`). Enrich `--force` re-derives
+  Thai and remaps existing bold spans; it does **not** re-read the PDF. If enrich warns
+  that bold was lost, re-extract that volume from `source/` — do not rely on `--force`
+  alone after orthography/spacing changes.
 
 ## Layout metrics
 
@@ -93,6 +108,7 @@ Reports write to `volumes/01Vin01/out/_ref_pages/layout_metrics.json` and `struc
 ```powershell
 cd books/cs-roman
 python scripts/generate_cs_roman_tex.py --volume 01Vin01
+python scripts/generate_cs_roman_tex.py --volume 02Vin02 --mode reading
 ```
 
 ## Tests

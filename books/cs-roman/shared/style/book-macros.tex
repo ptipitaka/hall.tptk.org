@@ -30,6 +30,25 @@
 \newcommand{\csromanrunheadfont}{%
   \normalfont\small\mdseries\upshape
 }
+% Reading mode: source-folio citation in the outer margin (no in-text mark).
+% Place at the start of body text belonging to printed page #1 (not headings).
+% Use \marginnote (not \marginpar) so marks work inside \csromangathagroup's \vtop.
+% Align toward the text block (away from the paper edge) on both sides.
+% Folio mark uses footnote size so ฉ.N recedes from body (not running-head \small).
+% \footnotesize note vs body (Scale 1.1) sits ~2.7pt high; positive vadjust lowers it.
+% \leavevmode: at \prose{\csromanfolio…} the note must enter the first line
+% after \parskip; in vmode it anchors above the paragraph (~\parskip too high).
+\newcommand{\csromanfoliofont}{%
+  \normalfont\footnotesize\mdseries\upshape
+}
+\renewcommand*{\marginfont}{\csromanfoliofont}%
+\renewcommand*{\raggedleftmarginnote}{\raggedleft\hspace{0pt}}%
+\renewcommand*{\raggedrightmarginnote}{\raggedright\hspace{0pt}}%
+\renewcommand*{\marginnotevadjust}{2.7pt}%
+\newcommand{\csromanfolio}[1]{%
+  \leavevmode
+  \marginnote{ฉ.#1}%
+}
 \newcommand{\csromanrunhead}[1]{{\csromanrunheadfont #1}}
 \makepagestyle{csroman}
 \makeevenhead{csroman}%
@@ -127,18 +146,49 @@
   \endgroup
 }
 
-\newcommand{\chapterhead}[1]{%
-  \par
-  \Needspace{3.5\baselineskip}%
+% Extra top pad when a chapter opens a sheet (kaṇḍa start).
+% Align title top with gambhīra (ปาราชิกปาฬิ) on the opening page
+% (measured y0 ≈ 140.8 with body start ≈ 90.7; 72bp sat ~50bp too low).
+\newlength{\csromanchaptertopskip}
+\setlength{\csromanchaptertopskip}{22bp}
+
+% After \csromanpage / mid-flow: guarantee recto (odd) without a second
+% \clearpage when already on an odd empty page.
+\newcommand{\csromanensureoddpage}{%
+  \ifodd\value{page}\else
+    \hbox{}\newpage
+  \fi
+}
+
+\newcommand{\csromanchapterheadbody}[1]{%
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
   % Source chapter (e.g. Verañjakaṇḍa) ≈16 bp bold.
   \csromanheadingfont{16bp}{20bp}{\bfseries #1\par}%
   \nointerlineskip
-  % After-skip −20% (was 15bp).
+  % After-skip −20% (were 15bp).
   \vskip 12bp\relax
   \endgroup
+}
+
+% Inline chapter on an already-open sheet (opening stack: Verañjakaṇḍa).
+\newcommand{\chapterhead}[1]{%
+  \par
+  \Needspace{3.5\baselineskip}%
+  \csromanchapterheadbody{#1}%
+}
+
+% Chapter that opens a printed sheet: odd/recto, no running head, top pad.
+% Always clear to a fresh sheet so \vspace* lands in the gambhīra band
+% (ปาราชิกปาฬิ y0 ≈ 140.8), not mid-page or on a mixed path.
+\newcommand{\chapterheadpage}[1]{%
+  \par
+  \clearpage
+  \csromanensureoddpage
+  \thispagestyle{plain}%
+  \vspace*{\csromanchaptertopskip}%
+  \csromanchapterheadbody{#1}%
 }
 
 % Generic section headers under cha: heading_kind h1…h6.
@@ -234,42 +284,72 @@
   \addcontentsline{toc}{#1}{#2}%
 }
 
-% Section closers (niṭṭhitaṃ): centered, medium weight.
-% Source CS Roman stacks consecutive closers with ≈18 bp clear gap
-% between line boxes (not a full blank paragraph each). Avoid the
-% center environment — its trivlist \topsep/\parskip inflated the band.
-\newcommand{\nitthitam}[1]{%
+% Geometry / sandwich centered labels (source_layout=center): body face,
+% centered, prose leading +20%. Consecutive lines share that baselineskip —
+% not the airy niṭṭhitaṃ band. Avoid ``center`` env (trivlist \topsep).
+% Set \baselineskip after \normalsize so the size command does not wipe it.
+\newcommand{\csromancenter}[1]{%
   \par
-  \Needspace{2\baselineskip}%
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
-  \nointerlineskip
-  % Source ≈18 bp clear between stacked closers; prefer a bit more
-  % space above the first closer than below each line.
-  \vskip 12bp\relax
-  {\normalsize\mdseries\csromanplainarg{#1}\par}%
-  \nointerlineskip
-  \vskip 6bp\relax
+  \normalsize\mdseries
+  \setlength{\baselineskip}{1.2\baselineskip}%
+  \csromanplainarg{#1}\par
   \endgroup
 }
 
-% End-of-section rule under niṭṭhitaṃ (CS Roman short centered line).
-\newcommand{\nitthitamruled}[1]{%
+% Section closers (niṭṭhitaṃ / samattaṃ / end formulas): a quiet structural
+% band — lesser than a heading, stronger than body prose. CS Roman source:
+% body size, centered. Major closers (kaṇḍa / large sections) may carry
+% ``\textbf`` from extract; keep bold weight but never enlarge beyond
+% ``\normalsize`` (source uses ~16bp; we mark emphasis with bold only).
+% Vertical air: top 14bp; bottom 12.74bp (= 9.8bp + 30%).
+% Optional short rule stays on \nitthitamruled / \csromansectionrule.
+% Avoid ``center`` env (trivlist).
+\newcommand{\nitthitam}[1]{%
   \par
   \Needspace{2.5\baselineskip}%
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
   \nointerlineskip
-  \vskip 12bp\relax
-  {\normalsize\mdseries\csromanplainarg{#1}\par}%
+  \vskip 14bp\relax
+  {\normalsize #1\par}%
   \nointerlineskip
-  \vskip 5bp\relax
-  \noindent\makebox[\textwidth]{\rule{0.15\linewidth}{0.4pt}}\par
-  \nointerlineskip
-  \vskip 6bp\relax
+  \vskip 12.74bp\relax
   \endgroup
+}
+
+% Short centered end-of-section rule (``section_rule``). Width matches the
+% source underscore glyph run (~33 bp ≈ 0.09\textwidth). Gap above the rule
+% equals one body line (\baselineskip). Bottom air 23.4bp (= 18bp + 30%).
+\newcommand{\csromansectionrule}{%
+  \par
+  \Needspace{2.5\baselineskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  \nointerlineskip
+  \vskip\baselineskip\relax
+  \noindent\makebox[\textwidth]{\rule{0.09\textwidth}{0.4pt}}\par
+  \nointerlineskip
+  \vskip 23.4bp\relax
+  \endgroup
+}
+
+% Closer + end rule as one band (one line between text and rule, air below).
+\newcommand{\nitthitamruled}[1]{%
+  \par
+  \Needspace{3.75\baselineskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  \nointerlineskip
+  \vskip 14bp\relax
+  {\normalsize #1\par}%
+  \endgroup
+  \csromansectionrule
 }
 
 % --- Body prose (CS Roman: first-line indent, NOT hanging) ---------------
@@ -336,11 +416,52 @@
   \noindent{\footnotesize #1\par}%
 }
 
-% Uddāna / gāthā: block indent ≈ CS Roman (x0 − prose left ≈ 65 pt).
-% One บท (stanza) ends with \gathaclose (vspace). Mid-บท lines use \gatha.
+% Uddāna / gāthā: optical center (not fixed \gathaindent).
+% Per page, \csromangathameasure sets \csromangathapagewidth to the longest
+% gāthā line on that page. Each consecutive run (กลุ่ม) is one
+% \csromangathagroup: lines left-aligned in a shared-width box, box centered.
 % Layout comes from JSON source_layout (bat_line vs wak_line), not line count.
 \newlength{\gathaindent}
 \setlength{\gathaindent}{65pt}
+\newlength{\csromangathapagewidth}
+\setlength{\csromangathapagewidth}{0pt}
+
+% #1 = all printed gāthā lines on the page, joined with \\ (no footnotes).
+\newcommand{\csromangathameasure}[1]{%
+  \settowidth{\csromangathapagewidth}{%
+    \begin{tabular}{@{}l@{}}
+    #1
+    \end{tabular}%
+  }%
+}
+
+% #1 = one กลุ่ม (≥1 บท): lines joined with \\ ; between full บท use
+% \\[\gathastanzaskip]. 1 บทครึ่ง (3 บาท) uses plain \\ only (no stanza skip).
+% Left skip + \vtop: top baseline for line spacing; footnotes stay outer.
+% Before/after gap = \tipitakaparskip (same air as between prose paragraphs).
+\makeatletter
+\newcommand{\csromangathagroup}[1]{%
+  \par
+  \vspace{\tipitakaparskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \noindent
+  \dimen@=\dimexpr 0.5\linewidth-0.5\csromangathapagewidth\relax
+  \ifdim\dimen@<\z@ \dimen@=\z@ \fi
+  \hskip\dimen@
+  \vtop{%
+    \hsize=\csromangathapagewidth
+    \linewidth=\hsize
+    \raggedright
+    \noindent #1\par
+  }%
+  \par
+  \endgroup
+  \vspace{\tipitakaparskip}%
+}
+\makeatother
+
+% Legacy fixed-indent macros (kept for hand TeX; generator no longer emits).
 \newcommand{\gatha}[1]{%
   \par
   \begingroup
@@ -356,6 +477,8 @@
   \endgroup
   \vspace{\gathastanzaskip}%
 }
+% Legacy alias → page-shared optical group (single-stanza sandwich case).
+\newcommand{\gathasandwich}[1]{\csromangathagroup{#1}}
 
 % Apparatus footnote: mark is * or + (does not advance the numbered footnote counter).
 \makeatletter
@@ -366,10 +489,22 @@
   \@footnotetext{#2}%
   \endgroup
 }
+% Shared apparatus callout: same * / + foot-note already defined on this page.
+\newcommand{\csromansymbolmark}[1]{%
+  \begingroup
+  \def\@thefnmark{#1}%
+  \@footnotemark
+  \endgroup
+}
 \makeatother
 
-% pot-ma-gyi (CS ``. .``): 1em gap after the visible sentence stop (``{{sp1}}``).
-\newcommand{\csromanspacer}{\hspace{1em}}
+% Sentence-stop gap (``{{sp1}}`` → 0.5em); pot-ma-gyi uses two → 1.0em.
+\newcommand{\csromanspacer}{\hspace{0.5em}}
+
+% Discourse dash after āmantesi / uddiseyyātha etc. Source JSON keeps U+2013
+% (CS Roman en-dash); Sarabun's en-dash is short (~0.54em) so the generator
+% emits this macro → em-dash (~0.84em), closer to the Roman edition line.
+\newcommand{\csromandash}{—}
 
 % Per-segment interword override (layout.json page_layout segments.word_space).
 % #1 = scale vs the current font's interword glue (already includes preamble
@@ -400,3 +535,36 @@
   \setlength{\gathaindent}{#6}%
   \setlength{\emergencystretch}{#7}%
 }
+
+% Reading mode: per-physical-page layout (layout.json page_layout_reading_mode).
+% Keys are reading PDF page numbers (\thepage), not source folio ฉ.N.
+% Applied at paragraph begin when \value{page} changes; paragraphs that
+% span a page break keep the layout from their start page.
+\makeatletter
+\newcount\csroman@reading@lastlayoutpage
+\csroman@reading@lastlayoutpage=\m@ne
+\newcommand{\csroman@reading@volumelayout}{}%
+\newcommand{\csromanreadingpagelayoutvolume}[7]{%
+  \def\csroman@reading@volumelayout{\csromanlayoutapply{#1}{#2}{#3}{#4}{#5}{#6}{#7}}%
+}
+\newcommand{\csromanreadingpagelayoutdef}[8]{%
+  \@namedef{csroman@rpl@#1}{\csromanlayoutapply{#2}{#3}{#4}{#5}{#6}{#7}{#8}}%
+}
+\newcommand{\csroman@reading@applyfor}[1]{%
+  \ifcsname csroman@rpl@#1\endcsname
+    \csname csroman@rpl@#1\endcsname
+  \else
+    \csroman@reading@volumelayout
+  \fi
+}
+\newcommand{\csroman@reading@tryapplylayout}{%
+  \ifnum\value{page}=\csroman@reading@lastlayoutpage
+  \else
+    \global\csroman@reading@lastlayoutpage=\value{page}%
+    \csroman@reading@applyfor{\the\value{page}}%
+  \fi
+}
+\newcommand{\csromanreadingpagelayoutenable}{%
+  \AddToHook{para/begin}{\csroman@reading@tryapplylayout}%
+}
+\makeatother

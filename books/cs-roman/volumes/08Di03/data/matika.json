@@ -1,0 +1,916 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "title": "Pāthikavaggapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 2
+    },
+    {
+      "title": "Pāthikasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": null,
+      "section_no": 1
+    },
+    {
+      "title": "Sunakkhattavatthu",
+      "page": 1,
+      "kind": "h2",
+      "matched_order": 4
+    },
+    {
+      "title": "Korakkhattiyavatthu",
+      "page": 4,
+      "kind": "h2",
+      "matched_order": 17
+    },
+    {
+      "title": "Acelakaḷāramaṭṭakavatthu",
+      "page": 7,
+      "kind": "h2",
+      "matched_order": 27
+    },
+    {
+      "title": "Acelapāthikaputtavatthu",
+      "page": 9,
+      "kind": "h2",
+      "matched_order": 34
+    },
+    {
+      "title": "Iddhipāṭihāriyakathā",
+      "page": 12,
+      "kind": "h2",
+      "matched_order": 49
+    },
+    {
+      "title": "Aggaññapaññattikathā",
+      "page": 23,
+      "kind": "h2",
+      "matched_order": 104
+    },
+    {
+      "title": "Udumbarikasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 135,
+      "section_no": 2
+    },
+    {
+      "title": "Nigrodhaparibbājakavatthu",
+      "page": 30,
+      "kind": "h2",
+      "matched_order": 136
+    },
+    {
+      "title": "Tapojigucchāvāda",
+      "page": 32,
+      "kind": "h2",
+      "matched_order": 145
+    },
+    {
+      "title": "Upakkilesa",
+      "page": 34,
+      "kind": "h2",
+      "matched_order": 152
+    },
+    {
+      "title": "Parisuddhapapaṭikappattakathā",
+      "page": 37,
+      "kind": "h2",
+      "matched_order": 173
+    },
+    {
+      "title": "Parisuddhatacappattakathā",
+      "page": 40,
+      "kind": "h2",
+      "matched_order": 193
+    },
+    {
+      "title": "Parisuddhaphegguppattakathā",
+      "page": 41,
+      "kind": "h2",
+      "matched_order": 199
+    },
+    {
+      "title": "Parisuddha-aggappattasārappattakathā",
+      "page": 42,
+      "kind": "h2",
+      "matched_order": 203
+    },
+    {
+      "title": "Nigrodhassa pajjhāyana",
+      "page": 43,
+      "kind": "h2",
+      "matched_order": 209
+    },
+    {
+      "title": "Brahmacariyapariyosānasacchikiriyā",
+      "page": 45,
+      "kind": "h2",
+      "matched_order": 216
+    },
+    {
+      "title": "Paribbājakānaṃpajjhāyana",
+      "page": 46,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Cakkavattisutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 225,
+      "section_no": 3
+    },
+    {
+      "title": "Attadīpasaraṇatā",
+      "page": 48,
+      "kind": "h2",
+      "matched_order": 226
+    },
+    {
+      "title": "Daḷhanemicakkavattirājā",
+      "page": 48,
+      "kind": "h2",
+      "matched_order": 229
+    },
+    {
+      "title": "Cakkavatti-ariyavatta",
+      "page": 50,
+      "kind": "h2",
+      "matched_order": 236
+    },
+    {
+      "title": "Cakkaratanapātubhāva",
+      "page": 50,
+      "kind": "h2",
+      "matched_order": 238
+    },
+    {
+      "title": "Dutiyādicakkavattikathā",
+      "page": 52,
+      "kind": "h2",
+      "matched_order": 247
+    },
+    {
+      "title": "Āyuvaṇṇādiparihānikathā",
+      "page": 54,
+      "kind": "h2",
+      "matched_order": 255
+    },
+    {
+      "title": "Dasavassāyukasamaya",
+      "page": 59,
+      "kind": "h2",
+      "matched_order": 278
+    },
+    {
+      "title": "Āyuvaṇṇādivaḍḍhanakathā",
+      "page": 61,
+      "kind": "h2",
+      "matched_order": 287
+    },
+    {
+      "title": "Saṅkharāja-uppatti",
+      "page": 62,
+      "kind": "h2",
+      "matched_order": 292
+    },
+    {
+      "title": "Metteyyabuddhuppāda",
+      "page": 63,
+      "kind": "h2",
+      "matched_order": 295
+    },
+    {
+      "title": "Bhikkhuno-āyuvaṇṇādivaḍḍhanakathā",
+      "page": 64,
+      "kind": "h2",
+      "matched_order": 300
+    },
+    {
+      "title": "Aggaññasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 310,
+      "section_no": 4
+    },
+    {
+      "title": "Vāseṭṭhabhāradvāja",
+      "page": 66,
+      "kind": "h2",
+      "matched_order": 311
+    },
+    {
+      "title": "Catuvaṇṇasuddhi",
+      "page": 67,
+      "kind": "h2",
+      "matched_order": 317
+    },
+    {
+      "title": "Rasapathavipātubhāva",
+      "page": 70,
+      "kind": "h2",
+      "matched_order": 329
+    },
+    {
+      "title": "Candimasūriyādipātubhāva",
+      "page": 70,
+      "kind": "h2",
+      "matched_order": 331
+    },
+    {
+      "title": "Bhūmipappaṭakapātubhāva",
+      "page": 71,
+      "kind": "h2",
+      "matched_order": 335
+    },
+    {
+      "title": "Padālatāpātubhāva",
+      "page": 72,
+      "kind": "h2",
+      "matched_order": 338
+    },
+    {
+      "title": "Akaṭṭhapākasālipātubhāva",
+      "page": 73,
+      "kind": "h2",
+      "matched_order": 343
+    },
+    {
+      "title": "Itthipurisaliṅgapātubhāva",
+      "page": 73,
+      "kind": "h2",
+      "matched_order": 345
+    },
+    {
+      "title": "Methunadhammasamācāra",
+      "page": 74,
+      "kind": "h2",
+      "matched_order": 348
+    },
+    {
+      "title": "Sālivibhāga",
+      "page": 75,
+      "kind": "h2",
+      "matched_order": 355
+    },
+    {
+      "title": "Mahāsammatarājā",
+      "page": 76,
+      "kind": "h2",
+      "matched_order": 359
+    },
+    {
+      "title": "Brāhmaṇamaṇḍala",
+      "page": 77,
+      "kind": "h2",
+      "matched_order": 364
+    },
+    {
+      "title": "Vessamaṇḍala",
+      "page": 78,
+      "kind": "h2",
+      "matched_order": 367
+    },
+    {
+      "title": "Suddamaṇḍala",
+      "page": 79,
+      "kind": "h2",
+      "matched_order": 370
+    },
+    {
+      "title": "Duccaritādikathā",
+      "page": 79,
+      "kind": "h2",
+      "matched_order": 373
+    },
+    {
+      "title": "Bodhipakkhiyabhāvanā",
+      "page": 80,
+      "kind": "h2",
+      "matched_order": 377
+    },
+    {
+      "title": "Sampasādanīyasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 388,
+      "section_no": 5
+    },
+    {
+      "title": "Sāriputtasīhanāda",
+      "page": 82,
+      "kind": "h2",
+      "matched_order": 389
+    },
+    {
+      "title": "Kusaladhammadesanā",
+      "page": 84,
+      "kind": "h2",
+      "matched_order": 399
+    },
+    {
+      "title": "Āyatanapaṇṇattidesanā",
+      "page": 84,
+      "kind": "h2",
+      "matched_order": 401
+    },
+    {
+      "title": "Gabbhāvakkantidesanā",
+      "page": 85,
+      "kind": "h2",
+      "matched_order": 403
+    },
+    {
+      "title": "Ādesanavidhādesanā",
+      "page": 85,
+      "kind": "h2",
+      "matched_order": 408
+    },
+    {
+      "title": "Dassanasamāpattidesanā",
+      "page": 86,
+      "kind": "h2",
+      "matched_order": 414
+    },
+    {
+      "title": "Puggalapaṇṇattidesanā",
+      "page": 87,
+      "kind": "h2",
+      "matched_order": 420
+    },
+    {
+      "title": "Padhānadesanā",
+      "page": 87,
+      "kind": "h2",
+      "matched_order": 422
+    },
+    {
+      "title": "Paṭipadādesanā",
+      "page": 88,
+      "kind": "h2",
+      "matched_order": 425
+    },
+    {
+      "title": "Bhassasamācārādidesanā",
+      "page": 88,
+      "kind": "h2",
+      "matched_order": 427
+    },
+    {
+      "title": "Anusāsanavidhādesanā",
+      "page": 89,
+      "kind": "h2",
+      "matched_order": 430
+    },
+    {
+      "title": "Parapuggalavimuttiñāṇadesanā",
+      "page": 89,
+      "kind": "h2",
+      "matched_order": 432
+    },
+    {
+      "title": "Sassatavādadesanā",
+      "page": 90,
+      "kind": "h2",
+      "matched_order": 435
+    },
+    {
+      "title": "Pubbenivāsānussatiñāṇadesanā",
+      "page": 91,
+      "kind": "h2",
+      "matched_order": 440
+    },
+    {
+      "title": "Cutūpapātañaṇadesanā",
+      "page": 92,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Iddhividhadesanā",
+      "page": 93,
+      "kind": "h2",
+      "matched_order": 446
+    },
+    {
+      "title": "Aññathāsatthuguṇadassana",
+      "page": 94,
+      "kind": "h2",
+      "matched_order": 450
+    },
+    {
+      "title": "Anuyogadānappakāra",
+      "page": 94,
+      "kind": "h2",
+      "matched_order": 452
+    },
+    {
+      "title": "Acchariya-abbhuta",
+      "page": 95,
+      "kind": "h2",
+      "matched_order": 458
+    },
+    {
+      "title": "Pāsādikasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 464,
+      "section_no": 6
+    },
+    {
+      "title": "Nigaṇṭhanāṭaputtakālaṅkiriyā",
+      "page": 97,
+      "kind": "h2",
+      "matched_order": 466
+    },
+    {
+      "title": "Asammāsambuddhappaveditadhammavinaya",
+      "page": 98,
+      "kind": "h2",
+      "matched_order": 472
+    },
+    {
+      "title": "Sammāsambuddhappaveditadhammavinaya",
+      "page": 99,
+      "kind": "h2",
+      "matched_order": 476
+    },
+    {
+      "title": "Sāvakānutappasatthu",
+      "page": 100,
+      "kind": "h2",
+      "matched_order": 480
+    },
+    {
+      "title": "Sāvakānanutappasatthu",
+      "page": 101,
+      "kind": "h2",
+      "matched_order": 483
+    },
+    {
+      "title": "Brahmacariya-aparipūrādikathā",
+      "page": 101,
+      "kind": "h2",
+      "matched_order": 485
+    },
+    {
+      "title": "Saṅgāyitabbadhamma",
+      "page": 105,
+      "kind": "h2",
+      "matched_order": 500
+    },
+    {
+      "title": "Saññāpetabbavidhi",
+      "page": 105,
+      "kind": "h2",
+      "matched_order": 502
+    },
+    {
+      "title": "Paccayānuññātakāraṇa",
+      "page": 107,
+      "kind": "h2",
+      "matched_order": 509
+    },
+    {
+      "title": "Sukhallikānuyoga",
+      "page": 107,
+      "kind": "h2",
+      "matched_order": 511
+    },
+    {
+      "title": "Sukhallikānuyogānisaṃsa",
+      "page": 109,
+      "kind": "h2",
+      "matched_order": 529
+    },
+    {
+      "title": "Khīṇāsava-abhabbaṭhāna",
+      "page": 110,
+      "kind": "h2",
+      "matched_order": 532
+    },
+    {
+      "title": "Pañhābyākaraṇa",
+      "page": 110,
+      "kind": "h2",
+      "matched_order": 534
+    },
+    {
+      "title": "Abyākataṭṭhāna",
+      "page": 112,
+      "kind": "h2",
+      "matched_order": 538
+    },
+    {
+      "title": "Byākataṭṭhāna",
+      "page": 113,
+      "kind": "h2",
+      "matched_order": 544
+    },
+    {
+      "title": "Pubbantasahagatadiṭṭhinissaya",
+      "page": 113,
+      "kind": "h2",
+      "matched_order": 547
+    },
+    {
+      "title": "Aparantasahagatadiṭṭhinissaya",
+      "page": 115,
+      "kind": "h2",
+      "matched_order": 553
+    },
+    {
+      "title": "Lakkhaṇasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 560,
+      "section_no": 7
+    },
+    {
+      "title": "Dvattiṃsamahāpurisalakkhaṇāni",
+      "page": 117,
+      "kind": "h2",
+      "matched_order": 561
+    },
+    {
+      "title": "Suppatiṭṭhitapādatālakkhaṇaṃ (1)",
+      "page": 119,
+      "kind": "h2",
+      "matched_order": 573
+    },
+    {
+      "title": "Pādatalacakkalakkhaṇaṃ (2)",
+      "page": 121,
+      "kind": "h2",
+      "matched_order": 599
+    },
+    {
+      "title": "Āyatanapaṇhitāditilakkhaṇaṃ (3-5)",
+      "page": 122,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Sattussadatālakkhaṇaṃ (6)",
+      "page": 124,
+      "kind": "h2",
+      "matched_order": 647
+    },
+    {
+      "title": "Karacaraṇamudujālatālakkhaṇāni (7-8)",
+      "page": 125,
+      "kind": "h2",
+      "matched_order": 663
+    },
+    {
+      "title": "Ussaṅkhapāda-uddhaggalomatālakkhaṇāni (9-10)",
+      "page": 126,
+      "kind": "h2",
+      "matched_order": 683
+    },
+    {
+      "title": "Eṇijaṅghalakkhaṇaṃ (11)",
+      "page": 127,
+      "kind": "h2",
+      "matched_order": 708
+    },
+    {
+      "title": "Sukhumacchavilakkhaṇaṃ (12)",
+      "page": 128,
+      "kind": "h2",
+      "matched_order": 729
+    },
+    {
+      "title": "Suvaṇṇavaṇṇalakkhaṇaṃ (13)",
+      "page": 130,
+      "kind": "h2",
+      "matched_order": 750
+    },
+    {
+      "title": "Kosohitavatthaguyhalakkhaṇaṃ (14)",
+      "page": 131,
+      "kind": "h2",
+      "matched_order": 771
+    },
+    {
+      "title": "Parimaṇḍala-anonamajaṇṇuparimasanalakkhaṇāni (15-16)",
+      "page": 132,
+      "kind": "h2",
+      "matched_order": 792
+    },
+    {
+      "title": "Sīhapubbaddhakāyāditilakkhaṇaṃ (17-19)",
+      "page": 134,
+      "kind": "h2",
+      "matched_order": 813
+    },
+    {
+      "title": "Rasaggasaggitālakkhaṇaṃ (20)",
+      "page": 135,
+      "kind": "h2",
+      "matched_order": 834
+    },
+    {
+      "title": "Abhinīlanetta-gopakhumalakkhaṇāni (21-22)",
+      "page": 136,
+      "kind": "h2",
+      "matched_order": 850
+    },
+    {
+      "title": "Uṇhīsasīsalakkhaṇaṃ (23)",
+      "page": 137,
+      "kind": "h2",
+      "matched_order": 869
+    },
+    {
+      "title": "Ekekalomatā-uṇṇālakkhaṇāni (24-25)",
+      "page": 138,
+      "kind": "h2",
+      "matched_order": 889
+    },
+    {
+      "title": "Cattālīsa-aviraḷadantalakkhaṇāni (26-27)",
+      "page": 139,
+      "kind": "h2",
+      "matched_order": 910
+    },
+    {
+      "title": "Pahūtajivhā-brahmassaralakkhaṇāni (28-29)",
+      "page": 141,
+      "kind": "h2",
+      "matched_order": 932
+    },
+    {
+      "title": "Sīhahanulakkhaṇaṃ (30)",
+      "page": 142,
+      "kind": "h2",
+      "matched_order": 952
+    },
+    {
+      "title": "Samasanta-susukkadāṭhālakkhaṇāni (31-32)",
+      "page": 143,
+      "kind": "h2",
+      "matched_order": 973
+    },
+    {
+      "title": "Siṅgālasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1010,
+      "section_no": 8
+    },
+    {
+      "title": "Chadisā",
+      "page": 146,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Cattāro kammakilesā",
+      "page": 147,
+      "kind": "h2",
+      "matched_order": 1018
+    },
+    {
+      "title": "Catuṭhāṇaṃ",
+      "page": 147,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Cha-apāyamukhāni",
+      "page": 148,
+      "kind": "h2",
+      "matched_order": 1028
+    },
+    {
+      "title": "Surāmerayassa cha ādīnavā",
+      "page": 148,
+      "kind": "h2",
+      "matched_order": 1030
+    },
+    {
+      "title": "Vikālacariyāya cha ādīnavā",
+      "page": 148,
+      "kind": "h2",
+      "matched_order": 1032
+    },
+    {
+      "title": "Samajjābhicaraṇassa cha ādīnavā",
+      "page": 148,
+      "kind": "h2",
+      "matched_order": 1034
+    },
+    {
+      "title": "Jūtappamādassa cha ādīnavā",
+      "page": 149,
+      "kind": "h2",
+      "matched_order": 1036
+    },
+    {
+      "title": "Pāpamittatāya cha ādīnavā",
+      "page": 149,
+      "kind": "h2",
+      "matched_order": 1038
+    },
+    {
+      "title": "Ālasyassa cha ādīnavā",
+      "page": 149,
+      "kind": "h2",
+      "matched_order": 1040
+    },
+    {
+      "title": "Mittapatirūpaka",
+      "page": 151,
+      "kind": "h2",
+      "matched_order": 1073
+    },
+    {
+      "title": "Suhadamitta",
+      "page": 152,
+      "kind": "h2",
+      "matched_order": 1087
+    },
+    {
+      "title": "Chaddisāpaṭicchādanakaṇḍa",
+      "page": 153,
+      "kind": "cha",
+      "matched_order": 1106
+    },
+    {
+      "title": "Āṭānāṭiyasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1138,
+      "section_no": 9
+    },
+    {
+      "title": "Paṭhamabhāṇavāra",
+      "page": 158,
+      "kind": "h2",
+      "matched_order": 1139
+    },
+    {
+      "title": "Dutiyabhāṇavāra",
+      "page": 166,
+      "kind": "h2",
+      "matched_order": 1278
+    },
+    {
+      "title": "Saṅgītisutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1418,
+      "section_no": 10
+    },
+    {
+      "title": "Ubbhatakanavasandhāgāra",
+      "page": 175,
+      "kind": "h2",
+      "matched_order": 1420
+    },
+    {
+      "title": "Bhinnanigaṇṭhavatthu",
+      "page": 176,
+      "kind": "h2",
+      "matched_order": 1426
+    },
+    {
+      "title": "Ekaka",
+      "page": 178,
+      "kind": "h2",
+      "matched_order": 1431
+    },
+    {
+      "title": "Duka",
+      "page": 178,
+      "kind": "h2",
+      "matched_order": 1433
+    },
+    {
+      "title": "Tika",
+      "page": 180,
+      "kind": "h2",
+      "matched_order": 1470
+    },
+    {
+      "title": "Catukka",
+      "page": 185,
+      "kind": "h2",
+      "matched_order": 1535
+    },
+    {
+      "title": "Pañcaka",
+      "page": 195,
+      "kind": "h2",
+      "matched_order": 1605
+    },
+    {
+      "title": "Chakka",
+      "page": 201,
+      "kind": "h2",
+      "matched_order": 1642
+    },
+    {
+      "title": "Sattaka",
+      "page": 208,
+      "kind": "h2",
+      "matched_order": 1683
+    },
+    {
+      "title": "Aṭṭhaka",
+      "page": 210,
+      "kind": "h2",
+      "matched_order": 1708
+    },
+    {
+      "title": "Navaka",
+      "page": 218,
+      "kind": "h2",
+      "matched_order": 1758
+    },
+    {
+      "title": "Dasaka",
+      "page": 221,
+      "kind": "h2",
+      "matched_order": 1785
+    },
+    {
+      "title": "Dasuttarasutta",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1819,
+      "section_no": 11
+    },
+    {
+      "title": "Ekodhammo",
+      "page": 227,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Dvedhammā",
+      "page": 228,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Tayodhammā",
+      "page": 229,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Cattārodhammā",
+      "page": 230,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Pañcadhammā",
+      "page": 232,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Chadhammā",
+      "page": 236,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Sattadhammā",
+      "page": 240,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Aṭṭhadhammā",
+      "page": 243,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Novadhammā",
+      "page": 252,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Dasadhammā",
+      "page": 255,
+      "kind": "h2",
+      "matched_order": null
+    },
+    {
+      "title": "Uddānagāthā",
+      "page": 260,
+      "kind": "h2",
+      "matched_order": null
+    }
+  ]
+}

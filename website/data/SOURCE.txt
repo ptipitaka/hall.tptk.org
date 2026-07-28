@@ -1,0 +1,10 @@
+Cover JPEGs for populate_tipitaka_catalog live in covers/
+(copy from tipitaka-catalog/resources/covers/). *.jpg is gitignored.
+Images already imported into Wagtail media travel with a DB+media dump.
+
+CTS Roman volume covers (40):
+  covers/cts-roman.jpg              — edition cover (vol. 01)
+  covers/cts-roman/NN-<stem>.jpg    — per-volume covers
+  covers/cts-roman-raw/<stem>.jpg   — raw PDF page-1 extracts
+Regenerate with: python scripts/style_cts_roman_covers.py
+(PDF sources: books/cs-roman/source/*.pdf)

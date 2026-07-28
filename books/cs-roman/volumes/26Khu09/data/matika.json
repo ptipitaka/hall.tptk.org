@@ -1,0 +1,930 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "title": "Paṭisambhidāmaggapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": null
+    },
+    {
+      "title": "Mahāvagga",
+      "page": null,
+      "kind": "h1",
+      "matched_order": null,
+      "section_no": 1
+    },
+    {
+      "title": "Ñāṇakathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": null,
+      "section_no": 1
+    },
+    {
+      "title": "Sutamayañāṇaniddesa",
+      "page": 5,
+      "kind": "h1",
+      "matched_order": 8,
+      "section_no": 1
+    },
+    {
+      "title": "Sīlamayañāṇaniddesa",
+      "page": 41,
+      "kind": "h1",
+      "matched_order": 184,
+      "section_no": 2
+    },
+    {
+      "title": "Samādhibhāvanāmayañāṇaniddesa",
+      "page": 47,
+      "kind": "h1",
+      "matched_order": 213,
+      "section_no": 3
+    },
+    {
+      "title": "Dhammaṭṭhitiñāṇaniddesa",
+      "page": 48,
+      "kind": "h1",
+      "matched_order": 218,
+      "section_no": 4
+    },
+    {
+      "title": "Sammasanañāṇaniddesa",
+      "page": 51,
+      "kind": "h1",
+      "matched_order": 232,
+      "section_no": 5
+    },
+    {
+      "title": "Udayabbayañāṇaniddesa",
+      "page": 52,
+      "kind": "h1",
+      "matched_order": 241,
+      "section_no": 6
+    },
+    {
+      "title": "Bhaṅgānupassanāñāṇaniddesa",
+      "page": 55,
+      "kind": "h1",
+      "matched_order": 255,
+      "section_no": 7
+    },
+    {
+      "title": "Ādīnavañāṇaniddesa",
+      "page": 56,
+      "kind": "h1",
+      "matched_order": 271,
+      "section_no": 8
+    },
+    {
+      "title": "Saṅkhārupekkhāñāṇaniddesa",
+      "page": 58,
+      "kind": "h1",
+      "matched_order": 293,
+      "section_no": 9
+    },
+    {
+      "title": "Gotrabhuñāṇaniddesa",
+      "page": 63,
+      "kind": "h1",
+      "matched_order": 323,
+      "section_no": 10
+    },
+    {
+      "title": "Maggañāṇaniddesa",
+      "page": 66,
+      "kind": "h1",
+      "matched_order": 343,
+      "section_no": 11
+    },
+    {
+      "title": "Phalañāṇaniddesa",
+      "page": 68,
+      "kind": "h1",
+      "matched_order": 367,
+      "section_no": 12
+    },
+    {
+      "title": "Vimuttiñāṇaniddesa",
+      "page": 70,
+      "kind": "h1",
+      "matched_order": 380,
+      "section_no": 13
+    },
+    {
+      "title": "Paccavekkhaṇañāṇaniddesa",
+      "page": 70,
+      "kind": "h1",
+      "matched_order": 386,
+      "section_no": 14
+    },
+    {
+      "title": "Vatthunānattañāṇaniddesa",
+      "page": 73,
+      "kind": "h1",
+      "matched_order": 398,
+      "section_no": 15
+    },
+    {
+      "title": "Gocaranānattañāṇaniddesa",
+      "page": 75,
+      "kind": "h1",
+      "matched_order": 407,
+      "section_no": 16
+    },
+    {
+      "title": "Cariyānānattañāṇaniddesa",
+      "page": 77,
+      "kind": "h1",
+      "matched_order": 415,
+      "section_no": 17
+    },
+    {
+      "title": "Bhūminānattañāṇaniddesa",
+      "page": 81,
+      "kind": "h1",
+      "matched_order": 428,
+      "section_no": 18
+    },
+    {
+      "title": "Dhammanānattañāṇaniddesa",
+      "page": 82,
+      "kind": "h1",
+      "matched_order": 436,
+      "section_no": 19
+    },
+    {
+      "title": "20-24. Ñāṇapañcakaniddesa",
+      "page": 84,
+      "kind": "h3",
+      "matched_order": 449
+    },
+    {
+      "title": "25-28. Paṭisambhidāñāṇaniddesa",
+      "page": 85,
+      "kind": "h3",
+      "matched_order": 453
+    },
+    {
+      "title": "29-31. Ñāṇattayaniddesa",
+      "page": 89,
+      "kind": "h3",
+      "matched_order": 472
+    },
+    {
+      "title": "Ānantarika samādhiñāṇaniddesa",
+      "page": 91,
+      "kind": "h1",
+      "matched_order": 485,
+      "section_no": 32
+    },
+    {
+      "title": "Araṇavihārañāṇaniddesa",
+      "page": 93,
+      "kind": "h1",
+      "matched_order": 494,
+      "section_no": 33
+    },
+    {
+      "title": "Nirodhasamāpattiñāṇaniddesa",
+      "page": 94,
+      "kind": "h1",
+      "matched_order": 501,
+      "section_no": 34
+    },
+    {
+      "title": "Parinibbānañāṇaniddesa",
+      "page": 97,
+      "kind": "h1",
+      "matched_order": 515,
+      "section_no": 35
+    },
+    {
+      "title": "Samasīsaṭṭhañāṇaniddesa",
+      "page": 98,
+      "kind": "h1",
+      "matched_order": 520,
+      "section_no": 36
+    },
+    {
+      "title": "Sallekhaṭṭhañāṇaniddesa",
+      "page": 99,
+      "kind": "h1",
+      "matched_order": 528,
+      "section_no": 37
+    },
+    {
+      "title": "Vīriyārambhañāṇaniddesa",
+      "page": 100,
+      "kind": "h1",
+      "matched_order": 535,
+      "section_no": 38
+    },
+    {
+      "title": "Atthasandassanañāṇaniddesa",
+      "page": 101,
+      "kind": "h1",
+      "matched_order": 541,
+      "section_no": 39
+    },
+    {
+      "title": "Dassanavisuddhiñāṇaniddesa",
+      "page": 102,
+      "kind": "h1",
+      "matched_order": 546,
+      "section_no": 40
+    },
+    {
+      "title": "Khantiñāṇaniddesa",
+      "page": 102,
+      "kind": "h1",
+      "matched_order": 553,
+      "section_no": 41
+    },
+    {
+      "title": "Pariyogāhaṇañāṇaniddesa",
+      "page": 103,
+      "kind": "h1",
+      "matched_order": 556,
+      "section_no": 42
+    },
+    {
+      "title": "Padesavihārañāṇaniddesa",
+      "page": 103,
+      "kind": "h1",
+      "matched_order": 559,
+      "section_no": 43
+    },
+    {
+      "title": "44-49. Chavivaṭṭañāṇaniddesa",
+      "page": 104,
+      "kind": "h3",
+      "matched_order": 564
+    },
+    {
+      "title": "Iddhividhañāṇaniddesa",
+      "page": 107,
+      "kind": "h1",
+      "matched_order": 576,
+      "section_no": 50
+    },
+    {
+      "title": "Sotadhātuvisuddhiñāṇaniddesa",
+      "page": 108,
+      "kind": "h1",
+      "matched_order": 580,
+      "section_no": 51
+    },
+    {
+      "title": "Cetopariyañāṇaniddesa",
+      "page": 108,
+      "kind": "h1",
+      "matched_order": 583,
+      "section_no": 52
+    },
+    {
+      "title": "Pubbenivāsānussatiñāṇaniddesa",
+      "page": 109,
+      "kind": "h1",
+      "matched_order": 587,
+      "section_no": 53
+    },
+    {
+      "title": "Dibbacakkhuñāṇaniddesa",
+      "page": 110,
+      "kind": "h1",
+      "matched_order": 591,
+      "section_no": 54
+    },
+    {
+      "title": "Āsavakkhayañāṇaniddesa",
+      "page": 111,
+      "kind": "h1",
+      "matched_order": 595,
+      "section_no": 55
+    },
+    {
+      "title": "56-63. Saccañāṇacatukkadvayaniddesa",
+      "page": 114,
+      "kind": "h3",
+      "matched_order": 606
+    },
+    {
+      "title": "64-67. Suddhikapaṭisambhidāñāṇaniddesa",
+      "page": 115,
+      "kind": "h3",
+      "matched_order": 611
+    },
+    {
+      "title": "Indriyaparopariyattañāṇaniddesa",
+      "page": 116,
+      "kind": "h1",
+      "matched_order": 618,
+      "section_no": 68
+    },
+    {
+      "title": "Āsayānusayañāṇaniddesa",
+      "page": 117,
+      "kind": "h1",
+      "matched_order": 630,
+      "section_no": 69
+    },
+    {
+      "title": "Yamakapāṭihīrañāṇaniddesa",
+      "page": 120,
+      "kind": "h1",
+      "matched_order": 640,
+      "section_no": 70
+    },
+    {
+      "title": "Mahākaruṇāñāṇaniddesa",
+      "page": 121,
+      "kind": "h1",
+      "matched_order": 645,
+      "section_no": 71
+    },
+    {
+      "title": "72-73. Sabbaññutaññāṇaniddesa",
+      "page": 125,
+      "kind": "h3",
+      "matched_order": 660
+    },
+    {
+      "title": "Diṭṭhikathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 682,
+      "section_no": 2
+    },
+    {
+      "title": "Assādadiṭṭhiniddesa",
+      "page": 134,
+      "kind": "h1",
+      "matched_order": 711,
+      "section_no": 1
+    },
+    {
+      "title": "Attānudiṭṭhiniddesa",
+      "page": 137,
+      "kind": "h1",
+      "matched_order": 726,
+      "section_no": 2
+    },
+    {
+      "title": "Micchādiṭṭhiniddesa",
+      "page": 146,
+      "kind": "h1",
+      "matched_order": 759,
+      "section_no": 3
+    },
+    {
+      "title": "Sakkāyadiṭṭhiniddesa",
+      "page": 147,
+      "kind": "h1",
+      "matched_order": 762,
+      "section_no": 4
+    },
+    {
+      "title": "Sassatadiṭṭhiniddesa",
+      "page": 148,
+      "kind": "h1",
+      "matched_order": 765,
+      "section_no": 5
+    },
+    {
+      "title": "Ucchedadiṭṭhiniddesa",
+      "page": 148,
+      "kind": "h1",
+      "matched_order": 768,
+      "section_no": 6
+    },
+    {
+      "title": "Antaggāhikādiṭṭhiniddesa",
+      "page": 149,
+      "kind": "h1",
+      "matched_order": 772,
+      "section_no": 7
+    },
+    {
+      "title": "Pubbantānudiṭṭhiniddesa",
+      "page": 154,
+      "kind": "h1",
+      "matched_order": 799,
+      "section_no": 8
+    },
+    {
+      "title": "Aparantānudiṭṭhiniddesa",
+      "page": 154,
+      "kind": "h1",
+      "matched_order": 801,
+      "section_no": 9
+    },
+    {
+      "title": "10-12. Saññojanikādidiṭṭhiniddesa",
+      "page": 155,
+      "kind": "h3",
+      "matched_order": 804
+    },
+    {
+      "title": "Attavādapaṭisaṃyuttadiṭṭhiniddesa",
+      "page": 156,
+      "kind": "h1",
+      "matched_order": 811,
+      "section_no": 13
+    },
+    {
+      "title": "Lokavādapaṭisaṃyuttadiṭṭhiniddesa",
+      "page": 156,
+      "kind": "h1",
+      "matched_order": 814,
+      "section_no": 14
+    },
+    {
+      "title": "15-16. Bhava-vibhavadiṭṭhiniddesa",
+      "page": 157,
+      "kind": "h3",
+      "matched_order": 818
+    },
+    {
+      "title": "Ānāpānassatikathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 849,
+      "section_no": 3
+    },
+    {
+      "title": "Gaṇanavāra",
+      "page": 161,
+      "kind": "h1",
+      "matched_order": 857,
+      "section_no": 1
+    },
+    {
+      "title": "Soḷasañāṇaniddesa",
+      "page": 162,
+      "kind": "h1",
+      "matched_order": 862,
+      "section_no": 2
+    },
+    {
+      "title": "Upakkilesañāṇaniddesa",
+      "page": 163,
+      "kind": "h1",
+      "matched_order": 868,
+      "section_no": 3
+    },
+    {
+      "title": "Vodānañāṇaniddesa",
+      "page": 166,
+      "kind": "h1",
+      "matched_order": 908,
+      "section_no": 4
+    },
+    {
+      "title": "Satokāriñāṇaniddesa",
+      "page": 173,
+      "kind": "h1",
+      "matched_order": 949,
+      "section_no": 5
+    },
+    {
+      "title": "Ñāṇarāsichakkaniddesa",
+      "page": 196,
+      "kind": "h1",
+      "matched_order": 1058,
+      "section_no": 6
+    },
+    {
+      "title": "Indriyakathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 1068,
+      "section_no": 4
+    },
+    {
+      "title": "Paṭhamasuttantaniddesa",
+      "page": 198,
+      "kind": "h1",
+      "matched_order": 1069,
+      "section_no": 1
+    },
+    {
+      "title": "Dutiyasuttantaniddesa",
+      "page": 200,
+      "kind": "h1",
+      "matched_order": 1081,
+      "section_no": 2
+    },
+    {
+      "title": "Tatiyasuttantaniddesa",
+      "page": 210,
+      "kind": "h1",
+      "matched_order": 1128,
+      "section_no": 3
+    },
+    {
+      "title": "Catutthasuttantaniddesa",
+      "page": 217,
+      "kind": "h1",
+      "matched_order": 1164,
+      "section_no": 4
+    },
+    {
+      "title": "Indriyasamodhāna",
+      "page": 223,
+      "kind": "h1",
+      "matched_order": 1189,
+      "section_no": 5
+    },
+    {
+      "title": "Vimokkhakathā",
+      "page": 230,
+      "kind": "h3",
+      "matched_order": 1232,
+      "section_no": 5
+    },
+    {
+      "title": "Gatikathā",
+      "page": 266,
+      "kind": "h3",
+      "matched_order": 1418,
+      "section_no": 6
+    },
+    {
+      "title": "Kammakathā",
+      "page": 271,
+      "kind": "h3",
+      "matched_order": 1438,
+      "section_no": 7
+    },
+    {
+      "title": "Vipallāsakathā",
+      "page": 273,
+      "kind": "h3",
+      "matched_order": 1456,
+      "section_no": 8
+    },
+    {
+      "title": "Maggakathā",
+      "page": 274,
+      "kind": "h3",
+      "matched_order": 1473,
+      "section_no": 9
+    },
+    {
+      "title": "Maṇḍapeyyakathā",
+      "page": 277,
+      "kind": "h3",
+      "matched_order": 1486,
+      "section_no": 10
+    },
+    {
+      "title": "Yuganaddhavagga",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1521,
+      "section_no": 2
+    },
+    {
+      "title": "Yuganaddhakathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 1522,
+      "section_no": 1
+    },
+    {
+      "title": "Suttantaniddesa",
+      "page": 284,
+      "kind": "h1",
+      "matched_order": 1531,
+      "section_no": 1
+    },
+    {
+      "title": "Dhammuddhaccavāraniddesa",
+      "page": 291,
+      "kind": "h1",
+      "matched_order": 1567,
+      "section_no": 2
+    },
+    {
+      "title": "Saccakathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 1575,
+      "section_no": 2
+    },
+    {
+      "title": "Paṭhamasuttantaniddesa",
+      "page": 293,
+      "kind": "h1",
+      "matched_order": 1588,
+      "section_no": 1
+    },
+    {
+      "title": "Dutiyasuttantapāḷi",
+      "page": 298,
+      "kind": "h1",
+      "matched_order": 1613,
+      "section_no": 2
+    },
+    {
+      "title": "Dutiyasuttantaniddesa",
+      "page": 299,
+      "kind": "h1",
+      "matched_order": 1616,
+      "section_no": 3
+    },
+    {
+      "title": "Bojjhaṅgakathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 1636,
+      "section_no": 3
+    },
+    {
+      "title": "Mūlamūlakādidasaka",
+      "page": 303,
+      "kind": "h3",
+      "matched_order": 1644
+    },
+    {
+      "title": "Suttantaniddesa",
+      "page": 311,
+      "kind": "h3",
+      "matched_order": 1686
+    },
+    {
+      "title": "Mettākathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 1701,
+      "section_no": 4
+    },
+    {
+      "title": "Indriyavāra",
+      "page": 315,
+      "kind": "h1",
+      "matched_order": 1709,
+      "section_no": 1
+    },
+    {
+      "title": "Balavāra",
+      "page": 317,
+      "kind": "h1",
+      "matched_order": 1718,
+      "section_no": 2
+    },
+    {
+      "title": "Bojjhaṅgavāra",
+      "page": 318,
+      "kind": "h1",
+      "matched_order": 1726,
+      "section_no": 3
+    },
+    {
+      "title": "Maggaṅgavāra",
+      "page": 319,
+      "kind": "h1",
+      "matched_order": 1736,
+      "section_no": 4
+    },
+    {
+      "title": "Virāgakathā",
+      "page": 324,
+      "kind": "h3",
+      "matched_order": null,
+      "section_no": 5
+    },
+    {
+      "title": "Paṭisambhidākathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 1786,
+      "section_no": 6
+    },
+    {
+      "title": "Dhammacakkapavattanavāra",
+      "page": 329,
+      "kind": "h1",
+      "matched_order": 1792,
+      "section_no": 1
+    },
+    {
+      "title": "Satipaṭṭhānavāra",
+      "page": 335,
+      "kind": "h1",
+      "matched_order": 1831,
+      "section_no": 2
+    },
+    {
+      "title": "Iddhipādavāra",
+      "page": 337,
+      "kind": "h1",
+      "matched_order": 1846,
+      "section_no": 3
+    },
+    {
+      "title": "Sattabodhisattavāra",
+      "page": 339,
+      "kind": "h1",
+      "matched_order": 1861,
+      "section_no": 4
+    },
+    {
+      "title": "Abhiññādivāra",
+      "page": 339,
+      "kind": "h1",
+      "matched_order": 1866,
+      "section_no": 5
+    },
+    {
+      "title": "Khandhādivāra",
+      "page": 340,
+      "kind": "h1",
+      "matched_order": 1870,
+      "section_no": 6
+    },
+    {
+      "title": "Saccavāra",
+      "page": 340,
+      "kind": "h1",
+      "matched_order": 1874,
+      "section_no": 7
+    },
+    {
+      "title": "Paṭisambhidāvāra",
+      "page": 341,
+      "kind": "h1",
+      "matched_order": 1880,
+      "section_no": 8
+    },
+    {
+      "title": "Chabuddhadhammavāra",
+      "page": 341,
+      "kind": "h1",
+      "matched_order": 1884,
+      "section_no": 9
+    },
+    {
+      "title": "Dhammacakkakathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 1894,
+      "section_no": 7
+    },
+    {
+      "title": "Saccavāra",
+      "page": 342,
+      "kind": "h1",
+      "matched_order": 1890,
+      "section_no": 1
+    },
+    {
+      "title": "Satipaṭṭhānavāra",
+      "page": 346,
+      "kind": "h1",
+      "matched_order": 1908,
+      "section_no": 2
+    },
+    {
+      "title": "Iddhipādavāra",
+      "page": 347,
+      "kind": "h1",
+      "matched_order": 1916,
+      "section_no": 3
+    },
+    {
+      "title": "Lokuttarakathā",
+      "page": 349,
+      "kind": "h3",
+      "matched_order": 1930,
+      "section_no": 8
+    },
+    {
+      "title": "Balakathā",
+      "page": 350,
+      "kind": "h3",
+      "matched_order": 1936,
+      "section_no": 9
+    },
+    {
+      "title": "Suññakathā",
+      "page": 358,
+      "kind": "h3",
+      "matched_order": 1986,
+      "section_no": 10
+    },
+    {
+      "title": "Paññāvagga",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 2034,
+      "section_no": 3
+    },
+    {
+      "title": "Mahāpaññākathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 2035,
+      "section_no": 1
+    },
+    {
+      "title": "Soḷasapaññāniddesa",
+      "page": 371,
+      "kind": "h1",
+      "matched_order": 2054,
+      "section_no": 1
+    },
+    {
+      "title": "Puggalavisesaniddesa",
+      "page": 381,
+      "kind": "h1",
+      "matched_order": 2094,
+      "section_no": 2
+    },
+    {
+      "title": "Iddhikathā",
+      "page": 383,
+      "kind": "h3",
+      "matched_order": 2104,
+      "section_no": 2
+    },
+    {
+      "title": "Dasa-iddhiniddesa",
+      "page": 385,
+      "kind": "h3",
+      "matched_order": 2119
+    },
+    {
+      "title": "Abhisamayakathā",
+      "page": 391,
+      "kind": "h3",
+      "matched_order": 2150,
+      "section_no": 3
+    },
+    {
+      "title": "Vivekakathā",
+      "page": null,
+      "kind": "h3",
+      "matched_order": 2170,
+      "section_no": 4
+    },
+    {
+      "title": "Maggaṅganiddesa",
+      "page": 396,
+      "kind": "h1",
+      "matched_order": 2179,
+      "section_no": 1
+    },
+    {
+      "title": "Indriyaniddesa",
+      "page": 399,
+      "kind": "h1",
+      "matched_order": 2196,
+      "section_no": 2
+    },
+    {
+      "title": "Cariyākathā",
+      "page": 400,
+      "kind": "h3",
+      "matched_order": 2202,
+      "section_no": 5
+    },
+    {
+      "title": "Pāṭihāriyakathā",
+      "page": 401,
+      "kind": "h3",
+      "matched_order": 2205,
+      "section_no": 6
+    },
+    {
+      "title": "Samasīsakathā",
+      "page": 404,
+      "kind": "h3",
+      "matched_order": 2229,
+      "section_no": 7
+    },
+    {
+      "title": "Satipaṭṭhānakathā",
+      "page": 406,
+      "kind": "h3",
+      "matched_order": 2239,
+      "section_no": 8
+    },
+    {
+      "title": "Vipassanākathā",
+      "page": 409,
+      "kind": "h3",
+      "matched_order": 2255,
+      "section_no": 9
+    },
+    {
+      "title": "Mātikākathā",
+      "page": 415,
+      "kind": "h3",
+      "matched_order": 2288,
+      "section_no": 10
+    }
+  ]
+}

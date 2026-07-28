@@ -1,0 +1,54 @@
+{% extends "coderedcms/pages/web_page_notitle.html" %}
+{% load i18n static %}
+
+{% block title %}{% block patidina_title %}Patidina{% endblock %}{% endblock %}
+
+{% block custom_assets %}
+{{ block.super }}
+<style>
+  .sarabun, .sarabun-thin { font-family: "Noto Serif Thai", "Sarabun", serif; }
+  /* Match Bootstrap .small — same size as the "วันที่" row label. */
+  .patidina-calendar-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  .patidina-calendar {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.875em;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: max-content;
+  }
+  .patidina-calendar td {
+    font-size: inherit;
+    box-sizing: border-box;
+  }
+  .patidina-calendar .patidina-cal-label-col {
+    width: 6.5rem;
+  }
+  .patidina-calendar .patidina-cal-day-col {
+    width: 2.75rem;
+  }
+  .patidina-calendar .patidina-cal-label {
+    white-space: nowrap;
+    text-align: left;
+    padding: 0.15rem 0.35rem 0.15rem 0;
+  }
+  .patidina-calendar .patidina-cal-day {
+    font-family: "Noto Serif Thai", "Sarabun", serif;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.25;
+    padding: 0.15rem 0.1rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+</style>
+{% endblock %}
+
+{% block content_body %}
+{% block content %}{% endblock %}
+{% endblock %}

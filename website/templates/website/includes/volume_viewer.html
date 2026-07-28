@@ -1,0 +1,15 @@
+{% load wagtailcore_tags i18n %}
+<section class="volume-viewer" id="volume-viewer" aria-labelledby="volume-viewer-heading">
+  <h2 id="volume-viewer-heading" class="h5">{% trans "Scans" %}</h2>
+  {% if folio_count and first_folio_sequence %}
+    <p class="mb-2">
+      {% blocktrans count counter=folio_count %}{{ counter }} folio{% plural %}{{ counter }} folios{% endblocktrans %}
+      —
+      <a href="{{ page.url }}f/{{ first_folio_sequence }}/">{% trans "Open first folio" %}</a>
+    </p>
+  {% else %}
+    <p class="text-muted mb-2">{% trans "No scan folios imported for this volume yet." %}</p>
+  {% endif %}
+  {# Vue edition island mounts here (later phase) #}
+  <div id="edition-app" data-volume="{{ page.id }}"></div>
+</section>

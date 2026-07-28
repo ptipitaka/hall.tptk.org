@@ -4,7 +4,7 @@
 Content and print config are separate files:
 
   books/cs-roman/output/<id>.segments.json   # segments only
-  books/cs-roman/output/<id>.layout.json     # source, bounds, layout, page_layout
+  books/cs-roman/output/<id>.layout.json     # source, bounds, layout, page_layout(+reading)
   books/cs-roman/volumes/<id>/data/segments.json
   books/cs-roman/volumes/<id>/data/layout.json
 
@@ -34,6 +34,7 @@ _LAYOUT_KEEP = frozenset(
         "back_matter_start_printed_page",
         "layout",
         "page_layout",
+        "page_layout_reading_mode",
     }
 )
 # Merged in-memory document (content ∪ layout).
@@ -85,7 +86,7 @@ _SEGMENT_TYPES = frozenset(
 _HEADING_KINDS = frozenset(
     {"nik", "boo", "cha", "h1", "h2", "h3", "h4", "h5", "h6"}
 )
-_SOURCE_LAYOUTS = frozenset({"bat_line", "wak_line", "hanging"})
+_SOURCE_LAYOUTS = frozenset({"bat_line", "wak_line", "hanging", "center"})
 _NOTE_MARKER_RE = re.compile(r"\{\{n(\d+)\}\}")
 
 
@@ -163,6 +164,8 @@ def compact_segment(seg: dict[str, Any]) -> dict[str, Any]:
     }
     if seg.get("item") is not None:
         out["item"] = seg.get("item")
+    if seg.get("section_no") is not None:
+        out["section_no"] = seg.get("section_no")
 
     kind = out["segment_type"]
     if kind in {"gatha", "gatha_continuation"}:
@@ -181,6 +184,8 @@ def compact_segment(seg: dict[str, Any]) -> dict[str, Any]:
             hl = compact_hanging_lines(seg.get("hanging_lines"))
             if hl is not None:
                 out["hanging_lines"] = hl
+        elif layout == "center":
+            out["source_layout"] = "center"
 
     flags = [f for f in (seg.get("flags") or []) if f]
     if flags:
@@ -354,10 +359,14 @@ def layout_keys_only(page_entry: dict[str, Any] | None) -> dict[str, float | int
     }
 
 
-def coerce_page_layout(raw: Any) -> dict[str, dict[str, Any]] | None:
-    """Map printed page → page entry; omit when empty."""
-    if not isinstance(raw, dict) or not raw:
+def coerce_page_layout(
+    raw: Any, *, keep_empty: bool = False
+) -> dict[str, dict[str, Any]] | None:
+    """Map printed page → page entry; omit when empty unless ``keep_empty``."""
+    if not isinstance(raw, dict):
         return None
+    if not raw:
+        return {} if keep_empty else None
     out: dict[str, dict[str, Any]] = {}
     for page_key, patch in raw.items():
         try:
@@ -370,7 +379,7 @@ def coerce_page_layout(raw: Any) -> dict[str, dict[str, Any]] | None:
         if coerced:
             out[str(page)] = coerced
     if not out:
-        return None
+        return {} if keep_empty else None
     return dict(sorted(out.items(), key=lambda kv: int(kv[0])))
 
 
@@ -440,7 +449,7 @@ def normalize_content(data: dict[str, Any]) -> dict[str, Any]:
 
 
 def normalize_layout(data: dict[str, Any]) -> dict[str, Any]:
-    """Layout file: source/bounds + layout + page_layout."""
+    """Layout file: source/bounds + layout + page_layout(+reading)."""
     out: dict[str, Any] = {"schema_version": SCHEMA_VERSION}
     if data.get("source") is not None:
         out["source"] = data["source"]
@@ -455,6 +464,15 @@ def normalize_layout(data: dict[str, Any]) -> dict[str, Any]:
     page_layout = coerce_page_layout(data.get("page_layout"))
     if page_layout is not None:
         out["page_layout"] = page_layout
+    # Keep empty {} when present so the reading-mode slot stays visible in file.
+    if "page_layout_reading_mode" in data and data.get(
+        "page_layout_reading_mode"
+    ) is not None:
+        reading = coerce_page_layout(
+            data.get("page_layout_reading_mode"), keep_empty=True
+        )
+        if reading is not None:
+            out["page_layout_reading_mode"] = reading
     return out
 
 
@@ -726,14 +744,28 @@ def doc_page_layout(data: dict[str, Any]) -> dict[int, dict[str, Any]]:
     return {int(page): dict(patch) for page, patch in raw.items()}
 
 
+def doc_page_layout_reading(data: dict[str, Any]) -> dict[int, dict[str, Any]]:
+    """Reading-mode physical page → page entry (layout keys only; no segments)."""
+    raw = coerce_page_layout(data.get("page_layout_reading_mode")) or {}
+    return {int(page): dict(patch) for page, patch in raw.items()}
+
+
 def effective_layout(
-    data: dict[str, Any], page: int | None = None
+    data: dict[str, Any],
+    page: int | None = None,
+    *,
+    reading: bool = False,
 ) -> dict[str, float | int | str]:
-    """Volume layout merged with optional ``page_layout[page]`` layout keys."""
+    """Volume layout merged with optional per-page layout keys.
+
+    ``reading=False`` uses sync ``page_layout`` (source printed page).
+    ``reading=True`` uses ``page_layout_reading_mode`` (physical reading page).
+    """
     base = doc_layout(data)
     if page is None:
         return base
-    entry = doc_page_layout(data).get(int(page))
+    pages = doc_page_layout_reading(data) if reading else doc_page_layout(data)
+    entry = pages.get(int(page))
     patch = layout_keys_only(entry)
     if not patch:
         return base
@@ -888,6 +920,48 @@ def validate_document(data: dict[str, Any]) -> list[str]:
                     errors=errors,
                     page=page,
                     segments=data["segments"],
+                )
+    if (
+        "page_layout_reading_mode" in data
+        and data.get("page_layout_reading_mode") is not None
+    ):
+        raw_reading = data.get("page_layout_reading_mode")
+        if not isinstance(raw_reading, dict):
+            errors.append(
+                "page_layout_reading_mode: need object keyed by physical page"
+            )
+        else:
+            for page_key, patch in raw_reading.items():
+                try:
+                    page = int(page_key)
+                except (TypeError, ValueError):
+                    errors.append(
+                        f"page_layout_reading_mode: invalid page key {page_key!r}"
+                    )
+                    continue
+                if page < 1:
+                    errors.append(
+                        "page_layout_reading_mode: page must be >= 1, "
+                        f"got {page_key!r}"
+                    )
+                    continue
+                if isinstance(patch, dict) and "segments" in patch:
+                    errors.append(
+                        f"page_layout_reading_mode.{page}.segments: "
+                        "not supported (reading mode has no page-local "
+                        "segment index)"
+                    )
+                    layout_only = {
+                        k: v for k, v in patch.items() if k != "segments"
+                    }
+                else:
+                    layout_only = patch
+                _validate_page_entry(
+                    layout_only,
+                    prefix=f"page_layout_reading_mode.{page}",
+                    errors=errors,
+                    page=page,
+                    segments=[],
                 )
 
     for i, seg in enumerate(data["segments"]):

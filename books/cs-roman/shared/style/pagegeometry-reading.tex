@@ -1,0 +1,24 @@
+% Reading-mode geometry: same stock as CS Roman; binding-aware L/R margins.
+% Sync builds keep pagegeometry.tex; only main.reading.tex uses this file.
+\setstocksize{709bp}{499bp}
+\settrimmedsize{709bp}{499bp}{*}
+\setlength{\binding}{0mm}
+% Spine > fore-edge for binding; outer still holds ฉ.N (sep+width ≲ 38 bp).
+\setlrmarginsandblock{78bp}{62bp}{*}
+\setulmarginsandblock{90.7bp}{72bp}{*}
+\setheadfoot{14pt}{12pt}
+\setheaderspaces{50.4bp}{*}{*}
+% Note column near the text block; leave air to the paper edge.
+\setmarginnotes{12bp}{26bp}{6bp}
+\checkandfixthelayout
+\AtBeginDocument{%
+  \checkandfixthelayout
+  \stockwidth=499bp\relax
+  \stockheight=709bp\relax
+  \paperwidth=499bp\relax
+  \paperheight=709bp\relax
+  \pagewidth=499bp\relax
+  \pageheight=709bp\relax
+  % Correct odd/even side for \marginnote (async page counter).
+  \strictpagecheck
+}

@@ -9,13 +9,14 @@ Public repo สำหรับพัฒนาระบบใหม่แทน `
 ## Stack
 
 - **Wagtail CRX 6.0** (`coderedcms`) — StreamField pages, navbar/footer, SEO
-- **Wagtail 7.4** + **wagtail-localize** — หลายภาษา (en / th / zh)
+- **Wagtail 7.4** + **wagtail-localize** — หลายภาษา (en / th)
 - **Django 5.2** + PostgreSQL (Docker)
 
 ## เอกสาร
 
-- [คู่มือการพัฒนา](docs/development_guide.md)
-- [Checklist ทีละขั้น](docs/step_by_step.md)
+- [Phase 1 — สรุปสิ่งที่ส่งมอบแล้ว](docs/phase1_complete.md) ← จุดอ้างอิงสถานะปัจจุบัน
+- [Goal 1 pilot — ch/pali2552ro (scans)](docs/goal1_pilot_pali2552ro.md)
+- [เอกสารเก่า (archive)](docs/archive/) — development guide, checklist, data model, migrate discussion
 
 ## เริ่มต้น (local)
 
@@ -52,11 +53,11 @@ docker compose exec web python manage.py createsuperuser
 ## หลายภาษา (admin)
 
 1. แก้ไขหน้า Home (locale **English**)
-2. คลิก **Translate this page** → เลือก ไทย / 中文
+2. คลิก **Translate this page** → เลือก ไทย
 3. แก้เนื้อหาแต่ละภาษาแยกกัน
 4. สลับ locale ได้จากแผง **Status** ทางขวา
 
-URL รองรับ prefix ภาษา: `/th/...`, `/zh/...` (ภาษาอังกฤษไม่มี prefix)
+URL รองรับ prefix ภาษา: `/th/...` (ภาษาอังกฤษไม่มี prefix)
 
 ## คำสั่งที่ใช้บ่อย
 

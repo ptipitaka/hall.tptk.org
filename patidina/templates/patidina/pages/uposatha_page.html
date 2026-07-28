@@ -1,0 +1,30 @@
+{% extends "patidina/_base.html" %}
+{% load i18n patidina_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block patidina_title %}
+{% translate "Uposatha days" %}
+{% if LANGUAGE_CODE == "th" %}พ.ศ. {{ be_year|arabic_to_thai }}{% else %}{{ year }}{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        {% if LANGUAGE_CODE == "th" %}
+            <a class="btn btn-sm btn-light d-print-none" href="{{ prev_uposatha_url }}">‹ {{ prev_year|add:543|arabic_to_thai }}</a>
+            <h1 class="h4 mb-0">
+                {% translate "Uposatha days" %} พ.ศ. {{ be_year|arabic_to_thai }}
+            </h1>
+            <a class="btn btn-sm btn-light d-print-none" href="{{ next_uposatha_url }}">{{ next_year|add:543|arabic_to_thai }} ›</a>
+        {% else %}
+            <a class="btn btn-sm btn-light d-print-none" href="{{ prev_uposatha_url }}">‹ {{ prev_year }}</a>
+            <h1 class="h4 mb-0">
+                {% translate "Uposatha days" %} {{ year }}
+            </h1>
+            <a class="btn btn-sm btn-light d-print-none" href="{{ next_uposatha_url }}">{{ next_year }} ›</a>
+        {% endif %}
+    </div>
+    {% include "patidina/uposatha-dates-widget.html" %}
+    <p class="mt-3 d-print-none"><a href="{{ patidina_home_url }}">{% translate "Back to Patidina" %}</a></p>
+</div>
+{% endblock %}

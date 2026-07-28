@@ -6,7 +6,12 @@
 \RequirePackage{iftex}
 \RequireLuaTeX
 
-\input{shared/style/pagegeometry}
+% Reading builds define \csromanusereadinggeometry before inputting this file.
+\ifdefined\csromanusereadinggeometry
+  \input{shared/style/pagegeometry-reading}
+\else
+  \input{shared/style/pagegeometry}
+\fi
 
 \usepackage[
   main=thai,
@@ -64,7 +69,11 @@
 \usepackage{graphicx}
 \usepackage[bottom,hang,stable,perpage]{footmisc}
 \setlength{\footnotemargin}{0.85em}
+% Extra headroom for Thai multi-level marks above the footnote baseline.
+\setlength{\footnotesep}{8.5pt}
 \usepackage{needspace}
+% Reading-mode \csromanfolio (works inside gāthā \vtop; sync builds unused).
+\usepackage{marginnote}
 
 \usepackage[
   unicode=true,
@@ -80,8 +89,9 @@
 \input{shared/style/footnotes}
 
 % Volume TOC from segments with in_toc (written via \csromantocmark).
+% Depth includes paragraph so Mātikā ``h3`` rows (vatthu / paññatti / …) show.
 \renewcommand{\contentsname}{มาติกา}
-\settocdepth{subsubsection}
-\maxtocdepth{subsubsection}
+\settocdepth{paragraph}
+\maxtocdepth{paragraph}
 \setsecnumdepth{none}
 \maxsecnumdepth{none}

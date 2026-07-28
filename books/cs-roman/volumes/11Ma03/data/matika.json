@@ -1,0 +1,440 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "title": "Uparipaṇṇāsapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 2
+    },
+    {
+      "title": "Devadahavagga",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 4,
+      "section_no": 1
+    },
+    {
+      "title": "Devadahasutta",
+      "page": 1,
+      "kind": "h1",
+      "matched_order": 5,
+      "section_no": 1
+    },
+    {
+      "title": "Pañcattayasutta",
+      "page": 18,
+      "kind": "h1",
+      "matched_order": 58,
+      "section_no": 2
+    },
+    {
+      "title": "Kintisutta",
+      "page": 26,
+      "kind": "h1",
+      "matched_order": 82,
+      "section_no": 3
+    },
+    {
+      "title": "Sāmagāmasutta",
+      "page": 32,
+      "kind": "h1",
+      "matched_order": 104,
+      "section_no": 4
+    },
+    {
+      "title": "Sunakkhattasutta",
+      "page": 39,
+      "kind": "h1",
+      "matched_order": 138,
+      "section_no": 5
+    },
+    {
+      "title": "Āneñjasappāyasutta",
+      "page": 48,
+      "kind": "h1",
+      "matched_order": 165,
+      "section_no": 6
+    },
+    {
+      "title": "Gaṇakamoggallānasutta",
+      "page": 52,
+      "kind": "h1",
+      "matched_order": 181,
+      "section_no": 7
+    },
+    {
+      "title": "Gopakamoggallānasutta",
+      "page": 58,
+      "kind": "h1",
+      "matched_order": 206,
+      "section_no": 8
+    },
+    {
+      "title": "Mahāpuṇṇamasutta",
+      "page": 66,
+      "kind": "h1",
+      "matched_order": 241,
+      "section_no": 9
+    },
+    {
+      "title": "Cūḷapuṇṇamasutta",
+      "page": 70,
+      "kind": "h1",
+      "matched_order": 262,
+      "section_no": 10
+    },
+    {
+      "title": "Uddānagāthā",
+      "page": 74,
+      "kind": "h3",
+      "matched_order": null
+    },
+    {
+      "title": "Anupadavagga",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 291,
+      "section_no": 2
+    },
+    {
+      "title": "Anupadasutta",
+      "page": 75,
+      "kind": "h1",
+      "matched_order": 292,
+      "section_no": 1
+    },
+    {
+      "title": "Chabbisodhanasutta",
+      "page": 79,
+      "kind": "h1",
+      "matched_order": 311,
+      "section_no": 2
+    },
+    {
+      "title": "Sappurisasutta",
+      "page": 86,
+      "kind": "h1",
+      "matched_order": 335,
+      "section_no": 3
+    },
+    {
+      "title": "Sevitabbāsevitabbasutta",
+      "page": 93,
+      "kind": "h1",
+      "matched_order": null,
+      "section_no": 4
+    },
+    {
+      "title": "Bahudhātukasutta",
+      "page": 106,
+      "kind": "h1",
+      "matched_order": 421,
+      "section_no": 5
+    },
+    {
+      "title": "Isigilisutta",
+      "page": 112,
+      "kind": "h1",
+      "matched_order": 447,
+      "section_no": 6
+    },
+    {
+      "title": "Mahācattārīsakasutta",
+      "page": 116,
+      "kind": "h1",
+      "matched_order": 508,
+      "section_no": 7
+    },
+    {
+      "title": "Ānāpānassatisutta",
+      "page": 122,
+      "kind": "h1",
+      "matched_order": 532,
+      "section_no": 8
+    },
+    {
+      "title": "Kāyagatāsatisutta",
+      "page": 130,
+      "kind": "h1",
+      "matched_order": 572,
+      "section_no": 9
+    },
+    {
+      "title": "Saṅkhārupapattisutta",
+      "page": 140,
+      "kind": "h1",
+      "matched_order": 613,
+      "section_no": 10
+    },
+    {
+      "title": "Uddānagāthā",
+      "page": 146,
+      "kind": "h3",
+      "matched_order": null
+    },
+    {
+      "title": "Suññatavagga",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 641,
+      "section_no": 3
+    },
+    {
+      "title": "Cūḷasuññatasutta",
+      "page": 147,
+      "kind": "h1",
+      "matched_order": 642,
+      "section_no": 1
+    },
+    {
+      "title": "Mahāsuññatasutta",
+      "page": 151,
+      "kind": "h1",
+      "matched_order": 660,
+      "section_no": 2
+    },
+    {
+      "title": "Acchariya-abbhutasutta",
+      "page": 159,
+      "kind": "h1",
+      "matched_order": 696,
+      "section_no": 3
+    },
+    {
+      "title": "Bākulasutta",
+      "page": 165,
+      "kind": "h1",
+      "matched_order": 723,
+      "section_no": 4
+    },
+    {
+      "title": "Dantabhūmisutta",
+      "page": 169,
+      "kind": "h1",
+      "matched_order": 747,
+      "section_no": 5
+    },
+    {
+      "title": "Bhūmijasutta",
+      "page": 177,
+      "kind": "h1",
+      "matched_order": 782,
+      "section_no": 6
+    },
+    {
+      "title": "Anuruddhasutta",
+      "page": 184,
+      "kind": "h1",
+      "matched_order": 806,
+      "section_no": 7
+    },
+    {
+      "title": "Upakkilesasutta",
+      "page": 191,
+      "kind": "h1",
+      "matched_order": 836,
+      "section_no": 8
+    },
+    {
+      "title": "Bālapaṇḍitasutta",
+      "page": 201,
+      "kind": "h1",
+      "matched_order": 901,
+      "section_no": 9
+    },
+    {
+      "title": "Devadūtasutta",
+      "page": 216,
+      "kind": "h1",
+      "matched_order": 969,
+      "section_no": 10
+    },
+    {
+      "title": "Uddānagāthā",
+      "page": 225,
+      "kind": "h3",
+      "matched_order": null
+    },
+    {
+      "title": "Vibhaṅgavagga",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1031,
+      "section_no": 4
+    },
+    {
+      "title": "Bhaddekarattasutta",
+      "page": 226,
+      "kind": "h1",
+      "matched_order": 1032,
+      "section_no": 1
+    },
+    {
+      "title": "Ānandabhaddekarattasutta",
+      "page": 228,
+      "kind": "h1",
+      "matched_order": 1061,
+      "section_no": 2
+    },
+    {
+      "title": "Mahākaccānabhaddekarattasutta",
+      "page": 231,
+      "kind": "h1",
+      "matched_order": 1100,
+      "section_no": 3
+    },
+    {
+      "title": "Lomasakaṅgiyabhaddekarattasutta",
+      "page": 240,
+      "kind": "h1",
+      "matched_order": 1171,
+      "section_no": 4
+    },
+    {
+      "title": "Cūḷakammavibhaṅgasutta",
+      "page": 243,
+      "kind": "h1",
+      "matched_order": 1211,
+      "section_no": 5
+    },
+    {
+      "title": "Mahākammavibhaṅgasutta",
+      "page": 249,
+      "kind": "h1",
+      "matched_order": 1240,
+      "section_no": 6
+    },
+    {
+      "title": "Saḷāyatanavibhaṅgasutta",
+      "page": 258,
+      "kind": "h1",
+      "matched_order": 1278,
+      "section_no": 7
+    },
+    {
+      "title": "Uddesavibhaṅgasutta",
+      "page": 265,
+      "kind": "h1",
+      "matched_order": 1315,
+      "section_no": 8
+    },
+    {
+      "title": "Araṇavibhaṅgasutta",
+      "page": 273,
+      "kind": "h1",
+      "matched_order": 1353,
+      "section_no": 9
+    },
+    {
+      "title": "Dhātuvibhaṅgasutta",
+      "page": 281,
+      "kind": "h1",
+      "matched_order": 1394,
+      "section_no": 10
+    },
+    {
+      "title": "Saccavibhaṅgasutta",
+      "page": 291,
+      "kind": "h1",
+      "matched_order": 1443,
+      "section_no": 11
+    },
+    {
+      "title": "Dakkhiṇāvibhaṅgasutta",
+      "page": 295,
+      "kind": "h1",
+      "matched_order": 1479,
+      "section_no": 12
+    },
+    {
+      "title": "Uddānagāthā",
+      "page": 300,
+      "kind": "h3",
+      "matched_order": null
+    },
+    {
+      "title": "Saḷāyatanavagga",
+      "page": null,
+      "kind": "h1",
+      "matched_order": 1525,
+      "section_no": 5
+    },
+    {
+      "title": "Anāthapiṇḍikovādasutta",
+      "page": 301,
+      "kind": "h1",
+      "matched_order": 1526,
+      "section_no": 1
+    },
+    {
+      "title": "Channovādasutta",
+      "page": 307,
+      "kind": "h1",
+      "matched_order": 1572,
+      "section_no": 2
+    },
+    {
+      "title": "Puṇṇovādasutta",
+      "page": 311,
+      "kind": "h1",
+      "matched_order": 1591,
+      "section_no": 3
+    },
+    {
+      "title": "Nandakovādasutta",
+      "page": 314,
+      "kind": "h1",
+      "matched_order": 1611,
+      "section_no": 4
+    },
+    {
+      "title": "Cūḷarāhulovādasutta",
+      "page": 324,
+      "kind": "h1",
+      "matched_order": 1649,
+      "section_no": 5
+    },
+    {
+      "title": "Chachakkasutta",
+      "page": 327,
+      "kind": "h1",
+      "matched_order": 1662,
+      "section_no": 6
+    },
+    {
+      "title": "Mahāsaḷāyatanikasutta",
+      "page": 335,
+      "kind": "h1",
+      "matched_order": 1704,
+      "section_no": 7
+    },
+    {
+      "title": "Nagaravindeyyasutta",
+      "page": 339,
+      "kind": "h1",
+      "matched_order": 1733,
+      "section_no": 8
+    },
+    {
+      "title": "Piṇḍapātapārisuddhisutta",
+      "page": 342,
+      "kind": "h1",
+      "matched_order": 1745,
+      "section_no": 9
+    },
+    {
+      "title": "Indriyabhāvanāsutta",
+      "page": 347,
+      "kind": "h1",
+      "matched_order": 1772,
+      "section_no": 10
+    },
+    {
+      "title": "Uddānagāthā",
+      "page": 352,
+      "kind": "h3",
+      "matched_order": null
+    }
+  ]
+}

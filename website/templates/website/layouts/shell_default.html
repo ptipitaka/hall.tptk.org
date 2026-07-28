@@ -1,0 +1,16 @@
+{% extends "coderedcms/pages/web_page_notitle.html" %}
+{% load wagtailcore_tags hall_breadcrumbs %}
+
+{% block content_pre_body %}
+<div class="container pt-5 pb-3">
+  {% catalog_breadcrumbs %}
+  <h1>{{ page.title }}</h1>
+  {% block page_type_pre %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block content_post_body %}
+<div class="container pb-5">
+  {% block page_type_footer %}{% endblock %}
+</div>
+{% endblock %}

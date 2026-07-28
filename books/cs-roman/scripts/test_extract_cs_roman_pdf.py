@@ -1,4 +1,4 @@
-"""Unit tests for cs-roman page-break word repair."""
+"""Unit tests for cs-roman page-break merge and word repair."""
 
 from __future__ import annotations
 
@@ -11,59 +11,484 @@ if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
 from extract_cs_roman_pdf import (  # noqa: E402
-    _paragraph_seems_complete,
+    SECTION_RULE_FLAG,
+    Segment,
+    _blocks_from_region,
+    _is_section_rule_line,
     _repair_mid_word_split,
+    _segment_to_json,
+    _split_false_pa_join,
+    attach_notes_sacred_style,
+    extract_page_blocks,
+    merge_blocks,
+    peel_glued_uddesa_heading,
+    unglue_false_pa_page_joins,
 )
 
 
 class RepairMidWordSplitTests(unittest.TestCase):
     def test_no_hyphen_keeps_separate_words(self) -> None:
-        prev, nxt = _repair_mid_word_split(
+        prev, nxt, joined = _repair_mid_word_split(
             "… sāmantā hasamānā ṭhitā",
             "hoti. So bhikkhu …",
         )
         self.assertEqual(prev, "… sāmantā hasamānā ṭhitā")
         self.assertEqual(nxt, "hoti. So bhikkhu …")
+        self.assertFalse(joined)
 
     def test_hyphen_joins_leading_word(self) -> None:
-        prev, nxt = _repair_mid_word_split(
+        prev, nxt, joined = _repair_mid_word_split(
             "agārasmā anagāriyaṃ pabbaj-",
             "jāya. Evaṃ …",
         )
         self.assertEqual(prev, "agārasmā anagāriyaṃ pabbajjāya")
         self.assertEqual(nxt, ". Evaṃ …")
+        self.assertTrue(joined)
 
     def test_soft_hyphen_joins_leading_word(self) -> None:
-        prev, nxt = _repair_mid_word_split(
+        prev, nxt, joined = _repair_mid_word_split(
             "pabbaj\u00ad",
             "jāya.",
         )
         self.assertEqual(prev, "pabbajjāya")
         self.assertEqual(nxt, ".")
+        self.assertTrue(joined)
+
+    def test_peyyala_marker_not_joined(self) -> None:
+        prev, nxt, joined = _repair_mid_word_split(
+            "taṃ jīvitā voropesi -pa-",
+            "aññaṃ maññamāno …",
+        )
+        self.assertEqual(prev, "taṃ jīvitā voropesi -pa-")
+        self.assertEqual(nxt, "aññaṃ maññamāno …")
+        self.assertFalse(joined)
+
+    def test_peyyala_marker_case_insensitive_token(self) -> None:
+        prev, nxt, joined = _repair_mid_word_split(
+            "ahosi -PA-",
+            "Āpattiṃ tvaṃ",
+        )
+        self.assertEqual(prev, "ahosi -PA-")
+        self.assertEqual(nxt, "Āpattiṃ tvaṃ")
+        self.assertFalse(joined)
 
 
-class ParagraphCompleteTests(unittest.TestCase):
-    def test_period_then_paren_ref_is_complete(self) -> None:
-        self.assertTrue(
-            _paragraph_seems_complete(
-                "Anāpatti bhikkhu pārājikassa, āpatti thullaccayassati. (14-15)"
+class FalsePaJoinRepairTests(unittest.TestCase):
+    def test_split_false_pa_join(self) -> None:
+        self.assertEqual(
+            _split_false_pa_join("voropesi -paaññaṃ"),
+            ("voropesi -pa-", "aññaṃ"),
+        )
+        self.assertIsNone(_split_false_pa_join("voropesi -pa-"))
+        self.assertIsNone(
+            _split_false_pa_join("bhesajja-parikkhārā")
+        )
+
+    def test_unglue_moves_word_to_continuation(self) -> None:
+        segments = [
+            {
+                "page": 109,
+                "segment_type": "prose",
+                "item": 188,
+                "text": [
+                    {
+                        "script": "roman",
+                        "value": "voropesi -paaññaṃ",
+                    },
+                    {"script": "thai", "value": "โวโรเปสิ -ปอญฺญํ"},
+                ],
+            },
+            {
+                "page": 110,
+                "segment_type": "prose_continuation",
+                "item": 188,
+                "text": [
+                    {
+                        "script": "roman",
+                        "value": "maññamāno taṃ",
+                    },
+                    {"script": "thai", "value": "มญฺญมาโน ตํ"},
+                ],
+            },
+        ]
+        self.assertEqual(unglue_false_pa_page_joins(segments), 1)
+        self.assertEqual(segments[0]["text"][0]["value"], "voropesi -pa-")
+        self.assertEqual(
+            segments[1]["text"][0]["value"], "aññaṃ maññamāno taṃ"
+        )
+
+
+class MergeBlocksContinuationTests(unittest.TestCase):
+    def test_cross_page_itemless_stays_prose_until_geometry(self) -> None:
+        """merge_blocks must not assume continuation (new para under same item)."""
+        blocks = [
+            {
+                "kind": "prose",
+                "item": 46,
+                "text": (
+                    "Atha vā pana … yadi panāhaṃ Buddhaṃ paccakkheyyanti"
+                ),
+                "flags": [],
+                "page": 29,
+                "pdf_page": 52,
+            },
+            {
+                "kind": "prose",
+                "item": None,
+                "text": "vadati viññāpeti -pa- yadi panāhaṃ asakyaputtiyo",
+                "flags": [],
+                "page": 30,
+                "pdf_page": 53,
+            },
+        ]
+        segs = merge_blocks(blocks)
+        self.assertEqual(len(segs), 2)
+        self.assertEqual(segs[0].segment_type, "prose")
+        self.assertEqual(segs[0].item, 46)
+        # Geometry (flush x0) upgrades this later; merge alone keeps prose.
+        self.assertEqual(segs[1].segment_type, "prose")
+
+    def test_cross_page_peyyala_not_glued(self) -> None:
+        blocks = [
+            {
+                "kind": "prose",
+                "item": 188,
+                "text": "taṃ jīvitā voropesi -pa-",
+                "flags": [],
+                "page": 109,
+                "pdf_page": 132,
+            },
+            {
+                "kind": "prose",
+                "item": None,
+                "text": "aññaṃ maññamāno taṃ jīvitā voropesi",
+                "flags": [],
+                "page": 110,
+                "pdf_page": 133,
+            },
+        ]
+        segs = merge_blocks(blocks)
+        self.assertEqual(len(segs), 2)
+        self.assertEqual(segs[0].text, "taṃ jīvitā voropesi -pa-")
+        self.assertEqual(
+            segs[1].text, "aññaṃ maññamāno taṃ jīvitā voropesi"
+        )
+        # Must not upgrade to continuation solely from a false hyphen join.
+        self.assertEqual(segs[1].segment_type, "prose")
+        self.assertEqual(segs[1].item, 188)
+
+    def test_cross_page_still_repairs_hyphen(self) -> None:
+        blocks = [
+            {
+                "kind": "prose",
+                "item": 10,
+                "text": "agārasmā anagāriyaṃ pabbaj-",
+                "flags": [],
+                "page": 1,
+                "pdf_page": 24,
+            },
+            {
+                "kind": "prose",
+                "item": None,
+                "text": "jāya. Evaṃ vadati.",
+                "flags": [],
+                "page": 2,
+                "pdf_page": 25,
+            },
+        ]
+        segs = merge_blocks(blocks)
+        self.assertEqual(segs[0].text, "agārasmā anagāriyaṃ pabbajjāya")
+        self.assertEqual(segs[1].text, ". Evaṃ vadati.")
+        # Joined hyphen across the page break ⇒ continuation, not a new para.
+        self.assertEqual(segs[1].segment_type, "prose_continuation")
+        self.assertEqual(segs[1].item, 10)
+
+    def test_same_page_itemless_is_new_prose(self) -> None:
+        blocks = [
+            {
+                "kind": "prose",
+                "item": 10,
+                "text": "Evaṃ hoti.",
+                "flags": [],
+                "page": 1,
+                "pdf_page": 24,
+            },
+            {
+                "kind": "prose",
+                "item": None,
+                "text": "So bhikkhu evaṃ vadati.",
+                "flags": [],
+                "page": 1,
+                "pdf_page": 24,
+            },
+        ]
+        segs = merge_blocks(blocks)
+        self.assertEqual(segs[1].segment_type, "prose")
+        self.assertEqual(segs[1].item, 10)
+
+
+class SectionNoHeadingTests(unittest.TestCase):
+    def test_numbered_heading_keeps_section_no_not_item(self) -> None:
+        blocks = _blocks_from_region(
+            "1. Pārājikakaṇḍa",
+            printed_page=13,
+            pdf_page=36,
+            headers=set(),
+            as_notes=False,
+        )
+        self.assertEqual(len(blocks), 1)
+        self.assertEqual(blocks[0]["kind"], "chapter")
+        self.assertEqual(blocks[0]["text"], "Pārājikakaṇḍa")
+        self.assertIsNone(blocks[0]["item"])
+        self.assertEqual(blocks[0]["section_no"], 1)
+
+        segs = merge_blocks(blocks)
+        self.assertEqual(segs[0].section_no, 1)
+        self.assertIsNone(segs[0].item)
+        payload = _segment_to_json(segs[0])
+        self.assertEqual(payload["section_no"], 1)
+        self.assertIsNone(payload.get("item"))
+
+    def test_numbered_title_heading(self) -> None:
+        blocks = _blocks_from_region(
+            "1. Paṭhamapārājika Sudinnabhāṇavāra",
+            printed_page=13,
+            pdf_page=36,
+            headers=set(),
+            as_notes=False,
+        )
+        self.assertEqual(blocks[0]["kind"], "title")
+        self.assertEqual(blocks[0]["section_no"], 1)
+        self.assertEqual(
+            blocks[0]["text"], "Paṭhamapārājika Sudinnabhāṇavāra"
+        )
+
+    def test_long_numbered_prose_keeps_item(self) -> None:
+        body = (
+            "1. Tena kho pana samayena Vesāliyā avidūre Kalandagāmo nāma "
+            "atthi, tattha Sudinno nāma Kalandaputto seṭṭhiputto hoti. "
+            "Atha kho Sudinno Kalandaputto sambahulehi sahāyakehi saddhiṃ "
+            "Vesāliṃ agamāsi kenacideva karaṇīyena."
+        )
+        blocks = _blocks_from_region(
+            body,
+            printed_page=13,
+            pdf_page=36,
+            headers=set(),
+            as_notes=False,
+        )
+        self.assertEqual(blocks[0]["kind"], "prose")
+        self.assertEqual(blocks[0]["item"], 1)
+        self.assertNotIn("section_no", blocks[0])
+
+    def test_glued_civaravagga_uddesa_peels_to_section_no(self) -> None:
+        blocks = _blocks_from_region(
+            "1. Cīvaravagga 1. Paṭhamakathinasikkhāpada Ime kho panāyasmanto "
+            "tiṃsa nissaggiyā pācittiyā dhammā uddesaṃ āgacchanti.",
+            printed_page=294,
+            pdf_page=317,
+            headers=set(),
+            as_notes=False,
+        )
+        self.assertEqual(len(blocks), 2)
+        self.assertEqual(blocks[0]["kind"], "chapter")
+        self.assertEqual(blocks[0]["section_no"], 1)
+        self.assertIsNone(blocks[0]["item"])
+        self.assertEqual(
+            blocks[0]["text"], "Cīvaravagga 1. Paṭhamakathinasikkhāpada"
+        )
+        self.assertEqual(blocks[1]["kind"], "prose")
+        self.assertIsNone(blocks[1]["item"])
+        self.assertTrue(blocks[1]["text"].startswith("Ime kho"))
+
+    def test_glued_sikkhapada_uddesa_peels_to_title(self) -> None:
+        blocks = _blocks_from_region(
+            "1. Sukkavissaṭṭhisikkhāpada Ime kho panāyasmanto terasa "
+            "saṃghādisesā dhammā uddesaṃ āgacchanti.",
+            printed_page=151,
+            pdf_page=174,
+            headers=set(),
+            as_notes=False,
+        )
+        self.assertEqual(len(blocks), 2)
+        self.assertEqual(blocks[0]["kind"], "title")
+        self.assertEqual(blocks[0]["section_no"], 1)
+        self.assertEqual(blocks[0]["text"], "Sukkavissaṭṭhisikkhāpada")
+        self.assertTrue(blocks[1]["text"].startswith("Ime kho"))
+
+    def test_peel_helper_strips_sentence_spacers(self) -> None:
+        peeled = peel_glued_uddesa_heading(
+            "Cīvaravagga 1.{{sp1}} Paṭhamakathinasikkhāpada Ime kho "
+            "panāyasmanto tiṃsa nissaggiyā pācittiyā dhammā uddesaṃ āgacchanti."
+        )
+        self.assertIsNotNone(peeled)
+        assert peeled is not None
+        title, body = peeled
+        self.assertEqual(title, "Cīvaravagga 1. Paṭhamakathinasikkhāpada")
+        self.assertTrue(body.startswith("Ime kho"))
+
+    def test_peel_rejects_ordinary_ime_kho_lists(self) -> None:
+        self.assertIsNone(
+            peel_glued_uddesa_heading(
+                "Puggalavagga lokasmiṃ. Katame tayo? Kāyasakkhī diṭṭhippatto "
+                "saddhāvimutto. Ime kho āvuso tayo puggalā santo saṃvijjamānā "
+                "lokasmiṃ."
+            )
+        )
+        self.assertIsNone(
+            peel_glued_uddesa_heading(
+                "Dasakanipātapāḷi Ime kho bhikkhave tayo dhamme pahāya bhabbo."
             )
         )
 
-    def test_ti_then_paren_ref_is_complete(self) -> None:
-        self.assertTrue(
-            _paragraph_seems_complete("Anāpatti bhikkhu asañciccāti. (16)")
+
+class SectionRuleAttachTests(unittest.TestCase):
+    def test_same_block_trailing_underscores_set_flag(self) -> None:
+        """Closer + short rule without a blank line → section_rule flag."""
+        blocks = _blocks_from_region(
+            "Sudinnabhāṇavāro niṭṭhito.\n_____",
+            printed_page=25,
+            pdf_page=48,
+            headers=set(),
+            as_notes=False,
+        )
+        self.assertEqual(len(blocks), 1)
+        self.assertEqual(blocks[0]["kind"], "niṭṭhitaṃ")
+        self.assertTrue(blocks[0]["text"].rstrip().endswith("_____"))
+        segs = merge_blocks(blocks)
+        payload = _segment_to_json(segs[0])
+        self.assertIn(SECTION_RULE_FLAG, payload.get("flags") or [])
+        self.assertEqual(
+            payload["text"][0]["value"], "Sudinnabhāṇavāro niṭṭhito."
         )
 
-    def test_thai_digits_paren_ref_is_complete(self) -> None:
-        self.assertTrue(
-            _paragraph_seems_complete("อนาปตฺติ ภิกฺขุ อสญฺจิจฺจาติ. (๑๔-๑๕)")
+    def test_separate_underscore_line_attaches_to_previous(self) -> None:
+        """Blank line before _____ must still attach (not a new segment)."""
+        blocks = _blocks_from_region(
+            "Makkaṭīvatthu niṭṭhitaṃ.\n\n_____\n\nSanthatabhāṇavāra",
+            printed_page=27,
+            pdf_page=50,
+            headers=set(),
+            as_notes=False,
         )
+        self.assertEqual(len(blocks), 2)
+        self.assertEqual(blocks[0]["kind"], "niṭṭhitaṃ")
+        self.assertTrue(blocks[0]["text"].rstrip().endswith("_____"))
+        self.assertNotEqual(blocks[1]["kind"], "niṭṭhitaṃ")
+        segs = merge_blocks(blocks)
+        self.assertEqual(len(segs), 2)
+        payload = _segment_to_json(segs[0])
+        self.assertIn(SECTION_RULE_FLAG, payload.get("flags") or [])
 
-    def test_mid_sentence_not_complete(self) -> None:
-        self.assertFalse(
-            _paragraph_seems_complete("Tena kho pana samayena Āḷavakā bhikkhū")
+    def test_long_footnote_rule_not_section_rule(self) -> None:
+        self.assertTrue(_is_section_rule_line("_" * 8))  # decorative title rule
+        self.assertFalse(_is_section_rule_line("_" * 62))
+        self.assertTrue(_is_section_rule_line("_____"))
+        blocks = _blocks_from_region(
+            "Verañjabhāṇavāro niṭṭhito.\n\n"
+            + ("_" * 62)
+            + "\n\n1. Vassaṃvutthā (Sī)",
+            printed_page=12,
+            pdf_page=35,
+            headers=set(),
+            as_notes=False,
         )
+        # Footnote separator is dropped; closer must not gain section_rule.
+        closer = next(b for b in blocks if "niṭṭhito" in b["text"])
+        self.assertFalse(closer["text"].rstrip().endswith("_____"))
+        segs = merge_blocks([closer])
+        payload = _segment_to_json(segs[0])
+        self.assertNotIn(SECTION_RULE_FLAG, payload.get("flags") or [])
+
+    def test_opening_decorative_rule_not_footnote_split(self) -> None:
+        """Medium underscore rule under gambhīra must stay body (02Vin02)."""
+        page = (
+            "Vinayapiṭaka\n\nPācittiyapāḷi\n\n________\n\n"
+            "Namo tassa Bhagavato Arahato Sammāsambuddhassa.\n\n"
+            "5. Pācittiyakaṇḍa\n\n"
+            "1. Musāvādavagga    1. Musāvādasikkhāpada\n\n"
+            "Ime kho panāyasmanto dvenavuti pācittiyā dhammā uddesaṃ "
+            "āgacchanti.\n"
+        )
+        blocks = extract_page_blocks(
+            page,
+            printed_page=1,
+            pdf_page=15,
+            headers={"Vinayapiṭaka", "Pācittiyapāḷi"},
+            is_opening_page=True,
+        )
+        kinds = [b["kind"] for b in blocks]
+        self.assertNotIn("note", kinds)
+        self.assertNotIn("note_continuation", kinds)
+        joined = " ".join(b["text"] for b in blocks)
+        self.assertIn("Namo tassa", joined)
+        self.assertIn("Pācittiyakaṇḍa", joined)
+        self.assertIn("Ime kho panāyasmanto", joined)
+
+    def test_merge_attaches_orphan_rule_block(self) -> None:
+        blocks = [
+            {
+                "kind": "niṭṭhitaṃ",
+                "item": None,
+                "text": "Sudinnabhāṇavāro niṭṭhito.",
+                "flags": [],
+                "page": 25,
+                "pdf_page": 48,
+            },
+            {
+                "kind": "prose",
+                "item": None,
+                "text": "_____",
+                "flags": [],
+                "page": 25,
+                "pdf_page": 48,
+            },
+        ]
+        segs = merge_blocks(blocks)
+        self.assertEqual(len(segs), 1)
+        self.assertTrue(segs[0].text.rstrip().endswith("_____"))
+        payload = _segment_to_json(segs[0])
+        self.assertIn(SECTION_RULE_FLAG, payload.get("flags") or [])
+
+
+class AttachSymbolNotesTests(unittest.TestCase):
+    def test_repeated_plus_keeps_mark_without_second_note(self) -> None:
+        """Second + callout keeps {{+}} even when only one + footnote exists."""
+        segs = [
+            Segment(
+                page=116,
+                order=1,
+                item=None,
+                segment_type="prose",
+                text="Kāsāvakaṇṭhā bahavo, pāpadhammā asaññatā.",
+                flags=["plus"],
+            ),
+            Segment(
+                page=116,
+                order=2,
+                item=None,
+                segment_type="prose",
+                text="Seyyo ayoguḷo bhutto, tatto aggisikhūpamo.",
+                flags=["plus"],
+            ),
+            Segment(
+                page=116,
+                order=3,
+                item=None,
+                segment_type="note",
+                text="Khu 1. 57 piṭṭhe dhammapadepi.",
+                flags=["plus"],
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        body = [s for s in out if s.segment_type == "prose"]
+        self.assertEqual(len(body), 2)
+        shared = "Khu 1. 57 piṭṭhe dhammapadepi."
+        self.assertTrue(body[0].text.startswith("{{+}}"))
+        self.assertEqual(body[0].symbol_notes.get("+"), shared)
+        # Second + callout shares the same note body (one + foot-note on the page).
+        self.assertTrue(body[1].text.startswith("{{+}}"))
+        self.assertEqual(body[1].symbol_notes.get("+"), shared)
 
 
 if __name__ == "__main__":

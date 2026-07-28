@@ -1,5 +1,10 @@
 /* SACRED homepage — goal cards (CRX cardgrid → card) */
 
+/* Goals title is a separate html block; cardgrid needs the section gap below. */
+.sacred-home .container.crx-grid:has(.home-goals) {
+  margin-bottom: var(--hall-section-gap);
+}
+
 .sacred-home .row.home-goals {
   --bs-gutter-x: 28px;
   --bs-gutter-y: 28px;

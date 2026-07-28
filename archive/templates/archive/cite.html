@@ -1,0 +1,23 @@
+{% extends "website/_catalog_base.html" %}
+{% load wagtailcore_tags %}
+
+{% block title %}Citation {{ cref }}{% endblock %}
+
+{% block content %}
+  <h1>Citation: {{ cref }}</h1>
+  {% if edition %}<p>Edition: {{ edition.title }}</p>{% endif %}
+  {% if segments %}
+    {% for segment in segments %}
+      <article>
+        <h2>{{ segment.volume.title }}</h2>
+        <div>{{ segment.text|linebreaks }}</div>
+        {% if segment.folio %}
+          <p><a href="{% pageurl segment.volume %}f/{{ segment.folio.sequence }}/">
+            View scan (folio {{ segment.folio.sequence }})</a></p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  {% else %}
+    <p>No text found for this reference yet.</p>
+  {% endif %}
+{% endblock %}
