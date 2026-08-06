@@ -35,7 +35,7 @@ TRANSLATION_LOCALES = ("th",)
 
 
 def _hero_html(content) -> str:
-    acronym = "Scriptural Archive of Canonical References Editions Depository"
+    acronym = "Scriptural Archive of Canonical Reference Editions Database"
     acronym_html = " ".join(
         f'<span class="acronym-letter">{word[0]}</span>{html.escape(word[1:])}'
         for word in acronym.split()

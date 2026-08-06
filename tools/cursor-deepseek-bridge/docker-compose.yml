@@ -1,0 +1,42 @@
+# Cursor -> DeepSeek V4 bridge proxy
+# Lightweight Go proxy with built-in RapidOCR for image input.
+# Repo: https://github.com/hhz-168/cursor-deepseek-bridge
+#
+# Usage:
+#   docker compose -f tools/cursor-deepseek-bridge/docker-compose.yml up -d
+#   docker compose -f tools/cursor-deepseek-bridge/docker-compose.yml logs -f
+#   docker compose -f tools/cursor-deepseek-bridge/docker-compose.yml down
+#
+# Then expose port 8080 via an HTTPS tunnel (Cursor blocks localhost as Base URL):
+#   cloudflared tunnel --url http://localhost:8080
+#   # or: ngrok http 8080
+#
+# In Cursor -> Settings -> Models:
+#   Override OpenAI Base URL: https://<tunnel-url>/v1
+#   OpenAI API Key:           <your DeepSeek API key>
+#   Model names:              deepseek-v4-flash, deepseek-v4-flash-thinking
+# Append `-thinking` to a model name to enable reasoning for that conversation.
+
+services:
+  cursor-deepseek-bridge:
+    image: houzingm/cursor-deepseek-bridge:latest
+    container_name: cursor-deepseek-bridge
+    ports:
+      - "8080:8080"
+    environment:
+      # Default target model when Cursor sends an unmapped model name.
+      - MAPPED_MODEL=deepseek-v4-flash
+      # Reasoning effort for `-thinking` models: low | medium | high
+      - DS_REASONING_EFFORT=high
+      # Max request body size (min 1m, max 256m). Raise for large screenshots.
+      - DS_MAX_REQUEST_BODY=64m
+      # Reasoning content cache TTL.
+      - DS_CACHE_TTL=24h
+      # Verbose proxy logs when debugging OCR / routing issues.
+      - DS_DEBUG=false
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

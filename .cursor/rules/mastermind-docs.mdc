@@ -1,0 +1,28 @@
+---
+description: How to write and edit mastermind policy/plan documents
+globs: mastermind/**/*.md
+alwaysApply: false
+---
+
+# Mastermind document style
+
+These files are **formal institutional policy and plans**, not technical manuals or chat notes.
+
+## Rules
+
+- Formal Thai policy register: complete sentences, numbered sections (๑ ๒ ๓), dignified diction
+- Clear and concise — decide direction without casual asides, arrows, or slogan tone
+- One concern per file; no implementation steps, command lists, or schema dumps
+- Prefer short tables and numbered principles over long prose
+- Update only when direction changes — not on every code change
+- Link to `docs/` for technical truth; do not copy it here
+- Distill source material into policy points; do not make channels or source files into section topics
+- Keep terms stable: SACRED, Mahāpadesa, Identity, Corpus, Alignment, Service; user groups ก/ข/ค
+
+## Do not
+
+- Write in informal bullet shorthand or conversational Thai
+- Elevate website/homepage/comms sync into a policy heading
+- Add status inventories of the repo
+- Add AI/feature brainstorms that skip Identity → Corpus → Alignment → Service
+- Inflate files past what a decision-maker needs in one sitting

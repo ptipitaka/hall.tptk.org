@@ -14,6 +14,7 @@ Public repo สำหรับพัฒนาระบบใหม่แทน `
 
 ## เอกสาร
 
+- [Mastermind — นโยบาย กุลยุทธ แผนงาน](mastermind/) ← ทิศทางโครงการ
 - [Phase 1 — สรุปสิ่งที่ส่งมอบแล้ว](docs/phase1_complete.md) ← จุดอ้างอิงสถานะปัจจุบัน
 - [Goal 1 pilot — ch/pali2552ro (scans)](docs/goal1_pilot_pali2552ro.md)
 - [เอกสารเก่า (archive)](docs/archive/) — development guide, checklist, data model, migrate discussion

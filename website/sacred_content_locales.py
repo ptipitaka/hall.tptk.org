@@ -60,7 +60,7 @@ LOCALE_CONTENT: dict[str, LocaleContent] = {
         "fullname": "The People's Tipiṭaka Hall",
         "mission_title": "Mission",
         "mission_body": (
-            "Conserving and safeguarding the integrity of the Tipiṭaka<br>\n"
+            "Conserving and transmitting the Tipiṭaka<br>\n"
             "carrying forward a tradition of textual preservation spanning over 2,500 years<br>\n"
             "from oral recitation, palm-leaf manuscripts, and printed books<br>\n"
             "to the digital and AI era<br>\n"
@@ -213,7 +213,7 @@ LOCALE_CONTENT: dict[str, LocaleContent] = {
         "fullname": "หอพระไตรปิฎกเพื่อประชาชน",
         "mission_title": "พันธกิจ",
         "mission_body": (
-            "อนุรักษ์และรักษาความถูกต้องของพระไตรปิฎก<br>\n"
+            "อนุรักษ์และสืบทอดพระไตรปิฎก<br>\n"
             "สานต่อกระบวนการรักษาพระคัมภีร์ที่ดำเนินมากว่า ๒,๕๐๐ ปี<br>\n"
             "จากยุคมุขปาฐะ จารใบลาน พิมพ์หนังสือ สู่ยุคดิจิทัลปัญญาประดิษฐ์<br>\n"
             "เพื่อสืบทอดคลังอารยธรรมทางปัญญาของมนุษยชาติ"

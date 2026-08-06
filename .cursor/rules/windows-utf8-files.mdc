@@ -1,0 +1,48 @@
+---
+description: Never mangle UTF-8 Thai/JSON via PowerShell default encoding
+alwaysApply: true
+---
+
+# Windows UTF-8 file I/O
+
+This repo has Thai (and other non-ASCII) in JSON/Markdown. On Thai Windows the
+system ANSI code page is often **windows-874**. PowerShell 5.1 `Get-Content` /
+`Set-Content` **without** `-Encoding utf8` misreads UTF-8 and re-saves mojibake
+(e.g. `ปรับ` → `เธเธฃ…`, or worse after repeated rounds).
+
+## Do
+
+- Edit UTF-8 JSON/text with the editor **Write** / **StrReplace** tools, or Python:
+
+```python
+from pathlib import Path
+import json
+
+path = Path("books/cs-roman/output/01Vin01.layout.json")
+data = json.loads(path.read_text(encoding="utf-8"))
+# ... mutate data ...
+path.write_text(
+    json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+    encoding="utf-8",
+)
+```
+
+- If PowerShell must touch UTF-8 files:
+
+```powershell
+Get-Content -Raw -Encoding utf8 -LiteralPath $path
+# write:
+[System.IO.File]::WriteAllText($path, $text, [System.Text.UTF8Encoding]::new($false))
+```
+
+## Do not
+
+- Batch-edit `*.json` / `*.md` with `Get-Content` / `Set-Content` / `-replace` and
+  no explicit UTF-8 encoding
+- Assume console `chcp` fixes file I/O encoding
+
+## CS Roman check
+
+`cs_roman_segments.doc_comment_encoding_errors` / `validate_document` reject
+mojibake markers in `layout.json` `//…` notes. Prefer fixing encoding at the
+edit path, not patching garbled Thai by hand after the fact.
