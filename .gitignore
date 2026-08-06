@@ -71,3 +71,12 @@ books/cs-roman/source/*.pdf
 # Vendored reference dump (local only; too large for the repo)
 docs/tipitaka.app-main/
 
+# CS Roman local DPD SQLite / archives (fetch via scripts/fetch_dpd_db.py)
+books/cs-roman/vendor/dpd/
+
+# CS Roman ad-hoc scratch (see scripts/scratch/README.md); keep archive + README
+books/cs-roman/scripts/scratch/*
+!books/cs-roman/scripts/scratch/README.md
+!books/cs-roman/scripts/scratch/archive/
+!books/cs-roman/scripts/scratch/archive/**
+
