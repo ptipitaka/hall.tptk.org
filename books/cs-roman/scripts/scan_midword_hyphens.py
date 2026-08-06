@@ -20,6 +20,7 @@ ensure_import_paths()
 from pali_script import Script, convert  # noqa: E402
 
 ROOT = BOOKS
+RESEARCH = BOOKS / "research"
 VOLUMES = VOLUMES_DIR
 
 MARKER_RE = re.compile(r"\{\{(?:n\d+|\*|sp1|sp3|\+)\}\}")
@@ -252,13 +253,13 @@ def main() -> int:
     parser.add_argument(
         "--tsv",
         type=Path,
-        default=ROOT / "research_midword_hyphens.tsv",
+        default=RESEARCH / "research_midword_hyphens.tsv",
         help="output TSV path",
     )
     parser.add_argument(
         "--md",
         type=Path,
-        default=ROOT / "research_midword_hyphens.md",
+        default=RESEARCH / "research_midword_hyphens.md",
         help="output markdown summary path",
     )
     parser.add_argument(

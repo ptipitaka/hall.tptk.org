@@ -15,6 +15,7 @@ ensure_import_paths()
 from pali_script import Script, convert  # noqa: E402
 
 ROOT = BOOKS
+RESEARCH = BOOKS / "research"
 VOLUMES = VOLUMES_DIR
 
 MARKER_RE = re.compile(r"\{\{(?:n\d+|\*|sp1|sp3|\+)\}\}")
@@ -142,10 +143,10 @@ def main() -> None:
         "--tsv",
         type=Path,
         default=None,
-        help="output TSV path (default: research_long_words_ge{N}.tsv under books/cs-roman)",
+        help="output TSV path (default: research/research_long_words_ge{N}.tsv)",
     )
     args = parser.parse_args()
-    out_tsv = args.tsv or (ROOT / f"research_long_words_ge{args.min_len}.tsv")
+    out_tsv = args.tsv or (RESEARCH / f"research_long_words_ge{args.min_len}.tsv")
 
     roman_words = scan_roman_words(args.min_len)
     rows = write_thai_tsv(roman_words, out_tsv, args.min_len)

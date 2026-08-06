@@ -21,6 +21,8 @@ from extract_cs_roman_pdf import (  # noqa: E402
     attach_notes_sacred_style,
     extract_page_blocks,
     merge_blocks,
+    peel_glued_gatha_title_raw,
+    peel_glued_gatha_title_text,
     peel_glued_uddesa_heading,
     unglue_false_pa_page_joins,
 )
@@ -342,6 +344,62 @@ class SectionNoHeadingTests(unittest.TestCase):
         )
 
 
+class GluedGathaTitlePeelTests(unittest.TestCase):
+    def test_raw_tassuddana_peels_title_and_bat_lines(self) -> None:
+        peeled = peel_glued_gatha_title_raw(
+            "Tassuddānaṃ\n"
+            "Ubbhataṃ kathinaṃ tīṇi, dhovanañca paṭiggaho.\n"
+            "Aññātakāni tīṇeva, ubhinnaṃ dūtakena cāti.\n"
+            "_____"
+        )
+        self.assertIsNotNone(peeled)
+        assert peeled is not None
+        title, lines = peeled
+        self.assertEqual(title, "Tassuddānaṃ")
+        self.assertEqual(len(lines), 3)
+        self.assertTrue(lines[0].startswith("Ubbhataṃ"))
+        self.assertTrue(lines[1].startswith("Aññātakāni"))
+        self.assertTrue(_is_section_rule_line(lines[2]))
+
+    def test_blocks_from_region_emits_title_then_verse_prose(self) -> None:
+        blocks = _blocks_from_region(
+            "Tassuddānaṃ\n"
+            "Ubbhataṃ kathinaṃ tīṇi, dhovanañca paṭiggaho.\n"
+            "Aññātakāni tīṇeva, ubhinnaṃ dūtakena cāti.\n"
+            "_____",
+            printed_page=328,
+            pdf_page=351,
+            headers=set(),
+            as_notes=False,
+        )
+        self.assertEqual(len(blocks), 3)
+        self.assertEqual(blocks[0]["kind"], "title")
+        self.assertEqual(blocks[0]["text"], "Tassuddānaṃ")
+        self.assertEqual(blocks[1]["kind"], "prose")
+        self.assertTrue(blocks[1]["text"].startswith("Ubbhataṃ"))
+        self.assertTrue(blocks[2]["text"].startswith("Aññātakāni"))
+        # Section rule attaches to last verse body.
+        self.assertIn("_____", blocks[2]["text"] or "")
+
+    def test_normalized_text_peel_and_reject_commentary(self) -> None:
+        peeled = peel_glued_gatha_title_text(
+            "Tassuddānaṃ Ubbhataṃ kathinaṃ tīṇi, dhovanañca paṭiggaho."
+            "{{sp1}} Aññātakāni tīṇeva, ubhinnaṃ dūtakena cāti."
+        )
+        self.assertIsNotNone(peeled)
+        assert peeled is not None
+        title, parts = peeled
+        self.assertEqual(title, "Tassuddānaṃ")
+        self.assertEqual(len(parts), 2)
+        # Long niddesa titles that merely contain ``gāthā`` must not peel.
+        self.assertIsNone(
+            peel_glued_gatha_title_text(
+                "Pārāyanatthutigāthāniddesa imassa pārāyanassāti tasmā "
+                "imassa dhammapariyāyassa.{{sp1}} Pārāyananteva adhivacanaṃ."
+            )
+        )
+
+
 class SectionRuleAttachTests(unittest.TestCase):
     def test_same_block_trailing_underscores_set_flag(self) -> None:
         """Closer + short rule without a blank line → section_rule flag."""
@@ -489,6 +547,279 @@ class AttachSymbolNotesTests(unittest.TestCase):
         # Second + callout shares the same note body (one + foot-note on the page).
         self.assertTrue(body[1].text.startswith("{{+}}"))
         self.assertEqual(body[1].symbol_notes.get("+"), shared)
+
+
+class AttachNumberedCalloutTests(unittest.TestCase):
+    def test_glued_callout_binds_note(self) -> None:
+        segs = [
+            Segment(
+                page=74,
+                order=1,
+                item=149,
+                segment_type="prose",
+                text="eso bhaginiyo ovādo”ti niyyādetabbo1. Sace",
+            ),
+            Segment(
+                page=74,
+                order=2,
+                item=1,
+                segment_type="note",
+                text="Niyyātetabbo (Itipi)",
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        body = next(s for s in out if s.segment_type == "prose")
+        self.assertIn("niyyādetabbo{{n0}}", body.text)
+        self.assertEqual(body.notes, ["Niyyātetabbo (Itipi)"])
+        self.assertFalse(any(s.segment_type == "note" for s in out))
+
+    def test_glued_midword_callout_binds_note(self) -> None:
+        """``Kaṇṭakassa1nāma`` (02Vin02 p.181) — digit glued before a letter."""
+        segs = [
+            Segment(
+                page=181,
+                order=1,
+                item=428,
+                segment_type="prose",
+                text=(
+                    "Tena kho pana samayena Kaṇṭakassa1nāma "
+                    "samaṇuddesassa evarūpaṃ"
+                ),
+            ),
+            Segment(
+                page=181,
+                order=2,
+                item=1,
+                segment_type="note",
+                text="Kaṇḍakassa (Syā, Ka)",
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        body = next(s for s in out if s.segment_type == "prose")
+        self.assertIn("Kaṇṭakassa{{n0}}nāma", body.text)
+        self.assertEqual(body.notes, ["Kaṇḍakassa (Syā, Ka)"])
+        self.assertFalse(any(s.segment_type == "note" for s in out))
+
+    def test_paren_note_binds_to_body_paren(self) -> None:
+        """``(  ) (katthaci natthi)`` binds next to body ``(`` (02Vin02 p.317)."""
+        segs = [
+            Segment(
+                page=317,
+                order=1,
+                item=None,
+                segment_type="prose",
+                text="tattha (sā bhikkhunī) abbhetabbā.",
+            ),
+            Segment(
+                page=317,
+                order=2,
+                item=None,
+                segment_type="note",
+                text="(  ) (katthaci natthi)",
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        body = next(s for s in out if s.segment_type == "prose")
+        self.assertTrue(body.text.startswith("tattha ({{()}}"))
+        self.assertEqual(body.symbol_notes.get("()"), "(katthaci natthi)")
+        self.assertFalse(any(s.segment_type == "note" for s in out))
+
+    def test_numbered_paren_body_not_stolen_by_folio(self) -> None:
+        """Numbered note ``2. ( ) (?) …`` must bind to ``(te)2``, not ``(150)``.
+
+        Regression: 01Vin01 p.86 bound note 2 onto folio ``(150)`` as
+        ``({{()}}150)`` and left literal ``(te)2`` in the next segment.
+        """
+        segs = [
+            Segment(
+                page=86,
+                order=1,
+                item=161,
+                segment_type="prose_continuation",
+                text="So bhikkhu abhiramatīti1. (150)",
+            ),
+            Segment(
+                page=86,
+                order=2,
+                item=162,
+                segment_type="prose",
+                text=(
+                    'bhāsatī”ti (te)2 anekākāravokāraṃ '
+                    "asubhabhāvanānuyogamanuyuttā viharanti."
+                ),
+                flags=["star"],
+            ),
+            Segment(
+                page=86,
+                order=3,
+                item=1,
+                segment_type="note",
+                text="Abhiramīti (Sī, Syā)",
+            ),
+            Segment(
+                page=86,
+                order=4,
+                item=2,
+                segment_type="note",
+                text="( ) (?) Evamuparipi īdisesu ṭhānesu.",
+            ),
+            Segment(
+                page=86,
+                order=5,
+                item=None,
+                segment_type="note",
+                text="Idaṃ vatthu Saṃ 3. 278 piṭṭhepi āgataṃ.",
+                flags=["star"],
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        bodies = [s for s in out if s.segment_type != "note"]
+        cont = next(s for s in bodies if s.segment_type == "prose_continuation")
+        prose = next(s for s in bodies if s.segment_type == "prose")
+        self.assertIn("abhiramatīti{{n0}}", cont.text)
+        self.assertIn("(150)", cont.text)
+        self.assertNotIn("{{()}}", cont.text)
+        self.assertNotIn("()", (cont.symbol_notes or {}))
+        self.assertIn("(te){{n0}}", prose.text)
+        self.assertNotIn("(te)2", prose.text)
+        self.assertEqual(
+            prose.notes,
+            ["( ) (?) Evamuparipi īdisesu ṭhānesu."],
+        )
+        self.assertEqual(
+            prose.symbol_notes.get("*"),
+            "Idaṃ vatthu Saṃ 3. 278 piṭṭhepi āgataṃ.",
+        )
+        self.assertFalse(any(s.segment_type == "note" for s in out))
+
+    def test_spaced_callout_binds_note(self) -> None:
+        """PDF superscript gap: ``paccāsīsitabbā 1 uposatha`` (02Vin02 p.75)."""
+        segs = [
+            Segment(
+                page=75,
+                order=1,
+                item=149,
+                segment_type="prose_continuation",
+                text=(
+                    "dve dhammā paccāsīsitabbā 1 uposathapucchakañca "
+                    "ovādupasaṅkamanañca,"
+                ),
+            ),
+            Segment(
+                page=75,
+                order=2,
+                item=1,
+                segment_type="note",
+                text="Paccāsiṃ sitabbā (Itipi)",
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        body = next(s for s in out if s.segment_type == "prose_continuation")
+        self.assertIn("paccāsīsitabbā{{n0}}", body.text)
+        self.assertNotIn("paccāsīsitabbā 1 ", body.text)
+        self.assertEqual(body.notes, ["Paccāsiṃ sitabbā (Itipi)"])
+        self.assertFalse(any(s.segment_type == "note" for s in out))
+
+    def test_spaced_outline_number_not_bound(self) -> None:
+        """``vagga 1. Title`` must not consume footnote 1."""
+        segs = [
+            Segment(
+                page=10,
+                order=1,
+                item=None,
+                segment_type="chapter",
+                text="Cīvaravagga 1. Paṭhamakathinasikkhāpada",
+            ),
+            Segment(
+                page=10,
+                order=2,
+                item=None,
+                segment_type="prose",
+                text="Ime kho panāyasmanto dvenavuti1 pācittiyā.",
+            ),
+            Segment(
+                page=10,
+                order=3,
+                item=1,
+                segment_type="note",
+                text="Variant (Itipi)",
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        chapter = next(s for s in out if s.segment_type == "chapter")
+        prose = next(s for s in out if s.segment_type == "prose")
+        self.assertEqual(chapter.text, "Cīvaravagga 1. Paṭhamakathinasikkhāpada")
+        self.assertIn("dvenavuti{{n0}}", prose.text)
+        self.assertEqual(prose.notes, ["Variant (Itipi)"])
+
+    def test_inline_plus_callout_binds_note(self) -> None:
+        """Mid-paragraph ``Te + evarūpaṃ`` (01Vin01 p.274) binds + note."""
+        segs = [
+            Segment(
+                page=274,
+                order=1,
+                item=431,
+                segment_type="prose",
+                text="nāma1 Kīṭāgirismiṃ. Te + evarūpaṃ anācāraṃ ācaranti.",
+                flags=["star"],
+            ),
+            Segment(
+                page=274,
+                order=2,
+                item=1,
+                segment_type="note",
+                text="Nāma bhikkhū (Ka)",
+            ),
+            Segment(
+                page=274,
+                order=3,
+                item=None,
+                segment_type="note",
+                text="Idaṃ vatthu Vi 4. 22 piṭṭhādīsupi āgataṃ.",
+                flags=["star"],
+            ),
+            Segment(
+                page=274,
+                order=4,
+                item=None,
+                segment_type="note",
+                text="Vi 4. 284 piṭṭhādīsupi.",
+                flags=["plus"],
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        body = next(s for s in out if s.segment_type == "prose")
+        self.assertIn("{{*}}", body.text)
+        self.assertIn("Te{{+}}evarūpaṃ", body.text.replace(" ", ""))
+        self.assertEqual(body.symbol_notes.get("+"), "Vi 4. 284 piṭṭhādīsupi.")
+        self.assertFalse(any(s.segment_type == "note" for s in out))
+
+    def test_bracket_note_binds_to_omission_bracket(self) -> None:
+        """``[  ] Etthantare…`` binds next to body ``[`` (01Vin01 p.134)."""
+        segs = [
+            Segment(
+                page=134,
+                order=1,
+                item=None,
+                segment_type="prose",
+                text="[ 219. Tīhā kārehi dutiyañca jhānaṃ",
+            ),
+            Segment(
+                page=134,
+                order=2,
+                item=None,
+                segment_type="note",
+                text="[  ] Etthantare pāṭhā Syāmapotthake natthi.",
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        body = next(s for s in out if s.segment_type == "prose")
+        self.assertTrue(body.text.startswith("[{{[]}}"))
+        self.assertEqual(
+            body.symbol_notes.get("[]"),
+            "Etthantare pāṭhā Syāmapotthake natthi.",
+        )
+        self.assertFalse(any(s.segment_type == "note" for s in out))
 
 
 if __name__ == "__main__":

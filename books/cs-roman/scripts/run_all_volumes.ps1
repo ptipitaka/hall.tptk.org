@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Sequentially regenerate matika.json/segments (headings) + rebuild sync+reading
+  Sequentially regenerate matika.json/segments (headings) + rebuild sync+printing
   PDFs for a list of cs-roman volumes, in order. Continues past per-volume
   failures and writes a running log.
 #>
@@ -42,12 +42,12 @@ foreach ($vol in $Volumes) {
     Log "OK $vol : sync PDF built"
   }
 
-  Log "--- $vol : build reading ---"
-  powershell -File .\build.ps1 -Volume $vol -Mode reading *>> $LogPath
+  Log "--- $vol : build printing ---"
+  powershell -File .\build.ps1 -Volume $vol -Mode printing *>> $LogPath
   if ($LASTEXITCODE -ne 0) {
-    Log "FAIL $vol : build reading exit $LASTEXITCODE"
+    Log "FAIL $vol : build printing exit $LASTEXITCODE"
   } else {
-    Log "OK $vol : reading PDF built"
+    Log "OK $vol : printing PDF built"
   }
 
   Log "=== DONE $vol ==="

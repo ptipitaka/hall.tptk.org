@@ -16,113 +16,113 @@
     {
       "title": "Kāmasuttaniddesa",
       "page": 1,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": null,
       "section_no": 1
     },
     {
       "title": "Guhaṭṭhakasuttaniddesa",
       "page": 17,
-      "kind": "h1",
-      "matched_order": 121,
+      "kind": "h2",
+      "matched_order": 107,
       "section_no": 2
     },
     {
       "title": "Duṭṭhaṭṭhakasuttaniddesa",
       "page": 47,
-      "kind": "h1",
-      "matched_order": 345,
+      "kind": "h2",
+      "matched_order": 292,
       "section_no": 3
     },
     {
       "title": "Suddhaṭṭhakasuttaniddesa",
       "page": 64,
-      "kind": "h1",
-      "matched_order": 471,
+      "kind": "h2",
+      "matched_order": 416,
       "section_no": 4
     },
     {
       "title": "Paramaṭṭhakasuttaniddesa",
       "page": 78,
-      "kind": "h1",
-      "matched_order": 603,
+      "kind": "h2",
+      "matched_order": 543,
       "section_no": 5
     },
     {
       "title": "Jarāsuttaniddesa",
       "page": 90,
-      "kind": "h1",
-      "matched_order": 711,
+      "kind": "h2",
+      "matched_order": 651,
       "section_no": 6
     },
     {
       "title": "Tissametteyyasuttaniddesa",
       "page": 107,
-      "kind": "h1",
-      "matched_order": 886,
+      "kind": "h2",
+      "matched_order": 802,
       "section_no": 7
     },
     {
       "title": "Pasūrasuttaniddesa",
       "page": 124,
-      "kind": "h1",
-      "matched_order": 1007,
+      "kind": "h2",
+      "matched_order": 918,
       "section_no": 8
     },
     {
       "title": "Māgaṇḍiyasuttaniddesa",
       "page": 140,
-      "kind": "h1",
-      "matched_order": 1161,
+      "kind": "h2",
+      "matched_order": 1068,
       "section_no": 9
     },
     {
       "title": "Purābhedasuttaniddesa",
       "page": 161,
-      "kind": "h1",
-      "matched_order": 1381,
+      "kind": "h2",
+      "matched_order": 1281,
       "section_no": 10
     },
     {
       "title": "Kalahavivādasuttaniddesa",
       "page": 196,
-      "kind": "h1",
-      "matched_order": 1579,
+      "kind": "h2",
+      "matched_order": 1459,
       "section_no": 11
     },
     {
       "title": "Cūḷaviyūhasuttaniddesa",
       "page": 220,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": null,
       "section_no": 12
     },
     {
       "title": "Mahāviyūhasuttaniddesa",
       "page": 236,
-      "kind": "h1",
-      "matched_order": 2025,
+      "kind": "h2",
+      "matched_order": 1823,
       "section_no": 13
     },
     {
       "title": "Tuvaṭṭakasuttaniddesa",
       "page": 263,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": null,
       "section_no": 14
     },
     {
       "title": "Attadaṇḍasuttaniddesa",
       "page": 315,
-      "kind": "h1",
-      "matched_order": 2687,
+      "kind": "h2",
+      "matched_order": 2354,
       "section_no": 15
     },
     {
       "title": "Sāriputtasuttaniddesa",
       "page": 352,
-      "kind": "h1",
-      "matched_order": 2999,
+      "kind": "h2",
+      "matched_order": 2593,
       "section_no": 16
     }
   ]

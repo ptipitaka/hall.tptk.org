@@ -12,13 +12,13 @@ ensure_import_paths()
 from pali_script import Script, convert  # noqa: E402
 
 from cs_roman_bold import (  # noqa: E402
-    bold_ranges_in_text,
+    bold_ranges_one_per_span,
     clip_ranges,
     ranges_to_runs,
 )
 
 # Inline markers embedded in segment body (must not be transliterated).
-# ``{{sp1}}`` = 0.5em gap in TeX after a visible sentence stop.
+# ``{{sp1}}`` → TeX ``\\csromanspacer`` after a visible sentence stop (default 0em).
 SP1_MARKER = "{{sp1}}"
 # Legacy pot-ma-gyi marker (3em era); migrated to ``{{sp1}}`` on normalize.
 SP3_MARKER = "{{sp3}}"
@@ -47,7 +47,7 @@ _SPECIAL_CHUNK_RE = re.compile(
 # CS→Thai letter convert maps ASCII digits to Thai digits; publication uses Arabic.
 _THAI_DIGITS_TO_ARABIC = str.maketrans("๐๑๒๓๔๕๖๗๘๙", "0123456789")
 
-# Burmese pot-ma-gyi in CS Roman: ``. .`` → ``.{{sp1}}{{sp1}}`` (1.0em gap).
+# Burmese pot-ma-gyi in CS Roman: ``. .`` → ``.{{sp1}}{{sp1}}`` (2× spacer).
 _POT_MA_GYI_RE = re.compile(r"\. \. ?")
 # Legacy single-``{{sp1}}`` pot-ma-gyi (no space before next unit) → double.
 _LEGACY_POT_MA_GYI_SP1_RE = re.compile(
@@ -73,6 +73,30 @@ _NEEDS_SPACING_RE = re.compile(
 # PDF text extraction turns the short end-of-section rule into underscores.
 _SECTION_RULE_RE = re.compile(r"\s*_{3,}\s*$")
 SECTION_RULE_FLAG = "section_rule"
+
+# Solid editorial hyphens in CS Roman (na-upanissaye); not soft wraps, not -pa-.
+_PALI_LETTER_CLASS = (
+    r"A-Za-z"
+    r"ĀāĪīŪūĒēŌō"
+    r"ṂṃṀṁṄṅÑñṬṭḌḍṆṇḶḷŚśṢṣḤḥ"
+    r"Œœ"
+)
+_PA_MARKER_RE = re.compile(r"(?i)-pa-")
+_SOLID_MIDWORD_HYPHEN_RE = re.compile(
+    rf"(?<=[{_PALI_LETTER_CLASS}])-(?=[{_PALI_LETTER_CLASS}])"
+)
+
+# PDF often emits U+23AF (HORIZONTAL LINE EXTENSION) for discourse dashes.
+# Sarabun has no glyph; map to CS Roman en-dash (TeX ``\\csromandash``).
+HORIZONTAL_LINE_EXTENSION = "\u23af"
+EN_DASH = "\u2013"
+
+
+def normalize_printable_dashes(text: str) -> str:
+    """Map non-printable dash lookalikes to CS Roman en-dash (U+2013)."""
+    if not text or HORIZONTAL_LINE_EXTENSION not in text:
+        return text
+    return text.replace(HORIZONTAL_LINE_EXTENSION, EN_DASH)
 
 
 def uses_sentence_spacer(segment_type: str | None) -> bool:
@@ -113,6 +137,31 @@ def strip_sentence_spacers(text: str) -> str:
 def needs_spacing_normalize(text: str) -> bool:
     """True when Roman/Thai still has raw pot-ma-gyi or missing sentence ``{{sp1}}``."""
     return bool(text and _NEEDS_SPACING_RE.search(text))
+
+
+def strip_solid_midword_hyphens(text: str) -> str:
+    """Remove solid letter-hyphen-letter joins; keep peyyāla ``-pa-``.
+
+    CS Roman often marks vowel-vowel compounds with an editorial hyphen
+    (``na-upanissaye``). Extract-normalized text drops those hyphens
+    (``naupanissaye``). Soft line-wrap hyphens are joined earlier in extract;
+    this step only clears remaining solid mid-word hyphens.
+    """
+    if not text or "-" not in text:
+        return text
+    parts: list[str] = []
+    last = 0
+    for m in _PA_MARKER_RE.finditer(text):
+        parts.append(_SOLID_MIDWORD_HYPHEN_RE.sub("", text[last : m.start()]))
+        parts.append(m.group(0))
+        last = m.end()
+    parts.append(_SOLID_MIDWORD_HYPHEN_RE.sub("", text[last:]))
+    return "".join(parts)
+
+
+def needs_solid_midword_hyphen_strip(text: str) -> bool:
+    """True when Roman still has solid editorial mid-word hyphens."""
+    return bool(text) and strip_solid_midword_hyphens(text) != text
 
 
 def has_sentence_spacer_marker(text: str) -> bool:
@@ -159,18 +208,34 @@ def split_trailing_section_rule(text: str) -> tuple[str, bool]:
     return text[: m.start()].rstrip(), True
 
 
-def prepare_roman_body(
+def normalize_roman_body(
     roman: str, *, normalize_spacing: bool = True
 ) -> tuple[str, bool]:
     """Strip section-rule tail; optionally normalize sentence-stop ``{{sp1}}``.
 
-    When ``normalize_spacing`` is false (headings / notes), strip any existing
-    spacer markers instead of injecting new ones.
+    Keeps solid editorial mid-word hyphens so Thai can be derived part-wise
+    (``na-upanissaye`` → ``น`` + ``อุปนิสฺสเย``). Callers that store Roman
+    should pass the result through ``strip_solid_midword_hyphens``.
     """
+    roman = normalize_printable_dashes(roman)
     cleaned, has_rule = split_trailing_section_rule(roman)
     if normalize_spacing:
         return normalize_pot_ma_gyi(cleaned), has_rule
     return strip_sentence_spacers(cleaned), has_rule
+
+
+def prepare_roman_body(
+    roman: str, *, normalize_spacing: bool = True
+) -> tuple[str, bool]:
+    """Full extract-normalize: spacing / section-rule, then drop solid hyphens.
+
+    When ``normalize_spacing`` is false (headings / notes), strip any existing
+    spacer markers instead of injecting new ones.
+    """
+    cleaned, has_rule = normalize_roman_body(
+        roman, normalize_spacing=normalize_spacing
+    )
+    return strip_solid_midword_hyphens(cleaned), has_rule
 
 
 def thai_digits_to_arabic(text: str) -> str:
@@ -192,8 +257,30 @@ def _thai_runs_digits_to_arabic(runs: list[Any]) -> list[Any]:
     return out
 
 
+def _convert_roman_chunk(chunk: str) -> str:
+    """Convert one Roman span; solid mid-word hyphens split morphemes, then drop.
+
+    Joining before convert misreads vowel junctions (``naupanissaye`` →
+    ``นฺเอา…``). Split on the hyphen, convert each side, concatenate without
+    ``-`` (``นอุปนิสฺสเย``).
+    """
+    if not chunk:
+        return ""
+    if "-" not in chunk or not _SOLID_MIDWORD_HYPHEN_RE.search(chunk):
+        return convert(chunk, Script.ROMAN, Script.THAI)
+    return "".join(
+        convert(part, Script.ROMAN, Script.THAI)
+        for part in _SOLID_MIDWORD_HYPHEN_RE.split(chunk)
+        if part
+    )
+
+
 def roman_to_thai(roman: str, *, normalize_spacing: bool = True) -> str:
     """Transliterate Roman Pāli → Thai; keep markers; ``-pa-`` → ฯเปฯ.
+
+    Solid editorial mid-word hyphens mark morpheme breaks for convert, then
+    are omitted in Thai (``na-upanissaye`` → ``นอุปนิสฺสเย``). Peyyāla
+    ``-pa-`` stays special-cased to ฯเปฯ.
 
     When ``normalize_spacing`` is false (headings / footnote bodies), do not
     inject sentence-stop ``{{sp1}}`` and strip any leftover spacer markers so
@@ -204,6 +291,7 @@ def roman_to_thai(roman: str, *, normalize_spacing: bool = True) -> str:
     """
     if not roman:
         return ""
+    roman = normalize_printable_dashes(roman)
     text = (
         normalize_pot_ma_gyi(roman)
         if normalize_spacing
@@ -220,7 +308,7 @@ def roman_to_thai(roman: str, *, normalize_spacing: bool = True) -> str:
         elif chunk.lower() == "-pa-":
             parts.append("ฯเปฯ")
         else:
-            parts.append(convert(chunk, Script.ROMAN, Script.THAI))
+            parts.append(_convert_roman_chunk(chunk))
     return thai_digits_to_arabic("".join(parts))
 
 
@@ -304,7 +392,8 @@ def remap_bold_ranges(
     ]
     if not spans:
         return []
-    return bold_ranges_in_text(prepared, spans)
+    # One stored bold run → one occurrence (do not re-bleed repeated lemmas).
+    return bold_ranges_one_per_span(prepared, spans)
 
 
 def script_text_entries(
@@ -316,23 +405,27 @@ def script_text_entries(
     """Build ``text`` as ``[{script, value(, runs)}, …]``; strip section-rule underscores.
 
     When ``normalize_spacing`` is true (body), also normalize sentence-stop
-    spacing to ``{{sp1}}``. Pass ``bold_ranges`` computed on the *prepared*
-    body (see ``prepare_roman_body``) so spans stay aligned.
+    spacing to ``{{sp1}}``. Thai is derived from the hyphenated Roman (morpheme
+    breaks), then solid mid-word hyphens are dropped from stored Roman.
+    Pass ``bold_ranges`` on the *final* Roman (post hyphen-strip) so spans
+    stay aligned — prefer ranges from ``prepare_roman_body``.
     """
-    cleaned, has_rule = prepare_roman_body(
+    spaced, has_rule = normalize_roman_body(
         roman, normalize_spacing=normalize_spacing
     )
+    # Thai before stripping hyphens so ``na-u…`` ≠ joined ``nau…``.
+    # Same spacing flag as Roman (idempotent); do not strip ``{{sp1}}`` here.
+    thai_value = roman_to_thai(spaced, normalize_spacing=normalize_spacing)
+    cleaned = strip_solid_midword_hyphens(spaced)
     roman_entry: dict[str, Any] = {"script": "roman", "value": cleaned}
-    thai_entry: dict[str, Any] = {
-        "script": "thai",
-        "value": roman_to_thai(cleaned, normalize_spacing=normalize_spacing),
-    }
+    thai_entry: dict[str, Any] = {"script": "thai", "value": thai_value}
 
     if bold_ranges:
         clipped = clip_ranges(bold_ranges, length=len(cleaned))
         runs = ranges_to_runs(cleaned, clipped)
         if runs:
             roman_entry["runs"] = runs
+            # Re-derive Thai runs from stripped Roman chunks (hyphens already gone).
             thai_entry["runs"] = transliterate_runs(runs)
 
     return [roman_entry, thai_entry], has_rule
@@ -375,7 +468,7 @@ def ensure_script_text(
     had_bold = text_field_has_bold_runs(text)
     old_runs = roman_runs_from_text_field(text)
 
-    needs = (
+    needs = needs_solid_midword_hyphen_strip(roman) or (
         needs_spacing_normalize(roman)
         if normalize_spacing
         else has_sentence_spacer_marker(roman)

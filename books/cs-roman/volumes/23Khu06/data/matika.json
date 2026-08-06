@@ -4,13 +4,13 @@
     {
       "title": "Jātakapāḷi dutiyabhāga",
       "page": null,
-      "kind": "h2",
+      "kind": "boo",
       "matched_order": 2
     },
     {
       "title": "Cattālīsanipāta",
       "page": null,
-      "kind": "h1",
+      "kind": "cha",
       "matched_order": null,
       "section_no": 17
     },
@@ -25,119 +25,119 @@
       "title": "Sarabhaṅgajātaka",
       "page": 5,
       "kind": "h1",
-      "matched_order": 102,
+      "matched_order": 61,
       "section_no": 522
     },
     {
       "title": "Alambusājātaka",
       "page": 12,
       "kind": "h1",
-      "matched_order": 278,
+      "matched_order": 125,
       "section_no": 523
     },
     {
       "title": "Saṅkhapālajātaka",
       "page": 16,
       "kind": "h1",
-      "matched_order": 378,
+      "matched_order": 175,
       "section_no": 524
     },
     {
       "title": "Cūḷasutasomajātaka",
       "page": 25,
       "kind": "h1",
-      "matched_order": 591,
+      "matched_order": 231,
       "section_no": 525
     },
     {
       "title": "Paṇṇāsanipāta",
       "page": null,
-      "kind": "h1",
-      "matched_order": 737,
+      "kind": "cha",
+      "matched_order": 287,
       "section_no": 18
     },
     {
       "title": "Niḷinikājātaka",
       "page": 31,
       "kind": "h1",
-      "matched_order": 738,
+      "matched_order": 288,
       "section_no": 526
     },
     {
       "title": "Ummādantījātaka",
       "page": 39,
       "kind": "h1",
-      "matched_order": 942,
+      "matched_order": 352,
       "section_no": 527
     },
     {
       "title": "Mahābodhijātaka",
       "page": 47,
       "kind": "h1",
-      "matched_order": 1159,
+      "matched_order": 425,
       "section_no": 528
     },
     {
       "title": "Saṭṭhinipāta",
       "page": null,
-      "kind": "h1",
-      "matched_order": 1302,
+      "kind": "cha",
+      "matched_order": 491,
       "section_no": 19
     },
     {
       "title": "Soṇakajātaka",
       "page": 53,
       "kind": "h1",
-      "matched_order": 1303,
+      "matched_order": 492,
       "section_no": 529
     },
     {
       "title": "Saṃkiccajātaka",
       "page": 59,
       "kind": "h1",
-      "matched_order": 1449,
+      "matched_order": 576,
       "section_no": 530
     },
     {
       "title": "Sattatinipāta",
       "page": null,
-      "kind": "h1",
-      "matched_order": 1601,
+      "kind": "cha",
+      "matched_order": 653,
       "section_no": 20
     },
     {
       "title": "Kusajātaka",
       "page": 66,
       "kind": "h1",
-      "matched_order": 1602,
+      "matched_order": 654,
       "section_no": 531
     },
     {
       "title": "Soṇanandajātaka",
       "page": 74,
       "kind": "h1",
-      "matched_order": 1811,
+      "matched_order": 766,
       "section_no": 532
     },
     {
       "title": "Asītinipāta",
       "page": null,
-      "kind": "h1",
-      "matched_order": 2013,
+      "kind": "cha",
+      "matched_order": 867,
       "section_no": 21
     },
     {
       "title": "Cūḷahaṃsajātaka",
       "page": 83,
       "kind": "h1",
-      "matched_order": 2014,
+      "matched_order": 868,
       "section_no": 533
     },
     {
       "title": "Mahāhaṃsajātaka",
       "page": 90,
       "kind": "h1",
-      "matched_order": 2195,
+      "matched_order": 961,
       "section_no": 534
     },
     {
@@ -151,97 +151,91 @@
       "title": "Kuṇālajātaka",
       "page": 113,
       "kind": "h1",
-      "matched_order": 2781,
+      "matched_order": 1178,
       "section_no": 536
     },
     {
       "title": "Mahāsutasomajātaka",
       "page": 131,
       "kind": "h1",
-      "matched_order": 3108,
+      "matched_order": 1324,
       "section_no": 537
-    },
-    {
-      "title": "Jātakapāḷi dutiyabhāga",
-      "page": null,
-      "kind": "h2",
-      "matched_order": 9508
     },
     {
       "title": "Mahānipāta",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3552,
+      "kind": "cha",
+      "matched_order": 1478,
       "section_no": 22
     },
     {
       "title": "Mūgapakkhajātaka",
       "page": 149,
       "kind": "h1",
-      "matched_order": 3553,
+      "matched_order": 1479,
       "section_no": 538
     },
     {
       "title": "Mahājanakajātaka",
       "page": 159,
       "kind": "h1",
-      "matched_order": 3808,
+      "matched_order": 1610,
       "section_no": 539
     },
     {
       "title": "Suvaṇṇasāmajātaka",
       "page": 174,
       "kind": "h1",
-      "matched_order": 4197,
+      "matched_order": 1805,
       "section_no": 540
     },
     {
       "title": "Nimijātaka",
       "page": 184,
       "kind": "h1",
-      "matched_order": 4456,
+      "matched_order": 1939,
       "section_no": 541
     },
     {
       "title": "Umaṅgajātaka",
       "page": 204,
       "kind": "h1",
-      "matched_order": 4969,
+      "matched_order": 2126,
       "section_no": 542
     },
     {
       "title": "Bhūridattajātaka",
       "page": 221,
       "kind": "h1",
-      "matched_order": 5408,
+      "matched_order": 2333,
       "section_no": 543
     },
     {
       "title": "Candakumārajātaka",
       "page": 242,
       "kind": "h1",
-      "matched_order": 5956,
+      "matched_order": 2543,
       "section_no": 544
     },
     {
       "title": "Mahānāradakassapajātaka",
       "page": 257,
       "kind": "h1",
-      "matched_order": 6341,
+      "matched_order": 2728,
       "section_no": 545
     },
     {
       "title": "Vidhurajātaka",
       "page": 275,
       "kind": "h1",
-      "matched_order": 6812,
+      "matched_order": 2948,
       "section_no": 546
     },
     {
       "title": "Vessantarajātaka",
       "page": 312,
       "kind": "h1",
-      "matched_order": 7780,
+      "matched_order": 3323,
       "section_no": 547
     }
   ]

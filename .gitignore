@@ -79,4 +79,5 @@ books/cs-roman/scripts/scratch/*
 !books/cs-roman/scripts/scratch/README.md
 !books/cs-roman/scripts/scratch/archive/
 !books/cs-roman/scripts/scratch/archive/**
+books/cs-roman/scripts/scratch/archive/**/*.pdf
 

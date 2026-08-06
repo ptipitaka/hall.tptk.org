@@ -2,15 +2,138 @@
 % book-macros.tex — ตามแบบจัดหน้า CS Roman Tipiṭaka
 % =========================================================================
 
-\newcommand{\csromanheadtitle}{}
-\newcommand{\csromanheadpitaka}{}
-% Store plain text only — generated bodies may wrap titles in \textbf.
-\newcommand{\setcsromanhead}[1]{%
-  \renewcommand{\csromanheadtitle}{\csromanplainarg{#1}}%
+% Linear lengths × printing scale (1 for sync/reading; ≈0.937308 printing).
+% Use integer ratio in \dimexpr (decimals are invalid as \dimexpr factors).
+\providecommand{\csromanprintingscalenum}{1}
+\providecommand{\csromanprintingscaleden}{1}
+\providecommand{\csromanprintingscale}{1}
+\newcommand{\csromandim}[1]{%
+  \dimexpr(#1)*\csromanprintingscalenum/\csromanprintingscaleden\relax
 }
+
+% Running-head fields — store plain text only (generated bodies may wrap
+% titles in \textbf; \csromanplainarg strips it).
+%   even/verso head: ปิฎก นิกาย ปาฬิ (macros; only the parts present)
+%   odd/recto  head: TeX marks from body cha / h1 / h2 (not from Mātikā)
+\newcommand{\csromanheadpitaka}{}
+\newcommand{\csromannikaya}{}
+\newcommand{\csromanheadpali}{}
 \newcommand{\setcsromanpitaka}[1]{%
   \renewcommand{\csromanheadpitaka}{\csromanplainarg{#1}}%
 }
+\newcommand{\setcsromannikaya}[1]{%
+  \renewcommand{\csromannikaya}{\csromanplainarg{#1}}%
+}
+\newcommand{\setcsromanheadpali}[1]{%
+  \renewcommand{\csromanheadpali}{\csromanplainarg{#1}}%
+}
+% Legacy alias for the pāḷi setter (tests / hand TeX).
+\newcommand{\setcsromanhead}[1]{\setcsromanheadpali{#1}}
+
+% Running-head separator between joined fields (ปิฎก↔นิกาย↔ปาฬิ;
+% cha↔h1↔h2 inside \rightmark). Wider than the within-title ``N. Title''
+% gap (\spaceskip 0.33em in \csromanrunhead) so parts read as separate names.
+\newcommand{\csromanheadsep}{\nobreak\hspace{1em}}
+
+% Join up to three stored verso fields (macro names, no backslash), skipping
+% empty ones and separating the present parts with \csromanheadsep.
+% \ifcsempty (etoolbox, loaded via memoir) tests the expansion — \ifx with
+% \@empty fails for \newcommand-defined (\long) macros even when empty.
+\newif\ifcsromanheadpartfirst
+\newcommand{\csromanheadjoin}[3]{%
+  \csromanheadpartfirsttrue
+  \csromanheadjoinpart{#1}%
+  \csromanheadjoinpart{#2}%
+  \csromanheadjoinpart{#3}%
+}
+\newcommand{\csromanheadjoinpart}[1]{%
+  \ifx\relax#1\relax
+  \else
+    \ifcsempty{#1}%
+      {}%  skip empty field
+      {%  emit present field
+        \ifcsromanheadpartfirst
+          \csromanheadpartfirstfalse
+        \else
+          \csromanheadsep
+        \fi
+        \csname #1\endcsname
+      }%
+  \fi
+}
+
+% --- Recto marks (standard TeX \markboth / \markright) ----------------------
+% leftmark = cha; rightmark = h1 and/or h2 joined with \csromanheadsep.
+% Trial display: three parts cha + h1 + h2 (omit empty). Fallback later:
+% deepest-only would rebuild \rightmark without keeping both h1 and h2.
+% Marks are set only from body heading macros — Mātikā ghost titles do not.
+% Companion macros mirror mark text for composing h1+h2 into one \rightmark
+% and for odd-head join (avoids firstmark/botmark edge cases when probing).
+\makeatletter
+\newcommand{\csromanheadcha}{}
+\newcommand{\csromanheadh}{}
+\newcommand{\csromanheadhii}{}
+\newcommand{\csroman@setheadfield}[2]{%
+  \begingroup
+  \renewcommand{\textbf}[1]{##1}%
+  \protected@xdef#1{#2}%
+  \endgroup
+}
+\newcommand{\csroman@markrightcomposed}{%
+  \ifcsempty{csromanheadh}%
+    {%
+      \ifcsempty{csromanheadhii}%
+        {\markright{}}%
+        {%
+          \protected@xdef\csroman@mr{\csromanheadhii}%
+          \expandafter\markright\expandafter{\csroman@mr}%
+        }%
+    }%
+    {%
+      \ifcsempty{csromanheadhii}%
+        {%
+          \protected@xdef\csroman@mr{\csromanheadh}%
+          \expandafter\markright\expandafter{\csroman@mr}%
+        }%
+        {%
+          \protected@xdef\csroman@mr{%
+            \csromanheadh\csromanheadsep\csromanheadhii
+          }%
+          \expandafter\markright\expandafter{\csroman@mr}%
+        }%
+    }%
+}
+\newcommand{\csromanmarkcha}[1]{%
+  \csroman@setheadfield\csromanheadcha{#1}%
+  \csroman@setheadfield\csromanheadh{}%
+  \csroman@setheadfield\csromanheadhii{}%
+  \protected@xdef\csroman@ml{\csromanheadcha}%
+  \expandafter\markboth\expandafter{\csroman@ml}{}%
+}
+\newcommand{\csromanmarkh}[1]{%
+  \csroman@setheadfield\csromanheadh{#1}%
+  \csroman@setheadfield\csromanheadhii{}%
+  \csroman@markrightcomposed
+}
+\newcommand{\csromanmarkhii}[1]{%
+  \csroman@setheadfield\csromanheadhii{#1}%
+  \csroman@markrightcomposed
+}
+% Legacy names (older generated TeX / tests) → same mark setters.
+\newcommand{\setcsromanheadcha}[1]{\csromanmarkcha{#1}}
+\newcommand{\setcsromanheadh}[1]{\csromanmarkh{#1}}
+\newcommand{\setcsromanheadhclear}{%
+  \csroman@setheadfield\csromanheadh{}%
+  \csroman@setheadfield\csromanheadhii{}%
+  \markright{}%
+}
+% Odd-head centre from the companion macros (same text pushed into marks).
+% Using the macros (not \leftmark/\rightmark) keeps cha+h1+h2 join reliable
+% under memoir output; marks still track body headings for TeX semantics.
+\newcommand{\csromanrectohead}{%
+  \csromanheadjoin{csromanheadcha}{csromanheadh}{csromanheadhii}%
+}
+\makeatother
 
 % Limited vertical stretch before the forced page break so under-full
 % page-synced sheets can settle toward the text-block bottom (≤2\baselineskip).
@@ -24,17 +147,20 @@
 % Running heads — academic / TeX book practice:
 %   recede behind body (smaller, medium weight, never bold);
 %   folio and title share one face (same size / weight / shape);
-%   even: page | piṭaka | (empty)
-%   odd:  (empty) | gambhīra | page
+%   even/verso:  page | ปิฎก นิกาย ปาฬิ | (empty)
+%   odd/recto:   (empty) | cha h1 h2 (marks) | page
 % No footer page numbers; no head rule (CS Roman has none).
+% Running head uses footnote size so it recedes from body and matches the
+% footnote / folio face (one size family across all marginal apparatus).
 \newcommand{\csromanrunheadfont}{%
-  \normalfont\small\mdseries\upshape
+  \normalfont\footnotesize\mdseries\upshape
 }
 % Reading mode: source-folio citation in the outer margin (no in-text mark).
 % Place at the start of body text belonging to printed page #1 (not headings).
-% Use \marginnote (not \marginpar) so marks work inside \csromangathagroup's \vtop.
+% Use \marginnote (not \marginpar) so marks work inside \csromangathastanza's \vtop.
 % Align toward the text block (away from the paper edge) on both sides.
-% Folio mark uses footnote size so ฉ.N recedes from body (not running-head \small).
+% Folio mark uses footnote size so ฉ.N recedes from body, matching the
+% running-head face (both \footnotesize, Scale 1.1) — one marginal apparatus.
 % \footnotesize note vs body (Scale 1.1) sits ~2.7pt high; positive vadjust lowers it.
 % \leavevmode: at \prose{\csromanfolio…} the note must enter the first line
 % after \parskip; in vmode it anchors above the paragraph (~\parskip too high).
@@ -44,20 +170,25 @@
 \renewcommand*{\marginfont}{\csromanfoliofont}%
 \renewcommand*{\raggedleftmarginnote}{\raggedleft\hspace{0pt}}%
 \renewcommand*{\raggedrightmarginnote}{\raggedright\hspace{0pt}}%
-\renewcommand*{\marginnotevadjust}{2.7pt}%
+\renewcommand*{\marginnotevadjust}{\csromandim{2.7pt}}%
 \newcommand{\csromanfolio}[1]{%
   \leavevmode
   \marginnote{ฉ.#1}%
 }
-\newcommand{\csromanrunhead}[1]{{\csromanrunheadfont #1}}
+% Compact running head: body WordSpace (~3.5×) must not open a wide gap
+% after ``N.'' in ``5. ปาจิตฺติยกณฺฑ 1. มุสาวาทวคฺค''.  Fixed 0.33em matches
+% the number–title sep used by \proseitem (≈ one character, non-stretching).
+\newcommand{\csromanrunhead}[1]{%
+  {\csromanrunheadfont\spaceskip=0.33em\relax #1}%
+}
 \makepagestyle{csroman}
 \makeevenhead{csroman}%
   {\csromanrunhead{\thepage}}%
-  {\csromanrunhead{\csromanheadpitaka}}%
+  {\csromanrunhead{\csromanheadjoin{csromanheadpitaka}{csromannikaya}{csromanheadpali}}}%
   {}
 \makeoddhead{csroman}%
   {}%
-  {\csromanrunhead{\csromanheadtitle}}%
+  {\csromanrunhead{\csromanrectohead}}%
   {\csromanrunhead{\thepage}}
 \makeevenfoot{csroman}{}{}{}
 \makeoddfoot{csroman}{}{}{}
@@ -90,9 +221,9 @@
 }
 
 \newcommand{\csromanheadingfont}[3]{%
-  % #1 size bp, #2 baselineskip bp, #3 text
+  % #1 size bp, #2 baselineskip bp, #3 text (scaled in printing mode)
   \addfontfeatures{Scale=1}%
-  \fontsize{#1}{#2}\selectfont
+  \fontsize{\csromandim{#1}}{\csromandim{#2}}\selectfont
   #3%
 }
 
@@ -107,7 +238,7 @@
   \csromanheadingfont{16bp}{20bp}{\mdseries\csromanplainarg{#1}\par}%
   \nointerlineskip
   % After-skip −20% (was 33bp).
-  \vskip 26.4bp\relax
+  \vskip\csromandim{26.4bp}\relax
   \endgroup
   \setcsromanpitaka{#1}%
 }
@@ -122,13 +253,13 @@
   \csromanheadingfont{36bp}{42bp}{\bfseries\csromanplainarg{#1}\par}%
   \nointerlineskip
   % After-skips −20% (were 34bp / 24bp).
-  \vskip 27.2bp\relax
+  \vskip\csromandim{27.2bp}\relax
   % Source rule ≈33 bp wide (~0.09\textwidth).
   \noindent\makebox[\textwidth]{\rule{0.09\textwidth}{0.5pt}}\par
   \nointerlineskip
-  \vskip 19.2bp\relax
+  \vskip\csromandim{19.2bp}\relax
   \endgroup
-  \setcsromanhead{#1}%
+  \setcsromanheadpali{#1}%
   \pagestyle{csroman}%
   \thispagestyle{plain}%
 }
@@ -142,7 +273,7 @@
   \csromanheadingfont{12bp}{16bp}{\mdseries #1\par}%
   \nointerlineskip
   % After-skip −20% (was 32bp).
-  \vskip 25.6bp\relax
+  \vskip\csromandim{25.6bp}\relax
   \endgroup
 }
 
@@ -150,15 +281,41 @@
 % Align title top with gambhīra (ปาราชิกปาฬิ) on the opening page
 % (measured y0 ≈ 140.8 with body start ≈ 90.7; 72bp sat ~50bp too low).
 \newlength{\csromanchaptertopskip}
-\setlength{\csromanchaptertopskip}{22bp}
+\setlength{\csromanchaptertopskip}{\csromandim{22bp}}
 
 % After \csromanpage / mid-flow: guarantee recto (odd) without a second
 % \clearpage when already on an odd empty page.
+% The inserted verso is intentionally blank — no running head / folio
+% (same plain style as chapter opening sheets). Global for all volumes.
 \newcommand{\csromanensureoddpage}{%
   \ifodd\value{page}\else
-    \hbox{}\newpage
+    \hbox{}%
+    \thispagestyle{plain}%
+    \newpage
   \fi
 }
+
+% Blank verso from \cleardoublepage (e.g. after มาติกา → arabic p.1 recto):
+% likewise suppress running heads. memoir default uses ``empty''; our
+% ``plain'' matches chapter / ensure-odd blanks.
+\makeatletter
+\renewcommand{\cleardoublepage}{%
+  \clearpage
+  \if@twoside
+    \ifodd\c@page
+    \else
+      \hbox{}%
+      \thispagestyle{plain}%
+      \newpage
+      \if@twocolumn
+        \hbox{}%
+        \thispagestyle{plain}%
+        \newpage
+      \fi
+    \fi
+  \fi
+}
+\makeatother
 
 \newcommand{\csromanchapterheadbody}[1]{%
   \begingroup
@@ -168,25 +325,43 @@
   \csromanheadingfont{16bp}{20bp}{\bfseries #1\par}%
   \nointerlineskip
   % After-skip −20% (were 15bp).
-  \vskip 12bp\relax
+  \vskip\csromandim{12bp}\relax
   \endgroup
 }
 
 % Inline chapter on an already-open sheet (opening stack: Verañjakaṇḍa).
 \newcommand{\chapterhead}[1]{%
   \par
+  \csromanmarkcha{#1}%
   \Needspace{3.5\baselineskip}%
   \csromanchapterheadbody{#1}%
 }
 
-% Chapter that opens a printed sheet: odd/recto, no running head, top pad.
-% Always clear to a fresh sheet so \vspace* lands in the gambhīra band
-% (ปาราชิกปาฬิ y0 ≈ 140.8), not mid-page or on a mixed path.
+% Chapter that opens a printed sheet: plain running head, top pad.
+% After \csromanpage the sheet is already fresh — do not \clearpage again
+% (that would bump the sync folio by +1) and do not force recto (odd), which
+% would also desync source page numbers.  Only leave the current page when it
+% already holds material.
 \newcommand{\chapterheadpage}[1]{%
   \par
-  \clearpage
+  \ifdim\pagetotal>0pt
+    \clearpage
+  \fi
+  \thispagestyle{plain}%
+  \csromanmarkcha{#1}%
+  \vspace*{\csromanchaptertopskip}%
+  \csromanchapterheadbody{#1}%
+}
+
+% Reading-mode variant: prefer recto when mid-flow (physical pages, not sync).
+\newcommand{\chapterheadpageread}[1]{%
+  \par
+  \ifdim\pagetotal>0pt
+    \clearpage
+  \fi
   \csromanensureoddpage
   \thispagestyle{plain}%
+  \csromanmarkcha{#1}%
   \vspace*{\csromanchaptertopskip}%
   \csromanchapterheadbody{#1}%
 }
@@ -204,6 +379,8 @@
 %   h5  12 bp italic        — style contrast (not size)
 %   h6  12 bp medium        — quietest; spacing mainly
 %
+% Before-skip base tuned for section breaks (h1…h6: 10 / 9 / 7 / 6.5 / 5 / 4.5 pt);
+% \csromanheader adds one body \baselineskip on top of that base.
 % Legacy aliases: \titlehead → h1, \subhead → h2.
 \newcommand{\csromanheaderspec}[1]{%
   \ifcase#1\relax
@@ -211,59 +388,79 @@
     \def\csromanheaderfontsize{14bp}%
     \def\csromanheaderbaselineskip{18bp}%
     \def\csromanheaderface{\bfseries\upshape}%
-    \def\csromanheaderbeforeskip{8pt}%
-    \def\csromanheaderafterskip{5pt}%
+    \def\csromanheaderbeforeskip{\csromandim{10pt}}%
+    \def\csromanheaderafterskip{\csromandim{5pt}}%
     \def\csromanheaderneed{3\baselineskip}%
   \or % 2
     \def\csromanheaderfontsize{13bp}%
     \def\csromanheaderbaselineskip{17bp}%
     \def\csromanheaderface{\bfseries\upshape}%
-    \def\csromanheaderbeforeskip{7pt}%
-    \def\csromanheaderafterskip{4pt}%
+    \def\csromanheaderbeforeskip{\csromandim{9pt}}%
+    \def\csromanheaderafterskip{\csromandim{4pt}}%
     \def\csromanheaderneed{2.75\baselineskip}%
   \or % 3 — same size as h2; weight differs
     \def\csromanheaderfontsize{13bp}%
     \def\csromanheaderbaselineskip{17bp}%
     \def\csromanheaderface{\mdseries\upshape}%
-    \def\csromanheaderbeforeskip{5.5pt}%
-    \def\csromanheaderafterskip{3.5pt}%
+    \def\csromanheaderbeforeskip{\csromandim{7pt}}%
+    \def\csromanheaderafterskip{\csromandim{3.5pt}}%
     \def\csromanheaderneed{2.5\baselineskip}%
   \or % 4 — body size, bold
     \def\csromanheaderfontsize{12bp}%
     \def\csromanheaderbaselineskip{16bp}%
     \def\csromanheaderface{\bfseries\upshape}%
-    \def\csromanheaderbeforeskip{5pt}%
-    \def\csromanheaderafterskip{3pt}%
+    \def\csromanheaderbeforeskip{\csromandim{6.5pt}}%
+    \def\csromanheaderafterskip{\csromandim{3pt}}%
     \def\csromanheaderneed{2.25\baselineskip}%
   \or % 5 — body size, italic (style, not shrinkage)
     \def\csromanheaderfontsize{12bp}%
     \def\csromanheaderbaselineskip{16bp}%
     \def\csromanheaderface{\mdseries\itshape}%
-    \def\csromanheaderbeforeskip{4pt}%
-    \def\csromanheaderafterskip{2.5pt}%
+    \def\csromanheaderbeforeskip{\csromandim{5pt}}%
+    \def\csromanheaderafterskip{\csromandim{2.5pt}}%
     \def\csromanheaderneed{2\baselineskip}%
   \or % 6 — body size, medium upright; tightest band
     \def\csromanheaderfontsize{12bp}%
     \def\csromanheaderbaselineskip{16bp}%
     \def\csromanheaderface{\mdseries\upshape}%
-    \def\csromanheaderbeforeskip{3.5pt}%
-    \def\csromanheaderafterskip{2pt}%
+    \def\csromanheaderbeforeskip{\csromandim{4.5pt}}%
+    \def\csromanheaderafterskip{\csromandim{2pt}}%
     \def\csromanheaderneed{2\baselineskip}%
   \else
     \def\csromanheaderfontsize{14bp}%
     \def\csromanheaderbaselineskip{18bp}%
     \def\csromanheaderface{\bfseries\upshape}%
-    \def\csromanheaderbeforeskip{8pt}%
-    \def\csromanheaderafterskip{5pt}%
+    \def\csromanheaderbeforeskip{\csromandim{10pt}}%
+    \def\csromanheaderafterskip{\csromandim{5pt}}%
     \def\csromanheaderneed{3\baselineskip}%
   \fi
 }
 
 \newcommand{\csromanheader}[2]{%
   % #1 = 1..6, #2 = text
+  % Extra \baselineskip above each level keeps the relative h1…h6 ladder
+  % while giving every header roughly one body line of air before it.
+  % Recto marks: h1 → clear h2; h2 → keep h1 and set h2; h3…h6 untouched.
+  \par
+  \ifnum#1=1\relax
+    \csromanmarkh{#2}%
+  \else
+    \ifnum#1=2\relax
+      \csromanmarkhii{#2}%
+    \fi
+  \fi
+  \csromanheaderbody{#1}{#2}%
+}
+% Display-only header (marks already set — used for compound vagga+sikkhāpada
+% so h1/h2 get equal \csromanheadsep gaps in the recto head).
+\newcommand{\csromanheadernomark}[2]{%
+  \par
+  \csromanheaderbody{#1}{#2}%
+}
+\newcommand{\csromanheaderbody}[2]{%
   \csromanheaderspec{#1}%
-  \Needspace{\csromanheaderneed}%
-  \vspace{\csromanheaderbeforeskip}%
+  \Needspace{\dimexpr\csromanheaderneed+\baselineskip\relax}%
+  \vspace{\dimexpr\csromanheaderbeforeskip+\baselineskip\relax}%
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
@@ -282,6 +479,60 @@
 \newcommand{\csromantocmark}[2]{%
   \phantomsection
   \addcontentsline{toc}{#1}{#2}%
+}
+
+% Explicit-page TOC row (sync / deferred outline order).
+% #1 level name, #2 title, #3 printed page, #4 dest.
+% PDF bookmarks for deferred rows are emitted separately by the generator
+% via a raw \bookmark{...} line (avoids # / optional-arg issues in wrappers).
+\newcommand{\csromantocmarkat}[4]{%
+  \addtocontents{toc}{\protect\contentsline{#1}{#2}{#3}{#4}}%
+}
+
+% Dest-based TOC row (reading / deferred).  Page resolves via \pageref*.
+% Use the starred form so hyperref does not wrap the digits in a page-anchor
+% link (pageanchor=false → that link would jump to PDF page 1).  With
+% linktoc=all, both title and page number use contentsline dest #3 (mtk.*).
+\newcommand{\csromantocmarkref}[3]{%
+  \addtocontents{toc}{%
+    \protect\contentsline{#1}{#2}{\protect\pageref*{#3}}{#3}%
+  }%
+}
+
+% Unpaged TOC row: source Mātikā had no folio (structural kaṇḍa / vagga / …).
+% Keep dest for bookmarks; leave the page field empty.  Leader dots are
+% suppressed by \csroman@tocfillnum below (empty page alone still draws
+% \cftdotfill in memoir).
+\newcommand{\csromantocmarknopage}[3]{%
+  \addtocontents{toc}{\protect\contentsline{#1}{#2}{}{#3}}%
+}
+
+% memoir draws leaders even when the TOC page field is empty.  For unpaged
+% Mātikā rows, skip leaders and the pnum box (same idea as \cftpagenumbersoff,
+% but only when this row has no folio).
+\makeatletter
+\newcommand{\csroman@tocfillnum}[2]{%
+  \def\csroman@tocpg{#2}%
+  \ifx\csroman@tocpg\@empty
+    \cftparfillskip
+    \@nameuse{cft#1afterpnum}\par
+  \else
+    {\@nameuse{cft#1leader}}\nobreak
+    \@nameuse{cft#1formatpnum}{#2}%
+    \@nameuse{cft#1afterpnum}\par
+  \fi
+}
+\renewcommand{\cftchapterfillnum}[1]{\csroman@tocfillnum{chapter}{#1}}
+\renewcommand{\cftsectionfillnum}[1]{\csroman@tocfillnum{section}{#1}}
+\renewcommand{\cftsubsectionfillnum}[1]{\csroman@tocfillnum{subsection}{#1}}
+\renewcommand{\cftsubsubsectionfillnum}[1]{\csroman@tocfillnum{subsubsection}{#1}}
+\renewcommand{\cftparagraphfillnum}[1]{\csroman@tocfillnum{paragraph}{#1}}
+\renewcommand{\cftsubparagraphfillnum}[1]{\csroman@tocfillnum{subparagraph}{#1}}
+\makeatother
+
+% Body anchor for a Mātikā outline row (place when the segment is visited).
+\newcommand{\csromanmatikaanchor}[1]{%
+  \hypertarget{#1}{}\label{#1}%
 }
 
 % Geometry / sandwich centered labels (source_layout=center): body face,
@@ -307,26 +558,47 @@
 % Vertical air: top 14bp; bottom 12.74bp (= 9.8bp + 30%).
 % Optional short rule stays on \nitthitamruled / \csromansectionrule.
 % Avoid ``center`` env (trivlist).
-\newcommand{\nitthitam}[1]{%
-  \par
-  \Needspace{2.5\baselineskip}%
+% No \Needspace here: that moved only the closer to the next page when the
+% band did not fit, leaving นิฏฺฐิตํ alone at page head. \par\nobreak keeps
+% the closer with the preceding paragraph's last lines instead.
+\makeatletter
+\newcommand{\csroman@closerband}[1]{%
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
   \nointerlineskip
-  \vskip 14bp\relax
+  \vskip\csromandim{14bp}\relax
   {\normalsize #1\par}%
   \nointerlineskip
-  \vskip 12.74bp\relax
+  \vskip\csromandim{12.74bp}\relax
   \endgroup
+}
+\newcommand{\csroman@closerbandruled}[1]{%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  \nointerlineskip
+  \vskip\csromandim{14bp}\relax
+  {\normalsize #1\par}%
+  \nointerlineskip
+  \nobreak
+  \vskip\baselineskip\relax
+  \noindent\makebox[\textwidth]{\rule{0.09\textwidth}{0.4pt}}\par
+  \nointerlineskip
+  \vskip\csromandim{23.4bp}\relax
+  \endgroup
+}
+\newcommand{\nitthitam}[1]{%
+  \par\nobreak
+  \csroman@closerband{#1}%
 }
 
 % Short centered end-of-section rule (``section_rule``). Width matches the
 % source underscore glyph run (~33 bp ≈ 0.09\textwidth). Gap above the rule
 % equals one body line (\baselineskip). Bottom air 23.4bp (= 18bp + 30%).
+% \nobreak (not \Needspace): stay with the preceding block when possible.
 \newcommand{\csromansectionrule}{%
-  \par
-  \Needspace{2.5\baselineskip}%
+  \par\nobreak
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
@@ -334,23 +606,63 @@
   \vskip\baselineskip\relax
   \noindent\makebox[\textwidth]{\rule{0.09\textwidth}{0.4pt}}\par
   \nointerlineskip
-  \vskip 23.4bp\relax
+  \vskip\csromandim{23.4bp}\relax
   \endgroup
 }
 
 % Closer + end rule as one band (one line between text and rule, air below).
+% Inline the rule (do not call \csromansectionrule) so an internal page break
+% cannot land between closer text and the rule.
 \newcommand{\nitthitamruled}[1]{%
-  \par
-  \Needspace{3.75\baselineskip}%
-  \begingroup
-  \setlength{\parskip}{0pt}%
-  \centering
-  \nointerlineskip
-  \vskip 14bp\relax
-  {\normalsize #1\par}%
-  \endgroup
-  \csromansectionrule
+  \par\nobreak
+  \csroman@closerbandruled{#1}%
 }
+
+% Body prose + section closer in one unbreakable unit (generator pairs
+% segments so the closer cannot orphan at a page head alone).
+\newcommand{\prosewithcloser}[2]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  #1\par\nobreak
+  \csroman@closerband{#2}%
+}
+\newcommand{\prosewithcloserruled}[2]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  #1\par\nobreak
+  \csroman@closerbandruled{#2}%
+}
+\newcommand{\proseitemwithcloser}[3]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  \indent\textbf{#1.}\hspace{0.33em}#2\par\nobreak
+  \csroman@closerband{#3}%
+}
+\newcommand{\proseitemwithcloserruled}[3]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  \indent\textbf{#1.}\hspace{0.33em}#2\par\nobreak
+  \csroman@closerbandruled{#3}%
+}
+\newcommand{\prosecontwithcloser}[2]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  \noindent #1\par\nobreak
+  \csroman@closerband{#2}%
+}
+\newcommand{\prosecontwithcloserruled}[2]{%
+  \par
+  \hangindent=0pt
+  \hangafter=1
+  \noindent #1\par\nobreak
+  \csroman@closerbandruled{#2}%
+}
+\makeatother
 
 % --- Body prose (CS Roman: first-line indent, NOT hanging) ---------------
 
@@ -417,16 +729,61 @@
 }
 
 % Uddāna / gāthā: optical center (not fixed \gathaindent).
-% Per page, \csromangathameasure sets \csromangathapagewidth to the longest
-% gāthā line on that page. Each consecutive run (กลุ่ม) is one
+% Per page, group measures update \csromangathapagewidth to the longest
+% aligned gāthā line. Each consecutive run (กลุ่ม) is one
 % \csromangathagroup: lines left-aligned in a shared-width box, box centered.
+% bat_line: \csromangathabat aligns the right วรรค after the comma using
+% \csromangathaleftcol = max left-วรรค width within that กลุ่ม.
 % Layout comes from JSON source_layout (bat_line vs wak_line), not line count.
 \newlength{\gathaindent}
-\setlength{\gathaindent}{65pt}
+\setlength{\gathaindent}{\csromandim{65pt}}
 \newlength{\csromangathapagewidth}
 \setlength{\csromangathapagewidth}{0pt}
+\newlength{\csromangathaleftcol}
+\setlength{\csromangathaleftcol}{0pt}
+\newlength{\csromangathabatgap}
+% Clear gap between left/right วรรค (not printing-scaled).
+\setlength{\csromangathabatgap}{20pt}
 
-% #1 = all printed gāthā lines on the page, joined with \\ (no footnotes).
+% #1 = left วรรค (incl. comma), #2 = right วรรค. Left sits in a fixed-width
+% box so right pādas share a column; gap after the left box is 20pt.
+\newcommand{\csromangathabat}[2]{%
+  \makebox[\csromangathaleftcol][l]{#1}\hspace{\csromangathabatgap}#2%
+}
+
+% #1 = left-วรรค lines of one กลุ่ม (\\-joined; may be empty).
+\newcommand{\csromangathasetleft}[1]{%
+  \settowidth{\csromangathaleftcol}{%
+    \begin{tabular}{@{}l@{}}
+    #1
+    \end{tabular}%
+  }%
+}
+
+% #1 = left-วรรค lines, #2 = full printed lines (may use \csromangathabat).
+% Sets leftcol for #2's width, then raises \csromangathapagewidth if wider.
+% Call once per กลุ่ม before any group is typeset (sync: all groups on page).
+\makeatletter
+\newcommand{\csromangathameasuregroup}[2]{%
+  \begingroup
+  \settowidth{\csromangathaleftcol}{%
+    \begin{tabular}{@{}l@{}}
+    #1
+    \end{tabular}%
+  }%
+  \settowidth{\dimen@}{%
+    \begin{tabular}{@{}l@{}}
+    #2
+    \end{tabular}%
+  }%
+  \ifdim\dimen@>\csromangathapagewidth
+    \global\csromangathapagewidth=\dimen@
+  \fi
+  \endgroup
+}
+\makeatother
+
+% Legacy: set page width from flat lines (no per-กลุ่ม left column).
 \newcommand{\csromangathameasure}[1]{%
   \settowidth{\csromangathapagewidth}{%
     \begin{tabular}{@{}l@{}}
@@ -435,20 +792,33 @@
   }%
 }
 
-% #1 = one กลุ่ม (≥1 บท): lines joined with \\ ; between full บท use
-% \\[\gathastanzaskip]. 1 บทครึ่ง (3 บาท) uses plain \\ only (no stanza skip).
-% Left skip + \vtop: top baseline for line spacing; footnotes stay outer.
+% #1 = one กลุ่ม of ``\csromangathastanza{...}`` units (generator emits one
+% stanza macro per บท; 1 บทครึ่ง is merged into a single stanza).
+% Page breaks are allowed *between* stanzas; each stanza is an unbreakable
+% \vtop (ไม่แตกบท). Optical center uses \csromangathapagewidth.
 % Before/after gap = \tipitakaparskip (same air as between prose paragraphs).
+\newlength{\csromangathaleftskip}
+\newif\ifcsromangathafirststanza
 \makeatletter
-\newcommand{\csromangathagroup}[1]{%
+\newcommand{\csromangathastanza}[1]{%
   \par
-  \vspace{\tipitakaparskip}%
-  \begingroup
-  \setlength{\parskip}{0pt}%
+  \ifcsromangathafirststanza
+    \csromangathafirststanzafalse
+  \else
+    % Multi-line \vtop depth breaks normal \baselineskip packing.
+    % \gathastanzaskip is the *target baseline-to-baseline* gap between บท
+    % (edition default 30pt ≈ body leading + clear stanza air; matches
+    % 01Vin01 printing reference). Compensate ~0.62\baselineskip of line-box
+    % extent so the measured gap lands near that target. Floor the vskip so
+    % a too-small layout value cannot pull บท on top of each other.
+    \dimen@=\dimexpr\gathastanzaskip-0.62\baselineskip\relax
+    \@tempdima=\dimexpr1.15\baselineskip-0.62\baselineskip\relax
+    \ifdim\dimen@<\@tempdima \dimen@=\@tempdima \fi
+    \nointerlineskip
+    \vskip\dimen@
+  \fi
   \noindent
-  \dimen@=\dimexpr 0.5\linewidth-0.5\csromangathapagewidth\relax
-  \ifdim\dimen@<\z@ \dimen@=\z@ \fi
-  \hskip\dimen@
+  \hskip\csromangathaleftskip
   \vtop{%
     \hsize=\csromangathapagewidth
     \linewidth=\hsize
@@ -456,6 +826,17 @@
     \noindent #1\par
   }%
   \par
+}
+\newcommand{\csromangathagroup}[1]{%
+  \par
+  \vspace{\tipitakaparskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \dimen@=\dimexpr 0.5\linewidth-0.5\csromangathapagewidth\relax
+  \ifdim\dimen@<\z@ \dimen@=\z@ \fi
+  \setlength{\csromangathaleftskip}{\dimen@}%
+  \csromangathafirststanzatrue
+  #1%
   \endgroup
   \vspace{\tipitakaparskip}%
 }
@@ -477,8 +858,8 @@
   \endgroup
   \vspace{\gathastanzaskip}%
 }
-% Legacy alias → page-shared optical group (single-stanza sandwich case).
-\newcommand{\gathasandwich}[1]{\csromangathagroup{#1}}
+% Legacy alias → single-stanza optical group.
+\newcommand{\gathasandwich}[1]{\csromangathagroup{\csromangathastanza{#1}}}
 
 % Apparatus footnote: mark is * or + (does not advance the numbered footnote counter).
 \makeatletter
@@ -498,17 +879,17 @@
 }
 \makeatother
 
-% Sentence-stop gap (``{{sp1}}`` → 0.5em); pot-ma-gyi uses two → 1.0em.
-\newcommand{\csromanspacer}{\hspace{0.5em}}
+% Sentence-stop gap (``{{sp1}}`` → 0em default); pot-ma-gyi uses two.
+\newcommand{\csromanspacer}{\hspace{0em}}
 
 % Discourse dash after āmantesi / uddiseyyātha etc. Source JSON keeps U+2013
 % (CS Roman en-dash); Sarabun's en-dash is short (~0.54em) so the generator
 % emits this macro → em-dash (~0.84em), closer to the Roman edition line.
 \newcommand{\csromandash}{—}
 
-% Per-segment interword override (layout.json page_layout segments.word_space).
-% #1 = scale vs the current font's interword glue (already includes preamble
-% WordSpace). Generator passes target/preamble, e.g. 0.8/1.6.
+% Per-segment interword override (absolute layout word_space vs preamble).
+% #1 = scale vs the current font's interword glue (includes preamble WordSpace).
+% Generator passes target/preamble_WordSpace, e.g. 0.8/3.5.
 \newcommand{\csromanwordspacebegin}[1]{%
   \begingroup
   \spaceskip=#1\fontdimen2\font
@@ -521,19 +902,20 @@
 % Volume / page layout from segments.json ``layout`` + ``page_layout``.
 % Args: word_space factor (vs font WordSpace), line_space, par_indent,
 % par_skip, gatha_stanza_skip, gatha_indent, emergency_stretch.
+% Printing: scale length args (#3–#7) by \csromanprintingscale; #1/#2 stay unitless.
 \newcommand{\csromanlayoutapply}[7]{%
   \spaceskip=#1\fontdimen2\font
     plus #1\fontdimen3\font
     minus #1\fontdimen4\font
   \relax
   \linespread{#2}\selectfont
-  \setlength{\tipitakahang}{#3}%
+  \setlength{\tipitakahang}{\dimexpr(#3)*\csromanprintingscalenum/\csromanprintingscaleden\relax}%
   \setlength{\parindent}{\tipitakahang}%
-  \setlength{\tipitakaparskip}{#4 plus 1pt minus 0.5pt}%
+  \setlength{\tipitakaparskip}{\dimexpr(#4)*\csromanprintingscalenum/\csromanprintingscaleden\relax plus 1pt minus 0.5pt}%
   \setlength{\parskip}{\tipitakaparskip}%
-  \setlength{\gathastanzaskip}{#5}%
-  \setlength{\gathaindent}{#6}%
-  \setlength{\emergencystretch}{#7}%
+  \setlength{\gathastanzaskip}{\dimexpr(#5)*\csromanprintingscalenum/\csromanprintingscaleden\relax}%
+  \setlength{\gathaindent}{\dimexpr(#6)*\csromanprintingscalenum/\csromanprintingscaleden\relax}%
+  \setlength{\emergencystretch}{\dimexpr(#7)*\csromanprintingscalenum/\csromanprintingscaleden\relax}%
 }
 
 % Reading mode: per-physical-page layout (layout.json page_layout_reading_mode).

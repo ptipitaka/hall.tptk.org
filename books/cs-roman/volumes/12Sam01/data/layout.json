@@ -2,12 +2,14 @@
   "schema_version": 1,
   "source": "books/cs-roman/source/12Sam01.pdf",
   "content_start_pdf_page": 40,
+  "content_end_printed_page": 472,
+  "back_matter_start_printed_page": 473,
   "layout": {
-    "word_space": 1.6,
+    "word_space": 3.5,
     "line_space": 1.5,
     "par_indent": "21.6pt",
     "par_skip": "5pt",
-    "gatha_stanza_skip": "6.3pt",
+    "gatha_stanza_skip": "30pt",
     "gatha_indent": "65pt",
     "emergency_stretch": "2.5em"
   }

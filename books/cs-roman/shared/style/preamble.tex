@@ -6,11 +6,22 @@
 \RequirePackage{iftex}
 \RequireLuaTeX
 
-% Reading builds define \csromanusereadinggeometry before inputting this file.
-\ifdefined\csromanusereadinggeometry
-  \input{shared/style/pagegeometry-reading}
+% Reading / printing builds define a geometry flag before inputting this file.
+% Printing scale s = 165mm/499bp ≈ 0.937308 (as 937308/1000000 for \dimexpr).
+\ifdefined\csromanuseprintinggeometry
+  \def\csromanprintingscalenum{937308}%
+  \def\csromanprintingscaleden{1000000}%
+  \def\csromanprintingscale{0.937308}%
+  \input{shared/style/pagegeometry-printing}
 \else
-  \input{shared/style/pagegeometry}
+  \def\csromanprintingscalenum{1}%
+  \def\csromanprintingscaleden{1}%
+  \def\csromanprintingscale{1}%
+  \ifdefined\csromanusereadinggeometry
+    \input{shared/style/pagegeometry-reading}
+  \else
+    \input{shared/style/pagegeometry}
+  \fi
 \fi
 
 \usepackage[
@@ -23,6 +34,13 @@
 % จึงตัดบรรทัดได้เฉพาะที่ช่องว่าง — ไม่อนุญาตให้ตัดกลางคำ
 \babelprovide[hyphenrules=nohyphenation]{thai}
 
+% Body Scale: reading/sync 1.1; printing 1.1×s ≈ 1.031038.
+\ifdefined\csromanuseprintinggeometry
+  \def\csromanfontscale{1.031038}%
+\else
+  \def\csromanfontscale{1.1}%
+\fi
+
 \babelfont{rm}[
   Path           = shared/fonts/,
   Extension      = .ttf,
@@ -31,13 +49,13 @@
   ItalicFont     = *-Italic,
   BoldItalicFont = *-BoldItalic,
   Ligatures      = TeX,
-  % Source body ≈12 pt VZTime; Sarabun 11pt × 1.1 ≈ 12.1 pt.
+  % Source body ≈12 pt VZTime; Sarabun 11pt × 1.1 ≈ 12.1 pt (printing × s).
   % Tuned so prose median line_ratio stays in ~0.95–1.05 vs CS Roman.
-  Scale          = 1.1,
-  % Pāli is space-separated — interword tuned on 01Vin01 as edition default.
-  % Volume/page/segment overrides: layout.json ``layout`` / ``page_layout``
-  % (see SCHEMA.md). Generator emits \csromanlayoutapply.
-  WordSpace      = 1.6,
+  Scale          = \csromanfontscale,
+  % Font-load interword baseline only (fontspec cannot change WordSpace later).
+  % Edition / volume absolute target: DEFAULT_LAYOUT / layout.json ``word_space``;
+  % generator overwrites this via \csromanlayoutapply → \spaceskip scale.
+  WordSpace      = 3.5,
 ]{Sarabun}
 
 % Thai stack (ิ/ี + ํ, ฺ, ุ/ู) needs more leading than Latin; tight lead looks uneven.
@@ -47,15 +65,15 @@
 \linespread{1.5}\selectfont
 \normalsize
 \newlength{\tipitakahang}
-\setlength{\tipitakahang}{21.6pt}
+\setlength{\tipitakahang}{\dimexpr21.6pt*\csromanprintingscalenum/\csromanprintingscaleden\relax}
 \setlength{\parindent}{\tipitakahang}
 % Body vertical rhythm:
 %   \tipitakaparskip  — gap between prose paragraphs (edition default 5pt)
-%   \gathastanzaskip  — gap after each gāthā บท
+%   \gathastanzaskip  — target baseline gap between gāthā บท (default 30pt)
 \newlength{\tipitakaparskip}
 \newlength{\gathastanzaskip}
-\setlength{\tipitakaparskip}{5pt plus 1pt minus 0.5pt}
-\setlength{\gathastanzaskip}{6.3pt plus 1pt minus 0.5pt}
+\setlength{\tipitakaparskip}{\dimexpr5pt*\csromanprintingscalenum/\csromanprintingscaleden\relax plus 1pt minus 0.5pt}
+\setlength{\gathastanzaskip}{\dimexpr30pt*\csromanprintingscalenum/\csromanprintingscaleden\relax}
 \setlength{\parskip}{\tipitakaparskip}
 \setlength{\emergencystretch}{2.5em}
 \frenchspacing
@@ -63,6 +81,14 @@
 % stretch heading gaps on short pages (especially the opening title stack).
 % Residual fill is limited to \vspace{0pt plus 2\baselineskip} in \csromanpage.
 \raggedbottom
+% Avoid a single line of a paragraph stranded across a page break
+% (club = first line alone at page foot; widow = last line alone at page head).
+% 10000 ≈ forbidden. In sync mode breaks are forced via \csromanpage anyway;
+% in reading mode this still discourages club/widow lines. Oversized body→rule
+% gaps on footnote pages are handled by packing credit in footnotes.tex (not by
+% relaxing these penalties — see research/clubwidow_penalty_tuning.md).
+\clubpenalty=10000
+\widowpenalty=10000
 
 \usepackage{microtype}
 \usepackage{xcolor}
@@ -70,9 +96,13 @@
 \usepackage[bottom,hang,stable,perpage]{footmisc}
 \setlength{\footnotemargin}{0.85em}
 % Extra headroom for Thai multi-level marks above the footnote baseline.
-\setlength{\footnotesep}{8.5pt}
+\setlength{\footnotesep}{\dimexpr8.5pt*\csromanprintingscalenum/\csromanprintingscaleden\relax}
+% Gap from last body line to footnote rule: 50% above LaTeX default
+% (\bigskipamount = 12pt plus 4pt minus 4pt → 18pt plus 6pt minus 6pt).
+% \footnoterule still pulls the rule up by 3pt into this glue.
+\skip\footins=1.5\bigskipamount
 \usepackage{needspace}
-% Reading-mode \csromanfolio (works inside gāthā \vtop; sync builds unused).
+% Reading/printing \csromanfolio (works inside gāthā \vtop; sync builds unused).
 \usepackage{marginnote}
 
 \usepackage[
@@ -80,8 +110,14 @@
   bookmarks=true,
   hidelinks,
   pdfencoding=auto,
+  % No page.N anchors: roman front matter and arabic body both use ``1''.
   pageanchor=false,
+  % Link TOC titles *and* page numbers to contentsline dest (#4 / mtk.*).
+  % Without this, reading-mode \pageref page digits make their own (broken)
+  % page-anchor links and jump to the start of the PDF.
+  linktoc=all,
 ]{hyperref}
+\usepackage{bookmark}
 
 \usepackage{memhfixc}
 

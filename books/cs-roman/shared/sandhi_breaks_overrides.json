@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "notes": "Curated surface Roman splits when DPD lookup/align cannot provide a reliable break. Keys are edition spellings. Parts must concatenate to the key AND yield clean Thai prefixes (thai_slices_from_roman_chunks). Overrides win over sandhi_breaks.json; rebuild of the DPD cache does not rewrite this file.",
+  "breaks": {
+    "tiracchānanagatubhatobyañjanakassa": [
+      "tiracchānanagatubhato",
+      "byañjanakassa"
+    ]
+  }
+}

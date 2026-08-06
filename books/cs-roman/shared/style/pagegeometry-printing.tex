@@ -1,0 +1,25 @@
+% Printing-mode geometry: 165 × 230 mm trim, scaled from reading (499 × 709 bp).
+% Width scale s = 165mm / 499bp ≈ 0.937308 (height locked to 230 mm, not 709bp×s).
+% Sync → pagegeometry.tex; reading → pagegeometry-reading.tex; printing → this file.
+% Margins = reading × s (bp rounded); do not use dimen×dimen in \dimexpr here.
+\setstocksize{230mm}{165mm}
+\settrimmedsize{230mm}{165mm}{*}
+\setlength{\binding}{0mm}
+% Reading 78/62/90.7/72 bp and notes 12/26/6 bp × s.
+\setlrmarginsandblock{73.11bp}{58.113bp}{*}
+\setulmarginsandblock{85.014bp}{67.486bp}{*}
+\setheadfoot{13.122pt}{11.248pt}
+\setheaderspaces{47.24bp}{*}{*}
+\setmarginnotes{11.248bp}{24.37bp}{5.624bp}
+\checkandfixthelayout
+\AtBeginDocument{%
+  \checkandfixthelayout
+  \stockwidth=165mm\relax
+  \stockheight=230mm\relax
+  \paperwidth=165mm\relax
+  \paperheight=230mm\relax
+  \pagewidth=165mm\relax
+  \pageheight=230mm\relax
+  % Correct odd/even side for \marginnote (async page counter).
+  \strictpagecheck
+}

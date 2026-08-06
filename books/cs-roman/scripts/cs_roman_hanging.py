@@ -117,6 +117,7 @@ class PageLine:
     x0: float
     text: str
     x1: float = 0.0
+    y1: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -178,10 +179,11 @@ def page_body_lines(page: Any) -> list[PageLine]:
             x0 = min(float(s["bbox"][0]) for s in spans)
             x1 = max(float(s["bbox"][2]) for s in spans)
             y0 = float(line["bbox"][1])
+            y1 = float(line["bbox"][3])
             # Skip far-right folio digits (keep centered labels ~x0 140–220).
             if x0 > _FOLIO_X0_SKIP:
                 continue
-            rows.append(PageLine(y0=y0, x0=x0, x1=x1, text=text))
+            rows.append(PageLine(y0=y0, x0=x0, x1=x1, y1=y1, text=text))
     rows.sort(key=lambda r: (r.y0, r.x0))
     return rows
 
@@ -207,8 +209,9 @@ def _is_gatha_geometry_indent(x0: float) -> bool:
     """True for indents eligible for embedded-gāthā geometry tagging.
 
     Includes the deep gāthā column and the hang / near-hang band used for
-    many bat_line verses. Call only after hanging paragraphs are merged so
-    true hang-body prose is no longer a separate segment.
+    many bat_line verses and embedded wak_line udāna quotes. Call only after
+    hanging paragraphs are merged so true hang-body prose is no longer a
+    separate segment.
     """
     return _GATHA_GEOMETRY_INDENT_LO <= x0 <= _GATHA_INDENT_HI
 

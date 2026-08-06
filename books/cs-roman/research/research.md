@@ -4,6 +4,8 @@
 
 1. [การปริวรรตอักษรโรมันเป็นไทยสำหรับคำควบกล้ำ](#1-การปริวรรตอักษรโรมันเป็นไทยสำหรับคำควบกล้ำ)
 2. [คำที่มียัติภังค์กลางคำ](research_midword_hyphens.md) — รายการสแกน 40 เล่ม
+3. [การปรับ \clubpenalty / \widowpenalty ใน reading mode](clubwidow_penalty_tuning.md) — sweep 01Vin01/02Vin02
+4. [Sandhi soft breaks จาก DPD](sandhi_soft_breaks.md) — ตัดสมาสเพื่อขึ้นบรรทัดใน PDF
 
 ---
 

@@ -4,7 +4,7 @@
 Content and print config are separate files:
 
   books/cs-roman/output/<id>.segments.json   # segments only
-  books/cs-roman/output/<id>.layout.json     # source, bounds, layout, page_layout(+reading)
+  books/cs-roman/output/<id>.layout.json     # source, bounds, layout, reading overrides
   books/cs-roman/volumes/<id>/data/segments.json
   books/cs-roman/volumes/<id>/data/layout.json
 
@@ -33,23 +33,36 @@ _LAYOUT_KEEP = frozenset(
         "content_end_printed_page",
         "back_matter_start_printed_page",
         "layout",
-        "page_layout",
         "page_layout_reading_mode",
+        "page_breaks_reading_mode",
     }
 )
 # Merged in-memory document (content ∪ layout).
 _DOC_KEEP = _CONTENT_KEEP | _LAYOUT_KEEP
 
-# Body-rhythm defaults matching shared/style/preamble.tex + book-macros.tex.
-# Tuned on 01Vin01 as the edition-wide standard; per-volume / page_layout
-# overrides only when a volume must differ. Normalize always emits a full
-# ``layout`` object with these keys.
+# Hand-authored section notes in layout.json (valid JSON; keys start with "//").
+_DOC_COMMENT_PREFIX = "//"
+_LAYOUT_DOC_COMMENT_ORDER = (
+    "//",
+    "//layout",
+    "//page_layout_reading_mode",
+    "//page_breaks_reading_mode",
+)
+
+# Body-rhythm edition defaults (absolute values). Normalize always emits a
+# full ``layout`` object with these keys. At generate time these overwrite
+# preamble.tex fallbacks via \\csromanlayoutapply; ``word_space`` is absolute
+# fontspec WordSpace units scaled against the font-load WordSpace in
+# preamble.tex (see generate_cs_roman_tex.PREAMBLE_WORD_SPACE).
+# Reading-mode per-page overrides: page_layout_reading_mode.
 DEFAULT_LAYOUT: dict[str, float | int | str] = {
-    "word_space": 1.6,
+    "word_space": 3.5,
     "line_space": 1.5,
     "par_indent": "21.6pt",
     "par_skip": "5pt",
-    "gatha_stanza_skip": "6.3pt",
+    # Target baseline-to-baseline between gāthā บท: body leading (~20pt) plus
+    # clear stanza air (~+10pt). Matches 01Vin01 printing reference rhythm.
+    "gatha_stanza_skip": "30pt",
     "gatha_indent": "65pt",
     "emergency_stretch": "2.5em",
 }
@@ -100,6 +113,67 @@ def layout_path_for(segments_path: Path) -> Path:
     if name == "segments.json":
         return segments_path.with_name("layout.json")
     return segments_path.with_name(segments_path.stem + ".layout.json")
+
+
+def is_doc_comment_key(key: object) -> bool:
+    """True for layout documentation keys (``//``, ``//layout``, …)."""
+    return isinstance(key, str) and key.startswith(_DOC_COMMENT_PREFIX)
+
+
+# Signature of UTF-8 Thai misread as windows-874 / cp1252 then re-saved as UTF-8
+# (e.g. PowerShell ``Get-Content`` without ``-Encoding utf8`` on Thai Windows).
+_MOJIBAKE_MARKERS = (
+    "\u20ac",  # EURO SIGN — often from UTF-8 lead byte 0x80 via cp1252/cp874
+    "\u0081",
+    "\u008d",
+    "\u008f",
+    "\u0090",
+    "\u009d",
+    "\u0099",  # C1 controls left from mis-decoded UTF-8 continuation bytes
+)
+
+
+def doc_comment_encoding_errors(data: dict[str, Any]) -> list[str]:
+    """Flag ``//…`` notes that look like UTF-8 mojibake (not content bugs)."""
+    errors: list[str] = []
+    for key, value in doc_comment_entries(data).items():
+        texts = value if isinstance(value, list) else [value]
+        for text in texts:
+            if not isinstance(text, str):
+                continue
+            if any(marker in text for marker in _MOJIBAKE_MARKERS):
+                errors.append(
+                    f"{key}: looks like UTF-8 mojibake in doc comment "
+                    "(do not edit JSON via PowerShell Get-Content without "
+                    "-Encoding utf8; use Python pathlib UTF-8 I/O)"
+                )
+                break
+            if len(text) > 800:
+                errors.append(
+                    f"{key}: doc comment suspiciously long ({len(text)} chars); "
+                    "possible multi-round encoding corruption"
+                )
+                break
+    return errors
+
+
+def doc_comment_entries(data: dict[str, Any]) -> dict[str, Any]:
+    """Return ``//…`` documentation entries from a layout/document dict."""
+    return {k: v for k, v in data.items() if is_doc_comment_key(k)}
+
+
+def _emit_doc_comments(
+    out: dict[str, Any],
+    comments: dict[str, Any],
+    *,
+    keys: tuple[str, ...] | None = None,
+) -> None:
+    """Insert selected documentation keys into ``out`` (skip missing)."""
+    if keys is None:
+        keys = tuple(comments)
+    for key in keys:
+        if key in comments:
+            out[key] = comments[key]
 
 
 def runs_have_bold(runs: Any) -> bool:
@@ -383,59 +457,57 @@ def coerce_page_layout(
     return dict(sorted(out.items(), key=lambda kv: int(kv[0])))
 
 
-def migrate_segment_word_space(data: dict[str, Any]) -> dict[str, Any]:
-    """Move legacy segment ``word_space`` into ``page_layout[page].segments[n]``.
+def coerce_page_breaks_reading(raw: Any) -> dict[str, list[int]] | None:
+    """Normalize ``page_breaks_reading_mode`` to ``{before_orders: [int, …]}``.
 
-    ``n`` is the 1-based index among segments on that printed page (by ``order``).
+    Omit when absent/empty. Deduplicates and sorts ``before_orders``.
+    """
+    if raw is None:
+        return None
+    if not isinstance(raw, dict):
+        return None
+    raw_orders = raw.get("before_orders")
+    if raw_orders is None:
+        return None
+    if not isinstance(raw_orders, list):
+        return None
+    orders: list[int] = []
+    seen: set[int] = set()
+    for item in raw_orders:
+        try:
+            order = int(item)
+        except (TypeError, ValueError):
+            continue
+        if order < 1 or order in seen:
+            continue
+        seen.add(order)
+        orders.append(order)
+    if not orders:
+        return None
+    return {"before_orders": sorted(orders)}
+
+
+def migrate_segment_word_space(data: dict[str, Any]) -> dict[str, Any]:
+    """Drop legacy segment ``word_space`` and removed ``page_layout``.
+
+    Per-page sync overrides (``page_layout`` / segment word_space) are no longer
+    supported; reading uses ``page_layout_reading_mode`` only.
     """
     segments = [s for s in (data.get("segments") or []) if isinstance(s, dict)]
-    if not any(s.get("word_space") is not None for s in segments):
+    has_seg_ws = any(s.get("word_space") is not None for s in segments)
+    has_page_layout = data.get("page_layout") is not None
+    if not has_seg_ws and not has_page_layout:
         return data
 
     data = dict(data)
-    page_layout = dict(coerce_page_layout(data.get("page_layout")) or {})
-    by_page: dict[int, list[dict[str, Any]]] = {}
-    for seg in segments:
-        page = seg.get("page")
-        if isinstance(page, int):
-            by_page.setdefault(page, []).append(seg)
-
-    new_segments: list[dict[str, Any]] = []
-    for seg in segments:
-        seg = dict(seg)
-        ws = _coerce_word_space(seg.pop("word_space", None))
-        page = seg.get("page")
-        if ws is not None and isinstance(page, int):
-            page_segs = sorted(
-                by_page.get(page) or [],
-                key=lambda s: int(s.get("order") or 0),
-            )
-            idx = next(
-                (
-                    i
-                    for i, s in enumerate(page_segs, 1)
-                    if s.get("order") == seg.get("order")
-                ),
-                None,
-            )
-            if idx is not None:
-                page_key = str(page)
-                entry = dict(page_layout.get(page_key) or {})
-                seg_map = dict(entry.get("segments") or {})
-                override = dict(seg_map.get(str(idx)) or {})
-                override["word_space"] = ws
-                seg_map[str(idx)] = override
-                entry["segments"] = dict(
-                    sorted(seg_map.items(), key=lambda kv: int(kv[0]))
-                )
-                page_layout[page_key] = entry
-        new_segments.append(seg)
-
-    data["segments"] = new_segments
-    if page_layout:
-        data["page_layout"] = dict(
-            sorted(page_layout.items(), key=lambda kv: int(kv[0]))
-        )
+    if has_seg_ws:
+        data["segments"] = [
+            {k: v for k, v in s.items() if k != "word_space"}
+            if isinstance(s, dict)
+            else s
+            for s in (data.get("segments") or [])
+        ]
+    data.pop("page_layout", None)
     return data
 
 
@@ -449,8 +521,10 @@ def normalize_content(data: dict[str, Any]) -> dict[str, Any]:
 
 
 def normalize_layout(data: dict[str, Any]) -> dict[str, Any]:
-    """Layout file: source/bounds + layout + page_layout(+reading)."""
+    """Layout file: source/bounds + layout + reading page overrides/breaks."""
+    comments = doc_comment_entries(data)
     out: dict[str, Any] = {"schema_version": SCHEMA_VERSION}
+    _emit_doc_comments(out, comments, keys=("//",))
     if data.get("source") is not None:
         out["source"] = data["source"]
     for key in (
@@ -460,10 +534,9 @@ def normalize_layout(data: dict[str, Any]) -> dict[str, Any]:
     ):
         if key in data and data[key] is not None:
             out[key] = data[key]
+    _emit_doc_comments(out, comments, keys=("//layout",))
     out["layout"] = merge_layout(data.get("layout"), None)
-    page_layout = coerce_page_layout(data.get("page_layout"))
-    if page_layout is not None:
-        out["page_layout"] = page_layout
+    _emit_doc_comments(out, comments, keys=("//page_layout_reading_mode",))
     # Keep empty {} when present so the reading-mode slot stays visible in file.
     if "page_layout_reading_mode" in data and data.get(
         "page_layout_reading_mode"
@@ -473,6 +546,13 @@ def normalize_layout(data: dict[str, Any]) -> dict[str, Any]:
         )
         if reading is not None:
             out["page_layout_reading_mode"] = reading
+    _emit_doc_comments(out, comments, keys=("//page_breaks_reading_mode",))
+    breaks = coerce_page_breaks_reading(data.get("page_breaks_reading_mode"))
+    if breaks is not None:
+        out["page_breaks_reading_mode"] = breaks
+    for key, value in comments.items():
+        if key not in out:
+            out[key] = value
     return out
 
 
@@ -502,6 +582,8 @@ def merge_documents(
                 continue
             if key in layout and layout[key] is not None:
                 out[key] = layout[key]
+        for key, value in doc_comment_entries(layout).items():
+            out[key] = value
     if isinstance(content, dict) and "segments" in content:
         out["segments"] = content["segments"]
     elif isinstance(layout, dict) and "segments" in layout:
@@ -704,7 +786,7 @@ def seg_word_space(
     data: dict[str, Any] | None,
     seg: dict[str, Any] | None = None,
 ) -> float | int | None:
-    """Per-segment WordSpace from ``page_layout[page].segments[n]``.
+    """Legacy segment ``word_space`` only (no sync page_layout overrides).
 
     Backward-compatible call shapes:
       seg_word_space(doc, seg)
@@ -715,21 +797,6 @@ def seg_word_space(
         if isinstance(data, dict):
             return _coerce_word_space(data.get("word_space"))
         return None
-    assert data is not None
-    page = seg.get("page")
-    if not isinstance(page, int):
-        return _coerce_word_space(seg.get("word_space"))
-    idx = page_local_index(data, seg)
-    if idx is None:
-        return _coerce_word_space(seg.get("word_space"))
-    entry = doc_page_layout(data).get(page) or {}
-    overrides = entry.get("segments") if isinstance(entry, dict) else None
-    if isinstance(overrides, dict):
-        patch = overrides.get(str(idx)) or overrides.get(idx)
-        if isinstance(patch, dict):
-            ws = _coerce_word_space(patch.get("word_space"))
-            if ws is not None:
-                return ws
     return _coerce_word_space(seg.get("word_space"))
 
 
@@ -738,16 +805,18 @@ def doc_layout(data: dict[str, Any]) -> dict[str, float | int | str]:
     return merge_layout(data.get("layout"), None)
 
 
-def doc_page_layout(data: dict[str, Any]) -> dict[int, dict[str, Any]]:
-    """Printed page → page entry (layout keys + optional segments)."""
-    raw = coerce_page_layout(data.get("page_layout")) or {}
-    return {int(page): dict(patch) for page, patch in raw.items()}
-
-
 def doc_page_layout_reading(data: dict[str, Any]) -> dict[int, dict[str, Any]]:
     """Reading-mode physical page → page entry (layout keys only; no segments)."""
     raw = coerce_page_layout(data.get("page_layout_reading_mode")) or {}
     return {int(page): dict(patch) for page, patch in raw.items()}
+
+
+def doc_reading_break_before_orders(data: dict[str, Any]) -> set[int]:
+    """Segment ``order`` values that force ``\\clearpage`` in reading mode."""
+    coerced = coerce_page_breaks_reading(data.get("page_breaks_reading_mode"))
+    if not coerced:
+        return set()
+    return set(coerced["before_orders"])
 
 
 def effective_layout(
@@ -756,16 +825,15 @@ def effective_layout(
     *,
     reading: bool = False,
 ) -> dict[str, float | int | str]:
-    """Volume layout merged with optional per-page layout keys.
+    """Volume layout, optionally merged with reading per-page overrides.
 
-    ``reading=False`` uses sync ``page_layout`` (source printed page).
-    ``reading=True`` uses ``page_layout_reading_mode`` (physical reading page).
+    Sync (``reading=False``) always uses volume ``layout`` only.
+    Reading uses ``page_layout_reading_mode`` (physical reading page).
     """
     base = doc_layout(data)
-    if page is None:
+    if not reading or page is None:
         return base
-    pages = doc_page_layout_reading(data) if reading else doc_page_layout(data)
-    entry = pages.get(int(page))
+    entry = doc_page_layout_reading(data).get(int(page))
     patch = layout_keys_only(entry)
     if not patch:
         return base
@@ -892,35 +960,32 @@ def validate_document(data: dict[str, Any]) -> list[str]:
     if "content_start_pdf_page" not in data:
         errors.append("content_start_pdf_page: missing")
 
-    unknown_doc = sorted(set(data) - _DOC_KEEP)
+    unknown_doc = sorted(
+        k
+        for k in set(data) - _DOC_KEEP
+        if not is_doc_comment_key(k) and k != "page_layout"
+    )
     if unknown_doc:
         errors.append(f"unexpected document keys: {', '.join(unknown_doc)}")
+    if "page_layout" in data and data.get("page_layout") is not None:
+        errors.append(
+            "page_layout: removed; use page_layout_reading_mode for reading "
+            "per-page overrides (sync uses volume layout only)"
+        )
+    for key, value in doc_comment_entries(data).items():
+        if isinstance(value, str):
+            continue
+        if isinstance(value, list) and all(isinstance(x, str) for x in value):
+            continue
+        errors.append(
+            f"{key}: need string or list of strings (layout documentation)"
+        )
+    errors.extend(doc_comment_encoding_errors(data))
 
     if "layout" in data and data.get("layout") is not None:
         _validate_layout_object(
             data.get("layout"), prefix="layout", errors=errors, allow_partial=True
         )
-    if "page_layout" in data and data.get("page_layout") is not None:
-        raw_pages = data.get("page_layout")
-        if not isinstance(raw_pages, dict):
-            errors.append("page_layout: need object keyed by printed page")
-        else:
-            for page_key, patch in raw_pages.items():
-                try:
-                    page = int(page_key)
-                except (TypeError, ValueError):
-                    errors.append(f"page_layout: invalid page key {page_key!r}")
-                    continue
-                if page < 1:
-                    errors.append(f"page_layout: page must be >= 1, got {page_key!r}")
-                    continue
-                _validate_page_entry(
-                    patch,
-                    prefix=f"page_layout.{page}",
-                    errors=errors,
-                    page=page,
-                    segments=data["segments"],
-                )
     if (
         "page_layout_reading_mode" in data
         and data.get("page_layout_reading_mode") is not None
@@ -963,6 +1028,45 @@ def validate_document(data: dict[str, Any]) -> list[str]:
                     page=page,
                     segments=[],
                 )
+    if (
+        "page_breaks_reading_mode" in data
+        and data.get("page_breaks_reading_mode") is not None
+    ):
+        raw_breaks = data.get("page_breaks_reading_mode")
+        if not isinstance(raw_breaks, dict):
+            errors.append(
+                "page_breaks_reading_mode: need object with before_orders"
+            )
+        else:
+            unknown = set(raw_breaks) - {"before_orders"}
+            for key in sorted(unknown):
+                errors.append(
+                    f"page_breaks_reading_mode: unknown key {key!r}"
+                )
+            raw_orders = raw_breaks.get("before_orders")
+            if "before_orders" not in raw_breaks:
+                errors.append(
+                    "page_breaks_reading_mode: need before_orders list"
+                )
+            elif not isinstance(raw_orders, list):
+                errors.append(
+                    "page_breaks_reading_mode.before_orders: need list of int"
+                )
+            else:
+                for j, item in enumerate(raw_orders):
+                    try:
+                        order = int(item)
+                    except (TypeError, ValueError):
+                        errors.append(
+                            "page_breaks_reading_mode.before_orders"
+                            f"[{j}]: need int, got {item!r}"
+                        )
+                        continue
+                    if order < 1:
+                        errors.append(
+                            "page_breaks_reading_mode.before_orders"
+                            f"[{j}]: must be >= 1, got {order}"
+                        )
 
     for i, seg in enumerate(data["segments"]):
         if not isinstance(seg, dict):
@@ -984,8 +1088,8 @@ def validate_document(data: dict[str, Any]) -> list[str]:
             errors.append(f"{prefix}.source_layout: unknown {layout!r}")
         if "word_space" in seg:
             errors.append(
-                f"{prefix}.word_space: must live in "
-                f"page_layout[page].segments[n], not on the segment"
+                f"{prefix}.word_space: not stored on segments; "
+                f"use layout / page_layout_reading_mode"
             )
         if "pdf_page" in seg:
             errors.append(f"{prefix}.pdf_page: must not be stored in v1")

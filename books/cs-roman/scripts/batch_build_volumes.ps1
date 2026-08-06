@@ -5,12 +5,12 @@
 .EXAMPLE
   .\scripts\batch_build_volumes.ps1
   .\scripts\batch_build_volumes.ps1 -Volume 01Vin01,02Vin02
-  .\scripts\batch_build_volumes.ps1 -Mode reading
+  .\scripts\batch_build_volumes.ps1 -Mode printing -Volume 01Vin01
   .\scripts\batch_build_volumes.ps1 -Mode both -Volume 01Vin01,02Vin02
 #>
 param(
   [string[]]$Volume = @(),
-  [ValidateSet("sync", "reading", "both")]
+  [ValidateSet("sync", "printing", "both")]
   [string]$Mode = "sync"
 )
 
@@ -29,7 +29,7 @@ if ($Volume.Count -gt 0) {
 
 $modes = @()
 if ($Mode -eq "both") {
-  $modes = @("sync", "reading")
+  $modes = @("sync", "printing")
 } else {
   $modes = @($Mode)
 }
@@ -39,12 +39,12 @@ $failed = @()
 
 foreach ($id in $ids) {
   foreach ($buildMode in $modes) {
-    if ($buildMode -eq "reading") {
-      $main = "volumes/$id/tex/main.reading.tex"
-      $body = "volumes/$id/tex/body.reading.generated.tex"
-      $outDir = Join-Path "build/aux/reading" $id
-      $builtName = "main.reading.pdf"
-      $dest = "volumes/$id/out/$id.reading.pdf"
+    if ($buildMode -eq "printing") {
+      $main = "volumes/$id/tex/main.printing.tex"
+      $body = "volumes/$id/tex/body.printing.generated.tex"
+      $outDir = Join-Path "build/aux/printing" $id
+      $builtName = "main.printing.pdf"
+      $dest = "volumes/$id/out/$id.printing.pdf"
     } else {
       $main = "volumes/$id/tex/main.tex"
       $body = "volumes/$id/tex/body.generated.tex"

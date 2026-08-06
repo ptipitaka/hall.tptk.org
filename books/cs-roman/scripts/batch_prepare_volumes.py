@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Scaffold, sync, and generate TeX for every cs-roman volume.
 
-Creates volumes/<id>/tex/main.tex and main.reading.tex, copies
-segments.json + layout.json (+ matika/transforms when present), and writes
-body.generated.tex and/or body.reading.generated.tex. Does not run latexmk
+Creates volumes/<id>/tex/main.tex and main.printing.tex;
+copies segments.json + layout.json (+ matika/transforms when present); and
+writes body.generated.tex / body.printing.generated.tex. Does not run latexmk
 (use build.ps1 / batch_build).
 
 Example:
   python books/cs-roman/scripts/batch_prepare_volumes.py
   python books/cs-roman/scripts/batch_prepare_volumes.py --volume 01Vin01
-  python books/cs-roman/scripts/batch_prepare_volumes.py --mode reading
+  python books/cs-roman/scripts/batch_prepare_volumes.py --mode printing
+  python books/cs-roman/scripts/batch_prepare_volumes.py --mode both
 """
 
 from __future__ import annotations
@@ -27,7 +28,7 @@ JSON_DIR = OUTPUT_DIR
 from generate_cs_roman_tex import generate  # noqa: E402
 from sync_volume_data import sync_volume  # noqa: E402
 
-_GENERATE_MODES = ("sync", "reading")
+_GENERATE_MODES = ("sync", "printing")
 
 _MAIN_TEX = """\
 % !TeX program = lualatex
@@ -53,14 +54,14 @@ _MAIN_TEX = """\
 \\end{{document}}
 """
 
-_MAIN_READING_TEX = """\
+_MAIN_PRINTING_TEX = """\
 % !TeX program = lualatex
-% !TeX root = main.reading.tex
-% CS Roman Thai Tipiṭaka — {volume_id} (reading mode: continuous + margin folios)
+% !TeX root = main.printing.tex
+% CS Roman Thai Tipiṭaka — {volume_id} (printing: reading flow at 165×230 mm)
 \\documentclass[11pt,twoside,openany]{{memoir}}
 
-% Binding-aware margins + outer ฉ.N marks (see pagegeometry-reading.tex).
-\\def\\csromanusereadinggeometry{{1}}
+% Trim 165×230 mm; lengths scaled from reading by 165mm/499bp.
+\\def\\csromanuseprintinggeometry{{1}}
 \\input{{shared/style/preamble}}
 
 \\begin{{document}}
@@ -74,7 +75,7 @@ _MAIN_READING_TEX = """\
 \\cleardoublepage
 \\pagenumbering{{arabic}}
 \\pagestyle{{plain}}
-\\input{{volumes/{volume_id}/tex/body.reading.generated}}
+\\input{{volumes/{volume_id}/tex/body.printing.generated}}
 \\end{{document}}
 """
 
@@ -87,11 +88,11 @@ def ensure_main_tex(volume_id: str) -> Path:
     return main
 
 
-def ensure_main_reading_tex(volume_id: str) -> Path:
+def ensure_main_printing_tex(volume_id: str) -> Path:
     tex_dir = BOOKS / "volumes" / volume_id / "tex"
     tex_dir.mkdir(parents=True, exist_ok=True)
-    main = tex_dir / "main.reading.tex"
-    main.write_text(_MAIN_READING_TEX.format(volume_id=volume_id), encoding="utf-8")
+    main = tex_dir / "main.printing.tex"
+    main.write_text(_MAIN_PRINTING_TEX.format(volume_id=volume_id), encoding="utf-8")
     return main
 
 
@@ -107,7 +108,9 @@ def _modes_from_arg(mode: str) -> tuple[str, ...]:
         return _GENERATE_MODES
     if mode in _GENERATE_MODES:
         return (mode,)
-    raise ValueError(f"mode must be sync, reading, or both; got {mode!r}")
+    raise ValueError(
+        f"mode must be sync, printing, or both; got {mode!r}"
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -120,9 +123,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--mode",
-        choices=("sync", "reading", "both"),
+        choices=("sync", "printing", "both"),
         default="both",
-        help="Which body TeX to generate (default: both sync and reading).",
+        help=(
+            "Which body TeX to generate (default: both = sync+printing)."
+        ),
     )
     parser.add_argument(
         "--copy-pdf",
@@ -142,7 +147,7 @@ def main(argv: list[str] | None = None) -> int:
     for volume_id in volumes:
         try:
             ensure_main_tex(volume_id)
-            ensure_main_reading_tex(volume_id)
+            ensure_main_printing_tex(volume_id)
             sync_volume(volume_id, copy_pdf=args.copy_pdf)
             outs: list[str] = []
             for mode in modes:
@@ -157,7 +162,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Done: {ok} ok, {len(failures)} failed")
     if failures:
         print("Failed:", ", ".join(failures), file=sys.stderr)
-    return 1 if failures else 0
+        return 1
+    return 0
 
 
 if __name__ == "__main__":

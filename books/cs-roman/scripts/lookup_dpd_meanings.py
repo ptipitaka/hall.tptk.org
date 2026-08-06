@@ -10,8 +10,9 @@ import urllib.request
 from html import unescape
 from pathlib import Path
 
-MD = Path(__file__).resolve().parents[1] / "research_front_vowel_clusters_translit.md"
-OUT = Path(__file__).resolve().parents[1] / "research_front_vowel_clusters_meanings.md"
+RESEARCH = Path(__file__).resolve().parents[1] / "research"
+MD = RESEARCH / "research_front_vowel_clusters_translit.md"
+OUT = RESEARCH / "research_front_vowel_clusters_meanings.md"
 
 ROW_RE = re.compile(
     r"^\| `([^`]+)` \| `([^`]+)` \| (\d+) \| ([^|]+) \| ([^|]+) \|$"

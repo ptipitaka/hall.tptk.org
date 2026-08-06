@@ -13,6 +13,8 @@ books/cs-roman/
   SCHEMA.md
   build.ps1                 # one volume: sync → generate → latexmk
   scripts/                  # extract, headings, TeX, metrics, tests
+    scratch/                # ad-hoc debug/audit scripts (not pipeline)
+  research/                 # orthography notes + scan outputs (*.md/*.tsv)
   source/                   # CS Roman PDFs (gitignored *.pdf)
   output/                   # canonical *.segments.json + *.layout.json
                             # + optional *.transforms.json
@@ -30,15 +32,15 @@ Single volume (from already-extracted JSON):
 ```powershell
 cd books/cs-roman
 .\build.ps1 -Volume 01Vin01              # sync (default): page-faithful sheets
-.\build.ps1 -Volume 02Vin02 -Mode reading  # continuous text + margin ฉ.N (any volume)
+.\build.ps1 -Volume 01Vin01 -Mode printing # continuous reading flow at 165×230 mm
 ```
 
 | Mode | Body TeX | PDF |
 |------|----------|-----|
 | `sync` (default) | `tex/body.generated.tex` | `out/<id>.pdf` |
-| `reading` | `tex/body.reading.generated.tex` | `out/<id>.reading.pdf` |
+| `printing` | `tex/body.printing.generated.tex` | `out/<id>.printing.pdf` |
 
-Reading mode keeps the volume `layout` defaults, does not force `\csromanpage`, merges `*_continuation` into the open paragraph, and places `ฉ.N` in the outer margin at each source-folio change. Drivers: `volumes/<id>/tex/main.tex` and `main.reading.tex` (templated by `batch_prepare_volumes.py`).
+Printing mode keeps the volume `layout` defaults, does not force `\csromanpage`, merges `*_continuation` into the open paragraph, and places `ฉ.N` in the outer margin at each source-folio change, at trim **165 × 230 mm** (width scale \(s = 165\,\mathrm{mm}/499\,\mathrm{bp}\)). Drivers: `main.tex`, `main.printing.tex` (templated by `batch_prepare_volumes.py`).
 
 Full pipeline for all volumes (extract → headings → TeX → PDF):
 
@@ -47,49 +49,60 @@ Full pipeline for all volumes (extract → headings → TeX → PDF):
 docker compose exec -T web python books/cs-roman/scripts/extract_cs_roman_pdf.py books/cs-roman/source --output-dir books/cs-roman/output
 docker compose exec -T web python books/cs-roman/scripts/batch_cs_roman_headings.py
 docker compose exec -T web python books/cs-roman/scripts/batch_prepare_volumes.py
-# default --mode both → sync + reading bodies, main.tex + main.reading.tex, matika sync
+# default --mode both → sync + printing bodies
 
 # Host TeX Live
 cd books/cs-roman
 .\scripts\batch_build_volumes.ps1              # sync PDFs
-.\scripts\batch_build_volumes.ps1 -Mode reading  # reading PDFs
+.\scripts\batch_build_volumes.ps1 -Mode printing # printing PDFs (165×230 mm)
 ```
 
 Or one PowerShell entrypoint from this directory:
 
 ```powershell
 cd books/cs-roman
-.\pipeline.ps1            # extract + headings + prepare sync+reading (Docker)
+.\pipeline.ps1            # extract + headings + prepare sync+printing (Docker)
 .\scripts\batch_build_volumes.ps1 -Mode both
 ```
 
 Steps (per volume):
 
 1. Sync PDF (hardlink from `source/`) + `segments.json` + `layout.json` (+ optional `transforms.json` / `matika.json`) into `volumes/<id>/`
-2. Generate `tex/body.generated.tex` and/or `body.reading.generated.tex` from segments (+ footnotes, bold runs, TOC marks, layout; apply `shared`/`volume` transforms on Roman then Thai). TOC prefers `matika.json` when present.
-3. `latexmk -lualatex` → `volumes/<id>/out/<id>.pdf` or `<id>.reading.pdf`
+2. Generate `tex/body.generated.tex` and/or `body.printing.generated.tex` from segments (+ footnotes, bold runs, TOC marks, layout; apply `shared`/`volume` transforms on Roman then Thai). TOC prefers `matika.json` when present.
+3. `latexmk -lualatex` → `volumes/<id>/out/<id>.pdf` / `<id>.printing.pdf`
 
 Requires: Python 3.11+, PyMuPDF, editable `pali_script` (`pip install -e packages/pali_script/python`), TeX Live with LuaLaTeX + memoir + babel-thai.
 
 ## Notes
 
-- `body.generated.tex` / `body.reading.generated.tex` are auto-generated — edit macros in `shared/style/`, not the body.
+- `body.generated.tex` / `body.printing.generated.tex` are auto-generated — edit macros in `shared/style/`, not the body.
 - Sync mode: each source `page` starts a new sheet with matching `\setcounter{page}{N}`.
-- Reading mode (any volume): physical page numbers in the running head; source folio cited as `ฉ.N` via `\csromanfolio` (outer margin). Geometry: `pagegeometry-reading.tex`. Per-page rhythm: `page_layout_reading_mode` in `layout.json` (physical page keys, not ฉ.N). Headings batch writes `output/<id>.matika.json` for memoir TOC marks.
+- Printing mode (any volume): physical page numbers in the running head; source folio cited as `ฉ.N` via `\csromanfolio` (outer margin); continuous reading flow at trim **165 × 230 mm** (`pagegeometry-printing.tex`). Per-page rhythm: `page_layout_reading_mode` in `layout.json` (physical page keys, not ฉ.N; sync uses volume `layout` only — no per-page sync map). Forced page breaks before a segment: `page_breaks_reading_mode.before_orders` (global `order` list; sync ignores). Optional `//…` notes in `layout.json` (see `output/01Vin01.layout.json`). Headings batch writes `output/<id>.matika.json` for memoir TOC marks. Printing **does not** apply `page_layout_reading_mode` (those keys are reading physical pages and would mis-fire after reflow); it uses volume `layout` and `page_breaks_reading_mode` only.
 - After มาติกา, `\cleardoublepage` forces arabic page 1 onto a recto (right-hand / odd) page.
-- Running heads show piṭaka / gambhīra titles and the (mode-dependent) page number.
-- Footnotes: `{{nN}}` → `\footnote{…}` with notes transliterated to Thai (Arabic digits kept).
-- Page geometry targets CS Roman MediaBox **499 × 709 bp** (`shared/style/pagegeometry.tex`).
+- Blank versos inserted to reach a recto chapter open (`\csromanensureoddpage` / `\cleardoublepage`) use pagestyle `plain` — no running head or page number (all volumes).
+- Running heads: **verso (even) = `ปิฎก นิกาย ปาฬิ`** (only parts present; Vinaya/Abhidhamma have no nikāya) and **recto (odd) = body `cha` + `h1` + `h2`** via TeX `\markboth` / `\markright` (`\chapterhead*` / `\csromanheader{1|2}` in `shared/style/book-macros.tex`). Compound body headings (`1. ปตฺตวคฺค 8. อฏฺฐมสิกฺขาปท`) split into separate h1/h2 mark fields so gaps use equal `\csromanheadsep` (`1em`). Mātikā drives TOC only — ghost outline titles without a body heading do not update the recto head. Verso fields use `\setcsromanpitaka` / `\setcsromannikaya` / `\setcsromanheadpali`; `\csromanheadjoin` joins present verso parts with `\csromanheadsep` (`1em`). `\csromanrunhead` sets `\spaceskip=0.33em` so body `word_space` (~3.5) does not open a wide gap after `N.` (same width as `\proseitem` number–title sep). Suttanta volumes (no `piṭaka` segment) get `\setcsromanpitaka{สุตฺตนฺตปิฏก}` + nikāya from the opening title injected at generate. Blank versos (opening sheet / `\csromanensureoddpage`) stay `plain` — no running head. Volume fragments without a body `cha` show only numbered `h1`/`h2` on recto when those headings appear.
+- Footnotes: `{{nN}}` → `\footnote{…}` with notes transliterated to Thai (Arabic digits kept). Extract binds glued/spaced numbered callouts, mid-paragraph ` * `/` + `, and bracket `[  ] …` / empty-paren `(  ) …` apparatus (paren hosts on non-folio `(` only; numbered notes that begin with `( )` stay numbered). Unbound notes become `\orphannote` **at end of the book** (not a TeX page-break bug). Repair older JSON with `python scripts/fixup_orphan_footnote_callouts.py --all` (also run after extract in `pipeline.ps1`; repairs folio-stolen `({{()}}150)`). Audit leftovers: `python scripts/scan_orphan_notes.py --volume 01Vin01 --strict`. Generate gate: `--forbid-orphan-notes`. Do **not** hand-patch segment orders — that regresses on re-extract. Layout (`shared/style/footnotes.tex`): each note `\insert`s its natural hang/long box; `\@makecol` unpacks exactly those sealed boxes and packs 2–3 per row when widths fit (stretch inter-note glue edge-to-edge); a **sole** one-line note is centered; a sole wrapping note or any leftover row on a multi-note page is left-aligned. No parallel toks queue (that desynced bodies from callouts). Footnotes stay pinned to the true page bottom (footmisc `bottom`) so rules align across facing pages; body→rule gap therefore varies with page fill by design (it is *not* `\skip\footins` alone — footmisc's bottom-pin glue absorbs a page's leftover height). Multi-column packing at shipout frees space that TeX had reserved for *stacked* notes at break time; `\csromanfn@footnotetext` credits that packing (~½ for short / ~⅓ for tiny) so the surplus is available to body lines instead of becoming an empty body→rule gap (see `research/clubwidow_penalty_tuning.md` and the packing-credit note in `shared/style/footnotes.tex`). If one page's gap looks oversized without a correspondingly large fill difference from its neighbor, treat it as a page-break/spacing bug on that specific page, not a footnote-layout issue. Mark/body page audit (exit 1 on hits): `python scripts/scan_footnote_page_mismatch.py --volume 01Vin01`. Regression: `python -m unittest books.cs-roman.scripts.test_footnote_mark_page_sync`.
+- Solid editorial mid-word hyphens in CS Roman (`na-upanissaye`) are stripped from body Roman at extract; Thai is converted part-wise then joined without `-` (`นอุปนิสฺสเย`, not `นฺเอา…`). Peyyāla `-pa-` is kept. Soft line-wrap hyphens are still joined earlier. Repair stored JSON: `python scripts/fixup_solid_midword_hyphens.py --all`.
+- Discourse dash: PDF text sometimes emits U+23AF (HORIZONTAL LINE EXTENSION ⎯) which Sarabun cannot draw. Extract / `normalize_printable_dashes` / `roman_to_thai` map it to en-dash U+2013; TeX emits `\csromandash` (same as source en-dashes). Repair stored JSON: `python scripts/fixup_printable_dashes.py --all` (also after extract in `pipeline.ps1`).
+- Parenthetical number ranges `(12-13)` / `(12- 13)` / `(55-56)` are emitted as `\mbox{(12-13)}` at TeX generate (spaces around `-` collapsed) so the marker neither breaks across lines nor opens a wide word-space gap; JSON may still have `(12- 13)`.
+- Long-compound **sandhi soft breaks** (layout only): enabled automatically on every `generate` / `build.ps1` mode (sync, printing) via `shared/sandhi_breaks.json`, merged with curated `shared/sandhi_breaks_overrides.json` (overrides win; use for edition forms DPD/align cannot split). If the DPD cache is missing and `vendor/dpd/dpd.db` is present, generate rebuilds the cache; curated overrides still apply. One-time DB fetch: `python scripts/fetch_dpd_db.py`. Force rebuild: `python scripts/build_sandhi_break_cache.py --all`. Disable: `--no-sandhi-breaks`. See [`research/sandhi_soft_breaks.md`](research/sandhi_soft_breaks.md).
+- Uddāna labels glued to bat/wak verses when the PDF omits the blank line after `Tassuddānaṃ` (etc.) are peeled at extract (`peel_glued_gatha_title_raw`). Older JSON: `python scripts/fixup_glued_gatha_titles.py --volume 01Vin01` then `fixup_gatha_geometry.py` + `fixup_center_layout.py`.
+- **bat_line gāthā column align:** TeX `\csromangathabat{left}{right}` aligns the right วรรค after the comma within each consecutive gāthā กลุ่ม (max left-วรรค width + fixed gap). No JSON change — regenerate TeX/PDF only.
+- Page geometry: sync targets CS Roman MediaBox **499 × 709 bp** (`pagegeometry.tex`). Printing uses **165 × 230 mm** (`pagegeometry-printing.tex`).
 - Body page range: `content_start_pdf_page` (Namo tassa) … `content_end_printed_page` (before back-matter indexes). Trim indexes with `python books/cs-roman/scripts/trim_cs_roman_back_matter.py books/cs-roman/output --all`.
 - Normalize / split content vs layout: `python books/cs-roman/scripts/cs_roman_segments.py normalize --all`
   (writes `<id>.segments.json` + `<id>.layout.json`; print tuning stays in layout)
 - Publication string fixes (conditional / per-volume): edit `shared/transforms.json` and/or
-  `output/<id>.transforms.json`, then rebuild — rules apply at generate, not extract.
-  See [`SCHEMA.md`](SCHEMA.md) (transforms file).
-- Bold inline `runs`: written at extract (`cs_roman_bold.py`). Enrich `--force` re-derives
-  Thai and remaps existing bold spans; it does **not** re-read the PDF. If enrich warns
-  that bold was lost, re-extract that volume from `source/` — do not rely on `--force`
-  alone after orthography/spacing changes.
+  `output/<id>.transforms.json` (`schema_version` **2**), then rebuild — rules apply at
+  generate, not extract. Prefer **`annotate`** (keep edition token + footnote) when the
+  Burmese reading is wrong; use **`replace`** (no PDF footnote; optional `remark`) when
+  Roman alone is wrong. Optional `soft_breaks` on either action merge into the sandhi map
+  at generate. See [`SCHEMA.md`](SCHEMA.md) (transforms).
+- Bold inline `runs`: written at extract (`cs_roman_bold.py`) via stroke bbox ↔
+  body-line geometry. Enrich `--force` re-derives Thai and remaps existing bold
+  spans; it does **not** re-read the PDF. Repair stored false bold without full
+  re-extract: `python books/cs-roman/scripts/fixup_bold_bbox.py --volume 01Vin01`.
+  If enrich warns that bold was lost, re-extract or run that fixup.
 
 ## Layout metrics
 
@@ -108,7 +121,7 @@ Reports write to `volumes/01Vin01/out/_ref_pages/layout_metrics.json` and `struc
 ```powershell
 cd books/cs-roman
 python scripts/generate_cs_roman_tex.py --volume 01Vin01
-python scripts/generate_cs_roman_tex.py --volume 02Vin02 --mode reading
+python scripts/generate_cs_roman_tex.py --volume 02Vin02 --mode printing
 ```
 
 ## Tests

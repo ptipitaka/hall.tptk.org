@@ -5,12 +5,12 @@
 .EXAMPLE
   .\build.ps1
   .\build.ps1 -Volume 01Vin01
-  .\build.ps1 -Volume 02Vin02 -Mode reading
+  .\build.ps1 -Volume 01Vin01 -Mode printing
   .\build.ps1 -Volume 01Vin01 -SkipGenerate
 #>
 param(
   [string]$Volume = "01Vin01",
-  [ValidateSet("sync", "reading")]
+  [ValidateSet("sync", "printing")]
   [string]$Mode = "sync",
   [switch]$SkipGenerate,
   [switch]$SkipSync
@@ -26,13 +26,13 @@ if (-not $SkipGenerate) {
   python scripts/generate_cs_roman_tex.py --volume $Volume --mode $Mode
 }
 
-if ($Mode -eq "reading") {
-  $main = "volumes/$Volume/tex/main.reading.tex"
-  $auxDir = "build/aux/reading/$Volume"
-  $built = "$auxDir/main.reading.pdf"
-  $dest = "volumes/$Volume/out/$Volume.reading.pdf"
+if ($Mode -eq "printing") {
+  $main = "volumes/$Volume/tex/main.printing.tex"
+  $auxDir = "build/aux/printing/$Volume"
+  $built = "$auxDir/main.printing.pdf"
+  $dest = "volumes/$Volume/out/$Volume.printing.pdf"
   if (-not (Test-Path $main)) {
-    python scripts/batch_prepare_volumes.py --volume $Volume --mode reading
+    python scripts/batch_prepare_volumes.py --volume $Volume --mode printing
   }
 } else {
   $main = "volumes/$Volume/tex/main.tex"

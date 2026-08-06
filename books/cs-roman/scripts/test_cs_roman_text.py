@@ -14,14 +14,19 @@ from cs_roman_text import (  # noqa: E402
     SP1_MARKER,
     SP3_MARKER,
     SP_MARKER,
+    EN_DASH,
+    HORIZONTAL_LINE_EXTENSION,
     demigrate_sp_markers,
     ensure_script_text,
+    needs_solid_midword_hyphen_strip,
     needs_spacing_normalize,
     normalize_pot_ma_gyi,
+    normalize_printable_dashes,
     prepare_roman_body,
     roman_to_thai,
     script_text_entries,
     strip_sentence_spacers,
+    strip_solid_midword_hyphens,
     text_field_has_bold_runs,
     thai_digits_to_arabic,
     uses_sentence_spacer,
@@ -195,6 +200,60 @@ class ScriptTextEntriesTests(unittest.TestCase):
         self.assertTrue(rule)
         self.assertEqual(body, f"mukhe.{_SP1X2}Manussa.")
 
+    def test_printable_dash_from_horizontal_line_extension(self) -> None:
+        """PDF U+23AF → en-dash (Sarabun-printable / \\csromandash)."""
+        raw = f"dissati{HORIZONTAL_LINE_EXTENSION} “Evaṃ"
+        self.assertEqual(
+            normalize_printable_dashes(raw),
+            f"dissati{EN_DASH} “Evaṃ",
+        )
+        body, _ = prepare_roman_body(raw, normalize_spacing=False)
+        self.assertEqual(body, f"dissati{EN_DASH} “Evaṃ")
+        thai = roman_to_thai(raw, normalize_spacing=False)
+        self.assertIn(EN_DASH, thai)
+        self.assertNotIn(HORIZONTAL_LINE_EXTENSION, thai)
+
+
+class SolidMidwordHyphenTests(unittest.TestCase):
+    def test_strips_editorial_hyphen(self) -> None:
+        self.assertEqual(
+            strip_solid_midword_hyphens("na-upanissaye"),
+            "naupanissaye",
+        )
+        self.assertEqual(
+            strip_solid_midword_hyphens("avitakka-avicāro"),
+            "avitakkaavicāro",
+        )
+
+    def test_keeps_peyyala_marker(self) -> None:
+        self.assertEqual(
+            strip_solid_midword_hyphens("Tīhākārehi -pa-. Sattahākārehi"),
+            "Tīhākārehi -pa-. Sattahākārehi",
+        )
+        self.assertEqual(
+            strip_solid_midword_hyphens("na-ārammaṇe -pa- na-adhipatiyā"),
+            "naārammaṇe -pa- naadhipatiyā",
+        )
+
+    def test_prepare_and_thai_drop_hyphen(self) -> None:
+        body, _ = prepare_roman_body("na-upanissaye")
+        self.assertEqual(body, "naupanissaye")
+        thai = roman_to_thai("na-upanissaye", normalize_spacing=False)
+        self.assertEqual(thai, "นอุปนิสฺสเย")
+        self.assertNotIn("-", thai)
+
+    def test_ensure_rebuilds_hyphenated_roman(self) -> None:
+        text = [
+            {"script": "roman", "value": "na-upanissaye"},
+            {"script": "thai", "value": "น-อุปนิสฺสเย"},
+        ]
+        self.assertTrue(needs_solid_midword_hyphen_strip(text[0]["value"]))
+        entries, _, _ = ensure_script_text(text, normalize_spacing=False)
+        roman = next(e["value"] for e in entries if e["script"] == "roman")
+        thai = next(e["value"] for e in entries if e["script"] == "thai")
+        self.assertEqual(roman, "naupanissaye")
+        self.assertEqual(thai, "นอุปนิสฺสเย")
+
 
 class BoldRunsPreserveTests(unittest.TestCase):
     def test_force_preserves_bold_when_text_unchanged(self) -> None:
@@ -222,6 +281,44 @@ class BoldRunsPreserveTests(unittest.TestCase):
         roman = next(e for e in entries if e["script"] == "roman")
         self.assertTrue(any(r.get("bold") for r in roman["runs"]))
         self.assertEqual("".join(r["value"] for r in roman["runs"]), roman["value"])
+
+    def test_force_does_not_rebled_repeated_lemma(self) -> None:
+        """A single bold lemma must not paint a later plain repeat after force."""
+        text = [
+            {
+                "script": "roman",
+                "value": (
+                    "Bhūmaṭṭhaṃ nāma bhaṇḍaṃ. “Bhūmaṭṭhaṃ bhaṇḍaṃ”ti theyyacitto"
+                ),
+                "runs": [
+                    {"value": "Bhūmaṭṭhaṃ", "bold": True},
+                    {
+                        "value": (
+                            " nāma bhaṇḍaṃ. “Bhūmaṭṭhaṃ bhaṇḍaṃ”ti theyyacitto"
+                        ),
+                        "bold": False,
+                    },
+                ],
+            },
+            {
+                "script": "thai",
+                "value": (
+                    "ภูมฏฺฐํ นาม ภณฺฑํ. “ภูมฏฺฐํ ภณฺฑํ”ติ เถยฺยจิตฺโต"
+                ),
+                "runs": [
+                    {"value": "ภูมฏฺฐํ", "bold": True},
+                    {
+                        "value": " นาม ภณฺฑํ. “ภูมฏฺฐํ ภณฺฑํ”ติ เถยฺยจิตฺโต",
+                        "bold": False,
+                    },
+                ],
+            },
+        ]
+        entries, _, lost = ensure_script_text(text, force=True)
+        self.assertFalse(lost)
+        roman = next(e for e in entries if e["script"] == "roman")
+        bold_bits = [r["value"] for r in roman["runs"] if r.get("bold")]
+        self.assertEqual(bold_bits, ["Bhūmaṭṭhaṃ"])
 
     def test_spacing_normalize_preserves_bold_span(self) -> None:
         text = [

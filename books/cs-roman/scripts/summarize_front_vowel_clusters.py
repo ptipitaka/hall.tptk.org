@@ -9,12 +9,10 @@ from pathlib import Path
 
 from pali_script import Script, convert
 
-TSV = Path(__file__).resolve().parents[1] / "research_front_vowel_clusters.tsv"
-MD = Path(__file__).resolve().parents[1] / "research_front_vowel_clusters.md"
-OUT_TRANSLIT_MD = (
-    Path(__file__).resolve().parents[1]
-    / "research_front_vowel_clusters_translit.md"
-)
+RESEARCH = Path(__file__).resolve().parents[1] / "research"
+TSV = RESEARCH / "research_front_vowel_clusters.tsv"
+MD = RESEARCH / "research_front_vowel_clusters.md"
+OUT_TRANSLIT_MD = RESEARCH / "research_front_vowel_clusters_translit.md"
 
 # After current beautify: ทฺเว → move เ before the virama run → เทฺว
 _FRONT_BEFORE_CLUSTER = re.compile(r"((?:[ก-ฮ]ฺ)+)([เโไใ])([ก-ฮ])")

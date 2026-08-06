@@ -10,7 +10,7 @@
     {
       "title": "Puggalakathā",
       "page": null,
-      "kind": "h2",
+      "kind": "cha",
       "matched_order": null,
       "section_no": 1
     },
@@ -95,763 +95,763 @@
       "title": "Upādāpaññattānuyoga",
       "page": 34,
       "kind": "h1",
-      "matched_order": 239,
+      "matched_order": 236,
       "section_no": 12
     },
     {
       "title": "Purisakārānuyoga",
       "page": 41,
       "kind": "h1",
-      "matched_order": 278,
+      "matched_order": 275,
       "section_no": 13
     },
     {
       "title": "Abhiññānuyoga",
       "page": 50,
       "kind": "h1",
-      "matched_order": 353,
+      "matched_order": 350,
       "section_no": 14
     },
     {
       "title": "15-18. Ñātakānuyogādi",
       "page": 50,
       "kind": "h2",
-      "matched_order": 359
+      "matched_order": 356
     },
     {
       "title": "Paṭivedhānuyoga",
       "page": 51,
-      "kind": "h1",
-      "matched_order": 366,
+      "kind": "h2",
+      "matched_order": 363,
       "section_no": 19
     },
     {
       "title": "Saṃghānuyoga",
       "page": 52,
-      "kind": "h1",
-      "matched_order": 374,
+      "kind": "h2",
+      "matched_order": 371,
       "section_no": 20
     },
     {
       "title": "Saccikaṭṭhasabhāgānuyoga",
       "page": 53,
-      "kind": "h1",
-      "matched_order": 379,
+      "kind": "h2",
+      "matched_order": 376,
       "section_no": 21
     },
     {
       "title": "Parihānikathā",
       "page": 61,
-      "kind": "h2",
-      "matched_order": 433,
+      "kind": "cha",
+      "matched_order": 424,
       "section_no": 2
     },
     {
       "title": "Brahmacariyakathā (ka)",
       "page": 80,
-      "kind": "h2",
-      "matched_order": 598,
+      "kind": "cha",
+      "matched_order": 584,
       "section_no": 3
     },
     {
       "title": "Odhisokathā (kha)",
       "page": 87,
-      "kind": "h2",
-      "matched_order": 649,
+      "kind": "cha",
+      "matched_order": 635,
       "section_no": 3
     },
     {
       "title": "Jahatikathā",
       "page": 92,
-      "kind": "h2",
-      "matched_order": 684,
+      "kind": "cha",
+      "matched_order": 669,
       "section_no": 4
     },
     {
       "title": "Sabbamatthītikathā",
       "page": 96,
-      "kind": "h2",
-      "matched_order": 722,
+      "kind": "cha",
+      "matched_order": 702,
       "section_no": 5
     },
     {
       "title": "Atītakkhandhādikathā",
       "page": 115,
-      "kind": "h2",
-      "matched_order": 850,
+      "kind": "cha",
+      "matched_order": 830,
       "section_no": 6
     },
     {
       "title": "Ekaccaṃatthītikathā",
       "page": 119,
-      "kind": "h2",
-      "matched_order": 874,
+      "kind": "cha",
+      "matched_order": 854,
       "section_no": 7
     },
     {
       "title": "Satipaṭṭhānakathā",
       "page": 121,
-      "kind": "h2",
-      "matched_order": 898,
+      "kind": "cha",
+      "matched_order": 878,
       "section_no": 8
     },
     {
       "title": "Hevatthikathā",
       "page": 124,
-      "kind": "h2",
-      "matched_order": 915,
+      "kind": "cha",
+      "matched_order": 895,
       "section_no": 9
     },
     {
       "title": "Dutiyavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 937,
+      "kind": "cha",
+      "matched_order": 1244,
       "section_no": 2
     },
     {
       "title": "(10) 1. Parūpahārakathā",
       "page": 127,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(11) 2. Aññāṇakathā",
       "page": 134,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(12) 3. Kaṅkhākathā",
       "page": 140,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(13) 4. Paravitāraṇakathā",
       "page": 145,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(14) 5. Vacībhedakathā",
       "page": 150,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(15) 6. Dukkhāhārakathā",
       "page": 156,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(16) 7. Cittiṭṭhitikathā",
       "page": 156,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(17) 8. Kukkuḷakathā",
       "page": 160,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(18) 9. Anupubbābhisamayakathā",
       "page": 163,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(19) 10. Vohārakathā",
       "page": 169,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(20) 11. Nirodhakathā",
       "page": 173,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Tatiyavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 1308,
+      "kind": "cha",
+      "matched_order": 1426,
       "section_no": 3
     },
     {
       "title": "(21) 1. Balakathā",
       "page": 174,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(22) 2. Ariyantikathā",
       "page": 177,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(23) 3. Vimuttikathā",
       "page": 181,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(24) 4. Vimuccamānakathā",
       "page": 183,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(25) 5. Aṭṭhamakakathā",
       "page": 185,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(26) 6. Aṭṭhamakassa-indriyakathā",
       "page": 187,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(27) 7. Dibbacakkhukathā",
       "page": 190,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(28) 8. Dibbasotakathā",
       "page": 191,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(29) 9. Yathākammūpagatañāṇakathā",
       "page": 193,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(30) 10. Saṃvarakathā",
       "page": 194,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(31) 11. Asaññakathā",
       "page": 196,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(32) 12. Nevasaññānāsaññāyatanakathā",
       "page": 198,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Catutthavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 1562,
+      "kind": "cha",
+      "matched_order": 1504,
       "section_no": 4
     },
     {
       "title": "(33) 1. Gihissa-arahātikathā",
       "page": 202,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(34) 2. Upapattikathā",
       "page": 203,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(35) 3. Anāsavakathā",
       "page": 205,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(36) 4. Samannāgatakathā",
       "page": 207,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(37) 5. Upekkhāsamannāgatakathā",
       "page": 211,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(38) 6. Bodhiyābuddhotikathā",
       "page": 212,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(39) 7. Lakkhaṇakathā",
       "page": 214,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(40) 8. Niyāmokkantikathā",
       "page": 216,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(41) 9. Aparāpisamannāgatakathā",
       "page": 219,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(42) 10. Sabbasaṃyojanappahānakathā",
       "page": 225,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Pañcamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 1786,
+      "kind": "cha",
+      "matched_order": 1715,
       "section_no": 5
     },
     {
       "title": "(43) 1. Vimuttikathā",
       "page": 227,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(44) 2. Asekhañāṇakathā",
       "page": 228,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(45) 3. Viparītakathā",
       "page": 229,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(46) 4. Niyāmakathā",
       "page": 231,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(47) 5. Paṭisambhidākathā",
       "page": 233,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(48) 6. Sammutiñāṇakathā",
       "page": 233,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(49) 7. Cittārammaṇakathā",
       "page": 234,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(50) 8. Anāgatañāṇakathā",
       "page": 235,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(51) 9. Paṭuppannakathā",
       "page": 236,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(52) 10. Phalañāṇakathā",
       "page": 237,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Chaṭṭhavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 1892,
+      "kind": "cha",
+      "matched_order": 1812,
       "section_no": 6
     },
     {
       "title": "(53) 1. Niyāmakathā",
       "page": 239,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(54) 2. Paṭiccasamuppādakathā",
       "page": 240,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(55) 3. Saccakathā",
       "page": 242,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(56) 4. Āruppakathā",
       "page": 244,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(57) 5. Nirodhasamāpattikathā",
       "page": 245,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(58) 6. Ākāsakathā",
       "page": 246,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(59) 7. Ākāsosanidassanotikathā",
       "page": 247,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(60) 8. Pathavīdhātusanidassanāti-ādikathā",
       "page": 248,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(61) 9. Cakkhundriyaṃsanidassananti-ādikathā",
       "page": 249,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(62) 10. Kāyakammaṃsanidassanantikathā",
       "page": 249,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Sattamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 1974,
+      "kind": "cha",
+      "matched_order": 1911,
       "section_no": 7
     },
     {
       "title": "(63) 1. Saṅgahitakathā",
       "page": 250,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(64) 2. Sampayuttakathā",
       "page": 252,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(65) 3. Cetasikakathā",
       "page": 253,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(66) 4. Dānakathā",
       "page": 254,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(67) 5. Paribhogamayapuññakathā",
       "page": 257,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(68) 6. Itodinnakathā",
       "page": 260,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(69) 7. Pathavīkammavipākotikathā",
       "page": 262,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(70) 8. Jarāmaraṇaṃvipākotikathā",
       "page": 264,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(71) 9. Ariyadhammavipākakathā",
       "page": 266,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(72) 10. Vipākovipākadhammadhammotikathā",
       "page": 267,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Aṭṭhamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 2139,
+      "kind": "cha",
+      "matched_order": 2050,
       "section_no": 8
     },
     {
       "title": "(73) 1. Chagatikathā",
       "page": 268,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(74) 2. Antarābhavakathā",
       "page": 269,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(75) 3. Kāmaguṇakathā",
       "page": 272,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(76) 4. Kāmakathā",
       "page": 274,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(77) 5. Rūpadhātukathā",
       "page": 275,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(78) 6. Arūpadhātukathā",
       "page": 276,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(79) 7. Rūpadhātuyā āyatanakathā",
       "page": 278,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(80) 8. Arūpe rūpakathā",
       "page": 280,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(81) 9. Rūpaṃ kammantikathā",
       "page": 282,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(82) 10. Jīvitindriyakathā",
       "page": 291,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(83) 11. Kammahetukathā",
       "page": 293,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Navamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 2313,
+      "kind": "cha",
+      "matched_order": 2254,
       "section_no": 9
     },
     {
       "title": "(84) 1. Ānisaṃsadassāvīkathā",
       "page": 294,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(85) 2. Amatārammaṇakathā",
       "page": 295,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(86) 3. Rūpaṃsārammaṇantikathā",
       "page": 298,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(87) 4. Anusayā-anārammaṇakathā",
       "page": 299,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(88) 5. Ñāṇaṃanārammaṇantikathā",
       "page": 300,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(89) 6. Atītānāgatārammaṇakathā",
       "page": 301,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(90) 7. Vitakkānupatitakathā",
       "page": 303,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(91) 8. Vitakkavipphārasaddakathā",
       "page": 304,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(92) 9. Na yathācittassavācātikathā",
       "page": 304,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(93) 10. Na yathācittassakāyakammantikathā",
       "page": 306,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(94) 11. Atītānāgatasamannāgatakathā",
       "page": 307,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Dasamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 2424,
+      "kind": "cha",
+      "matched_order": 2330,
       "section_no": 10
     },
     {
       "title": "(95) 1. Nirodhakathā",
       "page": 308,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(96) 2. Rūpaṃmaggotikathā",
       "page": 309,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(97) 3. Pañcaviññāṇasamaṅgissamaggakathā",
       "page": 311,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(98) 4. Pañcaviññāṇākusalāpi-akusalāpītikathā",
       "page": 312,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(99) 5. Sābhogātikathā",
       "page": 314,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(100) 6. Dvīhisīlehikathā",
       "page": 315,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(101) 7. Sīlaṃacetasikantikathā",
       "page": 317,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(102) 8. Sīlaṃnacittānuparivattītikathā",
       "page": 319,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(103) 9. Samādānahetukathā",
       "page": 320,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(104) 10. Viññattisīlantikathā",
       "page": 321,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(105) 11. Aviññattidussilyantikathā",
       "page": 322,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Ekādasamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 2536,
+      "kind": "cha",
+      "matched_order": 2442,
       "section_no": 11
     },
     {
       "title": "(106-8) 1-3. Tissopi-anusayakathā",
       "page": 323,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
@@ -899,660 +899,660 @@
     {
       "title": "Dvādasamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 2623,
+      "kind": "cha",
+      "matched_order": 2564,
       "section_no": 12
     },
     {
       "title": "(116) 1. Saṃvarokammantikathā",
       "page": 335,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(117) 2. Kammakathā",
       "page": 336,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(118) 3. Saddovipākotikathā",
       "page": 338,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(119) 4. Saḷāyatanakathā",
       "page": 339,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(120) 5. Sattakkhattuparamakathā",
       "page": 340,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(121) 6. Kolaṃkolakathā",
       "page": 341,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(122) 7. Ekabījīkathā",
       "page": 342,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(123) 8. Jīvitāvoropanakathā",
       "page": 342,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(124) 9. Duggatikathā",
       "page": 343,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(125) 10. Sattamabhavikakathā",
       "page": 344,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Terasamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 2712,
+      "kind": "cha",
+      "matched_order": 2652,
       "section_no": 13
     },
     {
       "title": "(126) 1. Kappaṭṭhakathā",
       "page": 345,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(127) 2. Kusalapaṭilābhakathā",
       "page": 346,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(128) 3. Anantarāpayuttakathā",
       "page": 347,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(129) 4. Niyatassaniyāmakathā",
       "page": 348,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(130) 5. Nivutakathā",
       "page": 349,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(131) 6. Sammukhībhūtakathā",
       "page": 350,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(132) 7. Samāpanno-assādetikathā",
       "page": 351,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(133) 8. Asātarāgakathā",
       "page": 352,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(134) 9. Dhammataṇhā-abyākatātikathā",
       "page": 353,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(135) 10. Dhammataṇhānadukkhasamudayotikathā ...",
       "page": 354,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Cuddasamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 2803,
+      "kind": "cha",
+      "matched_order": 2707,
       "section_no": 14
     },
     {
       "title": "(136) 1. Kusalākusalapaṭisandahanakathā",
       "page": 356,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(137) 2. Saḷāyatanuppattikathā",
       "page": 358,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(138) 3. Anantarapaccayakathā",
       "page": 359,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(139) 4. Ariyarūpakathā",
       "page": 361,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(140) 5. Añño-anusayotikathā",
       "page": 362,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(141) 6. Pariyuṭṭhānaṃcittavippayuttantikathā",
       "page": 363,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(142) 7. Pariyāpannakathā",
       "page": 364,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(143) 8. Abyākatakathā",
       "page": 365,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(144) 9. Apariyāpannakathā",
       "page": 367,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Pannārasamavagga",
       "page": null,
-      "kind": "h1",
+      "kind": "cha",
       "matched_order": null,
       "section_no": 15
     },
     {
       "title": "(145) 1. Paccayatākathā",
       "page": 368,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(146) 2. Aññamaññapaccayakathā",
       "page": 370,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(147) 3. Addhākathā",
       "page": 371,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(148) 4. Khaṇalayamuhuttakathā",
       "page": 372,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(149) 5. Āsavakathā",
       "page": 373,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(150) 6. Jarāmaraṇakathā",
       "page": 373,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(151) 7. Saññāvedayitakathā",
       "page": 374,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(152) 8. Dutiyasaññāvedayitakathā",
       "page": 374,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(153) 9. Tatiyasaññāvedayitakathā",
       "page": 375,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(154) 10. Asaññasattupikakathā",
       "page": 376,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(155) 11. Kammūpacayakathā",
       "page": 377,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Soḷasamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3011,
+      "kind": "cha",
+      "matched_order": 2938,
       "section_no": 16
     },
     {
       "title": "(156) 1. Niggahakathā",
       "page": 380,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(157) 2. Paggahakathā",
       "page": 381,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(158) 3. Sukhānuppadānakathā",
       "page": 383,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(159) 4. Adhigayhamanasikārakathā",
       "page": 383,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(160) 5. Rūpaṃhetūtikathā",
       "page": 386,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(161) 6. Rūpaṃsahetukantikathā",
       "page": 387,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(162) 7. Rūpaṃkusalākusalantikathā",
       "page": 388,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(163) 8. Rūpaṃvipākotikathā",
       "page": 389,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(164) 9. Rūpaṃrūpāvacarārūpāvacarantikathā",
       "page": 390,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(165) 10. Rūpārūpadhātupariyāpannakathā",
       "page": 391,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Sattarasamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3125,
+      "kind": "cha",
+      "matched_order": 3050,
       "section_no": 17
     },
     {
       "title": "(166) 1. Arahatopuññūpacayakathā",
       "page": 393,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(167) 2. Natthi-arahato-akālamaccūtikathā",
       "page": 394,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(168) 3. Sabbamidaṃkammatotikathā",
       "page": 395,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(169) 4. Indriyabaddhakathā",
       "page": 397,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(170) 5. Ṭhapetvā-ariyamaggantikathā",
       "page": 398,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(171) 6. Navattabbaṃsaṃghodakkhiṇaṃpaṭiggaṇhātikathā",
       "page": 398,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(172) 7. Navattabbaṃsaṃghodakkhiṇaṃ -pa- kathā ...",
       "page": 399,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(173) 8. Navattabbaṃsaṃghobhuñjatītikathā",
       "page": 400,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(174) 9. Navattabbaṃ -pa- mahapphalantikathā",
       "page": 401,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(175) 10. Navattabbaṃbuddhassadinnaṃ mahapphalantikathā ...",
-      "page": null,
-      "kind": "h3",
+      "page": 403,
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(176) 11. Dakkhiṇāvisuddhikathā",
       "page": 403,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Aṭṭhārasamavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3251,
+      "kind": "cha",
+      "matched_order": 3165,
       "section_no": 18
     },
     {
       "title": "(177) 1. Manussalokakathā",
       "page": 405,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(178) 2. Dhammadesanākathā",
       "page": 406,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(179) 3. Karuṇākathā",
       "page": 407,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(180) 4. Gandhajātikathā",
       "page": 408,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(181) 5. Ekamaggakathā",
       "page": 409,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(182) 6. Jhānasaṅkantikathā",
       "page": 410,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(183) 7. Jhānantarikakathā",
       "page": 412,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(184) 8. Saddaṃsuṇātītikathā",
       "page": 414,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(185) 9. Cakkhunārūpaṃpassatītikathā",
       "page": 415,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Ekūnavīsatimavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3359,
+      "kind": "cha",
+      "matched_order": 3234,
       "section_no": 19
     },
     {
       "title": "(186) 1. Kilesajahanakathā",
       "page": 417,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(187) 2. Suññatākathā",
       "page": 418,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(188) 3. Sāmaññaphalakathā",
       "page": 419,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(189) 4. Pattikathā",
       "page": 420,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(190) 5. Tathatākathā",
       "page": 421,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(191) 6. Kusalakathā",
       "page": 422,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(192) 7. Accantaniyāmakathā",
       "page": 423,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(193) 8. Indriyakathā",
       "page": 426,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Vīsatimavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3429,
+      "kind": "cha",
+      "matched_order": 3365,
       "section_no": 20
     },
     {
       "title": "(194) 1. Asañciccakathā",
       "page": 427,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(195) 2. Ñāṇakathā",
       "page": 429,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(196) 3. Nirayapālakathā",
       "page": 430,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(197) 4. Tiracchānakathā",
       "page": 432,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(198) 5. Maggakathā",
       "page": 433,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(199) 6. Ñāṇakathā",
       "page": 434,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Ekavīsatimavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3511,
+      "kind": "cha",
+      "matched_order": 3388,
       "section_no": 21
     },
     {
       "title": "(200) 1. Sāsanakathā",
       "page": 436,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(201) 2. Avivittakathā",
       "page": 436,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(202) 3. Saṃyojanakathā",
       "page": 437,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(203) 4. Iddhikathā",
       "page": 438,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(204) 5. Buddhakathā",
       "page": 439,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(205) 6. Sabbadisākathā",
       "page": 439,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(206) 7. Dhammakathā",
       "page": 440,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(207) 8. Kammakathā",
       "page": 441,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "Bāvīsatimavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3568,
+      "kind": "cha",
+      "matched_order": 3451,
       "section_no": 22
     },
     {
       "title": "(208) 1. Parinibbānakathā",
       "page": 442,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(209) 2. Kusalacittakathā",
       "page": 443,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(210) 3. Āneñjakathā",
       "page": 444,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(211) 4. Dhammābhisamayakathā",
       "page": 444,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(212-4) 5-7. Tissopikathā",
       "page": 445,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
@@ -1576,26 +1576,26 @@
     {
       "title": "Tevīsatimavagga",
       "page": null,
-      "kind": "h1",
-      "matched_order": 3625,
+      "kind": "cha",
+      "matched_order": 3502,
       "section_no": 23
     },
     {
       "title": "(218) 1. Ekādhippāyakathā",
       "page": 450,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(219) 2. Arahantavaṇṇakathā",
       "page": 450,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
       "title": "(220-4) 3-7. Issariyakāmakārikākathā",
       "page": 450,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {

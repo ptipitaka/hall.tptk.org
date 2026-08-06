@@ -10,8 +10,44 @@
     {
       "title": "Pañcamabhāga",
       "page": null,
-      "kind": "h2",
+      "kind": "h1",
       "matched_order": null
+    },
+    {
+      "title": "Tikatikapaṭṭhānapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 1758
+    },
+    {
+      "title": "Dukadukapaṭṭhānapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 502
+    },
+    {
+      "title": "Tikapaṭṭhānapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 850
+    },
+    {
+      "title": "Dukapaṭṭhānapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 933
+    },
+    {
+      "title": "Dukatikapaṭṭhānapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 844
+    },
+    {
+      "title": "Tikadukapaṭṭhānapāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 1555
     }
   ]
 }

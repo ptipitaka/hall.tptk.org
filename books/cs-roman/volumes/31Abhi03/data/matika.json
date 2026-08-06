@@ -10,48 +10,48 @@
     {
       "title": "Uddesa",
       "page": null,
-      "kind": "h2",
+      "kind": "h1",
       "matched_order": 4
     },
     {
       "title": "Nayamātikā",
       "page": 1,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 5,
       "section_no": 1
     },
     {
       "title": "Abbhantaramātikā",
       "page": 1,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 7,
       "section_no": 2
     },
     {
       "title": "Nayamukhamātikā",
       "page": 2,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 9,
       "section_no": 3
     },
     {
       "title": "Lakkhaṇamātikā",
       "page": 2,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 11,
       "section_no": 4
     },
     {
       "title": "Bāhiramātikā",
       "page": 2,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 13,
       "section_no": 5
     },
     {
       "title": "Paṭhamanaya",
       "page": null,
-      "kind": "h1",
+      "kind": "cha",
       "matched_order": null,
       "section_no": 1
     },
@@ -65,56 +65,56 @@
     {
       "title": "Khandha",
       "page": 3,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 16,
       "section_no": 1
     },
     {
       "title": "Āyatana",
       "page": 5,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 35,
       "section_no": 2
     },
     {
       "title": "Dhātu",
       "page": 7,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 46,
       "section_no": 3
     },
     {
       "title": "Sacca",
       "page": 8,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 58,
       "section_no": 4
     },
     {
       "title": "Indriya",
       "page": 10,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 71,
       "section_no": 5
     },
     {
       "title": "Paṭiccasamuppādādi",
       "page": 12,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 83,
       "section_no": 6
     },
     {
       "title": "Tika",
       "page": 14,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 100,
       "section_no": 7
     },
     {
       "title": "Duka",
       "page": 19,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 135,
       "section_no": 8
     },
@@ -128,7 +128,7 @@
     {
       "title": "Saṅgahitena-asaṅgahitapadaniddesa",
       "page": 28,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": 201,
       "section_no": 2
     },
@@ -136,209 +136,209 @@
       "title": "Tatiyanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 216,
+      "matched_order": 213,
       "section_no": 3
     },
     {
       "title": "Asaṅgahitenasaṅgahitapadaniddesa",
       "page": 30,
-      "kind": "h1",
-      "matched_order": 217,
+      "kind": "h2",
+      "matched_order": 214,
       "section_no": 3
     },
     {
       "title": "Catutthanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 236,
+      "matched_order": 231,
       "section_no": 4
     },
     {
       "title": "Saṅgahitenasaṅgahitapadaniddesa",
       "page": 33,
-      "kind": "h1",
-      "matched_order": 237,
+      "kind": "h2",
+      "matched_order": 232,
       "section_no": 4
     },
     {
       "title": "Pañcamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 247,
+      "matched_order": 241,
       "section_no": 5
     },
     {
       "title": "Asaṅgahitena-asaṅgahitapadaniddesa",
       "page": 35,
-      "kind": "h1",
-      "matched_order": 248,
+      "kind": "h2",
+      "matched_order": 242,
       "section_no": 5
     },
     {
       "title": "Tika",
       "page": 38,
-      "kind": "h1",
-      "matched_order": 267,
+      "kind": "h2",
+      "matched_order": 261,
       "section_no": 1
     },
     {
       "title": "Duka",
       "page": 39,
-      "kind": "h1",
-      "matched_order": 271,
+      "kind": "h2",
+      "matched_order": 265,
       "section_no": 2
     },
     {
       "title": "Chaṭṭhanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 297,
+      "matched_order": 291,
       "section_no": 6
     },
     {
       "title": "Sampayogavippayogapadaniddesa",
       "page": 43,
-      "kind": "h1",
-      "matched_order": 298,
+      "kind": "h2",
+      "matched_order": 292,
       "section_no": 6
     },
     {
       "title": "Khandha",
       "page": 43,
-      "kind": "h1",
-      "matched_order": 299,
+      "kind": "h2",
+      "matched_order": 293,
       "section_no": 1
     },
     {
       "title": "Āyatana",
       "page": 43,
-      "kind": "h1",
-      "matched_order": 303,
+      "kind": "h2",
+      "matched_order": 297,
       "section_no": 2
     },
     {
       "title": "Dhātu",
       "page": 44,
-      "kind": "h1",
-      "matched_order": 306,
+      "kind": "h2",
+      "matched_order": 300,
       "section_no": 3
     },
     {
       "title": "Saccādi",
       "page": 44,
-      "kind": "h1",
-      "matched_order": 309,
+      "kind": "h2",
+      "matched_order": 303,
       "section_no": 4
     },
     {
       "title": "Tika",
       "page": 48,
-      "kind": "h1",
-      "matched_order": 335,
+      "kind": "h2",
+      "matched_order": 329,
       "section_no": 5
     },
     {
       "title": "Duka",
       "page": 50,
-      "kind": "h1",
-      "matched_order": 357,
+      "kind": "h2",
+      "matched_order": 351,
       "section_no": 6
     },
     {
       "title": "Sattamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 398,
+      "matched_order": 389,
       "section_no": 7
     },
     {
       "title": "Sampayuttenavippayuttapadaniddesa",
       "page": 56,
-      "kind": "h1",
-      "matched_order": 399,
+      "kind": "h2",
+      "matched_order": 390,
       "section_no": 7
     },
     {
       "title": "Aṭṭhamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 419,
+      "matched_order": 405,
       "section_no": 8
     },
     {
       "title": "Vippayuttenasampayuttapadaniddesa",
       "page": 58,
-      "kind": "h1",
-      "matched_order": 420,
+      "kind": "h2",
+      "matched_order": 406,
       "section_no": 8
     },
     {
       "title": "Navamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 429,
+      "matched_order": 412,
       "section_no": 9
     },
     {
       "title": "Sampayuttenasampayuttapadaniddesa",
       "page": 59,
-      "kind": "h1",
-      "matched_order": 430,
+      "kind": "h2",
+      "matched_order": 413,
       "section_no": 9
     },
     {
       "title": "Dasamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 475,
+      "matched_order": 455,
       "section_no": 10
     },
     {
       "title": "Vippayuttenavippayuttapadaniddesa",
       "page": 65,
-      "kind": "h1",
-      "matched_order": 476,
+      "kind": "h2",
+      "matched_order": 456,
       "section_no": 10
     },
     {
       "title": "Tika",
       "page": 67,
-      "kind": "h1",
-      "matched_order": 494,
+      "kind": "h2",
+      "matched_order": 474,
       "section_no": 1
     },
     {
       "title": "Duka",
       "page": 70,
-      "kind": "h1",
-      "matched_order": 517,
+      "kind": "h2",
+      "matched_order": 497,
       "section_no": 2
     },
     {
       "title": "Ekādasamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 549,
+      "matched_order": 526,
       "section_no": 11
     },
     {
       "title": "Saṅgahitenasampayuttavippayuttapadaniddesa",
       "page": 75,
-      "kind": "h1",
-      "matched_order": 550,
+      "kind": "h2",
+      "matched_order": 527,
       "section_no": 11
     },
     {
       "title": "Dvādasamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 563,
+      "matched_order": 539,
       "section_no": 12
     },
     {
       "title": "Sampayuttenasaṅgahitāsaṅgahitapadaniddesa",
       "page": 78,
-      "kind": "h1",
+      "kind": "h2",
       "matched_order": null,
       "section_no": 12
     },
@@ -346,167 +346,173 @@
       "title": "Terasamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 608,
+      "matched_order": 581,
       "section_no": 13
     },
     {
       "title": "Asaṅgahitenasampayuttavippayuttapadaniddesa",
       "page": 84,
-      "kind": "h1",
-      "matched_order": 609,
+      "kind": "h2",
+      "matched_order": 582,
       "section_no": 13
     },
     {
       "title": "Cuddasamanaya",
       "page": null,
       "kind": "h1",
-      "matched_order": 629,
+      "matched_order": 602,
       "section_no": 14
     },
     {
       "title": "Vippayuttenasaṅgahitāsaṅgahitapadaniddesa",
       "page": 88,
-      "kind": "h1",
-      "matched_order": 630,
+      "kind": "h2",
+      "matched_order": 603,
       "section_no": 14
     },
     {
       "title": "Khandhādi",
       "page": 88,
-      "kind": "h1",
-      "matched_order": 631,
+      "kind": "h2",
+      "matched_order": 604,
       "section_no": 1
     },
     {
       "title": "Saccādi",
       "page": 89,
-      "kind": "h1",
-      "matched_order": 636,
+      "kind": "h2",
+      "matched_order": 609,
       "section_no": 2
     },
     {
       "title": "Phassādisattaka",
       "page": 91,
-      "kind": "h1",
-      "matched_order": 651,
+      "kind": "h2",
+      "matched_order": 624,
       "section_no": 3
     },
     {
       "title": "Tika",
       "page": 91,
-      "kind": "h1",
-      "matched_order": 654,
+      "kind": "h2",
+      "matched_order": 627,
       "section_no": 4
     },
     {
       "title": "Duka",
       "page": 95,
-      "kind": "h1",
-      "matched_order": 677,
+      "kind": "h2",
+      "matched_order": 650,
       "section_no": 5
+    },
+    {
+      "title": "Puggalapaññattipāḷi",
+      "page": null,
+      "kind": "boo",
+      "matched_order": 685
     },
     {
       "title": "Ekaka-uddesa",
       "page": 101,
       "kind": "h1",
-      "matched_order": 718,
+      "matched_order": 688,
       "section_no": 1
     },
     {
       "title": "Duka-uddesa",
       "page": 104,
       "kind": "h1",
-      "matched_order": 784,
+      "matched_order": 754,
       "section_no": 2
     },
     {
       "title": "Tika-uddesa",
       "page": 106,
       "kind": "h1",
-      "matched_order": 814,
+      "matched_order": 784,
       "section_no": 3
     },
     {
       "title": "Catukka-uddesa",
       "page": 107,
       "kind": "h1",
-      "matched_order": 835,
+      "matched_order": 805,
       "section_no": 4
     },
     {
       "title": "Pañcaka-uddesa",
       "page": 110,
       "kind": "h1",
-      "matched_order": 872,
+      "matched_order": 842,
       "section_no": 5
     },
     {
       "title": "Chakka-uddesa",
       "page": 112,
       "kind": "h1",
-      "matched_order": 891,
+      "matched_order": 861,
       "section_no": 6
     },
     {
       "title": "Sattaka-uddesa",
       "page": 112,
       "kind": "h1",
-      "matched_order": 895,
+      "matched_order": 865,
       "section_no": 7
     },
     {
       "title": "Aṭṭhaka-uddesa",
       "page": 113,
       "kind": "h1",
-      "matched_order": 901,
+      "matched_order": 871,
       "section_no": 8
     },
     {
       "title": "Navaka-uddesa",
       "page": 113,
       "kind": "h1",
-      "matched_order": 905,
+      "matched_order": 875,
       "section_no": 9
     },
     {
       "title": "Dasaka-uddesa",
       "page": 113,
       "kind": "h1",
-      "matched_order": 909,
+      "matched_order": 879,
       "section_no": 10
     },
     {
       "title": "Niddesa",
       "page": null,
-      "kind": "h2",
-      "matched_order": 914
+      "kind": "h1",
+      "matched_order": 884
     },
     {
       "title": "Ekakapuggalapaññatti",
       "page": 114,
       "kind": "h2",
-      "matched_order": 915,
+      "matched_order": 885,
       "section_no": 1
     },
     {
       "title": "Dukapuggalapaññatti",
       "page": 121,
       "kind": "h2",
-      "matched_order": 971,
+      "matched_order": 941,
       "section_no": 2
     },
     {
       "title": "Tikapuggalapaññatti",
       "page": 129,
       "kind": "h2",
-      "matched_order": 1028,
+      "matched_order": 998,
       "section_no": 3
     },
     {
       "title": "Catukkapuggalapaññatti",
       "page": 143,
       "kind": "h2",
-      "matched_order": 1102,
+      "matched_order": 1072,
       "section_no": 4
     },
     {
@@ -520,35 +526,35 @@
       "title": "Chakkapuggalapaññatti",
       "page": 180,
       "kind": "h2",
-      "matched_order": 1327,
+      "matched_order": 1297,
       "section_no": 6
     },
     {
       "title": "Sattakapuggalapaññatti",
       "page": 181,
       "kind": "h2",
-      "matched_order": 1336,
+      "matched_order": 1306,
       "section_no": 7
     },
     {
       "title": "Aṭṭhakapuggalapaññatti",
       "page": 183,
       "kind": "h2",
-      "matched_order": 1351,
+      "matched_order": 1321,
       "section_no": 8
     },
     {
       "title": "Navakapuggalapaññatti",
       "page": 184,
       "kind": "h2",
-      "matched_order": 1354,
+      "matched_order": 1324,
       "section_no": 9
     },
     {
       "title": "Dasakapuggalapaññatti",
       "page": 185,
       "kind": "h2",
-      "matched_order": 1367,
+      "matched_order": 1337,
       "section_no": 10
     }
   ]

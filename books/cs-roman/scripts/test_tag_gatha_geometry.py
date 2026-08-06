@@ -19,6 +19,7 @@ from cs_roman_hanging import (  # noqa: E402
 )
 from extract_cs_roman_pdf import (  # noqa: E402
     Segment,
+    _looks_like_bat_gatha_line,
     _looks_like_gatha_line,
     _looks_like_gatha_seed_line,
     detect_content_start,
@@ -345,6 +346,76 @@ class Page8HangBandEmbeddedGathaTests(unittest.TestCase):
         gathas = [s for s in grouped if s.segment_type == "gatha"]
         self.assertEqual(len(gathas), 1)
         self.assertEqual(len(gathas[0].bats or []), 3)
+
+
+@unittest.skipUnless(_PDF_02.is_file(), "02Vin02.pdf not available")
+class Page77HangBandEmbeddedWakTests(unittest.TestCase):
+    def test_adhicetaso_wak_lines_tagged_and_grouped(self) -> None:
+        """Hang-band wak_line udāna (x0~98–108) must tag as gatha, not prose."""
+        try:
+            import fitz
+        except ImportError:
+            self.skipTest("pymupdf not installed")
+
+        doc = fitz.open(_PDF_02)
+        cs = detect_content_start(doc)
+        assert cs is not None
+        pdf_page = cs + 77 - 1
+        lines = page_body_lines(doc[pdf_page - 1])
+        wak_lines = [
+            ln
+            for ln in lines
+            if _is_gatha_geometry_indent(ln.x0)
+            and any(
+                key in ln.text
+                for key in (
+                    "Adhicetaso",
+                    "Munino monapathesu",
+                    "Sok",
+                    "Upasanthassa",
+                )
+            )
+        ]
+        self.assertEqual(len(wak_lines), 4)
+        self.assertTrue(all(_is_gatha_geometry_indent(ln.x0) for ln in wak_lines))
+        self.assertFalse(_is_gatha_indent(wak_lines[0].x0))
+        seed = wak_lines[0].text.replace("* ", "{{*}}")
+        self.assertTrue(_looks_like_gatha_seed_line(seed))
+        self.assertFalse(_looks_like_bat_gatha_line(seed))
+
+        segs = [
+            Segment(
+                page=77,
+                order=i + 1,
+                item=None,
+                segment_type="prose",
+                text=ln.text.replace("* ", "{{*}}").replace("+ ", "{{+}}"),
+                pdf_page=pdf_page,
+                flags=(["star"] if ln.text.lstrip().startswith("*") else []),
+            )
+            for i, ln in enumerate(wak_lines)
+        ]
+        segs.append(
+            Segment(
+                page=77,
+                order=5,
+                item=None,
+                segment_type="prose",
+                text="Bhikkhuniyo evamāhaṃsu “nanu avocumhā na dāni ajja ovādo",
+                pdf_page=pdf_page,
+            )
+        )
+
+        n = tag_gatha_by_geometry(doc, segs, content_start=cs)
+        self.assertEqual(n, 4)
+        self.assertTrue(all(s.segment_type == "gatha" for s in segs[:4]))
+        self.assertEqual(segs[4].segment_type, "prose")
+
+        grouped = group_gatha_stanzas(segs)
+        gathas = [s for s in grouped if s.segment_type == "gatha"]
+        self.assertEqual(len(gathas), 1)
+        self.assertEqual(gathas[0].source_layout, "wak_line")
+        self.assertEqual(len(gathas[0].bats or []), 2)
 
 
 if __name__ == "__main__":

@@ -27,6 +27,7 @@ from cs_roman_segments import save as save_segments  # noqa: E402
 from cs_roman_text import (  # noqa: E402
     SECTION_RULE_FLAG,
     ensure_script_text,
+    needs_solid_midword_hyphen_strip,
     needs_spacing_normalize,
     uses_sentence_spacer,
 )
@@ -96,12 +97,16 @@ def enrich_file(path: Path, *, force: bool = False) -> tuple[int, int, int]:
             for e in segs[0]["text"]
         )
     )
-    # Still rewrite when sentence-stop / pot-ma-gyi spacing needs {{sp1}}.
-    needs_spacing = needs_spacing_normalize(raw)
-    if not force and already and not needs_spacing:
+    # Still rewrite when spacing or solid mid-word hyphens need normalize.
+    needs_normalize = needs_spacing_normalize(raw) or needs_solid_midword_hyphen_strip(
+        raw
+    )
+    if not force and already and not needs_normalize:
         return 0, len(segs), 0
 
-    data, converted, bold_lost = enrich_document(data, force=force or needs_spacing)
+    data, converted, bold_lost = enrich_document(
+        data, force=force or needs_normalize
+    )
     save_segments(path, data, normalize=True)
     return converted, len(data["segments"]), bold_lost
 

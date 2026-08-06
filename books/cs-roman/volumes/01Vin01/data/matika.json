@@ -16,25 +16,25 @@
     {
       "title": "Bhagavato paribhavakathā",
       "page": 1,
-      "kind": "h2",
+      "kind": "h1",
       "matched_order": null
     },
     {
       "title": "Kukkuṭacchāpakūpamākathā",
       "page": 4,
-      "kind": "h2",
+      "kind": "h1",
       "matched_order": null
     },
     {
       "title": "Verañjāyaṃ dubbhikkhakathā",
       "page": 7,
-      "kind": "h2",
+      "kind": "h1",
       "matched_order": null
     },
     {
       "title": "Sikkhāpadapaññatyārambhakathā",
       "page": 8,
-      "kind": "h2",
+      "kind": "h1",
       "matched_order": null
     },
     {
@@ -629,7 +629,7 @@
     {
       "title": "Uddānagāthā",
       "page": 284,
-      "kind": "h2",
+      "kind": "h1",
       "matched_order": null
     },
     {
@@ -643,7 +643,7 @@
       "title": "Paṭhama-aniyatasikkhāpada",
       "page": null,
       "kind": "h1",
-      "matched_order": 1889,
+      "matched_order": 1954,
       "section_no": 1
     },
     {
@@ -668,7 +668,7 @@
       "title": "Dutiya-aniyatasikkhāpada",
       "page": null,
       "kind": "h1",
-      "matched_order": 1919,
+      "matched_order": 2137,
       "section_no": 2
     },
     {
@@ -692,7 +692,7 @@
     {
       "title": "Uddānagāthā",
       "page": 293,
-      "kind": "h2",
+      "kind": "h1",
       "matched_order": null
     },
     {
@@ -980,7 +980,7 @@
     {
       "title": "Uddānagāthā",
       "page": 328,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
@@ -1249,7 +1249,7 @@
     {
       "title": "Uddānagāthā",
       "page": 351,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     },
     {
@@ -1369,7 +1369,7 @@
       "title": "Cīvara-acchindanasikkhāpada",
       "page": null,
       "kind": "h2",
-      "matched_order": 2443,
+      "matched_order": 2052,
       "section_no": 5
     },
     {
@@ -1518,7 +1518,7 @@
     {
       "title": "Uddānagāthā",
       "page": 381,
-      "kind": "h3",
+      "kind": "h2",
       "matched_order": null
     }
   ]

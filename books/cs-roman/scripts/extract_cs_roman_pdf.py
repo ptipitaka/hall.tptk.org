@@ -5,6 +5,7 @@ Pipeline:
   1. Read PDF text with PyMuPDF (fitz)
   2. Convert VZTime font encoding → Unicode (cs_roman_vztime)
   3. Split into paragraphs, detect item numbers / headings / notes
+     (peel uddāna labels glued to verse lines when PDF omits blank lines)
   4. Page-anchor segments; geometry upgrades flush page-starts → {kind}_continuation
   5. Attach footnotes to the segment where the callout appears ({{n0}})
   6. Tag uddāna/gāthā runs (title + gāthā-indent geometry); group into บท→บาท→วรรค
@@ -42,8 +43,9 @@ from paths import OUTPUT_DIR, ensure_import_paths, repo_relative
 
 ensure_import_paths()
 from cs_roman_bold import (  # noqa: E402
-    bold_ranges_in_text,
-    bold_span_texts,
+    BoldSpan,
+    bold_ranges_from_geoms,
+    bold_span_geoms,
     substantial_bold_ranges,
 )
 from cs_roman_hanging import (  # noqa: E402
@@ -66,9 +68,11 @@ from cs_roman_segments import (  # noqa: E402
 )
 from cs_roman_text import (  # noqa: E402
     SECTION_RULE_FLAG,
-    prepare_roman_body,
+    normalize_printable_dashes,
+    normalize_roman_body,
     script_text_entries,
     strip_sentence_spacers,
+    strip_solid_midword_hyphens,
     uses_sentence_spacer,
 )
 from cs_roman_vztime import unmapped_chars, vztime_to_unicode  # noqa: E402
@@ -88,6 +92,16 @@ STAR_BLOCK_RE = re.compile(r"^\*\s+(.*)$")
 PLUS_BLOCK_RE = re.compile(r"^\+\s+(.*)$")
 # Same-line sibling apparatus note: "...pi. + Dī 3. …"
 _INLINE_PLUS_NOTE_RE = re.compile(r"(?<=\.)\s+\+\s+(?=[A-ZĀĪŪÑÉÓ])")
+# Mid-paragraph apparatus callouts (e.g. ``Te + evarūpaṃ`` on 01Vin01 p.274).
+_INLINE_PLUS_CALLOUT_RE = re.compile(r"(?<=\S)\s+\+\s+(?=\S)")
+_INLINE_STAR_CALLOUT_RE = re.compile(r"(?<=\S)\s+\*\s+(?=\S)")
+# Bracket apparatus note: ``[  ] Etthantare pāṭhā Syāmapotthake natthi.``
+_BRACKET_NOTE_RE = re.compile(r"^\[\s*\]\s*(.+)$", re.DOTALL)
+# Empty-paren apparatus: ``(  ) (katthaci natthi)`` (02Vin02 p.317).
+_PAREN_NOTE_RE = re.compile(r"^\(\s*\)\s*(.+)$", re.DOTALL)
+# Folio / paragraph-range markers like ``(150)`` / ``(55-56)`` — never host
+# ``{{()}}`` (01Vin01 p.86 stole note 2 onto ``(150)``).
+_FOLIO_PAREN_RE = re.compile(r"^\(\d+(?:-\d+)?\)")
 PAGE_NUM_RE = re.compile(r"^\d+$")
 
 # Back-matter indexes (Padānukkama / Nāmānukkama / Gāthāsūci, etc.).
@@ -135,6 +149,11 @@ _UDDESA_BODY_RE = re.compile(
 )
 # Titles that open an uddāna / gāthā verse block.
 GATHA_TITLE_RE = re.compile(r"uddānagāthā|uddāna|gāthā|\bgatha\b", re.IGNORECASE)
+# Short block labels eligible for blank-line peel (not niddesa compounds).
+_GATHA_BLOCK_TITLE_RE = re.compile(
+    r"^(?:tassuddānaṃ|uddānagāthā(?:yo)?|uddānaṃ|uddāna)$",
+    re.IGNORECASE,
+)
 _GATHA_STOP_KINDS = frozenset(
     {
         "niṭṭhitaṃ",
@@ -150,12 +169,16 @@ _GATHA_STOP_KINDS = frozenset(
 )
 NAMO_RE = re.compile(r"^namo\s+tassa\b", re.IGNORECASE)
 NITTHITA_RE = re.compile(r"niṭṭhit", re.IGNORECASE)
-# Footnote callout glued to a word/quote: Bhagavā’1 / anabhāvaṃkatā1 / bhikkhave2
-FOOTNOTE_CALLOUT_RE = re.compile(
-    r"(?<=[^\s\d])(\d+)(?=[\s,;:.!?”’\"'\-–]|$)"
-)
-# Letters used in Roman Pāli (for mid-word page-break repair).
+# Footnote callout after a word/quote. PDF superscripts are often glued
+# Letters used in Roman Pāli (callout trailers + mid-word page-break repair).
 _PALI_LETTER_CLASS = r"A-Za-zĀāĪīŪūṄṅÑñṆṇṬṭḌḍḶḷṂṃŒœ"
+# (Bhagavā’1 / anabhāvaṃkatā1) or spaced (paccāsīsitabbā 1). Also mid-compound
+# glued marks (Kaṇṭakassa1nāma — 02Vin02 p.181). Groups:
+#   1 = optional horizontal space, 2 = mark digits, 3 = trailer char or None.
+# Spaced + trailing ``.`` is an outline number (``vagga 1.``), not a callout.
+FOOTNOTE_CALLOUT_RE = re.compile(
+    rf"(?<=[^\s\d])([ \t]*)(\d+)(?=([\s,;:.!?”’\"'\-–]|[{_PALI_LETTER_CLASS}])|$)"
+)
 _LEADING_WORD_RE = re.compile(
     rf"^([{_PALI_LETTER_CLASS}]+)(.*)$",
     re.DOTALL,
@@ -409,7 +432,8 @@ def _normalize_inline(text: str) -> str:
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     text = re.sub(r"[ \t]*\n[ \t]*", " ", text)
     text = re.sub(r"[ \t]{2,}", " ", text)
-    return text.strip()
+    # U+23AF → en-dash (printable; see normalize_printable_dashes).
+    return normalize_printable_dashes(text.strip())
 
 
 def _split_blocks(page_text: str, *, notes: bool = False) -> list[str]:
@@ -556,6 +580,81 @@ def peel_glued_uddesa_heading(text: str) -> tuple[str, str] | None:
     return title, body
 
 
+def _is_peelable_gatha_block_title(text: str) -> bool:
+    """True for short uddāna labels that may be glued to following verses."""
+    t = (text or "").strip()
+    if not _GATHA_BLOCK_TITLE_RE.match(t):
+        return False
+    heading, _reasons = _classify_heading(t)
+    return heading == "title"
+
+
+def peel_glued_gatha_title_raw(raw: str) -> tuple[str, list[str]] | None:
+    """Split ``Tassuddānaṃ\\nVerse…`` when PDF omitted the blank line after title.
+
+    On most pages blank lines already separate the uddāna label from bat/wak
+    verses. When they are missing, ``_split_blocks`` keeps title + verses in one
+    paragraph; classification then fails (too long / commas) and center geometry
+    paints the whole block as ``\\csromancenter``.
+    """
+    lines = [
+        ln.strip()
+        for ln in (raw or "").replace("\r\n", "\n").replace("\r", "\n").split("\n")
+        if ln.strip()
+    ]
+    if len(lines) < 2:
+        return None
+    first = _normalize_inline(lines[0])
+    if not _is_peelable_gatha_block_title(first):
+        return None
+    rest = lines[1:]
+    verseish = 0
+    for ln in rest:
+        if _is_section_rule_line(ln):
+            continue
+        # Bat line or wak seed only — not every short sentence ending in ``.``.
+        if not _looks_like_gatha_seed_line(ln):
+            return None
+        verseish += 1
+    if verseish < 1:
+        return None
+    return first, rest
+
+
+def peel_glued_gatha_title_text(text: str) -> tuple[str, list[str]] | None:
+    """Peel a normalized prose string ``Title Verse.{{sp1}} Verse.`` → title + lines.
+
+    Used by JSON fixup after extract already collapsed newlines / inserted
+    sentence spacers. Rejects long *gāthā*-containing section names whose
+    trailers are commentary, not bat/wak verse lines.
+    """
+    raw = (text or "").strip()
+    if not raw:
+        return None
+    m = re.match(r"^(\S+)\s+(.+)$", raw, flags=re.DOTALL)
+    if not m:
+        return None
+    title, rest = m.group(1), m.group(2).strip()
+    if not _is_peelable_gatha_block_title(title):
+        return None
+    # Drop a trailing section-rule glyph run if present in the string.
+    rest_body = re.sub(r"(?:\s|_)+$", "", rest).strip()
+    parts = [
+        p.strip()
+        for p in re.split(r"\{\{sp1\}\}", rest_body)
+        if p.strip() and not _is_section_rule_line(p)
+    ]
+    if not parts:
+        # No {{sp1}}: try a single remaining bat/wak line.
+        one = strip_sentence_spacers(rest_body).strip()
+        parts = [one] if one else []
+    if not parts:
+        return None
+    if not all(_looks_like_gatha_seed_line(p) for p in parts):
+        return None
+    return title, parts
+
+
 def _split_body_and_notes(page_text: str) -> tuple[str, str]:
     parts = FOOTNOTE_SPLIT_RE.split(page_text, maxsplit=1)
     if len(parts) == 1:
@@ -634,6 +733,45 @@ def _blocks_from_region(
 ) -> list[dict]:
     blocks_out: list[dict] = []
     for raw in _split_blocks(region_text, notes=as_notes):
+        # Uddāna label glued to verse lines (missing blank line in PDF text).
+        if not as_notes:
+            peeled_gatha = peel_glued_gatha_title_raw(raw)
+            if peeled_gatha is not None:
+                title, verse_lines = peeled_gatha
+                heading, reasons = _classify_heading(title)
+                assert heading == "title"
+                blocks_out.append(
+                    {
+                        "kind": heading,
+                        "item": None,
+                        "text": title,
+                        "flags": [],
+                        "page": printed_page,
+                        "pdf_page": pdf_page,
+                        "needs_review": bool(reasons),
+                        "review_reasons": reasons,
+                    }
+                )
+                for vline in verse_lines:
+                    if _is_section_rule_line(vline):
+                        if blocks_out:
+                            prev = blocks_out[-1]
+                            prev["text"] = _attach_section_rule_tail(
+                                str(prev.get("text") or "")
+                            )
+                        continue
+                    blocks_out.append(
+                        {
+                            "kind": "prose",
+                            "item": None,
+                            "text": _normalize_inline(vline),
+                            "flags": [],
+                            "page": printed_page,
+                            "pdf_page": pdf_page,
+                        }
+                    )
+                continue
+
         text = _normalize_inline(raw)
         # Underscore-only short rule on its own line → attach to previous body
         # block as trailing ``_____`` (becomes ``section_rule`` at serialize).
@@ -1028,13 +1166,118 @@ def merge_blocks(raw_blocks: list[dict]) -> list[Segment]:
     return segments
 
 
+def is_spaced_outline_number(spaces: str, trailer: str | None) -> bool:
+    """True for ``vagga 1.`` / ``2. Title``-style outline numbers, not callouts."""
+    return bool(spaces) and trailer == "."
+
+
+def apply_numbered_footnote_callouts(
+    text: str,
+    numbered: dict[int, str],
+    *,
+    note_index_base: int = 0,
+) -> tuple[str, list[str], set[int]]:
+    """Bind numbered callouts in ``text`` to note bodies keyed by source mark.
+
+    Accepts glued (``word1``) and spaced (``word 1``) marks. Spaced marks
+    followed by ``.`` are left unchanged (outline numbers).
+
+    Returns ``(new_text, bound_note_texts, used_item_numbers)``. Markers are
+    ``{{nK}}`` with ``K`` starting at ``note_index_base``.
+    """
+    notes_out: list[str] = []
+    used_items: set[int] = set()
+    available = dict(numbered)
+
+    def replace_callout(match: re.Match[str]) -> str:
+        spaces, num_s, trailer = match.group(1), match.group(2), match.group(3)
+        if is_spaced_outline_number(spaces, trailer):
+            return match.group(0)
+        num = int(num_s)
+        note_text = available.get(num)
+        if note_text is None:
+            return match.group(0)
+        idx = note_index_base + len(notes_out)
+        notes_out.append(note_text)
+        used_items.add(num)
+        available.pop(num, None)
+        return "{{" + f"n{idx}" + "}}"
+
+    return FOOTNOTE_CALLOUT_RE.sub(replace_callout, text), notes_out, used_items
+
+
+def _insert_empty_paren_marker(text: str) -> str | None:
+    """Insert ``{{()}}`` after the first non-folio ``(``; None if none."""
+    i = 0
+    while True:
+        j = text.find("(", i)
+        if j < 0:
+            return None
+        if _FOLIO_PAREN_RE.match(text[j:]):
+            i = j + 1
+            continue
+        return text[: j + 1] + "{{()}}" + text[j + 1 :]
+
+
+def _is_symbol_apparatus_note(note: Segment) -> bool:
+    """True for unnumbered apparatus notes (not ``1.`` / ``2.`` footnotes).
+
+    Numbered note bodies may start with ``( ) …`` / ``[ ] …`` as *text*
+    (01Vin01 p.86 note 2); those must stay in the numbered pool.
+    """
+    return not isinstance(note.item, int)
+
+
+def _bind_inline_symbol_callouts(
+    text: str,
+    *,
+    mark: str,
+    page_notes: list[Segment],
+    symbol_notes: dict[str, str],
+    shared_symbol_notes: dict[tuple[int, str], str],
+    page: int,
+    used_note_ids: set[int],
+) -> tuple[str, dict[str, str]]:
+    """Replace mid-paragraph `` + `` / `` * `` with ``{{+}}`` / ``{{*}}``."""
+    marker = "{{" + mark + "}}"
+    if marker in text:
+        return text, symbol_notes
+    callout_re = (
+        _INLINE_PLUS_CALLOUT_RE if mark == "+" else _INLINE_STAR_CALLOUT_RE
+    )
+    if not callout_re.search(text):
+        return text, symbol_notes
+
+    key = (page, mark)
+    available = [n for n in page_notes if id(n) not in used_note_ids]
+    if available:
+        note_seg = available[0]
+        symbol_notes = dict(symbol_notes)
+        symbol_notes[mark] = note_seg.text
+        shared_symbol_notes[key] = note_seg.text
+        used_note_ids.add(id(note_seg))
+    elif key in shared_symbol_notes:
+        symbol_notes = dict(symbol_notes)
+        symbol_notes[mark] = shared_symbol_notes[key]
+    else:
+        return text, symbol_notes
+
+    return callout_re.sub(marker, text, count=1), symbol_notes
+
+
 def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
     """
     Fold page footnotes into body segments (sacred-app style).
 
     Numbered callouts → ``{{nK}}`` + ``notes[K]``.
     ``*`` / ``+`` apparatus notes → ``{{*}}`` / ``{{+}}`` + ``symbol_notes``
-    (do not share the numbered footnote sequence).
+    (do not share the numbered footnote sequence). Mid-paragraph `` + `` /
+    `` * `` callouts are bound the same way. Bracket notes ``[  ] …`` bind to
+    the body ``[`` on the same page as ``{{[]}}``. Empty-paren notes
+    ``(  ) …`` bind to the first non-folio body ``(`` as ``{{()}}``.
+    Numbered footnotes whose body starts with ``( )`` / ``[ ]`` stay
+    numbered (they are not symbol apparatus). Folio markers like
+    ``(150)`` never host ``{{()}}``.
     Unmatched leftover notes remain as segment_type=note with needs_review.
     """
     notes_by_page: dict[int, list[Segment]] = {}
@@ -1070,21 +1313,17 @@ def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
             if "plus" in n.flags and id(n) not in used_note_ids
         ]
 
-        notes_out: list[str] = []
         symbol_notes: dict[str, str] = {}
 
-        def replace_callout(match: re.Match[str]) -> str:
-            num = int(match.group(1))
-            note_seg = numbered.get(num)
-            if note_seg is None:
-                return match.group(0)
-            idx = len(notes_out)
-            notes_out.append(note_seg.text)
+        numbered_texts = {
+            item: note_seg.text for item, note_seg in numbered.items()
+        }
+        new_text, notes_out, used_items = apply_numbered_footnote_callouts(
+            seg.text, numbered_texts
+        )
+        for item in used_items:
+            note_seg = numbered.pop(item)
             used_note_ids.add(id(note_seg))
-            numbered.pop(num, None)
-            return "{{" + f"n{idx}" + "}}"
-
-        new_text = FOOTNOTE_CALLOUT_RE.sub(replace_callout, seg.text)
 
         # Body * / + callouts always stay in text. Several callouts may share
         # one foot-note (e.g. two + marks → one "+ …" note at page bottom).
@@ -1111,6 +1350,63 @@ def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
                 symbol_notes["+"] = shared_symbol_notes[key]
             if "{{+}}" not in new_text:
                 new_text = "{{+}}" + new_text
+
+        # Mid-paragraph `` + `` / `` * `` callouts (not only paragraph-initial).
+        new_text, symbol_notes = _bind_inline_symbol_callouts(
+            new_text,
+            mark="+",
+            page_notes=plus_notes,
+            symbol_notes=symbol_notes,
+            shared_symbol_notes=shared_symbol_notes,
+            page=seg.page,
+            used_note_ids=used_note_ids,
+        )
+        new_text, symbol_notes = _bind_inline_symbol_callouts(
+            new_text,
+            mark="*",
+            page_notes=star_notes,
+            symbol_notes=symbol_notes,
+            shared_symbol_notes=shared_symbol_notes,
+            page=seg.page,
+            used_note_ids=used_note_ids,
+        )
+
+        # Bracket apparatus ``[  ] …`` notes → marker next to body ``[``.
+        # Skip numbered footnotes whose body merely begins with ``[ ]``.
+        bracket_notes = [
+            n
+            for n in page_notes
+            if id(n) not in used_note_ids
+            and _is_symbol_apparatus_note(n)
+            and _BRACKET_NOTE_RE.match((n.text or "").strip())
+        ]
+        if bracket_notes and "[" in new_text and "{{[]}}" not in new_text:
+            note_seg = bracket_notes[0]
+            m = _BRACKET_NOTE_RE.match((note_seg.text or "").strip())
+            assert m is not None
+            symbol_notes["[]"] = m.group(1).strip()
+            used_note_ids.add(id(note_seg))
+            new_text = new_text.replace("[", "[{{[]}}", 1)
+
+        # Empty-paren apparatus ``(  ) …`` → marker next to body ``(``.
+        # Skip numbered footnotes whose body begins with ``( )`` (common
+        # empty-reading formula). Never host the marker on folio ``(150)``.
+        paren_notes = [
+            n
+            for n in page_notes
+            if id(n) not in used_note_ids
+            and _is_symbol_apparatus_note(n)
+            and _PAREN_NOTE_RE.match((n.text or "").strip())
+        ]
+        if paren_notes and "{{()}}" not in new_text:
+            marked = _insert_empty_paren_marker(new_text)
+            if marked is not None:
+                note_seg = paren_notes[0]
+                m = _PAREN_NOTE_RE.match((note_seg.text or "").strip())
+                assert m is not None
+                symbol_notes["()"] = m.group(1).strip()
+                used_note_ids.add(id(note_seg))
+                new_text = marked
 
         seg.text = new_text
         seg.notes = notes_out
@@ -1253,8 +1549,9 @@ def tag_gatha_by_geometry(
     Retag prose lines in the verse indent that look like gāthā.
 
     Bat-line blocks: every printed line is ``วรรค, วรรค.`` (comma + stop).
-    Hang / near-hang band accepts only that bat-line shape. Deep gāthā
-    column also allows wak_line seeds (comma-only first วรรค).
+    Hang / near-hang band accepts bat_line, and also wak_line runs of at
+    least two printed lines (one บาท as วรรค pairs — e.g. embedded udāna
+    quotes). Deep gāthā column allows wak_line seeds with the usual grow.
 
     Catches embedded quotes (no uddāna title). Returns how many printed-line
     segments were retagged.
@@ -1291,11 +1588,10 @@ def tag_gatha_by_geometry(
             i += 1
             continue
 
-        # Hang-band embedded verse is always bat_line (A, B. on each line).
-        # Wak_line seeds only in the deep gāthā column.
-        if not seed_is_bat and not _is_gatha_indent(matched.x0):
-            i += 1
-            continue
+        # Hang / near-hang wak_line (comma-only first วรรค): allow only when
+        # the grown run has ≥2 printed lines (one บาท). Deep column wak OK
+        # with a single seed line (grow may still add pair lines).
+        hang_band_wak = not seed_is_bat and not _is_gatha_indent(matched.x0)
 
         # Grow a run; bat-line seeds stay bat-shaped on every line.
         run_end = i + 1
@@ -1325,8 +1621,9 @@ def tag_gatha_by_geometry(
                 break
             run_end += 1
 
-        # Need at least one full บาท (2 วรรค) worth of printed material.
-        if run_end - i < 1:
+        # Bat / deep wak: ≥1 printed line. Hang-band wak: ≥2 (one บาท).
+        min_run = 2 if hang_band_wak else 1
+        if run_end - i < min_run:
             i += 1
             continue
 
@@ -1681,8 +1978,9 @@ def extract_pdf(
 
     raw: list[dict] = []
     unmapped: dict[str, int] = {}
-    # PDF-page → stroke-overlay (fake-bold) span strings from texttrace.
-    bold_by_pdf_page: dict[int, list[str]] = {}
+    # PDF-page → stroke-overlay (fake-bold) spans with bboxes from texttrace.
+    bold_by_pdf_page: dict[int, list[BoldSpan]] = {}
+    lines_by_pdf_page: dict[int, list] = {}
 
     for idx in range(start_idx, end_idx):
         pdf_page = idx + 1
@@ -1696,9 +1994,10 @@ def extract_pdf(
             back_matter_start = printed
             content_end = printed - 1
             break
-        bold_spans = bold_span_texts(doc[idx])
+        bold_spans = bold_span_geoms(doc[idx])
         if bold_spans:
             bold_by_pdf_page[pdf_page] = bold_spans
+        lines_by_pdf_page[pdf_page] = page_body_lines(doc[idx])
         raw.extend(
             extract_page_blocks(
                 page_text,
@@ -1715,7 +2014,7 @@ def extract_pdf(
     pdf_pages = {s.pdf_page for s in segments if s.pdf_page}
     hanging_groups = collect_hanging_groups(doc, pdf_pages=pdf_pages)
     hanging_merged = merge_hanging_into_segments(segments, hanging_groups)
-    # Embedded verse: deep gāthā column or hang / near-hang bat lines (no title).
+    # Embedded verse: deep column, hang-band bat_line, or hang-band wak runs.
     gatha_geometry_tagged = tag_gatha_by_geometry(
         doc, segments, content_start=content_start
     )
@@ -1736,7 +2035,11 @@ def extract_pdf(
     segments_with_bold = 0
     json_segments: list[dict] = []
     for s in segments:
-        payload = _segment_to_json(s, bold_by_pdf_page=bold_by_pdf_page)
+        payload = _segment_to_json(
+            s,
+            bold_by_pdf_page=bold_by_pdf_page,
+            lines_by_pdf_page=lines_by_pdf_page,
+        )
         if _json_has_bold_runs(payload):
             segments_with_bold += 1
         json_segments.append(payload)
@@ -1769,36 +2072,64 @@ def extract_pdf(
     }
 
 
+def _bold_assets_for_segment(
+    seg: Segment,
+    bold_by_pdf_page: dict[int, list[BoldSpan]],
+    lines_by_pdf_page: dict[int, list],
+) -> tuple[list[BoldSpan], list]:
+    """Stroke spans + body lines for a segment's PDF page(s)."""
+    if not seg.pdf_page:
+        return [], []
+    spans = list(bold_by_pdf_page.get(seg.pdf_page) or [])
+    lines = list(lines_by_pdf_page.get(seg.pdf_page) or [])
+    # Rare mid-unit page break: allow geometry from the next PDF page too.
+    if seg.segment_type.endswith("_continuation"):
+        nxt = seg.pdf_page + 1
+        spans.extend(bold_by_pdf_page.get(nxt) or [])
+        lines.extend(lines_by_pdf_page.get(nxt) or [])
+    return spans, lines
+
+
+def _bold_ranges_for_roman(
+    roman: str,
+    *,
+    bold_spans: list[BoldSpan] | None = None,
+    page_lines: list | None = None,
+    normalize_spacing: bool = True,
+) -> tuple[list[tuple[int, int]], str, bool]:
+    """Prepare Roman and compute bbox-aware bold ranges."""
+    spaced, had_rule = normalize_roman_body(
+        roman, normalize_spacing=normalize_spacing
+    )
+    prepared = strip_solid_midword_hyphens(spaced)
+    ranges = bold_ranges_from_geoms(
+        prepared, bold_spans or [], page_lines or []
+    )
+    return ranges, prepared, had_rule
+
+
 def _wak_text_to_json(
     roman: str,
     *,
-    bold_spans: list[str] | None = None,
+    bold_spans: list[BoldSpan] | None = None,
+    page_lines: list | None = None,
     normalize_spacing: bool = True,
 ) -> tuple[list[dict], bool]:
-    # prepare first for bold alignment; keep had_rule — script_text_entries on
-    # the already-stripped body would always report False.
-    prepared, had_rule = prepare_roman_body(
-        roman, normalize_spacing=normalize_spacing
+    # Spacing first (keep solid hyphens for Thai morpheme breaks); bold on the
+    # final Roman after hyphen strip. script_text_entries re-normalizes and
+    # strips hyphens for storage.
+    ranges, _prepared, had_rule = _bold_ranges_for_roman(
+        roman,
+        bold_spans=bold_spans,
+        page_lines=page_lines,
+        normalize_spacing=normalize_spacing,
     )
-    ranges = bold_ranges_in_text(prepared, bold_spans or [])
     entries, _ = script_text_entries(
-        prepared,
+        roman,
         bold_ranges=ranges or None,
         normalize_spacing=normalize_spacing,
     )
     return entries, had_rule
-
-def _bold_spans_for_segment(
-    seg: Segment,
-    bold_by_pdf_page: dict[int, list[str]],
-) -> list[str]:
-    if not seg.pdf_page:
-        return []
-    spans = list(bold_by_pdf_page.get(seg.pdf_page) or [])
-    # Rare mid-unit page break: allow spans from the next PDF page too.
-    if seg.segment_type.endswith("_continuation"):
-        spans.extend(bold_by_pdf_page.get(seg.pdf_page + 1) or [])
-    return spans
 
 
 def _json_has_bold_runs(payload: dict) -> bool:
@@ -1820,7 +2151,8 @@ def _json_has_bold_runs(payload: dict) -> bool:
 def _segment_to_json(
     seg: Segment,
     *,
-    bold_by_pdf_page: dict[int, list[str]] | None = None,
+    bold_by_pdf_page: dict[int, list[BoldSpan]] | None = None,
+    lines_by_pdf_page: dict[int, list] | None = None,
 ) -> dict:
     """Serialize a Segment; ``text`` becomes multi-script entries (+ optional runs).
 
@@ -1834,7 +2166,9 @@ def _segment_to_json(
         data.pop("section_no", None)
     flags = [f for f in (data.get("flags") or []) if f != SECTION_RULE_FLAG]
     had_rule = False
-    bold_spans = _bold_spans_for_segment(seg, bold_by_pdf_page or {})
+    bold_spans, page_lines = _bold_assets_for_segment(
+        seg, bold_by_pdf_page or {}, lines_by_pdf_page or {}
+    )
 
     normalize_spacing = uses_sentence_spacer(seg.segment_type)
     if seg.bats is not None:
@@ -1852,6 +2186,7 @@ def _segment_to_json(
                     entries, rule = _wak_text_to_json(
                         str(roman),
                         bold_spans=bold_spans,
+                        page_lines=page_lines,
                         normalize_spacing=normalize_spacing,
                     )
                     had_rule = had_rule or rule
@@ -1860,16 +2195,18 @@ def _segment_to_json(
         data["bats"] = json_bats
         data["source_layout"] = seg.source_layout
     else:
-        # prepare first for bold alignment; keep had_rule from that call.
-        prepared, had_rule = prepare_roman_body(
-            seg.text, normalize_spacing=normalize_spacing
+        # Spacing first (keep solid hyphens for Thai); bold on post-strip Roman.
+        ranges, prepared, had_rule = _bold_ranges_for_roman(
+            seg.text,
+            bold_spans=bold_spans,
+            page_lines=page_lines,
+            normalize_spacing=normalize_spacing,
         )
-        ranges = bold_ranges_in_text(prepared, bold_spans)
         # Closers: only keep full-line (major) bold; drop lemma bleed.
         if seg.segment_type == "niṭṭhitaṃ":
             ranges = substantial_bold_ranges(prepared, ranges)
         entries, _ = script_text_entries(
-            prepared,
+            seg.text,
             bold_ranges=ranges or None,
             normalize_spacing=normalize_spacing,
         )
@@ -1882,6 +2219,7 @@ def _segment_to_json(
                 hl_entries, hl_rule = _wak_text_to_json(
                     str(line),
                     bold_spans=bold_spans,
+                    page_lines=page_lines,
                     normalize_spacing=normalize_spacing,
                 )
                 had_rule = had_rule or hl_rule
@@ -1998,12 +2336,17 @@ def main(argv: list[str] | None = None) -> int:
             existing = load(layout_out)
             if existing.get("layout") is not None:
                 data["layout"] = existing["layout"]
-            if existing.get("page_layout") is not None:
-                data["page_layout"] = existing["page_layout"]
             if existing.get("page_layout_reading_mode") is not None:
                 data["page_layout_reading_mode"] = existing[
                     "page_layout_reading_mode"
                 ]
+            if existing.get("page_breaks_reading_mode") is not None:
+                data["page_breaks_reading_mode"] = existing[
+                    "page_breaks_reading_mode"
+                ]
+            for key, value in existing.items():
+                if isinstance(key, str) and key.startswith("//"):
+                    data[key] = value
         save_document(out, data, layout_path=layout_out, normalize=True)
         seg_count = stats.get("segment_count", len(data.get("segments") or []))
         print(

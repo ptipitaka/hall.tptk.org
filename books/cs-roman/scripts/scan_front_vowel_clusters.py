@@ -15,7 +15,11 @@ from pali_script.convert import _match_longest, _tables
 from pali_script.roman import normalize_roman_input
 
 ROOT = Path(__file__).resolve().parents[1] / "volumes"
-OUT_TSV = Path(__file__).resolve().parents[1] / "research_front_vowel_clusters.tsv"
+OUT_TSV = (
+    Path(__file__).resolve().parents[1]
+    / "research"
+    / "research_front_vowel_clusters.tsv"
+)
 GLIDE = {"y", "r", "l", "v", "h"}
 FRONT = {"e", "o", "ai"}
 TOKEN_RE = re.compile(

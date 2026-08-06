@@ -1,25 +1,64 @@
 {
   "schema_version": 1,
+  "//": [
+    "layout.json — ปรับจังหวะการพิมพ์ / บังคับขึ้นหน้า (ไม่ใช่เนื้อหา)",
+    "ไฟล์ต้นทาง (แก้ที่นี่): books/cs-roman/output/01Vin01.layout.json",
+    "sync คัดลอกมาที่ volumes/01Vin01/data/layout.json",
+    "รายละเอียดเต็ม: books/cs-roman/SCHEMA.md",
+    "",
+    "โหมด sync  = ใช้เฉพาะ \"layout\" (ค่าทั้งเล่ม) ไม่มีการทับรายหน้า",
+    "โหมด reading = \"layout\" เป็นฐาน แล้วทับด้วยสองบล็อกด้านล่าง",
+    "",
+    "อย่าสับสนคีย์อ้างอิง:",
+    "  page_layout_reading_mode → คีย์ = เลขหน้า physical ใน PDF reading",
+    "  page_breaks_reading_mode → รายการ = order ของ segment (ไม่ใช่เลขหน้า)"
+  ],
   "source": "books/cs-roman/source/01Vin01.pdf",
   "content_start_pdf_page": 24,
   "content_end_printed_page": 382,
   "back_matter_start_printed_page": 383,
+  "//layout": [
+    "ค่าเริ่มต้นทั้งเล่ม (ใช้ทั้ง sync และ reading)",
+    "word_space          = ระยะห่างระหว่างคำ (interword)",
+    "line_space          = ระยะห่างระหว่างบรรทัด (leading)",
+    "par_indent          = ย่อหน้าบรรทัดแรก",
+    "par_skip            = ช่องว่างระหว่างย่อหน้า",
+    "gatha_stanza_skip   = ช่องว่างระหว่างบทคาถา",
+    "gatha_indent        = เยื้องคาถา",
+    "emergency_stretch   = ขยายฉุกเฉินตอนจัดบรรทัด"
+  ],
   "layout": {
-    "word_space": 1.6,
+    "word_space": 3.5,
     "line_space": 1.5,
     "par_indent": "21.6pt",
     "par_skip": "5pt",
-    "gatha_stanza_skip": "6.3pt",
+    "gatha_stanza_skip": "30pt",
     "gatha_indent": "65pt",
     "emergency_stretch": "2.5em"
   },
-  "page_layout": {
-    "157": {
-      "line_space": 1.15
-    },
-    "174": {
-      "line_space": 1
-    }
-  },
-  "page_layout_reading_mode": {}
+  "//page_layout_reading_mode": [
+    "READING only — ทับจังหวะรายหน้า",
+    "คีย์นอก = เลขหน้า physical ใน PDF reading (= \\thepage / เลขในหัวกระดาษ)",
+    "  ใช่: หน้า 93 ใน viewer ของ 01Vin01.reading.pdf",
+    "  ไม่ใช่: เลขหน้าต้นฉบับโรมัน, ไม่ใช่ ฉ.N ในขอบนอก",
+    "ค่าในแต่ละหน้า = ทับจาก layout ได้ทุกคีย์:",
+    "  word_space, line_space, par_indent, par_skip,",
+    "  gatha_stanza_skip, gatha_indent, emergency_stretch",
+    "ห้ามใส่ segments",
+    "เก็บ {} ว่างไว้ได้ เพื่อให้เห็นช่องนี้ในไฟล์",
+    "ตัวอย่าง: \"93\": { \"line_space\": 1.6 }",
+    "ตัวอย่างหลายคีย์: \"100\": { \"line_space\": 1.2, \"par_skip\": \"4pt\" }",
+    "หัวข้อติดท้ายหน้า (orphan) → ใช้ page_breaks_reading_mode ไม่ใช่บล็อกนี้"
+  ],
+  "page_layout_reading_mode": {},
+  "//page_breaks_reading_mode": [
+    "READING only — บังคับขึ้นหน้าใหม่ (\\clearpage) ก่อน segment ที่ระบุ",
+    "before_orders = รายการ order ของ segment (ฟิลด์ \"order\" ใน segments.json)",
+    "  ใช่: order ทั่วเล่ม เช่น 483",
+    "  ไม่ใช่: เลขหน้า physical, ไม่ใช่เลขต้นฉบับ, ไม่ใช่ ฉ.N",
+    "ใส่ order ของ segment แรกของบล็อกที่ต้องการให้ขึ้นหน้าใหม่ (เช่น หัวข้อ)",
+    "หา order: เปิด volumes/01Vin01/data/segments.json ค้นข้อความหัวข้อ",
+    "ตัวอย่าง: 483 = หัวข้อ วินีตวตฺถุ-อุทฺทานคาถา",
+    "  (segment นั้นอยู่ต้นฉบับหน้า 100 แต่ค่าที่ใส่คือ order ไม่ใช่ 100)"
+  ]
 }

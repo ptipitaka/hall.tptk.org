@@ -47,21 +47,42 @@ HEADING_TYPES = frozenset(
 )
 
 # Skip these Mātikā page chrome lines.
+# Page anchors may be a single page, a range (``1-4``), or a disjoint list
+# (Paṭṭhāna ``21-30-38``).  Leaders may sit on the same extracted line
+# (``... 21-30-38``).
 _SKIP_LINE_RE = re.compile(
     r"^(?:"
     r"mātikā|piṭṭhaṅka|piṭṭhaṃka|"
     r"_{3,}|"
     r"[ivxlcdm]+\.?|"  # roman folio
     r"\.{2,}|"
-    r"\d+(?:-\d+)?"  # page, or page range e.g. Kathāvatthu "1-4"
+    r"(?:\.{2,}\s*)?\d+(?:-\d+)*"  # 21 / 1-4 / ... 21-30-38 / 21-30-38
     r")$",
     re.IGNORECASE,
 )
-_PAGE_NUM_RE = re.compile(r"^(\d+)(?:-(\d+))?$")
-_BOOK_RUNNING_RE = re.compile(r"^.+pāḷi$", re.IGNORECASE)
+# Start page of ``N``, ``N-M``, or ``N-M-O-…``.
+_PAGE_NUM_RE = re.compile(r"^(\d+)(?:-\d+)*$")
+# Combined leader + page list on one extracted line.
+_INLINE_LEADER_PAGE_RE = re.compile(
+    r"^(?:\.{2,}\s*)(\d+(?:-\d+)*)\s*$"
+)
+# Book running headers: bare ``…pāḷi`` or ``…pāḷi paṭhamabhāga`` etc.
+# Also accept ASCII ``pali`` (some volumes lack the underdot in extract).
+_BOOK_RUNNING_RE = re.compile(
+    r"^.+pā[ḷl]i(?:\s+(?:paṭhama|dutiya|tatiya|catuttha|pañcama)bhāga)?$",
+    re.IGNORECASE,
+)
+_BHAGA_RUNNING_RE = re.compile(
+    r"^.+pā[ḷl]i\s+(?:paṭhama|dutiya|tatiya|catuttha|pañcama)bhāga$",
+    re.IGNORECASE,
+)
 _MATIKA_END_RE = re.compile(r"mātikā\s+niṭṭhit", re.IGNORECASE)
 _NUMBERED_RE = re.compile(r"^(\d+)\.\s*(.+)$")
+# Single ``N.`` or range ``N-M.`` / ``N–M.`` prefixes (hanging-number guard).
+_SECTION_PREFIX_RE = re.compile(r"^\d+(?:\s*[-–]\s*\d+)?\.\s*")
 _KANDA_RE = re.compile(r"kaṇḍa\b", re.IGNORECASE)
+# Mahāvagga / Cūlavagga chapter heads (same TOC depth as *kaṇḍa).
+_KHANDHAKA_RE = re.compile(r"khandhaka\b", re.IGNORECASE)
 # Numbered peers of kaṇḍa in Vinaya Mātikā (same TOC depth as *kaṇḍa).
 _KANDA_PEER_RE = re.compile(r"adhikaraṇasamatha\b", re.IGNORECASE)
 # Whole vibhaṅga books/parts (not rule-internal “…vibhaṅga” analysis).
@@ -87,6 +108,16 @@ _CLOSER_RE = re.compile(
 _COMPOUND_CHILD_RE = re.compile(
     r"^(.+?)\s+(\d+)\.\s+(.+)$",
 )
+# CS Roman Mātikā: leaves sit in a left column (x0/width ≈ 0.13).  Centered
+# parents — including long titles whose left edge drifts left of the page
+# midpoint — are anything above that leaf band.  Do not require x0 ≳ 0.28:
+# ``7. Pāpikāya diṭṭhiyā …`` is centered but only ≈ 0.23.
+_LEFT_LEAF_X_RATIO = 0.18
+# Kept for tests / callers that still pass a “center-ish” threshold.
+_CENTER_X_RATIO = 0.28
+# Distinct left-column indent steps (e.g. 62.6 → 85.0) are ~16–22pt.
+# Smaller Δx0 is usually hanging-number width (``1.`` vs ``9-10.``), not nesting.
+_LEFT_INDENT_EPS = 12.0
 
 _KIND_DEPTH = {
     "nik": 0,
@@ -99,6 +130,18 @@ _KIND_DEPTH = {
     "h5": 7,
     "h6": 8,
 }
+_KIND_BY_DEPTH = {depth: kind for kind, depth in _KIND_DEPTH.items()}
+
+# Section-closing titles: after indent nesting, outdent to peer the numbered
+# heads they follow — not as children of the last nested leaf alone.  They
+# still stay below the open chapter/vagga.  Append more bare titles here as
+# they are identified (Thai: อุทฺทานคาถา, …).
+_SECTION_CLOSER_TITLES = frozenset(
+    {
+        "uddānagāthā",
+        "uddānagāthāyo",
+    }
+)
 
 
 @dataclass
@@ -110,6 +153,16 @@ class MatikaEntry:
     section_no: int | None = None
 
 
+@dataclass
+class MatikaLine:
+    """One extracted Mātikā text line, optionally with layout geometry."""
+
+    pdf_page: int
+    text: str
+    x0: float | None = None
+    page_width: float | None = None
+
+
 def split_outline_title(title: str) -> tuple[int | None, str]:
     """Split ``N. Title`` into ``(N, Title)``; unnumbered → ``(None, title)``."""
     text = re.sub(r"\s+", " ", (title or "").strip())
@@ -117,6 +170,32 @@ def split_outline_title(title: str) -> tuple[int | None, str]:
     if not m:
         return None, text
     return int(m.group(1)), m.group(2).strip()
+
+
+def has_section_prefix(title: str) -> bool:
+    """True for ``N.`` or range ``N-M.`` outline prefixes."""
+    return bool(_SECTION_PREFIX_RE.match(re.sub(r"\s+", " ", (title or "").strip())))
+
+
+def is_matika_centered(x0: float | None, page_width: float | None) -> bool | None:
+    """Return True/False from geometry, or None when layout is unknown.
+
+    Left-column leaves (``x0/width ≤ _LEFT_LEAF_X_RATIO``) are not centered.
+    All other placed titles count as centered — long mid-heads start left of
+    short ones when the printer centers the whole line.
+    """
+    if x0 is None or page_width is None or page_width <= 0:
+        return None
+    return (x0 / page_width) > _LEFT_LEAF_X_RATIO
+
+
+def _is_structural_title(bare: str) -> bool:
+    return bool(
+        _KANDA_RE.search(bare)
+        or _KHANDHAKA_RE.search(bare)
+        or _KANDA_PEER_RE.search(bare)
+        or _MAJOR_VIBHANGA_RE.match(bare)
+    )
 
 
 def _matika_entry(
@@ -161,6 +240,14 @@ def normalize_title(text: str) -> str:
     text = text.lower()
     # Fold common anusvāra / niggahīta variants.
     text = text.replace("ṁ", "ṃ")
+    # Fold underdot / nasal pairs that often differ between Mātikā and body
+    # (e.g. Surāpāṇavagga vs Surāpānavagga, Pācittiyapāli vs …pāḷi).
+    text = (
+        text.replace("ḷ", "l")
+        .replace("ṇ", "n")
+        .replace("ṭ", "t")
+        .replace("ḍ", "d")
+    )
     text = re.sub(r"[’'`´]", "", text)
     text = re.sub(r"[,:;.–—\-]+", " ", text)
     text = re.sub(r"[.!?]+$", "", text)
@@ -191,15 +278,53 @@ def classify_matika_title(
     *,
     has_page: bool,
     under_vagga: bool = False,
+    centered: bool | None = None,
 ) -> str:
-    """Infer heading_kind from a Mātikā line (boo / cha / h1 / h2 / h3)."""
+    """Infer heading_kind from Mātikā layout when known, else title morphology.
+
+    Layout (preferred): CS Roman centers structural parents (kaṇḍa / khandhaka)
+    and mid-level numbered heads (*kamma / vagga / …), and left-aligns paged
+    leaves.  Consecutive centered numbered titles nest via a number stack in
+    ``parse_matika`` (restart at 1 = child); this helper only classifies a
+    single row (geometry + morphology), so centered non-structural numbered
+    titles default to ``h1``.
+    """
     bare = _NUMBERED_RE.sub(r"\2", title.strip())
     numbered = bool(_NUMBERED_RE.match(title.strip()))
+
     if _MAJOR_VIBHANGA_RE.match(bare):
-        # Bhikkhuvibhaṅga / Bhikkhunīvibhaṅga — major part, not h3 analysis.
         return "boo"
-    if _KANDA_RE.search(bare) or _KANDA_PEER_RE.search(bare):
-        # e.g. Sekhiyakaṇḍa and peer 8. Adhikaraṇasamatha
+
+    # --- Layout-first path -------------------------------------------------
+    if centered is True:
+        if _is_structural_title(bare) and not _VAGGA_RE.search(bare):
+            return "cha"
+        if _KANDA_PEER_RE.search(bare):
+            return "cha"
+        if numbered and _RULE_RE.search(bare):
+            return "h2" if under_vagga else "h1"
+        if _VAGGA_RE.search(bare) and not _RULE_RE.search(bare):
+            return "h1"
+        # Centered numbered mid-heads (*kamma, pārājika, …): h1 here;
+        # parse_matika may promote/demote via the consecutive-number stack.
+        if numbered:
+            return "h1"
+        if not has_page:
+            return "cha" if _is_structural_title(bare) else "h1"
+        return "h1"
+
+    if centered is False:
+        # Single-row helper: left leaves default to one depth.  Relative
+        # deeper-indent nesting among consecutive left rows is applied in
+        # ``parse_matika``.
+        if under_vagga:
+            return "h2"
+        return "h1"
+
+    # --- Morphology fallback (no geometry) ---------------------------------
+    if _KANDA_RE.search(bare) or _KHANDHAKA_RE.search(bare) or _KANDA_PEER_RE.search(
+        bare
+    ):
         return "cha"
     if _VAGGA_RE.search(bare) and not _RULE_RE.search(bare):
         return "h1"
@@ -215,57 +340,339 @@ def classify_matika_title(
     return "h2"
 
 
-def extract_matika_pages(
-    doc: fitz.Document, *, content_start: int
-) -> list[tuple[int, str]]:
-    """Return [(pdf_page_1based, unicode_text), ...] for Mātikā pages."""
-    # Heuristic: Mātikā sits in the last front-matter pages before content.
+def _centered_number_depth(stack: list[int], n: int, *, structural: bool) -> int:
+    """Update ``stack`` of open centered section numbers; return 1-based depth.
+
+    Structural titles (kaṇḍa / khandhaka) always sit at depth 1 and reset the
+    stack.  Other centered numbered titles nest: a restart at ``1`` pushes a
+    child level; ``2, 3, …`` replace the sibling whose number is ``n - 1``
+    after popping completed deeper numbers (``while top >= n``).
+    """
+    if structural:
+        stack[:] = [n]
+        return 1
+    if n == 1:
+        stack.append(1)
+    else:
+        while stack and stack[-1] >= n:
+            stack.pop()
+        if stack and stack[-1] == n - 1:
+            stack[-1] = n
+        else:
+            stack.append(n)
+    return len(stack)
+
+
+def _kind_at_centered_depth(depth: int) -> str:
+    """Map consecutive-centered depth → heading_kind."""
+    if depth <= 1:
+        return "cha"
+    if depth == 2:
+        return "h1"
+    if depth == 3:
+        return "h2"
+    return f"h{min(depth, 6)}"
+
+
+def _kind_plus(base: str, rel: int) -> str:
+    """Return ``base`` deepened by ``rel`` outline steps (clamped at h6)."""
+    if rel <= 0:
+        return base
+    depth = min(_KIND_DEPTH.get(base, 3) + rel, _KIND_DEPTH["h6"])
+    return _KIND_BY_DEPTH.get(depth, "h6")
+
+
+def _kind_minus(kind: str, steps: int = 1, *, floor: str) -> str:
+    """Return ``kind`` raised by ``steps`` outline levels, not above ``floor``."""
+    if steps <= 0:
+        return kind
+    depth = max(
+        _KIND_DEPTH.get(kind, 3) - steps,
+        _KIND_DEPTH.get(floor, 3),
+    )
+    return _KIND_BY_DEPTH.get(depth, floor)
+
+
+def is_section_closer_title(title: str) -> bool:
+    """True for known section-closing titles (e.g. Uddānagāthā)."""
+    _, bare = split_outline_title(title)
+    return normalize_title(bare) in _SECTION_CLOSER_TITLES
+
+
+def _left_indent_kind(
+    stack: list[tuple[float, bool]],
+    x0: float,
+    *,
+    has_prefix: bool,
+    base_kind: str,
+) -> str:
+    """Nest left-column rows by relative indent; return heading_kind.
+
+    A row with ``x0`` deeper than the open left parent becomes a child.
+    Prefixed→prefixed “deeper” steps are ignored: in Sam/An that Δx0 is
+    hanging-number width (``1.`` vs ``1-2.``), not hierarchy.  True Vinaya
+    sub-items are unprefixed at the deeper band (``Appaṭicchannamānatta``
+    under ``1. Sukkavissaṭṭhi``).
+    """
+    while stack and x0 < stack[-1][0] - _LEFT_INDENT_EPS:
+        stack.pop()
+    if not stack:
+        stack.append((x0, has_prefix))
+        return base_kind
+    parent_x0, parent_prefixed = stack[-1]
+    if x0 > parent_x0 + _LEFT_INDENT_EPS:
+        if has_prefix and parent_prefixed:
+            # Hanging-number sibling — stay at parent depth.
+            return _kind_plus(base_kind, len(stack) - 1)
+        stack.append((x0, has_prefix))
+    else:
+        # Same indent band: sibling; keep the band's first x0.
+        stack[-1] = (parent_x0, has_prefix)
+    return _kind_plus(base_kind, len(stack) - 1)
+
+
+def _matika_page_range(doc: fitz.Document, *, content_start: int) -> list[int]:
+    """1-based PDF page numbers that belong to the Mātikā block."""
     start = max(1, content_start - 12)
-    end = content_start  # exclusive as 1-based end = content_start
-    pages: list[tuple[int, str]] = []
+    end = content_start
+    pages: list[int] = []
     for pdf_page in range(start, end):
-        raw = doc[pdf_page - 1].get_text("text")
-        text = vztime_to_unicode(raw)
+        text = vztime_to_unicode(doc[pdf_page - 1].get_text("text"))
         if re.search(r"\bmātikā\b", text, re.IGNORECASE) or (
             pages and re.search(r"\bpiṭṭhaṅka\b", text, re.IGNORECASE)
         ):
-            pages.append((pdf_page, text))
+            pages.append(pdf_page)
         elif pages:
-            # Continue contiguous block after first Mātikā hit.
-            pages.append((pdf_page, text))
-    # If heuristic missed, fall back to pages that contain dotted leaders + pāḷi.
+            pages.append(pdf_page)
     if not pages:
         for pdf_page in range(1, content_start):
             text = vztime_to_unicode(doc[pdf_page - 1].get_text("text"))
             if text.count("...") >= 8 and re.search(r"pāḷi", text, re.I):
-                pages.append((pdf_page, text))
+                pages.append(pdf_page)
     return pages
 
 
-def parse_matika(pages: list[tuple[int, str]]) -> list[MatikaEntry]:
-    """Parse Mātikā text pages into ordered TOC entries."""
+def extract_matika_pages(
+    doc: fitz.Document, *, content_start: int
+) -> list[tuple[int, str]]:
+    """Return [(pdf_page_1based, unicode_text), ...] for Mātikā pages."""
+    return [
+        (pdf_page, vztime_to_unicode(doc[pdf_page - 1].get_text("text")))
+        for pdf_page in _matika_page_range(doc, content_start=content_start)
+    ]
+
+
+def extract_matika_lines(
+    doc: fitz.Document, *, content_start: int
+) -> list[MatikaLine]:
+    """Extract Mātikā lines with left-edge geometry for layout classification."""
+    lines: list[MatikaLine] = []
+    for pdf_page in _matika_page_range(doc, content_start=content_start):
+        page = doc[pdf_page - 1]
+        page_width = float(page.rect.width)
+        for block in page.get_text("dict").get("blocks") or []:
+            if block.get("type") != 0:
+                continue
+            for line in block.get("lines") or []:
+                spans = line.get("spans") or []
+                if not spans:
+                    continue
+                raw = "".join(str(span.get("text") or "") for span in spans)
+                text = vztime_to_unicode(raw).strip()
+                if not text:
+                    continue
+                x0 = min(float(span["bbox"][0]) for span in spans)
+                lines.append(
+                    MatikaLine(
+                        pdf_page=pdf_page,
+                        text=text,
+                        x0=x0,
+                        page_width=page_width,
+                    )
+                )
+    return lines
+
+
+def _coerce_matika_lines(
+    pages: list[tuple[int, str]] | list[MatikaLine],
+) -> list[MatikaLine]:
+    if not pages:
+        return []
+    if isinstance(pages[0], MatikaLine):
+        return list(pages)  # type: ignore[arg-type]
+    out: list[MatikaLine] = []
+    for pdf_page, text in pages:  # type: ignore[misc]
+        for raw_line in str(text).splitlines():
+            line = raw_line.strip()
+            if line:
+                out.append(MatikaLine(pdf_page=int(pdf_page), text=line))
+    return out
+
+
+def parse_matika(
+    pages: list[tuple[int, str]] | list[MatikaLine],
+) -> list[MatikaEntry]:
+    """Parse Mātikā pages/lines into ordered TOC entries.
+
+    When lines carry ``x0`` / ``page_width``, kinds follow printed layout
+    (centered parents vs left-aligned leaves).  Within the left column,
+    deeper indent than the previous left row nests as a child (e.g.
+    ``Appaṭicchannamānatta`` under ``1. Sukkavissaṭṭhi``).  Text-only input
+    falls back to title morphology.
+    """
     entries: list[MatikaEntry] = []
     book_title: str | None = None
     pending_title: str | None = None
     pending_source = 0
+    pending_x0: float | None = None
+    pending_width: float | None = None
     dot_run = 0
     under_vagga = False
+    # True while left-aligned leaves nest under a centered mid-level parent
+    # (depth ≥ 2 from the consecutive-number stack).
+    under_mid = False
+    # Last centered kind below cha (h1/h2/…); left leaves nest one deeper.
+    # Needed when a centered rule under vagga is already h2 — a flat
+    # under_vagga→h2 base would make Cabbaggiyabhikkhuvatthu a sibling of
+    # Paṭhamakathinasikkhāpada instead of a child.
+    last_mid_kind: str | None = None
+    # Open centered section numbers (depth = len); structural titles reset.
+    num_stack: list[int] = []
+    # Open left-column indent bands: (x0, numbered).
+    left_indent_stack: list[tuple[float, bool]] = []
+    seen_bhaga_running: set[str] = set()
+    seen_book_running: set[str] = set()
 
-    def _kind_for(title: str, *, has_page: bool) -> str:
-        nonlocal under_vagga
-        kind = classify_matika_title(
-            title, has_page=has_page, under_vagga=under_vagga
+    def _reset_left_indent() -> None:
+        left_indent_stack.clear()
+
+    def _kind_for(
+        title: str,
+        *,
+        has_page: bool,
+        x0: float | None = None,
+        page_width: float | None = None,
+    ) -> str:
+        nonlocal under_vagga, under_mid, last_mid_kind, num_stack
+        centered = is_matika_centered(x0, page_width)
+        section_no, bare = split_outline_title(title)
+        numbered = section_no is not None
+        structural = bool(
+            (
+                _is_structural_title(bare)
+                and not _VAGGA_RE.search(bare)
+            )
+            or _KANDA_PEER_RE.search(bare)
         )
-        bare = _NUMBERED_RE.sub(r"\2", title.strip())
+
+        if centered is True:
+            _reset_left_indent()
+            if structural:
+                if numbered:
+                    _centered_number_depth(
+                        num_stack, section_no, structural=True
+                    )
+                else:
+                    num_stack.clear()
+                under_mid = False
+                under_vagga = False
+                last_mid_kind = None
+                return "cha"
+            if numbered and _RULE_RE.search(bare) and under_vagga:
+                last_mid_kind = "h2"
+                under_mid = True
+                return "h2"
+            if numbered:
+                depth = _centered_number_depth(
+                    num_stack, section_no, structural=False
+                )
+                kind = _kind_at_centered_depth(depth)
+                under_mid = kind != "cha"
+                under_vagga = bool(
+                    _VAGGA_RE.search(bare) and not _RULE_RE.search(bare)
+                )
+                last_mid_kind = kind if kind != "cha" else None
+                return kind
+            kind = classify_matika_title(
+                title,
+                has_page=has_page,
+                under_vagga=under_vagga,
+                centered=True,
+            )
+            if kind in {"boo", "cha", "nik"}:
+                under_mid = False
+                under_vagga = False
+                last_mid_kind = None
+                num_stack.clear()
+            elif _VAGGA_RE.search(bare) and not _RULE_RE.search(bare):
+                under_vagga = True
+                under_mid = True
+                last_mid_kind = kind
+            else:
+                last_mid_kind = kind if kind not in {"boo", "cha", "nik"} else None
+            return kind
+
+        if centered is False:
+            # Left-aligned leaves under a centered mid-parent (or vagga),
+            # with optional deeper indent nesting among left rows.
+            # Nest one level under the last centered mid-head when known
+            # (vagga→sikkhāpada h2 → left leaves h3).
+            if last_mid_kind is not None:
+                base = _kind_plus(last_mid_kind, 1)
+            else:
+                base = "h2" if (under_mid or under_vagga) else "h1"
+            if x0 is not None:
+                kind = _left_indent_kind(
+                    left_indent_stack,
+                    x0,
+                    has_prefix=has_section_prefix(title),
+                    base_kind=base,
+                )
+            else:
+                kind = base
+            # Closers (Uddānagāthā, …): peer of the numbered heads they follow,
+            # not a child of the last nested leaf alone.  Stay below cha/vagga.
+            if is_section_closer_title(title):
+                if len(left_indent_stack) > 1:
+                    left_indent_stack.pop()
+                # Peer the last centered mid-head when known (sikkhāpada h2
+                # under vagga; numbered kamma h1 under kaṇḍa).  Else keep the
+                # old under_mid / base floors.
+                if last_mid_kind is not None:
+                    floor = last_mid_kind
+                elif under_mid and not under_vagga:
+                    floor = "h1"
+                else:
+                    floor = base
+                kind = _kind_minus(kind, 1, floor=floor)
+                if left_indent_stack:
+                    left_indent_stack[-1] = (
+                        left_indent_stack[-1][0],
+                        False,
+                    )
+            return kind
+
+        kind = classify_matika_title(
+            title,
+            has_page=has_page,
+            under_vagga=under_vagga,
+            centered=None,
+        )
         if (
             kind in {"boo", "cha", "nik"}
-            or _KANDA_RE.search(bare)
-            or _KANDA_PEER_RE.search(bare)
-            or _MAJOR_VIBHANGA_RE.match(bare)
+            or _is_structural_title(bare)
         ):
             under_vagga = False
+            under_mid = False
+            last_mid_kind = None
+            num_stack.clear()
+            _reset_left_indent()
         elif _VAGGA_RE.search(bare) and not _RULE_RE.search(bare):
             under_vagga = True
+            under_mid = True
+            last_mid_kind = kind
+        else:
+            last_mid_kind = kind if kind not in {"boo", "cha", "nik"} else None
         return kind
 
     def flush_structural(title: str, source_page: int) -> None:
@@ -273,60 +680,126 @@ def parse_matika(pages: list[tuple[int, str]]) -> list[MatikaEntry]:
             _matika_entry(
                 title,
                 page=None,
-                kind=_kind_for(title, has_page=False),
+                kind=_kind_for(
+                    title,
+                    has_page=False,
+                    x0=pending_x0,
+                    page_width=pending_width,
+                ),
                 source_page=source_page,
             )
         )
 
-    for pdf_page, text in pages:
-        for raw_line in text.splitlines():
-            line = raw_line.strip()
-            if not line:
-                continue
-            if _MATIKA_END_RE.search(line):
-                pending_title = None
-                dot_run = 0
-                continue
-            if _SKIP_LINE_RE.match(line):
-                if line.startswith("..."):
-                    if pending_title:
-                        dot_run += 1
-                elif (m := _PAGE_NUM_RE.match(line)) and pending_title and dot_run:
-                    # A range ("1-4") anchors on its start page.
-                    entries.append(
-                        _matika_entry(
-                            pending_title,
-                            page=int(m.group(1)),
-                            kind=_kind_for(pending_title, has_page=True),
-                            source_page=pending_source,
-                        )
-                    )
-                    pending_title = None
-                    dot_run = 0
-                continue
+    def flush_paged(title: str, page: int, source_page: int) -> None:
+        nonlocal pending_title, pending_x0, pending_width, dot_run
+        entries.append(
+            _matika_entry(
+                title,
+                page=page,
+                kind=_kind_for(
+                    title,
+                    has_page=True,
+                    x0=pending_x0,
+                    page_width=pending_width,
+                ),
+                source_page=source_page,
+            )
+        )
+        pending_title = None
+        pending_x0 = None
+        pending_width = None
+        dot_run = 0
 
-            if _BOOK_RUNNING_RE.match(line) and not _NUMBERED_RE.match(line):
-                if book_title is None:
-                    book_title = line
-                    entries.append(
-                        _matika_entry(
-                            line,
-                            page=None,
-                            kind="boo",
-                            source_page=pdf_page,
-                        )
-                    )
-                # Skip later running headers.
-                pending_title = None
-                dot_run = 0
-                continue
-
-            # New candidate title line.
-            if pending_title and not dot_run:
-                flush_structural(pending_title, pending_source)
-            pending_title = line
-            pending_source = pdf_page
+    for row in _coerce_matika_lines(pages):
+        line = row.text.strip()
+        if not line:
+            continue
+        if _MATIKA_END_RE.search(line):
+            pending_title = None
+            pending_x0 = None
+            pending_width = None
             dot_run = 0
+            continue
+
+        # Leader + page list on one line: ``... 21-30-38``.
+        inline = _INLINE_LEADER_PAGE_RE.match(line)
+        if inline and pending_title:
+            flush_paged(
+                pending_title,
+                int(inline.group(1).split("-", 1)[0]),
+                pending_source,
+            )
+            continue
+        if inline:
+            continue
+
+        # Pure leader dots, bare page, or multi-page list.
+        if _SKIP_LINE_RE.match(line):
+            if line.startswith("...") and not any(ch.isdigit() for ch in line):
+                if pending_title:
+                    dot_run += 1
+            elif (m := _PAGE_NUM_RE.match(line)) and pending_title and dot_run:
+                flush_paged(pending_title, int(m.group(1)), pending_source)
+            # Bare page number on its own line after a title (common in
+            # geometry extracts where leaders are separate drawing ops).
+            elif (
+                (m := _PAGE_NUM_RE.match(line))
+                and pending_title
+                and row.x0 is not None
+                and row.page_width
+                and row.x0 > row.page_width * 0.7
+            ):
+                flush_paged(pending_title, int(m.group(1)), pending_source)
+            continue
+
+        if _BOOK_RUNNING_RE.match(line) and not _NUMBERED_RE.match(line):
+            folded = normalize_title(line)
+            if _BHAGA_RUNNING_RE.match(line):
+                if folded in seen_bhaga_running or book_title is not None:
+                    pending_title = None
+                    pending_x0 = None
+                    pending_width = None
+                    dot_run = 0
+                    continue
+                seen_bhaga_running.add(folded)
+            # Repeated bare / compound ``…pāḷi`` lines are page chrome
+            # (common in Paṭṭhāna part 5), not new outline rows.
+            if folded in seen_book_running:
+                pending_title = None
+                pending_x0 = None
+                pending_width = None
+                dot_run = 0
+                continue
+            seen_book_running.add(folded)
+            if book_title is None:
+                book_title = line
+            _reset_left_indent()
+            under_mid = False
+            under_vagga = False
+            last_mid_kind = None
+            num_stack.clear()
+            entries.append(
+                _matika_entry(
+                    line,
+                    page=None,
+                    kind="boo",
+                    source_page=row.pdf_page,
+                )
+            )
+            pending_title = None
+            pending_x0 = None
+            pending_width = None
+            dot_run = 0
+            continue
+
+        # New candidate title line.
+        if pending_title and not dot_run:
+            flush_structural(pending_title, pending_source)
+        pending_title = line
+        pending_source = row.pdf_page
+        pending_x0 = row.x0
+        pending_width = row.page_width
+        dot_run = 0
 
     if pending_title and not dot_run:
         flush_structural(pending_title, pending_source)
@@ -352,7 +825,9 @@ def fallback_kind(seg: dict, text: str) -> tuple[str | None, bool]:
         if _MAJOR_VIBHANGA_RE.match(text.strip()):
             return "boo", False
         if (
-            _KANDA_RE.search(text) or _KANDA_PEER_RE.search(text)
+            _KANDA_RE.search(text)
+            or _KHANDHAKA_RE.search(text)
+            or _KANDA_PEER_RE.search(text)
         ) and not re.search(r"sikkhāpada\b", text, re.I):
             return "cha", False
         if _RULE_RE.search(text) or re.search(r"sikkhāpada\b", text, re.I):
@@ -504,6 +979,8 @@ def match_entries_to_segments(
     # Track which (segment, kind-band) already took a exclusive coarse match.
     # Multiple entries may share one compound segment.
     used_exclusive: set[int] = set()
+    # Structural / book titles already matched: skip later identical chrome.
+    matched_title_norms: set[str] = set()
 
     # Page-first anchoring: entries with a printed page number should only
     # ever anchor within that folio (± the adjacent page for a heading
@@ -528,34 +1005,78 @@ def match_entries_to_segments(
         # adjacent page only (still page-anchored, never document-wide).
         return on_page.get(entry.page - 1, []) + on_page.get(entry.page + 1, [])
 
+    def _seg_order(seg_i: int) -> int:
+        order = segments[seg_i].get("order")
+        return int(order) if order is not None else 10**9
+
     for ei in ordered_idxs:
         entry = entries[ei]
+        entry_norm = normalize_title(entry.title)
+        # Duplicate unpaged titles: keep the first match (running headers /
+        # recapitulated section labels latching onto the first body hit).
+        if entry.page is None and entry_norm in matched_title_norms:
+            continue
+
         best_i, best_score = None, 0.0
-        for i in heading_idxs if entry.kind == "boo" else _candidates_for(entry):
+        candidates = heading_idxs if entry.kind == "boo" else _candidates_for(entry)
+        for i in candidates:
             st = segments[i].get("segment_type")
             if entry.kind == "boo":
                 if st not in {"gambhīra", "title", "chapter"}:
                     continue
                 if i in used_exclusive:
                     continue
-                score = _score_match(
-                    normalize_title(entry.title), seg_norms[i]
-                )
+                score = _score_match(entry_norm, seg_norms[i])
                 if st == "gambhīra":
                     score += 15
             else:
                 score = _score_entry_against_segment(
                     entry, segments[i], seg_norms[i]
                 )
-                parent, _, child_name = compound_parts(segments[i])
+                parent, _, _child_name = compound_parts(segments[i])
                 # Non-compound exclusive: one entry per segment unless compound.
                 if not parent and i in used_exclusive:
                     score -= 40
-            if score > best_score:
+            # Book titles: prefer the earliest qualifying segment so a late
+            # gambhīra / title rematch cannot invert the outline planner.
+            if entry.kind == "boo":
+                if score > best_score or (
+                    score == best_score
+                    and best_i is not None
+                    and _seg_order(i) < _seg_order(best_i)
+                ):
+                    best_i, best_score = i, score
+                elif best_i is None and score > 0:
+                    best_i, best_score = i, score
+            elif score > best_score:
                 best_i, best_score = i, score
+            elif (
+                score == best_score
+                and best_i is not None
+                and _seg_order(i) < _seg_order(best_i)
+            ):
+                best_i, best_score = i, score
+
         threshold = 50.0 if entry.kind == "boo" else 40.0
+        # Among all boo candidates at/above threshold, force the earliest.
+        if entry.kind == "boo" and best_i is not None and best_score >= threshold:
+            earliest_i, earliest_order = best_i, _seg_order(best_i)
+            for i in candidates:
+                st = segments[i].get("segment_type")
+                if st not in {"gambhīra", "title", "chapter"}:
+                    continue
+                if i in used_exclusive:
+                    continue
+                score = _score_match(entry_norm, seg_norms[i])
+                if st == "gambhīra":
+                    score += 15
+                if score >= threshold and _seg_order(i) < earliest_order:
+                    earliest_i, earliest_order = i, _seg_order(i)
+            best_i = earliest_i
+
         if best_i is not None and best_score >= threshold:
             entry_to_seg[ei] = best_i
+            matched_title_norms.add(entry_norm)
             parent, _, _ = compound_parts(segments[best_i])
             if not parent or entry.kind in {"boo", "nik", "cha"}:
                 used_exclusive.add(best_i)
@@ -725,7 +1246,8 @@ def process_file(
         pages = extract_matika_pages(doc, content_start=content_start)
         if not pages:
             raise SystemExit(f"No Mātikā pages found before content in {pdf_path}")
-        entries = parse_matika(pages)
+        lines = extract_matika_lines(doc, content_start=content_start)
+        entries = parse_matika(lines if lines else pages)
     finally:
         doc.close()
 
