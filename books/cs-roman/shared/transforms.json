@@ -1,4 +1,403 @@
 {
   "schema_version": 2,
-  "rules": []
+  "rules": [
+    {
+      "id": "roman-dighamaddhana-long-i",
+      "enabled": true,
+      "when": {
+        "match": "dighamaddhānaṃ",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "dīghamaddhānaṃ",
+          "remark": "Roman dī- (long i); edition typo dighamaddhānaṃ in 01Vin01 p10, 07Di02 p102"
+        }
+      }
+    },
+    {
+      "id": "roman-bahukaraniya-long-i",
+      "enabled": true,
+      "when": {
+        "match": "bahukaraṇiyā",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "bahukaraṇīyā",
+          "remark": "Roman -ṇī- (long i); edition typo bahukaraṇiyā in 01Vin01 p54 (bahukaraṇīyā already attested)"
+        }
+      }
+    },
+    {
+      "id": "roman-anadinavadasso-long-i",
+      "enabled": true,
+      "when": {
+        "match": "anādinavadasso",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "anādīnavadasso",
+          "remark": "Roman -dī- (long i); edition typo anādinavadasso in 01Vin01 p21 (anādīnavadass- already attested)"
+        }
+      }
+    },
+    {
+      "id": "roman-attiyamano-long-i",
+      "enabled": true,
+      "when": {
+        "match": "aṭṭiyamāno",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "aṭṭīyamāno",
+          "remark": "Roman -ṭṭī- (long i); edition typo aṭṭiyamāno in 01Vin01 p30, 25Khu08 p247 (aṭṭīyamāno already attested, e.g. 01Vin01 p29)"
+        }
+      }
+    },
+    {
+      "id": "roman-dukkatassati-long-a",
+      "enabled": true,
+      "when": {
+        "match": "dukkaṭassati",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "dukkaṭassāti",
+          "remark": "Roman dukkaṭassa + iti (-ssā-); edition typo dukkaṭassati in 01Vin01 p74, p139 (dukkaṭassāti already attested)"
+        }
+      }
+    },
+    {
+      "id": "roman-samika-long-a",
+      "enabled": true,
+      "when": {
+        "match": "samikā",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "sāmikā",
+          "remark": "Roman sā- (long a); edition typo samikā in 01Vin01 p79 (sāmikā already attested, e.g. same formula p79 (94-97))"
+        }
+      }
+    },
+    {
+      "id": "roman-assamanaka-long-a",
+      "enabled": true,
+      "when": {
+        "match": "assamaṇakaṃ",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "assāmaṇakaṃ",
+          "remark": "Roman assā- (long a); edition typo assamaṇakaṃ in 01Vin01 p54 (assāmaṇakaṃ already attested, e.g. same formula p21)"
+        }
+      }
+    },
+    {
+      "id": "roman-akaraniya-long-i",
+      "enabled": true,
+      "when": {
+        "match": "akaraṇiyaṃ",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "akaraṇīyaṃ",
+          "remark": "Roman -ṇī- (long i); edition typo akaraṇiyaṃ in 01Vin01 p54 (akaraṇīyaṃ already attested, e.g. same formula p21)"
+        }
+      }
+    },
+    {
+      "id": "roman-quote-iti-unbold",
+      "enabled": true,
+      "when": {
+        "match": "”ti",
+        "token": false,
+        "volumes": ["01Vin01"],
+        "pages": [56],
+        "orders": [224]
+      },
+      "do": {
+        "unbold": {
+          "skip": 1,
+          "remark": "Roman stroke includes closing iti after ”; 01Vin01 p56 order 224 item 91 (period already unbold; p25 §39 already split)"
+        }
+      }
+    },
+    {
+      "id": "roman-bandhim-acc",
+      "enabled": true,
+      "when": {
+        "match": "bandhiṃ",
+        "token": true,
+        "volumes": ["01Vin01"],
+        "pages": [79]
+      },
+      "do": {
+        "replace": {
+          "with": "bandhaṃ",
+          "remark": "Roman bandhaṃ (acc.); edition typo bandhiṃ in 01Vin01 p79. token skips bandhiṃsu / anubandhiṃ; volumes+pages skip aorist bandhiṃ (15An01 p526) and other books' p79"
+        }
+      }
+    },
+    {
+      "id": "roman-kukuccam-geminate-kk",
+      "enabled": true,
+      "when": {
+        "match": "kukuccaṃ",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "kukkuccaṃ",
+          "remark": "Roman geminate kk; edition typo kukuccaṃ in 01Vin01 (kukkuccaṃ already attested)"
+        }
+      }
+    },
+    {
+      "id": "roman-kukuccayanta-geminate-kk",
+      "enabled": true,
+      "when": {
+        "match": "kukuccāyantā",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "kukkuccāyantā",
+          "remark": "Roman geminate kk; edition typo kukuccāyantā in 01Vin01 p83"
+        }
+      }
+    },
+    {
+      "id": "roman-sariputta-vipassi-space",
+      "enabled": true,
+      "when": {
+        "match": "SāriputtaVipassī",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "Sāriputta Vipassī",
+          "remark": "Roman glue between vocative Sāriputta and Vipassī"
+        }
+      }
+    },
+    {
+      "id": "roman-sa-upadanaya-linewrap",
+      "enabled": true,
+      "when": {
+        "match": "sa- upādānāya",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "saupādānāya",
+          "remark": "Roman line-wrap hyphen left as 'sa- upādānāya'; Myanmar has saupādānāya; solid sa-upādānāya already stripped at extract"
+        }
+      }
+    },
+    {
+      "id": "roman-amantesi-tena-dash-space",
+      "enabled": true,
+      "when": {
+        "match": "āmantesi–tena",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "āmantesi– tena",
+          "remark": "Space after discourse en-dash; glued āmantesi–tena in 01Vin01/04Vin04/10Ma02 (spaced form already attested)"
+        }
+      }
+    },
+    {
+      "id": "roman-haneyyum-vati-space",
+      "enabled": true,
+      "when": {
+        "match": "Haneyyuṃvāti",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "Haneyyuṃ vāti",
+          "remark": "Roman glue; Myanmar has Haneyyuṃ vāti (01Vin01 p57 lemma bold)"
+        }
+      }
+    },
+    {
+      "id": "roman-bandheyyum-vati-space",
+      "enabled": true,
+      "when": {
+        "match": "Bandheyyuṃvāti",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "Bandheyyuṃ vāti",
+          "remark": "Roman glue; Myanmar has Bandheyyuṃ vāti (01Vin01 p57 lemma bold)"
+        }
+      }
+    },
+    {
+      "id": "roman-pabbajeyyum-vati-space",
+      "enabled": true,
+      "when": {
+        "match": "Pabbājeyyuṃvāti",
+        "token": true
+      },
+      "do": {
+        "replace": {
+          "with": "Pabbājeyyuṃ vāti",
+          "remark": "Roman glue; Myanmar has Pabbājeyyuṃ vāti (01Vin01 p57 lemma bold)"
+        }
+      }
+    },
+    {
+      "id": "roman-addha-mahaddhana-dve-pada",
+      "enabled": true,
+      "when": {
+        "match": "aḍḍhāmahaddhanā",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "aḍḍhā mahaddhanā dve padāni – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-yopanati-dve-pada",
+      "enabled": true,
+      "when": {
+        "match": "Yopanāti",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "yo panāti dve padāni – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-tesam-yeva-niggahita-sandhi",
+      "enabled": true,
+      "when": {
+        "match": "tesaṃ yeva",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "tesaṃyeva niggahītasandhi – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-tam-yeva-niggahita-sandhi",
+      "enabled": true,
+      "when": {
+        "match": "taṃ yeva",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "taṃyeva niggahītasandhi – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-athakho-dve-nipata",
+      "enabled": true,
+      "when": {
+        "match": "athakho",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "atha kho dve nipātā – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-athakhvetam-dve-pada",
+      "enabled": true,
+      "when": {
+        "match": "athakhvetaṃ",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "atha khvetaṃ dve padāni – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-tassa-kukkuccam-dve-pada",
+      "enabled": true,
+      "when": {
+        "match": "Tassakukkuccaṃ",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "tassa kukkuccaṃ dve padāni – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-panasa-coraka-samaso",
+      "enabled": true,
+      "when": {
+        "match": "Panasa corakā",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "panasacorakā samāso – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-sinditva-bhinditva",
+      "enabled": true,
+      "when": {
+        "match": "sinditvā",
+        "token": true,
+        "volumes": ["01Vin01"],
+        "pages": [51]
+      },
+      "do": {
+        "replace": {
+          "with": "bhinditvā",
+          "remark": "Roman bh-; edition typo sinditvā in 01Vin01 p51 (bhinditvā in same passage, Burmese MS; tiṇakuṭikaṃ bhinditvā ×3)"
+        }
+      }
+    },
+    {
+      "id": "roman-cira-civara-patho",
+      "enabled": true,
+      "when": {
+        "match": "cīrapiṇḍapātasenāsanagilānappaccayabhesajjaparikkhārā",
+        "token": true
+      },
+      "do": {
+        "annotate": {
+          "footnote": "cīra- pāṭho, cīvara- – ม.พ.ป.",
+          "soft_breaks": [
+            "cīra",
+            "piṇḍapāta",
+            "senāsana",
+            "gilānappaccaya",
+            "bhesajja",
+            "parikkhārā"
+          ]
+        }
+      }
+    }
+  ]
 }

@@ -1,0 +1,73 @@
+thai_len	count	volumes	roman	thai	kind	matched_key	parts	thai_slice_ok
+37	8	2	cīvarapiṇḍapātasenāsanagilānapaccayabhesajjaparikkhārānan	จีวรปิณฺฑปาตเสนาสนคิลานปจฺจยเภสชฺชปริกฺขารานนฺ	prefix	cīvarapiṇḍapātasenāsanagilānapaccayabhesajjaparikkhārā	["cīvara", "piṇḍapāta", "senāsana", "gilānapaccaya", "bhesajja", "parikkhārā", "nan"]	yes
+18	5	1	Saṅkhārakkhandhapariyāpannoti	สงฺขารกฺขนฺธปริยาปนฺโนติ	prefix	saṅkhārakkhandhapariyāpanno	["saṅkhārakkhandha", "pariyāpanno", "ti"]	yes
+18	5	1	nevācayagāmināpacayagāmīnaṃ	เนวาจยคามินาปจยคามีนํ	prefix	nevācayagāmināpacayagāmī	["ne", "vā", "cayagāmi", "nā", "pacayagāmī", "naṃ"]	yes
+17	5	2	asammāsambuddhappavedito	อสมฺมาสมฺพุทฺธปฺปเวทิโต	suffix	sammāsambuddhappavedito	["a", "sammāsambuddha", "ppavedito"]	yes
+17	4	3	nevasaññānāsaññāyatanan	เนวสญฺญานาสญฺญายตนนฺ	prefix	nevasaññānāsaññāyatana	["ne", "va", "saññā", "nā", "saññā", "yatana", "n"]	yes
+29	2	2	itarītaracīvarapiṇḍapātasenāsanagilānappaccaya	อิตรีตรจีวรปิณฺฑปาตเสนาสนคิลานปฺปจฺจย	suffix	cīvarapiṇḍapātasenāsanagilānappaccaya	["itarītara", "cīvarapiṇḍapātasenāsana", "gilānappaccaya"]	yes
+28	2	1	Nevadassanenanabhāvanāyapahātabbahetukapada	เนวทสฺสเนนนภาวนายปหาตพฺพเหตุกปท	suffix	bhāvanāyapahātabbahetukapada	["nevadassanenana", "bhāvanāya", "pahātabba", "hetuka", "pada"]	yes
+26	2	1	sandosabyāpattiakusalasañcetanikāhetu	สนฺโทสพฺยาปตฺติอกุสลสญฺเจตนิกาเหตุ	suffix	akusalasañcetanikāhetu	["sandosabyāpatti", "akusalasañcetanikā", "hetu"]	yes
+23	2	1	gilānappaccayabhesajjaparikkhārānan	คิลานปฺปจฺจยเภสชฺชปริกฺขารานนฺ	prefix	gilānappaccayabhesajjaparikkhārā	["gilānappaccaya", "bhesajja", "parikkhārā", "nan"]	yes
+23	2	1	nanocittasaṃsaṭṭhasamuṭṭhānānuparivattiṃ	นโนจิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติํ	suffix	nocittasaṃsaṭṭhasamuṭṭhānānuparivattiṃ	["na", "no", "citta", "saṃsaṭṭha", "samuṭṭhānā", "nuparivattiṃ"]	yes
+19	2	2	Ekadussadāyakattheraapadāna	เอกทุสฺสทายกตฺเถรอปทาน	suffix	dussadāyakattheraapadāna	["eka", "dussa", "dāyaka", "ttheraapadāna"]	yes
+19	2	1	Sāriputtamoggallānānañcā	สาริปุตฺตโมคฺคลฺลานานญฺจา	prefix	sāriputtamoggallānā	["sāriputta", "moggallā", "nā", "nañcā"]	yes
+19	2	1	nanocittasaṃsaṭṭhasamuṭṭhānasahabhuṃ	นโนจิตฺตสํสฏฺฐสมุฏฺฐานสหภุํ	suffix	nocittasaṃsaṭṭhasamuṭṭhānasahabhuṃ	["na", "no", "citta", "saṃsaṭṭha", "samuṭṭhāna", "sahabhuṃ"]	yes
+19	2	1	naparalokavajjabhayadassāvinoti	นปรโลกวชฺชภยทสฺสาวิโนติ	prefix	naparalokavajjabhayadassāvino	["na", "paralokavajjabhayadassāvino", "ti"]	yes
+19	2	1	ākāsānañcāyatanasaññāyā	อากาสานญฺจายตนสญฺญายา	prefix	ākāsānañcāyatanasaññā	["ākāsānañcāyatana", "saññā", "yā"]	yes
+17	2	1	aparisuddhakāyasamācāratā	อปริสุทฺธกายสมาจารตา	suffix	parisuddhakāyasamācāratā	["a", "parisuddha", "kāya", "samācāra", "tā"]	yes
+17	2	1	viññāṇañcāyatanasaññāyā	วิญฺญาณญฺจายตนสญฺญายา	prefix	viññāṇañcāyatanasaññā	["viññāṇañcāyatana", "saññā", "yā"]	yes
+17	2	1	ākiñcaññāyatanasaññāyā	อากิญฺจญฺญายตนสญฺญายา	prefix	ākiñcaññāyatanasaññā	["ākiñcaññāyatana", "saññā", "yā"]	yes
+16	2	1	aparisuddhavacīsamācāratā	อปริสุทฺธวจีสมาจารตา	suffix	parisuddhavacīsamācāratā	["a", "parisuddha", "vacī", "samācāra", "tā"]	yes
+16	2	1	nanocittasaṃsaṭṭhasamuṭṭhānaṃ	นโนจิตฺตสํสฏฺฐสมุฏฺฐานํ	suffix	nocittasaṃsaṭṭhasamuṭṭhānaṃ	["na", "no", "citta", "saṃsaṭṭha", "samuṭṭhānaṃ"]	yes
+43	1	1	cīvarapiṇḍapātasenāsanagilānapaccayabhesajjaparikkhārapariyādānepi	จีวรปิณฺฑปาตเสนาสนคิลานปจฺจยเภสชฺชปริกฺขารปริยาทาเนปิ	prefix	cīvarapiṇḍapātasenāsanagilānapaccayabhesajja	["cīvarapiṇḍapātasenāsana", "gilānapaccayabhesajja", "parikkhārapariyādānepi"]	yes
+43	1	1	cīvarapiṇḍapātasenāsanagilānapaccayabhesajjaparikkhārānuppadānatthaṃ	จีวรปิณฺฑปาตเสนาสนคิลานปจฺจยเภสชฺชปริกฺขารานุปฺปทานตฺถํ	prefix	cīvarapiṇḍapātasenāsanagilānapaccayabhesajjaparikkhārā	["cīvara", "piṇḍapāta", "senāsana", "gilānapaccaya", "bhesajja", "parikkhārā", "nuppadānatthaṃ"]	yes
+40	1	1	vāditavisūkadassanamālāgandhavilepanadhāraṇamaṇḍanavibhūsanaṭṭhānā	วาทิตวิสูกทสฺสนมาลาคนฺธวิเลปนธารณมณฺฑนวิภูสนฏฺฐานา	suffix	mālāgandhavilepanadhāraṇamaṇḍanavibhūsanaṭṭhānā	["vāditavisūkadassana", "mālā", "gandha", "vilepana", "dhāraṇa", "maṇḍana", "vibhūsana", "ṭṭhānā"]	yes
+37	1	1	cīvaraviṇḍapātasenāsanagilānappaccayabhesajjaparikkhārānaṃ	จีวรวิณฺฑปาตเสนาสนคิลานปฺปจฺจยเภสชฺชปริกฺขารานํ	suffix	senāsanagilānappaccayabhesajjaparikkhārānaṃ	["cīvaraviṇḍapāta", "senāsana", "gilānappaccaya", "bhesajja", "parikkhārānaṃ"]	yes
+37	1	1	īvarapiṇḍapātasenāsanagilānappaccayabhesajjaparikkhārānaṃ	อีวรปิณฺฑปาตเสนาสนคิลานปฺปจฺจยเภสชฺชปริกฺขารานํ	suffix	senāsanagilānappaccayabhesajjaparikkhārānaṃ	["īvarapiṇḍapāta", "senāsana", "gilānappaccaya", "bhesajja", "parikkhārānaṃ"]	yes
+36	1	1	abhivādanapaccuṭṭhānaañjalikammasāmīcikammacīvarapiṇḍapāta	อภิวาทนปจฺจุฏฺฐานอญฺชลิกมฺมสามีจิกมฺมจีวรปิณฺฑปาต	prefix	abhivādanapaccuṭṭhānaañjalikamma	["abhivādana", "paccuṭṭhānaañjalikamma", "sāmīcikammacīvarapiṇḍapāta"]	yes
+36	1	1	sāmīcikammacīvarapiṇḍapātasenāsanagilānappaccayabhesajja	สามีจิกมฺมจีวรปิณฺฑปาตเสนาสนคิลานปฺปจฺจยเภสชฺช	suffix	cīvarapiṇḍapātasenāsanagilānappaccayabhesajja	["sāmīcikamma", "cīvarapiṇḍapātasenāsana", "gilānappaccaya", "bhesajja"]	yes
+35	1	1	cīrapiṇḍapātasenāsanagilānappaccayabhesajjaparikkhārā	จีรปิณฺฑปาตเสนาสนคิลานปฺปจฺจยเภสชฺชปริกฺขารา	suffix	gilānappaccayabhesajjaparikkhārā	["cīrapiṇḍapātasenāsana", "gilānappaccaya", "bhesajja", "parikkhārā"]	yes
+35	1	1	senāsanagilānappaccayabhesajjaparikkhārānuppadānena	เสนาสนคิลานปฺปจฺจยเภสชฺชปริกฺขารานุปฺปทาเนน	prefix	senāsanagilānappaccaya	["senāsana", "gilānappaccaya", "bhesajjaparikkhārānuppadānena"]	yes
+34	1	1	itarītaracīvarapiṇḍapātasenāsanagilānappaccayabhesajja	อิตรีตรจีวรปิณฺฑปาตเสนาสนคิลานปฺปจฺจยเภสชฺช	suffix	cīvarapiṇḍapātasenāsanagilānappaccayabhesajja	["itarītara", "cīvarapiṇḍapātasenāsana", "gilānappaccaya", "bhesajja"]	yes
+34	1	1	piṇḍapātasenāsanagilānappaccayabhesajjaparikkhārānaṃ	ปิณฺฑปาตเสนาสนคิลานปฺปจฺจยเภสชฺชปริกฺขารานํ	suffix	senāsanagilānappaccayabhesajjaparikkhārānaṃ	["piṇḍapāta", "senāsana", "gilānappaccaya", "bhesajja", "parikkhārānaṃ"]	yes
+33	1	1	dassanamālāgandhavilepanadhāraṇamaṇḍanavibhūsanaṭṭhānā	ทสฺสนมาลาคนฺธวิเลปนธารณมณฺฑนวิภูสนฏฺฐานา	suffix	mālāgandhavilepanadhāraṇamaṇḍanavibhūsanaṭṭhānā	["dassana", "mālā", "gandha", "vilepana", "dhāraṇa", "maṇḍana", "vibhūsana", "ṭṭhānā"]	yes
+33	1	1	indriyabalabojjhaṅgamaggaṅgasatipaṭṭhānasammappadhāna	อินฺทฺริยพลโพชฺฌงฺคมคฺคงฺคสติปฏฺฐานสมฺมปฺปธาน	suffix	satipaṭṭhānasammappadhāna	["indriyabalabojjhaṅgamaggaṅga", "satipaṭṭhāna", "sammappadhāna"]	yes
+32	1	1	cīvarapiṇḍapātasenāsanagilānagilānapaccayabhesajja	จีวรปิณฺฑปาตเสนาสนคิลานคิลานปจฺจยเภสชฺช	prefix	cīvarapiṇḍapātasenāsanagilāna	["cīvarapiṇḍapātasenāsana", "gilāna", "gilānapaccayabhesajja"]	yes
+30	1	1	addhamāsikaṃpariyāyabhattabhojanānuyogamanuyutto	อทฺธมาสิกํปริยายภตฺตโภชนานุโยคมนุยุตฺโต	suffix	pariyāyabhattabhojanānuyogamanuyutto	["addhamāsikaṃ", "pariyāya", "bhattabhojanānuyogamanuyutto"]	yes
+28	1	1	indriyabalabojjhaṅgasatipaṭṭhānasammappadhāna	อินฺทฺริยพลโพชฺฌงฺคสติปฏฺฐานสมฺมปฺปธาน	suffix	satipaṭṭhānasammappadhāna	["indriyabalabojjhaṅga", "satipaṭṭhāna", "sammappadhāna"]	yes
+28	1	1	nevasaññānāsaññāyatanasamāpattādhimutto	เนวสญฺญานาสญฺญายตนสมาปตฺตาธิมุตฺโต	prefix	nevasaññānāsaññāyatana	["ne", "va", "saññā", "nā", "saññā", "yatana", "samāpattādhimutto"]	yes
+28	1	1	nevasaññānāsaññāyatanasaññāsaññāsahagataṃ	เนวสญฺญานาสญฺญายตนสญฺญาสญฺญาสหคตํ	prefix	nevasaññānāsaññāyatanasaññā	["nevasaññānāsaññāyatana", "saññā", "saññāsahagataṃ"]	yes
+28	1	1	saddhāsampayuttassomanassasampayuttacittassa	สทฺธาสมฺปยุตฺตสฺโสมนสฺสสมฺปยุตฺตจิตฺตสฺส	suffix	somanassasampayuttacittassa	["saddhāsampayuttas", "somanassa", "sampayuttacittassa"]	yes
+28	1	1	ātāpetvāṭhānacaṅkamanisajjāsayanāhāraṃ	อาตาเปตฺวาฐานจงฺกมนิสชฺชาสยนาหารํ	suffix	ṭhānacaṅkamanisajjāsayanāhāraṃ	["ātāpetvā", "ṭhānacaṅkama", "nisajjā", "saya", "nāhāraṃ"]	yes
+27	1	1	samaṇabrāhmaṇakapaṇaddhikavanibbakayācakānan	สมณพฺราหฺมณกปณทฺธิกวนิพฺพกยาจกานนฺ	prefix	samaṇabrāhmaṇakapaṇaddhika	["samaṇabrāhmaṇa", "kapaṇaddhika", "vanibbakayācakānan"]	yes
+26	1	1	nevasaññānāsaññāyatanasamāpattiniṭṭho	เนวสญฺญานาสญฺญายตนสมาปตฺตินิฏฺโฐ	prefix	nevasaññānāsaññāyatanasamāpatti	["nevasaññānāsaññāyatana", "samāpatti", "niṭṭho"]	yes
+23	1	1	nanocittasaṃsaṭṭhasamuṭṭhānānuparivattī	นโนจิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺตี	suffix	nocittasaṃsaṭṭhasamuṭṭhānānuparivattī	["na", "no", "citta", "saṃsaṭṭha", "samuṭṭhānā", "nuparivattī"]	yes
+23	1	1	sampayuttasomanassasampayuttacittassa	สมฺปยุตฺตโสมนสฺสสมฺปยุตฺตจิตฺตสฺส	suffix	somanassasampayuttacittassa	["sampayutta", "somanassa", "sampayuttacittassa"]	yes
+22	1	1	Dukkhāyavedanāyasampayuttapadahetu	ทุกฺขายเวทนายสมฺปยุตฺตปทเหตุ	prefix	dukkhāyavedanāyasampayuttapada	["dukkhāya", "vedanāya", "sampayutta", "pada", "hetu"]	yes
+22	1	1	nevasaññānāsaññāyatanasaññāyā	เนวสญฺญานาสญฺญายตนสญฺญายา	prefix	nevasaññānāsaññāyatanasaññā	["nevasaññānāsaññāyatana", "saññā", "yā"]	yes
+21	1	1	Ajeliphaladāyakattherassāpadānaṃ	อเชลิผลทายกตฺเถรสฺสาปทานํ	suffix	phaladāyakattherassāpadānaṃ	["ajeli", "phaladāyaka", "ttherassāpadānaṃ"]	yes
+21	1	1	Phārusaphaladāyakattherassāpadānaṃ	ผารุสผลทายกตฺเถรสฺสาปทานํ	suffix	phaladāyakattherassāpadānaṃ	["phārusa", "phaladāyaka", "ttherassāpadānaṃ"]	yes
+21	1	1	kāyekāyānupassanāsatipaṭṭhānaṃ	กาเยกายานุปสฺสนาสติปฏฺฐานํ	suffix	kāyānupassanāsatipaṭṭhānaṃ	["kāye", "kāyānupassanā", "satipaṭṭhānaṃ"]	yes
+20	1	1	Avaṭaphaladāyakattherassāpadānaṃ	อวฏผลทายกตฺเถรสฺสาปทานํ	suffix	phaladāyakattherassāpadānaṃ	["avaṭa", "phaladāyaka", "ttherassāpadānaṃ"]	yes
+20	1	1	Dutiyaraṃsisaññakattherassāpadānaṃ	ทุติยรํสิสญฺญกตฺเถรสฺสาปทานํ	suffix	raṃsisaññakattherassāpadānaṃ	["dutiya", "raṃsi", "saññaka", "ttherassāpadānaṃ"]	yes
+20	1	1	Kurañciyaphaladāyakattheraapadāna	กุรญฺจิยผลทายกตฺเถรอปทาน	suffix	phaladāyakattheraapadāna	["kurañciya", "phaladāyaka", "ttheraapadāna"]	yes
+20	1	1	Nevasaññānāsaññāyatanampāhaṃ	เนวสญฺญานาสญฺญายตนมฺปาหํ	prefix	nevasaññānāsaññāyatana	["ne", "va", "saññā", "nā", "saññā", "yatana", "mpāhaṃ"]	yes
+20	1	1	Ticampakapupphiyattherassāpadānaṃ	ติจมฺปกปุปฺผิยตฺเถรสฺสาปทานํ	suffix	campakapupphiyattherassāpadānaṃ	["ti", "campaka", "pupphi", "yatthe", "rassā", "padānaṃ"]	yes
+20	1	1	natthicakkhusamphassaviññāṇāyatanaṃ	นตฺถิจกฺขุสมฺผสฺสวิญฺญาณายตนํ	suffix	cakkhusamphassaviññāṇāyatanaṃ	["natthi", "cakkhusamphassa", "viññāṇāyatanaṃ"]	yes
+20	1	1	paccayabhesajjaparikkhārānantipi	ปจฺจยเภสชฺชปริกฺขารานนฺติปิ	prefix	paccayabhesajjaparikkhārā	["paccaya", "bhesajjaparikkhārā", "nantipi"]	yes
+20	1	1	paridevadukkhadomanassupāyāsā	ปริเทวทุกฺขโทมนสฺสุปายาสา	suffix	dukkhadomanassupāyāsā	["parideva", "dukkhadomanassu", "pāyāsā"]	yes
+19	1	1	Ajeliphaladāyakattheraapadāna	อเชลิผลทายกตฺเถรอปทาน	suffix	phaladāyakattheraapadāna	["ajeli", "phaladāyaka", "ttheraapadāna"]	yes
+19	1	1	Kaḷambadāyakattherassāpadānaṃ	กฬมฺพทายกตฺเถรสฺสาปทานํ	suffix	ambadāyakattherassāpadānaṃ	["kaḷ", "amba", "dāyaka", "ttherassāpadānaṃ"]	no
+19	1	1	Miñcavaṭaṃsakiyattherassāpadānaṃ	มิญฺจวฏํสกิยตฺเถรสฺสาปทานํ	suffix	vaṭaṃsakiyattherassāpadānaṃ	["miñca", "vaṭaṃ", "saki", "yatthe", "rassā", "padānaṃ"]	yes
+19	1	1	dhammavicayasambojjhaṅgovīmasā	ธมฺมวิจยสมฺโพชฺฌงฺโควีมสา	prefix	dhammavicayasambojjhaṅgo	["dhammavicaya", "sambojjhaṅgo", "vīmasā"]	yes
+19	1	1	nanocittasaṃsaṭṭhasamuṭṭhānasahabhū	นโนจิตฺตสํสฏฺฐสมุฏฺฐานสหภู	suffix	nocittasaṃsaṭṭhasamuṭṭhānasahabhū	["na", "no", "citta", "saṃsaṭṭha", "samuṭṭhāna", "sahabhū"]	yes
+18	1	1	Anidassanaappaṭighamūlakeyeva	อนิทสฺสนอปฺปฏิฆมูลเกเยว	prefix	anidassanaappaṭighamūlake	["anidassanaappaṭigha", "mūlake", "yeva"]	yes
+18	1	1	Avaṭaphaladāyakattheraapadāna	อวฏผลทายกตฺเถรอปทาน	suffix	phaladāyakattheraapadāna	["avaṭa", "phaladāyaka", "ttheraapadāna"]	yes
+18	1	1	Nevācayagāmināpacayagāmīhi	เนวาจยคามินาปจยคามีหิ	prefix	nevācayagāmināpacayagāmī	["ne", "vā", "cayagāmi", "nā", "pacayagāmī", "hi"]	yes
+18	1	1	arūpadhātupariyāpannotikathā	อรูปธาตุปริยาปนฺโนติกถา	prefix	arūpadhātupariyāpannoti	["arūpadhātu", "pariyāpannoti", "kathā"]	yes
+18	1	1	nivavipākanavipākadhammadhammā	นิววิปากนวิปากธมฺมธมฺมา	suffix	vipākanavipākadhammadhammā	["niva", "vipāka", "na", "vipāka", "dhamma", "dhammā"]	yes
+18	1	1	ppaccayabhesajjaparikkhārānaṃ	ปฺปจฺจยเภสชฺชปริกฺขารานํ	suffix	paccayabhesajjaparikkhārānaṃ	["p", "paccaya", "bhesajjaparikkhārānaṃ"]	yes
+17	1	1	Kaḷambadāyakattheraapadāna	กฬมฺพทายกตฺเถรอปทาน	suffix	ambadāyakattheraapadāna	["kaḷ", "amba", "dāyaka", "ttheraapadāna"]	no
+17	1	1	dhipadhānasaṅkhārasamannāgataṃ	ธิปธานสงฺขารสมนฺนาคตํ	suffix	padhānasaṅkhārasamannāgataṃ	["dhi", "padhānasaṅkhāra", "samannāgataṃ"]	yes
+17	1	1	jāgariyānuyogapariyantoti	ชาคริยานุโยคปริยนฺโตติ	prefix	jāgariyānuyogapariyanto	["jāgariyānuyoga", "pariyanto", "ti"]	yes
+17	1	1	nanocittasaṃsaṭṭhasamuṭṭhāno	นโนจิตฺตสํสฏฺฐสมุฏฺฐาโน	suffix	nocittasaṃsaṭṭhasamuṭṭhāno	["na", "no", "citta", "saṃsaṭṭha", "samuṭṭhāno"]	yes

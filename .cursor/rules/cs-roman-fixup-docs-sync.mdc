@@ -1,0 +1,27 @@
+---
+description: Keep CS Roman fixup_process.md in sync whenever the fixup process changes
+globs: books/cs-roman/{docs/fixup_process.md,scripts/fixup_manifest.json,scripts/fixup_manifest_lib.py,scripts/run_cs_roman_fixups.py,scripts/scan_fixup_residuals.py,pipeline.ps1}
+alwaysApply: false
+---
+
+# Sync fixup process documentation
+
+Any change to the CS Roman fixup **process** must update the canonical doc in the same change:
+
+`books/cs-roman/docs/fixup_process.md`
+
+## Triggers (must update the doc)
+
+- Add / remove / rename a fixup or `case` in `fixup_manifest.json`
+- Change `pipeline`, `gate`, `scope`, or `follow_ups` meaning
+- Change runner/gate CLI or `pipeline.ps1` fixup/gate switches
+- Add a post-PDF audit to `post_pdf_audits`
+- Change residual parsing expectations
+
+## Checklist
+
+1. Manifest and doc case tables match (no orphan ids / missing cases).
+2. Commands in the doc still work.
+3. README pointer to the doc stays accurate if the path changes.
+
+Do not leave process knowledge only in chat or commit messages.

@@ -40,7 +40,7 @@ Y_TOP_MAX = 130.0
 NEW_PARA_RE = re.compile(r"^\d+\.")
 # Allow glued ordinals: นิฏฺฐิตํสตฺตมํ. / นิฏฺฐิตํปฐมํ.
 CLOSER_RE = re.compile(
-    r"(?:นิฏฺฐิต[าโตํ]\S*|สมตฺตํ)\s*\.?$"
+    r"(?:นิฏฺฐิ(?:ตํ|ตา|ตานิ|โต)\S*|สมตฺต(?:ํ|า|านิ)|สมตฺโต)\s*\.?$"
 )
 # Dotted TOC leaders / page-number-only lines — skip front-matter noise.
 TOC_DOTS_RE = re.compile(r"\.{3,}")

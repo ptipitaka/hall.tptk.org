@@ -46,6 +46,52 @@ class EnrichSectionRuleTests(unittest.TestCase):
         seg = out["segments"][0]
         self.assertIn(SECTION_RULE_FLAG, seg.get("flags") or [])
 
+    def test_normalizes_pot_ma_gyi_inside_bats_waks(self) -> None:
+        """Nested gāthā wak text must get the same spacing contract."""
+        from cs_roman_text import SP1_MARKER
+
+        doc = {
+            "segments": [
+                {
+                    "page": 1,
+                    "order": 1,
+                    "segment_type": "gatha",
+                    "bats": [
+                        {
+                            "waks": [
+                                {
+                                    "text": [
+                                        {
+                                            "script": "roman",
+                                            "value": (
+                                                f"bhajethāti.{SP1_MARKER}"
+                                                f"{SP1_MARKER}Chaṭṭhaṃ."
+                                            ),
+                                        },
+                                        {
+                                            "script": "thai",
+                                            "value": (
+                                                f"ภเชถาติ.{SP1_MARKER}"
+                                                f"{SP1_MARKER}ฉฏฺฐํ."
+                                            ),
+                                        },
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                }
+            ]
+        }
+        out, _, _ = enrich_document(doc, force=False)
+        wak = out["segments"][0]["bats"][0]["waks"][0]["text"]
+        roman = next(e["value"] for e in wak if e["script"] == "roman")
+        thai = next(e["value"] for e in wak if e["script"] == "thai")
+        self.assertNotIn(SP1_MARKER + SP1_MARKER, roman)
+        self.assertNotIn(SP1_MARKER + SP1_MARKER, thai)
+        self.assertIn(f".{SP1_MARKER} Chaṭṭhaṃ.", roman)
+        self.assertIn(f".{SP1_MARKER} ฉฏฺฐํ.", thai)
+
 
 if __name__ == "__main__":
     unittest.main()

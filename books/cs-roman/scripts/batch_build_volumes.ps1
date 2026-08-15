@@ -72,15 +72,21 @@ foreach ($id in $ids) {
     # Per-volume dirs so TOC .aux from one book cannot corrupt the next.
     # Quote args so PowerShell expands $outDir before latexmk sees them.
     # -f: keep going when TOC/label passes do not stabilize (large volumes).
-    & latexmk -lualatex -g -f "-outdir=$outDir" "-auxdir=$outDir" $main
+    # latexmk writes benign first-pass messages (e.g. missing .toc) to stderr;
+    # with $ErrorActionPreference Stop that becomes a terminating NativeCommandError.
+    $prevEap = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    & latexmk -lualatex -g -f "-outdir=$outDir" "-auxdir=$outDir" $main 2>&1 | Out-Host
+    $latexmkExit = $LASTEXITCODE
+    $ErrorActionPreference = $prevEap
     $built = Join-Path $outDir $builtName
     if (-not (Test-Path $built)) {
-      Write-Host "FAIL $id/$buildMode (missing $built; latexmk exit $LASTEXITCODE)"
+      Write-Host "FAIL $id/$buildMode (missing $built; latexmk exit $latexmkExit)"
       $failed += "$id/$buildMode"
       continue
     }
-    if ($LASTEXITCODE -ne 0) {
-      Write-Host "WARN $id/$buildMode latexmk exit $LASTEXITCODE but PDF exists - copying anyway"
+    if ($latexmkExit -ne 0) {
+      Write-Host "WARN $id/$buildMode latexmk exit $latexmkExit but PDF exists - copying anyway"
     }
     Copy-Item $built $dest -Force
     Write-Host "PDF -> $dest"

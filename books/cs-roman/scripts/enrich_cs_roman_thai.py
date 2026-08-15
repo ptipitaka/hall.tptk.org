@@ -51,12 +51,17 @@ def enrich_document(data: dict, *, force: bool = False) -> tuple[dict, int, int]
         normalize_spacing = uses_sentence_spacer(
             str(seg.get("segment_type") or "")
         )
-        entries, had_rule, lost = ensure_script_text(
-            before, force=force, normalize_spacing=normalize_spacing
-        )
-        if lost:
-            bold_lost += 1
-        seg["text"] = entries
+        had_rule = False
+        if before is not None:
+            entries, text_rule, lost = ensure_script_text(
+                before, force=force, normalize_spacing=normalize_spacing
+            )
+            had_rule = had_rule or text_rule
+            if lost:
+                bold_lost += 1
+            seg["text"] = entries
+            if force or not already or text_rule:
+                converted += 1
         hanging = seg.get("hanging_lines")
         if isinstance(hanging, list) and hanging:
             hl_out: list = []
@@ -69,6 +74,37 @@ def enrich_document(data: dict, *, force: bool = False) -> tuple[dict, int, int]
                     bold_lost += 1
                 hl_out.append(hl_entries)
             seg["hanging_lines"] = hl_out
+        bats = seg.get("bats")
+        if isinstance(bats, list) and bats:
+            bats_out: list = []
+            for bat in bats:
+                if not isinstance(bat, dict):
+                    bats_out.append(bat)
+                    continue
+                bat = dict(bat)
+                waks_out: list = []
+                for wak in bat.get("waks") or []:
+                    if not isinstance(wak, dict):
+                        waks_out.append(wak)
+                        continue
+                    wak = dict(wak)
+                    wak_text = wak.get("text")
+                    if wak_text is None:
+                        waks_out.append(wak)
+                        continue
+                    wak_entries, wak_rule, wak_lost = ensure_script_text(
+                        wak_text,
+                        force=force,
+                        normalize_spacing=normalize_spacing,
+                    )
+                    had_rule = had_rule or wak_rule
+                    if wak_lost:
+                        bold_lost += 1
+                    wak["text"] = wak_entries
+                    waks_out.append(wak)
+                bat["waks"] = waks_out
+                bats_out.append(bat)
+            seg["bats"] = bats_out
         # Preserve an existing section_rule flag: after extract/serialize the
         # trailing ``_____`` is already stripped into the flag, so a later
         # enrich/--force pass would otherwise clear it (had_rule=False).
@@ -77,7 +113,7 @@ def enrich_document(data: dict, *, force: bool = False) -> tuple[dict, int, int]
         if had_rule or had_flag:
             flags.append(SECTION_RULE_FLAG)
         seg["flags"] = flags
-        if force or not already or had_rule:
+        if before is None and (force or had_rule):
             converted += 1
         segments.append(seg)
     data["segments"] = segments

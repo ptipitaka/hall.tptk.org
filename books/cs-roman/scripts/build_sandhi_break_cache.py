@@ -21,7 +21,7 @@ ensure_import_paths()
 from cs_roman_sandhi_breaks import (  # noqa: E402
     DEFAULT_CACHE_PATH,
     DEFAULT_DB_PATH,
-    DEFAULT_MIN_THAI_LEN,
+    DEFAULT_MIN_ROMAN_LEN,
     rebuild_sandhi_break_cache,
 )
 
@@ -34,8 +34,8 @@ def main() -> None:
     parser.add_argument(
         "--min-len",
         type=int,
-        default=DEFAULT_MIN_THAI_LEN,
-        help=f"min thai_display_len (default {DEFAULT_MIN_THAI_LEN})",
+        default=DEFAULT_MIN_ROMAN_LEN,
+        help=f"min roman_letter_len (default {DEFAULT_MIN_ROMAN_LEN})",
     )
     parser.add_argument(
         "--db",
@@ -53,7 +53,7 @@ def main() -> None:
 
     path, hit, total = rebuild_sandhi_break_cache(
         volume=None if args.all else args.volume,
-        min_thai_len=args.min_len,
+        min_roman_len=args.min_len,
         db_path=args.db,
         out_path=args.out,
         progress=True,

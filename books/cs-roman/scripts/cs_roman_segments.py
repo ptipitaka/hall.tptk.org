@@ -22,6 +22,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from cs_roman_text import CLOSER_LEVELS
+
 SCHEMA_VERSION = 1
 
 _CONTENT_KEEP = frozenset({"schema_version", "segments"})
@@ -59,10 +61,11 @@ DEFAULT_LAYOUT: dict[str, float | int | str] = {
     "word_space": 3.5,
     "line_space": 1.5,
     "par_indent": "21.6pt",
-    "par_skip": "5pt",
-    # Target baseline-to-baseline between gāthā บท: body leading (~20pt) plus
-    # clear stanza air (~+10pt). Matches 01Vin01 printing reference rhythm.
-    "gatha_stanza_skip": "30pt",
+    # Extra air between prose paragraphs (added on top of baselineskip).
+    "par_skip": "8pt",
+    # Extra air between gāthā บท — same JSON value as par_skip; TeX adds
+    # 0.3\\baselineskip so the optical gap matches prose inter-paragraph air.
+    "gatha_stanza_skip": "8pt",
     "gatha_indent": "65pt",
     "emergency_stretch": "2.5em",
 }
@@ -89,6 +92,7 @@ _SEGMENT_TYPES = frozenset(
         "namakkāraṃ",
         "chapter",
         "title",
+        "tassuddānaṃ",
         "niṭṭhitaṃ",
         "note",
         "subhead",
@@ -99,7 +103,9 @@ _SEGMENT_TYPES = frozenset(
 _HEADING_KINDS = frozenset(
     {"nik", "boo", "cha", "h1", "h2", "h3", "h4", "h5", "h6"}
 )
-_SOURCE_LAYOUTS = frozenset({"bat_line", "wak_line", "hanging", "center"})
+_SOURCE_LAYOUTS = frozenset(
+    {"bat_line", "wak_line", "mixed", "hanging", "center"}
+)
 _NOTE_MARKER_RE = re.compile(r"\{\{n(\d+)\}\}")
 
 
@@ -285,6 +291,9 @@ def compact_segment(seg: dict[str, Any]) -> dict[str, Any]:
     heading_kind = seg.get("heading_kind")
     if heading_kind:
         out["heading_kind"] = heading_kind
+    closer_level = seg.get("closer_level")
+    if closer_level in CLOSER_LEVELS:
+        out["closer_level"] = closer_level
     if seg.get("in_toc"):
         out["in_toc"] = True
 
@@ -1086,6 +1095,9 @@ def validate_document(data: dict[str, Any]) -> list[str]:
         layout = seg.get("source_layout")
         if layout is not None and layout not in _SOURCE_LAYOUTS:
             errors.append(f"{prefix}.source_layout: unknown {layout!r}")
+        closer_level = seg.get("closer_level")
+        if closer_level is not None and closer_level not in CLOSER_LEVELS:
+            errors.append(f"{prefix}.closer_level: unknown {closer_level!r}")
         if "word_space" in seg:
             errors.append(
                 f"{prefix}.word_space: not stored on segments; "

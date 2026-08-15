@@ -88,7 +88,7 @@
       "title": "Gati-anuyoga",
       "page": 29,
       "kind": "h1",
-      "matched_order": 197,
+      "matched_order": null,
       "section_no": 11
     },
     {
@@ -143,70 +143,70 @@
       "title": "Parihānikathā",
       "page": 61,
       "kind": "cha",
-      "matched_order": 424,
+      "matched_order": 425,
       "section_no": 2
     },
     {
       "title": "Brahmacariyakathā (ka)",
       "page": 80,
       "kind": "cha",
-      "matched_order": 584,
+      "matched_order": 576,
       "section_no": 3
     },
     {
       "title": "Odhisokathā (kha)",
       "page": 87,
       "kind": "cha",
-      "matched_order": 635,
+      "matched_order": 624,
       "section_no": 3
     },
     {
       "title": "Jahatikathā",
       "page": 92,
       "kind": "cha",
-      "matched_order": 669,
+      "matched_order": 653,
       "section_no": 4
     },
     {
       "title": "Sabbamatthītikathā",
       "page": 96,
       "kind": "cha",
-      "matched_order": 702,
+      "matched_order": 684,
       "section_no": 5
     },
     {
       "title": "Atītakkhandhādikathā",
       "page": 115,
       "kind": "cha",
-      "matched_order": 830,
+      "matched_order": 810,
       "section_no": 6
     },
     {
       "title": "Ekaccaṃatthītikathā",
       "page": 119,
       "kind": "cha",
-      "matched_order": 854,
+      "matched_order": 834,
       "section_no": 7
     },
     {
       "title": "Satipaṭṭhānakathā",
       "page": 121,
       "kind": "cha",
-      "matched_order": 878,
+      "matched_order": 858,
       "section_no": 8
     },
     {
       "title": "Hevatthikathā",
       "page": 124,
       "kind": "cha",
-      "matched_order": 895,
+      "matched_order": 875,
       "section_no": 9
     },
     {
       "title": "Dutiyavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 1244,
+      "matched_order": 1219,
       "section_no": 2
     },
     {
@@ -279,7 +279,7 @@
       "title": "Tatiyavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 1426,
+      "matched_order": 1404,
       "section_no": 3
     },
     {
@@ -358,7 +358,7 @@
       "title": "Catutthavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 1504,
+      "matched_order": 1485,
       "section_no": 4
     },
     {
@@ -425,7 +425,7 @@
       "title": "Pañcamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 1715,
+      "matched_order": 1694,
       "section_no": 5
     },
     {
@@ -492,7 +492,7 @@
       "title": "Chaṭṭhavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 1812,
+      "matched_order": 1791,
       "section_no": 6
     },
     {
@@ -559,7 +559,7 @@
       "title": "Sattamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 1911,
+      "matched_order": 1890,
       "section_no": 7
     },
     {
@@ -626,7 +626,7 @@
       "title": "Aṭṭhamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 2050,
+      "matched_order": 2034,
       "section_no": 8
     },
     {
@@ -699,7 +699,7 @@
       "title": "Navamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 2254,
+      "matched_order": 2242,
       "section_no": 9
     },
     {
@@ -772,7 +772,7 @@
       "title": "Dasamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 2330,
+      "matched_order": 2318,
       "section_no": 10
     },
     {
@@ -845,7 +845,7 @@
       "title": "Ekādasamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 2442,
+      "matched_order": 2430,
       "section_no": 11
     },
     {
@@ -900,7 +900,7 @@
       "title": "Dvādasamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 2564,
+      "matched_order": 2552,
       "section_no": 12
     },
     {
@@ -967,7 +967,7 @@
       "title": "Terasamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 2652,
+      "matched_order": 2641,
       "section_no": 13
     },
     {
@@ -1034,7 +1034,7 @@
       "title": "Cuddasamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 2707,
+      "matched_order": 2696,
       "section_no": 14
     },
     {
@@ -1168,7 +1168,7 @@
       "title": "Soḷasamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 2938,
+      "matched_order": 2928,
       "section_no": 16
     },
     {
@@ -1235,7 +1235,7 @@
       "title": "Sattarasamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 3050,
+      "matched_order": 3043,
       "section_no": 17
     },
     {
@@ -1308,7 +1308,7 @@
       "title": "Aṭṭhārasamavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 3165,
+      "matched_order": 3149,
       "section_no": 18
     },
     {
@@ -1369,7 +1369,7 @@
       "title": "Ekūnavīsatimavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 3234,
+      "matched_order": 3218,
       "section_no": 19
     },
     {
@@ -1424,7 +1424,7 @@
       "title": "Vīsatimavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 3365,
+      "matched_order": 3350,
       "section_no": 20
     },
     {
@@ -1467,7 +1467,7 @@
       "title": "Ekavīsatimavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 3388,
+      "matched_order": 3373,
       "section_no": 21
     },
     {
@@ -1522,7 +1522,7 @@
       "title": "Bāvīsatimavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 3451,
+      "matched_order": 3436,
       "section_no": 22
     },
     {
@@ -1577,7 +1577,7 @@
       "title": "Tevīsatimavagga",
       "page": null,
       "kind": "cha",
-      "matched_order": 3502,
+      "matched_order": 3487,
       "section_no": 23
     },
     {

@@ -1,0 +1,332 @@
+{
+  "version": 1,
+  "doc": "books/cs-roman/docs/fixup_process.md",
+  "fixups": [
+    {
+      "id": "unbound_footnote_callouts",
+      "script": "fixup_unbound_footnote_callouts.py",
+      "summary": "Remap collided {{nK}} and rebind literal callouts from PDF notes",
+      "case": "unbound_footnote_callout",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": true,
+      "follow_ups": ["orphan_footnote_callouts"]
+    },
+    {
+      "id": "orphan_footnote_callouts",
+      "script": "fixup_orphan_footnote_callouts.py",
+      "summary": "Rebound orphan / folio-stolen footnote callouts",
+      "case": "footnote_callout",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "printable_dashes",
+      "script": "fixup_printable_dashes.py",
+      "summary": "U+23AF horizontal line → en-dash",
+      "case": "printable_dash",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "solid_midword_hyphens",
+      "script": "fixup_solid_midword_hyphens.py",
+      "summary": "Strip solid editorial mid-word hyphens in Roman body",
+      "case": "midword_hyphen",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "glued_section_closers",
+      "script": "fixup_glued_section_closers.py",
+      "summary": "Peel section closers glued after verse/prose stop",
+      "case": "glued_section_closer",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "closer_levels",
+      "script": "fixup_closer_levels.py",
+      "summary": "Cache closer_level on section closers",
+      "case": "closer_level_cache",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "glued_parentheticals",
+      "script": "fixup_glued_parentheticals.py",
+      "summary": "Peel expansion parentheticals glued after stop",
+      "case": "glued_parenthetical",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "tassuddana_labels",
+      "script": "fixup_tassuddana_labels.py",
+      "summary": "Exact Tassuddānaṃ / ตสฺสุทฺทานํ → segment_type tassuddānaṃ",
+      "case": "tassuddana_label",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "idam_center_labels",
+      "script": "fixup_idam_center_labels.py",
+      "summary": "Demote Idaṃ / อิทํ mistagged as headings",
+      "case": "idam_center_label",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "false_heading_guesses",
+      "script": "fixup_false_heading_guesses.py",
+      "summary": "Demote weak/speech-intro false title headings",
+      "case": "false_heading",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "ordinal_section_closers",
+      "script": "fixup_ordinal_section_closers.py",
+      "summary": "Normalize ordinal category closers + section_rule",
+      "case": "ordinal_section_closer",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "false_gatha_prose",
+      "script": "fixup_false_gatha_prose.py",
+      "summary": "Peel prose mistagged inside folded gāthā",
+      "case": "false_gatha_prose",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "glued_gatha_nama_colophons",
+      "script": "fixup_glued_gatha_nama_colophons.py",
+      "summary": "Peel Name nāma. section labels from folded gāthā",
+      "case": "glued_gatha_nama_colophon",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "orphan_bat_gatha_hanging",
+      "script": "fixup_orphan_bat_gatha_hanging.py",
+      "summary": "Promote numbered bat/wak hanging (and orphan pairs) to gāthā",
+      "case": "orphan_bat_gatha_hanging",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "glued_gatha_titles",
+      "script": "fixup_glued_gatha_titles.py",
+      "summary": "Peel uddāna/gāthā titles glued to verse lines",
+      "case": "glued_gatha_title",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false,
+      "follow_ups": ["gatha_geometry", "center_layout"]
+    },
+    {
+      "id": "gatha_geometry",
+      "script": "fixup_gatha_geometry.py",
+      "summary": "Retag/fold bats after glued gāthā title peels (PDF; run when titles peeled)",
+      "case": "gatha_geometry",
+      "phase": "segments",
+      "pipeline": false,
+      "gate": "off",
+      "scope": "all",
+      "requires_pdf": true
+    },
+    {
+      "id": "center_layout",
+      "script": "fixup_center_layout.py",
+      "summary": "Restore source_layout center after peels (PDF; run with gatha_geometry)",
+      "case": "center_layout",
+      "phase": "segments",
+      "pipeline": false,
+      "gate": "off",
+      "scope": "all",
+      "requires_pdf": true
+    },
+    {
+      "id": "glued_gatha_bat_lines",
+      "script": "fixup_glued_gatha_bat_lines.py",
+      "summary": "Split verse lines glued by PDF block-join",
+      "case": "glued_gatha_bat",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "mixed_gatha_layout",
+      "script": "fixup_mixed_gatha_layout.py",
+      "summary": "Normalize mixed / wak_line gāthā source_layout",
+      "case": "mixed_gatha_layout",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "glued_uddesa_headings",
+      "script": "fixup_glued_uddesa_headings.py",
+      "summary": "Peel uddesa headings glued into prose",
+      "case": "glued_uddesa_heading",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "false_pa_hyphen_joins",
+      "script": "fixup_false_pa_hyphen_joins.py",
+      "summary": "Repair false -pa- hyphen joins",
+      "case": "false_pa_hyphen",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "glued_running_headers",
+      "script": "fixup_glued_running_headers.py",
+      "summary": "Peel running-header furniture glued onto body",
+      "case": "glued_running_header",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "warn",
+      "scope": "all",
+      "requires_pdf": true
+    },
+    {
+      "id": "page_start_continuation",
+      "script": "fixup_page_start_continuation.py",
+      "summary": "Reclassify page-start prose vs prose_continuation",
+      "case": "page_start_continuation",
+      "phase": "segments",
+      "pipeline": true,
+      "gate": "warn",
+      "scope": "per_volume",
+      "requires_pdf": true
+    },
+    {
+      "id": "edition_layout_rhythm",
+      "script": "fixup_edition_layout_rhythm.py",
+      "summary": "Apply edition par_skip / gatha_stanza_skip to layout JSON",
+      "case": "edition_layout_rhythm",
+      "phase": "layout",
+      "pipeline": true,
+      "gate": "strict",
+      "scope": "all",
+      "requires_pdf": false
+    },
+    {
+      "id": "nitthitam_false_bold",
+      "script": "fixup_nitthitam_false_bold.py",
+      "summary": "Clear false bold on niṭṭhitaṃ closers",
+      "case": "nitthitam_false_bold",
+      "phase": "segments",
+      "pipeline": false,
+      "gate": "off",
+      "scope": "per_volume",
+      "requires_pdf": false
+    },
+    {
+      "id": "bold_bbox",
+      "script": "fixup_bold_bbox.py",
+      "summary": "Re-detect bold runs from PDF bbox (no re-extract)",
+      "case": "bold_bbox",
+      "phase": "segments",
+      "pipeline": false,
+      "gate": "off",
+      "scope": "all",
+      "requires_pdf": true
+    }
+  ],
+  "post_pdf_audits": [
+    {
+      "id": "orphan_notes",
+      "script": "scan_orphan_notes.py",
+      "summary": "Unbound footnotes left as orphannote",
+      "case": "orphan_note_audit"
+    },
+    {
+      "id": "closer_levels_scan",
+      "script": "scan_closer_levels.py",
+      "summary": "Audit closer_level taxonomy across corpus",
+      "case": "closer_level_audit"
+    },
+    {
+      "id": "margin_overflow",
+      "script": "scan_margin_overflow.py",
+      "summary": "Words overflowing text block in built PDF",
+      "case": "margin_overflow_audit"
+    },
+    {
+      "id": "orphan_headings",
+      "script": "scan_orphan_headings.py",
+      "summary": "Headings alone at page foot/head in built PDF",
+      "case": "orphan_heading_audit"
+    },
+    {
+      "id": "widow_stubs",
+      "script": "scan_widow_stubs.py",
+      "summary": "Widow/stub lines in built PDF",
+      "case": "widow_stub_audit"
+    },
+    {
+      "id": "sandhi_break_gaps",
+      "script": "scan_sandhi_break_gaps.py",
+      "summary": "Long compounds missing sandhi soft breaks",
+      "case": "sandhi_gap_audit"
+    }
+  ]
+}

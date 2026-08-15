@@ -43,12 +43,19 @@ def main(argv: list[str] | None = None) -> int:
 
     vol = BOOKS / "volumes" / args.volume
     segments_path = vol / "data" / "segments.json"
+    output_path = BOOKS / "output" / f"{args.volume}.segments.json"
     if not segments_path.is_file():
         print(f"Missing {segments_path}", file=sys.stderr)
         return 1
 
     doc_data = load_document(segments_path)
     content_start = int(doc_data.get("content_start_pdf_page") or 0)
+    if content_start < 1:
+        # Prefer layout.json when segments omit the field (post-split).
+        layout_path = vol / "data" / "layout.json"
+        if layout_path.is_file():
+            layout = load_document(layout_path)
+            content_start = int(layout.get("content_start_pdf_page") or 0)
     if content_start < 1:
         print("content_start_pdf_page missing/invalid", file=sys.stderr)
         return 1
@@ -97,6 +104,9 @@ def main(argv: list[str] | None = None) -> int:
     doc_data["segments"] = segments
     save_content(segments_path, doc_data, normalize=True)
     print(f"Wrote {segments_path}")
+    if output_path.is_file():
+        save_content(output_path, doc_data, normalize=True)
+        print(f"Wrote {output_path}")
     return 0
 
 

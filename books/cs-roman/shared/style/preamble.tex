@@ -55,6 +55,7 @@
   % Font-load interword baseline only (fontspec cannot change WordSpace later).
   % Edition / volume absolute target: DEFAULT_LAYOUT / layout.json ``word_space``;
   % generator overwrites this via \csromanlayoutapply → \spaceskip scale.
+  % Footnotes clear \spaceskip after \footnotesize (font natural glue), not body word_space.
   WordSpace      = 3.5,
 ]{Sarabun}
 
@@ -68,12 +69,15 @@
 \setlength{\tipitakahang}{\dimexpr21.6pt*\csromanprintingscalenum/\csromanprintingscaleden\relax}
 \setlength{\parindent}{\tipitakahang}
 % Body vertical rhythm:
-%   \tipitakaparskip  — gap between prose paragraphs (edition default 5pt)
-%   \gathastanzaskip  — target baseline gap between gāthā บท (default 30pt)
+%   \tipitakaparskip  — extra air between prose paragraphs (edition default 8pt;
+%                       added on top of \baselineskip packing; layout.json overwrites)
+%   \gathastanzaskip  — extra air between gāthā บท (default 8pt = same JSON
+%                       value as par_skip; TeX adds 0.3\baselineskip so the
+%                       optical gap matches prose — see \csromangathastanza)
 \newlength{\tipitakaparskip}
 \newlength{\gathastanzaskip}
-\setlength{\tipitakaparskip}{\dimexpr5pt*\csromanprintingscalenum/\csromanprintingscaleden\relax plus 1pt minus 0.5pt}
-\setlength{\gathastanzaskip}{\dimexpr30pt*\csromanprintingscalenum/\csromanprintingscaleden\relax}
+\setlength{\tipitakaparskip}{\dimexpr8pt*\csromanprintingscalenum/\csromanprintingscaleden\relax plus 1pt minus 0.5pt}
+\setlength{\gathastanzaskip}{\dimexpr8pt*\csromanprintingscalenum/\csromanprintingscaleden\relax}
 \setlength{\parskip}{\tipitakaparskip}
 \setlength{\emergencystretch}{2.5em}
 \frenchspacing
@@ -94,7 +98,8 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage[bottom,hang,stable,perpage]{footmisc}
-\setlength{\footnotemargin}{0.85em}
+\setlength{\footnotemargin}{0.85em}% legacy footmisc default; note hang uses
+% \csromanfn@marksep in footnotes.tex (mark + kern + body), not this margin.
 % Extra headroom for Thai multi-level marks above the footnote baseline.
 \setlength{\footnotesep}{\dimexpr8.5pt*\csromanprintingscalenum/\csromanprintingscaleden\relax}
 % Gap from last body line to footnote rule: 50% above LaTeX default

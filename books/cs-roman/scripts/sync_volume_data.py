@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sync PDF + segments/layout/transforms JSON into books/cs-roman/volumes/<id>/."""
+"""Sync PDF + segments/layout JSON into books/cs-roman/volumes/<id>/."""
 
 from __future__ import annotations
 
@@ -77,13 +77,12 @@ def sync_volume(volume_id: str, *, copy_pdf: bool = False) -> Path:
         raise FileNotFoundError(f"Missing layout JSON: {layout_src}")
 
     sync_optional_json(
-        JSON_DIR / f"{volume_id}.transforms.json",
-        data / "transforms.json",
-    )
-    sync_optional_json(
         JSON_DIR / f"{volume_id}.matika.json",
         data / "matika.json",
     )
+    stale_transforms = data / "transforms.json"
+    if stale_transforms.is_file():
+        stale_transforms.unlink()
     return vol
 
 
@@ -104,11 +103,6 @@ def _copy_replace(src: Path, dst: Path) -> None:
                 tmp.unlink()
             except OSError:
                 pass
-
-
-def sync_transforms_file(src: Path, dst: Path) -> None:
-    """Copy optional transforms.json, or remove a stale volume copy."""
-    sync_optional_json(src, dst)
 
 
 def sync_optional_json(src: Path, dst: Path) -> None:

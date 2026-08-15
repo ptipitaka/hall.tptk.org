@@ -1,0 +1,31 @@
+---
+description: CS Roman fixups must go through manifest, pipeline, and residual gate
+globs: books/cs-roman/**
+alwaysApply: false
+---
+
+# CS Roman fixup process
+
+Canonical process: `books/cs-roman/docs/fixup_process.md`  
+Registry: `books/cs-roman/scripts/fixup_manifest.json`
+
+## When fixing extract/layout bugs in stored JSON
+
+1. Prefer extract/generate root cause + regression test.
+2. Add or extend `fixup_*.py` with `--volume` / `--all` / `--dry-run`.
+3. **Register** the fixup in `fixup_manifest.json` (`pipeline`, `gate`, `case`).
+4. Do **not** hardcode a new block in `pipeline.ps1` — it runs `--pipeline` from the manifest.
+5. Residual footer must be parseable by `fixup_manifest_lib.parse_residual_count`.
+6. Verify: `run_cs_roman_fixups.py --pipeline` then `scan_fixup_residuals.py --strict`.
+
+## Gates
+
+- `gate: strict` — must reach residual 0; pipeline fails otherwise.
+- `gate: warn` — PDF-heavy / soft; report only.
+- `gate: off` — manual only (`pipeline: false`).
+
+## Forbidden
+
+- One-off JSON/PDF edits as the only fix
+- New fixup scripts left out of the manifest
+- `-SkipFixupGate` as the normal path while residuals remain

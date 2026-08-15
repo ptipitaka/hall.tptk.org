@@ -1,9 +1,13 @@
 <#
 .SYNOPSIS
-  Extract + headings + prepare TeX for cs-roman volumes (Docker web service).
+  Extract + fixups + residual gate + headings + prepare TeX for cs-roman
+  (Docker web service).
 
   Prepares both sync and printing drivers/bodies by default. Build PDFs with
   .\scripts\batch_build_volumes.ps1 (-Mode sync|printing|both).
+
+  Fixups and the residual gate are driven by scripts/fixup_manifest.json —
+  see docs/fixup_process.md. Do not hardcode new fixup blocks here.
 
 .EXAMPLE
   .\pipeline.ps1
@@ -16,6 +20,8 @@ param(
   [ValidateSet("sync", "printing", "both")]
   [string]$PrepareMode = "both",
   [switch]$SkipExtract,
+  [switch]$SkipFixups,
+  [switch]$SkipFixupGate,
   [switch]$SkipHeadings,
   [switch]$SkipPrepare
 )
@@ -48,37 +54,40 @@ if (-not $SkipExtract) {
   } else {
     Invoke-WebPython $extractArgs
   }
+}
 
-  # Re-bind orphan footnotes left in older artifacts / edge shapes the extract
-  # pass should cover going forward. Never rely on one-off JSON patches --
-  # those vanish on the next extract (see scripts/scratch/_fix_01vin01_orphans.py).
+# JSON / layout fixups from fixup_manifest.json (even when SkipExtract).
+if (-not $SkipFixups) {
   if ($Volume) {
     foreach ($id in $Volume) {
       Invoke-WebPython @(
-        "books/cs-roman/scripts/fixup_orphan_footnote_callouts.py",
+        "books/cs-roman/scripts/run_cs_roman_fixups.py",
+        "--pipeline",
         "--volume", $id
       )
     }
   } else {
     Invoke-WebPython @(
-      "books/cs-roman/scripts/fixup_orphan_footnote_callouts.py",
-      "--all"
+      "books/cs-roman/scripts/run_cs_roman_fixups.py",
+      "--pipeline"
     )
   }
+}
 
-  # PDF U+23AF → en-dash (Sarabun has no glyph). Newer extract normalizes;
-  # repair any leftover in stored JSON.
+# Fail if gate=strict residuals remain (see docs/fixup_process.md).
+if (-not $SkipFixupGate) {
   if ($Volume) {
     foreach ($id in $Volume) {
       Invoke-WebPython @(
-        "books/cs-roman/scripts/fixup_printable_dashes.py",
+        "books/cs-roman/scripts/scan_fixup_residuals.py",
+        "--strict",
         "--volume", $id
       )
     }
   } else {
     Invoke-WebPython @(
-      "books/cs-roman/scripts/fixup_printable_dashes.py",
-      "--all"
+      "books/cs-roman/scripts/scan_fixup_residuals.py",
+      "--strict"
     )
   }
 }

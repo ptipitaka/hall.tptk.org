@@ -23,7 +23,9 @@ from extract_cs_roman_pdf import (  # noqa: E402
     _looks_like_gatha_line,
     _looks_like_gatha_seed_line,
     detect_content_start,
+    expand_glued_gatha_printed_lines,
     group_gatha_stanzas,
+    split_glued_gatha_printed_line_tail,
     tag_gatha_by_geometry,
 )
 
@@ -58,8 +60,202 @@ class ThreeBatOneAndHalfTests(unittest.TestCase):
         gathas = [s for s in grouped if s.segment_type == "gatha"]
         self.assertEqual(len(gathas), 1)
         self.assertEqual(len(gathas[0].bats or []), 3)
+        self.assertEqual(gathas[0].source_layout, "bat_line")
         self.assertFalse(gathas[0].needs_review)
         self.assertNotIn("irregular_gatha_stanza", gathas[0].review_reasons)
+
+    def test_section_rule_tail_does_not_block_bat_split(self) -> None:
+        """Trailing ``_____`` glued by extract must not leave the last บาท unsplit."""
+        from cs_roman_text import SECTION_RULE_FLAG
+
+        lines = [
+            Segment(
+                page=340,
+                order=1,
+                item=None,
+                segment_type="gatha",
+                text="Vesālī Vajji Nāḷandā, Bhāradvāja Soṇo ca Ghosito.",
+            ),
+            Segment(
+                page=340,
+                order=2,
+                item=None,
+                segment_type="gatha",
+                text="Hāliddiko Nakulapitā, Lohicco Verahaccānīti. _____",
+            ),
+        ]
+        grouped = group_gatha_stanzas(lines)
+        gathas = [s for s in grouped if s.segment_type == "gatha"]
+        self.assertEqual(len(gathas), 1)
+        bats = gathas[0].bats or []
+        self.assertEqual([len(b.get("waks") or []) for b in bats], [2, 2])
+        self.assertEqual(gathas[0].source_layout, "bat_line")
+        self.assertNotIn("irregular_gatha_stanza", gathas[0].review_reasons)
+        self.assertIn(SECTION_RULE_FLAG, gathas[0].flags)
+        # No leftover ``_____`` gatha segment.
+        self.assertFalse(
+            any(
+                (s.bats or [{}])[0].get("waks", [{}])[0].get("text") == "_____"
+                for s in gathas
+                if s.bats
+            )
+        )
+        right = bats[1]["waks"][1]["text"]
+        self.assertEqual(right, "Lohicco Verahaccānīti.")
+        self.assertNotIn("_____", right)
+
+
+class MixedBatAndLongSingleTests(unittest.TestCase):
+    def test_long_single_lines_use_mixed_layout(self) -> None:
+        """04Vin04 p.103: one bat pair + two long stop lines → mixed."""
+        from extract_cs_roman_pdf import gatha_layout_fix_target
+        from generate_cs_roman_tex import gatha_stanza_line_bodies
+
+        lines = [
+            Segment(
+                page=103,
+                order=1,
+                item=None,
+                segment_type="gatha",
+                text="Pārivāsikesu tayo, catu mānattacārike.",
+            ),
+            Segment(
+                page=103,
+                order=2,
+                item=None,
+                segment_type="gatha",
+                text="Na samenti ratticchedesu mānattesu ca devasi.",
+            ),
+            Segment(
+                page=103,
+                order=3,
+                item=None,
+                segment_type="gatha",
+                text="Dve kammā sadisā sesā tayo kammā samāsamāti.",
+            ),
+        ]
+        grouped = group_gatha_stanzas(lines)
+        gathas = [s for s in grouped if s.segment_type == "gatha"]
+        self.assertEqual(len(gathas), 1)
+        g = gathas[0]
+        self.assertEqual(g.source_layout, "mixed")
+        self.assertEqual(len(g.bats or []), 2)
+        self.assertEqual(g.bats[0]["waks"][0]["text"], "Pārivāsikesu tayo,")
+        self.assertEqual(
+            g.bats[1]["waks"][0]["text"],
+            "Na samenti ratticchedesu mānattesu ca devasi.",
+        )
+        self.assertIn("mixed_gatha_layout", g.review_reasons)
+        self.assertFalse(g.needs_review)
+
+        folded = {
+            "segment_type": "gatha",
+            "source_layout": "wak_line",
+            "bats": [
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {"script": "roman", "value": "Pārivāsikesu tayo,"},
+                                {"script": "thai", "value": "ปาริวาสิเกสุ ตโย,"},
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "roman",
+                                    "value": "catu mānattacārike.",
+                                },
+                                {
+                                    "script": "thai",
+                                    "value": "จตุ มานตฺตจาริเก.",
+                                },
+                            ]
+                        },
+                    ]
+                },
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "roman",
+                                    "value": "Na samenti ratticchedesu{{n0}} mānattesu ca devasi.",
+                                },
+                                {
+                                    "script": "thai",
+                                    "value": "น สเมนฺติ รตฺติจฺเฉเทสุ{{n0}} มานตฺเตสุ จ เทวสิ.",
+                                },
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "roman",
+                                    "value": "Dve kammā sadisā sesā tayo kammā samāsamāti{{n0}}.",
+                                },
+                                {
+                                    "script": "thai",
+                                    "value": "เทฺว กมฺมา สทิสา เสสา ตโย กมฺมา สมาสมาติ{{n0}}.",
+                                },
+                            ]
+                        },
+                    ]
+                },
+            ],
+        }
+        self.assertEqual(gatha_layout_fix_target(folded), "mixed")
+        folded["source_layout"] = "mixed"
+        bodies = gatha_stanza_line_bodies(folded)
+        self.assertEqual(len(bodies), 3)
+        self.assertTrue(bodies[0].startswith(r"\csromangathabat{"))
+        self.assertIn("ปาริวาสิเกสุ ตโย,", bodies[0])
+        self.assertIn("จตุ มานตฺตจาริเก.", bodies[0])
+        self.assertNotIn(r"\csromangathabat", bodies[1])
+        self.assertNotIn(r"\csromangathabat", bodies[2])
+        self.assertIn("น สเมนฺติ", bodies[1])
+        self.assertIn("เทฺว กมฺมา", bodies[2])
+
+        pure_bat = {
+            "segment_type": "gatha",
+            "source_layout": "bat_line",
+            "bats": [
+                {
+                    "waks": [
+                        {"text": [{"script": "roman", "value": "Mūlāya mānattārahā,"}]},
+                        {
+                            "text": [
+                                {
+                                    "script": "roman",
+                                    "value": "tathā mānattacāritā.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "roman",
+                                    "value": "Abbhānārahe nayo cāpi,",
+                                }
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "roman",
+                                    "value": "sambhedam nayato puna.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+            ],
+        }
+        self.assertIsNone(gatha_layout_fix_target(pure_bat))
 
 _PDF = (
     Path(__file__).resolve().parents[1]
@@ -416,6 +612,85 @@ class Page77HangBandEmbeddedWakTests(unittest.TestCase):
         self.assertEqual(len(gathas), 1)
         self.assertEqual(gathas[0].source_layout, "wak_line")
         self.assertEqual(len(gathas[0].bats or []), 2)
+
+
+class GluedGathaBatLineExpandTests(unittest.TestCase):
+    def test_expand_helpers_split_and_leave_plain_bat(self) -> None:
+        glued = (
+            "Appaṭivedhā Asallakkhaṇā, Anupalakkhaṇena Appaccupalakkhaṇā."
+            "{{sp1}} Asamapekkhaṇā Appaccupekkhaṇā Appaccakkhakammanti."
+        )
+        peeled = split_glued_gatha_printed_line_tail(glued)
+        self.assertIsNotNone(peeled)
+        assert peeled is not None
+        self.assertEqual(
+            peeled[0],
+            "Appaṭivedhā Asallakkhaṇā, Anupalakkhaṇena Appaccupalakkhaṇā.",
+        )
+        self.assertTrue(peeled[1].startswith("Asamapekkhaṇā"))
+        self.assertEqual(
+            expand_glued_gatha_printed_lines(
+                "Aññāṇā Adassanā ceva, Anabhisamayā Ananubodhā."
+            ),
+            ["Aññāṇā Adassanā ceva, Anabhisamayā Ananubodhā."],
+        )
+
+    def test_yamaka_two_clause_line_not_expanded(self) -> None:
+        """35Abhi07 p.76: Yamaka ``X. Y`` is one printed line, not glued verse."""
+        line = "Sotaṃ sotindriyaṃ. Indriyā cakkhundriyaṃ -pa-."
+        self.assertIsNone(split_glued_gatha_printed_line_tail(line))
+        self.assertEqual(expand_glued_gatha_printed_lines(line), [line])
+        dotted = "Sotaṃ sotindriyaṃ.  . Indriyā cakkhundriyaṃ -pa-."
+        self.assertEqual(len(expand_glued_gatha_printed_lines(dotted)), 1)
+
+    def test_space_only_bat_plus_next_line_still_expands(self) -> None:
+        glued = (
+            "Appaṭivedhā Asallakkhaṇā, Anupalakkhaṇena Appaccupalakkhaṇā. "
+            "Asamapekkhaṇā Appaccupekkhaṇā Appaccakkhakammanti."
+        )
+        peeled = split_glued_gatha_printed_line_tail(glued)
+        self.assertIsNotNone(peeled)
+        assert peeled is not None
+        self.assertTrue(peeled[1].startswith("Asamapekkhaṇā"))
+
+    def test_vacchagotta_glued_second_line_folds_cleanly(self) -> None:
+        """13Sam02 Vacchagotta uddāna: block-joined lines 2+3 must not merge."""
+        lines = [
+            Segment(
+                page=223,
+                order=1,
+                item=None,
+                segment_type="gatha",
+                text="Aññāṇā Adassanā ceva, Anabhisamayā Ananubodhā.",
+            ),
+            Segment(
+                page=223,
+                order=2,
+                item=None,
+                segment_type="gatha",
+                text=(
+                    "Appaṭivedhā Asallakkhaṇā, Anupalakkhaṇena Appaccupalakkhaṇā."
+                    "{{sp1}} Asamapekkhaṇā Appaccupekkhaṇā Appaccakkhakammanti."
+                ),
+            ),
+        ]
+        grouped = group_gatha_stanzas(lines)
+        gathas = [s for s in grouped if s.segment_type.startswith("gatha")]
+        flat: list[str] = []
+        for g in gathas:
+            for bat in g.bats or []:
+                for wak in bat.get("waks") or []:
+                    flat.append(str(wak.get("text") or ""))
+        self.assertEqual(flat[0], "Aññāṇā Adassanā ceva,")
+        self.assertEqual(flat[1], "Anabhisamayā Ananubodhā.")
+        self.assertEqual(flat[2], "Appaṭivedhā Asallakkhaṇā,")
+        self.assertEqual(flat[3], "Anupalakkhaṇena Appaccupalakkhaṇā.")
+        self.assertEqual(
+            flat[4],
+            "Asamapekkhaṇā Appaccupekkhaṇā Appaccakkhakammanti.",
+        )
+        # Right วรรค of bat 2 must not retain the third printed line.
+        self.assertNotIn("Asamapekkhaṇā", flat[3])
 
 
 if __name__ == "__main__":

@@ -2,13 +2,19 @@
 
 In the printed edition, a hanging paragraph is one unit whose first line sits at
 the normal first-line indent (~84 pt) and whose following lines sit deeper
-(~106 pt) — not body wrap (~63 pt) and not gāthā indent (~127–149 pt).
+(~97–116 pt) — not body wrap (~63 pt) and not deep gāthā indent (~127–149 pt).
 
 Example (printed page 216 / PDF 239)::
 
     84.2  338. Paṭiggaṇhāti vīmaṃsati paccāharati, …
    105.8      Paṭiggaṇhāti vīmaṃsati na paccāharati, …
    105.8      …
+
+Numbered KN/SN bat verses often use the same first-indent + near-hang pair
+(23Khu06 p.1)::
+
+    84.2  1. Vessantaraṃ taṃ pucchāmi, sakuṇa bhaddamatthu te.
+    97.2      Rajjaṃ kāretukāmena, kiṃ su kiccaṃ kataṃ varaṃ.
 
 Gāthā column (measured 01Vin01)::
 
@@ -17,11 +23,12 @@ Gāthā column (measured 01Vin01)::
    138.7  embedded verse with leading * / +
    149.0  embedded verse continuation (text aligned after marker)
 
-Embedded verse in hang / near-hang band (not hanging paragraphs)::
+Embedded verse in hang / near-hang band (not hanging paragraphs — no
+first-indent head; geometry tagging runs after hanging merge)::
 
     98.3  * Manāpameva… (02Vin02 p.8; apparatus on first bat)
    108.0  following bat lines of the same 1 บทครึ่ง
-    97–103  many SN/KN bat_line body verses
+    97–103  many SN/KN bat_line body verses (all lines in-band)
 
 Centered short labels (measured 01Vin01 p.129+)::
 
@@ -55,7 +62,10 @@ _BODY_FLUSH_LO = 55.0
 _BODY_FLUSH_HI = 72.0
 _FIRST_INDENT_LO = 78.0
 _FIRST_INDENT_HI = 92.0
-_HANG_INDENT_LO = 100.0
+# Includes near-hang ~97 used by numbered KN/SN bat verse bodies (23Khu06).
+# Keep LO aligned with _GATHA_GEOMETRY_INDENT_LO so first-indent + near-hang
+# pairs merge as hanging before geometry can orphan the second line as gāthā.
+_HANG_INDENT_LO = 97.0
 _HANG_INDENT_HI = 116.0
 # Gāthā verse column (deeper than hang; shallower than short centered labels).
 # LO 117: dialogue * lines on 01Vin01 p.223 sit ~119.3 (gap above hang ≤116).
@@ -79,6 +89,7 @@ _CENTER_KINDS = frozenset(
         "verse",
         "verse_continuation",
         "title",
+        "tassuddānaṃ",
         "niṭṭhitaṃ",
     }
 )
@@ -98,6 +109,10 @@ _GLUED_FOOTNOTE_DIGIT_RE = re.compile(
     r"(?<=\w)[0-9]{1,2}(?=(?:\s|[.,;:!?\"'“”…]|$))"
 )
 _MATCH_PREFIX_LEN = 28
+# Numbered bat_line verses (first-indent + hang body) must not merge as hanging
+# paragraphs — they fold to gāthā so วรรค columns align.
+_BAT_LINE_STOP_RE = re.compile(r"[.!?…][\"'\u201c\u201d]?\s*$")
+_BAT_LINE_COMMA_RE = re.compile(r",\s+\S")
 
 _BODY_KINDS = frozenset(
     {
@@ -200,6 +215,14 @@ def _is_hang_indent(x0: float) -> bool:
     return _HANG_INDENT_LO <= x0 <= _HANG_INDENT_HI
 
 
+def _looks_like_bat_printed_line(text: str) -> bool:
+    """True for ``A, B.`` printed บาท (shape only; no prose demotion)."""
+    t = (text or "").strip()
+    if not _BAT_LINE_STOP_RE.search(t):
+        return False
+    return bool(_BAT_LINE_COMMA_RE.search(t))
+
+
 def _is_gatha_indent(x0: float) -> bool:
     """True for the deep verse column (not hang indent, not centered titles)."""
     return _GATHA_INDENT_LO <= x0 <= _GATHA_INDENT_HI
@@ -288,6 +311,47 @@ def _set_source_layout(seg: Any, layout: str | None) -> None:
         seg.source_layout = layout
 
 
+def _common_prefix_len(a: str, b: str) -> int:
+    """Length of the shared character prefix of ``a`` and ``b``."""
+    n = min(len(a), len(b))
+    i = 0
+    while i < n and a[i] == b[i]:
+        i += 1
+    return i
+
+
+_SENTENCE_LEFTOVER_TOKEN_RE = re.compile(r"[.!?…][\"'\u201c\u201d]?$")
+
+
+def _token_is_sentence_leftover(token: str) -> bool:
+    """True for mid-line leftovers like ``pārājikassa.`` or a bare ``.``."""
+    t = (token or "").strip()
+    if not t:
+        return True
+    if t in {".", "..", "…"}:
+        return True
+    return bool(_SENTENCE_LEFTOVER_TOKEN_RE.search(t))
+
+
+def _leading_token_rests(nt: str) -> list[str]:
+    """PDF-line tails after dropping 1–2 leading tokens (hyphen-repair cases).
+
+    Skips drops that peel sentence leftovers (``pārājikassa. . Bhikkhu…``) so a
+    mid-line restart after pot-ma-gyi cannot tie with a true paragraph head.
+    Hyphen-repair tails (``pariyāyena asubhakathaṃ…``) still match.
+    """
+    parts = nt.split()
+    rests: list[str] = []
+    for i in range(1, min(3, len(parts))):
+        dropped = parts[:i]
+        if any(_token_is_sentence_leftover(tok) for tok in dropped):
+            continue
+        rest = " ".join(parts[i:])
+        if rest:
+            rests.append(rest)
+    return rests
+
+
 def _match_after_leading_tokens(nt: str, needle: str, prefix: str) -> bool:
     """Match when PDF line still has a hyphen-tail token before ``needle``.
 
@@ -295,34 +359,62 @@ def _match_after_leading_tokens(nt: str, needle: str, prefix: str) -> bool:
     onto the previous segment, so the stored page-start may begin at the
     following word while the PDF line still starts with ``pariyāyena``.
     """
-    parts = nt.split()
-    for i in range(1, min(3, len(parts))):
-        rest = " ".join(parts[i:])
-        if not rest:
-            continue
+    for rest in _leading_token_rests(nt):
         rest_prefix = rest[:_MATCH_PREFIX_LEN]
         if needle.startswith(rest_prefix) or rest.startswith(prefix):
             return True
     return False
 
 
+def _line_match_score(nt: str, needle: str, prefix: str) -> int | None:
+    """Return match quality for a normalized PDF line, or ``None`` if no match.
+
+    Prefix gate (``_MATCH_PREFIX_LEN``) keeps recall for wrapped body lines;
+    among gated candidates the longest shared prefix wins so co-page labels
+    that share an opening (01Vin01 p.157 ``Vatthuvisārakassa ekamūlakassa…``
+    ``khaṇḍacakkaṃ`` vs ``baddhacakkaṃ``) do not steal each other's geometry.
+    """
+    line_prefix = nt[:_MATCH_PREFIX_LEN]
+    gated = bool(needle.startswith(line_prefix) or nt.startswith(prefix))
+    if not gated and not _match_after_leading_tokens(nt, needle, prefix):
+        return None
+    direct = _common_prefix_len(nt, needle)
+    score = direct
+    for rest in _leading_token_rests(nt):
+        score = max(score, _common_prefix_len(rest, needle))
+    if nt == needle:
+        # Exact line wins over a longer co-prefix sibling.
+        score = max(score, len(needle) + 1)
+    # Prefer line-start alignment when a rest-only match would otherwise tie.
+    if direct == score and (nt.startswith(prefix) or needle.startswith(line_prefix)):
+        score += 1
+    return score
+
+
 def _match_cached_line(
     lines: list[PageLine], text: str
 ) -> PageLine | None:
+    """Best PDF body line for ``text`` (longest shared normalized prefix).
+
+    Returns the first line among equal-best scores (stable top-to-bottom).
+    """
     needle = normalize_match_text(text)
     if not needle:
         return None
     prefix = needle[:_MATCH_PREFIX_LEN]
+    best: PageLine | None = None
+    best_score = -1
     for line in lines:
         nt = normalize_match_text(line.text)
         if not nt:
             continue
-        line_prefix = nt[:_MATCH_PREFIX_LEN]
-        if needle.startswith(line_prefix) or nt.startswith(prefix):
-            return line
-        if _match_after_leading_tokens(nt, needle, prefix):
-            return line
-    return None
+        score = _line_match_score(nt, needle, prefix)
+        if score is None:
+            continue
+        if score > best_score:
+            best_score = score
+            best = line
+    return best
 
 
 def _seg_page(seg: Any) -> int:
@@ -451,6 +543,13 @@ def hanging_groups_on_page(page: Any, *, pdf_page: int) -> list[HangingGroup]:
             hang.append(body)
             j += 1
         if hang:
+            # Numbered bat_line verses (head + every hang line ``A, B.``) are
+            # gāthā, not hanging paragraphs — leave lines for geometry fold.
+            if _looks_like_bat_printed_line(head.text) and all(
+                _looks_like_bat_printed_line(ln) for ln in hang
+            ):
+                i += 1
+                continue
             groups.append(
                 HangingGroup(
                     pdf_page=pdf_page,
@@ -672,7 +771,15 @@ def tag_center_layout_by_geometry(
         matched = _match_cached_line(line_cache[pdf_page], roman)
         if matched is None:
             unmatched += 1
-            if layout == _CENTER_LAYOUT:
+            # Keep forced centers for summary furniture when PDF match fails.
+            from cs_roman_text import (
+                is_expansion_parenthetical,
+                is_tassuddana_label,
+            )
+
+            if layout == _CENTER_LAYOUT and not (
+                is_tassuddana_label(roman) or is_expansion_parenthetical(roman)
+            ):
                 _set_source_layout(seg, None)
                 cleared += 1
             continue
@@ -680,9 +787,17 @@ def tag_center_layout_by_geometry(
             if layout != _CENTER_LAYOUT:
                 _set_source_layout(seg, _CENTER_LAYOUT)
                 tagged += 1
-        elif layout == _CENTER_LAYOUT:
-            _set_source_layout(seg, None)
-            cleared += 1
+        else:
+            from cs_roman_text import (
+                is_expansion_parenthetical,
+                is_tassuddana_label,
+            )
+
+            if layout == _CENTER_LAYOUT and not (
+                is_tassuddana_label(roman) or is_expansion_parenthetical(roman)
+            ):
+                _set_source_layout(seg, None)
+                cleared += 1
 
     sandwich = tag_center_layout_by_sandwich(segments)
     return {
@@ -691,3 +806,178 @@ def tag_center_layout_by_geometry(
         "unmatched": unmatched,
         **sandwich,
     }
+
+
+# A centered block is reconstructed from a run of consecutive centered PDF
+# lines. Each line's text is normalized the same way ``_normalize_inline``
+# (extract_cs_roman_pdf) would have joined them, so the no-break join must
+# reproduce the segment's stored Roman exactly before any ``{{br}}`` is added.
+_WS_RE = re.compile(r"[ \t]{2,}")
+
+
+def _normalize_line_roman(text: str) -> str:
+    """Per-line normalization mirroring ``_normalize_inline`` on a single line."""
+    from cs_roman_text import normalize_printable_dashes
+
+    return normalize_printable_dashes(_WS_RE.sub(" ", (text or "").strip()))
+
+
+def _find_centered_start(
+    lines: list[PageLine], page_width: float, needle: str
+) -> int | None:
+    """Index of the first centered line whose text opens ``needle``.
+
+    Uses the same prefix-gate + longest-prefix scoring as ``_match_cached_line``
+    but restricted to centered lines, so a body-prose line that merely shares an
+    opening cannot steal the start of a centered block.
+    """
+    if not needle:
+        return None
+    prefix = needle[:_MATCH_PREFIX_LEN]
+    best_idx: int | None = None
+    best_score = -1
+    for i, ln in enumerate(lines):
+        if not _is_center_line(ln, page_width):
+            continue
+        nt = normalize_match_text(ln.text)
+        if not nt:
+            continue
+        line_prefix = nt[:_MATCH_PREFIX_LEN]
+        gated = needle.startswith(line_prefix) or nt.startswith(prefix)
+        if not gated and not _match_after_leading_tokens(nt, needle, prefix):
+            continue
+        score = _common_prefix_len(nt, needle)
+        for rest in _leading_token_rests(nt):
+            score = max(score, _common_prefix_len(rest, needle))
+        if nt == needle:
+            score = max(score, len(needle) + 1)
+        if score > best_score:
+            best_score = score
+            best_idx = i
+    return best_idx
+
+
+def _reconstruct_centered_lines(
+    roman: str, lines: list[PageLine], page_width: float
+) -> list[PageLine] | None:
+    """Consecutive centered PDF lines composing ``roman``, or ``None``.
+
+    Walks forward from the start line, accepting each centered line whose text
+    continues the segment, until the no-break join reproduces ``roman``
+    exactly. A non-centered line or a line that breaks the chain ends the walk.
+    """
+    needle = normalize_match_text(roman)
+    if not needle:
+        return None
+    start = _find_centered_start(lines, page_width, needle)
+    if start is None:
+        return None
+    composing: list[PageLine] = []
+    parts: list[str] = []
+    i = start
+    n = len(lines)
+    while i < n:
+        ln = lines[i]
+        if not _is_center_line(ln, page_width):
+            break
+        nt = normalize_match_text(ln.text)
+        if not nt:
+            i += 1
+            continue
+        # Skip purely decorative centered lines (e.g. the ``_____`` separator
+        # the typesetter sets between sections). They carry no letters, so they
+        # cannot be a content line of the segment; absorbing them would splice
+        # a ``{{br}}`` that survives after the decoration is stripped
+        # downstream, leaving a dangling trailing break.
+        if not any(c.isalpha() for c in nt):
+            i += 1
+            continue
+        candidate = " ".join(parts + [nt])
+        # The accumulated text must stay aligned with the segment: either it is
+        # a prefix of the segment, or the segment is a prefix of it (last line
+        # may end the block exactly).
+        if not (needle.startswith(candidate) or candidate.startswith(needle)):
+            break
+        parts.append(nt)
+        composing.append(ln)
+        if needle == candidate:
+            return composing
+        i += 1
+    # Final exact check (covers candidate.startswith(needle) overshoot cases).
+    if needle == " ".join(parts):
+        return composing
+    return None
+
+
+def restore_centered_line_breaks(
+    doc: Any,
+    segments: list[Any],
+    *,
+    content_start: int,
+) -> dict[str, int]:
+    """Re-insert typesetter's manual line breaks into centered multi-line segments.
+
+    The extractor collapses intra-block newlines to spaces (``_normalize_inline``
+    in ``extract_cs_roman_pdf``), so a centered block the source set as N
+    independent centered lines — e.g. the pātimokkha-uddesa formula
+    ``Ime kho panāyasmanto … dhammā`` / ``uddesaṃ āgacchanti.`` — is stored as one
+    joined string with no break marker. This pass uses PDF line geometry to
+    recover those breaks: it finds the run of consecutive centered PDF lines
+    that compose the segment and, when the reconstruction matches the stored
+    Roman exactly, splices ``{{br}}`` (``BR_MARKER``) at the line boundaries.
+
+    Non-destructive: when the reconstruction does not match exactly, the segment
+    is left unchanged (current behavior). Thai is re-derived downstream from
+    the updated Roman (``{{br}}`` survives ``roman_to_thai``). Idempotent: a
+    segment already carrying ``{{br}}`` is skipped. Returns counts for CLI /
+    extract stats.
+    """
+    if fitz is None:
+        raise RuntimeError("PyMuPDF (pymupdf) is required")
+
+    from cs_roman_text import BR_MARKER
+
+    restored = 0
+    skipped_existing = 0
+    line_cache: dict[int, list[PageLine]] = {}
+    width_cache: dict[int, float] = {}
+
+    for seg in segments:
+        if _get_source_layout(seg) != _CENTER_LAYOUT:
+            continue
+        if _get_segment_type(seg) not in _CENTER_KINDS:
+            continue
+        # Nested gāthā carries its text in ``bats``, not ``text``.
+        if getattr(seg, "bats", None) if not isinstance(seg, dict) else seg.get("bats"):
+            continue
+        roman = segment_roman_text(seg)
+        if not roman or not roman.strip():
+            continue
+        if BR_MARKER in roman:
+            skipped_existing += 1
+            continue
+        pdf_page = _seg_pdf_page(seg, content_start=content_start)
+        if pdf_page is None or pdf_page < 1 or pdf_page > doc.page_count:
+            continue
+        if pdf_page not in line_cache:
+            page = doc[pdf_page - 1]
+            line_cache[pdf_page] = page_body_lines(page)
+            width_cache[pdf_page] = float(page.rect.width)
+        composing = _reconstruct_centered_lines(
+            roman, line_cache[pdf_page], width_cache[pdf_page]
+        )
+        if composing is None or len(composing) < 2:
+            continue
+        # Exact gate: the no-break join of the per-line normalized texts must
+        # reproduce the stored Roman before we splice any break markers.
+        parts = [_normalize_line_roman(ln.text) for ln in composing]
+        if " ".join(parts) != roman:
+            continue
+        new_roman = (" " + BR_MARKER + " ").join(parts)
+        if isinstance(seg, dict):
+            seg["text"] = new_roman
+        else:
+            seg.text = new_roman
+        restored += 1
+
+    return {"centered_breaks_restored": restored, "centered_breaks_existing": skipped_existing}

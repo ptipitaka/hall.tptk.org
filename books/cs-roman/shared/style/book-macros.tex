@@ -11,6 +11,78 @@
   \dimexpr(#1)*\csromanprintingscalenum/\csromanprintingscaleden\relax
 }
 
+% Closer-chain state: consecutive \\nitthitam / closer bands share the
+% optical paragraph gap between lines; bottom air is deferred until the
+% next non-closer block (see \\csroman@closerband).
+% Under \\nointerlineskip, bare \\tipitakaparskip is shorter than TeX prose
+% paragraph air (\\baselineskip packing + \\parskip). Match gāthā stanza
+% compensation: \\tipitakaparskip + 0.3\\baselineskip (= optical par_skip).
+% Symmetric band: top = bottom = that gap. Deferred bottom is the sole gap
+% to the next block — \\csromanapplyclosergap suppresses a stacked
+% \\parskip; structural titles use \\addvspace so closer bottom merges with
+% their before-skip (max, not sum).
+\makeatletter
+\newif\ifcsroman@aftercloser
+\newif\ifcsroman@noparskip
+\newif\ifcsroman@afterheader
+\newlength{\csroman@closerbottom}
+\newlength{\csroman@prevheaderafter}
+% End a structural-title stack so the next h1…h6 / cha uses the full
+% before-skip (section break after prose), not the tight inter-title band.
+\newcommand{\csromanclearheaderstack}{%
+  \global\csroman@afterheaderfalse
+  \global\csroman@prevheaderafter\z@
+}
+\newcommand{\csromanmarkheaderstack}{%
+  \global\csroman@afterheadertrue
+}
+% Record this title's after-skip so a following stacked title can replace it
+% (marks / penalties after the glue make \\lastskip unreliable).
+\newcommand{\csromanrememberheaderafter}[1]{%
+  \global\csroman@prevheaderafter=#1\relax
+}
+% Choose before-skip: stacked titles → exact \csromanheaderstackskip
+% (remove the previous title's after-skip first); else level base.
+% Requires \csromanheaderspec already run (defines \csromanheaderbeforeskip).
+\newcommand{\csromanapplyheaderbeforeskip}{%
+  \ifcsroman@afterheader
+    \nointerlineskip
+    \ifdim\csroman@prevheaderafter>\z@
+      \vskip-\csroman@prevheaderafter
+    \fi
+    \vskip\csromanheaderstackskip\relax
+  \else
+    \addvspace{\csromanheaderbeforeskip}%
+  \fi
+}
+\newcommand{\csroman@closergap}{%
+  \dimexpr\tipitakaparskip+0.3\baselineskip\relax
+}
+\newcommand{\csromanflushcloserbottom}{%
+  \ifcsroman@aftercloser
+    \nointerlineskip
+    \addvspace{\csroman@closerbottom}%
+    \global\csroman@aftercloserfalse
+    \global\csroman@closerbottom\z@
+    \global\csroman@prevclosertier\z@
+    \global\csroman@noparskiptrue
+  \fi
+}
+% Zero \\parskip for the next paragraph only (call inside a group that
+% wraps that paragraph). Clears the flag either way.
+\newcommand{\csromanapplyclosergap}{%
+  \ifcsroman@noparskip
+    \global\csroman@noparskipfalse
+    \setlength{\parskip}{0pt}%
+  \fi
+}
+% Structural / already-zero-parskip blocks: consume the flag so it cannot
+% leak into the following prose paragraph.
+\newcommand{\csromanclearclosergap}{%
+  \global\csroman@noparskipfalse
+}
+\makeatother
+
 % Running-head fields — store plain text only (generated bodies may wrap
 % titles in \textbf; \csromanplainarg strips it).
 %   even/verso head: ปิฎก นิกาย ปาฬิ (macros; only the parts present)
@@ -75,7 +147,13 @@
 \newcommand{\csromanheadhii}{}
 \newcommand{\csroman@setheadfield}[2]{%
   \begingroup
+  % Running heads cannot carry footnotes / inserts; gobble them so a heading
+  % that still has \\footnote in its display text does not blow \\protected@xdef.
   \renewcommand{\textbf}[1]{##1}%
+  \renewcommand{\footnote}[1]{}%
+  \renewcommand{\csromansharedfootnote}[2]{}%
+  \renewcommand{\csromansymbolfootnote}[2]{}%
+  \renewcommand{\csromansymbolfoottext}[2]{}%
   \protected@xdef#1{#2}%
   \endgroup
 }
@@ -228,6 +306,8 @@
 }
 
 \newcommand{\pitaka}[1]{%
+  \csromanflushcloserbottom
+  \csromanclearclosergap
   \par
   \Needspace{4\baselineskip}%
   \begingroup
@@ -243,21 +323,39 @@
   \setcsromanpitaka{#1}%
 }
 
+% Mid-volume new pāḷi open (printing/reading): finish the current sheet,
+% then guarantee a recto (odd) page so the pāḷi title stack never starts on
+% a verso. Blank verso (if inserted) is plain — no running head. First pāḷi
+% after มาติกา already sits on a recto via \cleardoublepage; generate emits
+% this only before a *subsequent* distinct gambhīra (and its nikāya prelude).
+\newcommand{\csromanpalirecto}{%
+  \csromanflushcloserbottom
+  \par
+  \ifdim\pagetotal>0pt
+    \clearpage
+  \fi
+  \csromanensureoddpage
+}
+
 \newcommand{\gambhira}[1]{%
+  \csromanflushcloserbottom
+  \csromanclearclosergap
   \par
   \Needspace{5\baselineskip}%
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
-  % Source Pārājikapāḷi ≈36 bp bold (in-page title, not running head).
-  \csromanheadingfont{36bp}{42bp}{\bfseries\csromanplainarg{#1}\par}%
+  % Book / pāḷi display (``boo``): bold, clearly above ``cha`` (16 bp) but
+  % smaller than source Pārājikapāḷi ≈36 bp — long Abhidhamma titles
+  % (e.g. ธมฺมานุโลมปจฺจนีย ทุกปฏฺฐานปาฬิ) need room without losing rank.
+  \csromanheadingfont{24bp}{30bp}{\bfseries\csromanplainarg{#1}\par}%
   \nointerlineskip
-  % After-skips −20% (were 34bp / 24bp).
-  \vskip\csromandim{27.2bp}\relax
+  % After-skips tuned with the 24 bp display (were 27.2bp / 19.2bp at 36 bp).
+  \vskip\csromandim{22bp}\relax
   % Source rule ≈33 bp wide (~0.09\textwidth).
   \noindent\makebox[\textwidth]{\rule{0.09\textwidth}{0.5pt}}\par
   \nointerlineskip
-  \vskip\csromandim{19.2bp}\relax
+  \vskip\csromandim{16bp}\relax
   \endgroup
   \setcsromanheadpali{#1}%
   \pagestyle{csroman}%
@@ -265,6 +363,8 @@
 }
 
 \newcommand{\namakkaram}[1]{%
+  \csromanflushcloserbottom
+  \csromanclearclosergap
   \par
   \Needspace{3\baselineskip}%
   \begingroup
@@ -318,22 +418,30 @@
 \makeatother
 
 \newcommand{\csromanchapterheadbody}[1]{%
+  \csromanclearclosergap
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
   % Source chapter (e.g. Verañjakaṇḍa) ≈16 bp bold.
   \csromanheadingfont{16bp}{20bp}{\bfseries #1\par}%
   \nointerlineskip
-  % After-skip −20% (were 15bp).
-  \vskip\csromandim{12bp}\relax
   \endgroup
+  % After-skip −20% (were 15bp). \addvspace so a following stacked h1…h6
+  % merges to max(after, stack) instead of summing.
+  \nobreak
+  \addvspace{\csromandim{12bp}}%
+  \csromanrememberheaderafter{\csromandim{12bp}}%
+  \nobreak
+  \csromanmarkheaderstack
 }
 
 % Inline chapter on an already-open sheet (opening stack: Verañjakaṇḍa).
 \newcommand{\chapterhead}[1]{%
+  \csromanflushcloserbottom
   \par
   \csromanmarkcha{#1}%
-  \Needspace{3.5\baselineskip}%
+  % Title band + ≥2 body lines (see \csromanheaderbody).
+  \Needspace{5.5\baselineskip}%
   \csromanchapterheadbody{#1}%
 }
 
@@ -343,6 +451,7 @@
 % would also desync source page numbers.  Only leave the current page when it
 % already holds material.
 \newcommand{\chapterheadpage}[1]{%
+  \csromanflushcloserbottom
   \par
   \ifdim\pagetotal>0pt
     \clearpage
@@ -355,6 +464,7 @@
 
 % Reading-mode variant: prefer recto when mid-flow (physical pages, not sync).
 \newcommand{\chapterheadpageread}[1]{%
+  \csromanflushcloserbottom
   \par
   \ifdim\pagetotal>0pt
     \clearpage
@@ -379,9 +489,15 @@
 %   h5  12 bp italic        — style contrast (not size)
 %   h6  12 bp medium        — quietest; spacing mainly
 %
-% Before-skip base tuned for section breaks (h1…h6: 10 / 9 / 7 / 6.5 / 5 / 4.5 pt);
-% \csromanheader adds one body \baselineskip on top of that base.
+% Before-skip (after prose / section break): h1…h6 bases
+% 10 / 9 / 7 / 6.5 / 5 / 4.5 pt — more above than below; no extra
+% \baselineskip (that doubled air in title stacks).
+% Stacked titles (cha/h1…h6 immediately after another): use
+% \csromanheaderstackskip only (~source saṃyutta→vagga ink gap ≈17pt).
+% \csromanheaderneed ≈ vertical size of the heading band (before+title+after);
+% \csromanheaderbody adds +3\baselineskip so ≥2 body lines must fit with it.
 % Legacy aliases: \titlehead → h1, \subhead → h2.
+\newcommand{\csromanheaderstackskip}{\csromandim{14pt}}
 \newcommand{\csromanheaderspec}[1]{%
   \ifcase#1\relax
   \or % 1
@@ -438,9 +554,8 @@
 
 \newcommand{\csromanheader}[2]{%
   % #1 = 1..6, #2 = text
-  % Extra \baselineskip above each level keeps the relative h1…h6 ladder
-  % while giving every header roughly one body line of air before it.
   % Recto marks: h1 → clear h2; h2 → keep h1 and set h2; h3…h6 untouched.
+  \csromanflushcloserbottom
   \par
   \ifnum#1=1\relax
     \csromanmarkh{#2}%
@@ -454,21 +569,38 @@
 % Display-only header (marks already set — used for compound vagga+sikkhāpada
 % so h1/h2 get equal \csromanheadsep gaps in the recto head).
 \newcommand{\csromanheadernomark}[2]{%
+  \csromanflushcloserbottom
   \par
   \csromanheaderbody{#1}{#2}%
 }
 \newcommand{\csromanheaderbody}[2]{%
+  % #1 = 1..6, #2 = text
+  % Keep-with-next: Needspace alone is not enough — if only the title band
+  % fits, TeX still breaks before the following prose (orphan heading at page
+  % foot, e.g. 02Vin02 「1. ลสุณวคฺค 9. นวมสิกฺขาปท」). Reserve heading + ≥2
+  % body lines, then \nobreak so the first paragraph cannot detach.
+  % Flush deferred closer bottom *before* Needspace so it is not left between
+  % the title and the following prose. \\addvspace merges closer bottom /
+  % previous title after-skip with this before-skip (max, not sum).
+  % \csromanapplyheaderbeforeskip: stack skip when previous block was a title.
+  \csromanflushcloserbottom
+  \csromanclearclosergap
   \csromanheaderspec{#1}%
-  \Needspace{\dimexpr\csromanheaderneed+\baselineskip\relax}%
-  \vspace{\dimexpr\csromanheaderbeforeskip+\baselineskip\relax}%
+  \Needspace{\dimexpr\csromanheaderneed+3\baselineskip\relax}%
+  \csromanapplyheaderbeforeskip
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
   \csromanheadingfont{\csromanheaderfontsize}{\csromanheaderbaselineskip}{%
     \csromanheaderface #2\par
   }%
+  \nointerlineskip
   \endgroup
-  \vspace{\csromanheaderafterskip}%
+  \nobreak
+  \addvspace{\csromanheaderafterskip}%
+  \csromanrememberheaderafter{\csromanheaderafterskip}%
+  \nobreak
+  \csromanmarkheaderstack
 }
 
 \newcommand{\titlehead}[1]{\csromanheader{1}{#1}}
@@ -536,68 +668,130 @@
 }
 
 % Geometry / sandwich centered labels (source_layout=center): body face,
-% centered, prose leading +20%. Consecutive lines share that baselineskip —
-% not the airy niṭṭhitaṃ band. Avoid ``center`` env (trivlist \topsep).
-% Set \baselineskip after \normalsize so the size command does not wipe it.
+% centered, body leading (same \baselineskip as prose). Consecutive lines share
+% that baselineskip so a typesetter's manual line break ({{br}} -> \\) inside
+% a centered block sits at the same pitch as adjacent body lines, not the
+% airy +20% band. Avoid ``center`` env (trivlist \topsep). \normalsize already
+% carries \linespread{1.5}; do not inflate \baselineskip further.
 \newcommand{\csromancenter}[1]{%
+  \csromanflushcloserbottom
+  \csromanclearclosergap
+  \csromanclearheaderstack
   \par
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
   \normalsize\mdseries
-  \setlength{\baselineskip}{1.2\baselineskip}%
   \csromanplainarg{#1}\par
   \endgroup
 }
 
 % Section closers (niṭṭhitaṃ / samattaṃ / end formulas): a quiet structural
-% band — lesser than a heading, stronger than body prose. CS Roman source:
-% body size, centered. Major closers (kaṇḍa / large sections) may carry
-% ``\textbf`` from extract; keep bold weight but never enlarge beyond
-% ``\normalsize`` (source uses ~16bp; we mark emphasis with bold only).
-% Vertical air: top 14bp; bottom 12.74bp (= 9.8bp + 30%).
-% Optional short rule stays on \nitthitamruled / \csromansectionrule.
+% band — lesser than a heading, stronger than body prose. Always
+% ``\normalsize`` (never enlarge to heading sizes). Three visual tiers from
+% lexical closer_level (see cs_roman_text.classify_section_closer):
+%   leaf  (0) — default gap = \csroman@closergap
+%   mid   (1) — gap + 0.5\baselineskip (ordinal vagga / saṃyutta / …)
+%   major (2) — gap + 1\baselineskip + \bfseries (pāḷi / kaṇḍa / …)
+% Consecutive closers share one inter-line gap = max(prev tier, this tier).
+% Ruled closers add 0.5\baselineskip to deferred bottom after the rule.
 % Avoid ``center`` env (trivlist).
 % No \Needspace here: that moved only the closer to the next page when the
 % band did not fit, leaving นิฏฺฐิตํ alone at page head. \par\nobreak keeps
 % the closer with the preceding paragraph's last lines instead.
 \makeatletter
-\newcommand{\csroman@closerband}[1]{%
-  \begingroup
-  \setlength{\parskip}{0pt}%
-  \centering
-  \nointerlineskip
-  \vskip\csromandim{14bp}\relax
-  {\normalsize #1\par}%
-  \nointerlineskip
-  \vskip\csromandim{12.74bp}\relax
-  \endgroup
+\newcount\csroman@prevclosertier
+\newcommand{\csroman@setclosergapdim}[1]{%
+  \ifcase#1\relax
+    \dimen@=\csroman@closergap
+  \or
+    \dimen@=\dimexpr\csroman@closergap+0.5\baselineskip\relax
+  \or
+    \dimen@=\dimexpr\csroman@closergap+\baselineskip\relax
+  \else
+    \dimen@=\csroman@closergap
+  \fi
 }
-\newcommand{\csroman@closerbandruled}[1]{%
+% #1 = tier 0|1|2; #2 = closer body
+\newcommand{\csroman@closerbandat}[2]{%
+  \csromanclearheaderstack
   \begingroup
   \setlength{\parskip}{0pt}%
   \centering
+  \count@=#1\relax
+  \ifcsroman@aftercloser
+    \ifnum\csroman@prevclosertier>\count@
+      \count@=\csroman@prevclosertier
+    \fi
+  \fi
+  \csroman@setclosergapdim{\count@}%
   \nointerlineskip
-  \vskip\csromandim{14bp}\relax
-  {\normalsize #1\par}%
+  \vskip\dimen@
+  \ifnum#1=2
+    {\normalsize\bfseries #2\par}%
+  \else
+    {\normalsize #2\par}%
+  \fi
+  \endgroup
+  \csroman@setclosergapdim{#1}%
+  \global\csroman@closerbottom=\dimen@
+  \global\csroman@prevclosertier=#1\relax
+  \global\csroman@afterclosertrue
+}
+\newcommand{\csroman@closerbandruledat}[2]{%
+  \csromanclearheaderstack
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \centering
+  \count@=#1\relax
+  \ifcsroman@aftercloser
+    \ifnum\csroman@prevclosertier>\count@
+      \count@=\csroman@prevclosertier
+    \fi
+  \fi
+  \csroman@setclosergapdim{\count@}%
+  \nointerlineskip
+  \vskip\dimen@
+  \ifnum#1=2
+    {\normalsize\bfseries #2\par}%
+  \else
+    {\normalsize #2\par}%
+  \fi
   \nointerlineskip
   \nobreak
   \vskip\baselineskip\relax
   \noindent\makebox[\textwidth]{\rule{0.09\textwidth}{0.4pt}}\par
-  \nointerlineskip
-  \vskip\csromandim{23.4bp}\relax
   \endgroup
+  \csroman@setclosergapdim{#1}%
+  \global\csroman@closerbottom=\dimexpr\dimen@+0.5\baselineskip\relax
+  \global\csroman@prevclosertier=#1\relax
+  \global\csroman@afterclosertrue
 }
+% Back-compat aliases (leaf).
+\newcommand{\csroman@closerband}[1]{\csroman@closerbandat{0}{#1}}
+\newcommand{\csroman@closerbandruled}[1]{\csroman@closerbandruledat{0}{#1}}
 \newcommand{\nitthitam}[1]{%
   \par\nobreak
-  \csroman@closerband{#1}%
+  \csroman@closerbandat{0}{#1}%
+}
+\newcommand{\nitthitammid}[1]{%
+  \par\nobreak
+  \csroman@closerbandat{1}{#1}%
+}
+\newcommand{\nitthitammajor}[1]{%
+  \par\nobreak
+  \csroman@closerbandat{2}{#1}%
 }
 
 % Short centered end-of-section rule (``section_rule``). Width matches the
 % source underscore glyph run (~33 bp ≈ 0.09\textwidth). Gap above the rule
-% equals one body line (\baselineskip). Bottom air 23.4bp (= 18bp + 30%).
+% equals one body line (\baselineskip). Bottom air =
+% \csroman@closergap + 0.5\baselineskip (same as ruled closer bottom).
 % \nobreak (not \Needspace): stay with the preceding block when possible.
 \newcommand{\csromansectionrule}{%
+  \csromanflushcloserbottom
+  \csromanclearclosergap
+  \csromanclearheaderstack
   \par\nobreak
   \begingroup
   \setlength{\parskip}{0pt}%
@@ -606,7 +800,7 @@
   \vskip\baselineskip\relax
   \noindent\makebox[\textwidth]{\rule{0.09\textwidth}{0.4pt}}\par
   \nointerlineskip
-  \vskip\csromandim{23.4bp}\relax
+  \vskip\dimexpr\csroman@closergap+0.5\baselineskip\relax
   \endgroup
 }
 
@@ -615,79 +809,153 @@
 % cannot land between closer text and the rule.
 \newcommand{\nitthitamruled}[1]{%
   \par\nobreak
-  \csroman@closerbandruled{#1}%
+  \csroman@closerbandruledat{0}{#1}%
 }
+\newcommand{\nitthitammidruled}[1]{%
+  \par\nobreak
+  \csroman@closerbandruledat{1}{#1}%
+}
+\newcommand{\nitthitammajorrule}[1]{%
+  \par\nobreak
+  \csroman@closerbandruledat{2}{#1}%
+}
+\newcommand{\nitthitammajorruled}[1]{\nitthitammajorrule{#1}}
 
 % Body prose + section closer in one unbreakable unit (generator pairs
 % segments so the closer cannot orphan at a page head alone).
-\newcommand{\prosewithcloser}[2]{%
+% Tiered variants: plain / mid / major (+ ruled).
+\newcommand{\prosewithcloserat}[3]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
-  #1\par\nobreak
-  \csroman@closerband{#2}%
+  #2\par\nobreak
+  \endgroup
+  \csroman@closerbandat{#1}{#3}%
 }
-\newcommand{\prosewithcloserruled}[2]{%
+\newcommand{\prosewithcloserruledat}[3]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
-  #1\par\nobreak
-  \csroman@closerbandruled{#2}%
+  #2\par\nobreak
+  \endgroup
+  \csroman@closerbandruledat{#1}{#3}%
 }
-\newcommand{\proseitemwithcloser}[3]{%
+\newcommand{\prosewithcloser}[2]{\prosewithcloserat{0}{#1}{#2}}
+\newcommand{\prosewithclosermid}[2]{\prosewithcloserat{1}{#1}{#2}}
+\newcommand{\prosewithclosermajor}[2]{\prosewithcloserat{2}{#1}{#2}}
+\newcommand{\prosewithcloserruled}[2]{\prosewithcloserruledat{0}{#1}{#2}}
+\newcommand{\prosewithclosermidruled}[2]{\prosewithcloserruledat{1}{#1}{#2}}
+\newcommand{\prosewithclosermajorrule}[2]{\prosewithcloserruledat{2}{#1}{#2}}
+\newcommand{\prosewithclosermajorruled}[2]{\prosewithclosermajorrule{#1}{#2}}
+\newcommand{\proseitemwithcloserat}[4]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
-  \indent\textbf{#1.}\hspace{0.33em}#2\par\nobreak
-  \csroman@closerband{#3}%
+  \indent\textbf{#2.}\hspace{0.33em}#3\par\nobreak
+  \endgroup
+  \csroman@closerbandat{#1}{#4}%
 }
-\newcommand{\proseitemwithcloserruled}[3]{%
+\newcommand{\proseitemwithcloserruledat}[4]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
-  \indent\textbf{#1.}\hspace{0.33em}#2\par\nobreak
-  \csroman@closerbandruled{#3}%
+  \indent\textbf{#2.}\hspace{0.33em}#3\par\nobreak
+  \endgroup
+  \csroman@closerbandruledat{#1}{#4}%
 }
-\newcommand{\prosecontwithcloser}[2]{%
+\newcommand{\proseitemwithcloser}[3]{\proseitemwithcloserat{0}{#1}{#2}{#3}}
+\newcommand{\proseitemwithclosermid}[3]{\proseitemwithcloserat{1}{#1}{#2}{#3}}
+\newcommand{\proseitemwithclosermajor}[3]{\proseitemwithcloserat{2}{#1}{#2}{#3}}
+\newcommand{\proseitemwithcloserruled}[3]{\proseitemwithcloserruledat{0}{#1}{#2}{#3}}
+\newcommand{\proseitemwithclosermidruled}[3]{\proseitemwithcloserruledat{1}{#1}{#2}{#3}}
+\newcommand{\proseitemwithclosermajorruled}[3]{\proseitemwithcloserruledat{2}{#1}{#2}{#3}}
+\newcommand{\prosecontwithcloserat}[3]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
-  \noindent #1\par\nobreak
-  \csroman@closerband{#2}%
+  \noindent #2\par\nobreak
+  \endgroup
+  \csroman@closerbandat{#1}{#3}%
 }
-\newcommand{\prosecontwithcloserruled}[2]{%
+\newcommand{\prosecontwithcloserruledat}[3]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
-  \noindent #1\par\nobreak
-  \csroman@closerbandruled{#2}%
+  \noindent #2\par\nobreak
+  \endgroup
+  \csroman@closerbandruledat{#1}{#3}%
 }
+\newcommand{\prosecontwithcloser}[2]{\prosecontwithcloserat{0}{#1}{#2}}
+\newcommand{\prosecontwithclosermid}[2]{\prosecontwithcloserat{1}{#1}{#2}}
+\newcommand{\prosecontwithclosermajor}[2]{\prosecontwithcloserat{2}{#1}{#2}}
+\newcommand{\prosecontwithcloserruled}[2]{\prosecontwithcloserruledat{0}{#1}{#2}}
+\newcommand{\prosecontwithclosermidruled}[2]{\prosecontwithcloserruledat{1}{#1}{#2}}
+\newcommand{\prosecontwithclosermajorruled}[2]{\prosecontwithcloserruledat{2}{#1}{#2}}
 \makeatother
 
 % --- Body prose (CS Roman: first-line indent, NOT hanging) ---------------
 
 % ข้อมีเลข: เลขอยู่บนบรรทัดแรกที่ย่อหน้า บรรทัดถัดไปชิดขอบซ้าย
 \newcommand{\proseitem}[2]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
   \indent\textbf{#1.}\hspace{0.33em}#2\par
+  \endgroup
 }
 
 % ย่อหน้าธรรมดา / ข้อเดิมไม่มีเลขซ้ำ — ย่อบรรทัดแรก
 \newcommand{\prose}[1]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
   #1\par
+  \endgroup
 }
 
 % ต่อกลางย่อหน้าข้ามหน้า — ไม่ย่อ (ชิดซ้าย) ไม่ซ้ำเลข
 \newcommand{\prosecont}[1]{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
+  \begingroup
+  \csromanapplyclosergap
   \hangindent=0pt
   \hangafter=1
   \noindent #1\par
+  \endgroup
 }
 
 % Hanging paragraph: body lines align under the first glyph after the item label
@@ -698,8 +966,11 @@
 \newlength{\hangingbodyindent}
 \setlength{\hangingbodyindent}{2\tipitakahang}
 \newcommand{\csromanhangingbegin}{%
+  \csromanflushcloserbottom
+  \csromanclearheaderstack
   \par
   \begingroup
+  \csromanapplyclosergap
   \setlength{\parskip}{0pt}%
 }
 \newcommand{\hangingheaditem}[2]{%
@@ -724,21 +995,33 @@
 }
 
 \newcommand{\orphannote}[1]{%
-  \par\vspace{0.3em}%
+  \csromanflushcloserbottom
+  \par
+  \begingroup
+  \csromanapplyclosergap
+  \vspace{0.3em}%
   \noindent{\footnotesize #1\par}%
+  \endgroup
 }
 
-% Uddāna / gāthā: optical center (not fixed \gathaindent).
+% Uddāna / gāthā: optical center of the *verse body* (not fixed \gathaindent).
 % Per page, group measures update \csromangathapagewidth to the longest
-% aligned gāthā line. Each consecutive run (กลุ่ม) is one
-% \csromangathagroup: lines left-aligned in a shared-width box, box centered.
+% aligned gāthā line (item labels omitted from measure). Each consecutive
+% run (กลุ่ม) is one \csromangathagroup: body lines left-aligned in a
+% shared-width box, box centered. Numbered บท pin \textbf{N.} at the
+% \proseitem column; the body may sit further right after optical skip.
 % bat_line: \csromangathabat aligns the right วรรค after the comma using
 % \csromangathaleftcol = max left-วรรค width within that กลุ่ม.
+% wak_line: \csromangathawak centers a narrower block (width =
+% \csromangathawakwidth = max wak line on the page) inside that page box so
+% mixed bat/wak กลุ่ม keep one center axis for every wak บท.
 % Layout comes from JSON source_layout (bat_line vs wak_line), not line count.
 \newlength{\gathaindent}
 \setlength{\gathaindent}{\csromandim{65pt}}
 \newlength{\csromangathapagewidth}
 \setlength{\csromangathapagewidth}{0pt}
+\newlength{\csromangathawakwidth}
+\setlength{\csromangathawakwidth}{0pt}
 \newlength{\csromangathaleftcol}
 \setlength{\csromangathaleftcol}{0pt}
 \newlength{\csromangathabatgap}
@@ -750,6 +1033,53 @@
 \newcommand{\csromangathabat}[2]{%
   \makebox[\csromangathaleftcol][l]{#1}\hspace{\csromangathabatgap}#2%
 }
+
+% Numbered gāthā บท: item number stays in the same fixed column as
+% \proseitem (\tipitakahang from text left). Optical centering of the verse
+% body (\csromangathaleftskip / wak pad) may leave a gap after the label —
+% the number must not ride inward with the centered block (KN bat/wak).
+\newlength{\csromangathaitemwidth}
+\setlength{\csromangathaitemwidth}{0pt}
+\newlength{\csromangathawakpad}
+\setlength{\csromangathawakpad}{0pt}
+\newlength{\csromangathabodyindent}
+\setlength{\csromangathabodyindent}{0pt}
+\makeatletter
+% Place \textbf{N.} at the proseitem column; set \csromangathabodyindent so
+% continuation lines align under the verse body (not under the number).
+\newcommand{\csroman@gathaplaceitem}[1]{%
+  \settowidth{\csromangathaitemwidth}{\textbf{#1.}\hspace{0.33em}}%
+  % Current line start is text-left + leftskip + wakpad (wakpad=0 outside wak).
+  % Use \tipitakahang (not \parindent): \raggedright inside the stanza/wak
+  % \vtop zeros \parindent, but proseitem still sits at the hang column.
+  \dimen0=\dimexpr\csromangathaleftskip+\csromangathawakpad\relax
+  \kern-\dimen0
+  \kern\tipitakahang
+  \textbf{#1.}\hspace{0.33em}%
+  \dimen1=\dimexpr\tipitakahang+\csromangathaitemwidth\relax
+  \ifdim\dimen0>\dimen1
+    \kern\dimexpr\dimen0-\dimen1\relax
+    \global\csromangathabodyindent=\z@
+  \else
+    \global\csromangathabodyindent=\dimexpr\dimen1-\dimen0\relax
+  \fi
+}
+\newcommand{\csromangathaitembat}[3]{%
+  \csroman@gathaplaceitem{#1}%
+  \csromangathabat{#2}{#3}%
+}
+\newcommand{\csromangathacontbat}[2]{%
+  \hspace{\csromangathabodyindent}%
+  \csromangathabat{#1}{#2}%
+}
+\newcommand{\csromangathaitemline}[2]{%
+  \csroman@gathaplaceitem{#1}%
+  #2%
+}
+\newcommand{\csromangathacontline}[1]{%
+  \hspace{\csromangathabodyindent}#1%
+}
+\makeatother
 
 % #1 = left-วรรค lines of one กลุ่ม (\\-joined; may be empty).
 \newcommand{\csromangathasetleft}[1]{%
@@ -781,6 +1111,43 @@
   \fi
   \endgroup
 }
+
+% #1 = wak_line printed lines (\\-joined). Raises \csromangathawakwidth.
+\newcommand{\csromangathameasurewak}[1]{%
+  \settowidth{\dimen@}{%
+    \begin{tabular}{@{}l@{}}
+    #1
+    \end{tabular}%
+  }%
+  \ifdim\dimen@>\csromangathawakwidth
+    \global\csromangathawakwidth=\dimen@
+  \fi
+}
+
+% Center one wak_line บท inside the shared optical page box. Lines stay
+% \raggedright in the wak-width box; all wak บท on the page share the axis.
+% Uses explicit left pad (not \hss..\hss) so \csroman@gathaplaceitem can
+% back out to the fixed proseitem column without guessing centering glue.
+\newcommand{\csromangathawak}[1]{%
+  \ifdim\csromangathawakwidth>\z@
+    \dimen@=\dimexpr 0.5\hsize-0.5\csromangathawakwidth\relax
+    \ifdim\dimen@<\z@ \dimen@=\z@ \fi
+    \csromangathawakpad=\dimen@
+    \noindent\hb@xt@\hsize{%
+      \hskip\csromangathawakpad
+      \vtop{%
+        \hsize=\csromangathawakwidth
+        \linewidth=\hsize
+        \raggedright
+        \noindent #1\par
+      }%
+      \hss
+    }%
+    \global\csromangathawakpad=\z@
+  \else
+    #1%
+  \fi
+}
 \makeatother
 
 % Legacy: set page width from flat lines (no per-กลุ่ม left column).
@@ -797,6 +1164,10 @@
 % Page breaks are allowed *between* stanzas; each stanza is an unbreakable
 % \vtop (ไม่แตกบท). Optical center uses \csromangathapagewidth.
 % Before/after gap = \tipitakaparskip (same air as between prose paragraphs).
+% Footnote \\insert cannot migrate out of a sealed \\vtop (same class of
+% restriction as \\marginpar → use \\marginnote for folio). Defer note
+% bodies while building the box; flush after it joins the main list
+% (\\csromanfn@defer* in footnotes.tex).
 \newlength{\csromangathaleftskip}
 \newif\ifcsromangathafirststanza
 \makeatletter
@@ -805,18 +1176,17 @@
   \ifcsromangathafirststanza
     \csromangathafirststanzafalse
   \else
-    % Multi-line \vtop depth breaks normal \baselineskip packing.
-    % \gathastanzaskip is the *target baseline-to-baseline* gap between บท
-    % (edition default 30pt ≈ body leading + clear stanza air; matches
-    % 01Vin01 printing reference). Compensate ~0.62\baselineskip of line-box
-    % extent so the measured gap lands near that target. Floor the vskip so
-    % a too-small layout value cannot pull บท on top of each other.
-    \dimen@=\dimexpr\gathastanzaskip-0.62\baselineskip\relax
-    \@tempdima=\dimexpr1.15\baselineskip-0.62\baselineskip\relax
-    \ifdim\dimen@<\@tempdima \dimen@=\@tempdima \fi
+    % Prose inter-paragraph air is NOT \parskip alone: TeX adds \parskip on
+    % top of normal \baselineskip packing. A multi-line \vtop breaks that
+    % packing (its depth spans every line), so emulate the optical gap with
+    % \nointerlineskip plus an explicit skip:
+    %   \gathastanzaskip  (= layout gatha_stanza_skip, keep equal to par_skip)
+    %   + 0.3\baselineskip (open leading remainder; tuned so ink-to-ink gap
+    %     on 01Vin01 printing matches prose at par_skip=gatha_stanza_skip=8pt)
     \nointerlineskip
-    \vskip\dimen@
+    \vskip\dimexpr\gathastanzaskip+0.3\baselineskip\relax
   \fi
+  \global\csromanfn@defertrue
   \noindent
   \hskip\csromangathaleftskip
   \vtop{%
@@ -825,11 +1195,15 @@
     \raggedright
     \noindent #1\par
   }%
+  \csromanfn@flushdeferred
   \par
 }
 \newcommand{\csromangathagroup}[1]{%
+  \csromanflushcloserbottom
+  \csromanclearclosergap
+  \csromanclearheaderstack
   \par
-  \vspace{\tipitakaparskip}%
+  \addvspace{\tipitakaparskip}%
   \begingroup
   \setlength{\parskip}{0pt}%
   \dimen@=\dimexpr 0.5\linewidth-0.5\csromangathapagewidth\relax
@@ -838,7 +1212,63 @@
   \csromangathafirststanzatrue
   #1%
   \endgroup
-  \vspace{\tipitakaparskip}%
+  \addvspace{\tipitakaparskip}%
+}
+% Gāthā กลุ่ม + section closer in one unit (generator pairs so นิฏฺฐิตํ
+% cannot orphan alone at a page head after uddāna / summary verses).
+% Bottom gatha \addvspace is omitted — closer-band top air replaces it.
+% #1 = tier 0|1|2; #2 = stanza inner; #3 = closer body.
+\newcommand{\csromangathagroupwithcloserat}[3]{%
+  \csromanflushcloserbottom
+  \csromanclearclosergap
+  \csromanclearheaderstack
+  \par
+  \addvspace{\tipitakaparskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \dimen@=\dimexpr 0.5\linewidth-0.5\csromangathapagewidth\relax
+  \ifdim\dimen@<\z@ \dimen@=\z@ \fi
+  \setlength{\csromangathaleftskip}{\dimen@}%
+  \csromangathafirststanzatrue
+  #2%
+  \endgroup
+  \par\nobreak
+  \csroman@closerbandat{#1}{#3}%
+}
+\newcommand{\csromangathagroupwithcloserruledat}[3]{%
+  \csromanflushcloserbottom
+  \csromanclearclosergap
+  \csromanclearheaderstack
+  \par
+  \addvspace{\tipitakaparskip}%
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \dimen@=\dimexpr 0.5\linewidth-0.5\csromangathapagewidth\relax
+  \ifdim\dimen@<\z@ \dimen@=\z@ \fi
+  \setlength{\csromangathaleftskip}{\dimen@}%
+  \csromangathafirststanzatrue
+  #2%
+  \endgroup
+  \par\nobreak
+  \csroman@closerbandruledat{#1}{#3}%
+}
+\newcommand{\csromangathagroupwithcloser}[2]{%
+  \csromangathagroupwithcloserat{0}{#1}{#2}%
+}
+\newcommand{\csromangathagroupwithclosermid}[2]{%
+  \csromangathagroupwithcloserat{1}{#1}{#2}%
+}
+\newcommand{\csromangathagroupwithclosermajor}[2]{%
+  \csromangathagroupwithcloserat{2}{#1}{#2}%
+}
+\newcommand{\csromangathagroupwithcloserruled}[2]{%
+  \csromangathagroupwithcloserruledat{0}{#1}{#2}%
+}
+\newcommand{\csromangathagroupwithclosermidruled}[2]{%
+  \csromangathagroupwithcloserruledat{1}{#1}{#2}%
+}
+\newcommand{\csromangathagroupwithclosermajorruled}[2]{%
+  \csromangathagroupwithcloserruledat{2}{#1}{#2}%
 }
 \makeatother
 
@@ -870,6 +1300,15 @@
   \@footnotetext{#2}%
   \endgroup
 }
+% Bracket / empty-paren apparatus: editorial ``[…]`` / ``(…)`` already mark the
+% span in the body (CS source has no second superscript ``[ ]`` / ``( )``).
+% Emit foot-text only; footer still shows ``[ ]`` / ``( )`` as the note label.
+\newcommand{\csromansymbolfoottext}[2]{%
+  \begingroup
+  \def\@thefnmark{#1}%
+  \@footnotetext{#2}%
+  \endgroup
+}
 % Shared apparatus callout: same * / + foot-note already defined on this page.
 \newcommand{\csromansymbolmark}[1]{%
   \begingroup
@@ -879,23 +1318,35 @@
 }
 \makeatother
 
-% Sentence-stop gap (``{{sp1}}`` → 0em default); pot-ma-gyi uses two.
-\newcommand{\csromanspacer}{\hspace{0em}}
+% Sentence-stop gap retired: body text uses ordinary ``. `` only (no
+% ``{{sp1}}`` / ``\\csromanspacer``). Macro kept as a no-op for any legacy TeX.
+\newcommand{\csromanspacer}{}
 
 % Discourse dash after āmantesi / uddiseyyātha etc. Source JSON keeps U+2013
 % (CS Roman en-dash); Sarabun's en-dash is short (~0.54em) so the generator
 % emits this macro → em-dash (~0.84em), closer to the Roman edition line.
 \newcommand{\csromandash}{—}
 
-% Per-segment interword override (absolute layout word_space vs preamble).
-% #1 = scale vs the current font's interword glue (includes preamble WordSpace).
-% Generator passes target/preamble_WordSpace, e.g. 0.8/3.5.
-\newcommand{\csromanwordspacebegin}[1]{%
-  \begingroup
+% Interword glue = factor × current font's fontdimen 2/3/4 (includes preamble
+% WordSpace). Re-call after any size change (\footnotesize, etc.) so absolute
+% body \spaceskip is not inherited by smaller faces.
+\makeatletter
+\newcommand{\csroman@wordspacefactor}{1}
+\newcommand{\csromansetwordspace}[1]{%
   \spaceskip=#1\fontdimen2\font
     plus #1\fontdimen3\font
     minus #1\fontdimen4\font
   \relax
+}
+
+% Per-segment interword override (absolute layout word_space vs preamble).
+% #1 = scale vs the current font's interword glue (includes preamble WordSpace).
+% Generator passes target/preamble_WordSpace, e.g. 0.8/3.5.
+% Does not overwrite \csroman@wordspacefactor (volume / page layout owns that).
+% Footnotes clear \spaceskip after \footnotesize (font natural glue), not this factor.
+\newcommand{\csromanwordspacebegin}[1]{%
+  \begingroup
+  \csromansetwordspace{#1}%
 }
 \newcommand{\csromanwordspaceend}{\endgroup}
 
@@ -904,10 +1355,8 @@
 % par_skip, gatha_stanza_skip, gatha_indent, emergency_stretch.
 % Printing: scale length args (#3–#7) by \csromanprintingscale; #1/#2 stay unitless.
 \newcommand{\csromanlayoutapply}[7]{%
-  \spaceskip=#1\fontdimen2\font
-    plus #1\fontdimen3\font
-    minus #1\fontdimen4\font
-  \relax
+  \renewcommand{\csroman@wordspacefactor}{#1}%
+  \csromansetwordspace{#1}%
   \linespread{#2}\selectfont
   \setlength{\tipitakahang}{\dimexpr(#3)*\csromanprintingscalenum/\csromanprintingscaleden\relax}%
   \setlength{\parindent}{\tipitakahang}%
@@ -922,7 +1371,6 @@
 % Keys are reading PDF page numbers (\thepage), not source folio ฉ.N.
 % Applied at paragraph begin when \value{page} changes; paragraphs that
 % span a page break keep the layout from their start page.
-\makeatletter
 \newcount\csroman@reading@lastlayoutpage
 \csroman@reading@lastlayoutpage=\m@ne
 \newcommand{\csroman@reading@volumelayout}{}%

@@ -36,6 +36,7 @@ from assign_cs_roman_heading_levels import fallback_kind  # noqa: E402
 from cs_roman_segments import load_document, save_content  # noqa: E402
 from cs_roman_text import (  # noqa: E402
     SECTION_RULE_FLAG,
+    is_tassuddana_label,
     roman_value_from_text_field,
     script_text_entries,
 )
@@ -128,11 +129,19 @@ def unglue_gatha_titles(segments: list[dict[str, Any]]) -> tuple[list[dict[str, 
                 "in_toc",
             }
         }
-        title_seg["segment_type"] = "title"
-        title_seg["text"] = _make_text(title, heading=True)
-        title_seg["flags"] = []
-        title_seg.pop("source_layout", None)
-        _apply_heading_meta(title_seg)
+        if is_tassuddana_label(title):
+            title_seg["segment_type"] = "tassuddānaṃ"
+            title_seg["text"] = _make_text(title, heading=True)
+            title_seg["flags"] = []
+            title_seg["source_layout"] = "center"
+            title_seg.pop("heading_kind", None)
+            title_seg.pop("in_toc", None)
+        else:
+            title_seg["segment_type"] = "title"
+            title_seg["text"] = _make_text(title, heading=True)
+            title_seg["flags"] = []
+            title_seg.pop("source_layout", None)
+            _apply_heading_meta(title_seg)
         out.append(title_seg)
 
         for i, verse in enumerate(verses):

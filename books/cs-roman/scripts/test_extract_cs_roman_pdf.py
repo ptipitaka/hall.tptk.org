@@ -14,16 +14,23 @@ from extract_cs_roman_pdf import (  # noqa: E402
     SECTION_RULE_FLAG,
     Segment,
     _blocks_from_region,
+    _is_running_header,
     _is_section_rule_line,
+    _normalize_inline,
     _repair_mid_word_split,
     _segment_to_json,
     _split_false_pa_join,
     attach_notes_sacred_style,
+    detect_running_headers,
     extract_page_blocks,
+    is_running_header_folio_label,
     merge_blocks,
     peel_glued_gatha_title_raw,
     peel_glued_gatha_title_text,
+    peel_glued_running_header_prefix,
     peel_glued_uddesa_heading,
+    peel_leading_running_headers,
+    peel_page_top_running_header_furniture,
     unglue_false_pa_page_joins,
 )
 
@@ -373,7 +380,7 @@ class GluedGathaTitlePeelTests(unittest.TestCase):
             as_notes=False,
         )
         self.assertEqual(len(blocks), 3)
-        self.assertEqual(blocks[0]["kind"], "title")
+        self.assertEqual(blocks[0]["kind"], "tassuddānaṃ")
         self.assertEqual(blocks[0]["text"], "Tassuddānaṃ")
         self.assertEqual(blocks[1]["kind"], "prose")
         self.assertTrue(blocks[1]["text"].startswith("Ubbhataṃ"))
@@ -820,6 +827,281 @@ class AttachNumberedCalloutTests(unittest.TestCase):
             "Etthantare pāṭhā Syāmapotthake natthi.",
         )
         self.assertFalse(any(s.segment_type == "note" for s in out))
+
+
+class _FakePage:
+    def __init__(self, text: str) -> None:
+        self._text = text
+
+    def get_text(self, *_args: object, **_kwargs: object) -> str:
+        return self._text
+
+
+class _FakeDoc:
+    def __init__(self, pages: list[str]) -> None:
+        self._pages = [_FakePage(t) for t in pages]
+
+    @property
+    def page_count(self) -> int:
+        return len(self._pages)
+
+    def __getitem__(self, index: int) -> _FakePage:
+        return self._pages[index]
+
+
+class RunningHeaderTests(unittest.TestCase):
+    def test_detect_scans_beyond_first_twelve_pages(self) -> None:
+        pages = [f"1. EarlySutta\n{i + 1}\nbody text here.\n" for i in range(15)]
+        pages.extend(
+            f"10. Subhasutta\n{i + 1}\nkhayañāṇāya cittaṃ abhinīharati.\n"
+            for i in range(15, 30)
+        )
+        headers = detect_running_headers(_FakeDoc(pages), 0)
+        self.assertIn("1. EarlySutta", headers)
+        self.assertIn("10. Subhasutta", headers)
+
+    def test_detect_ignores_mid_page_body_repeats(self) -> None:
+        filler = "\n".join(f"body line {n} with enough words here." for n in range(8))
+        pages = [
+            f"BookLabel\n{i + 1}\n{filler}\nvadeyya.\nvadeyya.\nvadeyya.\n"
+            for i in range(10)
+        ]
+        headers = detect_running_headers(_FakeDoc(pages), 0)
+        self.assertIn("BookLabel", headers)
+        self.assertNotIn("vadeyya.", headers)
+
+    def test_detect_excludes_tassuddana_label(self) -> None:
+        pages = [
+            f"Tassuddānaṃ\n{i + 1}\nTathāgataṃ Padaṃ Kūṭaṃ, Mūlaṃ Sārena Vassikaṃ.\n"
+            for i in range(10)
+        ]
+        headers = detect_running_headers(_FakeDoc(pages), 0)
+        self.assertNotIn("Tassuddānaṃ", headers)
+        self.assertFalse(_is_running_header("Tassuddānaṃ", {"Tassuddānaṃ"}))
+
+    def test_peel_multiline_glued_header_and_folio(self) -> None:
+        raw = (
+            "10. Subhasutta \n"
+            "203 \n"
+            "khayañāṇāya cittaṃ abhinīharati abhininnāmeti."
+        )
+        headers = {"10. Subhasutta", "Sīlakkhandhavaggapāḷi"}
+        out = peel_leading_running_headers(raw, headers)
+        self.assertTrue(
+            _normalize_inline(out).startswith("khayañāṇāya cittaṃ"),
+            out,
+        )
+
+    def test_peel_keeps_isolated_chapter_title(self) -> None:
+        raw = "10. Subhasutta "
+        out = peel_leading_running_headers(raw, {"10. Subhasutta"})
+        self.assertEqual(_normalize_inline(out), "10. Subhasutta")
+
+    def test_is_running_header_keeps_numbered_title(self) -> None:
+        self.assertFalse(
+            _is_running_header("10. Subhasutta", {"10. Subhasutta"})
+        )
+
+    def test_is_running_header_drops_unnumbered_book_label(self) -> None:
+        self.assertTrue(
+            _is_running_header(
+                "Sīlakkhandhavaggapāḷi", {"Sīlakkhandhavaggapāḷi"}
+            )
+        )
+
+    def test_extract_page_blocks_peels_glued_header(self) -> None:
+        page = (
+            "10. Subhasutta \n"
+            "203 \n"
+            "khayañāṇāya cittaṃ abhinīharati.\n"
+            "\n"
+            "Seyyathāpi māṇava pabbatasaṅkhepe udakarahado.\n"
+        )
+        blocks = extract_page_blocks(
+            page,
+            printed_page=203,
+            pdf_page=221,
+            headers={"10. Subhasutta"},
+        )
+        self.assertGreaterEqual(len(blocks), 1)
+        self.assertTrue(
+            blocks[0]["text"].startswith("khayañāṇāya"),
+            blocks[0]["text"],
+        )
+        self.assertIsNone(blocks[0].get("item"))
+
+    def test_extract_keeps_chapter_open_title_block(self) -> None:
+        page = (
+            "10. Subhasutta \n"
+            "\n"
+            "Subhamāṇavavatthu \n"
+            "\n"
+            "444. Evaṃ me sutaṃ–ekaṃ samayaṃ.\n"
+        )
+        blocks = extract_page_blocks(
+            page,
+            printed_page=188,
+            pdf_page=206,
+            headers={"10. Subhasutta"},
+        )
+        kinds_texts = [(b["kind"], b["text"], b.get("section_no")) for b in blocks]
+        self.assertTrue(
+            any(
+                k in {"title", "chapter", "subhead"} and t == "Subhasutta"
+                for k, t, _sn in kinds_texts
+            ),
+            kinds_texts,
+        )
+
+    def test_peel_glued_prefix_from_stored_prose(self) -> None:
+        headers = {"10. Subhasutta", "2. Sāmaññaphalasutta"}
+        peeled = peel_glued_running_header_prefix(
+            "Subhasutta khayañāṇāya cittaṃ abhinīharati abhininnāmeti, "
+            "so idaṃ dukkhanti yathābhūtaṃ pajānāti.",
+            headers,
+        )
+        assert peeled is not None
+        rest, label, item = peeled
+        self.assertEqual(label, "Subhasutta")
+        self.assertEqual(item, 10)
+        self.assertTrue(rest.startswith("khayañāṇāya"))
+
+    def test_detect_folio_header_from_single_page(self) -> None:
+        """Short suttas may appear at page top only once — still detect."""
+        pages = [
+            "Aṭṭhakanāgarasutta (52)\n13\n"
+            "Bhagavatā jānatā passatā Arahatā Sammāsambuddhena "
+            "ekadhammo akkhāto, yattha bhikkhuno.\n"
+        ]
+        headers = detect_running_headers(_FakeDoc(pages), 0)
+        self.assertIn("Aṭṭhakanāgarasutta (52)", headers)
+
+    def test_peel_folio_prefix_without_frequency_set(self) -> None:
+        peeled = peel_glued_running_header_prefix(
+            "Aṭṭhakanāgarasutta (52) Bhagavatā jānatā passatā Arahatā "
+            "Sammāsambuddhena ekadhammo akkhāto, yattha bhikkhuno "
+            "appamattassa ātāpino pahitattassa viharato.",
+            set(),
+        )
+        assert peeled is not None
+        rest, label, item = peeled
+        self.assertEqual(label, "Aṭṭhakanāgarasutta (52)")
+        self.assertIsNone(item)
+        self.assertTrue(rest.startswith("Bhagavatā"), rest)
+
+    def test_peel_numbered_folio_prefix_pattern(self) -> None:
+        peeled = peel_glued_running_header_prefix(
+            "4. Potaliyasutta (54) liṅgā te nimittā yathā taṃ "
+            "gahapatissāti. Tathā hi pana me bho gotama sabbe "
+            "kammantā paṭikkhittā, sabbe vohārā samucchinnāti.",
+            set(),
+        )
+        assert peeled is not None
+        rest, label, item = peeled
+        self.assertEqual(label, "4. Potaliyasutta (54)")
+        self.assertEqual(item, 4)
+        self.assertTrue(rest.startswith("liṅgā"), rest)
+
+    def test_is_running_header_drops_folio_label(self) -> None:
+        self.assertTrue(is_running_header_folio_label("Potaliyasutta (54)"))
+        self.assertTrue(
+            _is_running_header("Potaliyasutta (54)", {"4. Potaliyasutta (54)"})
+        )
+        self.assertTrue(_is_running_header("4. Potaliyasutta (54)", set()))
+
+    def test_is_running_header_keeps_chapter_open_without_folio(self) -> None:
+        self.assertFalse(is_running_header_folio_label("10. Subhasutta"))
+        self.assertFalse(
+            _is_running_header("10. Subhasutta", {"10. Subhasutta"})
+        )
+
+    def test_peel_page_top_continuation_header_with_edition_folio(self) -> None:
+        """Centered saṃyutta running header + outer edition page → furniture."""
+        page = (
+            "12. Vacchagottasaṃyutta \n"
+            "\n"
+            "\n"
+            "223 \n"
+            "Sāvatthinidānaṃ. Saṅkhāresu kho Vaccha appaccakkhakammā -pa-.\n"
+        )
+        headers = {"12. Vacchagottasaṃyutta"}
+        out = peel_page_top_running_header_furniture(page, headers)
+        self.assertTrue(
+            _normalize_inline(out).startswith("Sāvatthinidānaṃ"),
+            out,
+        )
+        blocks = extract_page_blocks(
+            page, printed_page=223, pdf_page=241, headers=headers
+        )
+        texts = [_normalize_inline(b["text"]) for b in blocks]
+        self.assertTrue(texts, blocks)
+        self.assertTrue(texts[0].startswith("Sāvatthinidānaṃ"), texts)
+        self.assertFalse(
+            any("Vacchagottasaṃyutta" in t for t in texts),
+            texts,
+        )
+
+    def test_peel_page_top_keeps_chapter_open_before_child_title(self) -> None:
+        page = (
+            "12. Vacchagottasaṃyutta \n"
+            "\n"
+            "1. Rūpa-aññāṇasutta \n"
+            "\n"
+            "607. Ekaṃ samayaṃ Bhagavā Sāvatthiyaṃ viharati.\n"
+        )
+        headers = {"12. Vacchagottasaṃyutta"}
+        out = peel_page_top_running_header_furniture(page, headers)
+        self.assertIn("Vacchagottasaṃyutta", out)
+        blocks = extract_page_blocks(
+            page, printed_page=218, pdf_page=236, headers=headers
+        )
+        kinds_texts = [
+            (b["kind"], _normalize_inline(b["text"])) for b in blocks
+        ]
+        self.assertTrue(
+            any(
+                "Vacchagottasaṃyutta" in t or t == "Vacchagottasaṃyutta"
+                for _k, t in kinds_texts
+            ),
+            kinds_texts,
+        )
+
+    def test_peel_page_top_keeps_header_when_folio_then_child_title(self) -> None:
+        """Header + edition folio + child title → still a chapter open."""
+        page = (
+            "12. Vacchagottasaṃyutta \n"
+            "\n"
+            "218 \n"
+            "\n"
+            "1. Rūpa-aññāṇasutta \n"
+            "\n"
+            "607. Ekaṃ samayaṃ Bhagavā Sāvatthiyaṃ viharati.\n"
+        )
+        headers = {"12. Vacchagottasaṃyutta"}
+        out = peel_page_top_running_header_furniture(page, headers)
+        self.assertIn("Vacchagottasaṃyutta", out)
+
+    def test_extract_drops_isolated_folio_header_block(self) -> None:
+        page = (
+            "Potaliyasutta (54) \n"
+            "\n"
+            "Ime kho gahapati aṭṭha dhammā saṃkhittena vuttā.\n"
+        )
+        blocks = extract_page_blocks(
+            page,
+            printed_page=27,
+            pdf_page=33,
+            headers={"4. Potaliyasutta (54)"},
+        )
+        texts = [b["text"] for b in blocks]
+        self.assertFalse(
+            any(is_running_header_folio_label(t) for t in texts),
+            texts,
+        )
+        self.assertTrue(
+            any(t.startswith("Ime kho") for t in texts),
+            texts,
+        )
 
 
 if __name__ == "__main__":

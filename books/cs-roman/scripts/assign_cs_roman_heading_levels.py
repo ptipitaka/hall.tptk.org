@@ -30,8 +30,12 @@ from paths import OUTPUT_DIR, SOURCE_DIR, ensure_import_paths
 
 ensure_import_paths()
 from cs_roman_segments import save as save_segments  # noqa: E402
+from cs_roman_text import is_ordinal_section_closer  # noqa: E402
 from cs_roman_vztime import vztime_to_unicode  # noqa: E402
-from extract_cs_roman_pdf import detect_content_start  # noqa: E402
+from extract_cs_roman_pdf import (  # noqa: E402
+    detect_content_start,
+    ends_with_speech_intro_dash,
+)
 
 HEADING_TYPES = frozenset(
     {
@@ -102,6 +106,11 @@ _SUB_HINT_RE = re.compile(
 )
 _CLOSER_RE = re.compile(
     r"(?:niṭṭhit|samattaṃ|samatta\b|tassuddāna)",
+    re.IGNORECASE,
+)
+# Centered deictic labels (Idaṃ sabbamūlakaṃ / อิทํ ทสมูลกํ) — not outline heads.
+_IDAM_LABEL_RE = re.compile(
+    r"^(?:Idaṃ|อิทํ)\s+\S+\.?$",
     re.IGNORECASE,
 )
 # Body compound: "Kosiyavagga 5. Nisīdanasanthatasikkhāpada"
@@ -235,6 +244,7 @@ def normalize_title(text: str) -> str:
         text.replace("{{sp1}}", " ")
         .replace("{{sp3}}", " ")
         .replace("{{sp}}", " ")
+        .replace("{{br}}", " ")
     )
     text = _NUMBERED_RE.sub(r"\2", text.strip())
     text = text.lower()
@@ -807,6 +817,16 @@ def parse_matika(
     return entries
 
 
+def is_plain_centered_label(seg: dict, text: str) -> bool:
+    """True for mid-body ``Idaṃ …`` / ``อิทํ …`` labels (not outline heads).
+
+    These are body centers (``\\csromancenter``), never ``heading_kind``.
+    Other centered titles keep morphology / Mātikā assignment (often bold).
+    """
+    _ = seg
+    return bool(_IDAM_LABEL_RE.match((text or "").strip()))
+
+
 def fallback_kind(seg: dict, text: str) -> tuple[str | None, bool]:
     """
     Return (heading_kind, in_toc) when no Mātikā match applies.
@@ -815,7 +835,12 @@ def fallback_kind(seg: dict, text: str) -> tuple[str | None, bool]:
     titles still enter the memoir TOC when absent from the Mātikā block.
     """
     st = seg.get("segment_type") or ""
-    if st in {"namakkāraṃ", "niṭṭhitaṃ"} or _CLOSER_RE.search(text):
+    if (
+        st in {"namakkāraṃ", "niṭṭhitaṃ"}
+        or _CLOSER_RE.search(text)
+        or is_ordinal_section_closer(text)
+        or is_plain_centered_label(seg, text)
+    ):
         return None, False
     if st == "piṭaka":
         return "nik", True
@@ -834,7 +859,9 @@ def fallback_kind(seg: dict, text: str) -> tuple[str | None, bool]:
             return "h1", False
         return "cha", False
     if st == "title":
-        if _CLOSER_RE.search(text):
+        if ends_with_speech_intro_dash(text):
+            return None, False
+        if _CLOSER_RE.search(text) or is_ordinal_section_closer(text):
             return None, False
         if _MAJOR_VIBHANGA_RE.match(text.strip()):
             return "boo", False
@@ -949,6 +976,7 @@ def match_entries_to_segments(
         if (s.get("segment_type") in HEADING_TYPES)
         and (s.get("segment_type") not in {"namakkāraṃ", "niṭṭhitaṃ"})
         and not _CLOSER_RE.search(_roman_text(s))
+        and not is_ordinal_section_closer(_roman_text(s))
     ]
     seg_norms = {
         i: normalize_title(_roman_text(segments[i])) for i in heading_idxs
@@ -1140,6 +1168,18 @@ def assign_levels(
             continue
 
         text = _roman_text(seg)
+        # Section closers (นิฏฺฐิตํ / ordinal …vaggo paṭhamo.) are not headings.
+        # Plain centered labels (Idaṃ sabbamūlakaṃ) likewise stay body centers.
+        if (
+            st == "niṭṭhitaṃ"
+            or _CLOSER_RE.search(text)
+            or is_ordinal_section_closer(text)
+            or is_plain_centered_label(seg, text)
+        ):
+            seg.pop("heading_kind", None)
+            seg.pop("in_toc", None)
+            continue
+
         if i in seg_to_entries:
             matched_entries = seg_to_entries[i]
             # Deepest outline level wins for body typography (child of compound).

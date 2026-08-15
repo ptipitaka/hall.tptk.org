@@ -109,7 +109,8 @@ def fixup_volume(
         f"changed={len(changed)}"
     )
     for page, order, old, new, preview in changed[:40]:
-        print(f"  p{page} o{order}: {old!r} -> {new!r} | {preview}")
+        safe = preview.encode("ascii", "replace").decode("ascii")
+        print(f"  p{page} o{order}: {old!r} -> {new!r} | {safe}")
     if len(changed) > 40:
         print(f"  … +{len(changed) - 40} more")
 

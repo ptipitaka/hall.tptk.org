@@ -10,6 +10,7 @@ from assign_cs_roman_heading_levels import (
     assign_levels,
     classify_matika_title,
     compound_parts,
+    fallback_kind,
     is_section_closer_title,
     _centered_number_depth,
     _kind_at_centered_depth,
@@ -427,6 +428,11 @@ class ClassifyTests(unittest.TestCase):
         self.assertTrue(is_section_closer_title("Uddānagāthā"))
         self.assertTrue(is_section_closer_title("Uddānagāthāyo"))
         self.assertFalse(is_section_closer_title("Appaṭicchannamānatta"))
+        kind, in_toc = fallback_kind(
+            {"segment_type": "title"}, "Parimaṇḍalavaggo paṭhamo."
+        )
+        self.assertIsNone(kind)
+        self.assertFalse(in_toc)
         w = 499.0
         lines = [
             MatikaLine(5, "2.  Pārivāsikakkhandhaka", x0=187.0, page_width=w),
@@ -533,10 +539,44 @@ class MatchAndAssignTests(unittest.TestCase):
         }
         out, report, matika = assign_levels(data, entries=[])
         seg = out["segments"][0]
-        self.assertEqual(seg.get("heading_kind"), "h2")
+        self.assertIsNone(seg.get("heading_kind"))
         self.assertFalse(seg.get("in_toc"))
         self.assertEqual(report["in_toc_count"], 0)
         self.assertEqual(matika["entries"], [])
+
+    def test_fallback_keeps_bold_centered_title_as_heading(self) -> None:
+        seg = _heading(
+            page=50,
+            order=1,
+            segment_type="title",
+            roman="Vinītavatthu",
+        )
+        seg["source_layout"] = "center"
+        seg["text"] = [
+            {
+                "script": "roman",
+                "value": "Vinītavatthu",
+                "runs": [{"value": "Vinītavatthu", "bold": True}],
+            }
+        ]
+        data = {"schema_version": 1, "segments": [seg]}
+        out, report, _ = assign_levels(data, entries=[])
+        self.assertEqual(out["segments"][0].get("heading_kind"), "h2")
+        self.assertFalse(out["segments"][0].get("in_toc"))
+        self.assertEqual(report["in_toc_count"], 0)
+
+    def test_fallback_keeps_non_idam_centered_title(self) -> None:
+        """Unmatched centered titles that are not Idaṃ… still get morphology h2."""
+        seg = _heading(
+            page=50,
+            order=1,
+            segment_type="title",
+            roman="Paṭhamabhāṇavāro.",
+        )
+        seg["source_layout"] = "center"
+        data = {"schema_version": 1, "segments": [seg]}
+        out, _, _ = assign_levels(data, entries=[])
+        self.assertEqual(out["segments"][0].get("heading_kind"), "h2")
 
     def test_assign_sets_deepest_kind_on_compound(self) -> None:
         data = {

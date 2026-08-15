@@ -22,6 +22,7 @@ from generate_cs_roman_tex import (  # noqa: E402
     gatha_group_command,
     gatha_group_end_index,
     gatha_group_end_index_reading,
+    gatha_group_with_closer_command,
     gatha_left_column_bodies,
     gatha_measure_command,
     gatha_measure_group_command,
@@ -37,6 +38,7 @@ from generate_cs_roman_tex import (  # noqa: E402
     last_item_after_prose_closer_pair,
     layout_apply_command,
     note_to_thai,
+    pairable_closer_segment,
     prose_with_closer_command,
     read_preamble_word_space,
     section_rule_commands,
@@ -113,7 +115,7 @@ class GenerateCsRomanLayoutTests(unittest.TestCase):
         # Absolute DEFAULT word_space → factor vs preamble; dimensions pass through.
         # Absolute DEFAULT word_space → factor vs preamble; dimensions pass through.
         self.assertIn(
-            f"{{{ws_factor}}}{{1.5}}{{21.6pt}}{{5pt}}{{30pt}}{{65pt}}{{2.5em}}%",
+            f"{{{ws_factor}}}{{1.5}}{{21.6pt}}{{8pt}}{{8pt}}{{65pt}}{{2.5em}}%",
             cmd,
         )
 
@@ -230,6 +232,29 @@ class SectionNoGenerateTests(unittest.TestCase):
         )
         self.assertIsNone(split_recto_compound_title("1. ปตฺตวคฺค"))
 
+    def test_split_recto_ignores_numbers_inside_footnotes(self) -> None:
+        # 12Sam01-style: edition refs ``3.`` / ``4.`` live inside \\footnote.
+        body = (
+            r"อถ โข อรติ\footnote{อรติ จ (ก) 3. กถํ ฌายํ (สฺยา), "
+            r"กถชฺฌายํ (ก) 4. น กุปฺปตี (สี)} "
+            r"มารธีตา ภควนฺตํ คาถาย อชฺฌภาสิ\csromandash{}"
+        )
+        self.assertIsNone(split_recto_compound_title(body))
+        cmd = heading_command_with_recto_marks("2", body)
+        self.assertTrue(cmd.startswith(r"\csromanheader{2}{"))
+        self.assertNotIn(r"\csromanmarkh{", cmd)
+        self.assertIn(r"\footnote{", cmd)
+
+        # 18Khu01 / 22Khu05: symbol footnote bodies also cite ``N.``.
+        sym = (
+            r"224. \csromansymbolfootnote{*}{ขุ 4. 413 ปิฏฺเฐปิ.}"
+            r"กุมฺภิลชาตก (2-8-4)"
+        )
+        self.assertIsNone(split_recto_compound_title(sym))
+        sym_cmd = heading_command_with_recto_marks("2", sym)
+        self.assertTrue(sym_cmd.startswith(r"\csromanheader{2}{"))
+        self.assertNotIn(r"\csromanmarkhii{", sym_cmd)
+
     def test_heading_command_splits_compound_recto_marks(self) -> None:
         body = r"1. \textbf{ปตฺตวคฺค 8. อฏฺฐมสิกฺขาปท}"
         cmd = heading_command_with_recto_marks("2", body)
@@ -303,6 +328,25 @@ class SectionNoGenerateTests(unittest.TestCase):
         self.assertEqual(escape_tex("(15- 16)"), r"\mbox{(15-16)}")
         self.assertEqual(escape_tex("(27-  28)"), r"\mbox{(27-28)}")
 
+    def test_paren_number_comma_pair_stays_unbroken(self) -> None:
+        """``(4, 24)`` stays one line; ``(4,24)`` gets a space after the comma."""
+        tex, _ = apply_notes_to_thai(
+            "อิเม ทุภโต วุฏฺฐานานํ อนุโลมา จตฺตาโร วิโมกฺขา. (4, 24)",
+            notes=[],
+            symbol_notes={},
+        )
+        self.assertIn(r"\mbox{(4, 24)}", tex)
+        glued, _ = apply_notes_to_thai(
+            "อิเม ทุภโต วุฏฺฐานานํ อนุโลมา จตฺตาโร วิโมกฺขา. (4,24)",
+            notes=[],
+            symbol_notes={},
+        )
+        self.assertIn(r"\mbox{(4, 24)}", glued)
+        self.assertNotIn(r"\mbox{(4,24)}", glued)
+        self.assertEqual(escape_tex("(4, 24)"), r"\mbox{(4, 24)}")
+        self.assertEqual(escape_tex("(4,24)"), r"\mbox{(4, 24)}")
+        self.assertEqual(escape_tex("(4,  24)"), r"\mbox{(4, 24)}")
+
     def test_symbol_mark_without_note_body(self) -> None:
         thai, _ = apply_notes_to_thai(
             "{{+}}เสยฺโย อโยคุโฬ ภุตฺโต,",
@@ -333,15 +377,85 @@ class SectionNoGenerateTests(unittest.TestCase):
         self.assertIn(r"\csromansymbolmark{+}", second)
         self.assertNotIn(r"\csromansymbolfootnote", second)
 
-    def test_bracket_symbol_note_emits_spaced_mark(self) -> None:
-        """``{{[]}}`` → ``\\csromansymbolfootnote{[ ]}{…}`` (Syāma omission)."""
+    def test_bracket_symbol_note_emits_foottext_only(self) -> None:
+        """``{{[]}}`` → foot-text only; body keeps editorial ``[`` (no ``[ ]`` mark)."""
         thai, _ = apply_notes_to_thai(
             "[{{[]}}๒๑๙. ตีหา กาเรหิ",
             notes=[],
             symbol_notes={"[]": "Etthantare pāṭhā Syāmapotthake natthi."},
         )
-        self.assertIn(r"\csromansymbolfootnote{[ ]}", thai)
+        self.assertTrue(thai.startswith(r"[\csromansymbolfoottext{[ ]}{"))
+        self.assertIn("เอตฺถนฺตเร", thai)
+        self.assertNotIn(r"\csromansymbolfootnote{[ ]}", thai)
+        self.assertNotIn(r"\csromansymbolmark{[ ]}", thai)
         self.assertNotIn(r"\orphannote", thai)
+
+    def test_paren_symbol_note_emits_foottext_only(self) -> None:
+        """``{{()}}`` → foot-text only; body keeps editorial ``(`` (no ``( )`` mark)."""
+        thai, _ = apply_notes_to_thai(
+            "({{()}}กตฺถจิ",
+            notes=[],
+            symbol_notes={"()": "(katthaci natthi)"},
+        )
+        self.assertTrue(thai.startswith(r"(\csromansymbolfoottext{( )}{"))
+        self.assertNotIn(r"\csromansymbolfootnote{( )}", thai)
+        self.assertNotIn(r"\csromansymbolmark{( )}", thai)
+
+    def test_closer_probe_does_not_steal_bracket_footnote(self) -> None:
+        """Prose before §219 must not consume ``{{[]}}`` via closer probe.
+
+        ``pairable_closer_segment`` builds the *next* segment speculatively.
+        When that neighbor is ordinary prose with a Syāma-omission note
+        (01Vin01 p.134 ``[ 219.``), the probe must not mark ``[]`` emitted.
+        """
+        prev = {
+            "page": 134,
+            "order": 733,
+            "segment_type": "prose",
+            "item": 218,
+            "text": [
+                {"script": "roman", "value": "thullaccayassa."},
+                {"script": "thai", "value": "ถุลฺลจฺจยสฺส."},
+            ],
+        }
+        bracket = {
+            "page": 134,
+            "order": 734,
+            "segment_type": "prose",
+            "item": 218,
+            "text": [
+                {
+                    "script": "roman",
+                    "value": "[{{[]}} 219.{{sp1}} Tīhākārehi.",
+                },
+                {
+                    "script": "thai",
+                    "value": "[{{[]}} 219.{{sp1}} ตีหากาเรหิ.",
+                },
+            ],
+            "symbol_notes": {
+                "[]": "Etthantare pāṭhā Syāmapotthake natthi.",
+            },
+        }
+        emitted: set[str] = set()
+        self.assertIsNone(
+            pairable_closer_segment(bracket, [], emitted_symbol_notes=emitted)
+        )
+        self.assertNotIn("[]", emitted)
+
+        doc = {
+            "schema_version": 1,
+            "source": "test",
+            "segments": [prev, bracket],
+            "layout": dict(DEFAULT_LAYOUT),
+        }
+        lines, _ = generate_reading_lines(
+            doc, [], "01Vin01", doc["segments"], DEFAULT_LAYOUT, mode="printing"
+        )
+        joined = "\n".join(lines)
+        self.assertIn(r"\csromansymbolfoottext{[ ]}", joined)
+        self.assertIn("เอตฺถนฺตเร", joined)
+        self.assertNotIn(r"\csromansymbolmark{[ ]}", joined)
 
     def test_note_to_thai_keeps_abbr_dot_word_space(self) -> None:
         """Catalog refs stay word-spaced; no sentence \\csromanspacer in notes."""
@@ -355,7 +469,7 @@ class SectionNoGenerateTests(unittest.TestCase):
             notes=["Bhagavāti (Syā), Dī 1. 46, 109 piṭṭhesu."],
             symbol_notes={},
         )
-        self.assertIn(r"\footnote{", tex)
+        self.assertIn(r"\csromansharedfootnote{", tex)
         self.assertIn("1. 46", tex)
         self.assertNotIn(r"\csromanspacer", tex)
 
@@ -391,7 +505,8 @@ class SectionNoGenerateTests(unittest.TestCase):
         self.assertIn("2.", body)
         self.assertNotIn("๒", body)
         self.assertNotIn(r"\csromanspacer", body)
-        self.assertIn("อุโทสิตสิกฺขาปท", body)
+        self.assertIn("อุโทสิต", body)
+        self.assertIn("สิกฺขาปท", body)
 
     def test_gatha_footnote_on_later_line(self) -> None:
         """Markers on a non-first บาท line must still resolve notes."""
@@ -434,7 +549,7 @@ class SectionNoGenerateTests(unittest.TestCase):
         }
         cmds = gatha_stanza_commands(seg)
         joined = "\n".join(cmds)
-        self.assertIn(r"\footnote{", joined)
+        self.assertIn(r"\csromansharedfootnote{", joined)
         self.assertNotIn("missing note", joined)
         self.assertIn("ชนฺตาฆเรน", joined)  # Thai of Jantāgharena
 
@@ -710,6 +825,127 @@ class SectionNoGenerateTests(unittest.TestCase):
         self.assertIn(r"\csromangathabat{", tex)
         self.assertNotIn("กายสํสคฺคํ, ทุฏฺฐุลฺลํ", tex)
 
+    def test_gatha_measure_keeps_footnote_callout_width(self) -> None:
+        """03Vin03 p.55: measure must reserve superscript width or bat wraps."""
+        from generate_cs_roman_tex import (
+            _gatha_string_to_measure_tex,
+            gatha_left_column_bodies,
+            gatha_stanza_line_bodies,
+        )
+
+        seg = {
+            "page": 55,
+            "order": 1,
+            "segment_type": "gatha",
+            "source_layout": "bat_line",
+            "notes": ["Nīyamānānaṃ (Ka)", "Ussuyā (Ka)"],
+            "bats": [
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "“นยนฺติ เว มหาวีรา,",
+                                }
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "สทฺธมฺเมน ตถาคตา.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "ธมฺเมน นยมานานํ{{n0}},",
+                                }
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "กา อุสูยา{{n1}} วิชานตนฺ”ติ.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+            ],
+        }
+        self.assertIn(
+            r"\textsuperscript{1}",
+            _gatha_string_to_measure_tex("ธมฺเมน นยมานานํ{{n0}},"),
+        )
+        self.assertIn(
+            r"\textsuperscript{*}",
+            _gatha_string_to_measure_tex("สุขา{{*}} วิราคตา"),
+        )
+        lefts = gatha_left_column_bodies(seg)
+        self.assertEqual(len(lefts), 2)
+        self.assertIn(r"\textsuperscript{1}", lefts[1])
+        measure = gatha_stanza_line_bodies(seg, for_measure=True)
+        self.assertEqual(len(measure), 2)
+        self.assertIn(r"\textsuperscript{1}", measure[1])
+        # Body still emits real footnotes (not the measure proxy alone).
+        body = gatha_stanza_line_bodies(seg, for_measure=False)
+        self.assertIn(r"\csromansharedfootnote{", body[1])
+        self.assertNotIn(r"\textsuperscript{1}", body[1])
+
+    def test_gatha_measure_omits_item_labels(self) -> None:
+        """Optical measure is verse body only; item stays in fixed prose column."""
+        seg = {
+            "page": 1,
+            "order": 1,
+            "segment_type": "gatha",
+            "item": 50,
+            "source_layout": "wak_line",
+            "bats": [
+                {
+                    "waks": [
+                        {"text": [{"script": "thai", "value": "อลงฺกตา กุณฺฑลิโน สุวตฺถา,"}]},
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "เวฬุริยมุตฺตาถรุขคฺคพนฺธา.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    "waks": [
+                        {"text": [{"script": "thai", "value": "รเถสภา ติฏฺฐถ เก นุ ตุเมฺห,"}]},
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "กถํ โว ชานนฺติ มนุสฺสโลเก.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+            ],
+        }
+        measure = gatha_stanza_line_bodies(seg, for_measure=True)
+        self.assertTrue(measure)
+        self.assertFalse(any("gathaitem" in line for line in measure))
+        self.assertFalse(any("gathacont" in line for line in measure))
+        body = gatha_stanza_line_bodies(seg, for_measure=False)
+        self.assertTrue(body[0].startswith(r"\csromangathaitemline{50}"))
+        self.assertTrue(body[1].startswith(r"\csromangathacontline{"))
+
     def test_gatha_one_and_half_no_stanza_skip(self) -> None:
         """3 บาท (1 บทครึ่ง): full + half → one unbreakable stanza."""
         full = {
@@ -779,6 +1015,168 @@ class SectionNoGenerateTests(unittest.TestCase):
         self.assertIn("สญฺจิจฺจวธสปฺปาณํ,", inner)
         self.assertIn("อุกฺขิตฺตํ กณฺฏกญฺเจว,", inner)
 
+    def test_mixed_wak_bat_keeps_stanza_skip_and_wak_center(self) -> None:
+        """wak_line then bat_line: separate บท + wak wrap (not false บทครึ่ง)."""
+        wak = {
+            "page": 70,
+            "order": 311,
+            "segment_type": "gatha",
+            "source_layout": "wak_line",
+            "bats": [
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "ทารุทกา มตฺติกา เทฺว ติณานิ,",
+                                }
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "สํฆสฺส สตฺต อวหาสิ เสยฺยํ.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "สสฺสามิกํ น จาปิ นีหเรยฺย,",
+                                }
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "หเรยฺย สสฺสามิกํ ตาวกาลิกํ.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+            ],
+        }
+        bat = {
+            "page": 70,
+            "order": 312,
+            "segment_type": "gatha",
+            "source_layout": "bat_line",
+            "bats": [
+                {
+                    "waks": [
+                        {"text": [{"script": "thai", "value": "จมฺปา ราชคเห เจว,"}]},
+                        {"text": [{"script": "thai", "value": "เวสาลิยา จ อชฺชุโก."}]},
+                    ]
+                },
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {"script": "thai", "value": "พาราณสี จ โกสมฺพี,"}
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "สาคลา ทฬฺหิเกน จาติ.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+            ],
+        }
+        bodies = [
+            gatha_stanza_line_bodies(wak),
+            gatha_stanza_line_bodies(bat),
+        ]
+        self.assertEqual([len(b) for b in bodies], [4, 2])
+        # Line-count alone looks like wak บทครึ่ง — must not merge across styles.
+        inner = format_gatha_group_inner(
+            bodies, ["wak_line", "bat_line"]
+        )
+        self.assertEqual(inner.count(r"\csromangathastanza{"), 2)
+        self.assertIn(r"\csromangathawak{", inner)
+        self.assertIn(r"\csromangathabat{", inner)
+        # wak block ends before bat stanza (standard inter-บท gap in TeX).
+        wak_end = inner.index(r"\csromangathawak{")
+        bat_stanza = inner.index(r"\csromangathastanza{\csromangathabat{")
+        self.assertLess(wak_end, bat_stanza)
+
+    def test_wak_line_group_emits_measurewak_and_centered_block(self) -> None:
+        """wak_line กลุ่ม: measurewak + \\csromangathawak; shared axis ready."""
+        from generate_cs_roman_tex import generate_sync_lines
+
+        wak = {
+            "page": 221,
+            "order": 1,
+            "segment_type": "gatha",
+            "source_layout": "wak_line",
+            "bats": [
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "มมนฺนปานํ วิปุลํ อุฬารํ,",
+                                }
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "อุปฺปชฺชตีมสฺส มณิสฺส เหตุ.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "ตํ เต น ทสฺสํ อติยาจเก,",
+                                }
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "thai",
+                                    "value": "น จาปิ เต อสฺสมมาคมิสฺสํ.",
+                                }
+                            ]
+                        },
+                    ]
+                },
+            ],
+        }
+        doc = {
+            "schema_version": 1,
+            "segments": [wak],
+            "layout": DEFAULT_LAYOUT,
+        }
+        lines, _ = generate_sync_lines(doc, [], "01Vin01", [wak], DEFAULT_LAYOUT)
+        tex = "\n".join(lines)
+        self.assertIn(r"\setlength{\csromangathawakwidth}{0pt}", tex)
+        self.assertIn(r"\csromangathameasurewak{", tex)
+        self.assertIn(r"\csromangathawak{", tex)
+        self.assertIn("มมนฺนปานํ วิปุลํ อุฬารํ,", tex)
+
     def test_generate_page_shared_gatha_optical_center(self) -> None:
         """Two groups on one page: one measure, two groups; no fixed indent."""
         from generate_cs_roman_tex import generate
@@ -797,7 +1195,7 @@ class SectionNoGenerateTests(unittest.TestCase):
                     {
                         "page": 150,
                         "order": 1,
-                        "segment_type": "title",
+                        "segment_type": "tassuddānaṃ",
                         "source_layout": "center",
                         "text": [
                             {"script": "roman", "value": "Tassuddānaṃ"},
@@ -918,7 +1316,9 @@ class SectionNoGenerateTests(unittest.TestCase):
             generate(volume_id)
             tex = out_path.read_text(encoding="utf-8")
             self.assertIn(r"\csromancenter{ตสฺสุทฺทานํ}", tex)
-            self.assertIn(r"\vspace{0.5\baselineskip}", tex)
+            # Gap to following gāthā is one \\tipitakaparskip (gatha group top),
+            # not an extra half-baselineskip stacked on top.
+            self.assertNotIn(r"\vspace{0.5\baselineskip}", tex)
             self.assertIn(r"\setlength{\csromangathapagewidth}{0pt}", tex)
             self.assertGreaterEqual(tex.count(r"\csromangathameasuregroup{"), 1)
             self.assertEqual(tex.count(r"\csromangathagroup{"), 2)
@@ -1011,6 +1411,46 @@ class SectionNoGenerateTests(unittest.TestCase):
                 item=232,
             )
         )
+        # Gendered samatto (masc. -o) — same closer band as samattaṃ.
+        samatto, _ = segment_command(
+            "prose",
+            None,
+            "มูลปณฺณาสโก สมตฺโต.",
+            last_item=None,
+        )
+        self.assertEqual(samatto, r"\nitthitammajor{มูลปณฺณาสโก สมตฺโต.}")
+        self.assertTrue(is_section_closer("prose", "มูลปณฺณาสโก สมตฺโต."))
+        # Ordinal category closer (…วคฺโค ปฐโม.) — even mistagged as h2.
+        vagga_cmd, _ = segment_command(
+            "title",
+            None,
+            "ปริมณฺฑลวคฺโค ปฐโม.",
+            last_item=None,
+            section_rule=True,
+            heading_kind="h2",
+            source_layout="center",
+        )
+        self.assertEqual(
+            vagga_cmd, r"\nitthitammidruled{ปริมณฺฑลวคฺโค ปฐโม.}"
+        )
+        prose_vagga, _ = segment_command(
+            "prose",
+            None,
+            "มุสาวาทวคฺโค ปฐโม.",
+            last_item=None,
+            source_layout="center",
+        )
+        # Ordinal closers always get the end rule (editorial; CS may omit it).
+        self.assertEqual(
+            prose_vagga, r"\nitthitammidruled{มุสาวาทวคฺโค ปฐโม.}"
+        )
+        self.assertTrue(
+            is_section_closer(
+                "prose",
+                "มุสาวาทวคฺโค ปฐโม.",
+                section_rule=False,
+            )
+        )
         # Geometry center on plain prose → \csromancenter; keep item continuity.
         baddha, after_center = segment_command(
             "prose",
@@ -1055,6 +1495,15 @@ class SectionNoGenerateTests(unittest.TestCase):
             source_layout="center",
         )
         self.assertEqual(bold_title, r"\titlehead{\textbf{สนฺถตภาณวาร}}")
+        # Bold tassuddānaṃ stays centered body label (not titlehead).
+        bold_tass, _ = segment_command(
+            "tassuddānaṃ",
+            None,
+            r"\textbf{ตสฺสุทฺทานํ}",
+            last_item=None,
+            source_layout="center",
+        )
+        self.assertEqual(bold_tass, r"\csromancenter{\textbf{ตสฺสุทฺทานํ}}")
         # Plain title + center (e.g. Idaṃ sabbamūlakaṃ) → \csromancenter.
         sabba, _ = segment_command(
             "title",
@@ -1064,6 +1513,16 @@ class SectionNoGenerateTests(unittest.TestCase):
             source_layout="center",
         )
         self.assertEqual(sabba, r"\csromancenter{อิทํ สพฺพมูลกํ}")
+        # Mistagged heading_kind must not bold a plain centered label.
+        sabba_h2, _ = segment_command(
+            "title",
+            None,
+            "อิทํ สพฺพมูลกํ",
+            last_item=None,
+            source_layout="center",
+            heading_kind="h2",
+        )
+        self.assertEqual(sabba_h2, r"\csromancenter{อิทํ สพฺพมูลกํ}")
         # Numbered outline title + center keeps titlehead.
         numbered, _ = segment_command(
             "title",
@@ -1080,6 +1539,182 @@ class SectionNoGenerateTests(unittest.TestCase):
                 gambhira, kind="gambhīra", section_rule=True
             ),
             [gambhira],
+        )
+
+    def test_consecutive_closers_use_parskip_gap_in_macros(self) -> None:
+        """Closer band top/bottom = optical par_skip (not bare tipitakaparskip)."""
+        macros = (
+            Path(__file__).resolve().parents[1]
+            / "shared"
+            / "style"
+            / "book-macros.tex"
+        ).read_text(encoding="utf-8")
+        self.assertIn(r"\csromanflushcloserbottom", macros)
+        self.assertIn(r"\csromanapplyclosergap", macros)
+        self.assertIn(r"\csromanclearclosergap", macros)
+        self.assertIn(
+            r"\dimexpr\tipitakaparskip+0.3\baselineskip\relax", macros
+        )
+        self.assertIn(r"\csroman@closerbandat", macros)
+        self.assertIn(r"\csroman@setclosergapdim", macros)
+        self.assertIn(r"\nitthitammajor", macros)
+        self.assertIn(r"\nitthitammid", macros)
+        # Leaf gap is \csroman@closergap; mid/major add baselineskip fractions.
+        closer_at = macros.split(r"\newcommand{\csroman@setclosergapdim}[1]{%")[1]
+        closer_at = closer_at.split(r"\newcommand{\csroman@closerbandat}")[0]
+        self.assertIn(r"\csroman@closergap", closer_at)
+        self.assertIn(r"0.5\baselineskip", closer_at)
+        # Bare tipitakaparskip alone under \nointerlineskip looked tighter
+        # than prose paragraph air — do not regress to that.
+        band = macros.split(r"\newcommand{\csroman@closerbandat}[2]{%")[1]
+        band = band.split(r"\newcommand{\csroman@closerbandruledat}")[0]
+        self.assertNotIn(r"\vskip\tipitakaparskip\relax", band)
+        # Deferred bottom must not be the old asymmetric 12.74bp.
+        self.assertNotIn("12.74bp", macros)
+        flush = macros.split(r"\newcommand{\csromanflushcloserbottom}{%")[1]
+        flush = flush.split(r"\newcommand{\csromanapplyclosergap}")[0]
+        self.assertIn(r"\addvspace{\csroman@closerbottom}", flush)
+        self.assertIn(r"\global\csroman@noparskiptrue", flush)
+        # Following prose zeros \parskip so bottom air is not doubled.
+        prose = macros.split(r"\newcommand{\prose}[1]{%")[1]
+        prose = prose.split(r"\newcommand{\prosecont}")[0]
+        self.assertIn(r"\csromanapplyclosergap", prose)
+        proseitem = macros.split(r"\newcommand{\proseitem}[2]{%")[1]
+        proseitem = proseitem.split(r"\newcommand{\prose}[1]")[0]
+        self.assertIn(r"\csromanapplyclosergap", proseitem)
+        # Gāthā inter-บท: emulate prose (parskip on top of baselineskip) via
+        # \vskip\gathastanzaskip+0.3\baselineskip (not bare \gathastanzaskip).
+        self.assertIn(
+            r"\vskip\dimexpr\gathastanzaskip+0.3\baselineskip\relax", macros
+        )
+        self.assertNotIn(r"0.62\baselineskip", macros)
+        # Stacked cha/h1…h6: tight inter-title band (not before+baselineskip).
+        self.assertIn(r"\csromanheaderstackskip", macros)
+        self.assertIn(r"\csromanclearheaderstack", macros)
+        self.assertIn(r"\csromanmarkheaderstack", macros)
+        self.assertIn(r"\csromanapplyheaderbeforeskip", macros)
+        self.assertIn(r"\ifcsroman@afterheader", macros)
+        header_body = macros.split(r"\newcommand{\csromanheaderbody}[2]{%")[1]
+        header_body = header_body.split(r"\newcommand{\titlehead}")[0]
+        self.assertIn(r"\csromanapplyheaderbeforeskip", header_body)
+        self.assertIn(r"\addvspace{\csromanheaderafterskip}", header_body)
+        self.assertIn(r"\csromanmarkheaderstack", header_body)
+        apply_before = macros.split(
+            r"\newcommand{\csromanapplyheaderbeforeskip}{%"
+        )[1]
+        apply_before = apply_before.split(r"\newcommand{\csroman@closergap}")[0]
+        self.assertIn(r"\vskip\csromanheaderstackskip\relax", apply_before)
+        self.assertIn(r"\addvspace{\csromanheaderbeforeskip}", apply_before)
+        self.assertIn(r"\csroman@prevheaderafter", apply_before)
+        self.assertIn(r"\csromanrememberheaderafter", macros)
+        # Do not regress to before-skip + one body baselineskip (≈30pt air
+        # between every stacked title).
+        self.assertNotIn(
+            r"\addvspace{\dimexpr\csromanheaderbeforeskip+\baselineskip\relax}",
+            macros,
+        )
+        proseitem = macros.split(r"\newcommand{\proseitem}[2]{%")[1]
+        proseitem = proseitem.split(r"\newcommand{\prose}[1]")[0]
+        self.assertIn(r"\csromanclearheaderstack", proseitem)
+
+    def test_sync_emits_consecutive_standalone_closers(self) -> None:
+        segments = [
+            {
+                "page": 10,
+                "order": 1,
+                "segment_type": "prose",
+                "text": [{"script": "thai", "value": "เนื้อหาก่อนปิด."}],
+            },
+            {
+                "page": 10,
+                "order": 2,
+                "segment_type": "niṭṭhitaṃ",
+                "text": [{"script": "thai", "value": "สพฺพมูลกํ นิฏฺฐิตํ."}],
+            },
+            {
+                "page": 10,
+                "order": 3,
+                "segment_type": "niṭṭhitaṃ",
+                "text": [{"script": "thai", "value": "สุทฺธิกวารกถา นิฏฺฐิตา."}],
+            },
+        ]
+        doc = {
+            "schema_version": 1,
+            "segments": segments,
+            "layout": DEFAULT_LAYOUT,
+        }
+        lines, _ = generate_sync_lines(
+            doc, [], "01Vin01", segments, DEFAULT_LAYOUT
+        )
+        body = "\n".join(lines)
+        self.assertIn(r"\prosewithcloser{", body)
+        self.assertIn(r"{สพฺพมูลกํ นิฏฺฐิตํ.}", body)
+        self.assertIn(r"\nitthitam{สุทฺธิกวารกถา นิฏฺฐิตา.}", body)
+
+    def test_closer_then_center_does_not_stack_parskip(self) -> None:
+        """After a closer band, center uses deferred bottom — not +\\tipitakaparskip."""
+        segments = [
+            {
+                "page": 134,
+                "order": 1,
+                "segment_type": "prose",
+                "text": [{"script": "thai", "value": "เนื้อหาก่อนปิด."}],
+            },
+            {
+                "page": 134,
+                "order": 2,
+                "segment_type": "niṭṭhitaṃ",
+                "source_layout": "center",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "วตฺถุวิสารกสฺส เอกมูลกํ นิฏฺฐิตํ.",
+                    }
+                ],
+            },
+            {
+                "page": 134,
+                "order": 3,
+                "segment_type": "prose",
+                "source_layout": "center",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "ยถา เอกมูลกํ วิตฺถาริตํ, เอวเมว ทุมูลกาทิปิ วิตฺถาเรตพฺพํ.",
+                    }
+                ],
+            },
+            {
+                "page": 134,
+                "order": 4,
+                "segment_type": "title",
+                "source_layout": "center",
+                "heading_kind": "h2",
+                "text": [{"script": "thai", "value": "อิทํ สพฺพมูลกํ"}],
+            },
+        ]
+        doc = {
+            "schema_version": 1,
+            "segments": segments,
+            "layout": DEFAULT_LAYOUT,
+        }
+        lines, _ = generate_sync_lines(
+            doc, [], "01Vin01", segments, DEFAULT_LAYOUT
+        )
+        body = "\n".join(lines)
+        self.assertIn(r"\prosewithcloser{", body)
+        self.assertIn(
+            r"\csromancenter{ยถา เอกมูลกํ วิตฺถาริตํ, เอวเมว ทุมูลกาทิปิ วิตฺถาเรตพฺพํ.}",
+            body,
+        )
+        self.assertIn(r"\csromancenter{อิทํ สพฺพมูลกํ}", body)
+        self.assertNotIn(r"\csromanheader{2}{อิทํ สพฺพมูลกํ}", body)
+        # No tipitakaparskip between closer unit and the center run.
+        self.assertNotRegex(
+            body,
+            r"\\prosewithcloser\{[^}]+\}\{[^}]+\}"
+            r"\n\\vspace\{\\tipitakaparskip\}"
+            r"\n\\csromancenter",
         )
 
     def test_prose_with_closer_command_and_section_rule(self) -> None:
@@ -1135,6 +1770,151 @@ class SectionNoGenerateTests(unittest.TestCase):
         self.assertIn("เนื้อหาก่อนปิด.", body)
         self.assertIn(r"{ปฐมปาราชิกํ สมตฺตํ.}", body)
         self.assertNotIn(r"\nitthitamruled{ปฐมปาราชิกํ สมตฺตํ.}", body)
+
+    def test_gatha_group_with_closer_command(self) -> None:
+        cmd = gatha_group_with_closer_command(
+            [["วิสฺสฏฺฐิ กายสํสคฺคํ,"]],
+            r"\textbf{สํฆาทิเสสกณฺฑํ นิฏฺฐิตํ.}",
+            closer_tier="major",
+        )
+        self.assertTrue(cmd.startswith(r"\csromangathagroupwithclosermajor{"))
+        self.assertIn(r"\textbf{สํฆาทิเสสกณฺฑํ นิฏฺฐิตํ.}", cmd)
+        self.assertTrue(is_prose_closer_command(cmd))
+        ruled = gatha_group_with_closer_command(
+            [["วิสฺสฏฺฐิ กายสํสคฺคํ,"]],
+            "ปฐมวคฺโค นิฏฺฐิโต.",
+            section_rule=True,
+            closer_tier="mid",
+        )
+        self.assertTrue(ruled.startswith(r"\csromangathagroupwithclosermidruled{"))
+        self.assertEqual(
+            section_rule_commands(ruled, kind="gatha", section_rule=True),
+            [ruled],
+        )
+
+    def test_pali_closer_uses_major_band(self) -> None:
+        cmd, _ = segment_command(
+            "niṭṭhitaṃ",
+            None,
+            "ปาราชิกปาฬิ นิฏฺฐิตา.",
+            last_item=None,
+        )
+        self.assertEqual(cmd, r"\nitthitammajor{ปาราชิกปาฬิ นิฏฺฐิตา.}")
+
+    def test_two_line_vagga_closer_emits_mid_band(self) -> None:
+        segments = [
+            {
+                "page": 177,
+                "order": 1,
+                "segment_type": "prose",
+                "source_layout": "center",
+                "text": [{"script": "thai", "value": "โสตาปตฺติวคฺโค."}],
+            },
+            {
+                "page": 177,
+                "order": 2,
+                "segment_type": "niṭṭhitaṃ",
+                "source_layout": "center",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "อฏฺฐารสเวยฺยากรณํ นิฏฺฐิตํ.",
+                    }
+                ],
+            },
+            {
+                "page": 178,
+                "order": 3,
+                "segment_type": "tassuddānaṃ",
+                "text": [{"script": "thai", "value": "ตสฺสุทฺทานํ"}],
+            },
+        ]
+        doc = {
+            "schema_version": 1,
+            "segments": segments,
+            "layout": DEFAULT_LAYOUT,
+        }
+        lines, _ = generate_reading_lines(
+            doc, [], "13Sam02", segments, DEFAULT_LAYOUT, mode="printing"
+        )
+        body = "\n".join(lines)
+        self.assertIn(
+            r"\nitthitammid{โสตาปตฺติวคฺโค.\\อฏฺฐารสเวยฺยากรณํ นิฏฺฐิตํ.}",
+            body,
+        )
+        self.assertNotIn(r"\csromancenter{โสตาปตฺติวคฺโค.}", body)
+        self.assertNotIn(
+            r"\nitthitam{อฏฺฐารสเวยฺยากรณํ นิฏฺฐิตํ.}",
+            body,
+        )
+
+    def test_reading_emit_pairs_gatha_with_nitthitam_closer(self) -> None:
+        """Uddāna gāthā + kaṇḍa closer stay one unit (01Vin01 p.284 orphan)."""
+        segments = [
+            {
+                "page": 284,
+                "order": 1,
+                "segment_type": "gatha",
+                "source_layout": "bat_line",
+                "bats": [
+                    {
+                        "waks": [
+                            {
+                                "text": [
+                                    {
+                                        "script": "thai",
+                                        "value": "วิสฺสฏฺฐิ กายสํสคฺคํ,",
+                                    }
+                                ]
+                            },
+                            {
+                                "text": [
+                                    {
+                                        "script": "thai",
+                                        "value": "ทุฏฺฐุลฺลํ อตฺตกามญฺจ.",
+                                    }
+                                ]
+                            },
+                        ]
+                    }
+                ],
+            },
+            {
+                "page": 284,
+                "order": 2,
+                "segment_type": "niṭṭhitaṃ",
+                "source_layout": "center",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "สํฆาทิเสสกณฺฑํ นิฏฺฐิตํ.",
+                        "runs": [
+                            {
+                                "value": "สํฆาทิเสสกณฺฑํ นิฏฺฐิตํ.",
+                                "bold": True,
+                            }
+                        ],
+                    }
+                ],
+            },
+            {
+                "page": 285,
+                "order": 3,
+                "segment_type": "chapter",
+                "section_no": 3,
+                "heading_kind": "cha",
+                "text": [{"script": "thai", "value": "อนิยตกณฺฑ"}],
+            },
+        ]
+        doc = {"schema_version": 1, "segments": segments, "layout": DEFAULT_LAYOUT}
+        lines, _ = generate_reading_lines(
+            doc, [], "01Vin01", segments, DEFAULT_LAYOUT, mode="printing"
+        )
+        body = "\n".join(lines)
+        self.assertIn(r"\csromangathagroupwithclosermajor{", body)
+        self.assertIn(r"\textbf{สํฆาทิเสสกณฺฑํ นิฏฺฐิตํ.}", body)
+        self.assertNotIn(r"\nitthitam{", body)
+        self.assertNotIn(r"\csromangathagroup{", body)
 
     def test_last_item_after_proseitem_closer_pair(self) -> None:
         self.assertEqual(
@@ -1870,6 +2650,145 @@ class RunningHeadGenerateTests(unittest.TestCase):
         self.assertNotIn(r"\setcsromanheadh{", joined)
         self.assertNotIn(r"\setcsromanheadhclear", joined)
         self.assertIn(r"\csromanmatikaanchor{", joined)
+
+
+class PaliRectoOpenTests(unittest.TestCase):
+    """Subsequent pāḷi opens on a recto; duplicate gambhīra furniture is skipped."""
+
+    def _two_pali_doc(self) -> tuple[dict, list[dict]]:
+        segments = [
+            {
+                "page": 1,
+                "order": 1,
+                "segment_type": "title",
+                "heading_kind": "h2",
+                "text": [{"script": "thai", "value": "สํยุตฺตนิกาย"}],
+            },
+            {
+                "page": 1,
+                "order": 2,
+                "segment_type": "gambhīra",
+                "heading_kind": "boo",
+                "text": [
+                    {"script": "thai", "value": "ขนฺธวคฺคสํยุตฺตปาฬิ"}
+                ],
+            },
+            {
+                "page": 1,
+                "order": 3,
+                "segment_type": "namakkāraṃ",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "นโม ตสฺส ภควโต อรหโต สมฺมาสมฺพุทฺธสฺส.",
+                    }
+                ],
+            },
+            {
+                "page": 100,
+                "order": 10,
+                "segment_type": "niṭṭhitaṃ",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "ขนฺธวคฺคสํยุตฺตปาฬิ นิฏฺฐิตา.",
+                    }
+                ],
+            },
+            {
+                "page": 100,
+                "order": 11,
+                "segment_type": "title",
+                "heading_kind": "h2",
+                "text": [{"script": "thai", "value": "สํยุตฺตนิกาย"}],
+            },
+            {
+                "page": 100,
+                "order": 12,
+                "segment_type": "gambhīra",
+                "heading_kind": "boo",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "สฬายตนวคฺคสํยุตฺตปาฬิ",
+                    }
+                ],
+            },
+            {
+                "page": 100,
+                "order": 13,
+                "segment_type": "namakkāraṃ",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "นโม ตสฺส ภควโต อรหโต สมฺมาสมฺพุทฺธสฺส.",
+                    }
+                ],
+            },
+            {
+                "page": 102,
+                "order": 20,
+                "segment_type": "gambhīra",
+                "heading_kind": "boo",
+                "text": [
+                    {
+                        "script": "thai",
+                        "value": "สฬายตนวคฺคสํยุตฺตปาฬิ",
+                    }
+                ],
+            },
+            {
+                "page": 102,
+                "order": 21,
+                "segment_type": "prose",
+                "item": 5,
+                "text": [{"script": "thai", "value": "รูปา ภิกฺขเว ทุกฺขา."}],
+            },
+        ]
+        doc = {
+            "schema_version": 1,
+            "segments": segments,
+            "layout": {**DEFAULT_LAYOUT},
+            "page_layout_reading_mode": {},
+        }
+        return doc, segments
+
+    def test_printing_opens_subsequent_pali_on_recto_before_nikaya(self) -> None:
+        doc, segments = self._two_pali_doc()
+        lines, _ = generate_reading_lines(
+            doc, [], "13Sam02", segments, DEFAULT_LAYOUT, mode="printing"
+        )
+        body = "\n".join(lines)
+        # First pāḷi: no mid-volume recto break.
+        first = body.index(r"\gambhira{ขนฺธวคฺคสํยุตฺตปาฬิ}")
+        self.assertNotIn(r"\csromanpalirecto", body[:first])
+        # Second pāḷi: recto before the reprinted nikāya prelude.
+        second_nikaya = body.index(
+            r"\csromanheader{2}{สํยุตฺตนิกาย}",
+            first,
+        )
+        # Opening injects setcsromannikaya + first header; find the *second*
+        # display header (after the first gambhira).
+        marker = r"\csromanpalirecto"
+        self.assertIn(marker, body)
+        recto_at = body.index(marker)
+        self.assertLess(recto_at, second_nikaya)
+        self.assertLess(
+            second_nikaya,
+            body.index(r"\gambhira{สฬายตนวคฺคสํยุตฺตปาฬิ}"),
+        )
+        # Duplicate continuation gambhīra suppressed.
+        self.assertEqual(body.count(r"\gambhira{สฬายตนวคฺคสํยุตฺตปาฬิ}"), 1)
+
+    def test_sync_skips_duplicate_gambhira_without_recto(self) -> None:
+        doc, segments = self._two_pali_doc()
+        lines, _ = generate_sync_lines(
+            doc, [], "13Sam02", segments, DEFAULT_LAYOUT
+        )
+        body = "\n".join(lines)
+        self.assertNotIn(r"\csromanpalirecto", body)
+        self.assertEqual(body.count(r"\gambhira{สฬายตนวคฺคสํยุตฺตปาฬิ}"), 1)
+        self.assertIn(r"\gambhira{ขนฺธวคฺคสํยุตฺตปาฬิ}", body)
 
 
 if __name__ == "__main__":

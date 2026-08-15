@@ -29,7 +29,7 @@ from cs_roman_hanging import (  # noqa: E402
 from cs_roman_vztime import vztime_to_unicode
 
 # Markers inserted after extraction; absent from PDF stroke text.
-_NOTE_MARKER_RE = re.compile(r"\{\{(?:n\d+|\*|\+|sp1|sp3)\}\}")
+_NOTE_MARKER_RE = re.compile(r"\{\{(?:n\d+|\*|\+|sp1|sp3|sb|br)\}\}")
 
 # Vertical / horizontal slack when testing stroke vs body-line overlap (pt).
 _LINE_OVERLAP_TOL = 3.0
@@ -526,6 +526,55 @@ def substantial_bold_ranges(
     if bold_chars / plain_len < min_coverage:
         return []
     return ranges
+
+
+def unbold_ranges_in_runs(
+    runs: list[dict[str, Any]] | None,
+    ranges: list[tuple[int, int]],
+) -> list[dict[str, Any]] | None:
+    """Clear bold on character ranges; collapse adjacent same-flag runs.
+
+    ``ranges`` are ``[start, end)`` into ``join(runs[].value)``. Idempotent
+    when those spans are already unbold. Returns ``None`` when no bold remains.
+    """
+    if not runs or not ranges:
+        return runs
+    pieces: list[tuple[str, bool]] = []
+    for run in runs:
+        if not isinstance(run, dict):
+            continue
+        value = str(run.get("value") or "")
+        if value:
+            pieces.append((value, bool(run.get("bold"))))
+    if not pieces:
+        return runs
+    joined = "".join(value for value, _ in pieces)
+    flags: list[bool] = []
+    for value, bold in pieces:
+        flags.extend([bold] * len(value))
+    changed = False
+    n = len(joined)
+    for start, end in ranges:
+        a = max(0, min(start, n))
+        b = max(a, min(end, n))
+        for i in range(a, b):
+            if flags[i]:
+                flags[i] = False
+                changed = True
+    if not changed:
+        return runs
+    out: list[dict[str, Any]] = []
+    pos = 0
+    while pos < n:
+        bold = flags[pos]
+        end = pos + 1
+        while end < n and flags[end] == bold:
+            end += 1
+        out.append({"value": joined[pos:end], "bold": bold})
+        pos = end
+    if not any(r["bold"] for r in out):
+        return None
+    return out
 
 
 def ranges_to_runs(text: str, ranges: list[tuple[int, int]]) -> list[dict[str, Any]] | None:

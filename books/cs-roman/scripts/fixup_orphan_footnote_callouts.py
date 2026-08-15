@@ -131,23 +131,59 @@ def _rebind_numbered(segments: list[dict[str, Any]], bound_ids: set[int]) -> int
         if not numbered:
             continue
 
-        roman = roman_value_from_text_field(seg.get("text"))
-        if not roman:
-            continue
-
         existing_notes = list(seg.get("notes") or [])
-        new_roman, bound_notes, used_items = apply_numbered_footnote_callouts(
-            roman,
-            numbered,
-            note_index_base=len(existing_notes),
-        )
-        if not used_items:
-            continue
+        used_all: set[int] = set()
 
-        _rewrite_roman(seg, new_roman)
-        seg["notes"] = existing_notes + bound_notes
+        if st in {"gatha", "gatha_continuation"}:
+            for bat in seg.get("bats") or []:
+                if not isinstance(bat, dict):
+                    continue
+                for wak in bat.get("waks") or []:
+                    if not isinstance(wak, dict):
+                        continue
+                    roman = roman_value_from_text_field(wak.get("text"))
+                    if not roman:
+                        continue
+                    offer = {
+                        k: v for k, v in numbered.items() if k not in used_all
+                    }
+                    if not offer:
+                        break
+                    new_roman, bound_notes, used_items = (
+                        apply_numbered_footnote_callouts(
+                            roman,
+                            offer,
+                            note_index_base=len(existing_notes),
+                        )
+                    )
+                    if not used_items:
+                        continue
+                    entries, _rule, _bold = ensure_script_text(
+                        new_roman, force=True, normalize_spacing=True
+                    )
+                    wak["text"] = entries
+                    existing_notes.extend(bound_notes)
+                    used_all.update(used_items)
+        else:
+            roman = roman_value_from_text_field(seg.get("text"))
+            if not roman:
+                continue
+            new_roman, bound_notes, used_items = apply_numbered_footnote_callouts(
+                roman,
+                numbered,
+                note_index_base=len(existing_notes),
+            )
+            if not used_items:
+                continue
+            _rewrite_roman(seg, new_roman)
+            existing_notes = existing_notes + bound_notes
+            used_all = set(used_items)
+
+        if not used_all:
+            continue
+        seg["notes"] = existing_notes
         for n in page_orphans:
-            if int(n["item"]) in used_items:
+            if int(n["item"]) in used_all:
                 bound_ids.add(id(n))
                 fixed += 1
     return fixed

@@ -17,6 +17,7 @@ from cs_roman_bold import (  # noqa: E402
     ranges_to_runs,
     substantial_bold_ranges,
     subtract_marker_ranges,
+    unbold_ranges_in_runs,
 )
 from cs_roman_hanging import PageLine  # noqa: E402
 from cs_roman_text import roman_to_thai, transliterate_runs  # noqa: E402
@@ -233,8 +234,8 @@ class MarkerBoldCollisionTests(unittest.TestCase):
         ranges = subtract_marker_ranges(text, [(0, 4), (6, 7)])
         self.assertEqual(ranges, [(0, 4)])
 
-    def test_thai_runs_keep_literal_sp1(self) -> None:
-        """Regression: split ``{{sp`` / ``1`` / ``}}`` must not become สฺปฺ/๑."""
+    def test_thai_runs_strip_legacy_sp1(self) -> None:
+        """Legacy ``{{sp1}}`` is stripped; must not become สฺปฺ/๑."""
         roman = "yācitabbā.{{sp1}} Dutiyampi"
         roman_runs = [
             {"value": "yācitabbā", "bold": True},
@@ -243,9 +244,35 @@ class MarkerBoldCollisionTests(unittest.TestCase):
         thai_runs = transliterate_runs(roman_runs)
         joined = "".join(r["value"] for r in thai_runs)
         self.assertEqual(joined, roman_to_thai(roman))
-        self.assertIn("{{sp1}}", joined)
+        self.assertNotIn("{{sp1}}", joined)
         self.assertNotIn("สฺปฺ", joined)
+        self.assertIn("ยาจิตพฺพา. ทุติยมฺปิ", joined)
         self.assertNotIn("๑", "".join(r["value"] for r in thai_runs if r.get("bold")))
+
+
+class UnboldRangesTests(unittest.TestCase):
+    def test_clears_span_and_joins_adjacent_plain(self) -> None:
+        text = "ayampi pārājiko hoti asaṃvāso”ti."
+        runs = [
+            {"value": "ayampi pārājiko hoti asaṃvāso”ti", "bold": True},
+            {"value": ".", "bold": False},
+        ]
+        quote_end = text.index("”") + 1
+        peeled = unbold_ranges_in_runs(runs, [(quote_end, len(text))])
+        self.assertEqual(
+            peeled,
+            [
+                {"value": "ayampi pārājiko hoti asaṃvāso”", "bold": True},
+                {"value": "ti.", "bold": False},
+            ],
+        )
+
+    def test_noop_when_already_plain(self) -> None:
+        runs = [
+            {"value": "asaṃvāso”", "bold": True},
+            {"value": "ti.", "bold": False},
+        ]
+        self.assertIs(unbold_ranges_in_runs(runs, [(9, 12)]), runs)
 
 
 if __name__ == "__main__":

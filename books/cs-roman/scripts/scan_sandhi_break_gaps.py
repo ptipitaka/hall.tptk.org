@@ -1,7 +1,7 @@
 """List long Roman tokens with no sandhi soft-break in DPD cache or overrides.
 
 Scans all ``volumes/*/data/segments.json``. A token qualifies when
-``thai_display_len >= min_len`` (default 15, same as sandhi inject). Output is
+``roman_letter_len >= min_len`` (default 15, same as sandhi build/inject).
 sorted by corpus frequency (count) then Thai length — use for curating
 ``shared/sandhi_breaks_overrides.json``.
 
@@ -24,7 +24,7 @@ ensure_import_paths()
 from pali_script import Script, convert  # noqa: E402
 
 from cs_roman_sandhi_breaks import (  # noqa: E402
-    DEFAULT_MIN_THAI_LEN,
+    DEFAULT_MIN_ROMAN_LEN,
     load_break_cache,
     load_break_overrides,
     normalize_lookup_key,
@@ -68,8 +68,6 @@ def collect_gap_rows(min_len: int) -> list[tuple[int, int, int, str, str]]:
             continue
         thai = convert(surf, Script.ROMAN, Script.THAI)
         tl = thai_display_len(thai)
-        if tl < min_len:
-            continue
         if key in cache or key in overrides:
             continue
         rows.append(
@@ -98,8 +96,8 @@ def main() -> None:
     parser.add_argument(
         "--min-len",
         type=int,
-        default=DEFAULT_MIN_THAI_LEN,
-        help=f"min thai_display_len (default {DEFAULT_MIN_THAI_LEN})",
+        default=DEFAULT_MIN_ROMAN_LEN,
+        help=f"min roman_letter_len (default {DEFAULT_MIN_ROMAN_LEN})",
     )
     parser.add_argument(
         "--tsv",
@@ -115,7 +113,7 @@ def main() -> None:
     cache = load_break_cache()
     overrides = load_break_overrides()
     print(f"cache_entries={len(cache)} override_entries={len(overrides)}")
-    print(f"missing_rows={len(rows)} (thai_display_len>={args.min_len})")
+    print(f"missing_rows={len(rows)} (roman_letter_len>={args.min_len})")
     print(f"wrote {args.tsv}")
     if rows:
         print("--- top 10 by count ---")

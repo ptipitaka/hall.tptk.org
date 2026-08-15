@@ -14,7 +14,7 @@
     "  page_breaks_reading_mode → รายการ = order ของ segment (ไม่ใช่เลขหน้า)"
   ],
   "source": "books/cs-roman/source/01Vin01.pdf",
-  "content_start_pdf_page": 24,
+  "content_start_pdf_page": 25,
   "content_end_printed_page": 382,
   "back_matter_start_printed_page": 383,
   "//layout": [
@@ -31,8 +31,8 @@
     "word_space": 3.5,
     "line_space": 1.5,
     "par_indent": "21.6pt",
-    "par_skip": "5pt",
-    "gatha_stanza_skip": "30pt",
+    "par_skip": "8pt",
+    "gatha_stanza_skip": "8pt",
     "gatha_indent": "65pt",
     "emergency_stretch": "2.5em"
   },

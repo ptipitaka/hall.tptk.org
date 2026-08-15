@@ -19,6 +19,7 @@ from cs_roman_hanging import (  # noqa: E402
     _is_center_line,
     _is_first_indent,
     _is_gatha_indent,
+    _is_hang_indent,
     _is_short_center_sandwich_text,
     _match_after_leading_tokens,
     _match_cached_line,
@@ -94,6 +95,12 @@ class IndentBandTests(unittest.TestCase):
         self.assertFalse(_is_gatha_indent(105.8))
         self.assertFalse(_is_gatha_indent(116.0))  # hang upper edge
         self.assertFalse(_is_gatha_indent(187.0))
+        # Numbered KN/SN bat bodies sit just below the old 100pt hang floor.
+        self.assertTrue(_is_hang_indent(97.2))  # 23Khu06 p.1
+        self.assertTrue(_is_hang_indent(103.0))
+        self.assertTrue(_is_hang_indent(105.8))
+        self.assertFalse(_is_hang_indent(96.0))
+        self.assertFalse(_is_hang_indent(84.2))
 
     def test_normalize_strips_markers(self) -> None:
         self.assertEqual(
@@ -348,6 +355,167 @@ class ReclassifyByIndentTests(unittest.TestCase):
                 normalize_match_text(seg_text)[:28],
             )
         )
+
+    def test_midline_pot_ma_gyi_does_not_steal_indent_head(self) -> None:
+        """01Vin01 p.36: ``. . Bhikkhu…`` flush must not beat indented head."""
+        lines = [
+            PageLine(
+                y0=126.0,
+                x0=62.6,
+                text=(
+                    "pārājikassa. . Bhikkhupaccatthikā manussitthiṃ "
+                    "bhikkhussa santike ānetvā"
+                ),
+            ),
+            PageLine(
+                y0=179.0,
+                x0=62.6,
+                text=(
+                    "pārājikassa. . Bhikkhupaccatthikā manussitthiṃ "
+                    "bhikkhussa santike ānetvā"
+                ),
+            ),
+            PageLine(
+                y0=238.0,
+                x0=84.2,
+                text="Bhikkhupaccatthikā manussitthiṃ bhikkhussa santike ānetvā",
+            ),
+        ]
+        needle = (
+            "Bhikkhupaccatthikā manussitthiṃ bhikkhussa santike ānetvā "
+            "passāvamaggena. Mukhena aṅgajātaṃ abhinisīdenti"
+        )
+        matched = _match_cached_line(lines, needle)
+        self.assertIsNotNone(matched)
+        assert matched is not None
+        self.assertTrue(_is_first_indent(matched.x0))
+        self.assertEqual(matched.y0, 238.0)
+
+    def test_shared_prefix_prefers_longest_common(self) -> None:
+        """01Vin01 p.157: …khaṇḍacakkaṃ… must not steal …baddhacakkaṃ."""
+        lines = [
+            PageLine(
+                y0=100.0,
+                x0=108.06,
+                x1=394.3,
+                text="Vatthuvisārakassa ekamūlakassa khaṇḍacakkaṃ niṭṭhitaṃ.",
+            ),
+            PageLine(
+                y0=400.0,
+                x0=131.46,
+                x1=370.84,
+                text="Vatthuvisārakassa ekamūlakassa baddhacakkaṃ.",
+            ),
+            PageLine(
+                y0=420.0,
+                x0=200.88,
+                x1=301.44,
+                text="Mūlaṃ saṃkhittaṃ.",
+            ),
+        ]
+        matched = _match_cached_line(
+            lines, "Vatthuvisārakassa ekamūlakassa baddhacakkaṃ."
+        )
+        self.assertIsNotNone(matched)
+        assert matched is not None
+        self.assertEqual(
+            matched.text, "Vatthuvisārakassa ekamūlakassa baddhacakkaṃ."
+        )
+        self.assertTrue(_is_center_line(matched, 499.0))
+        # Sibling closer still resolves to its own (earlier) line.
+        closer = _match_cached_line(
+            lines,
+            "Vatthuvisārakassa ekamūlakassa khaṇḍacakkaṃ niṭṭhitaṃ.",
+        )
+        self.assertIsNotNone(closer)
+        assert closer is not None
+        self.assertIn("khaṇḍacakkaṃ", closer.text)
+
+    def test_shared_prefix_center_tag_uses_correct_line(self) -> None:
+        """Geometry center must use baddha line, not the earlier khaṇḍa line."""
+
+        class _Page:
+            rect = type("R", (), {"width": 499.0})()
+
+        class _Doc:
+            page_count = 1
+
+            def __getitem__(self, idx: int) -> object:
+                return _Page()
+
+        segs = [
+            {
+                "page": 1,
+                "order": 722,
+                "segment_type": "niṭṭhitaṃ",
+                "text": [
+                    {
+                        "script": "roman",
+                        "value": (
+                            "Vatthuvisārakassa ekamūlakassa "
+                            "khaṇḍacakkaṃ niṭṭhitaṃ."
+                        ),
+                    }
+                ],
+            },
+            {
+                "page": 1,
+                "order": 726,
+                "item": 216,
+                "segment_type": "prose",
+                "text": [
+                    {
+                        "script": "roman",
+                        "value": (
+                            "Vatthuvisārakassa ekamūlakassa baddhacakkaṃ."
+                        ),
+                    }
+                ],
+            },
+            {
+                "page": 1,
+                "order": 727,
+                "item": 216,
+                "segment_type": "prose",
+                "text": [{"script": "roman", "value": "Mūlaṃ saṃkhittaṃ."}],
+            },
+        ]
+        lines = [
+            PageLine(
+                y0=100.0,
+                x0=108.06,
+                x1=394.3,
+                text=(
+                    "Vatthuvisārakassa ekamūlakassa "
+                    "khaṇḍacakkaṃ niṭṭhitaṃ."
+                ),
+            ),
+            PageLine(
+                y0=400.0,
+                x0=131.46,
+                x1=370.84,
+                text="Vatthuvisārakassa ekamūlakassa baddhacakkaṃ.",
+            ),
+            PageLine(
+                y0=420.0,
+                x0=200.88,
+                x1=301.44,
+                text="Mūlaṃ saṃkhittaṃ.",
+            ),
+        ]
+        import cs_roman_hanging as hanging
+
+        original = hanging.page_body_lines
+        hanging.page_body_lines = lambda _page: lines  # type: ignore[assignment]
+        try:
+            stats = tag_center_layout_by_geometry(
+                _Doc(), segs, content_start=1
+            )
+        finally:
+            hanging.page_body_lines = original  # type: ignore[assignment]
+        self.assertGreaterEqual(stats["tagged_center"], 2)
+        self.assertEqual(segs[1].get("source_layout"), "center")
+        self.assertEqual(segs[2].get("source_layout"), "center")
 
 
 if __name__ == "__main__":

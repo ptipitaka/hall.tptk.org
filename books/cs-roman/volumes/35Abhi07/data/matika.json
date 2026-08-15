@@ -81,161 +81,161 @@
       "title": "Pavatti 1. Uppādavāra",
       "page": null,
       "kind": "h1",
-      "matched_order": 1082,
+      "matched_order": 1005,
       "section_no": 2
     },
     {
       "title": "Paccuppannavāra",
       "page": 8,
       "kind": "h2",
-      "matched_order": 88,
+      "matched_order": 87,
       "section_no": 1
     },
     {
       "title": "Atītavāra",
       "page": 12,
       "kind": "h2",
-      "matched_order": 117,
+      "matched_order": 112,
       "section_no": 2
     },
     {
       "title": "Anāgatavāra",
       "page": 16,
       "kind": "h2",
-      "matched_order": 144,
+      "matched_order": 133,
       "section_no": 3
     },
     {
       "title": "Paccuppannātītavāra",
       "page": 19,
       "kind": "h2",
-      "matched_order": 171,
+      "matched_order": 154,
       "section_no": 4
     },
     {
       "title": "Paccuppannānāgatavāra",
       "page": 22,
       "kind": "h2",
-      "matched_order": 194,
+      "matched_order": 172,
       "section_no": 5
     },
     {
       "title": "Atītānāgatavāra",
       "page": 26,
       "kind": "h2",
-      "matched_order": 219,
+      "matched_order": 193,
       "section_no": 6
     },
     {
       "title": "Pavatti 2. Nirodhavāra",
       "page": null,
       "kind": "cha",
-      "matched_order": 243,
+      "matched_order": 213,
       "section_no": 2
     },
     {
       "title": "Paccuppannavāra",
       "page": 29,
       "kind": "h1",
-      "matched_order": 244,
+      "matched_order": null,
       "section_no": 1
     },
     {
       "title": "Atītavāra",
       "page": 34,
       "kind": "h1",
-      "matched_order": 273,
+      "matched_order": 238,
       "section_no": 2
     },
     {
       "title": "Anāgatavāra",
       "page": 37,
       "kind": "h1",
-      "matched_order": 300,
+      "matched_order": 260,
       "section_no": 3
     },
     {
       "title": "Paccuppannātītavāra",
       "page": 41,
       "kind": "h1",
-      "matched_order": 325,
+      "matched_order": 281,
       "section_no": 4
     },
     {
       "title": "Paccuppannānāgatavāra",
       "page": 44,
       "kind": "h1",
-      "matched_order": 347,
+      "matched_order": 298,
       "section_no": 5
     },
     {
       "title": "Atītānāgatavāra",
       "page": 48,
       "kind": "h1",
-      "matched_order": 369,
+      "matched_order": 318,
       "section_no": 6
     },
     {
       "title": "Pavatti 3. Uppādanirodhavāra",
       "page": null,
       "kind": "cha",
-      "matched_order": 392,
+      "matched_order": 337,
       "section_no": 2
     },
     {
       "title": "Paccuppannavāra",
       "page": 51,
       "kind": "h1",
-      "matched_order": 393,
+      "matched_order": null,
       "section_no": 1
     },
     {
       "title": "Atītavāra",
       "page": 55,
       "kind": "h1",
-      "matched_order": 420,
+      "matched_order": 360,
       "section_no": 2
     },
     {
       "title": "Anāgatavāra",
       "page": 58,
       "kind": "h1",
-      "matched_order": 448,
+      "matched_order": 383,
       "section_no": 3
     },
     {
       "title": "Paccuppannātītavāra",
       "page": 62,
       "kind": "h1",
-      "matched_order": 476,
+      "matched_order": 407,
       "section_no": 4
     },
     {
       "title": "Paccuppannānāgatavāra",
       "page": 65,
       "kind": "h1",
-      "matched_order": 498,
+      "matched_order": 425,
       "section_no": 5
     },
     {
       "title": "Atītānāgatavāra",
       "page": 69,
       "kind": "h1",
-      "matched_order": 519,
+      "matched_order": 443,
       "section_no": 6
     },
     {
       "title": "Bhāvanāvāra",
       "page": 72,
       "kind": "cha",
-      "matched_order": 545,
+      "matched_order": 464,
       "section_no": 3
     },
     {
       "title": "Indriyayamakapāḷi",
       "page": null,
       "kind": "boo",
-      "matched_order": 551
+      "matched_order": 470
     },
     {
       "title": "Paṇṇattivāra-uddesa",
@@ -286,7 +286,7 @@
       "title": "Suddhindriyavāra",
       "page": null,
       "kind": "h1",
-      "matched_order": 692,
+      "matched_order": 609,
       "section_no": 3
     },
     {
@@ -305,7 +305,7 @@
       "title": "Suddhindriyamūlacakkavāra",
       "page": null,
       "kind": "h1",
-      "matched_order": 722,
+      "matched_order": 647,
       "section_no": 4
     },
     {
@@ -421,37 +421,37 @@
       "title": "Anulomapuggala",
       "page": 113,
       "kind": "h5",
-      "matched_order": 1084
+      "matched_order": null
     },
     {
       "title": "Anuloma-okāsa",
       "page": 123,
       "kind": "h5",
-      "matched_order": 1141
+      "matched_order": 1060
     },
     {
       "title": "Anulomapuggalokāsa",
       "page": 126,
       "kind": "h5",
-      "matched_order": 1169
+      "matched_order": null
     },
     {
       "title": "Paccanīkapuggala",
       "page": 138,
       "kind": "h5",
-      "matched_order": 1228
+      "matched_order": null
     },
     {
       "title": "Paccanīka-okāsa",
       "page": 150,
       "kind": "h5",
-      "matched_order": 1287
+      "matched_order": 1195
     },
     {
       "title": "Paccanīkapuggalokāsa",
       "page": 153,
       "kind": "h5",
-      "matched_order": 1315
+      "matched_order": null
     },
     {
       "title": "Atītavāra",
@@ -464,37 +464,37 @@
       "title": "Anulomapuggala",
       "page": 166,
       "kind": "h5",
-      "matched_order": 1376
+      "matched_order": null
     },
     {
       "title": "Anuloma-okāsa",
       "page": 167,
       "kind": "h5",
-      "matched_order": 1385
+      "matched_order": 1285
     },
     {
       "title": "Anulomapuggalokāsa",
       "page": 170,
       "kind": "h5",
-      "matched_order": 1413
+      "matched_order": null
     },
     {
       "title": "Paccanīkapuggala",
       "page": 174,
       "kind": "h5",
-      "matched_order": 1444
+      "matched_order": null
     },
     {
       "title": "Paccanīka-okāsa",
       "page": 175,
       "kind": "h5",
-      "matched_order": 1455
+      "matched_order": 1348
     },
     {
       "title": "Paccanīkapuggalokāsa",
       "page": 179,
       "kind": "h5",
-      "matched_order": 1483
+      "matched_order": 1375
     },
     {
       "title": "Anāgatavāra",
@@ -507,37 +507,37 @@
       "title": "Anulomapuggala",
       "page": 183,
       "kind": "h5",
-      "matched_order": 1511
+      "matched_order": null
     },
     {
       "title": "Anuloma-okāsa",
       "page": 189,
       "kind": "h5",
-      "matched_order": 1549
+      "matched_order": 1437
     },
     {
       "title": "Anulomapuggalokāsa",
       "page": 193,
       "kind": "h5",
-      "matched_order": 1577
+      "matched_order": null
     },
     {
       "title": "Paccanīkapuggala",
       "page": 200,
       "kind": "h5",
-      "matched_order": 1616
+      "matched_order": null
     },
     {
       "title": "Paccanīka-okāsa",
       "page": 208,
       "kind": "h5",
-      "matched_order": 1656
+      "matched_order": 1534
     },
     {
       "title": "Paccanīkapuggalokāsa",
       "page": 211,
       "kind": "h5",
-      "matched_order": 1683
+      "matched_order": null
     },
     {
       "title": "Paccuppannātītavāra",
@@ -550,37 +550,37 @@
       "title": "Anulomapuggala",
       "page": 220,
       "kind": "h5",
-      "matched_order": 1724
+      "matched_order": null
     },
     {
       "title": "Anuloma-okāsa",
       "page": 224,
       "kind": "h5",
-      "matched_order": 1753
+      "matched_order": 1625
     },
     {
       "title": "Anulomapuggalokāsa",
       "page": 224,
       "kind": "h5",
-      "matched_order": 1755
+      "matched_order": null
     },
     {
       "title": "Paccanīkapuggala",
       "page": 232,
       "kind": "h5",
-      "matched_order": 1794
+      "matched_order": null
     },
     {
       "title": "Paccanīka-okāsa",
       "page": 233,
       "kind": "h5",
-      "matched_order": 1803
+      "matched_order": 1670
     },
     {
       "title": "Paccanīkapuggalokāsa",
       "page": 233,
       "kind": "h5",
-      "matched_order": 1805
+      "matched_order": null
     },
     {
       "title": "Paccuppannānāgatavāra",
@@ -593,37 +593,37 @@
       "title": "Anulomapuggala",
       "page": 240,
       "kind": "h5",
-      "matched_order": 1839
+      "matched_order": null
     },
     {
       "title": "Anuloma-okāsa",
       "page": 249,
       "kind": "h5",
-      "matched_order": 1880
+      "matched_order": 1740
     },
     {
       "title": "Anulomapuggalokāsa",
       "page": 249,
       "kind": "h5",
-      "matched_order": 1882
+      "matched_order": null
     },
     {
       "title": "Paccanīkapuggala",
       "page": 259,
       "kind": "h5",
-      "matched_order": 1924
+      "matched_order": null
     },
     {
       "title": "Paccanīka-okāsa",
       "page": 271,
       "kind": "h5",
-      "matched_order": 1968
+      "matched_order": 1823
     },
     {
       "title": "Paccanīkapuggalokāsa",
       "page": 271,
       "kind": "h5",
-      "matched_order": 1970
+      "matched_order": null
     },
     {
       "title": "Atītānāgatavāra",
@@ -636,43 +636,43 @@
       "title": "Anulomapuggala",
       "page": 283,
       "kind": "h5",
-      "matched_order": 2015
+      "matched_order": null
     },
     {
       "title": "Anuloma-okāsa",
       "page": 289,
       "kind": "h5",
-      "matched_order": 2054
+      "matched_order": 1902
     },
     {
       "title": "Anulomapuggalokāsa",
       "page": 289,
       "kind": "h5",
-      "matched_order": 2056
+      "matched_order": null
     },
     {
       "title": "Paccanīkapuggala",
       "page": 298,
       "kind": "h5",
-      "matched_order": 2096
+      "matched_order": 1940
     },
     {
       "title": "Paccanīka-okāsa",
       "page": 298,
       "kind": "h5",
-      "matched_order": 2103
+      "matched_order": 1940
     },
     {
       "title": "Paccanīkapuggalokāsa",
       "page": 298,
       "kind": "h5",
-      "matched_order": 2105
+      "matched_order": null
     },
     {
       "title": "Pariññāvāra",
       "page": null,
       "kind": "h2",
-      "matched_order": 2146,
+      "matched_order": null,
       "section_no": 3
     },
     {

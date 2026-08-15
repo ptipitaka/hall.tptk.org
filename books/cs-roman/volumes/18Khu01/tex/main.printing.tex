@@ -1,0 +1,22 @@
+% !TeX program = lualatex
+% !TeX root = main.printing.tex
+% CS Roman Thai Tipiṭaka — 18Khu01 (printing: reading flow at 165×230 mm)
+\documentclass[11pt,twoside,openany]{memoir}
+
+% Trim 165×230 mm; lengths scaled from reading by 165mm/499bp.
+\def\csromanuseprintinggeometry{1}
+\input{shared/style/preamble}
+
+\begin{document}
+% Front: Mātikā from segments with in_toc (page numbers = physical body pages).
+\pagestyle{plain}
+\pagenumbering{roman}
+% babel-thai may reset \contentsname — set immediately before use.
+\renewcommand{\contentsname}{มาติกา}
+\tableofcontents*
+% Body must open on a recto (right-hand / odd) page.
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{plain}
+\input{volumes/18Khu01/tex/body.printing.generated}
+\end{document}
