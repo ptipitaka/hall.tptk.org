@@ -14,14 +14,18 @@ Actions (exactly one per rule):
   (Roman wrong vs Burmese; ``remark`` is editor documentation only).
 - ``unbold`` — keep ``when.match``; clear bold on that span in ``runs``
   (Roman stroke/weight wrong vs Burmese). Optional ``skip`` leaves a
-  prefix of the match bold (e.g. ``”`` in ``”ti``).
+  prefix of the match bold (e.g. ``asaṃvāso”`` in ``asaṃvāso”ti``).
 
-Catalog ``replace`` / ``annotate`` set ``when.token`` to ``true`` (letter
-boundaries: ``bandhiṃ`` does not hit ``bandhiṃsu``). ``unbold`` of a glued
-quote-iti uses ``token: false`` because ``”`` is not a letter-run.
-The parser still defaults ``token`` to ``false`` for tests. Optional
-``when.volumes`` pins a rule to volume folder ids (``01Vin01``); generate
-drops it for other books. Optional ``soft_breaks`` on either action merges
+``when.match`` is an exact whole word unless it starts or ends with ``+``
+(one or more letters in the same word: ``+bandhiṃ``, ``bandhiṃ+``,
+``+bandhiṃ+``). The hit span is the core; affix letters stay.
+``when.token`` is removed. Catalog rules omit ``enabled`` (default
+``true``); set ``false`` only to skip a rule. ``when.loci`` pins a rule
+to one or more places: each entry needs ``volume``; ``page`` and
+``order`` are optional (omitted fields match any). ``order`` requires
+``page``. Generate drops a rule when the current book is not in any
+locus. Unpinned rules (no ``loci``) apply in every volume.
+Optional ``soft_breaks`` on either action merges
 into the sandhi break map at generate (keyed by the surface form present
 after the rule).
 
@@ -37,7 +41,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Iterator, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any, Literal
 
@@ -53,6 +57,15 @@ TransformAction = Literal["annotate", "replace", "unbold"]
 
 
 @dataclass(frozen=True)
+class TransformLocus:
+    """One place pin. ``volume`` is required; ``page`` / ``order`` may be omitted."""
+
+    volume: str
+    page: int | None = None
+    order: int | None = None
+
+
+@dataclass(frozen=True)
 class TransformRule:
     """One ordered annotate or replace rule with optional segment filters."""
 
@@ -60,11 +73,11 @@ class TransformRule:
     enabled: bool
     action: TransformAction
     match: str
-    pages: frozenset[int] | None = None
-    orders: frozenset[int] | None = None
-    volumes: frozenset[str] | None = None
+    core: str
+    leading_plus: bool = False
+    trailing_plus: bool = False
+    loci: tuple[TransformLocus, ...] | None = None
     segment_types: frozenset[str] | None = None
-    token: bool = False
     footnote: str | None = None
     replacement: str | None = None
     remark: str | None = None
@@ -76,17 +89,78 @@ def shared_transforms_path() -> Path:
     return SHARED_TRANSFORMS_PATH
 
 
-def _int_set(raw: Any, *, field: str) -> frozenset[int] | None:
+def _parse_loci(raw: Any, *, loc: str) -> tuple[TransformLocus, ...] | None:
     if raw is None:
         return None
-    if not isinstance(raw, list):
-        raise ValueError(f"when.{field} must be a list of integers")
-    out: set[int] = set()
-    for item in raw:
-        if not isinstance(item, int) or isinstance(item, bool):
-            raise ValueError(f"when.{field} entries must be integers")
-        out.add(item)
-    return frozenset(out)
+    if not isinstance(raw, list) or not raw:
+        raise ValueError(f"{loc}: when.loci must be a non-empty list")
+    allowed = {"volume", "page", "order"}
+    out: list[TransformLocus] = []
+    for i, item in enumerate(raw):
+        item_loc = f"{loc}: when.loci[{i}]"
+        if not isinstance(item, dict):
+            raise ValueError(f"{item_loc}: must be an object")
+        unknown = set(item) - allowed
+        if unknown:
+            keys = ", ".join(sorted(unknown))
+            raise ValueError(f"{item_loc}: unsupported keys: {keys}")
+        volume = item.get("volume")
+        if not isinstance(volume, str) or not volume:
+            raise ValueError(f"{item_loc}: volume must be a non-empty string")
+        page_raw = item.get("page")
+        order_raw = item.get("order")
+        if page_raw is None:
+            page: int | None = None
+        elif not isinstance(page_raw, int) or isinstance(page_raw, bool):
+            raise ValueError(f"{item_loc}: page must be an integer")
+        else:
+            page = page_raw
+        if order_raw is None:
+            order: int | None = None
+        elif not isinstance(order_raw, int) or isinstance(order_raw, bool):
+            raise ValueError(f"{item_loc}: order must be an integer")
+        else:
+            order = order_raw
+        if order is not None and page is None:
+            raise ValueError(f"{item_loc}: order requires page")
+        out.append(TransformLocus(volume=volume, page=page, order=order))
+    return tuple(out)
+
+
+def _is_single_letter_run(text: str) -> bool:
+    return bool(text) and all(ch.isalpha() for ch in text)
+
+
+def parse_match_pattern(match: str, *, loc: str = "when.match") -> tuple[str, bool, bool]:
+    """Split ``when.match`` into ``(core, leading_plus, trailing_plus)``.
+
+    No ``+`` — exact whole word (letter-run bounds on the full span, so
+    ``bandhiṃ`` does not hit ``bandhiṃsu``; ``bandhiṃ.`` still matches).
+    ``+bandhiṃ`` — one or more letters before the core; core ends the word.
+    ``bandhiṃ+`` — letters after; core starts the word.
+    ``+bandhiṃ+`` — letters on both sides. ``+`` only at the start or end;
+    affix patterns need a single letter-run core. The replace/annotate/unbold
+    span is the core (``anubandhiṃ`` + ``+bandhiṃ`` + ``bandhaṃ`` →
+    ``anubandhaṃ``).
+    """
+    if not isinstance(match, str) or match == "":
+        raise ValueError(f"{loc}: when.match must be a non-empty string")
+    leading = match.startswith("+")
+    trailing = match.endswith("+")
+    core = match[1:] if leading else match
+    if trailing:
+        core = core[:-1]
+    if not core:
+        raise ValueError(f"{loc}: when.match core must be non-empty")
+    if "+" in core:
+        raise ValueError(
+            f"{loc}: + may only appear at the start or end of when.match"
+        )
+    if (leading or trailing) and not _is_single_letter_run(core):
+        raise ValueError(
+            f"{loc}: + affix requires a single letter-run core (got {core!r})"
+        )
+    return core, leading, trailing
 
 
 def _str_set(raw: Any, *, field: str) -> frozenset[str] | None:
@@ -165,12 +239,17 @@ def parse_transforms_document(data: Any, *, source: str) -> list[TransformRule]:
             raise ValueError(f"{loc}: when must be an object")
         allowed_when = {
             "match",
-            "pages",
-            "orders",
-            "volumes",
+            "loci",
             "segment_types",
-            "token",
         }
+        if "token" in when:
+            raise ValueError(
+                f"{loc}: when.token removed; use + in when.match for affixes"
+            )
+        legacy_when = set(when) & {"volumes", "pages", "orders"}
+        if legacy_when:
+            keys = ", ".join(sorted(legacy_when))
+            raise ValueError(f"{loc}: {keys} moved to when.loci")
         unknown_when = set(when) - allowed_when
         if unknown_when:
             unknown = ", ".join(sorted(unknown_when))
@@ -179,10 +258,9 @@ def parse_transforms_document(data: Any, *, source: str) -> list[TransformRule]:
         if not isinstance(match_raw, str) or match_raw == "":
             raise ValueError(f"{loc}: when.match must be a non-empty string")
         match = match_raw
-        token_raw = when.get("token", False)
-        if not isinstance(token_raw, bool):
-            raise ValueError(f"{loc}: when.token must be a boolean")
-        token = token_raw
+        core, leading_plus, trailing_plus = parse_match_pattern(
+            match, loc=f"{loc}: when.match"
+        )
 
         do = raw.get("do")
         if not isinstance(do, dict):
@@ -220,7 +298,7 @@ def parse_transforms_document(data: Any, *, source: str) -> list[TransformRule]:
             footnote = footnote_raw
             soft_breaks = _parse_soft_breaks(
                 ann.get("soft_breaks"),
-                surface=match,
+                surface=core,
                 loc=loc,
                 field="do.annotate.soft_breaks",
             )
@@ -236,9 +314,9 @@ def parse_transforms_document(data: Any, *, source: str) -> list[TransformRule]:
             skip_raw = spec.get("skip", 0)
             if not isinstance(skip_raw, int) or isinstance(skip_raw, bool) or skip_raw < 0:
                 raise ValueError(f"{loc}: do.unbold.skip must be a non-negative integer")
-            if skip_raw >= len(match):
+            if skip_raw >= len(core):
                 raise ValueError(
-                    f"{loc}: do.unbold.skip must be smaller than when.match"
+                    f"{loc}: do.unbold.skip must be smaller than the match core"
                 )
             unbold_skip = skip_raw
             remark_raw = spec.get("remark")
@@ -271,19 +349,21 @@ def parse_transforms_document(data: Any, *, source: str) -> list[TransformRule]:
                 field="do.replace.soft_breaks",
             )
 
+        loci = _parse_loci(when.get("loci"), loc=loc)
+
         rules.append(
             TransformRule(
                 id=rule_id,
                 enabled=enabled,
                 action=action,
                 match=match,
-                pages=_int_set(when.get("pages"), field="pages"),
-                orders=_int_set(when.get("orders"), field="orders"),
-                volumes=_str_set(when.get("volumes"), field="volumes"),
+                core=core,
+                leading_plus=leading_plus,
+                trailing_plus=trailing_plus,
+                loci=loci,
                 segment_types=_str_set(
                     when.get("segment_types"), field="segment_types"
                 ),
-                token=token,
                 footnote=footnote,
                 replacement=replacement,
                 remark=remark,
@@ -316,7 +396,7 @@ def collect_transform_soft_breaks(
         if not rule.enabled or not rule.soft_breaks:
             continue
         if rule.action == "annotate":
-            key = rule.match
+            key = rule.core
         elif rule.action == "replace":
             assert rule.replacement is not None
             key = rule.replacement
@@ -329,12 +409,20 @@ def collect_transform_soft_breaks(
 def select_rules_for_volume(
     rules: Sequence[TransformRule], volume_id: str
 ) -> list[TransformRule]:
-    """Drop rules pinned to other volume ids; unpinned rules stay."""
-    return [
-        rule
-        for rule in rules
-        if rule.volumes is None or volume_id in rule.volumes
-    ]
+    """Keep unpinned rules; drop other books; narrow mixed-volume ``loci``."""
+    kept: list[TransformRule] = []
+    for rule in rules:
+        if rule.loci is None:
+            kept.append(rule)
+            continue
+        matching = tuple(loc for loc in rule.loci if loc.volume == volume_id)
+        if not matching:
+            continue
+        if matching == rule.loci:
+            kept.append(rule)
+        else:
+            kept.append(replace(rule, loci=matching))
+    return kept
 
 
 @dataclass(frozen=True)
@@ -367,8 +455,8 @@ def _index_key_run(run: str) -> str:
     return run.casefold()
 
 
-def _iter_letter_runs(text: str) -> Iterator[str]:
-    """Yield maximal ``str.isalpha()`` runs (same boundaries as token match)."""
+def _iter_letter_run_spans(text: str) -> Iterator[tuple[int, int]]:
+    """Yield ``(start, end)`` of maximal ``str.isalpha()`` runs."""
     i = 0
     n = len(text)
     while i < n:
@@ -376,14 +464,16 @@ def _iter_letter_runs(text: str) -> Iterator[str]:
             j = i + 1
             while j < n and text[j].isalpha():
                 j += 1
-            yield text[i:j]
+            yield i, j
             i = j
         else:
             i += 1
 
 
-def _is_single_letter_run(text: str) -> bool:
-    return bool(text) and all(ch.isalpha() for ch in text)
+def _iter_letter_runs(text: str) -> Iterator[str]:
+    """Yield maximal ``str.isalpha()`` runs (same boundaries as exact match)."""
+    for start, end in _iter_letter_run_spans(text):
+        yield text[start:end]
 
 
 def _first_letter_run(text: str) -> str | None:
@@ -400,16 +490,16 @@ def compile_transforms(rules: Sequence[TransformRule]) -> TransformProgram:
         if not rule.enabled:
             continue
         indexed = _IndexedRule(i, rule)
-        if rule.token and _is_single_letter_run(rule.match):
-            by_run_map.setdefault(_index_key_run(rule.match), []).append(indexed)
-        elif rule.token:
-            first = _first_letter_run(rule.match)
+        if rule.leading_plus or rule.trailing_plus:
+            other_list.append(indexed)
+        elif _is_single_letter_run(rule.core):
+            by_run_map.setdefault(_index_key_run(rule.core), []).append(indexed)
+        else:
+            first = _first_letter_run(rule.core)
             if first is None:
                 other_list.append(indexed)
             else:
                 by_first_map.setdefault(_index_key_run(first), []).append(indexed)
-        else:
-            other_list.append(indexed)
     return TransformProgram(
         rules=rule_list,
         by_run={key: tuple(vals) for key, vals in by_run_map.items()},
@@ -466,6 +556,24 @@ def _candidate_indexed(
     return out
 
 
+def _locus_matches(
+    loci: tuple[TransformLocus, ...],
+    *,
+    page: int,
+    order: int,
+    volume_id: str | None,
+) -> bool:
+    for loc in loci:
+        if volume_id is not None and loc.volume != volume_id:
+            continue
+        if loc.page is not None and loc.page != page:
+            continue
+        if loc.order is not None and loc.order != order:
+            continue
+        return True
+    return False
+
+
 def rule_matches(
     rule: TransformRule,
     text: str,
@@ -477,32 +585,31 @@ def rule_matches(
 ) -> bool:
     if not rule.enabled:
         return False
-    if (
-        rule.volumes is not None
-        and volume_id is not None
-        and volume_id not in rule.volumes
+    if rule.loci is not None and not _locus_matches(
+        rule.loci, page=page, order=order, volume_id=volume_id
     ):
-        return False
-    if rule.pages is not None and page not in rule.pages:
-        return False
-    if rule.orders is not None and order not in rule.orders:
         return False
     if rule.segment_types is not None and segment_type not in rule.segment_types:
         return False
-    return _has_match(text, rule.match, token=rule.token)
+    return next(iter_rule_hits(text, rule), None) is not None
 
 
 def _token_bounded(text: str, start: int, length: int) -> bool:
-    """True when ``text[start:start+length]`` is not inside a longer letter-run."""
-    if start > 0 and text[start - 1].isalpha():
+    """True when ``text[start:start+length]`` is not inside a longer letter-run.
+
+    A match that begins or ends with a non-letter already sits on a token
+    boundary on that side (e.g. ``”ti`` after ``…so”``); only require the
+    neighbour to be non-alpha when the match edge itself is a letter.
+    """
+    if start > 0 and text[start - 1].isalpha() and text[start].isalpha():
         return False
     end = start + length
-    if end < len(text) and text[end].isalpha():
+    if end < len(text) and text[end].isalpha() and text[end - 1].isalpha():
         return False
     return True
 
 
-def _iter_match_indices(text: str, needle: str, *, token: bool):
+def _iter_literal_starts(text: str, needle: str, *, bounded: bool) -> Iterator[int]:
     """Yield start indices of non-overlapping ``needle`` hits (case-insensitive)."""
     if not needle:
         return
@@ -511,8 +618,8 @@ def _iter_match_indices(text: str, needle: str, *, token: bool):
     start = 0
     text_len = len(text)
     while start <= text_len - needle_len:
-        if text[start:start + needle_len].casefold() == needle_fold:
-            if not token or _token_bounded(text, start, needle_len):
+        if text[start : start + needle_len].casefold() == needle_fold:
+            if not bounded or _token_bounded(text, start, needle_len):
                 yield start
                 start += needle_len
             else:
@@ -521,28 +628,86 @@ def _iter_match_indices(text: str, needle: str, *, token: bool):
             start += 1
 
 
-def _has_match(text: str, needle: str, *, token: bool) -> bool:
-    return next(_iter_match_indices(text, needle, token=token), None) is not None
-
-
-def _literal_sub(
+def _iter_plus_starts(
     text: str,
-    needle: str,
+    core: str,
     *,
-    replacer,
-    token: bool = False,
-) -> str:
-    """Replace every non-overlapping occurrence of ``needle`` via ``replacer``."""
-    indices = list(_iter_match_indices(text, needle, token=token))
-    if not indices:
+    leading: bool,
+    trailing: bool,
+) -> Iterator[int]:
+    """Yield core starts inside letter-runs that have the required affixes."""
+    core_fold = core.casefold()
+    core_len = len(core)
+    if not core_len:
+        return
+    for run_start, run_end in _iter_letter_run_spans(text):
+        i = run_start
+        while i + core_len <= run_end:
+            if text[i : i + core_len].casefold() == core_fold:
+                has_left = i > run_start
+                has_right = i + core_len < run_end
+                left_ok = has_left if leading else not has_left
+                right_ok = has_right if trailing else not has_right
+                if left_ok and right_ok:
+                    yield i
+                    i += core_len
+                    continue
+            i += 1
+
+
+def iter_match_hits(
+    text: str,
+    match: str,
+    *,
+    substring: bool = False,
+) -> Iterator[tuple[int, int]]:
+    """Yield ``(start, length)`` hits for a catalog ``when.match`` pattern.
+
+    ``substring`` is a hunt mode: raw blob search, no ``+`` affix parse and
+    no letter-run bounds.
+    """
+    if substring:
+        for start in _iter_literal_starts(text, match, bounded=False):
+            yield start, len(match)
+        return
+    core, leading, trailing = parse_match_pattern(match)
+    if leading or trailing:
+        starts = _iter_plus_starts(
+            text, core, leading=leading, trailing=trailing
+        )
+    else:
+        starts = _iter_literal_starts(text, core, bounded=True)
+    core_len = len(core)
+    for start in starts:
+        yield start, core_len
+
+
+def iter_rule_hits(text: str, rule: TransformRule) -> Iterator[tuple[int, int]]:
+    """Yield ``(start, length)`` of this rule's core hits in ``text``."""
+    core_len = len(rule.core)
+    if rule.leading_plus or rule.trailing_plus:
+        starts = _iter_plus_starts(
+            text,
+            rule.core,
+            leading=rule.leading_plus,
+            trailing=rule.trailing_plus,
+        )
+    else:
+        starts = _iter_literal_starts(text, rule.core, bounded=True)
+    for start in starts:
+        yield start, core_len
+
+
+def _sub_hits(text: str, hits: Sequence[tuple[int, int]], replacer) -> str:
+    """Replace every hit span via ``replacer`` (receives the original slice)."""
+    if not hits:
         return text
-    needle_len = len(needle)
     parts: list[str] = []
     last = 0
-    for idx in indices:
-        parts.append(text[last:idx])
-        parts.append(replacer(text[idx:idx + needle_len]))
-        last = idx + needle_len
+    for start, length in hits:
+        parts.append(text[last:start])
+        parts.append(replacer(text[start : start + length]))
+        last = start + length
     parts.append(text[last:])
     return "".join(parts)
 
@@ -574,11 +739,10 @@ def _apply_one_rule(
     if rule.action == "replace":
         assert rule.replacement is not None
         replacement = rule.replacement
-        return _literal_sub(
+        return _sub_hits(
             text,
-            rule.match,
-            replacer=lambda _matched, _with=replacement: _with,
-            token=rule.token,
+            list(iter_rule_hits(text, rule)),
+            lambda _matched, _with=replacement: _with,
         )
     if not emit_footnotes:
         return text
@@ -594,9 +758,7 @@ def _apply_one_rule(
         extra.append(_body)
         return f"{matched}{{{{n{idx}}}}}"
 
-    return _literal_sub(
-        text, rule.match, replacer=_annotate_hit, token=rule.token
-    )
+    return _sub_hits(text, list(iter_rule_hits(text, rule)), _annotate_hit)
 
 
 def _apply_transforms_linear(
@@ -720,8 +882,7 @@ def apply_unbold_to_runs(
         ):
             continue
         skip = rule.unbold_skip
-        match_len = len(rule.match)
-        for start in _iter_match_indices(text, rule.match, token=rule.token):
+        for start, match_len in iter_rule_hits(text, rule):
             a = start + skip
             b = start + match_len
             if a < b:
