@@ -1,7 +1,13 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+from django.urls import reverse
 from wagtail.models import Locale
+from wagtail.test.utils import WagtailTestUtils
 
+from snippets.admin_listing import (
+    attach_translation_siblings,
+    format_translation_siblings,
+)
 from snippets.models import (
     CanonicalSection,
     Classification,
@@ -121,3 +127,54 @@ class ReferenceSnippetModelTests(TestCase):
         self.assertEqual(dn.kind, CanonicalSection.Kind.NIKAYA)
         self.assertEqual(dn.parent.code, "sut")
         self.assertEqual(dn.name, "ทีฆนิกาย")
+
+
+class ReferenceSnippetListingTests(WagtailTestUtils, TestCase):
+    def setUp(self):
+        for code in ("en", "th"):
+            Locale.objects.get_or_create(language_code=code)
+        self.rows = create_translated_rows(
+            Classification,
+            translation_key=seed_translation_key("classification", "tipitaka"),
+            shared={"siglum": "TP", "slug": "tipitaka", "sort_order": 0},
+            localized={
+                "en": {"title": "Tipiṭaka", "description": ""},
+                "th": {"title": "พระไตรปิฎก", "description": ""},
+            },
+        )
+        self.login()
+
+    def test_format_shows_other_locale_title(self):
+        self.assertIn("พระไตรปิฎก", format_translation_siblings(self.rows["en"]))
+        self.assertIn("Tipiṭaka", format_translation_siblings(self.rows["th"]))
+
+    def test_attach_translation_siblings_skips_self(self):
+        attached = attach_translation_siblings([self.rows["en"]])[0]
+        siblings = attached._prefetched_siblings
+        self.assertEqual(len(siblings), 1)
+        self.assertEqual(siblings[0].pk, self.rows["th"].pk)
+
+    def test_classification_listing_defaults_to_english(self):
+        url = reverse("wagtailsnippets_snippets_classification:list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Translations")
+        self.assertContains(response, f"snippet_{self.rows['en'].pk}_title")
+        self.assertNotContains(response, f"snippet_{self.rows['th'].pk}_title")
+        self.assertContains(response, "พระไตรปิฎก")
+        self.assertContains(response, 'name="locale"')
+
+    def test_classification_listing_can_select_thai(self):
+        url = reverse("wagtailsnippets_snippets_classification:list")
+        response = self.client.get(url, {"locale": "th"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, f"snippet_{self.rows['th'].pk}_title")
+        self.assertNotContains(response, f"snippet_{self.rows['en'].pk}_title")
+        self.assertContains(response, "Tipiṭaka")
+
+    def test_classification_listing_all_locales_when_locale_blank(self):
+        url = reverse("wagtailsnippets_snippets_classification:list")
+        response = self.client.get(url, {"locale": ""})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, f"snippet_{self.rows['en'].pk}_title")
+        self.assertContains(response, f"snippet_{self.rows['th'].pk}_title")
