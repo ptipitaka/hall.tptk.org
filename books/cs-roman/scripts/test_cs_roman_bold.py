@@ -14,7 +14,9 @@ from cs_roman_bold import (  # noqa: E402
     BoldSpan,
     bold_ranges_from_geoms,
     bold_ranges_in_text,
+    extend_bold_ranges_to_token_end,
     ranges_to_runs,
+    snap_runs_to_token_end,
     substantial_bold_ranges,
     subtract_marker_ranges,
     unbold_ranges_in_runs,
@@ -61,6 +63,65 @@ class BboxBoldBleedTests(unittest.TestCase):
         # String-only path still bleeds — documents why geom matching exists.
         bled = bold_ranges_in_text(prepared, ["Bhūmaṭṭhaṃ"])
         self.assertEqual(len(bled), 2)
+
+    def test_inflated_bbox_lemma_not_painted_on_quote_line(self) -> None:
+        """Inflated full-line stroke bbox must not paint a quoted repeat.
+
+        Regression: 01Vin01 §104 — texttrace emits the ``Khettaṭṭhaṃ`` lemma
+        stroke with a full-line-width bbox that straddles the definition line
+        and the following wrap line which carries the quoted repeat. The
+        union-of-overlapping-lines match pulled in the quote occurrence and
+        x-picking chose it; restrict to the primary (max y-overlap) line.
+        """
+        prepared = (
+            "Khettaṃ nāma yattha pubbaṇṇaṃ vā aparaṇṇaṃ vā jāyati. "
+            "Khettaṭṭhaṃ nāma bhaṇḍaṃ khette catūhi ṭhānehi nikkhittaṃ "
+            "hoti bhūmaṭṭhaṃ thalaṭṭhaṃ ākāsaṭṭhaṃ vehāsaṭṭhaṃ. "
+            "“Khettaṭṭhaṃ bhaṇḍaṃ avaharissāmī”ti theyyacitto"
+        )
+        lines = [
+            PageLine(
+                y0=423.6,
+                x0=84.2,
+                x1=394.0,
+                y1=439.0,
+                text="104. Khettaṃ nāma yattha pubbaṇṇaṃ vā aparaṇṇaṃ vā jāyati.",
+            ),
+            PageLine(
+                y0=440.2,
+                x0=62.6,
+                x1=384.4,
+                y1=455.7,
+                text="Khettaṭṭhaṃ nāma bhaṇḍaṃ khette catūhi ṭhānehi nikkhittaṃ hoti",
+            ),
+            PageLine(
+                y0=456.9,
+                x0=62.6,
+                x1=419.6,
+                y1=472.4,
+                text='bhūmaṭṭhaṃ thalaṭṭhaṃ ākāsaṭṭhaṃ vehāsaṭṭhaṃ. “Khettaṭṭhaṃ bhaṇḍaṃ',
+            ),
+            PageLine(
+                y0=473.7,
+                x0=62.6,
+                x1=397.2,
+                y1=489.2,
+                text='avaharissāmī”ti theyyacitto dutiyaṃ vā pariyesati gacchati vā, āpatti',
+            ),
+        ]
+        # Stroke text is the short lemma, but its bbox is inflated to the
+        # full body-line width and height (y 426.5–455.1), overlapping the
+        # definition line and — within the 3pt tolerance — the quote line.
+        spans = [
+            BoldSpan("Khettaṃ", (108.7, 426.5, 150.1, 438.5)),
+            BoldSpan("Khettaṭṭhaṃ", (62.6, 426.5, 394.0, 455.1)),
+        ]
+        ranges = bold_ranges_from_geoms(prepared, spans, lines)
+        bold_bits = [prepared[a:b] for a, b in ranges]
+        self.assertEqual(bold_bits, ["Khettaṃ", "Khettaṭṭhaṃ"])
+        # Quoted repeat on the wrap line stays plain.
+        quoted_at = prepared.index("“Khettaṭṭhaṃ") + 1
+        self.assertFalse(any(a <= quoted_at < b for a, b in ranges))
 
     def test_same_line_x_picks_correct_occurrence(self) -> None:
         prepared = "Foo bar Foo baz"
@@ -248,6 +309,89 @@ class MarkerBoldCollisionTests(unittest.TestCase):
         self.assertNotIn("สฺปฺ", joined)
         self.assertIn("ยาจิตพฺพา. ทุติยมฺปิ", joined)
         self.assertNotIn("๑", "".join(r["value"] for r in thai_runs if r.get("bold")))
+
+
+class HyphenJoinBoldSplitTests(unittest.TestCase):
+    """Soft-hyphen leftover letter must stay in the bold token.
+
+    02Vin02 p.153: stroke ``samādahāpeyy-`` + wrap ``a`` → stored value
+    ``samādahāpeyya``, but runs split the ``a``. Thai convert of the stump
+    emits ``สมาทหาเปยฺยฺ`` + ``อ`` instead of ``สมาทหาเปยฺย``.
+    """
+
+    def test_extends_leftover_letter_to_token_end(self) -> None:
+        text = (
+            "jotiṃ samādaheyya vā samādahāpeyya vā aññatra "
+            "tathārūpappaccayā pācittiyan”ti."
+        )
+        start = text.index("samādahāpeyya")
+        end = start + len("samādahāpeyy")
+        self.assertEqual(
+            extend_bold_ranges_to_token_end(text, [(start, end)]),
+            [(start, start + len("samādahāpeyya"))],
+        )
+
+    def test_does_not_swallow_glued_ti(self) -> None:
+        text = "Haneyyuṃvāti hatthena."
+        start = 0
+        end = len("Haneyyuṃvā")
+        self.assertEqual(
+            extend_bold_ranges_to_token_end(text, [(start, end)]),
+            [(start, end)],
+        )
+        text = "pācittiyan”ti."
+        ranges = extend_bold_ranges_to_token_end(text, [(0, len("pācittiyan"))])
+        self.assertEqual(ranges, [(0, len("pācittiyan"))])
+
+    def test_ranges_to_runs_keeps_peyya_whole(self) -> None:
+        text = "samādaheyya vā samādahāpeyya vā aññatra"
+        start = text.index("samādahāpeyya")
+        end = start + len("samādahāpeyy")
+        runs = ranges_to_runs(text, [(start, end)])
+        self.assertIsNotNone(runs)
+        bold = "".join(r["value"] for r in runs if r["bold"])
+        self.assertEqual(bold, "samādahāpeyya")
+        thai_runs = transliterate_runs(runs)
+        joined = "".join(r["value"] for r in thai_runs)
+        self.assertEqual(joined, roman_to_thai(text))
+        bold_thai = "".join(r["value"] for r in thai_runs if r["bold"])
+        self.assertEqual(bold_thai, roman_to_thai("samādahāpeyya"))
+        self.assertNotIn("เปยฺยฺ", bold_thai)
+        plain_thai = "".join(r["value"] for r in thai_runs if not r["bold"])
+        self.assertFalse(plain_thai.startswith("อ"))
+
+    def test_snap_runs_moves_leftover_a(self) -> None:
+        text = (
+            "“Yo pana bhikkhu agilāno visibbanāpekkho jotiṃ "
+            "samādaheyya vā samādahāpeyya vā aññatra "
+            "tathārūpappaccayā pācittiyan”ti."
+        )
+        runs = [
+            {"value": "“", "bold": False},
+            {
+                "value": (
+                    "Yo pana bhikkhu agilāno visibbanāpekkho jotiṃ "
+                    "samādaheyya vā"
+                ),
+                "bold": True,
+            },
+            {"value": " ", "bold": False},
+            {"value": "samādahāpeyy", "bold": True},
+            {
+                "value": "a vā aññatra tathārūpappaccayā pācittiyan”ti.",
+                "bold": False,
+            },
+        ]
+        snapped = snap_runs_to_token_end(text, runs)
+        self.assertIsNot(snapped, runs)
+        self.assertEqual(
+            [r for r in snapped if r["bold"]][-1]["value"],
+            "samādahāpeyya",
+        )
+        tail = [r["value"] for r in snapped if not r["bold"]][-1]
+        self.assertTrue(tail.startswith(" vā"))
+        self.assertFalse(tail.startswith("a "))
+        self.assertIs(snap_runs_to_token_end(text, snapped), snapped)
 
 
 class UnboldRangesTests(unittest.TestCase):

@@ -6832,11 +6832,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pavatti 1. Uppādavāra"
+          "value": "Pavatti 1. Uppādavāra",
+          "runs": [
+            {
+              "value": "Pavatti 1. Uppādavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปวตฺติ 1. อุปฺปาทวาร"
+          "value": "ปวตฺติ 1. อุปฺปาทวาร",
+          "runs": [
+            {
+              "value": "ปวตฺติ 1. อุปฺปาทวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -8210,7 +8222,7 @@
           "value": "ปวตฺติ 2. นิโรธวาร",
           "runs": [
             {
-              "value": "ปวตฺติ 2.{{sp1}} นิโรธวาร",
+              "value": "ปวตฺติ 2. นิโรธวาร",
               "bold": true
             }
           ]
@@ -11121,11 +11133,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Khandhayamakapāḷi niṭṭhitā."
+          "value": "Khandhayamakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Khandhayamakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ขนฺธยมกปาฬิ นิฏฺฐิตา."
+          "value": "ขนฺธยมกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "ขนฺธยมกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -14948,11 +14972,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pavatti 1. Uppādavāra"
+          "value": "Pavatti 1. Uppādavāra",
+          "runs": [
+            {
+              "value": "Pavatti 1. Uppādavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปวตฺติ 1. อุปฺปาทวาร"
+          "value": "ปวตฺติ 1. อุปฺปาทวาร",
+          "runs": [
+            {
+              "value": "ปวตฺติ 1. อุปฺปาทวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -19454,11 +19490,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pavatti 2. Nirodhavāra"
+          "value": "Pavatti 2. Nirodhavāra",
+          "runs": [
+            {
+              "value": "Pavatti 2. Nirodhavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปวตฺติ 2. นิโรธวาร"
+          "value": "ปวตฺติ 2. นิโรธวาร",
+          "runs": [
+            {
+              "value": "ปวตฺติ 2. นิโรธวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -22870,11 +22918,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pavatti 3. Uppādanirodhavāra"
+          "value": "Pavatti 3. Uppādanirodhavāra",
+          "runs": [
+            {
+              "value": "Pavatti 3. Uppādanirodhavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร"
+          "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร",
+          "runs": [
+            {
+              "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -25321,11 +25381,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Āyatanayamakapāḷi niṭṭhitā."
+          "value": "Āyatanayamakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Āyatanayamakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "อายตนยมกปาฬิ นิฏฺฐิตา."
+          "value": "อายตนยมกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "อายตนยมกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -27810,11 +27882,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pavatti 1. Uppādavāra"
+          "value": "Pavatti 1. Uppādavāra",
+          "runs": [
+            {
+              "value": "Pavatti 1. Uppādavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปวตฺติ 1. อุปฺปาทวาร"
+          "value": "ปวตฺติ 1. อุปฺปาทวาร",
+          "runs": [
+            {
+              "value": "ปวตฺติ 1. อุปฺปาทวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -27896,11 +27980,79 @@
       "text": [
         {
           "script": "roman",
-          "value": "ghānadhātu uppajjati, sacakkhukānaṃ saghānakānaṃ upapajjantānaṃ tesaṃ cakkhudhātu ca uppajjati ghānadhātu ca uppajjati.{{sp1}}{{sp1}}Yassa vā pana ghānadhātu uppajjati tassa cakkhudhātu uppajjatīti, saghānakānaṃ acakkhukānaṃ upapajjantānaṃ tesaṃ ghānadhātu uppajjati no ca tesaṃ cakkhudhātu uppajjati, saghānakānaṃ sacakkhukānaṃ upapajjantānaṃ tesaṃ ghānadhātu ca uppajjati cakkhudhātu ca uppajjati."
+          "value": "ghānadhātu uppajjati, sacakkhukānaṃ saghānakānaṃ upapajjantānaṃ tesaṃ cakkhudhātu ca uppajjati ghānadhātu ca uppajjati.{{sp1}}{{sp1}}Yassa vā pana ghānadhātu uppajjati tassa cakkhudhātu uppajjatīti, saghānakānaṃ acakkhukānaṃ upapajjantānaṃ tesaṃ ghānadhātu uppajjati no ca tesaṃ cakkhudhātu uppajjati, saghānakānaṃ sacakkhukānaṃ upapajjantānaṃ tesaṃ ghānadhātu ca uppajjati cakkhudhātu ca uppajjati.",
+          "runs": [
+            {
+              "value": "ghānadhātu uppajjati, sacakkhukānaṃ saghānakānaṃ upapajjantānaṃ tesaṃ ",
+              "bold": false
+            },
+            {
+              "value": "cakkhudhātu ca uppajjati ghānadhātu ca uppajj",
+              "bold": true
+            },
+            {
+              "value": "ati.{{sp1}}{{sp1}}Yassa vā pana ",
+              "bold": false
+            },
+            {
+              "value": "ghānadhātu uppajjati tassa cakkhudhātu uppajjatīti, saghānakānaṃ",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "acakkhukānaṃ upapajjantānaṃ tesaṃ ghānadhātu uppajjati no ca tesaṃ",
+              "bold": true
+            },
+            {
+              "value": " cakkhudhātu uppajjati, saghānakānaṃ sacakkhukānaṃ upapajjantānaṃ ",
+              "bold": false
+            },
+            {
+              "value": "tesaṃ ghānadhātu ca uppajjati cakkhudhātu ca uppajjati.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ฆานธาตุ อุปฺปชฺชติ, สจกฺขุกานํ สฆานกานํ อุปปชฺชนฺตานํ เตสํ จกฺขุธาตุ จ อุปฺปชฺชติ ฆานธาตุ จ อุปฺปชฺชติ.{{sp1}}{{sp1}}ยสฺส วา ปน ฆานธาตุ อุปฺปชฺชติ ตสฺส จกฺขุธาตุ อุปฺปชฺชตีติ, สฆานกานํ อจกฺขุกานํ อุปปชฺชนฺตานํ เตสํ ฆานธาตุ อุปฺปชฺชติ โน จ เตสํ จกฺขุธาตุ อุปฺปชฺชติ, สฆานกานํ สจกฺขุกานํ อุปปชฺชนฺตานํ เตสํ ฆานธาตุ จ อุปฺปชฺชติ จกฺขุธาตุ จ อุปฺปชฺชติ."
+          "value": "ฆานธาตุ อุปฺปชฺชติ, สจกฺขุกานํ สฆานกานํ อุปปชฺชนฺตานํ เตสํ จกฺขุธาตุ จ อุปฺปชฺชติ ฆานธาตุ จ อุปฺปชฺชติ.{{sp1}}{{sp1}}ยสฺส วา ปน ฆานธาตุ อุปฺปชฺชติ ตสฺส จกฺขุธาตุ อุปฺปชฺชตีติ, สฆานกานํ อจกฺขุกานํ อุปปชฺชนฺตานํ เตสํ ฆานธาตุ อุปฺปชฺชติ โน จ เตสํ จกฺขุธาตุ อุปฺปชฺชติ, สฆานกานํ สจกฺขุกานํ อุปปชฺชนฺตานํ เตสํ ฆานธาตุ จ อุปฺปชฺชติ จกฺขุธาตุ จ อุปฺปชฺชติ.",
+          "runs": [
+            {
+              "value": "ฆานธาตุ อุปฺปชฺชติ, สจกฺขุกานํ สฆานกานํ อุปปชฺชนฺตานํ เตสํ ",
+              "bold": false
+            },
+            {
+              "value": "จกฺขุธาตุ จ อุปฺปชฺชติ ฆานธาตุ จ อุปฺปชฺชฺ",
+              "bold": true
+            },
+            {
+              "value": "อติ. ยสฺส วา ปน ",
+              "bold": false
+            },
+            {
+              "value": "ฆานธาตุ อุปฺปชฺชติ ตสฺส จกฺขุธาตุ อุปฺปชฺชตีติ, สฆานกานํ",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "อจกฺขุกานํ อุปปชฺชนฺตานํ เตสํ ฆานธาตุ อุปฺปชฺชติ โน จ เตสํ",
+              "bold": true
+            },
+            {
+              "value": " จกฺขุธาตุ อุปฺปชฺชติ, สฆานกานํ สจกฺขุกานํ อุปปชฺชนฺตานํ ",
+              "bold": false
+            },
+            {
+              "value": "เตสํ ฆานธาตุ จ อุปฺปชฺชติ จกฺขุธาตุ จ อุปฺปชฺชติ.",
+              "bold": true
+            }
+          ]
         }
       ]
     },
@@ -28009,11 +28161,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Dhātuyamakapāḷi niṭṭhitā."
+          "value": "Dhātuyamakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Dhātuyamakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ธาตุยมกปาฬิ นิฏฺฐิตา."
+          "value": "ธาตุยมกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "ธาตุยมกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -28399,7 +28563,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} ปทโสธนมูลจกฺกวาร",
+              "value": "2. ปทโสธนมูลจกฺกวาร",
               "bold": true
             }
           ]
@@ -30649,7 +30813,7 @@
           "value": "ปวตฺติ 1. อุปฺปาทวาร",
           "runs": [
             {
-              "value": "ปวตฺติ 1.{{sp1}} อุปฺปาทวาร",
+              "value": "ปวตฺติ 1. อุปฺปาทวาร",
               "bold": true
             }
           ]
@@ -32673,7 +32837,7 @@
           "value": "ปวตฺติ 2. นิโรธวาร",
           "runs": [
             {
-              "value": "ปวตฺติ 2.{{sp1}} นิโรธวาร",
+              "value": "ปวตฺติ 2. นิโรธวาร",
               "bold": true
             }
           ]
@@ -34293,11 +34457,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pavatti 3. Uppādanirodhavāra"
+          "value": "Pavatti 3. Uppādanirodhavāra",
+          "runs": [
+            {
+              "value": "Pavatti 3. Uppādanirodhavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร"
+          "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร",
+          "runs": [
+            {
+              "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",

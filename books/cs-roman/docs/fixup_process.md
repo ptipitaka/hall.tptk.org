@@ -1,6 +1,7 @@
 # กระบวนการ Fixup CS Roman
 
 เอกสารอ้างอิงเดียวของเหตุการณ์ซ่อม segments/layout หลัง extract  
+งานประจำ (แก้ที่ไหน / คำสั่งค้นคำ): [`playbook.md`](playbook.md)  
 **Registry:** [`scripts/fixup_manifest.json`](../scripts/fixup_manifest.json)  
 **Runner:** `scripts/run_cs_roman_fixups.py` · **Gate:** `scripts/scan_fixup_residuals.py`
 
@@ -12,11 +13,13 @@
 
 ```
 extract (optional)
-  → run_cs_roman_fixups.py --pipeline   # ซ่อมตาม manifest
+  → run_cs_roman_fixups.py --pipeline   # ซ่อมตามลำดับใน manifest
   → scan_fixup_residuals.py --strict     # ล้มถ้ายังค้าง (gate=strict)
   → headings → prepare → build PDF
   → post-PDF audits (scan_*)              # คนละชั้น ไม่ใช่ JSON fixup
 ```
+
+ลำดับใน manifest มีความหมาย: peel (closer / gāthā / header) มาก่อน แล้วจึง `unbound_footnote_callouts` เพราะ peel อาจเผยเลข callout ที่ติดคำ ถ้า rebound ก่อน peel ประตู `--strict` จะเจอ residual หลัง peel (เช่น 03Vin03)
 
 Entrypoint: `books/cs-roman/pipeline.ps1` (มี `-SkipFixups` / `-SkipFixupGate`)
 
@@ -56,6 +59,7 @@ Entrypoint: `books/cs-roman/pipeline.ps1` (มี `-SkipFixups` / `-SkipFixupGat
 | `printable_dash` | U+23AF วาดไม่ได้ | `fixup_printable_dashes` |
 | `midword_hyphen` | ยัติภังค์กลางคำ editorial ใน Roman | `fixup_solid_midword_hyphens` |
 | `glued_section_closer` | closer ติดท้ายประโยค | `fixup_glued_section_closers` |
+| `glued_cakka_closer` | `Khaṇḍacakkaṃ.` closer ติดท้าย prose (ไม่ใช่สูตร niṭṭhitaṃ) | `fixup_glued_cakka_closers` |
 | `closer_level_cache` | ยังไม่มี/ผิด `closer_level` | `fixup_closer_levels` |
 | `glued_parenthetical` | วงเล็บขยายติดท้ายวรรค | `fixup_glued_parentheticals` |
 | `tassuddana_label` | exact `ตสฺสุทฺทานํ` เป็น `title`/`\titlehead` | `fixup_tassuddana_labels` |
@@ -75,6 +79,8 @@ Entrypoint: `books/cs-roman/pipeline.ps1` (มี `-SkipFixups` / `-SkipFixupGat
 | `glued_running_header` | running header ติดเนื้อ | `fixup_glued_running_headers` |
 | `page_start_continuation` | ขึ้นหน้าใหม่ไม่ใช่ continuation | `fixup_page_start_continuation` |
 | `edition_layout_rhythm` | `par_skip` / `gatha_stanza_skip` ใน layout | `fixup_edition_layout_rhythm` |
+| `midword_bold_split` | ตัวหนาขาดกลางคำหลังต่อยัติภังค์ (เหลือ `a`/`อ`) | `fixup_midword_bold_splits` |
+| `item_correction` | เลขข้อพิมพ์ผิด (เช่น สลับหลัก 238→283) ตาม `shared/item_corrections.json` | `fixup_item_corrections` |
 | `nitthitam_false_bold` | bold ปลอมบน closer (มือ/รายเล่ม) | `fixup_nitthitam_false_bold` |
 | `bold_bbox` | bold จาก bbox PDF (มือ) | `fixup_bold_bbox` |
 

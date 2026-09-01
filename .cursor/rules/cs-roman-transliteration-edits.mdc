@@ -1,0 +1,33 @@
+---
+description: CS Roman publication text and transliteration fixes go in transforms.json only — never edit segments.json or output/ for spelling
+globs: books/cs-roman/**
+alwaysApply: false
+---
+
+# CS Roman: ห้ามแก้ผลปริวรรต / โรมันฉบับพิมพ์ใน segments
+
+Canonical policy: `books/cs-roman/docs/transliteration_policy.md`
+
+## When the task is Roman spelling, punctuation, editorial note, false bold, or Thai-from-Roman wrong because Roman is wrong
+
+Edit **`books/cs-roman/shared/transforms.json`** only. Run `scan_transform_hits.py` before editing; pin `when.loci` when the same token is correct elsewhere.
+
+## Forbidden (publication / transliteration text)
+
+- Hand-editing `books/cs-roman/output/*.segments.json` for Roman, Thai body text, or publication punctuation
+- Hand-editing `books/cs-roman/volumes/*/data/segments.json` for the same purpose
+- Patching `text[].value` or `runs` in segments to “fix transliteration” or “fix publication Roman”
+- Treating `output/` as the git source of truth for book text
+
+## Allowed elsewhere
+
+- `shared/transforms.json` — publication rules (applied at TeX generate to body / gāthā / hanging; not edition `notes` / `symbol_notes`)
+- `volumes/<id>/data/layout.json` — print rhythm (not spelling)
+- `shared/style/` — TeX macros (not generated body TeX)
+- `shared/sandhi_breaks_overrides.json` — line-break sandhi
+- Extract + test + `pipeline.ps1` — recurring PDF extract bugs
+- Registered `fixup_*.py` — legacy JSON structure (see `fixup_process.md`), not per-word publication spelling
+
+## Verify
+
+`run_tests.ps1 -Module test_cs_roman_transforms` then `build.ps1 -Volume … -Mode printing`. PDF after generate is the acceptance criterion; `segments.json` may still show pre-transform text.

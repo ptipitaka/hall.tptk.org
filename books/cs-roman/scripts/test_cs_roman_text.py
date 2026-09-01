@@ -577,6 +577,22 @@ class SectionCloserFormulaTests(unittest.TestCase):
         self.assertTrue(is_section_closer_formula("จูฬวคฺโค นิฏฺฐิโต."))
         self.assertTrue(is_section_closer_formula("ทสมสิกฺขาปทํ นิฏฺฐิตํ."))
         self.assertTrue(is_section_closer_formula("ปริมณฺฑลวคฺโค ปฐโม."))
+        self.assertTrue(
+            is_section_closer_formula("กิญฺจิเลสสิกฺขาปทํ นิฏฺฐิตํ นวมํ.")
+        )
+        self.assertTrue(
+            is_section_closer_formula(
+                "kiñcilesasikkhāpadaṃ niṭṭhitaṃ navamaṃ."
+            )
+        )
+        self.assertTrue(
+            is_section_closer_formula(
+                "(Aññābhāgiya) kiñcilesasikkhāpadaṃ niṭṭhitaṃ navamaṃ."
+            )
+        )
+        self.assertTrue(
+            is_section_closer_formula("พฺรหฺมชาลสุตฺตํ นิฏฺฐิตํ ปฐมํ.")
+        )
 
     def test_rejects_body_prose(self) -> None:
         self.assertFalse(
@@ -603,6 +619,19 @@ class SectionCloserFormulaTests(unittest.TestCase):
             (
                 "dve Soṇā dve Nandikkhayena cāti.",
                 "Mūlapaṇṇāsako samatto.",
+            ),
+        )
+        glued = peel_trailing_section_closer(
+            "Anāpatti tathāsaññī codeti vā codāpeti vā ummattakassa "
+            "ādikammikassāti. (Aññābhāgiya) kiñcilesasikkhāpadaṃ "
+            "niṭṭhitaṃ navamaṃ."
+        )
+        self.assertEqual(
+            glued,
+            (
+                "Anāpatti tathāsaññī codeti vā codāpeti vā ummattakassa "
+                "ādikammikassāti.",
+                "(Aññābhāgiya) kiñcilesasikkhāpadaṃ niṭṭhitaṃ navamaṃ.",
             ),
         )
 

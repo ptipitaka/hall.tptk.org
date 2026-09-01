@@ -1420,6 +1420,25 @@ class SectionNoGenerateTests(unittest.TestCase):
         )
         self.assertEqual(samatto, r"\nitthitammajor{มูลปณฺณาสโก สมตฺโต.}")
         self.assertTrue(is_section_closer("prose", "มูลปณฺณาสโก สมตฺโต."))
+        # Sikkhāpada closer with trailing ordinal (not only …นิฏฺฐิตํ.).
+        sik, _ = segment_command(
+            "title",
+            None,
+            "อมูลกสิกฺขาปทํ นิฏฺฐิตํ อฏฺฐมํ.",
+            last_item=None,
+            source_layout="center",
+        )
+        self.assertEqual(sik, r"\nitthitam{อมูลกสิกฺขาปทํ นิฏฺฐิตํ อฏฺฐมํ.}")
+        paren, _ = segment_command(
+            "niṭṭhitaṃ",
+            None,
+            "(อญฺญาภาคิย) กิญฺจิเลสสิกฺขาปทํ นิฏฺฐิตํ นวมํ.",
+            last_item=None,
+        )
+        self.assertEqual(
+            paren,
+            r"\nitthitam{(อญฺญาภาคิย) กิญฺจิเลสสิกฺขาปทํ นิฏฺฐิตํ นวมํ.}",
+        )
         # Ordinal category closer (…วคฺโค ปฐโม.) — even mistagged as h2.
         vagga_cmd, _ = segment_command(
             "title",

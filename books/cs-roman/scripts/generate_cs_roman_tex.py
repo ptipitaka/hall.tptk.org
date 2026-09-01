@@ -22,6 +22,7 @@ from paths import BOOKS, OUTPUT_DIR, ensure_import_paths
 ensure_import_paths()
 
 from cs_roman_gatha_fit import gatha_group_stack_bat_keys  # noqa: E402
+from cs_roman_item_corrections import apply_item_corrections  # noqa: E402
 from cs_roman_segments import (  # noqa: E402
     DEFAULT_LAYOUT,
     doc_layout,
@@ -41,6 +42,7 @@ from cs_roman_sandhi_breaks import (  # noqa: E402
     inject_soft_breaks_in_thai,
     merge_break_maps,
 )
+from cs_roman_bold import snap_runs_to_token_end  # noqa: E402
 from cs_roman_text import (  # noqa: E402
     SECTION_RULE_FLAG,
     classify_section_closer_tier,
@@ -389,8 +391,9 @@ def publication_thai_of_text_field(
     """Thai value (+ optional runs) after publication transforms on Roman.
 
     When transforms do not change the Roman string, reuse stored Thai / runs
-    unless an ``unbold`` rule hits — then remap flags on Roman runs and
-    re-derive Thai runs. When the Roman string changes, re-derive Thai via
+    unless an ``unbold`` rule hits or a mid-token bold split is snapped —
+    then remap flags on Roman runs and re-derive Thai runs. When the Roman
+    string changes, re-derive Thai via
     ``roman_to_thai`` and remap stored Roman bold runs through the same edit
     (then ``transliterate_runs``). Runs are dropped only when they cannot be
     aligned (join mismatch / no remaining bold).
@@ -407,6 +410,9 @@ def publication_thai_of_text_field(
         emit_footnotes=emit_footnotes,
     )
     roman_runs = roman_runs_from_text_field(text)
+    snapped = snap_runs_to_token_end(roman, roman_runs)
+    snapped_changed = snapped is not roman_runs
+    roman_runs = snapped
     if new_roman != roman:
         roman_runs = remap_runs_through_edit(roman, new_roman, roman_runs)
         roman_runs = apply_unbold_to_runs(
@@ -427,7 +433,7 @@ def publication_thai_of_text_field(
         order=order,
         segment_type=segment_type,
     )
-    if unbolded is roman_runs:
+    if unbolded is roman_runs and not snapped_changed:
         return (
             thai_of_text_field(text),
             thai_runs_of_text_field(text),
@@ -438,49 +444,19 @@ def publication_thai_of_text_field(
     return thai_of_text_field(text), thai_runs, new_roman, extra
 
 
-def transform_note_list(
-    notes: list,
-    rules: Sequence[TransformRule],
-    *,
-    page: int,
-    order: int,
-    segment_type: str,
-) -> list:
-    """Transform note bodies; never inject editorial footnotes into notes."""
-    out: list[str] = []
-    for n in notes:
-        text, _extra = apply_transforms(
-            str(n or ""),
-            rules,
-            page=page,
-            order=order,
-            segment_type=segment_type,
-            emit_footnotes=False,
-        )
-        out.append(text)
-    return out
+def transform_note_list(notes: list) -> list[str]:
+    """Edition numbered-note bodies as extracted.
+
+    ``shared/transforms.json`` does not apply to ``notes`` (apparatus such as
+    ``Paṭaggāhikasālaṃ (?)``). Catalog rules run on body / gāthā / hanging
+    Roman only. ``annotate`` still injects *new* editorial notes on body hits.
+    """
+    return [str(n or "") for n in notes]
 
 
-def transform_symbol_notes(
-    symbol_notes: dict,
-    rules: Sequence[TransformRule],
-    *,
-    page: int,
-    order: int,
-    segment_type: str,
-) -> dict:
-    out: dict = {}
-    for key, value in symbol_notes.items():
-        text, _extra = apply_transforms(
-            str(value or ""),
-            rules,
-            page=page,
-            order=order,
-            segment_type=segment_type,
-            emit_footnotes=False,
-        )
-        out[key] = text
-    return out
+def transform_symbol_notes(symbol_notes: dict) -> dict[str, str]:
+    """Edition symbol-note bodies as extracted; catalog transforms do not apply."""
+    return {key: str(value or "") for key, value in symbol_notes.items()}
 
 
 def note_to_thai(roman: str) -> str:
@@ -629,16 +605,8 @@ def build_body(
     refresh_sandhi_with_transforms(rules)
     page, order, kind = segment_context(seg)
     apply_sp = uses_sentence_spacer(kind)
-    notes = transform_note_list(
-        seg_notes(seg), rules, page=page, order=order, segment_type=kind
-    )
-    symbol_notes = transform_symbol_notes(
-        seg_symbol_notes(seg),
-        rules,
-        page=page,
-        order=order,
-        segment_type=kind,
-    )
+    notes = transform_note_list(seg_notes(seg))
+    symbol_notes = transform_symbol_notes(seg_symbol_notes(seg))
     thai, runs, roman, extra = publication_thai_of_text_field(
         seg.get("text"),
         rules,
@@ -1087,17 +1055,8 @@ def gatha_stanza_line_bodies(
     optical centering.
     """
     rules = rules or []
-    page, order, kind = segment_context(seg)
-    notes = transform_note_list(
-        seg_notes(seg), rules, page=page, order=order, segment_type=kind
-    )
-    symbol_notes = transform_symbol_notes(
-        seg_symbol_notes(seg),
-        rules,
-        page=page,
-        order=order,
-        segment_type=kind,
-    )
+    notes = transform_note_list(seg_notes(seg))
+    symbol_notes = transform_symbol_notes(seg_symbol_notes(seg))
     printed, extra = _gatha_printed_lines(
         seg,
         rules,
@@ -3559,6 +3518,9 @@ def generate(volume_id: str, *, mode: str = "sync") -> Path:
         raise FileNotFoundError(data_path)
 
     doc = load_document(data_path)
+    segments = doc.get("segments")
+    if isinstance(segments, list):
+        apply_item_corrections(segments, volume_id)
     all_rules = load_shared_transforms()
     rules = compile_transforms(select_rules_for_volume(all_rules, volume_id))
     # DPD/overrides cache + soft_breaks from shared transform rules.

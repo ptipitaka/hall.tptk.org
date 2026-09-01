@@ -235,6 +235,46 @@ class ClassifyTests(unittest.TestCase):
         self.assertTrue(is_matika_centered(193.4, w))
         # Long centered ``7. Pāpikāya…`` (~0.23) — below old 0.28 threshold.
         self.assertTrue(is_matika_centered(115.9, w))
+        # 03Vin03 Mātikā: two-digit vs three-digit hanging numbers, same column.
+        self.assertFalse(is_matika_centered(92.4, w))
+        self.assertFalse(is_matika_centered(86.6, w))
+
+    def test_digit_width_hanging_numbers_stay_h1_siblings(self) -> None:
+        """03Vin03: ``99.`` x0=92.4 and ``100.`` x0=86.6 stay the same TOC depth."""
+        w = 499.0
+        lines = [
+            MatikaLine(7, "2.  Uposathakkhandhaka", x0=176.1, page_width=w),
+            MatikaLine(7, "99.  Bhedapurekkhārapannarasaka", x0=92.4, page_width=w),
+            MatikaLine(7, "...", x0=326.2, page_width=w),
+            MatikaLine(7, "180", x0=413.2, page_width=w),
+            MatikaLine(7, "100.  Sīmokkantikapeyyāla", x0=86.6, page_width=w),
+            MatikaLine(7, "...", x0=326.3, page_width=w),
+            MatikaLine(7, "184", x0=413.2, page_width=w),
+            MatikaLine(7, "101.  Liṅgādidassana", x0=86.8, page_width=w),
+            MatikaLine(7, "...", x0=326.2, page_width=w),
+            MatikaLine(7, "185", x0=413.2, page_width=w),
+            MatikaLine(7, "105.  Vajjanīyapuggalasandassanā", x0=86.8, page_width=w),
+            MatikaLine(7, "...", x0=326.3, page_width=w),
+            MatikaLine(7, "189", x0=413.2, page_width=w),
+            MatikaLine(7, "106.  Uddānagāthā", x0=86.8, page_width=w),
+            MatikaLine(7, "...", x0=326.3, page_width=w),
+            MatikaLine(7, "190", x0=413.2, page_width=w),
+            MatikaLine(8, "3.  Vassūpanāyikakkhandhaka", x0=176.1, page_width=w),
+        ]
+        entries = parse_matika(lines)
+        kinds = [(e.section_no, e.kind, e.title) for e in entries]
+        self.assertEqual(
+            kinds,
+            [
+                (2, "cha", "Uposathakkhandhaka"),
+                (99, "h1", "Bhedapurekkhārapannarasaka"),
+                (100, "h1", "Sīmokkantikapeyyāla"),
+                (101, "h1", "Liṅgādidassana"),
+                (105, "h1", "Vajjanīyapuggalasandassanā"),
+                (106, "h1", "Uddānagāthā"),
+                (3, "cha", "Vassūpanāyikakkhandhaka"),
+            ],
+        )
 
     def test_parse_keeps_long_numbered_head_as_sibling(self) -> None:
         """Items 5–7 ukkhepanīyakamma stay same depth despite long title x0."""

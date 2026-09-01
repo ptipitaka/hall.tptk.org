@@ -4,3 +4,6 @@ volumes/*/out/
 volumes/*/source/
 volumes/*/tex/body.generated.tex
 volumes/*/tex/body.reading.generated.tex
+tmp/
+tmp_scan*.txt
+research/annotate_*.html

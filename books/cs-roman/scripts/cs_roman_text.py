@@ -156,13 +156,27 @@ def ensure_ordinal_closer_section_rule(text: str, section_rule: bool) -> bool:
     return is_ordinal_section_closer(text)
 
 
+# Neuter/feminine -ṃ ordinals after the end-verb (…นิฏฺฐิตํ นวมํ.) or
+# between stem and verb (…สิกฺขาปทํ ปฐมํ นิฏฺฐิตํ.).
+_CLOSER_NEUTER_ORDINALS = (
+    r"ปฐมํ|ทุติยํ|ตติยํ|จตุตฺถํ|ปญฺจมํ|ฉฏฺฐํ|สตฺตมํ|อฏฺฐมํ|นวมํ|ทสมํ|"
+    r"เอกาทสมํ|ทฺวาทสมํ|เตรสมํ|จุทฺทสมํ|ปนฺนรสมํ|โสฬสมํ|"
+    r"pa[tṭ]hama[ṃṁm]|dutiya[ṃṁm]|tatiya[ṃṁm]|catuttha[ṃṁm]|"
+    r"pa[nñ]cama[ṃṁm]|cha[tṭ]tha[ṃṁm]|sattama[ṃṁm]|a[tṭ]thama[ṃṁm]|"
+    r"navama[ṃṁm]|dasama[ṃṁm]|ek[aā]dasama[ṃṁm]|dv[aā]dasama[ṃṁm]|"
+    r"terasama[ṃṁm]|cuddasama[ṃṁm]|pannarasama[ṃṁm]|so[ḷl]asama[ṃṁm]"
+)
+_CLOSER_TRAILING_ORDINAL = rf"(?:\s+(?:{_CLOSER_NEUTER_ORDINALS}))?"
 # End formulas: นิฏฺฐิตํ/า/โต/านิ and สมตฺตํ/า/โต/านิ (Thai leading-vowel โต).
 # Roman mirrors niṭṭhitaṃ / samattaṃ and gendered -o / -ā / -āni.
+# Optional trailing sutta/rule ordinal: …niṭṭhitaṃ navamaṃ.
 _SECTION_CLOSER_FORMULA_THAI_RE = re.compile(
-    r"(?:นิฏฺฐิ(?:ตํ|ตา|ตานิ|โต)|สมตฺต(?:ํ|า|านิ)|สมตฺโต)\s*\.?$"
+    r"(?:นิฏฺฐิ(?:ตํ|ตา|ตานิ|โต)|สมตฺต(?:ํ|า|านิ)|สมตฺโต)"
+    rf"{_CLOSER_TRAILING_ORDINAL}\s*\.?$"
 )
 _SECTION_CLOSER_FORMULA_ROMAN_RE = re.compile(
-    r"(?:ni[ṭt]{1,2}hit(?:a[ṃṁm]|ā|o|āni)|samatt(?:a[ṃṁm]|ā|o|āni))\s*\.?$",
+    r"(?:ni[ṭt]{1,2}hit(?:a[ṃṁm]|ā|o|āni)|samatt(?:a[ṃṁm]|ā|o|āni))"
+    rf"{_CLOSER_TRAILING_ORDINAL}\s*\.?$",
     re.IGNORECASE,
 )
 # Split ``…cāti.{{sp1}} Mūlapaṇṇāsako samatto.`` after the verse-ending stop.
@@ -180,6 +194,9 @@ def is_section_closer_formula(text: str) -> bool:
 
     Used to recognize standalone end formulas and to peel them off the end of
     a verse/prose unit after a sentence stop. Rejects long body prose.
+    Trailing sutta/rule ordinals after the verb (``…นิฏฺฐิตํ นวมํ.`` /
+    ``…niṭṭhitaṃ navamaṃ.``) count; a short parenthetical prefix such as
+    ``(Aññābhāgiya)`` is allowed because the probe searches the ending.
     """
     plain = plain_closer_probe_text(text)
     if not plain or len(plain) > 90:
@@ -284,10 +301,7 @@ _CLOSER_LEVEL_TO_TIER: dict[str, str] = {
     "unknown": "leaf",
 }
 # Optional short ordinal between stem and end-verb (…สิกฺขาปทํ ปฐมํ นิฏฺฐิตํ.).
-_CLOSER_INLINE_ORDINAL = (
-    r"(?:\s+(?:ปฐมํ|ทุติยํ|ตติยํ|จตุตฺถํ|ปญฺจมํ|ฉฏฺฐํ|สตฺตมํ|อฏฺฐมํ|นวมํ|ทสมํ|"
-    r"pa[tṭ]hama[ṃṁm]|dutiya[ṃṁm]|tatiya[ṃṁm]))?"
-)
+_CLOSER_INLINE_ORDINAL = _CLOSER_TRAILING_ORDINAL
 # Verb cue after the closed noun. Thai ``สมตฺโต`` is สมตฺ + โ + ต
 # (leading vowel before final consonant) — not the prefix ``สมตฺต``.
 _CLOSER_VERB_CUE = (

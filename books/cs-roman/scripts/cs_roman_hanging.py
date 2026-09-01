@@ -110,9 +110,13 @@ _GLUED_FOOTNOTE_DIGIT_RE = re.compile(
 )
 _MATCH_PREFIX_LEN = 28
 # Numbered bat_line verses (first-indent + hang body) must not merge as hanging
-# paragraphs — they fold to gāthā so วรรค columns align.
+# paragraphs — they fold to gāthā so วรรค columns align. Mixed bat/wak hang
+# bodies (03Vin03 item 39) use the same skip.
 _BAT_LINE_STOP_RE = re.compile(r"[.!?…][\"'\u201c\u201d]?\s*$")
 _BAT_LINE_COMMA_RE = re.compile(r",\s+\S")
+_VERSE_HANG_END_RE = re.compile(r"[,.!?…]\s*$")
+_SPEAKER_CUE_TAIL_RE = re.compile(r"\([^()]*,\s*\)\s*$")
+_VERSE_HANG_MAX_LEN = 90
 
 _BODY_KINDS = frozenset(
     {
@@ -221,6 +225,41 @@ def _looks_like_bat_printed_line(text: str) -> bool:
     if not _BAT_LINE_STOP_RE.search(t):
         return False
     return bool(_BAT_LINE_COMMA_RE.search(t))
+
+
+def _looks_like_verse_hang_line(text: str) -> bool:
+    """True for a hang-body line that can belong to a numbered บท.
+
+    Accepts bat_line ``A, B.``, short wak_line (comma or stop), and a packed
+    speaker cue ``… (Kassapāti Bhagavā,)``. Long hanging-prose wraps stay out.
+    """
+    t = (text or "").strip()
+    if not t:
+        return False
+    if _looks_like_bat_printed_line(t):
+        return True
+    if len(t) > _VERSE_HANG_MAX_LEN:
+        return False
+    if _SPEAKER_CUE_TAIL_RE.search(t):
+        return True
+    return bool(_VERSE_HANG_END_RE.search(t))
+
+
+def _is_verse_hang_group(head: str, hang: list[str]) -> bool:
+    """True when first-indent head + hang lines are gāthā, not hanging prose.
+
+    Covers pure bat+bat numbered verses and mixed bat/wak bodies so extract
+    leaves printed lines for geometry fold (``\\csromangathabat`` columns).
+    """
+    if not hang:
+        return False
+    head_t = (head or "").strip()
+    head_verse = _looks_like_bat_printed_line(head_t) or (
+        bool(_ITEM_PREFIX_RE.match(head_t)) and _looks_like_verse_hang_line(head_t)
+    )
+    if not head_verse:
+        return False
+    return all(_looks_like_verse_hang_line(ln) for ln in hang)
 
 
 def _is_gatha_indent(x0: float) -> bool:
@@ -543,11 +582,9 @@ def hanging_groups_on_page(page: Any, *, pdf_page: int) -> list[HangingGroup]:
             hang.append(body)
             j += 1
         if hang:
-            # Numbered bat_line verses (head + every hang line ``A, B.``) are
-            # gāthā, not hanging paragraphs — leave lines for geometry fold.
-            if _looks_like_bat_printed_line(head.text) and all(
-                _looks_like_bat_printed_line(ln) for ln in hang
-            ):
+            # Numbered / bat-shaped verse (pure bat or mixed bat/wak hang) is
+            # gāthā, not a hanging paragraph — leave printed lines for fold.
+            if _is_verse_hang_group(head.text, hang):
                 i += 1
                 continue
             groups.append(

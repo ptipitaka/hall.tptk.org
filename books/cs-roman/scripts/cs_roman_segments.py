@@ -3,10 +3,10 @@
 
 Content and print config are separate files:
 
-  books/cs-roman/output/<id>.segments.json   # segments only
-  books/cs-roman/output/<id>.layout.json     # source, bounds, layout, reading overrides
-  books/cs-roman/volumes/<id>/data/segments.json
-  books/cs-roman/volumes/<id>/data/layout.json
+  books/cs-roman/output/<id>.segments.json   # extract staging (gitignored)
+  books/cs-roman/output/<id>.layout.json
+  books/cs-roman/volumes/<id>/data/segments.json  # git copy
+  books/cs-roman/volumes/<id>/data/layout.json     # hand-edit print rhythm here
 
   python books/cs-roman/scripts/cs_roman_segments.py normalize books/cs-roman/output/01Vin01.segments.json
   python books/cs-roman/scripts/cs_roman_segments.py normalize --all
@@ -166,6 +166,69 @@ def doc_comment_encoding_errors(data: dict[str, Any]) -> list[str]:
 def doc_comment_entries(data: dict[str, Any]) -> dict[str, Any]:
     """Return ``//…`` documentation entries from a layout/document dict."""
     return {k: v for k, v in data.items() if is_doc_comment_key(k)}
+
+
+def volume_id_from_layout_source(source: object) -> str | None:
+    """Folder id from layout ``source`` path (``…/01Vin01.pdf``)."""
+    if not isinstance(source, str) or not source.strip():
+        return None
+    stem = Path(source.replace("\\", "/")).name
+    if stem.lower().endswith(".pdf"):
+        stem = stem[: -len(".pdf")]
+    return stem or None
+
+
+def layout_git_origin_lines(volume_id: str) -> list[str]:
+    """Comment lines that name the git copy as the hand-edit target."""
+    return [
+        (
+            "ไฟล์ที่เก็บใน git (แก้จังหวะพิมพ์ที่นี่): "
+            f"books/cs-roman/volumes/{volume_id}/data/layout.json"
+        ),
+        (
+            "output/<id>.layout.json เป็นของชั่วคราวหลังถอด PDF — "
+            "ถ้ามีไฟล์ใน output แล้ว sync จะทับสำเนานี้"
+        ),
+    ]
+
+
+def rewrite_layout_origin_comments(data: dict[str, Any]) -> dict[str, Any]:
+    """Point ``//`` notes at the git layout copy, not gitignored output/."""
+    volume_id = volume_id_from_layout_source(data.get("source"))
+    if not volume_id:
+        return data
+    comments = data.get("//")
+    if not isinstance(comments, list):
+        return data
+    lines = [str(item) for item in comments]
+    if any("ไฟล์ที่เก็บใน git (แก้จังหวะพิมพ์ที่นี่):" in line for line in lines):
+        return data
+    if not any(line.startswith("ไฟล์ต้นทาง (แก้ที่นี่):") for line in lines):
+        return data
+    new_origin = layout_git_origin_lines(volume_id)
+    out_lines: list[str] = []
+    replaced = False
+    for line in lines:
+        if line.startswith("ไฟล์ต้นทาง (แก้ที่นี่):") or line.startswith(
+            "ไฟล์ที่เก็บใน git (แก้จังหวะพิมพ์ที่นี่):"
+        ):
+            if not replaced:
+                out_lines.extend(new_origin)
+                replaced = True
+            continue
+        if line.startswith("sync คัดลอกมาที่") or line.startswith(
+            "output/<id>.layout.json เป็นของชั่วคราว"
+        ):
+            continue
+        out_lines.append(line)
+    if not replaced:
+        insert_at = 1 if out_lines else 0
+        out_lines[insert_at:insert_at] = new_origin
+    if out_lines == lines:
+        return data
+    updated = dict(data)
+    updated["//"] = out_lines
+    return updated
 
 
 def _emit_doc_comments(
@@ -531,6 +594,7 @@ def normalize_content(data: dict[str, Any]) -> dict[str, Any]:
 
 def normalize_layout(data: dict[str, Any]) -> dict[str, Any]:
     """Layout file: source/bounds + layout + reading page overrides/breaks."""
+    data = rewrite_layout_origin_comments(data)
     comments = doc_comment_entries(data)
     out: dict[str, Any] = {"schema_version": SCHEMA_VERSION}
     _emit_doc_comments(out, comments, keys=("//",))

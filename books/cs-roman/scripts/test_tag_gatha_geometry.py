@@ -11,6 +11,7 @@ if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
 from cs_roman_hanging import (  # noqa: E402
+    _is_first_indent,
     _is_gatha_geometry_indent,
     _is_gatha_indent,
     _match_cached_line,
@@ -257,6 +258,133 @@ class MixedBatAndLongSingleTests(unittest.TestCase):
         }
         self.assertIsNone(gatha_layout_fix_target(pure_bat))
 
+
+class Vin03Item39FoldTests(unittest.TestCase):
+    def test_printed_bat_lines_split_instead_of_one_wak(self) -> None:
+        """03Vin03 item 39: ``A, B.`` lines become bat columns, not one วรรค."""
+        from generate_cs_roman_tex import gatha_stanza_line_bodies
+
+        lines = [
+            Segment(
+                page=33,
+                order=1,
+                item=39,
+                segment_type="gatha",
+                text="Nerañjarāyaṃ Bhagavā, Uruvelakassapaṃ jaṭilaṃ avoca.",
+            ),
+            Segment(
+                page=33,
+                order=2,
+                item=None,
+                segment_type="gatha",
+                text="Sace te Kassapa agaru, viharemu ajjaṇho aggisālamhīti.",
+            ),
+            Segment(
+                page=33,
+                order=3,
+                item=None,
+                segment_type="gatha",
+                text="Na kho me mahāsamaṇa garu,",
+            ),
+            Segment(
+                page=33,
+                order=4,
+                item=None,
+                segment_type="gatha",
+                text="Phāsukāmova taṃ nivāremi.",
+            ),
+            Segment(
+                page=33,
+                order=5,
+                item=None,
+                segment_type="gatha",
+                text="Abhīto pāvisi bhayamatīto.",
+            ),
+            Segment(
+                page=33,
+                order=6,
+                item=None,
+                segment_type="gatha",
+                text="Disvā isiṃ paviṭṭhaṃ, ahināgo dummano padhūpāyi.",
+            ),
+            Segment(
+                page=33,
+                order=7,
+                item=None,
+                segment_type="gatha",
+                text="Sumanamanaso adhimano, manussanāgopi tattha padhūpāyi.",
+            ),
+        ]
+        grouped = group_gatha_stanzas(lines)
+        gathas = [s for s in grouped if s.segment_type == "gatha"]
+        self.assertGreaterEqual(len(gathas), 2)
+        first = gathas[0]
+        self.assertEqual(first.source_layout, "bat_line")
+        self.assertEqual(first.bats[0]["waks"][0]["text"], "Nerañjarāyaṃ Bhagavā,")
+        self.assertEqual(
+            first.bats[0]["waks"][1]["text"],
+            "Uruvelakassapaṃ jaṭilaṃ avoca.",
+        )
+
+        disva_seg = None
+        disva_bat = None
+        for g in gathas:
+            for bat in g.bats or []:
+                waks = bat.get("waks") or []
+                left = (waks[0].get("text") if waks else "") or ""
+                if str(left).startswith("Disvā isiṃ"):
+                    disva_seg = g
+                    disva_bat = bat
+                    break
+            if disva_bat is not None:
+                break
+        self.assertIsNotNone(disva_seg)
+        self.assertIsNotNone(disva_bat)
+        assert disva_seg is not None
+        assert disva_bat is not None
+        self.assertEqual(disva_seg.source_layout, "bat_line")
+        waks = disva_bat["waks"]
+        self.assertEqual(waks[0]["text"], "Disvā isiṃ paviṭṭhaṃ,")
+        self.assertEqual(waks[1]["text"], "ahināgo dummano padhūpāyi.")
+
+        folded = {
+            "segment_type": "gatha",
+            "source_layout": "bat_line",
+            "bats": [
+                {
+                    "waks": [
+                        {
+                            "text": [
+                                {
+                                    "script": "roman",
+                                    "value": "Disvā isiṃ paviṭṭhaṃ,",
+                                },
+                                {"script": "thai", "value": "ทิสฺวา อิสิํ ปวิฏฺฐํ,"},
+                            ]
+                        },
+                        {
+                            "text": [
+                                {
+                                    "script": "roman",
+                                    "value": "ahināgo dummano padhūpāyi.",
+                                },
+                                {
+                                    "script": "thai",
+                                    "value": "อหินาโค ทุมฺมโน ปธูปายิ.",
+                                },
+                            ]
+                        },
+                    ]
+                }
+            ],
+        }
+        bodies = gatha_stanza_line_bodies(folded)
+        self.assertEqual(len(bodies), 1)
+        self.assertTrue(bodies[0].startswith(r"\csromangathabat{"))
+        self.assertIn("ทิสฺวา อิสิํ ปวิฏฺฐํ,", bodies[0])
+        self.assertIn("อหินาโค ทุมฺมโน ปธูปายิ.", bodies[0])
+
+
 _PDF = (
     Path(__file__).resolve().parents[1]
     / "volumes"
@@ -271,6 +399,19 @@ _PDF_02 = (
     / "source"
     / "02Vin02.pdf"
 )
+_PDF_03 = (
+    Path(__file__).resolve().parents[1]
+    / "source"
+    / "03Vin03.pdf"
+)
+if not _PDF_03.is_file():
+    _PDF_03 = (
+        Path(__file__).resolve().parents[1]
+        / "volumes"
+        / "03Vin03"
+        / "source"
+        / "03Vin03.pdf"
+    )
 
 
 class GathaIndentBandTests(unittest.TestCase):
@@ -354,6 +495,11 @@ class VerseShapeTests(unittest.TestCase):
         # wak second half is allowed as a continuation shape
         self.assertTrue(
             _looks_like_gatha_line("Sa\u1e43ghassa satta avah\u0101si seyya\u1e43.")
+        )
+        self.assertTrue(
+            _looks_like_gatha_line(
+                "Ettheva te mano na ramittha (Kassapāti Bhagavā,)"
+            )
         )
 
 
@@ -691,6 +837,72 @@ class GluedGathaBatLineExpandTests(unittest.TestCase):
         )
         # Right วรรค of bat 2 must not retain the third printed line.
         self.assertNotIn("Asamapekkhaṇā", flat[3])
+
+
+@unittest.skipUnless(_PDF_03.is_file(), "03Vin03.pdf not available")
+class Vin03Item55FirstIndentQuoteTests(unittest.TestCase):
+    def test_quoted_first_indent_verse_tags_as_gatha(self) -> None:
+        """03Vin03 p.46 item 55: first-indent quoted bats must not stay prose."""
+        try:
+            import fitz
+        except ImportError:
+            self.skipTest("pymupdf not installed")
+
+        doc = fitz.open(_PDF_03)
+        cs = detect_content_start(doc)
+        assert cs is not None
+        pdf_page = cs + 46 - 1
+        lines = page_body_lines(doc[pdf_page - 1])
+        verse_lines = []
+        seen_kimeva = False
+        for ln in lines:
+            if "Kimeva" in ln.text:
+                seen_kimeva = True
+            if not seen_kimeva:
+                continue
+            if not _is_first_indent(ln.x0):
+                break
+            verse_lines.append(ln)
+        self.assertGreaterEqual(len(verse_lines), 4)
+        self.assertTrue(_is_first_indent(verse_lines[0].x0))
+
+        segs = [
+            Segment(
+                page=46,
+                order=i + 1,
+                item=55,
+                segment_type="prose",
+                text=ln.text.replace("* ", "{{*}}").replace("+ ", "{{+}}"),
+                pdf_page=pdf_page,
+            )
+            for i, ln in enumerate(verse_lines)
+        ]
+        segs.append(
+            Segment(
+                page=47,
+                order=len(segs) + 1,
+                item=56,
+                segment_type="prose",
+                text="Atha kho āyasmā Uruvelakassapo uṭṭhāyāsanā ekaṃsaṃ uttarāsaṅgaṃ karitvā",
+                pdf_page=pdf_page + 1,
+            )
+        )
+
+        n = tag_gatha_by_geometry(doc, segs, content_start=cs)
+        self.assertGreaterEqual(n, 4)
+        self.assertEqual(segs[0].segment_type, "gatha")
+        self.assertEqual(segs[0].item, 55)
+        self.assertTrue(all(s.segment_type == "gatha" for s in segs[:-1]))
+        self.assertEqual(segs[-1].segment_type, "prose")
+
+        grouped = group_gatha_stanzas(segs)
+        gathas = [s for s in grouped if s.segment_type == "gatha"]
+        self.assertGreaterEqual(len(gathas), 1)
+        first = gathas[0]
+        self.assertEqual(first.source_layout, "bat_line")
+        left = first.bats[0]["waks"][0]["text"]
+        self.assertIn("Kimeva", str(left))
+        self.assertTrue(str(left).rstrip().endswith(","))
 
 
 if __name__ == "__main__":

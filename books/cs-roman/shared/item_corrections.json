@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "01vin01-page186-item-238-to-283",
+      "from": 238,
+      "to": 283,
+      "loci": [
+        {
+          "volume": "01Vin01",
+          "page": 186
+        }
+      ],
+      "remark": "Edition printed 238 (digit transposition). Sequence is 282 → 283 → 284 at Duṭṭhullavācāsikkhāpada; real item 238 is 01Vin01 p154 Ajjhattarūpe."
+    }
+  ]
+}

@@ -1079,6 +1079,57 @@ class GenerateWithTransformsTests(unittest.TestCase):
         # Soft breaks from the annotate rule should appear (edition form not in DPD).
         self.assertIn(r"\-", body)
 
+    def test_build_body_does_not_apply_transforms_to_edition_notes(self) -> None:
+        """01Vin01 p316 o2099: body paggāhikasālaṃ; apparatus Paṭaggāhikasālaṃ (?)."""
+        rules = parse_transforms_document(
+            {
+                "schema_version": 2,
+                "rules": [
+                    _replace_rule(
+                        "body",
+                        match="paggāhikasālaṃ",
+                        replacement="paggahikasālaṃ",
+                    ),
+                    _replace_rule(
+                        "note",
+                        match="Paṭaggāhikasālaṃ",
+                        replacement="SHOULDNOT",
+                    ),
+                    _annotate_rule(
+                        "ann",
+                        match="Paṭaggāhikasālaṃ",
+                        footnote="should not inject – ม.พ.ป.",
+                    ),
+                ],
+            },
+            source="mem",
+        )
+        seg = {
+            "page": 316,
+            "order": 2099,
+            "segment_type": "prose_continuation",
+            "notes": ["Paṭaggāhikasālaṃ (?)"],
+            "symbol_notes": {"*": "Paṭaggāhikasālaṃ (Syā)"},
+            "text": [
+                {
+                    "script": "roman",
+                    "value": "paggāhikasālaṃ{{n0}} vā pasāressantī”ti.{{*}}",
+                },
+                {"script": "thai", "value": "WRONG"},
+            ],
+        }
+        body, _ = build_body(seg, rules)
+        edition = note_to_thai("Paṭaggāhikasālaṃ (?)")
+        self.assertIn(tex_numbered_footnote(edition), body)
+        self.assertNotIn("SHOULDNOT", body)
+        self.assertNotIn(note_to_thai("SHOULDNOT"), body)
+        self.assertNotIn(
+            tex_numbered_footnote(note_to_thai("should not inject – ม.พ.ป.")),
+            body,
+        )
+        self.assertIn(note_to_thai("Paṭaggāhikasālaṃ (Syā)"), body)
+        self.assertIn(roman_to_thai("paggahikasālaṃ"), body)
+
     def test_generate_applies_shared_transforms(self) -> None:
         volume_id = "_transforms_test_vol"
         vol = BOOKS / "volumes" / volume_id
@@ -2928,6 +2979,144 @@ class SharedTransformsTests(unittest.TestCase):
         )
         self.assertEqual(gatha, "Kasmiṃ padese samaṇaṃ vasantaṃ,")
         self.assertEqual(extra3, [])
+
+    def test_cakkabhedaya_ti_drop_quote_only_locus(self) -> None:
+        rules = load_transforms_file(SHARED_TRANSFORMS_PATH)
+        snippet = (
+            "Devadatto saṃghabhedāya parakkamissati cakkabhedāyā”ti. "
+            "Atha kho te bhikkhū Devadattaṃ anekapariyāyena vigarahitvā "
+            "Bhagavato etamatthaṃ ārocesuṃ -pa- “saccaṃ kira tvaṃ Devadatta "
+            "saṃghabhedāya parakkamasi cakkabhedāyā”ti."
+        )
+        text, extra = apply_transforms(
+            snippet,
+            rules,
+            page=265,
+            order=1757,
+            segment_type="prose_continuation",
+            volume_id="01Vin01",
+        )
+        self.assertEqual(
+            text,
+            "Devadatto saṃghabhedāya parakkamissati cakkabhedāyāti. "
+            "Atha kho te bhikkhū Devadattaṃ anekapariyāyena vigarahitvā "
+            "Bhagavato etamatthaṃ ārocesuṃ -pa- “saccaṃ kira tvaṃ Devadatta "
+            "saṃghabhedāya parakkamasi cakkabhedāyāti.",
+        )
+        self.assertEqual(extra, [])
+        skip_p264, extra2 = apply_transforms(
+            "Devadatto Bhagavato saṃghabhedāya parakkamissati cakkabhedāyā”ti.",
+            rules,
+            page=264,
+            order=1756,
+            segment_type="prose",
+            volume_id="01Vin01",
+        )
+        self.assertEqual(
+            skip_p264,
+            "Devadatto Bhagavato saṃghabhedāya parakkamissati cakkabhedāyā”ti.",
+        )
+        self.assertEqual(extra2, [])
+
+    def test_yakaci_space_replace_spares_sya_note(self) -> None:
+        rules = load_transforms_file(SHARED_TRANSFORMS_PATH)
+        lower, extra = apply_transforms(
+            "Gahapatānī nāma yākāci agāraṃ ajjhāvasati.",
+            rules,
+            page=314,
+            order=2085,
+            segment_type="prose",
+            volume_id="01Vin01",
+        )
+        self.assertEqual(lower, "Gahapatānī nāma yā kāci agāraṃ ajjhāvasati.")
+        self.assertEqual(extra, [])
+        capital, extra_c = apply_transforms(
+            "Yā kāci vedanā. Yākāci saññā. Ye keci saṅkhārā.",
+            rules,
+            page=73,
+            order=463,
+            segment_type="prose",
+            volume_id="13Sam02",
+        )
+        self.assertEqual(
+            capital, "Yā kāci vedanā. Yā kāci saññā. Ye keci saṅkhārā."
+        )
+        self.assertEqual(extra_c, [])
+        sya, extra_s = apply_transforms(
+            "Yākāci (Syā)",
+            rules,
+            page=420,
+            order=2243,
+            segment_type="prose",
+            volume_id="04Vin04",
+        )
+        self.assertEqual(sya, "Yākāci (Syā)")
+        self.assertEqual(extra_s, [])
+
+    def test_mattham_matta_replace_only_locus(self) -> None:
+        rules = load_transforms_file(SHARED_TRANSFORMS_PATH)
+        text, extra = apply_transforms(
+            "kathaṃ hi nāma chabbaggiyā bhikkhū na matthaṃ jānitvā bahuṃ cīvaraṃ",
+            rules,
+            page=316,
+            order=2099,
+            segment_type="prose_continuation",
+            volume_id="01Vin01",
+        )
+        self.assertEqual(
+            text,
+            "kathaṃ hi nāma chabbaggiyā bhikkhū na mattaṃ jānitvā bahuṃ cīvaraṃ",
+        )
+        self.assertEqual(extra, [])
+        verse, extra2 = apply_transforms(
+            "Kiṃ kicca'matthaṃ idhamatthi tuyhaṃ,",
+            rules,
+            page=199,
+            order=2663,
+            segment_type="gatha",
+            volume_id="22Khu05",
+        )
+        self.assertEqual(verse, "Kiṃ kicca'matthaṃ idhamatthi tuyhaṃ,")
+        self.assertEqual(extra2, [])
+
+    def test_ayasmanam_ayasmantam_replace(self) -> None:
+        rules = load_transforms_file(SHARED_TRANSFORMS_PATH)
+        text, extra = apply_transforms(
+            "upasaṅkamitvā āyasmanaṃ Pilindavacchaṃ abhivādetvā",
+            rules,
+            page=362,
+            order=2419,
+            segment_type="prose",
+            volume_id="01Vin01",
+        )
+        self.assertEqual(
+            text, "upasaṅkamitvā āyasmantaṃ Pilindavacchaṃ abhivādetvā"
+        )
+        self.assertEqual(extra, [])
+        self.assertNotIn("āyasmanti", text)
+
+    def test_icchamano_short_a_replace_preserves_capital(self) -> None:
+        rules = load_transforms_file(SHARED_TRANSFORMS_PATH)
+        lower, extra = apply_transforms(
+            "Ākaṅkhamānoti icchāmāno.",
+            rules,
+            page=378,
+            order=2523,
+            segment_type="prose",
+            volume_id="01Vin01",
+        )
+        self.assertEqual(lower, "Ākaṅkhamānoti icchamāno.")
+        self.assertEqual(extra, [])
+        capital, extra_c = apply_transforms(
+            "Icchāmāno cahaṃ ajja,",
+            rules,
+            page=77,
+            order=1117,
+            segment_type="gatha",
+            volume_id="21Khu04",
+        )
+        self.assertEqual(capital, "Icchamāno cahaṃ ajja,")
+        self.assertEqual(extra_c, [])
 
 
 class TransformIndexTests(unittest.TestCase):

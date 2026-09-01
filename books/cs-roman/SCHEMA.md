@@ -4,11 +4,18 @@
 
 Three file roles:
 
-| Role | Meaning | Canonical | Volume sync |
-|------|---------|-----------|-------------|
+| Role | Meaning | Extract staging | Git copy |
+|------|---------|-----------------|----------|
 | Content | Extract-normalized text (after format-contract rules only) | `output/<id>.segments.json` | `volumes/<id>/data/segments.json` |
-| Print | Spacing / bounds | `output/<id>.layout.json` | `volumes/<id>/data/layout.json` |
-| Publication rules | Conditional string transforms for the book | `shared/transforms.json` | not synced |
+| Print | Spacing / bounds (hand-tuned) | `output/<id>.layout.json` | `volumes/<id>/data/layout.json` |
+| Publication rules | Conditional string transforms for the book | — | `shared/transforms.json` |
+
+Git tracks `volumes/<id>/data/`. `output/` is extract staging (gitignored);
+`build.ps1` copies output → volumes when staging files exist. Edit print
+rhythm in the git `layout.json`. Publication Roman / transliteration fixes:
+**only** `shared/transforms.json` — never hand-edit segments for that purpose
+([`docs/transliteration_policy.md`](docs/transliteration_policy.md)). See
+[`docs/playbook.md`](docs/playbook.md).
 
 Consumers load segments + layout (via `load_document`) into one in-memory
 document. TeX generate also loads transform rules from
@@ -45,7 +52,10 @@ section-rule underscores, solid editorial mid-word hyphens
 `na-upanissaye` → Roman `naupanissaye` / Thai `นอุปนิสฺสเย` — Thai is
 converted part-wise at the hyphen then joined, while peyyāla `-pa-` is kept,
 etc.) are applied at extract; publication string fixes live in
-`shared/transforms.json` and run at TeX generate. Repair older segments with
+`shared/transforms.json` and run at TeX generate. Printed **item-number**
+typos (digit transposition and the like) are a separate identity layer:
+`shared/item_corrections.json` remaps `item` at extract, JSON fixup, and
+generate so citation does not keep the edition glyph. Repair older segments with
 `scripts/fixup_solid_midword_hyphens.py`. Legacy `{{sp1}}` / `{{sp3}}`
 sentence-spacer markers are stripped on normalize (retired; TeX no longer
 emits `\csromanspacer` from them).
@@ -58,7 +68,12 @@ blank line after `10. Subhasutta` / folio / `Potaliyasutta (54)`, extract peels
 that furniture from the multi-line block so it is not item-parsed into the body
 or tagged `source_layout=center`. Isolated `Name (folio)` blocks are dropped as
 furniture; chapter opens without a folio paren (`10. Subhasutta`,
-`Potaliyasutta`) are kept.
+`Potaliyasutta`) are kept. Peyyāla / paragraph-number tails
+(`…ahosi -pa-. (39)`, `anāpattīti. (15)`) are body even when they sit
+alone at a page start — they are not folio labels. On real PDFs,
+running-header *candidates* are lines sitting above the first
+body-column line (flush / first-indent / hang / gāthā). Flush
+page-start body is never furniture.
 
 Continuation pages (common in Saṃyutta) reprint a centered `N. Title` with the
 **edition page number on the outer margin** (เลขหน้าฉบับริมนอก). Blank lines
@@ -100,33 +115,68 @@ Publication string rules applied when generating TeX (see
 
 | Path | Role |
 |------|------|
-| `shared/transforms.json` | Sole catalog; generate loads this for every volume |
+| `shared/transforms.json` | Sole **string** catalog; generate loads this for every volume |
+| `shared/item_corrections.json` | Printed Tipiṭaka `item` typos (`from` → `to` at `loci`); extract, fixup, and generate apply it |
 
 Prefer a unique `when.match` so the same typo is fixed wherever it appears.
-Optional `volumes` / `pages` / `orders` / `segment_types` are AND filters on the
-volume **currently being generated**. Printed `pages` / `orders` collide across
-books — pin `volumes` (folder id, e.g. `01Vin01`) when the same surface string
-is wrong in one book and correct in another. Record known loci in
-`replace.remark` or a test, not as a default pin.
+When the same surface is wrong at some places and correct at others, pin
+`when.loci` on **one** rule (several entries, including several volumes).
+Each locus requires `volume`; `page` and `order` are optional (omitted fields
+match any). `order` requires `page`. Generate drops a rule when the current
+book is not in any locus. Unpinned rules apply in every volume. Optional
+`segment_types`. Record extra context in `replace.remark` or a test.
+Do not use `when.volumes` / `when.pages` / `when.orders`.
 
-Exactly one action per rule:
+### Item-number corrections (`shared/item_corrections.json`)
+
+`item` is citation identity, not a body token. When the Roman PDF prints the
+wrong number (e.g. `238` for `283` by digit transposition) keep the edition
+glyph out of JSON: add a catalog rule with `from`, `to`, `loci` (`volume` +
+`page`; `order` optional), and a `remark`. Extract applies it so re-extract
+does not restore the typo; `fixup_item_corrections.py` repairs stored JSON;
+generate applies it again so a stale file still prints the canonical number.
+A match starts at the locus, then follows later segments that still carry
+`from` (itemless headings are skipped). Do not auto-guess sequence gaps.
+This is silent like `replace`, not an `annotate` footnote — a wrong item
+collides with the real earlier number.
+
+```json
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "01vin01-page186-item-238-to-283",
+      "from": 238,
+      "to": 283,
+      "loci": [{"volume": "01Vin01", "page": 186}],
+      "remark": "edition printed 238; sequence 282→283→284"
+    }
+  ]
+}
+```
+
+String catalog — exactly one action per rule:
 
 | Action | When | Body text | PDF footnote |
 |--------|------|-----------|--------------|
 | `annotate` (default for new editorial notes) | Burmese/source reading is wrong; keep Roman as printed | Unchanged (`when.match`) | Yes — `footnote` |
 | `replace` | Burmese is correct; Roman is wrong | `when.match` → `with` | No (`remark` is editor-only) |
 
-`when.match` is the **full** edition surface token (literal substring, not a
-regex). Matching is **case-insensitive** (`str.casefold`) so catalog entries
-may use Roman capitalisation while still hitting lowercase surface in segments;
-`annotate` keeps the edition substring as printed. Catalog rules in
-`shared/transforms.json` always set `when.token` to
-`true` (letter boundaries: `bandhiṃ` does not hit `bandhiṃsu` / `anubandhiṃ`).
-Match the complete word or phrase as printed, not a stem (`kukuccaṃ` not
-`kukucc`). The parser still defaults `token` to `false` for tests. Optional
-`volumes` (volume folder ids) plus `pages` / `orders` when the same surface
-token is correct in one locus and wrong in another. Optional `soft_breaks` parts must
-concatenate to the surface form that remains after the rule (`match` for
+`when.match` is the edition surface (literal, not a regex). No `+` means
+the **whole word** (letter-run bounds on the full span: `bandhiṃ` does not
+hit `bandhiṃsu` / `anubandhiṃ`; `taṃ yeva` does not hit `santaṃ yeva`;
+`bandhiṃ.` still matches). A leading and/or trailing `+` means one or more
+letters in the same word (`+bandhiṃ`, `bandhiṃ+`, `+bandhiṃ+`). `+` only at
+the start or end; affix cores must be a single letter-run. The
+replace/annotate/unbold span is the **core** (`anubandhiṃ` + `+bandhiṃ` +
+`with` `bandhaṃ` → `anubandhaṃ`). Matching is **case-insensitive**
+(`str.casefold`) so catalog entries may use Roman capitalisation while still
+hitting lowercase surface in segments; `annotate` keeps the edition
+substring as printed. Match the complete word or phrase as printed, not a
+stem (`kukuccaṃ` not `kukucc`). Do not use `when.token`. Optional
+`when.loci` when the same surface token is correct in one place and wrong in
+another. Optional `soft_breaks` parts must
+concatenate to the surface form that remains after the rule (`core` for
 annotate, `with` for replace) and merge into the sandhi break map at generate
 (they are not written to `sandhi_breaks_overrides.json`).
 
@@ -136,14 +186,12 @@ annotate, `with` for replace) and merge into the sandhi break map at generate
   "rules": [
     {
       "id": "01vin01-page12-bhagavaa",
-      "enabled": true,
       "when": {
-        "volumes": ["01Vin01"],
-        "pages": [12],
-        "orders": [3],
-        "segment_types": ["prose"],
         "match": "Bhagavaa",
-        "token": true
+        "segment_types": ["prose"],
+        "loci": [
+          {"volume": "01Vin01", "page": 12, "order": 3}
+        ]
       },
       "do": {
         "replace": {
@@ -153,11 +201,25 @@ annotate, `with` for replace) and merge into the sandhi break map at generate
       }
     },
     {
-      "id": "roman-cira-civara-patho",
-      "enabled": true,
+      "id": "roman-gacchantim-acc",
       "when": {
-        "match": "cīrapiṇḍapātasenāsanagilānappaccayabhesajjaparikkhārā",
-        "token": true
+        "match": "gacchantiṃ",
+        "loci": [
+          {"volume": "01Vin01", "page": 145, "order": 801},
+          {"volume": "01Vin01", "page": 145, "order": 802}
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "gacchantaṃ",
+          "remark": "masculine acc.; feminine gacchantiṃ kept elsewhere"
+        }
+      }
+    },
+    {
+      "id": "roman-cira-civara-patho",
+      "when": {
+        "match": "cīrapiṇḍapātasenāsanagilānappaccayabhesajjaparikkhārā"
       },
       "do": {
         "annotate": {
@@ -180,17 +242,18 @@ annotate, `with` for replace) and merge into the sandhi break map at generate
 | Field | Role |
 |-------|------|
 | `id` | Stable unique id within the file (for tests / disable) |
-| `enabled` | Default `true`; `false` skips the rule |
-| `when` | AND filters: required literal `match`; optional `volumes`, `pages`, `orders`, `segment_types`; optional `token` |
-| `when.volumes` | Volume folder ids (`01Vin01`, …). Generate drops the rule for other books. Use with `pages` when page numbers collide |
-| `when.token` | Catalog `replace` / `annotate`: always `true`. Letter boundaries so `bandhiṃ` does not hit `bandhiṃsu` / `anubandhiṃ` (`taṃ yeva` does not hit `santaṃ yeva`). Parser default for tests is `false`. Catalog `unbold` of glued quote-iti (`”ti`) uses `false` because `”` is not a letter-run |
+| `enabled` | Omit when on (parser default `true`). Set `false` only to skip the rule without deleting it |
+| `when` | AND filters: required `match`; optional `loci`, `segment_types` |
+| `when.loci` | List of places. Each entry requires `volume`; optional `page`, `order` (`order` requires `page`). A segment matches if **any** entry matches. Several volumes go in several entries on the same rule |
+| `when.match` | Exact whole word, or `+` affix at start/end (`+bandhiṃ` / `bandhiṃ+` / `+bandhiṃ+`). Hit span is the core. Phrases and glued punctuation (`asaṃvāso”ti`) are exact spans with outer letter-run bounds |
 | `do.annotate` | Keep `match`; required `footnote` (Roman note body + siglum); optional `soft_breaks` |
 | `do.replace` | Required `with`; optional `remark` (not rendered); optional `soft_breaks` |
-| `do.unbold` | Keep `match`; clear bold on that span in `runs` (Roman stroke/weight wrong vs Burmese). Optional `skip` (non-negative int, smaller than `match`) leaves a prefix bold — e.g. `skip: 1` on `”ti` keeps `”`. Optional `remark`. Does not change the Roman string |
-| `do.annotate.footnote` | Editorial numbered note. Convention: Pali lemma / tag, then **` – ม.พ.ป.`** (en-dash + มูลนิธิพระไตรปิฎกเพื่อประชาชน) so the note is distinct from edition apparatus (`สี`, `สฺยา`, …). Example: `tesaṃyeva niggahītasandhi – ม.พ.ป.` → Thai `เตสํเยว นิคฺคหีตสนฺธิ – ม.พ.ป.` At generate: callout `{{nN}}` is appended after each hit (after existing segment notes); body goes through `note_to_thai`, then TeX `\csromansharedfootnote{id}{…}` (identical bodies share one mark per page after ≥2 latex runs; see `footnotes.tex`). Runs on body/gāthā Roman **before** Thai transliteration and sandhi soft breaks. Not injected when transforming note bodies themselves. |
+| `do.unbold` | Keep the match core; clear bold on that span in `runs` (Roman stroke/weight wrong vs Burmese). Optional `skip` (non-negative int, smaller than the core) leaves a prefix bold — e.g. `skip: 9` on `asaṃvāso”ti` keeps `asaṃvāso”`. Optional `remark`. Does not change the Roman string |
+| `do.annotate.footnote` | Editorial numbered note. Convention: Pali lemma / tag, then **` – ม.พ.ป.`** (en-dash + มูลนิธิพระไตรปิฎกเพื่อประชาชน) so the note is distinct from edition apparatus (`สี`, `สฺยา`, …). Example: `tesaṃyeva niggahītasandhi – ม.พ.ป.` → Thai `เตสํเยว นิคฺคหีตสนฺธิ – ม.พ.ป.` At generate: callout `{{nN}}` is appended after each hit (after existing segment notes); body goes through `note_to_thai`, then TeX `\csromansharedfootnote{id}{…}` (identical bodies share one mark per page after ≥2 latex runs; see `footnotes.tex`). Runs on body/gāthā/hanging Roman **before** Thai transliteration and sandhi soft breaks. Never applied to edition `notes` / `symbol_notes`. |
 
 **Order:** file order in `shared/transforms.json`. Matching rules are applied
-to Roman text (body, notes, gāthā, hanging lines); Thai for the PDF is
+to Roman text (body, gāthā, hanging lines) — **not** edition `notes` or
+`symbol_notes` (apparatus as extracted, e.g. `Paṭaggāhikasālaṃ (?)`). Thai for the PDF is
 re-derived via `roman_to_thai` when the Roman string changes (annotate always
 changes Roman by adding `{{nN}}`). Stored Thai in `segments.json` is left
 unchanged. Stored bold `runs` are remapped through the same edit
@@ -203,8 +266,9 @@ is unchanged. Runs drop only when they cannot be aligned.
 
 Generate compiles a letter-run index (`compile_transforms` in
 `cs_roman_transforms.py`) so apply is O(tokens in the segment), not
-O(rules × segments). The JSON schema is unchanged; file order remains the
-apply contract. Do not write hit positions back into this catalog.
+O(rules × segments). File order remains the apply contract. Affix rules
+(`+` in `when.match`) scan as a small leftover set. Do not write hit
+positions back into this catalog.
 
 Format-contract rules that define markers / flags stay in Python
 (`cs_roman_text.py`), not in this file: pot-ma-gyi, `-pa-` → ฯเปฯ, trailing
@@ -217,11 +281,11 @@ catalog `do.unbold`, not a hardcoded peel.
 |-------|----------|------|
 | `page` | yes | Printed page number |
 | `order` | yes | Reading order in the volume |
-| `item` | no | Tipiṭaka item number; `null`/absent for headings & gāthā |
+| `item` | no | Canonical Tipiṭaka item number; `null`/absent for headings & gāthā. Printed number typos are remapped via [`shared/item_corrections.json`](shared/item_corrections.json) (extract / fixup / generate) — do not hand-edit `segments.json` |
 | `section_no` | no | Outline number printed before a heading (e.g. `1` in `1. Pārājikakaṇḍa`); omit when unnumbered; **not** Tipiṭaka `item` |
 | `segment_type` | yes | Structural kind (see below) |
 | `text` | conditional | Multi-script body (absent on gāthā); heading titles stay bare (no leading outline `N.` prefix) |
-| `notes` | no | Numbered footnote bodies (Roman); omit if empty. PDF U+23AF (HORIZONTAL LINE EXTENSION) is normalized to en-dash U+2013 at extract; Thai is derived at generate via `note_to_thai`. |
+| `notes` | no | Numbered footnote bodies (Roman); omit if empty. PDF U+23AF (HORIZONTAL LINE EXTENSION) is normalized to en-dash U+2013 at extract; Thai is derived at generate via `note_to_thai`. Catalog `transforms.json` does not rewrite these strings. |
 
 ### Compound outline titles (Vinaya)
 
@@ -246,7 +310,7 @@ deeper (child) level for body macros.
 ### Mātikā outline file (`*.matika.json`)
 
 Written by `assign_cs_roman_heading_levels.py` from the printed Mātikā.
-Canonical: `output/<id>.matika.json`; sync copy: `volumes/<id>/data/matika.json`.
+Extract staging: `output/<id>.matika.json`; git copy: `volumes/<id>/data/matika.json`.
 
 | Field | Role |
 |-------|------|
@@ -277,7 +341,7 @@ not touch marks.
 When a short heading is glued to the pātimokkha uddesa sentence
 (`Ime kho… uddesaṃ āgacchanti.`), extract/fixup **peels** them into a
 heading segment + a following centered `prose` segment.
-| `symbol_notes` | no | `{"*":…}` / `{"+":…}`; omit if empty |
+| `symbol_notes` | no | `{"*":…}` / `{"+":…}`; omit if empty. Catalog `transforms.json` does not rewrite these strings. |
 | `flags` | no | e.g. `section_rule`; omit if empty |
 | `needs_review` | no | Present only when `true` |
 | `review_reasons` | no | Omit if empty |
@@ -308,7 +372,12 @@ segment-level `word_space` (print overrides live in `layout.json`).
 - Bold comes from CS Roman PDF fake-bold at **extract** time: stroke overlays
   (`get_texttrace` type 1) are matched to body-line **bboxes**, then the span
   string is located only inside that line’s window in the segment text (so a
-  bold lemma does not paint later plain repeats). When the Roman edition
+  bold lemma does not paint later plain repeats). When a stroke ends mid-token
+  after a soft-hyphen join (`samādahāpeyy-` + `a` → `samādahāpeyya`), extract
+  extends the bold range over that short vowel leftover so Thai convert is not
+  split (`สมาทหาเปยฺยฺ` + `อ`). Glued particles such as `ti` stay plain. Repair
+  stored JSON with
+  `scripts/fixup_midword_bold_splits.py`. When the Roman edition
   stroke is wrong vs Burmese, catalog `do.unbold` in `shared/transforms.json`
   (applied at generate; not baked into JSON). `enrich_cs_roman_thai.py`
   (`--force` / spacing normalize) **preserves** remappable `runs`; it does not
@@ -319,7 +388,7 @@ segment-level `word_space` (print overrides live in `layout.json`).
 
 | Marker | Meaning |
 |--------|---------|
-| `{{nN}}` | Numbered footnote → `notes[N]`. Extract binds glued (`word1`) and spaced (`word 1`) callouts; spaced `1.` outline numbers are not callouts. Folding printed gāthā lines remaps per-line `{{n0}}` into a single notes list. Older JSON (literal digits / collided markers): `scripts/fixup_unbound_footnote_callouts.py` then `scripts/fixup_orphan_footnote_callouts.py`. |
+| `{{nN}}` | Numbered footnote → `notes[N]`. Extract binds glued (`word1`) and spaced (`word 1`) callouts; spaced `1.` outline numbers are not callouts. Folding printed gāthā lines remaps per-line `{{n0}}` into a single notes list. Older JSON (literal digits / collided markers): pipeline peels first, then `scripts/fixup_unbound_footnote_callouts.py` then `scripts/fixup_orphan_footnote_callouts.py`. |
 | `{{*}}` / `{{+}}` | Apparatus → `symbol_notes` (also mid-paragraph spaced ` * ` / ` + ` callouts) |
 | `{{[]}}` | Bracket apparatus (``[  ] …`` note, e.g. Syāma omission) → `symbol_notes["[]"]`. Body keeps the editorial `[…]` span; TeX emits `\csromansymbolfoottext{[ ]}{…}` (footnote label only — no second superscript `[ ]` next to the opener). |
 | `{{()}}` | Empty-paren apparatus (``(  ) …`` note, e.g. *katthaci natthi*) → `symbol_notes["()"]`. Hosts on the first **non-folio** body `(`. Numbered footnotes whose body starts with `( )` stay numbered (`{{nN}}`), never steal onto `(150)`. Same bodyless foot-text emit as `{{[]}}`. |
@@ -414,8 +483,11 @@ multi-script line entries (same shape as `text`).
 
 Numbered KN/SN bat verses often print as first-indent head (~84 pt) + near-hang
 body (~97–116 pt). Extract should fold those as ``gatha`` with ``item`` (not
-hanging): hang merge skips bat+bat groups; geometry may seed first-indent
-numbered bats and keep ``item`` on the บท. TeX uses ``\csromangathaitembat`` /
+hanging): hang merge skips verse groups (pure bat+bat, and numbered mixed
+bat/wak hang such as 03Vin03 item 39) so each printed ``A, B.`` line can split
+into two วรรค. Geometry may seed first-indent numbered/item bats, grow hang-
+band or further first-indent verse-shaped siblings (quoted dialogue after
+``gāthāya ajjhabhāsi–``), and keep ``item`` on the บท. TeX uses ``\csromangathaitembat`` /
 ``\csromangathacontbat`` so the label sits outside the shared left-วรรค column
 and วรรค 2/4 still align. The item number stays in the fixed ``\proseitem``
 column (``\tipitakahang`` from text left; not ``\parindent``, which
@@ -469,11 +541,15 @@ demoted. Older mistags: `scripts/fixup_false_heading_guesses.py`.
 
 **Glued closer after verse/prose stop:** when a section-closer formula follows a
 sentence stop on the same printed line as the last gāthā วรรค (or prose)
-— e.g. `…จาติ. มูลปณฺณาสโก สมตฺโต.` — extract peels the trailer into a
-`niṭṭhitaṃ` segment so TeX uses the centered closer band instead of
-overstretching `\csromangathabat`. Gendered endings include Thai `สมตฺโต` /
-`นิฏฺฐิโต` (leading vowel โ) and Roman `samatto` / `niṭṭhito`, not only
-`สมตฺตํ` / `นิฏฺฐิตํ`. Older JSON: `scripts/fixup_glued_section_closers.py`.
+— e.g. `…จาติ. มูลปณฺณาสโก สมตฺโต.` or
+`…ādikammikassāti. (Aññābhāgiya) kiñcilesasikkhāpadaṃ niṭṭhitaṃ navamaṃ.` —
+extract peels the trailer into a `niṭṭhitaṃ` segment so TeX uses the centered
+closer band instead of overstretching `\csromangathabat` or running the closer
+on as body prose. Formulas include an optional trailing sutta/rule ordinal
+after the end-verb (`…นิฏฺฐิตํ นวมํ.` / `…niṭṭhitaṃ navamaṃ.`). Gendered
+endings include Thai `สมตฺโต` / `นิฏฺฐิโต` (leading vowel โ) and Roman
+`samatto` / `niṭṭhito`, not only `สมตฺตํ` / `นิฏฺฐิตํ`. Older JSON:
+`scripts/fixup_glued_section_closers.py`.
 
 **Closer structural level (`closer_level`):** optional cache of what unit the
 formula closes, from longest-rightmost lexical cues on the closer string
@@ -629,7 +705,7 @@ Print tuning lives in **`layout.json`**:
 1. **`layout`** — volume defaults (every supported key; normalize fills gaps). **Sync and printing modes use this only** (printing has no per-page map).
 2. **`page_layout_reading_mode`** — same layout keys for **physical reading-PDF pages** (`\thepage` / running head); not folio ฉ.N; **no `segments`**. Printing omits this map (reflow changes physical page numbers).
 3. **`page_breaks_reading_mode`** — force `\clearpage` **before** listed segment `order`s in reading and printing modes (orphan headings / keep-with-next); sync ignores this
-4. **`//…` documentation keys** — optional notes. Prefer `"//"`, `"//layout"`, `"//page_layout_reading_mode"`, `"//page_breaks_reading_mode"`. See `output/01Vin01.layout.json`.
+4. **`//…` documentation keys** — optional notes. Prefer `"//"`, `"//layout"`, `"//page_layout_reading_mode"`, `"//page_breaks_reading_mode"`. See `volumes/01Vin01/data/layout.json`.
 
 Edition defaults live in `DEFAULT_LAYOUT` (`scripts/cs_roman_segments.py`) and
 each volume’s `layout.json`. `shared/style/preamble.tex` holds matching TeX

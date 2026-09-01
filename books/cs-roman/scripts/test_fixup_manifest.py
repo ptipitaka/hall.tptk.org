@@ -20,6 +20,8 @@ class ManifestTests(unittest.TestCase):
         ids = [f["id"] for f in data["fixups"]]
         self.assertIn("tassuddana_labels", ids)
         self.assertIn("false_heading_guesses", ids)
+        self.assertIn("midword_bold_splits", ids)
+        self.assertIn("item_corrections", ids)
 
     def test_rejects_bad_gate(self) -> None:
         data = load_manifest()

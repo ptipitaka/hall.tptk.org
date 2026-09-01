@@ -18989,11 +18989,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ekakanipātaṃ niṭṭhitaṃ."
+          "value": "Ekakanipātaṃ niṭṭhitaṃ.",
+          "runs": [
+            {
+              "value": "Ekakanipātaṃ niṭṭhitaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เอกกนิปาตํ นิฏฺฐิตํ."
+          "value": "เอกกนิปาตํ นิฏฺฐิตํ.",
+          "runs": [
+            {
+              "value": "เอกกนิปาตํ นิฏฺฐิตํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -23982,7 +23994,7 @@
               "bold": false
             },
             {
-              "value": "176.{{sp1}} กฬายมุฏฺฐิชาตก (2-3-6)",
+              "value": "176. กฬายมุฏฺฐิชาตก (2-3-6)",
               "bold": true
             }
           ]
@@ -30958,11 +30970,47 @@
       "text": [
         {
           "script": "roman",
-          "value": "Bīraṇathambhavagga 211.{{sp1}} Somadattajātaka ({{n0}}-{{n1}}-1)"
+          "value": "Bīraṇathambhavagga 211.{{sp1}} Somadattajātaka ({{n0}}-{{n1}}-1)",
+          "runs": [
+            {
+              "value": "Bīraṇathambhavagga",
+              "bold": true
+            },
+            {
+              "value": " 211.{{sp1}} ",
+              "bold": false
+            },
+            {
+              "value": "Somadattajāt",
+              "bold": true
+            },
+            {
+              "value": "aka ({{n0}}-{{n1}}-1)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "พีรณถมฺภวคฺค 211.{{sp1}} โสมทตฺตชาตก ({{n0}}-{{n1}}-1)"
+          "value": "พีรณถมฺภวคฺค 211.{{sp1}} โสมทตฺตชาตก ({{n0}}-{{n1}}-1)",
+          "runs": [
+            {
+              "value": "พีรณถมฺภวคฺค",
+              "bold": true
+            },
+            {
+              "value": " 211. ",
+              "bold": false
+            },
+            {
+              "value": "โสมทตฺตชาตฺ",
+              "bold": true
+            },
+            {
+              "value": "อก ({{n0}}-{{n1}}-1)",
+              "bold": false
+            }
+          ]
         }
       ],
       "notes": [
@@ -39403,11 +39451,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kuṇḍakakucchisindhavajātaka ({{n0}}-{{n1}}-4)"
+          "value": "Kuṇḍakakucchisindhavajātaka ({{n0}}-{{n1}}-4)",
+          "runs": [
+            {
+              "value": "Kuṇḍakakucchisindhavajāt",
+              "bold": true
+            },
+            {
+              "value": "aka ({{n0}}-{{n1}}-4)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "กุณฺฑกกุจฺฉิสินฺธวชาตก ({{n0}}-{{n1}}-4)"
+          "value": "กุณฺฑกกุจฺฉิสินฺธวชาตก ({{n0}}-{{n1}}-4)",
+          "runs": [
+            {
+              "value": "กุณฺฑกกุจฺฉิสินฺธวชาตฺ",
+              "bold": true
+            },
+            {
+              "value": "อก ({{n0}}-{{n1}}-4)",
+              "bold": false
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -45570,11 +45638,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Tikanipāta 279.{{sp1}} Satapattajātaka ({{n0}}-{{n1}}-9)"
+          "value": "Tikanipāta 279.{{sp1}} Satapattajātaka ({{n0}}-{{n1}}-9)",
+          "runs": [
+            {
+              "value": "Tikanipāta 279.{{sp1}} ",
+              "bold": false
+            },
+            {
+              "value": "Satapattajāt",
+              "bold": true
+            },
+            {
+              "value": "aka ({{n0}}-{{n1}}-9)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ติกนิปาต 279.{{sp1}} สตปตฺตชาตก ({{n0}}-{{n1}}-9)"
+          "value": "ติกนิปาต 279.{{sp1}} สตปตฺตชาตก ({{n0}}-{{n1}}-9)",
+          "runs": [
+            {
+              "value": "ติกนิปาต 279. ",
+              "bold": false
+            },
+            {
+              "value": "สตปตฺตชาตฺ",
+              "bold": true
+            },
+            {
+              "value": "อก ({{n0}}-{{n1}}-9)",
+              "bold": false
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -52254,11 +52350,11 @@
               "bold": false
             },
             {
-              "value": "Daddarajātak",
+              "value": "Daddarajātaka",
               "bold": true
             },
             {
-              "value": "a ({{n0}}-{{n1}}-4)",
+              "value": " ({{n0}}-{{n1}}-4)",
               "bold": false
             }
           ]
@@ -52272,11 +52368,11 @@
               "bold": false
             },
             {
-              "value": "ททฺทรชาตกฺ",
+              "value": "ททฺทรชาตก",
               "bold": true
             },
             {
-              "value": "อ ({{n0}}-{{n1}}-4)",
+              "value": " ({{n0}}-{{n1}}-4)",
               "bold": false
             }
           ]
@@ -57334,11 +57430,11 @@
               "bold": false
             },
             {
-              "value": "Succajajātak",
+              "value": "Succajajātaka",
               "bold": true
             },
             {
-              "value": "a (4-{{n0}}-10)",
+              "value": " (4-{{n0}}-10)",
               "bold": false
             }
           ]
@@ -57352,11 +57448,11 @@
               "bold": false
             },
             {
-              "value": "สุจฺจชชาตกฺ",
+              "value": "สุจฺจชชาตก",
               "bold": true
             },
             {
-              "value": "อ (4-{{n0}}-10)",
+              "value": " (4-{{n0}}-10)",
               "bold": false
             }
           ]
@@ -60848,7 +60944,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} โกกิลวคฺค",
+              "value": "4. โกกิลวคฺค",
               "bold": true
             }
           ]
@@ -63370,7 +63466,7 @@
               "bold": false
             },
             {
-              "value": "339.{{sp1}} พาเวรุชาตก (4-4-9)",
+              "value": "339. พาเวรุชาตก (4-4-9)",
               "bold": true
             }
           ]
@@ -64416,7 +64512,7 @@
               "bold": false
             },
             {
-              "value": "342.{{sp1}} วานรชาตก (4-5-2)",
+              "value": "342. วานรชาตก (4-5-2)",
               "bold": true
             }
           ]
@@ -65902,11 +65998,11 @@
               "bold": false
             },
             {
-              "value": "Ayakūṭajātak",
+              "value": "Ayakūṭajātaka",
               "bold": true
             },
             {
-              "value": "a ({{n0}}-{{n1}}-7)",
+              "value": " ({{n0}}-{{n1}}-7)",
               "bold": false
             }
           ]
@@ -65920,11 +66016,11 @@
               "bold": false
             },
             {
-              "value": "อยกูฏชาตกฺ",
+              "value": "อยกูฏชาตก",
               "bold": true
             },
             {
-              "value": "อ ({{n0}}-{{n1}}-7)",
+              "value": " ({{n0}}-{{n1}}-7)",
               "bold": false
             }
           ]
@@ -67313,11 +67409,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Catukkanipātaṃ niṭṭhitaṃ."
+          "value": "Catukkanipātaṃ niṭṭhitaṃ.",
+          "runs": [
+            {
+              "value": "Catukkanipātaṃ niṭṭhitaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "จตุกฺกนิปาตํ นิฏฺฐิตํ."
+          "value": "จตุกฺกนิปาตํ นิฏฺฐิตํ.",
+          "runs": [
+            {
+              "value": "จตุกฺกนิปาตํ นิฏฺฐิตํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -94452,7 +94560,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} คนฺธารวคฺค",
+              "value": "2. คนฺธารวคฺค",
               "bold": true
             }
           ]
@@ -202281,11 +202389,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Vīsatinipātaṃ niṭṭhitaṃ."
+          "value": "Vīsatinipātaṃ niṭṭhitaṃ.",
+          "runs": [
+            {
+              "value": "Vīsatinipātaṃ niṭṭhitaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "วีสตินิปาตํ นิฏฺฐิตํ."
+          "value": "วีสตินิปาตํ นิฏฺฐิตํ.",
+          "runs": [
+            {
+              "value": "วีสตินิปาตํ นิฏฺฐิตํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -228047,11 +228167,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Jātakapāḷiyā paṭhamo bhāgo niṭṭhito."
+          "value": "Jātakapāḷiyā paṭhamo bhāgo niṭṭhito.",
+          "runs": [
+            {
+              "value": "Jātakapāḷiyā paṭhamo bhāgo niṭṭhito.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ชาตกปาฬิยา ปฐโม ภาโค นิฏฺฐิโต."
+          "value": "ชาตกปาฬิยา ปฐโม ภาโค นิฏฺฐิโต.",
+          "runs": [
+            {
+              "value": "ชาตกปาฬิยา ปฐโม ภาโค นิฏฺฐิโต.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",

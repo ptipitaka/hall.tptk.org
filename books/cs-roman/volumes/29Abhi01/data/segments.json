@@ -1288,31 +1288,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Hetugocchakaṃ.",
-          "runs": [
-            {
-              "value": "Hetugocchaka",
-              "bold": true
-            },
-            {
-              "value": "ṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Hetugocchakaṃ."
         },
         {
           "script": "thai",
-          "value": "เหตุโคจฺฉกํ.",
-          "runs": [
-            {
-              "value": "เหตุโคจฺฉก",
-              "bold": true
-            },
-            {
-              "value": "ํ.",
-              "bold": false
-            }
-          ]
+          "value": "เหตุโคจฺฉกํ."
         }
       ],
       "source_layout": "center"
@@ -1823,11 +1803,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "1476) Āsavagocchakaṃ."
+                  "value": "1476) Āsavagocchakaṃ.",
+                  "runs": [
+                    {
+                      "value": "1476) ",
+                      "bold": false
+                    },
+                    {
+                      "value": "Āsavagocchakaṃ",
+                      "bold": true
+                    },
+                    {
+                      "value": ".",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "1476) อาสวโคจฺฉกํ."
+                  "value": "1476) อาสวโคจฺฉกํ.",
+                  "runs": [
+                    {
+                      "value": "1476) ",
+                      "bold": false
+                    },
+                    {
+                      "value": "อาสวโคจฺฉกํ",
+                      "bold": true
+                    },
+                    {
+                      "value": ".",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -3020,31 +3028,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Nīvaraṇagocchakaṃ.",
-          "runs": [
-            {
-              "value": "Nīvaraṇagocchaka",
-              "bold": true
-            },
-            {
-              "value": "ṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Nīvaraṇagocchakaṃ."
         },
         {
           "script": "thai",
-          "value": "นีวรณโคจฺฉกํ.",
-          "runs": [
-            {
-              "value": "นีวรณโคจฺฉก",
-              "bold": true
-            },
-            {
-              "value": "ํ.",
-              "bold": false
-            }
-          ]
+          "value": "นีวรณโคจฺฉกํ."
         }
       ],
       "source_layout": "center"
@@ -3250,11 +3238,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "1524) Parāmāsagocchakaṃ."
+                  "value": "1524) Parāmāsagocchakaṃ.",
+                  "runs": [
+                    {
+                      "value": "1524) ",
+                      "bold": false
+                    },
+                    {
+                      "value": "Parāmāsagocchakaṃ",
+                      "bold": true
+                    },
+                    {
+                      "value": ".",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "1524) ปรามาสโคจฺฉกํ."
+                  "value": "1524) ปรามาสโคจฺฉกํ.",
+                  "runs": [
+                    {
+                      "value": "1524) ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ปรามาสโคจฺฉกํ",
+                      "bold": true
+                    },
+                    {
+                      "value": ".",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -4240,31 +4256,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kilesagocchakaṃ.",
-          "runs": [
-            {
-              "value": "Kilesagocchaka",
-              "bold": true
-            },
-            {
-              "value": "ṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Kilesagocchakaṃ."
         },
         {
           "script": "thai",
-          "value": "กิเลสโคจฺฉกํ.",
-          "runs": [
-            {
-              "value": "กิเลสโคจฺฉก",
-              "bold": true
-            },
-            {
-              "value": "ํ.",
-              "bold": false
-            }
-          ]
+          "value": "กิเลสโคจฺฉกํ."
         }
       ],
       "source_layout": "center"
@@ -10851,31 +10847,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Aṭṭhakasiṇaṃ soḷasakkhattukaṃ.",
-          "runs": [
-            {
-              "value": "Aṭṭhakasiṇaṃ soḷasakkhattukaṃ",
-              "bold": true
-            },
-            {
-              "value": ".",
-              "bold": false
-            }
-          ]
+          "value": "Aṭṭhakasiṇaṃ soḷasakkhattukaṃ."
         },
         {
           "script": "thai",
-          "value": "อฏฺฐกสิณํ โสฬสกฺขตฺตุกํ.",
-          "runs": [
-            {
-              "value": "อฏฺฐกสิณํ โสฬสกฺขตฺตุกํ",
-              "bold": true
-            },
-            {
-              "value": ".",
-              "bold": false
-            }
-          ]
+          "value": "อฏฺฐกสิณํ โสฬสกฺขตฺตุกํ."
         }
       ],
       "source_layout": "center"
@@ -11170,31 +11146,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Dve ārammaṇāni.",
-          "runs": [
-            {
-              "value": "Dve ārammaṇāni",
-              "bold": true
-            },
-            {
-              "value": ".",
-              "bold": false
-            }
-          ]
+          "value": "Dve ārammaṇāni."
         },
         {
           "script": "thai",
-          "value": "เทฺว อารมฺมณานิ.",
-          "runs": [
-            {
-              "value": "เทฺว อารมฺมณานิ",
-              "bold": true
-            },
-            {
-              "value": ".",
-              "bold": false
-            }
-          ]
+          "value": "เทฺว อารมฺมณานิ."
         }
       ],
       "source_layout": "center"
@@ -12078,31 +12034,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Idampi aṭṭhakkhattukaṃ.",
-          "runs": [
-            {
-              "value": "Idampi aṭṭhakkhattukaṃ",
-              "bold": true
-            },
-            {
-              "value": ".",
-              "bold": false
-            }
-          ]
+          "value": "Idampi aṭṭhakkhattukaṃ."
         },
         {
           "script": "thai",
-          "value": "อิทมฺปิ อฏฺฐกฺขตฺตุกํ.",
-          "runs": [
-            {
-              "value": "อิทมฺปิ อฏฺฐกฺขตฺตุกํ",
-              "bold": true
-            },
-            {
-              "value": ".",
-              "bold": false
-            }
-          ]
+          "value": "อิทมฺปิ อฏฺฐกฺขตฺตุกํ."
         }
       ],
       "source_layout": "center"
@@ -12131,11 +12067,71 @@
       "text": [
         {
           "script": "roman",
-          "value": "vivicceva kāmehi -pa- paṭhamaṃ jhānaṃ upasampajja viharati.{{sp1}} Tasmiṃ samaye phasso hoti -pa- avikkhepo hoti -pa-.{{sp1}} Ime dhammā kusalā."
+          "value": "vivicceva kāmehi -pa- paṭhamaṃ jhānaṃ upasampajja viharati.{{sp1}} Tasmiṃ samaye phasso hoti -pa- avikkhepo hoti -pa-.{{sp1}} Ime dhammā kusalā.",
+          "runs": [
+            {
+              "value": "vivicceva kāmehi -pa- paṭhamaṃ jhānaṃ upasampajja viharati.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " Tasmiṃ",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "samaye phasso hoti -pa- avikkhepo hoti -pa-.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " Ime dhammā kusalā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "วิวิจฺเจว กาเมหิ ฯเปฯ ปฐมํ ฌานํ อุปสมฺปชฺช วิหรติ.{{sp1}} ตสฺมิํ สมเย ผสฺโส โหติ ฯเปฯ อวิกฺเขโป โหติ ฯเปฯ.{{sp1}} อิเม ธมฺมา กุสลา."
+          "value": "วิวิจฺเจว กาเมหิ ฯเปฯ ปฐมํ ฌานํ อุปสมฺปชฺช วิหรติ.{{sp1}} ตสฺมิํ สมเย ผสฺโส โหติ ฯเปฯ อวิกฺเขโป โหติ ฯเปฯ.{{sp1}} อิเม ธมฺมา กุสลา.",
+          "runs": [
+            {
+              "value": "วิวิจฺเจว กาเมหิ ฯเปฯ ปฐมํ ฌานํ อุปสมฺปชฺช วิหรติ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " ตสฺมิํ",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "สมเย ผสฺโส โหติ ฯเปฯ อวิกฺเขโป โหติ ฯเปฯ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " อิเม ธมฺมา กุสลา.",
+              "bold": true
+            }
+          ]
         }
       ]
     },
@@ -14463,31 +14459,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Suññataṃ.",
-          "runs": [
-            {
-              "value": "Suññata",
-              "bold": true
-            },
-            {
-              "value": "ṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Suññataṃ."
         },
         {
           "script": "thai",
-          "value": "สุญฺญตํ.",
-          "runs": [
-            {
-              "value": "สุญฺญต",
-              "bold": true
-            },
-            {
-              "value": "ํ.",
-              "bold": false
-            }
-          ]
+          "value": "สุญฺญตํ."
         }
       ],
       "source_layout": "center"
@@ -14502,12 +14478,8 @@
           "value": "Suññatamūlakapaṭipadā",
           "runs": [
             {
-              "value": "Suññata",
+              "value": "Suññatamūlakapaṭipadā",
               "bold": true
-            },
-            {
-              "value": "mūlakapaṭipadā",
-              "bold": false
             }
           ]
         },
@@ -14516,12 +14488,8 @@
           "value": "สุญฺญตมูลกปฏิปทา",
           "runs": [
             {
-              "value": "สุญฺญต",
+              "value": "สุญฺญตมูลกปฏิปทา",
               "bold": true
-            },
-            {
-              "value": "มูลกปฏิปทา",
-              "bold": false
             }
           ]
         }
@@ -20276,11 +20244,71 @@
       "text": [
         {
           "script": "roman",
-          "value": "ṭhapetvā saññākkhandhaṃ ṭhapetvā viññāṇakkhandhaṃ.{{sp1}} Ayaṃ tasmiṃ samaye saṅkhārakkhandho hoti -pa-.{{sp1}} Ime dhammā abyākatā."
+          "value": "ṭhapetvā saññākkhandhaṃ ṭhapetvā viññāṇakkhandhaṃ.{{sp1}} Ayaṃ tasmiṃ samaye saṅkhārakkhandho hoti -pa-.{{sp1}} Ime dhammā abyākatā.",
+          "runs": [
+            {
+              "value": "ṭhapetvā saññākkhandhaṃ ṭhapetvā viññāṇakkhandhaṃ.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " Ayaṃ tasmiṃ",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "samaye saṅkhārakkhandho hoti -pa-.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " Ime dhammā abyākatā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ฐเปตฺวา สญฺญากฺขนฺธํ ฐเปตฺวา วิญฺญาณกฺขนฺธํ.{{sp1}} อยํ ตสฺมิํ สมเย สงฺขารกฺขนฺโธ โหติ ฯเปฯ.{{sp1}} อิเม ธมฺมา อพฺยากตา."
+          "value": "ฐเปตฺวา สญฺญากฺขนฺธํ ฐเปตฺวา วิญฺญาณกฺขนฺธํ.{{sp1}} อยํ ตสฺมิํ สมเย สงฺขารกฺขนฺโธ โหติ ฯเปฯ.{{sp1}} อิเม ธมฺมา อพฺยากตา.",
+          "runs": [
+            {
+              "value": "ฐเปตฺวา สญฺญากฺขนฺธํ ฐเปตฺวา วิญฺญาณกฺขนฺธํ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " อยํ ตสฺมิํ",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "สมเย สงฺขารกฺขนฺโธ โหติ ฯเปฯ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " อิเม ธมฺมา อพฺยากตา.",
+              "bold": true
+            }
+          ]
         }
       ]
     },
@@ -21190,31 +21218,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ekakaṃ.",
-          "runs": [
-            {
-              "value": "Ekaka",
-              "bold": true
-            },
-            {
-              "value": "ṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Ekakaṃ."
         },
         {
           "script": "thai",
-          "value": "เอกกํ.",
-          "runs": [
-            {
-              "value": "เอกก",
-              "bold": true
-            },
-            {
-              "value": "ํ.",
-              "bold": false
-            }
-          ]
+          "value": "เอกกํ."
         }
       ],
       "source_layout": "center"
@@ -38395,7 +38403,7 @@
               "bold": true
             },
             {
-              "value": "ติ ติสฺโส วิชฺชา.{{sp1}} ปุพฺเพนิวาสานุสฺสติญาณํ วิชฺชา, สตฺตานํ จุตูปปาเต ญาณํ วิชฺชา, อาสวานํ ขเย ญาณํ วิชฺชา.",
+              "value": "ติ ติสฺโส วิชฺชา. ปุพฺเพนิวาสานุสฺสติญาณํ วิชฺชา, สตฺตานํ จุตูปปาเต ญาณํ วิชฺชา, อาสวานํ ขเย ญาณํ วิชฺชา.",
               "bold": false
             }
           ]
@@ -38431,7 +38439,7 @@
               "bold": true
             },
             {
-              "value": "ติ เทฺว วิมุตฺติโย.{{sp1}} จิตฺตสฺส{{n0}} อธิมุตฺติ นิพฺพานญฺจ.",
+              "value": "ติ เทฺว วิมุตฺติโย. จิตฺตสฺส{{n0}} อธิมุตฺติ นิพฺพานญฺจ.",
               "bold": false
             }
           ]

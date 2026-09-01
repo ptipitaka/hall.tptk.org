@@ -131,5 +131,70 @@ class UnglueGathaCloserTests(unittest.TestCase):
         self.assertEqual(out[1]["segment_type"], "niṭṭhitaṃ")
 
 
+class UnglueSikkhapadaOrdinalCloserTests(unittest.TestCase):
+    def test_peels_parenthetical_sikkhapada_ordinal_from_prose(self) -> None:
+        segs = [
+            {
+                "order": 1,
+                "page": 262,
+                "segment_type": "prose",
+                "item": 408,
+                "text": [
+                    {
+                        "script": "roman",
+                        "value": (
+                            "Anāpatti tathāsaññī codeti vā codāpeti vā "
+                            "ummattakassa ādikammikassāti. (Aññābhāgiya) "
+                            "kiñcilesasikkhāpadaṃ niṭṭhitaṃ navamaṃ."
+                        ),
+                    },
+                    {
+                        "script": "thai",
+                        "value": (
+                            "อนาปตฺติ ตถาสญฺญี โจเทติ วา โจทาเปติ วา "
+                            "อุมฺมตฺตกสฺส อาทิกมฺมิกสฺสาติ. (อญฺญาภาคิย) "
+                            "กิญฺจิเลสสิกฺขาปทํ นิฏฺฐิตํ นวมํ."
+                        ),
+                    },
+                ],
+            }
+        ]
+        out, n = unglue_section_closers(segs)
+        self.assertEqual(n, 1)
+        self.assertEqual(out[0]["segment_type"], "prose")
+        self.assertEqual(out[0]["item"], 408)
+        roman = next(
+            t["value"] for t in out[0]["text"] if t["script"] == "roman"
+        )
+        thai = next(
+            t["value"] for t in out[0]["text"] if t["script"] == "thai"
+        )
+        self.assertEqual(
+            roman,
+            "Anāpatti tathāsaññī codeti vā codāpeti vā ummattakassa "
+            "ādikammikassāti.",
+        )
+        self.assertEqual(
+            thai,
+            "อนาปตฺติ ตถาสญฺญี โจเทติ วา โจทาเปติ วา อุมฺมตฺตกสฺส "
+            "อาทิกมฺมิกสฺสาติ.",
+        )
+        self.assertEqual(out[1]["segment_type"], "niṭṭhitaṃ")
+        closer_roman = next(
+            t["value"] for t in out[1]["text"] if t["script"] == "roman"
+        )
+        closer_thai = next(
+            t["value"] for t in out[1]["text"] if t["script"] == "thai"
+        )
+        self.assertEqual(
+            closer_roman,
+            "(Aññābhāgiya) kiñcilesasikkhāpadaṃ niṭṭhitaṃ navamaṃ.",
+        )
+        self.assertEqual(
+            closer_thai,
+            "(อญฺญาภาคิย) กิญฺจิเลสสิกฺขาปทํ นิฏฺฐิตํ นวมํ.",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

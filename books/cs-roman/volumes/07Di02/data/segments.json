@@ -15856,11 +15856,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Mahāsudassanasuttaṃ niṭṭhitaṃ catutthaṃ."
+          "value": "Mahāsudassanasuttaṃ niṭṭhitaṃ catutthaṃ.",
+          "runs": [
+            {
+              "value": "Mahāsudassanasuttaṃ niṭṭhitaṃ catutthaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "มหาสุทสฺสนสุตฺตํ นิฏฺฐิตํ จตุตฺถํ."
+          "value": "มหาสุทสฺสนสุตฺตํ นิฏฺฐิตํ จตุตฺถํ.",
+          "runs": [
+            {
+              "value": "มหาสุทสฺสนสุตฺตํ นิฏฺฐิตํ จตุตฺถํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "closer_level": "sutta"
@@ -17789,11 +17801,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Janavasabhasuttaṃ niṭṭhitaṃ pañcamaṃ."
+          "value": "Janavasabhasuttaṃ niṭṭhitaṃ pañcamaṃ.",
+          "runs": [
+            {
+              "value": "Janavasabhasuttaṃ niṭṭhitaṃ pañcamaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ชนวสภสุตฺตํ นิฏฺฐิตํ ปญฺจมํ."
+          "value": "ชนวสภสุตฺตํ นิฏฺฐิตํ ปญฺจมํ.",
+          "runs": [
+            {
+              "value": "ชนวสภสุตฺตํ นิฏฺฐิตํ ปญฺจมํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -32091,11 +32115,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "vedanāsu vedanānupassī viharati, ajjhattabahiddhā vā vedanāsu vedanānupassī viharati.{{sp1}} Samudayadhammānupassī vā vedanāsu viharati, vayadhammānupassī vā vedanāsu viharati, samudayavayadhammānupassī vā vedanāsu viharati. “Atthi vedanā”ti vā panassa sati paccupaṭṭhitā hoti yāvadeva ñāṇamattāya paṭissatimattāya.{{sp1}} Anissito ca viharati, na ca kiñci loke upādiyati.{{sp1}} Evampi kho bhikkhave bhikkhu vedanāsu vedanānupassī viharati."
+          "value": "vedanāsu vedanānupassī viharati, ajjhattabahiddhā vā vedanāsu vedanānupassī viharati.{{sp1}} Samudayadhammānupassī vā vedanāsu viharati, vayadhammānupassī vā vedanāsu viharati, samudayavayadhammānupassī vā vedanāsu viharati. “Atthi vedanā”ti vā panassa sati paccupaṭṭhitā hoti yāvadeva ñāṇamattāya paṭissatimattāya.{{sp1}} Anissito ca viharati, na ca kiñci loke upādiyati.{{sp1}} Evampi kho bhikkhave bhikkhu vedanāsu vedanānupassī viharati.",
+          "runs": [
+            {
+              "value": "vedanāsu vedanānupassī viharati, ajjhattabahiddhā vā vedanāsu",
+              "bold": true
+            },
+            {
+              "value": " vedanānupassī viharati.{{sp1}} Samudayadhammānupassī vā vedanāsu viharati, vayadhammānupassī vā vedanāsu viharati, samudayavayadhammānupassī vā vedanāsu viharati. “Atthi vedanā”ti vā panassa sati paccupaṭṭhitā hoti yāvadeva ñāṇamattāya paṭissatimattāya.{{sp1}} Anissito ca viharati, na ca kiñci loke upādiyati.{{sp1}} Evampi kho bhikkhave bhikkhu vedanāsu vedanānupassī viharati.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เวทนาสุ เวทนานุปสฺสี วิหรติ, อชฺฌตฺตพหิทฺธา วา เวทนาสุ เวทนานุปสฺสี วิหรติ.{{sp1}} สมุทยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ, วยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ, สมุทยวยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ. “อตฺถิ เวทนา”ติ วา ปนสฺส สติ ปจฺจุปฏฺฐิตา โหติ ยาวเทว ญาณมตฺตาย ปฏิสฺสติมตฺตาย.{{sp1}} อนิสฺสิโต จ วิหรติ, น จ กิญฺจิ โลเก อุปาทิยติ.{{sp1}} เอวมฺปิ โข ภิกฺขเว ภิกฺขุ เวทนาสุ เวทนานุปสฺสี วิหรติ."
+          "value": "เวทนาสุ เวทนานุปสฺสี วิหรติ, อชฺฌตฺตพหิทฺธา วา เวทนาสุ เวทนานุปสฺสี วิหรติ.{{sp1}} สมุทยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ, วยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ, สมุทยวยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ. “อตฺถิ เวทนา”ติ วา ปนสฺส สติ ปจฺจุปฏฺฐิตา โหติ ยาวเทว ญาณมตฺตาย ปฏิสฺสติมตฺตาย.{{sp1}} อนิสฺสิโต จ วิหรติ, น จ กิญฺจิ โลเก อุปาทิยติ.{{sp1}} เอวมฺปิ โข ภิกฺขเว ภิกฺขุ เวทนาสุ เวทนานุปสฺสี วิหรติ.",
+          "runs": [
+            {
+              "value": "เวทนาสุ เวทนานุปสฺสี วิหรติ, อชฺฌตฺตพหิทฺธา วา เวทนาสุ",
+              "bold": true
+            },
+            {
+              "value": " เวทนานุปสฺสี วิหรติ. สมุทยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ, วยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ, สมุทยวยธมฺมานุปสฺสี วา เวทนาสุ วิหรติ. “อตฺถิ เวทนา”ติ วา ปนสฺส สติ ปจฺจุปฏฺฐิตา โหติ ยาวเทว ญาณมตฺตาย ปฏิสฺสติมตฺตาย. อนิสฺสิโต จ วิหรติ, น จ กิญฺจิ โลเก อุปาทิยติ. เอวมฺปิ โข ภิกฺขเว ภิกฺขุ เวทนาสุ เวทนานุปสฺสี วิหรติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -32172,31 +32216,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Cittānupassanā niṭṭhitā.",
-          "runs": [
-            {
-              "value": "Cittānupassanā",
-              "bold": true
-            },
-            {
-              "value": " niṭṭhitā.",
-              "bold": false
-            }
-          ]
+          "value": "Cittānupassanā niṭṭhitā."
         },
         {
           "script": "thai",
-          "value": "จิตฺตานุปสฺสนา นิฏฺฐิตา.",
-          "runs": [
-            {
-              "value": "จิตฺตานุปสฺสนา",
-              "bold": true
-            },
-            {
-              "value": " นิฏฺฐิตา.",
-              "bold": false
-            }
-          ]
+          "value": "จิตฺตานุปสฺสนา นิฏฺฐิตา."
         }
       ],
       "source_layout": "center",
@@ -32336,11 +32360,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "yathā ca uppannāya vicikicchāya pahānaṃ hoti tañca pajānāti, yathā ca pahīnāya vicikicchāya āyatiṃ anuppādo hoti tañca pajānāti."
+          "value": "yathā ca uppannāya vicikicchāya pahānaṃ hoti tañca pajānāti, yathā ca pahīnāya vicikicchāya āyatiṃ anuppādo hoti tañca pajānāti.",
+          "runs": [
+            {
+              "value": "yathā ca uppannāya vicikicchāya pahānaṃ hoti tañca pajānāti, yathā ca ",
+              "bold": false
+            },
+            {
+              "value": "pahīnāya vicikicchāya āyatiṃ anuppādo hoti tañca pajānāti.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ยถา จ อุปฺปนฺนาย วิจิกิจฺฉาย ปหานํ โหติ ตญฺจ ปชานาติ, ยถา จ ปหีนาย วิจิกิจฺฉาย อายติํ อนุปฺปาโท โหติ ตญฺจ ปชานาติ."
+          "value": "ยถา จ อุปฺปนฺนาย วิจิกิจฺฉาย ปหานํ โหติ ตญฺจ ปชานาติ, ยถา จ ปหีนาย วิจิกิจฺฉาย อายติํ อนุปฺปาโท โหติ ตญฺจ ปชานาติ.",
+          "runs": [
+            {
+              "value": "ยถา จ อุปฺปนฺนาย วิจิกิจฺฉาย ปหานํ โหติ ตญฺจ ปชานาติ, ยถา จ ",
+              "bold": false
+            },
+            {
+              "value": "ปหีนาย วิจิกิจฺฉาย อายติํ อนุปฺปาโท โหติ ตญฺจ ปชานาติ.",
+              "bold": true
+            }
+          ]
         }
       ]
     },

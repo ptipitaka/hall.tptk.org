@@ -1064,12 +1064,17 @@
     \global\csromangathabodyindent=\dimexpr\dimen1-\dimen0\relax
   \fi
 }
+% Numbered bat_line บท: the item label sits on its own line above the verse
+% body (at the \proseitem hang column), so every bat gets the full
+% \csromangathapagewidth and the two วรรค stay on one line instead of
+% wrapping under the label. Continuation bats align under the first bat
+% (no body indent — the label no longer shares the bat line).
 \newcommand{\csromangathaitembat}[3]{%
   \csroman@gathaplaceitem{#1}%
+  \\%
   \csromangathabat{#2}{#3}%
 }
 \newcommand{\csromangathacontbat}[2]{%
-  \hspace{\csromangathabodyindent}%
   \csromangathabat{#1}{#2}%
 }
 \newcommand{\csromangathaitemline}[2]{%

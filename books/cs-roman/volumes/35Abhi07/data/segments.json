@@ -1551,7 +1551,7 @@
           "value": "ปวตฺติ 1. อุปฺปาทวาร",
           "runs": [
             {
-              "value": "ปวตฺติ 1.{{sp1}} อุปฺปาทวาร",
+              "value": "ปวตฺติ 1. อุปฺปาทวาร",
               "bold": true
             }
           ]
@@ -3651,11 +3651,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pavatti 2. Nirodhavāra"
+          "value": "Pavatti 2. Nirodhavāra",
+          "runs": [
+            {
+              "value": "Pavatti 2. Nirodhavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปวตฺติ 2. นิโรธวาร"
+          "value": "ปวตฺติ 2. นิโรธวาร",
+          "runs": [
+            {
+              "value": "ปวตฺติ 2. นิโรธวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -5793,7 +5805,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} ปวตฺติ 3.{{sp1}} อุปฺปาทนิโรธวาร",
+              "value": "2. ปวตฺติ 3. อุปฺปาทนิโรธวาร",
               "bold": true
             }
           ]
@@ -7597,7 +7609,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} อตีตานาคตวาร",
+              "value": "6. อตีตานาคตวาร",
               "bold": true
             }
           ]
@@ -8016,11 +8028,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Dhammayamakapāḷi niṭṭhitā."
+          "value": "Dhammayamakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Dhammayamakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ธมฺมยมกปาฬิ นิฏฺฐิตา."
+          "value": "ธมฺมยมกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "ธมฺมยมกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -18700,7 +18724,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} ปวตฺติ 1.{{sp1}} อุปฺปาทวาร",
+              "value": "2. ปวตฺติ 1. อุปฺปาทวาร",
               "bold": true
             }
           ]
@@ -25048,7 +25072,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} อนาคตวาร",
+              "value": "3. อนาคตวาร",
               "bold": true
             }
           ]
@@ -36713,11 +36737,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Indriyayamakapāḷi niṭṭhitā."
+          "value": "Indriyayamakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Indriyayamakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "อินฺทฺริยยมกปาฬิ นิฏฺฐิตา."
+          "value": "อินฺทฺริยยมกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "อินฺทฺริยยมกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",

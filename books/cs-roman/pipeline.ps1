@@ -54,6 +54,21 @@ if (-not $SkipExtract) {
   } else {
     Invoke-WebPython $extractArgs
   }
+  # Fixups read volumes/<id>/data/; copy fresh extract there before they run.
+  $syncIds = @($Volume)
+  if (-not $syncIds -or $syncIds.Count -eq 0) {
+    $outDir = Join-Path $RepoRoot "books/cs-roman/output"
+    $syncIds = @(
+      Get-ChildItem -LiteralPath $outDir -Filter "*.segments.json" |
+        ForEach-Object { $_.Name -replace '\.segments\.json$', '' }
+    )
+  }
+  foreach ($id in $syncIds) {
+    Invoke-WebPython @(
+      "books/cs-roman/scripts/sync_volume_data.py",
+      "--volume", $id
+    )
+  }
 }
 
 # JSON / layout fixups from fixup_manifest.json (even when SkipExtract).

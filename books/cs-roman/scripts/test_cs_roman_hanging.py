@@ -21,6 +21,8 @@ from cs_roman_hanging import (  # noqa: E402
     _is_gatha_indent,
     _is_hang_indent,
     _is_short_center_sandwich_text,
+    _is_verse_hang_group,
+    _looks_like_verse_hang_line,
     _match_after_leading_tokens,
     _match_cached_line,
     merge_hanging_into_segments,
@@ -81,6 +83,30 @@ class MergeHangingTests(unittest.TestCase):
         self.assertEqual(segs[0].source_layout, "hanging")
         self.assertEqual(len(segs[0].hanging_lines or []), 2)
         self.assertEqual(segs[1].text.startswith("Puriso"), True)
+
+
+class VerseHangGroupTests(unittest.TestCase):
+    def test_mixed_numbered_verse_is_not_hanging_paragraph(self) -> None:
+        """03Vin03 item 39: numbered bat head + mixed hang must stay printed lines."""
+        head = "39.  Nerañjarāyaṃ Bhagavā, Uruvelakassapaṃ jaṭilaṃ avoca."
+        hang = [
+            "Sace te Kassapa agaru, viharemu ajjaṇho aggisālamhīti.",
+            "Na kho me mahāsamaṇa garu,",
+            "Phāsukāmova taṃ nivāremi.",
+            "Disvā isiṃ paviṭṭhaṃ, ahināgo dummano padhūpāyi.",
+        ]
+        self.assertTrue(_is_verse_hang_group(head, hang))
+        self.assertTrue(_looks_like_verse_hang_line(hang[1]))
+        self.assertTrue(_looks_like_verse_hang_line(hang[3]))
+
+    def test_long_hanging_prose_wrap_is_not_verse(self) -> None:
+        head = "338. Paṭiggaṇhāti vīmaṃsati paccāharati, āpatti saṃghādisesassa."
+        hang = [
+            "Anupasampannassa tassa bhikkhuno āpatti dukkaṭassa hoti sace na paṭijānāti taṃ āpattiṃ yeva.",
+        ]
+        self.assertGreater(len(hang[0]), 90)
+        self.assertFalse(_looks_like_verse_hang_line(hang[0]))
+        self.assertFalse(_is_verse_hang_group(head, hang))
 
 
 class IndentBandTests(unittest.TestCase):

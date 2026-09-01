@@ -117,11 +117,13 @@ _IDAM_LABEL_RE = re.compile(
 _COMPOUND_CHILD_RE = re.compile(
     r"^(.+?)\s+(\d+)\.\s+(.+)$",
 )
-# CS Roman Mātikā: leaves sit in a left column (x0/width ≈ 0.13).  Centered
-# parents — including long titles whose left edge drifts left of the page
-# midpoint — are anything above that leaf band.  Do not require x0 ≳ 0.28:
-# ``7. Pāpikāya diṭṭhiyā …`` is centered but only ≈ 0.23.
-_LEFT_LEAF_X_RATIO = 0.18
+# CS Roman Mātikā: leaves sit in a left column (x0/width ≈ 0.13–0.19).
+# Two-digit vs three-digit hanging numbers shift x0 by ~6pt (03Vin03:
+# ``99.`` at 92.4 vs ``100.`` at 86.6 on a 499pt page).  0.18 treated the
+# two-digit row as centered, so 100–105 nested as h2.  Centered long
+# parents still sit above this band (``7. Pāpikāya diṭṭhiyā …`` ≈ 0.23).
+# Do not require x0 ≳ 0.28.
+_LEFT_LEAF_X_RATIO = 0.20
 # Kept for tests / callers that still pass a “center-ish” threshold.
 _CENTER_X_RATIO = 0.28
 # Distinct left-column indent steps (e.g. 62.6 → 85.0) are ~16–22pt.

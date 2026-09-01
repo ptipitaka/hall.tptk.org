@@ -816,8 +816,9 @@ def apply_transforms(
     ``unbold`` does not change the string (applied to ``runs`` via
     ``apply_unbold_to_runs`` at generate).
 
-    When ``emit_footnotes`` is false (e.g. transforming note bodies),
-    annotate leaves text unchanged; replace still applies.
+    When ``emit_footnotes`` is false (e.g. TOC titles), annotate leaves
+    text unchanged; replace still applies. Edition ``notes`` /
+    ``symbol_notes`` are never passed through this function at generate.
     """
     if not text or not rules:
         return text, []

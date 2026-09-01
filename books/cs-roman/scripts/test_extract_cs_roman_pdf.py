@@ -31,8 +31,12 @@ from extract_cs_roman_pdf import (  # noqa: E402
     peel_glued_uddesa_heading,
     peel_leading_running_headers,
     peel_page_top_running_header_furniture,
+    running_header_candidates_from_lines,
     unglue_false_pa_page_joins,
+    vztime_to_unicode,
 )
+from cs_roman_hanging import PageLine, _is_body_flush, page_body_lines  # noqa: E402
+from paths import SOURCE_DIR, VOLUMES_DIR  # noqa: E402
 
 
 class RepairMidWordSplitTests(unittest.TestCase):
@@ -289,6 +293,32 @@ class SectionNoHeadingTests(unittest.TestCase):
         self.assertEqual(blocks[0]["kind"], "prose")
         self.assertEqual(blocks[0]["item"], 1)
         self.assertNotIn("section_no", blocks[0])
+
+    def test_item_prose_peels_trailing_sikkhapada_ordinal_closer(self) -> None:
+        body = (
+            "408. Anāpatti tathāsaññī codeti vā codāpeti vā ummattakassa "
+            "ādikammikassāti. (Aññābhāgiya) kiñcilesasikkhāpadaṃ "
+            "niṭṭhitaṃ navamaṃ."
+        )
+        blocks = _blocks_from_region(
+            body,
+            printed_page=262,
+            pdf_page=286,
+            headers=set(),
+            as_notes=False,
+        )
+        self.assertEqual(len(blocks), 2)
+        self.assertEqual(blocks[0]["kind"], "prose")
+        self.assertEqual(blocks[0]["item"], 408)
+        self.assertTrue(blocks[0]["text"].startswith("Anāpatti"))
+        self.assertTrue(blocks[0]["text"].endswith("ādikammikassāti."))
+        self.assertNotIn("niṭṭhitaṃ", blocks[0]["text"])
+        self.assertEqual(blocks[1]["kind"], "niṭṭhitaṃ")
+        self.assertIsNone(blocks[1]["item"])
+        self.assertEqual(
+            blocks[1]["text"],
+            "(Aññābhāgiya) kiñcilesasikkhāpadaṃ niṭṭhitaṃ navamaṃ.",
+        )
 
     def test_glued_civaravagga_uddesa_peels_to_section_no(self) -> None:
         blocks = _blocks_from_region(
@@ -1009,6 +1039,51 @@ class RunningHeaderTests(unittest.TestCase):
         )
         self.assertTrue(_is_running_header("4. Potaliyasutta (54)", set()))
 
+    def test_is_running_header_keeps_peyyala_page_continuation(self) -> None:
+        """01Vin01 p.146: short ``…(39)`` tail is body, not ``Name (folio)``."""
+        tail = (
+            "-pa-. Eso bhikkhave satto imasmiṃ, yeva Rājagahe "
+            "orabbhiko ahosi -pa-. (39)"
+        )
+        self.assertFalse(is_running_header_folio_label(tail))
+        self.assertFalse(_is_running_header(tail, set()))
+        self.assertFalse(
+            is_running_header_folio_label("gāmakūṭo ahosi -pa-. (45)")
+        )
+        self.assertFalse(is_running_header_folio_label("anāpattīti. (15)"))
+        glued = (
+            f"{tail} Idhāhaṃ āvuso Gijjhakūṭā pabbatā orohanto "
+            "addasaṃ asilomaṃ purisaṃ vehāsaṃ gacchantaṃ."
+        )
+        self.assertIsNone(peel_glued_running_header_prefix(glued, set()))
+
+    def test_extract_keeps_peyyala_page_start_continuation(self) -> None:
+        page = (
+            "Pārājikapāḷi \n"
+            "146 \n"
+            "-pa-. Eso bhikkhave satto imasmiṃ, yeva Rājagahe "
+            "orabbhiko ahosi -pa-. \n"
+            "(39) \n"
+            "\n"
+            "Idhāhaṃ āvuso Gijjhakūṭā pabbatā orohanto addasaṃ asilomaṃ \n"
+            "purisaṃ vehāsaṃ gacchantaṃ.\n"
+        )
+        blocks = extract_page_blocks(
+            page,
+            printed_page=146,
+            pdf_page=170,
+            headers={"Pārājikapāḷi"},
+        )
+        texts = [
+            _normalize_inline(b["text"])
+            for b in blocks
+            if b["kind"] != "note"
+        ]
+        self.assertTrue(
+            any("orabbhiko" in t and "(39)" in t for t in texts),
+            texts,
+        )
+
     def test_is_running_header_keeps_chapter_open_without_folio(self) -> None:
         self.assertFalse(is_running_header_folio_label("10. Subhasutta"))
         self.assertFalse(
@@ -1102,6 +1177,162 @@ class RunningHeaderTests(unittest.TestCase):
             any(t.startswith("Ime kho") for t in texts),
             texts,
         )
+
+    def test_geometry_candidates_skip_flush_peyyala_and_page_num(self) -> None:
+        """01Vin01 p.146: page num shares flush x0; peyyāla is first body."""
+        lines = [
+            PageLine(y0=50.4, x0=62.6, x1=84.1, text="146"),
+            PageLine(y0=50.4, x0=217.5, x1=284.8, text="Vinayapiṭaka"),
+            PageLine(
+                y0=90.7,
+                x0=62.6,
+                x1=422.0,
+                text=(
+                    "-pa-. Eso bhikkhave satto imasmiṃ, yeva "
+                    "Rājagahe orabbhiko ahosi -pa-."
+                ),
+            ),
+            PageLine(y0=109.0, x0=62.6, x1=86.1, text="(39)"),
+            PageLine(
+                y0=133.3,
+                x0=84.2,
+                x1=398.4,
+                text="Idhāhaṃ āvuso Gijjhakūṭā pabbatā orohanto addasaṃ asilomaṃ",
+            ),
+        ]
+        cands = running_header_candidates_from_lines(lines, 499.0)
+        self.assertEqual(cands, ["Vinayapiṭaka"])
+
+    def test_geometry_candidates_keep_majjhima_folio_header(self) -> None:
+        lines = [
+            PageLine(
+                y0=50.4, x0=199.3, x1=300.9, text="4. Potaliyasutta (54)"
+            ),
+            PageLine(
+                y0=90.7,
+                x0=84.2,
+                x1=406.0,
+                text="41. Ime kho gahapati aṭṭha dhammā saṃkhittena vuttā.",
+            ),
+        ]
+        cands = running_header_candidates_from_lines(lines, 499.0)
+        self.assertEqual(cands, ["4. Potaliyasutta (54)"])
+        self.assertTrue(is_running_header_folio_label(cands[0]))
+
+
+def _source_pdf(volume: str) -> Path:
+    return SOURCE_DIR / f"{volume}.pdf"
+
+
+def _content_start(volume: str) -> int:
+    import json
+
+    path = VOLUMES_DIR / volume / "data" / "layout.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return int(data["content_start_pdf_page"])
+
+
+def _content_end_idx(volume: str, content_start: int, page_count: int) -> int:
+    import json
+
+    path = VOLUMES_DIR / volume / "data" / "layout.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    end_printed = int(data.get("content_end_printed_page") or 0)
+    if end_printed < 1:
+        return page_count
+    return min(page_count, content_start + end_printed - 1)
+
+
+@unittest.skipUnless(_source_pdf("01Vin01").is_file(), "source PDF not present")
+class LiveRunningHeaderGeometryTests(unittest.TestCase):
+    def test_01vin01_page_146_keeps_orabbhiko(self) -> None:
+        import fitz
+
+        start = _content_start("01Vin01")
+        printed = 146
+        pdf_page = start + printed - 1
+        doc = fitz.open(_source_pdf("01Vin01"))
+        end_idx = _content_end_idx("01Vin01", start, doc.page_count)
+        headers = detect_running_headers(
+            doc, start - 1, content_end_idx=end_idx
+        )
+        raw = vztime_to_unicode(doc[pdf_page - 1].get_text("text"))
+        blocks = extract_page_blocks(
+            raw,
+            printed_page=printed,
+            pdf_page=pdf_page,
+            headers=headers,
+        )
+        texts = [
+            _normalize_inline(b["text"])
+            for b in blocks
+            if b["kind"] != "note"
+        ]
+        self.assertTrue(
+            any("orabbhiko" in t and "(39)" in t for t in texts),
+            texts[:5],
+        )
+        self.assertNotIn("orabbhiko", " ".join(headers))
+
+    def test_10ma02_detects_folio_running_header(self) -> None:
+        import fitz
+
+        pdf = _source_pdf("10Ma02")
+        if not pdf.is_file():
+            self.skipTest("10Ma02.pdf missing")
+        start = _content_start("10Ma02")
+        doc = fitz.open(pdf)
+        end_idx = _content_end_idx("10Ma02", start, doc.page_count)
+        headers = detect_running_headers(
+            doc, start - 1, content_end_idx=end_idx
+        )
+        folios = [h for h in headers if is_running_header_folio_label(h)]
+        self.assertTrue(folios, sorted(headers)[:12])
+        self.assertTrue(
+            any("Potaliyasutta" in h for h in folios),
+            folios[:12],
+        )
+
+    def test_canary_first_flush_line_not_in_headers(self) -> None:
+        """Flush peyyāla / sentence tails must not enter the headers set.
+
+        A pāḷi book title may be flush on its open page and a centered running
+        header later — that is not a drop of body text.
+        """
+        import fitz
+
+        canaries = ("01Vin01", "10Ma02", "12Sam01", "38Abhi10")
+        hits: list[str] = []
+        scanned = 0
+        for volume in canaries:
+            pdf = _source_pdf(volume)
+            if not pdf.is_file():
+                continue
+            scanned += 1
+            start = _content_start(volume)
+            doc = fitz.open(pdf)
+            end_idx = _content_end_idx(volume, start, doc.page_count)
+            headers = detect_running_headers(
+                doc, start - 1, content_end_idx=end_idx
+            )
+            for i in range(start - 1, end_idx):
+                lines = page_body_lines(doc[i])
+                for ln in lines:
+                    s = (ln.text or "").strip()
+                    if not s or s.isdigit():
+                        continue
+                    if not _is_body_flush(ln.x0):
+                        continue
+                    if s in headers and (
+                        "-pa-" in s.lower()
+                        or any(ch in s for ch in ".,;:!?")
+                        or not s[0].isupper()
+                    ):
+                        hits.append(f"{volume} p{i + 1}: {s[:80]}")
+                    break
+        if scanned == 0:
+            self.skipTest("no canary PDFs")
+        self.assertEqual(hits, [])
 
 
 if __name__ == "__main__":

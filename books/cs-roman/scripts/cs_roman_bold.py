@@ -30,6 +30,17 @@ from cs_roman_vztime import vztime_to_unicode
 
 # Markers inserted after extraction; absent from PDF stroke text.
 _NOTE_MARKER_RE = re.compile(r"\{\{(?:n\d+|\*|\+|sp1|sp3|sb|br)\}\}")
+# Pāli letters in CS Roman (precomposed). Used to close a bold range that
+# ends inside a token after a soft-hyphen join.
+_PALI_LETTER_RE = re.compile(
+    r"[A-Za-z"
+    r"ĀāĪīŪūĒēŌō"
+    r"ṂṃṀṁṄṅÑñṬṭḌḍṆṇḶḷŚśṢṣḤḥ"
+    r"Œœ]"
+)
+# Hyphen-join leftovers are a short vowel / niggahīta (`a` of peyya). Do not
+# swallow a following particle such as glued ``ti`` in ``Haneyyuṃvāti``.
+_HYPHEN_LEFTOVER_RE = re.compile(r"[aāiīuūeoṃṁAĀIĪUŪEOṂṀ]{1,2}")
 
 # Vertical / horizontal slack when testing stroke vs body-line overlap (pt).
 _LINE_OVERLAP_TOL = 3.0
@@ -467,31 +478,52 @@ def bold_ranges_from_geoms(
             continue
         union_a = min(a for _, a, _b in cands)
         union_b = max(b for _, _a, b in cands)
-        primary_ln = max(
+        primary_ln, primary_a, primary_b = max(
             cands, key=lambda w: (_y_overlap_amount(span.bbox, w[0]), w[2] - w[1])
-        )[0]
+        )
         slack = 4
-        matches = [
+        # Prefer matches that start inside the primary (max y-overlap) line's
+        # window. texttrace often emits a short lemma stroke with an inflated
+        # full-line bbox that straddles neighbouring wrap lines; using the
+        # union of all overlapping lines lets such a stroke paint a later
+        # plain repeat on a neighbouring line (01Vin01 §104 Khettaṭṭhaṃ).
+        # Restrict to the primary line first; fall back to the union only
+        # when nothing starts there (genuine multi-line sikkhāpada strokes).
+        primary_matches = [
             (s, e)
             for s, e in find_span_ranges(prepared, needle)
-            if s < union_b + slack and e > union_a - slack
+            if s < primary_b + slack and e > primary_a - slack
         ]
-        if not matches:
-            # Full-line strokes can disagree with prepared text (glued
-            # footnote digits, quote normalization). If the stroke covers
-            # most of a line's width, bold those overlapping windows.
-            for ln, a, b in cands:
-                if not _stroke_covers_line_width(span, ln):
-                    continue
-                if not _overlaps(a, b, accepted):
-                    accepted.append((a, b))
-            continue
-        inside = [
-            m
-            for m in matches
-            if m[0] >= union_a - slack and m[1] <= union_b + slack
-        ]
-        chosen = _pick_match_by_x(inside or matches, primary_ln, span.bbox)
+        if primary_matches:
+            inside = [
+                m
+                for m in primary_matches
+                if m[0] >= primary_a - slack and m[1] <= primary_b + slack
+            ]
+            chosen = _pick_match_by_x(inside or primary_matches, primary_ln, span.bbox)
+        else:
+            matches = [
+                (s, e)
+                for s, e in find_span_ranges(prepared, needle)
+                if s < union_b + slack and e > union_a - slack
+            ]
+            if not matches:
+                # Full-line strokes can disagree with prepared text (glued
+                # footnote digits, quote normalization). If the stroke
+                # covers most of a line's width, bold those overlapping
+                # windows.
+                for ln, a, b in cands:
+                    if not _stroke_covers_line_width(span, ln):
+                        continue
+                    if not _overlaps(a, b, accepted):
+                        accepted.append((a, b))
+                continue
+            inside = [
+                m
+                for m in matches
+                if m[0] >= union_a - slack and m[1] <= union_b + slack
+            ]
+            chosen = _pick_match_by_x(inside or matches, primary_ln, span.bbox)
         if _overlaps(chosen[0], chosen[1], accepted):
             continue
         accepted.append(chosen)
@@ -577,9 +609,90 @@ def unbold_ranges_in_runs(
     return out
 
 
+def extend_bold_ranges_to_token_end(
+    text: str, ranges: list[tuple[int, int]]
+) -> list[tuple[int, int]]:
+    """Grow a bold range over a short hyphen-join leftover in the same token.
+
+    Soft-hyphen joins leave the stroke covering ``samādahāpeyy-`` while the
+    prepared word is ``samādahāpeyya``. Splitting the leftover ``a`` into a
+    plain run makes ``transliterate_runs`` emit Thai ``สมาทหาเปยฺยฺ`` + ``อ``
+    instead of ``สมาทหาเปยฺย``. Glued particles such as ``ti`` in
+    ``Haneyyuṃvāti`` stay plain.
+    """
+    if not text or not ranges:
+        return ranges
+    n = len(text)
+    out: list[tuple[int, int]] = []
+    for start, end in ranges:
+        start = max(0, min(start, n))
+        end = max(start, min(end, n))
+        if (
+            start < end < n
+            and _PALI_LETTER_RE.match(text[end - 1])
+            and _PALI_LETTER_RE.match(text[end])
+        ):
+            j = end
+            while j < n and _PALI_LETTER_RE.match(text[j]):
+                j += 1
+            if _HYPHEN_LEFTOVER_RE.fullmatch(text[end:j]):
+                end = j
+        if start < end:
+            out.append((start, end))
+    return _merge_ranges(out)
+
+
+def _runs_to_ranges(runs: list[dict[str, Any]]) -> list[tuple[int, int]]:
+    ranges: list[tuple[int, int]] = []
+    pos = 0
+    for run in runs:
+        if not isinstance(run, dict):
+            continue
+        value = str(run.get("value") or "")
+        n = len(value)
+        if run.get("bold") and n:
+            ranges.append((pos, pos + n))
+        pos += n
+    return ranges
+
+
+def _runs_signature(runs: list[dict[str, Any]] | None) -> tuple[tuple[str, bool], ...]:
+    if not runs:
+        return ()
+    out: list[tuple[str, bool]] = []
+    for run in runs:
+        if not isinstance(run, dict):
+            continue
+        value = str(run.get("value") or "")
+        if value:
+            out.append((value, bool(run.get("bold"))))
+    return tuple(out)
+
+
+def snap_runs_to_token_end(
+    text: str, runs: list[dict[str, Any]] | None
+) -> list[dict[str, Any]] | None:
+    """Close mid-token bold splits; return the same object when unchanged."""
+    if not runs or not text:
+        return runs
+    joined = "".join(
+        str(r.get("value") or "") for r in runs if isinstance(r, dict)
+    )
+    if joined != text:
+        return runs
+    new = ranges_to_runs(text, _runs_to_ranges(runs))
+    if new is None:
+        return runs
+    if _runs_signature(new) == _runs_signature(runs):
+        return runs
+    return new
+
+
 def ranges_to_runs(text: str, ranges: list[tuple[int, int]]) -> list[dict[str, Any]] | None:
     """Collapse bold ranges into runs; ``None`` when there is no bold."""
-    merged = subtract_marker_ranges(text, ranges)
+    merged = extend_bold_ranges_to_token_end(
+        text, subtract_marker_ranges(text, ranges)
+    )
     if not merged or not text:
         return None
     runs: list[dict[str, Any]] = []

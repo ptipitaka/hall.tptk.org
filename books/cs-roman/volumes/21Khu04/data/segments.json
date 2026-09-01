@@ -6370,11 +6370,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Upasampādayī Buddho,"
+                  "value": "Upasampādayī Buddho,",
+                  "runs": [
+                    {
+                      "value": "Upasampādayī Buddho",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อุปสมฺปาทยี พุทฺโธ,"
+                  "value": "อุปสมฺปาทยี พุทฺโธ,",
+                  "runs": [
+                    {
+                      "value": "อุปสมฺปาทยี พุทฺโธ",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             },
@@ -38407,11 +38427,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Agārā abhinikkhamma,"
+                  "value": "Agārā abhinikkhamma,",
+                  "runs": [
+                    {
+                      "value": "Agārā abhinikkhamma",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อคารา อภินิกฺขมฺม,"
+                  "value": "อคารา อภินิกฺขมฺม,",
+                  "runs": [
+                    {
+                      "value": "อคารา อภินิกฺขมฺม",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             },
@@ -38435,11 +38475,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Jātiyā sattavassena,"
+                  "value": "Jātiyā sattavassena,",
+                  "runs": [
+                    {
+                      "value": "Jātiyā sattavassena",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ชาติยา สตฺตวสฺเสน,"
+                  "value": "ชาติยา สตฺตวสฺเสน,",
+                  "runs": [
+                    {
+                      "value": "ชาติยา สตฺตวสฺเสน",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             },
@@ -40493,11 +40553,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Jātiyā pañcavassena,"
+                  "value": "Jātiyā pañcavassena,",
+                  "runs": [
+                    {
+                      "value": "Jātiyā pañcavassena",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ชาติยา ปญฺจวสฺเสน,"
+                  "value": "ชาติยา ปญฺจวสฺเสน,",
+                  "runs": [
+                    {
+                      "value": "ชาติยา ปญฺจวสฺเสน",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             },
@@ -40521,11 +40601,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Oropitamhi kesamhi,"
+                  "value": "Oropitamhi kesamhi,",
+                  "runs": [
+                    {
+                      "value": "Oropitamhi kesamhi",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "โอโรปิตมฺหิ เกสมฺหิ,"
+                  "value": "โอโรปิตมฺหิ เกสมฺหิ,",
+                  "runs": [
+                    {
+                      "value": "โอโรปิตมฺหิ เกสมฺหิ",
+                      "bold": false
+                    },
+                    {
+                      "value": ",",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             },
@@ -44731,11 +44831,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "aggā hessantupāsikā."
+                  "value": "aggā hessantupāsikā.",
+                  "runs": [
+                    {
+                      "value": "aggā hessantupāsikā",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อคฺคา เหสฺสนฺตุปาสิกา."
+                  "value": "อคฺคา เหสฺสนฺตุปาสิกา.",
+                  "runs": [
+                    {
+                      "value": "อคฺคา เหสฺสนฺตุปาสิกา",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -44759,11 +44879,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Assatthoti pavuccati."
+                  "value": "Assatthoti pavuccati.",
+                  "runs": [
+                    {
+                      "value": "Assatthoti pavuccati",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อสฺสตฺโถติ ปวุจฺจติ."
+                  "value": "อสฺสตฺโถติ ปวุจฺจติ.",
+                  "runs": [
+                    {
+                      "value": "อสฺสตฺโถติ ปวุจฺจติ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -44796,11 +44936,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "asamassa Mahesino."
+                  "value": "asamassa Mahesino.",
+                  "runs": [
+                    {
+                      "value": "asamassa Mahesino",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อสมสฺส มเหสิโน."
+                  "value": "อสมสฺส มเหสิโน.",
+                  "runs": [
+                    {
+                      "value": "อสมสฺส มเหสิโน",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -44824,11 +44984,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "namassanti katañjalī."
+                  "value": "namassanti katañjalī.",
+                  "runs": [
+                    {
+                      "value": "namassanti katañjalī",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "นมสฺสนฺติ กตญฺชลี."
+                  "value": "นมสฺสนฺติ กตญฺชลี.",
+                  "runs": [
+                    {
+                      "value": "นมสฺสนฺติ กตญฺชลี",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -44861,11 +45041,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Megho nāma susikkhito."
+                  "value": "Megho nāma susikkhito.",
+                  "runs": [
+                    {
+                      "value": "Megho nāma susikkhito",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "เมโฆ นาม สุสิกฺขิโต."
+                  "value": "เมโฆ นาม สุสิกฺขิโต.",
+                  "runs": [
+                    {
+                      "value": "เมโฆ นาม สุสิกฺขิโต",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -44889,11 +45089,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Sumedhassa Mahāmune."
+                  "value": "Sumedhassa Mahāmune.",
+                  "runs": [
+                    {
+                      "value": "Sumedhassa Mahāmune",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สุเมธสฺส มหามุเน."
+                  "value": "สุเมธสฺส มหามุเน.",
+                  "runs": [
+                    {
+                      "value": "สุเมธสฺส มหามุเน",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -44926,11 +45146,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Sumedhe karuṇāsaye{{n0}}."
+                  "value": "Sumedhe karuṇāsaye{{n0}}.",
+                  "runs": [
+                    {
+                      "value": "Sumedhe karuṇāsaye{{n0}}",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สุเมเธ กรุณาสเย{{n0}}."
+                  "value": "สุเมเธ กรุณาสเย{{n0}}.",
+                  "runs": [
+                    {
+                      "value": "สุเมเธ กรุณาสเย{{n0}}",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -44954,11 +45194,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sahāva anupabbajiṃ."
+                  "value": "sahāva anupabbajiṃ.",
+                  "runs": [
+                    {
+                      "value": "sahāva anupabbajiṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สหาว อนุปพฺพชิํ."
+                  "value": "สหาว อนุปพฺพชิํ.",
+                  "runs": [
+                    {
+                      "value": "สหาว อนุปพฺพชิํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -44994,11 +45254,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "indriyesu ca pañcasu."
+                  "value": "indriyesu ca pañcasu.",
+                  "runs": [
+                    {
+                      "value": "indriyesu ca pañcasu",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อินฺทฺริเยสุ จ ปญฺจสุ."
+                  "value": "อินฺทฺริเยสุ จ ปญฺจสุ.",
+                  "runs": [
+                    {
+                      "value": "อินฺทฺริเยสุ จ ปญฺจสุ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45022,11 +45302,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Jinasāsanakārako."
+                  "value": "Jinasāsanakārako.",
+                  "runs": [
+                    {
+                      "value": "Jinasāsanakārako",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ชินสาสนการโก."
+                  "value": "ชินสาสนการโก.",
+                  "runs": [
+                    {
+                      "value": "ชินสาสนการโก",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45059,11 +45359,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "pāpamittena kenaci."
+                  "value": "pāpamittena kenaci.",
+                  "runs": [
+                    {
+                      "value": "pāpamittena kenaci",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ปาปมิตฺเตน เกนจิ."
+                  "value": "ปาปมิตฺเตน เกนจิ.",
+                  "runs": [
+                    {
+                      "value": "ปาปมิตฺเตน เกนจิ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45087,11 +45407,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sumaggā paridhaṃsito."
+                  "value": "sumaggā paridhaṃsito.",
+                  "runs": [
+                    {
+                      "value": "sumaggā paridhaṃsito",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สุมคฺคา ปริธํสิโต."
+                  "value": "สุมคฺคา ปริธํสิโต.",
+                  "runs": [
+                    {
+                      "value": "สุมคฺคา ปริธํสิโต",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45124,11 +45464,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sāsanato apakkamiṃ."
+                  "value": "sāsanato apakkamiṃ.",
+                  "runs": [
+                    {
+                      "value": "sāsanato apakkamiṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สาสนโต อปกฺกมิํ."
+                  "value": "สาสนโต อปกฺกมิํ.",
+                  "runs": [
+                    {
+                      "value": "สาสนโต อปกฺกมิํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45152,11 +45512,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "payutto mātughātanaṃ."
+                  "value": "payutto mātughātanaṃ.",
+                  "runs": [
+                    {
+                      "value": "payutto mātughātanaṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ปยุตฺโต มาตุฆาตนํ."
+                  "value": "ปยุตฺโต มาตุฆาตนํ.",
+                  "runs": [
+                    {
+                      "value": "ปยุตฺโต มาตุฆาตนํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45189,11 +45569,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "ghātayiṃ duṭṭhamānaso."
+                  "value": "ghātayiṃ duṭṭhamānaso.",
+                  "runs": [
+                    {
+                      "value": "ghātayiṃ duṭṭhamānaso",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ฆาตยิํ ทุฏฺฐมานโส."
+                  "value": "ฆาตยิํ ทุฏฺฐมานโส.",
+                  "runs": [
+                    {
+                      "value": "ฆาตยิํ ทุฏฺฐมานโส",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45217,11 +45617,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "upapanno sudāruṇaṃ."
+                  "value": "upapanno sudāruṇaṃ.",
+                  "runs": [
+                    {
+                      "value": "upapanno sudāruṇaṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อุปปนฺโน สุทารุณํ."
+                  "value": "อุปปนฺโน สุทารุณํ.",
+                  "runs": [
+                    {
+                      "value": "อุปปนฺโน สุทารุณํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45257,11 +45677,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "saṃsariṃ dukkhito ciraṃ."
+                  "value": "saṃsariṃ dukkhito ciraṃ.",
+                  "runs": [
+                    {
+                      "value": "saṃsariṃ dukkhito ciraṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สํสริํ ทุกฺขิโต จิรํ."
+                  "value": "สํสริํ ทุกฺขิโต จิรํ.",
+                  "runs": [
+                    {
+                      "value": "สํสริํ ทุกฺขิโต จิรํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45285,11 +45725,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Sumedhaṃ Narapuṅgavaṃ."
+                  "value": "Sumedhaṃ Narapuṅgavaṃ.",
+                  "runs": [
+                    {
+                      "value": "Sumedhaṃ Narapuṅgavaṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สุเมธํ นรปุงฺควํ."
+                  "value": "สุเมธํ นรปุงฺควํ.",
+                  "runs": [
+                    {
+                      "value": "สุเมธํ นรปุงฺควํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45322,11 +45782,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "maccho āsiṃ Timiṅgalo."
+                  "value": "maccho āsiṃ Timiṅgalo.",
+                  "runs": [
+                    {
+                      "value": "maccho āsiṃ Timiṅgalo",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "มจฺโฉ อาสิํ ติมิงฺคโล."
+                  "value": "มจฺโฉ อาสิํ ติมิงฺคโล.",
+                  "runs": [
+                    {
+                      "value": "มจฺโฉ อาสิํ ติมิงฺคโล",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45350,11 +45830,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "gocaratthamupāgamiṃ."
+                  "value": "gocaratthamupāgamiṃ.",
+                  "runs": [
+                    {
+                      "value": "gocaratthamupāgamiṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "โคจรตฺถมุปาคมิํ."
+                  "value": "โคจรตฺถมุปาคมิํ.",
+                  "runs": [
+                    {
+                      "value": "โคจรตฺถมุปาคมิํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45387,11 +45887,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Buddhaseṭṭhamanussaruṃ."
+                  "value": "Buddhaseṭṭhamanussaruṃ.",
+                  "runs": [
+                    {
+                      "value": "Buddhaseṭṭhamanussaruṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "พุทฺธเสฏฺฐมนุสฺสรุํ."
+                  "value": "พุทฺธเสฏฺฐมนุสฺสรุํ.",
+                  "runs": [
+                    {
+                      "value": "พุทฺธเสฏฺฐมนุสฺสรุํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45415,11 +45935,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sutvā tehi udīritaṃ."
+                  "value": "sutvā tehi udīritaṃ.",
+                  "runs": [
+                    {
+                      "value": "sutvā tehi udīritaṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สุตฺวา เตหิ อุทีริตํ."
+                  "value": "สุตฺวา เตหิ อุทีริตํ.",
+                  "runs": [
+                    {
+                      "value": "สุตฺวา เตหิ อุทีริตํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45452,11 +45992,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "tato kālaṅkato ahaṃ."
+                  "value": "tato kālaṅkato ahaṃ.",
+                  "runs": [
+                    {
+                      "value": "tato kālaṅkato ahaṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ตโต กาลงฺกโต อหํ."
+                  "value": "ตโต กาลงฺกโต อหํ.",
+                  "runs": [
+                    {
+                      "value": "ตโต กาลงฺกโต อหํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45480,11 +46040,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "jāto brāhmaṇajātiyaṃ."
+                  "value": "jāto brāhmaṇajātiyaṃ.",
+                  "runs": [
+                    {
+                      "value": "jāto brāhmaṇajātiyaṃ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ชาโต พฺราหฺมณชาติยํ."
+                  "value": "ชาโต พฺราหฺมณชาติยํ.",
+                  "runs": [
+                    {
+                      "value": "ชาโต พฺราหฺมณชาติยํ",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45517,11 +46097,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sabbapāpajigucchako."
+                  "value": "sabbapāpajigucchako.",
+                  "runs": [
+                    {
+                      "value": "sabbapāpajigucchako",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สพฺพปาปชิคุจฺฉโก."
+                  "value": "สพฺพปาปชิคุจฺฉโก.",
+                  "runs": [
+                    {
+                      "value": "สพฺพปาปชิคุจฺฉโก",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -45545,11 +46145,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "jātiyā sattavassiko."
+                  "value": "jātiyā sattavassiko.",
+                  "runs": [
+                    {
+                      "value": "jātiyā sattavassiko",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ชาติยา สตฺตวสฺสิโก."
+                  "value": "ชาติยา สตฺตวสฺสิโก.",
+                  "runs": [
+                    {
+                      "value": "ชาติยา สตฺตวสฺสิโก",
+                      "bold": false
+                    },
+                    {
+                      "value": ".",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -54934,11 +55554,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pañcamasatakaṃ samattaṃ."
+          "value": "Pañcamasatakaṃ samattaṃ.",
+          "runs": [
+            {
+              "value": "Pañcamasatakaṃ samattaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปญฺจมสตกํ สมตฺตํ."
+          "value": "ปญฺจมสตกํ สมตฺตํ.",
+          "runs": [
+            {
+              "value": "ปญฺจมสตกํ สมตฺตํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "closer_level": "unknown"
@@ -256083,7 +256715,7 @@
               "bold": false
             },
             {
-              "value": "13.{{sp1}} สุเมธพุทฺธวํส",
+              "value": "13. สุเมธพุทฺธวํส",
               "bold": true
             }
           ]
@@ -289882,31 +290514,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kururājacariyaṃ tatiyaṃ.",
-          "runs": [
-            {
-              "value": "Kururājacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ tatiyaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Kururājacariyaṃ tatiyaṃ."
         },
         {
           "script": "thai",
-          "value": "กุรุราชจริยํ ตติยํ.",
-          "runs": [
-            {
-              "value": "กุรุราชจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ ตติยํ.",
-              "bold": false
-            }
-          ]
+          "value": "กุรุราชจริยํ ตติยํ."
         }
       ],
       "source_layout": "center"
@@ -291199,31 +291811,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Nimirājacariyaṃ chaṭṭhaṃ.",
-          "runs": [
-            {
-              "value": "Nimirājacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ chaṭṭhaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Nimirājacariyaṃ chaṭṭhaṃ."
         },
         {
           "script": "thai",
-          "value": "นิมิราชจริยํ ฉฏฺฐํ.",
-          "runs": [
-            {
-              "value": "นิมิราชจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ ฉฏฺฐํ.",
-              "bold": false
-            }
-          ]
+          "value": "นิมิราชจริยํ ฉฏฺฐํ."
         }
       ],
       "source_layout": "center"
@@ -299055,31 +299647,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Mātuposakacariyaṃ paṭhamaṃ.",
-          "runs": [
-            {
-              "value": "Mātuposakacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ paṭhamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Mātuposakacariyaṃ paṭhamaṃ."
         },
         {
           "script": "thai",
-          "value": "มาตุโปสกจริยํ ปฐมํ.",
-          "runs": [
-            {
-              "value": "มาตุโปสกจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ ปฐมํ.",
-              "bold": false
-            }
-          ]
+          "value": "มาตุโปสกจริยํ ปฐมํ."
         }
       ],
       "source_layout": "center"
@@ -299700,31 +300272,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Bhūridattacariyaṃ dutiyaṃ.",
-          "runs": [
-            {
-              "value": "Bhūridattacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ dutiyaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Bhūridattacariyaṃ dutiyaṃ."
         },
         {
           "script": "thai",
-          "value": "ภูริทตฺตจริยํ ทุติยํ.",
-          "runs": [
-            {
-              "value": "ภูริทตฺตจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ ทุติยํ.",
-              "bold": false
-            }
-          ]
+          "value": "ภูริทตฺตจริยํ ทุติยํ."
         }
       ],
       "source_layout": "center"
@@ -302993,31 +303545,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Mātaṅgacariyaṃ sattamaṃ.",
-          "runs": [
-            {
-              "value": "Mātaṅgacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ sattamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Mātaṅgacariyaṃ sattamaṃ."
         },
         {
           "script": "thai",
-          "value": "มาตงฺคจริยํ สตฺตมํ.",
-          "runs": [
-            {
-              "value": "มาตงฺคจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ สตฺตมํ.",
-              "bold": false
-            }
-          ]
+          "value": "มาตงฺคจริยํ สตฺตมํ."
         }
       ],
       "source_layout": "center"
@@ -303598,31 +304130,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Dhammadevaputtacariyaṃ aṭṭhamaṃ.",
-          "runs": [
-            {
-              "value": "Dhammadevaputtacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ aṭṭhamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Dhammadevaputtacariyaṃ aṭṭhamaṃ."
         },
         {
           "script": "thai",
-          "value": "ธมฺมเทวปุตฺตจริยํ อฏฺฐมํ.",
-          "runs": [
-            {
-              "value": "ธมฺมเทวปุตฺตจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ อฏฺฐมํ.",
-              "bold": false
-            }
-          ]
+          "value": "ธมฺมเทวปุตฺตจริยํ อฏฺฐมํ."
         }
       ],
       "source_layout": "center"
@@ -305628,31 +306140,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Yudhañjayacariyaṃ paṭhamaṃ.",
-          "runs": [
-            {
-              "value": "Yudhañjayacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ paṭhamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Yudhañjayacariyaṃ paṭhamaṃ."
         },
         {
           "script": "thai",
-          "value": "ยุธญฺชยจริยํ ปฐมํ.",
-          "runs": [
-            {
-              "value": "ยุธญฺชยจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ ปฐมํ.",
-              "bold": false
-            }
-          ]
+          "value": "ยุธญฺชยจริยํ ปฐมํ."
         }
       ],
       "source_layout": "center"
@@ -307508,31 +308000,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ayogharacariyaṃ tatiyaṃ.",
-          "runs": [
-            {
-              "value": "Ayogharacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ tatiyaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Ayogharacariyaṃ tatiyaṃ."
         },
         {
           "script": "thai",
-          "value": "อโยฆรจริยํ ตติยํ.",
-          "runs": [
-            {
-              "value": "อโยฆรจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ ตติยํ.",
-              "bold": false
-            }
-          ]
+          "value": "อโยฆรจริยํ ตติยํ."
         }
       ],
       "source_layout": "center"
@@ -310313,31 +310785,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Saccatāpasacariyaṃ aṭṭhamaṃ.",
-          "runs": [
-            {
-              "value": "Saccatāpasacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ aṭṭhamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Saccatāpasacariyaṃ aṭṭhamaṃ."
         },
         {
           "script": "thai",
-          "value": "สจฺจตาปสจริยํ อฏฺฐมํ.",
-          "runs": [
-            {
-              "value": "สจฺจตาปสจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ อฏฺฐมํ.",
-              "bold": false
-            }
-          ]
+          "value": "สจฺจตาปสจริยํ อฏฺฐมํ."
         }
       ],
       "source_layout": "center"
@@ -313478,31 +313930,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Suvaṇṇasāmacariyaṃ terasamaṃ.",
-          "runs": [
-            {
-              "value": "Suvaṇṇasāmacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ terasamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Suvaṇṇasāmacariyaṃ terasamaṃ."
         },
         {
           "script": "thai",
-          "value": "สุวณฺณสามจริยํ เตรสมํ.",
-          "runs": [
-            {
-              "value": "สุวณฺณสามจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ เตรสมํ.",
-              "bold": false
-            }
-          ]
+          "value": "สุวณฺณสามจริยํ เตรสมํ."
         }
       ],
       "source_layout": "center"
@@ -314194,31 +314626,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Mahālomahaṃsacariyaṃ pannarasamaṃ.",
-          "runs": [
-            {
-              "value": "Mahālomahaṃsacariya",
-              "bold": true
-            },
-            {
-              "value": "ṃ pannarasamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Mahālomahaṃsacariyaṃ pannarasamaṃ."
         },
         {
           "script": "thai",
-          "value": "มหาโลมหํสจริยํ ปนฺนรสมํ.",
-          "runs": [
-            {
-              "value": "มหาโลมหํสจริย",
-              "bold": true
-            },
-            {
-              "value": "ํ ปนฺนรสมํ.",
-              "bold": false
-            }
-          ]
+          "value": "มหาโลมหํสจริยํ ปนฺนรสมํ."
         }
       ],
       "source_layout": "center"

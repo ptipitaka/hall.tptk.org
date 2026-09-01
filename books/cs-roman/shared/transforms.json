@@ -366,6 +366,30 @@
       }
     },
     {
+      "id": "roman-brūhi-hotu-comma",
+      "when": {
+        "match": "brūhi hotu"
+      },
+      "do": {
+        "replace": {
+          "with": "brūhi, hotu",
+          "remark": "Roman comma after brūhi; edition missing comma wherever brūhi hotu (01Vin01 p211–213, 12 occurrences)"
+        }
+      }
+    },
+    {
+      "id": "roman-brūhi-homi-comma",
+      "when": {
+        "match": "brūhi homi"
+      },
+      "do": {
+        "replace": {
+          "with": "brūhi, homi",
+          "remark": "Roman comma after brūhi; edition missing comma wherever brūhi homi (01Vin01 p213–216, 13 occurrences)"
+        }
+      }
+    },
+    {
       "id": "roman-haneyyum-vati-dve-pada",
       "when": {
         "match": "Haneyyuṃvāti"
@@ -943,6 +967,1408 @@
       "do": {
         "annotate": {
           "footnote": "lābhimhīti – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-muhittika-long-u",
+      "when": {
+        "match": "Muhittikā"
+      },
+      "do": {
+        "replace": {
+          "with": "muhuttikā",
+          "remark": "Roman muhuttikā (long u); edition typo Muhittikā/muhittikā in 01Vin01 p213 o1433 and p214 o1440 (muhuttikā already attested same passage p214)"
+        }
+      }
+    },
+    {
+      "id": "roman-chandavasini-long-i",
+      "when": {
+        "match": "chandavāsini",
+        "loci": [
+          {
+            "volume": "01Vin01",
+            "page": 214,
+            "order": 1437
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "chandavāsinī",
+          "remark": "Roman -nī (long i); edition typo chandavāsini in 01Vin01 p214 o1437 (chandavāsinī already attested same passage)"
+        }
+      }
+    },
+    {
+      "id": "roman-dhanakkita-ca-dve-pada",
+      "when": {
+        "match": "dhanakkītācā",
+        "loci": [
+          {
+            "volume": "01Vin01",
+            "page": 209
+          }
+        ]
+      },
+      "do": {
+        "annotate": {
+          "footnote": "dhanakkītā cā dve padāni – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-sambodi-to-sammodi",
+      "when": {
+        "match": "sambodi"
+      },
+      "do": {
+        "replace": {
+          "with": "sammodi",
+          "remark": "Roman sammodi (saddhiṃ sammodi formula); edition typo sambodi in 01Vin01 p217 gāthā (sammodi already attested across Vin/Dī/Ma/Saṃ)"
+        }
+      }
+    },
+    {
+      "id": "roman-tatrasudam-split",
+      "when": {
+        "match": "tatrasudaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "tatra sudaṃ",
+          "remark": "Roman tatra sudaṃ (two words); edition typo tatrasudaṃ (tatra sudaṃ already attested across Vin/Dī/Ma/Saṃ/Aṅ/Kh)"
+        }
+      }
+    },
+    {
+      "id": "roman-atiyacake-to-atiyacakosi",
+      "when": {
+        "match": "atiyācake"
+      },
+      "do": {
+        "replace": {
+          "with": "atiyācakosi",
+          "remark": "Roman atiyācakosi; edition typo atiyācake in 01Vin01 p221 o1493 (atiyācakosi already attested same passage o1494 and 22Khu05)"
+        }
+      }
+    },
+    {
+      "id": "roman-tasessi-to-tasesi",
+      "when": {
+        "match": "tāsessi"
+      },
+      "do": {
+        "replace": {
+          "with": "Tāsesi",
+          "remark": "Roman Tāsesi (single s); edition typo Tāsessi in 01Vin01 p221 o1494 gāthā (Tāsesi already attested 22Khu05 Maṇikaṇṭhajātaka)"
+        }
+      }
+    },
+    {
+      "id": "roman-bhiyyosomattaya-dve-pada",
+      "when": {
+        "match": "bhiyyosomattāya"
+      },
+      "do": {
+        "annotate": {
+          "footnote": "bhiyyoso mattāya dve padāni – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-ajjhabhasi-short-a",
+      "when": {
+        "match": "ajjhābhāsi"
+      },
+      "do": {
+        "replace": {
+          "with": "ajjhabhāsi",
+          "remark": "Roman ajjha- (short a); edition typo ajjhābhāsi in 01Vin01 p221 o1495, p223 o1500 (ajjhabhāsi already attested, e.g. same page o1492)"
+        }
+      }
+    },
+    {
+      "id": "roman-samghadisesenam-long-a",
+      "when": {
+        "match": "saṃghādisesenaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "saṃghādisesānaṃ",
+          "remark": "Roman -sānaṃ (long ā); edition typo saṃghādisesenaṃ in 01Vin01 p229 o1542 (saṃghādisesānaṃ already attested same kuṭi/vihāra formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-saram-bham-join",
+      "when": {
+        "match": "sāram bhaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "sārambhaṃ",
+          "remark": "Roman sārambhaṃ (one word); edition typo sāram bhaṃ in 01Vin01 p230 o1546 (sārambhaṃ already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-aparikkamanati-quote-iti",
+      "when": {
+        "match": "aparikkamanāti”"
+      },
+      "do": {
+        "replace": {
+          "with": "aparikkamanā”ti",
+          "remark": "Roman quote before ti (…nā”ti); edition typo aparikkamanāti” in 01Vin01 p232 o1557 (aparikkamanā”ti already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-anarambha-long-a",
+      "when": {
+        "match": "anarambhā"
+      },
+      "do": {
+        "replace": {
+          "with": "anārambhā",
+          "remark": "Roman anā- (long ā); edition typo anarambhā in 01Vin01 p234 o1566 (anārambhā already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-samghadesesena-to-disesena",
+      "when": {
+        "match": "saṃghādesesena"
+      },
+      "do": {
+        "replace": {
+          "with": "saṃghādisesena",
+          "remark": "Roman saṃghādisesena (-di-); edition typo saṃghādesesena in 01Vin01 p228/p236/p242/p287 (saṃghādisesena already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-pe-sacca-kira-channa-drop-open-quote",
+      "when": {
+        "match": "-pa- “saccaṃ kira tvaṃ channa"
+      },
+      "do": {
+        "replace": {
+          "with": "-pa- saccaṃ kira tvaṃ channa",
+          "remark": "Roman drop opening quote after pe; edition typo -pa- “saccaṃ kira tvaṃ Channa in 01Vin01 p237/p271, 02Vin02 p54"
+        }
+      }
+    },
+    {
+      "id": "roman-ratthapujitan-ti-drop-quote",
+      "when": {
+        "match": "raṭṭhapūjitan”ti"
+      },
+      "do": {
+        "replace": {
+          "with": "raṭṭhapūjitanti",
+          "remark": "Roman raṭṭhapūjitanti (no quote before ti); edition typo raṭṭhapūjitan”ti in 01Vin01 p237 o1585"
+        }
+      }
+    },
+    {
+      "id": "roman-vihethenti-quote-iti",
+      "when": {
+        "match": "viheṭhentī{{n0}} ti."
+      },
+      "do": {
+        "replace": {
+          "with": "viheṭhentī{{n0}}”ti.",
+          "remark": "Roman quote before ti (…tī{{n0}}”ti); missing closer after footnote in 01Vin01 p237 o1585 (viheṭhentī”ti already attested 02Vin02 p51, 03Vin03 p277–278, 28Khu11 p251)"
+        }
+      }
+    },
+    {
+      "id": "roman-anarambham-long-a",
+      "when": {
+        "match": "anarambhaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "anārambhaṃ",
+          "remark": "Roman anā- (long ā); edition typo anarambhaṃ in 01Vin01 p237 o1586, p240 o1610 (anārambhaṃ already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-attu-ddesanti-join",
+      "when": {
+        "match": "attu ddesanti"
+      },
+      "do": {
+        "replace": {
+          "with": "Attuddesanti",
+          "remark": "Roman Attuddesanti (one word); edition typo Attu ddesanti in 01Vin01 p238 o1591 (Attuddesanti already attested p224 o1511)"
+        }
+      }
+    },
+    {
+      "id": "roman-viharavatthu-olokanam-join",
+      "when": {
+        "match": "vihāravatthu- olokanaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "vihāravatthuolokanaṃ",
+          "remark": "Roman vihāravatthuolokanaṃ (one word); edition typo vihāravatthu- olokanaṃ in 01Vin01 p238 o1592–1594"
+        }
+      }
+    },
+    {
+      "id": "roman-sammannati-short-a",
+      "when": {
+        "match": "sammannāti"
+      },
+      "do": {
+        "replace": {
+          "with": "sammannati",
+          "remark": "Roman sammannati (short a); edition typo sammannāti in 01Vin01 p238 o1594 (sammannati already attested same kamma-vācā formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-viharavatthu-desanam-join",
+      "when": {
+        "match": "vihāravatthu desanaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "vihāravatthudesanaṃ",
+          "remark": "Roman vihāravatthudesanaṃ (one word); edition typo vihāravatthu desanaṃ in 01Vin01 p239 o1597 (vihāravatthudesanaṃ already attested same formula o1596/o1598)"
+        }
+      }
+    },
+    {
+      "id": "roman-tunhassa-short-a",
+      "when": {
+        "match": "tuṇhāssa"
+      },
+      "do": {
+        "replace": {
+          "with": "tuṇhassa",
+          "remark": "Roman tuṇhassa (short a); edition typo tuṇhāssa in 01Vin01 p239 o1598, p270 o1798 (tuṇhassa already attested same kamma-vācā formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-samghadesesassa-to-disesassa",
+      "when": {
+        "match": "saṃghādesesassa"
+      },
+      "do": {
+        "replace": {
+          "with": "saṃghādisesassa",
+          "remark": "Roman saṃghādisesassa (-di-); edition typo saṃghādesesassa in 01Vin01 p206 o1357, p240 o1608, p243 o1623 (saṃghādisesassa already attested)"
+        }
+      }
+    },
+    {
+      "id": "roman-saparikkamanam-apatti-comma",
+      "when": {
+        "match": "saparikkamanaṃ āpatti",
+        "loci": [
+          {
+            "volume": "01Vin01",
+            "page": 241,
+            "order": 1614
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "saparikkamanaṃ, āpatti",
+          "remark": "Roman comma before āpatti; edition typo saparikkamanaṃ āpatti in 01Vin01 p241 o1614 (saparikkamanaṃ, āpatti already attested same formula). Not 05Vin05 p374 gāthā"
+        }
+      }
+    },
+    {
+      "id": "roman-savetam-to-savatam",
+      "when": {
+        "match": "savetaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "savātaṃ",
+          "remark": "Roman savātaṃ (long ā); edition typo savetaṃ in 01Vin01 p248 o1645 (savātaṃ already attested same passage and 04Vin04)"
+        }
+      }
+    },
+    {
+      "id": "roman-sabhaya-long-a",
+      "when": {
+        "match": "sabhaya"
+      },
+      "do": {
+        "replace": {
+          "with": "sabhayā",
+          "remark": "Roman sabhayā (long ā); edition typo sabhaya in 01Vin01 p248 o1645 (sabhayā already attested same passage and 04Vin04)"
+        }
+      }
+    },
+    {
+      "id": "roman-pe-sacca-kira-dabba-drop-quotes",
+      "when": {
+        "match": "-pa- “saccaṃ kira tumhe bhikkhave"
+      },
+      "do": {
+        "replace": {
+          "with": "-pa- saccaṃ kira tumhe bhikkhave",
+          "remark": "Roman drop quotes after pe before saccaṃ kira tumhe bhikkhave Dabbaṃ…; edition typo in 01Vin01 p249 o1648"
+        }
+      }
+    },
+    {
+      "id": "roman-samarenati-to-samayenati",
+      "when": {
+        "match": "samarenāti"
+      },
+      "do": {
+        "replace": {
+          "with": "samayenāti",
+          "remark": "Roman samayenāti (-y-); edition typo samarenāti in 01Vin01 p250 o1658 (samayenāti already attested same formula p117/p260)"
+        }
+      }
+    },
+    {
+      "id": "roman-pe-dittho-maya-drop-open-quote",
+      "when": {
+        "match": "-pa- “Diṭṭho mayā pārājikaṃ dhammaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "-pa- diṭṭho mayā pārājikaṃ dhammaṃ",
+          "remark": "Roman drop opening quote after pe; edition typo -pa- “diṭṭho mayā pārājikaṃ dhammaṃ in 01Vin01 p251 o1674"
+        }
+      }
+    },
+    {
+      "id": "roman-pe-suto-dittho-maya-drop-open-quotes",
+      "when": {
+        "match": "-pa- “Suto mayā pārājikaṃ dhammaṃ ajjhāpannosi -pa- “Diṭṭho mayā suto"
+      },
+      "do": {
+        "replace": {
+          "with": "-pa- suto mayā pārājikaṃ dhammaṃ ajjhāpannosi -pa- diṭṭho mayā suto",
+          "remark": "Roman drop opening quotes after pe; edition typo in 01Vin01 p252 o1675"
+        }
+      }
+    },
+    {
+      "id": "roman-pe-parisankito-maya-drop-open-quotes",
+      "when": {
+        "match": "-pa- “Parisaṅkito mayā suto ca -pa- “Parisaṅkito"
+      },
+      "do": {
+        "replace": {
+          "with": "-pa- parisaṅkito mayā suto ca -pa- parisaṅkito",
+          "remark": "Roman drop opening quotes after pe; edition typo in 01Vin01 p252 o1676"
+        }
+      }
+    },
+    {
+      "id": "roman-tance-codapeti-split",
+      "when": {
+        "match": "tañcecodāpeti"
+      },
+      "do": {
+        "replace": {
+          "with": "tañce codāpeti",
+          "remark": "Roman tañce codāpeti (two words); edition typo tañcecodāpeti in 01Vin01 p253 o1681 (tañce codāpeti already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-mallaputam-double-t",
+      "when": {
+        "match": "mallaputaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "Mallaputtaṃ",
+          "remark": "Roman Mallaputtaṃ (double t); edition typo Mallaputaṃ in 01Vin01 p256 o1705 (Mallaputtaṃ already attested same sentence)"
+        }
+      }
+    },
+    {
+      "id": "roman-anuddhamsetha-ti-drop-quote",
+      "when": {
+        "match": "anuddhaṃsethā”ti"
+      },
+      "do": {
+        "replace": {
+          "with": "anuddhaṃsethāti",
+          "remark": "Roman anuddhaṃsethāti (no quote before ti); edition typo anuddhaṃsethā”ti in 01Vin01 p249 o1648, p256 o1705 (anuddhaṃsethāti already attested same passages)"
+        }
+      }
+    },
+    {
+      "id": "roman-samanuggahiyamano-long-i",
+      "when": {
+        "match": "samanuggāhiyamāno",
+        "loci": [
+          {
+            "volume": "01Vin01"
+          },
+          {
+            "volume": "17An03"
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "samanuggāhīyamāno",
+          "remark": "Roman samanuggāhīyamāno (long ī); edition typo samanuggāhiyamāno in 01Vin01 p257 o1707, 17An03. Not 09Ma01 apparatus Samanuggāhiyamāno (Syā, Vinayepi). (samanuggāhīyamāno already attested 01Vin01 sikkhāpada)"
+        }
+      }
+    },
+    {
+      "id": "roman-apattadhikaranam-long-a",
+      "when": {
+        "match": "āpattadhikaraṇaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "āpattādhikaraṇaṃ",
+          "remark": "Roman āpattādhikaraṇaṃ (long ā); edition typo āpattadhikaraṇaṃ in 01Vin01 p258 o1716 (āpattādhikaraṇaṃ already attested same sentence)"
+        }
+      }
+    },
+    {
+      "id": "roman-annabhagiya-to-sannabhagiya",
+      "when": {
+        "match": "aññābhāgiya"
+      },
+      "do": {
+        "replace": {
+          "with": "Saññabhāgiya",
+          "remark": "Roman Saññabhāgiya; edition typo Aññābhāgiya in 01Vin01 p262 o1751 closer (aññabhāgiya- with short a kept in body)"
+        }
+      }
+    },
+    {
+      "id": "roman-pamsukuliya-to-pamsukulika",
+      "when": {
+        "match": "paṃsukūliyā"
+      },
+      "do": {
+        "replace": {
+          "with": "paṃsukūlikā",
+          "remark": "Roman paṃsukūlikā; edition typo paṃsukūliyā in 01Vin01 p264 o1756 (paṃsukūlikā already attested same formula p263, 04Vin04 p359)"
+        }
+      }
+    },
+    {
+      "id": "roman-panjahi-to-pancahi",
+      "when": {
+        "match": "pañjahi"
+      },
+      "do": {
+        "replace": {
+          "with": "pañcahi",
+          "remark": "Roman pañcahi; edition typo pañjahi in 01Vin01 p264 o1756 (pañcahi already attested same page)"
+        }
+      }
+    },
+    {
+      "id": "roman-cakkabhedaya-ti-drop-quote-01vin01-265",
+      "when": {
+        "match": "cakkabhedāyā”ti",
+        "loci": [
+          {
+            "volume": "01Vin01",
+            "page": 265,
+            "order": 1757
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "cakkabhedāyāti",
+          "remark": "Roman cakkabhedāyāti (no quote before ti); edition typo cakkabhedāyā”ti in 01Vin01 p265 o1757. loci skip p264/p267 and 04Vin04 (cakkabhedāyāti already attested 04Vin04 p360)"
+        }
+      }
+    },
+    {
+      "id": "roman-phasu-viharati-close-single-quote",
+      "when": {
+        "match": "phāsu viharatī”ti,"
+      },
+      "do": {
+        "replace": {
+          "with": "phāsu viharatī’ti,",
+          "remark": "Roman closing single quote before ti (matches opening ‘); edition typo ”ti in 01Vin01 p265 o1758 (phāsu viharatī’ti, already attested p268)"
+        }
+      }
+    },
+    {
+      "id": "roman-sangho-napetabbo-discourse-dash",
+      "when": {
+        "match": "saṃgho ñāpetabbo."
+      },
+      "do": {
+        "replace": {
+          "with": "saṃgho ñāpetabbo–",
+          "remark": "Discourse dash after ñatti cue; period mis-extract in 01Vin01 p266 o1768 (saṃgho ñāpetabbo– already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-anuvattaka-short-a",
+      "when": {
+        "match": "anuvattākā"
+      },
+      "do": {
+        "replace": {
+          "with": "anuvattakā",
+          "remark": "Roman anuvattakā (short a); edition typo anuvattākā in 01Vin01 p268 o1785 (anuvattakā already attested same sentence)"
+        }
+      }
+    },
+    {
+      "id": "roman-itthandhamassa-to-itthannamassa",
+      "when": {
+        "match": "itthandhāmassa"
+      },
+      "do": {
+        "replace": {
+          "with": "itthannāmassa",
+          "remark": "Roman itthannāmassa (-nn-); edition typo itthandhāmassa in 01Vin01 p269 o1797 (itthannāmassa already attested same sentence)"
+        }
+      }
+    },
+    {
+      "id": "roman-patinissajjanti-apatti-comma",
+      "when": {
+        "match": "paṭinissajjanti āpatti"
+      },
+      "do": {
+        "replace": {
+          "with": "paṭinissajjanti, āpatti",
+          "remark": "Roman comma before āpatti; edition typo paṭinissajjanti āpatti in 01Vin01 p270 o1803 (paṭinissajjanti, āpatti already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-dhammakammasanni-long-i",
+      "when": {
+        "match": "dhammakammasaññi"
+      },
+      "do": {
+        "replace": {
+          "with": "dhammakammasaññī",
+          "remark": "Roman dhammakammasaññī (long ī); edition typo dhammakammasaññi in 01Vin01 p270 o1806 (dhammakammasaññī already attested same page)"
+        }
+      }
+    },
+    {
+      "id": "roman-karosi-ti-drop-quote-01vin01-271",
+      "when": {
+        "match": "karosī”ti",
+        "loci": [
+          {
+            "volume": "01Vin01",
+            "page": 271,
+            "order": 1812
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "karosīti",
+          "remark": "Roman karosīti (no quote before ti); edition typo karosī”ti in 01Vin01 p271 o1812 after pe. Not 01Vin01 Seyyasaka, 03Vin03, 06Di01 quoted questions"
+        }
+      }
+    },
+    {
+      "id": "roman-bhagavata-short-a",
+      "when": {
+        "match": "bhāgavatā"
+      },
+      "do": {
+        "replace": {
+          "with": "Bhagavatā",
+          "remark": "Roman Bhagavatā (short a); edition typo bhāgavatā / Bhāgavatā in 01Vin01 p272 o1818, 27khu10 p183, 28Khu11 p208 (Bhagavatā already attested same formulas)"
+        }
+      }
+    },
+    {
+      "id": "roman-atenam-to-attanam",
+      "when": {
+        "match": "atenaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "attānaṃ",
+          "remark": "Roman attānaṃ; edition typo atenaṃ in 01Vin01 p273 o1824 (attānaṃ avacanīyaṃ already attested same kamma-vācā) and 07Di02 p172 o808 (ekattena attānaṃ already attested same sentence)"
+        }
+      }
+    },
+    {
+      "id": "roman-evamatam-to-evametam",
+      "when": {
+        "match": "evamātaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "evametaṃ",
+          "remark": "Roman evametaṃ; edition typo evamātaṃ in 01Vin01 p273 o1825 (evametaṃ dhārayāmī already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-karapentipi-long-a",
+      "when": {
+        "match": "karāpentipi"
+      },
+      "do": {
+        "replace": {
+          "with": "kārāpentipi",
+          "remark": "Roman kārā- (long a); edition typo karāpentipi in 01Vin01 p274 o1837 (kārāpentipi already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-manjarikam-harantipi-insert",
+      "when": {
+        "match": "mañjarikaṃ harāpentipi"
+      },
+      "do": {
+        "replace": {
+          "with": "mañjarikaṃ harantipi harāpentipi",
+          "remark": "Roman harantipi before harāpentipi; edition omitted harantipi in 01Vin01 p274 o1837 (mañjarikaṃ harantipi harāpentipi already attested 04Vin04)"
+        }
+      }
+    },
+    {
+      "id": "roman-yathavajjenapi-short-i",
+      "when": {
+        "match": "yathāvajjenapī"
+      },
+      "do": {
+        "replace": {
+          "with": "yathāvajjenapi",
+          "remark": "Roman -pi (short i); edition typo yathāvajjenapī in 01Vin01 p275 o1838 (yathāvajjenapi already attested same narrative)"
+        }
+      }
+    },
+    {
+      "id": "roman-sikkhanti-short-a",
+      "when": {
+        "match": "sikkhānti"
+      },
+      "do": {
+        "replace": {
+          "with": "sikkhanti",
+          "remark": "Roman sikkhanti (short a); edition typo sikkhānti in 01Vin01 p275 o1838 (sikkhanti already attested same list)"
+        }
+      }
+    },
+    {
+      "id": "roman-karotha-tumhakam-comma",
+      "when": {
+        "match": "karotha tumhākaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "karotha, tumhākaṃ",
+          "remark": "Roman comma after karotha; edition missing comma in karotha tumhākaṃ in 01Vin01 p278 o1845 (karotha, tumhākaṃ already attested 04Vin04 p28)"
+        }
+      }
+    },
+    {
+      "id": "roman-suyyantica-space",
+      "when": {
+        "match": "suyyantica"
+      },
+      "do": {
+        "replace": {
+          "with": "suyyanti ca",
+          "remark": "Roman false join; edition typo suyyantica in 01Vin01 p280 o1853 (suyyanti ca already attested same formula 01Vin01 p279, 04Vin04 p28)"
+        }
+      }
+    },
+    {
+      "id": "roman-tassa-yeva-sandhi-annotate",
+      "when": {
+        "match": "tassā yeva"
+      },
+      "do": {
+        "annotate": {
+          "footnote": "tassāyeva sandhi – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-va-cahi-join",
+      "when": {
+        "match": "vā cāhi"
+      },
+      "do": {
+        "replace": {
+          "with": "vācāhi",
+          "remark": "Roman false space; edition typo vā cāhi in 01Vin01 p290 o1923 (vācāhi already attested same volume p187, p291, p292 and corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-ayampiti-long-i",
+      "when": {
+        "match": "ayampiti"
+      },
+      "do": {
+        "replace": {
+          "with": "ayampīti",
+          "remark": "Roman -ī- (long i); edition typo ayampiti in 01Vin01 p293 o1945, 02Vin02 p284 o2319 (ayampīti already attested 01Vin01 p58/p93/p118, 02Vin02 p277 etc.)"
+        }
+      }
+    },
+    {
+      "id": "roman-anunnata-long-a",
+      "when": {
+        "match": "anuññataṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "anuññātaṃ",
+          "remark": "Roman -ññā- (long a); edition typo anuññataṃ in 01Vin01 p303 o2020 (anuññātaṃ already attested same volume p264/p294 and corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-nocassa-space",
+      "when": {
+        "match": "nocassa"
+      },
+      "do": {
+        "replace": {
+          "with": "no cassa",
+          "remark": "Roman false join; edition typo nocassa in 01Vin01 p304 o2021 (no cassa already attested same page o2028)"
+        }
+      }
+    },
+    {
+      "id": "roman-pavittiya-c",
+      "when": {
+        "match": "pāvittiyaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "pācittiyaṃ",
+          "remark": "Roman pācittiyaṃ; edition typo pāvittiyaṃ in 01Vin01 p307 o2047 (pācittiyaṃ already attested same nissaggiya formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-pindaya-long-a",
+      "when": {
+        "match": "piṇḍaya"
+      },
+      "do": {
+        "replace": {
+          "with": "piṇḍāya",
+          "remark": "Roman -ā- (long a); edition typo piṇḍaya in 01Vin01 p276 o1842, p308 o2054 (piṇḍāya already attested same sentences / corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-ujjhayanti-long-a",
+      "when": {
+        "match": "ujjhayanti"
+      },
+      "do": {
+        "replace": {
+          "with": "ujjhāyanti",
+          "remark": "Roman -ā- (long a); edition typo ujjhayanti in 01Vin01 p310 o2060, p324 o2174, 04Vin04 p475 o2552 (ujjhāyanti already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-yakaci-space",
+      "when": {
+        "match": "yākāci",
+        "loci": [
+          {
+            "volume": "01Vin01",
+            "page": 314,
+            "order": 2085
+          },
+          {
+            "volume": "01Vin01",
+            "page": 319,
+            "order": 2121
+          },
+          {
+            "volume": "04Vin04",
+            "page": 420,
+            "order": 2242
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "yā kāci",
+          "remark": "Roman false join; edition typo yākāci in 01Vin01 p314 o2085, p319 o2121, 04Vin04 p420 o2242 (yā kāci already attested same formulas). Spare 04Vin04 p420 o2243 apparatus Yākāci (Syā)"
+        }
+      }
+    },
+    {
+      "id": "roman-yakaci-space-capital",
+      "when": {
+        "match": "yākāci",
+        "loci": [
+          {
+            "volume": "13Sam02",
+            "page": 73,
+            "order": 463
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "Yā kāci",
+          "remark": "Roman false join, sentence-initial; edition typo Yākāci in 13Sam02 p73 o463 (Yā kāci already attested same paragraph)"
+        }
+      }
+    },
+    {
+      "id": "roman-natikanam-nataka",
+      "when": {
+        "match": "ñātikānaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "ñātakānaṃ",
+          "remark": "Roman ñātaka-; edition typo ñātikānaṃ in 01Vin01 p315 o2094 (ñātakānaṃ already attested same anāpatti formula p317/p320)"
+        }
+      }
+    },
+    {
+      "id": "roman-mattham-matta",
+      "when": {
+        "match": "matthaṃ",
+        "loci": [
+          {
+            "volume": "01Vin01",
+            "page": 316,
+            "order": 2099
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "mattaṃ",
+          "remark": "Roman mattaṃ (measure); edition typo matthaṃ in 01Vin01 p316 o2099 (na mattaṃ jānitvā already attested same page). Spare verse 'matthaṃ / eta'matthaṃ in 22Khu05, 23Khu06"
+        }
+      }
+    },
+    {
+      "id": "roman-pavereyya-long-a",
+      "when": {
+        "match": "pavereyya"
+      },
+      "do": {
+        "replace": {
+          "with": "pavāreyya",
+          "remark": "Roman -ā- (long a); edition typo pavereyya in 01Vin01 p316 o2100 (abhihaṭṭhuṃ pavāreyya already attested 02Vin02)"
+        }
+      }
+    },
+    {
+      "id": "roman-annatake-long-a",
+      "when": {
+        "match": "aññatake"
+      },
+      "do": {
+        "replace": {
+          "with": "Aññātake",
+          "remark": "Roman aññātaka- (long ā); edition typo Aññatake in 01Vin01 p315 o2092, p317 o2110 (Aññātake already attested same vinītavatthu lists)"
+        }
+      }
+    },
+    {
+      "id": "roman-natthakarana-short-a",
+      "when": {
+        "match": "naṭṭhākāraṇā"
+      },
+      "do": {
+        "replace": {
+          "with": "naṭṭhakāraṇā",
+          "remark": "Roman naṭṭha- (short a); edition typo naṭṭhākāraṇā in 01Vin01 p317 o2112 (parallel acchinnakāraṇā same list)"
+        }
+      }
+    },
+    {
+      "id": "roman-upankamitva-sa",
+      "when": {
+        "match": "upaṅkamitvā"
+      },
+      "do": {
+        "replace": {
+          "with": "upasaṅkamitvā",
+          "remark": "Roman upasaṅkamitvā; edition typo upaṅkamitvā in 01Vin01 p318 o2116, 03Vin03 p381 o2200 (upasaṅkamitvā already attested corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-appavarito-short-a",
+      "when": {
+        "match": "appāvārito"
+      },
+      "do": {
+        "replace": {
+          "with": "appavārito",
+          "remark": "Roman appa- (short a); edition typo appāvārito in 01Vin01 p318 o2116 (appavārito already attested same paragraph)"
+        }
+      }
+    },
+    {
+      "id": "roman-annatako-long-a",
+      "when": {
+        "match": "aññatako"
+      },
+      "do": {
+        "replace": {
+          "with": "Aññātako",
+          "remark": "Roman aññātaka- (long ā); edition typo Aññatako in 01Vin01 p318 o2116 (Aññātako moghapurisa already attested same formula p313)"
+        }
+      }
+    },
+    {
+      "id": "roman-apavaritoti-pp",
+      "when": {
+        "match": "apavāritoti"
+      },
+      "do": {
+        "replace": {
+          "with": "appavāritoti",
+          "remark": "Roman app- (geminate p); edition typo apavāritoti in 01Vin01 p319 o2126 (appavāritoti already attested same padabhājaniya 01Vin01 p373)"
+        }
+      }
+    },
+    {
+      "id": "roman-appavaritoti-short-a",
+      "when": {
+        "match": "appāvāritoti"
+      },
+      "do": {
+        "replace": {
+          "with": "appavāritoti",
+          "remark": "Roman appa- (short a) + iti; edition typo appāvāritoti in 01Vin01 p322 o2154 (appavāritoti already attested p373; same lemma as appāvārito)"
+        }
+      }
+    },
+    {
+      "id": "roman-ganassava-space",
+      "when": {
+        "match": "gaṇassavā"
+      },
+      "do": {
+        "replace": {
+          "with": "gaṇassa vā",
+          "remark": "Roman false join; edition typo gaṇassavā in 01Vin01 p319 o2133 (gaṇassa vā already attested same nissajjitabbaṃ formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-puggalassava-space",
+      "when": {
+        "match": "puggalassavā"
+      },
+      "do": {
+        "replace": {
+          "with": "puggalassa vā",
+          "remark": "Roman false join; edition typo puggalassavā in 01Vin01 p319 o2133 (puggalassa vā already attested same nissajjitabbaṃ formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-upasankimitva-a",
+      "when": {
+        "match": "upasaṅkimitvā"
+      },
+      "do": {
+        "replace": {
+          "with": "upasaṅkamitvā",
+          "remark": "Roman -kami- (short a); edition typo upasaṅkimitvā in 01Vin01 p321 o2142 (upasaṅkamitvā already attested same formula / corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-vacittiya-p",
+      "when": {
+        "match": "vācittiyaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "pācittiyaṃ",
+          "remark": "Roman pācittiyaṃ; edition typo vācittiyaṃ in 01Vin01 p323 o2165 (pācittiyaṃ already attested same nissaggiya formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-patikkanhatu-gg",
+      "when": {
+        "match": "paṭikkaṇhātu"
+      },
+      "do": {
+        "replace": {
+          "with": "paṭiggaṇhātu",
+          "remark": "Roman paṭiggaṇhātu; edition typo paṭikkaṇhātu in 01Vin01 p325 o2176 (paṭiggaṇhātu already attested same formula p323/p326)"
+        }
+      }
+    },
+    {
+      "id": "roman-patigganhati-long-a",
+      "when": {
+        "match": "paṭiggaṇhati"
+      },
+      "do": {
+        "replace": {
+          "with": "paṭiggaṇhāti",
+          "remark": "Roman -ā- (long a); edition typo paṭiggaṇhati in 01Vin01 p327 o2188 (paṭiggaṇhāti already attested corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-thokam-yeva-sandhi-annotate",
+      "when": {
+        "match": "thokaṃ yeva"
+      },
+      "do": {
+        "annotate": {
+          "footnote": "thokaṃyeva sandhi – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-databba-tena-dash-space",
+      "when": {
+        "match": "dātabbā–tena"
+      },
+      "do": {
+        "replace": {
+          "with": "dātabbā– tena",
+          "remark": "Space after discourse en-dash; glued dātabbā–tena in 01Vin01 p334 o2242 (āmantesi– tena already the catalog pattern)"
+        }
+      }
+    },
+    {
+      "id": "roman-patissalliyitum-s",
+      "when": {
+        "match": "paṭissallīyituṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "paṭisallīyituṃ",
+          "remark": "Roman paṭisallīyituṃ (single s); edition typo paṭissallīyituṃ in 01Vin01 p336 o2261 (paṭisallīyituṃ already attested same page)"
+        }
+      }
+    },
+    {
+      "id": "roman-amantesi-tena-hi-sikkhapada-dash",
+      "when": {
+        "match": "āmantesi tena hi bhikkhave bhikkhūnaṃ sikkhāpadaṃ paññapessāmi"
+      },
+      "do": {
+        "replace": {
+          "with": "āmantesi– tena hi bhikkhave bhikkhūnaṃ sikkhāpadaṃ paññapessāmi",
+          "remark": "Discourse dash after āmantesi; missing dash in 01Vin01 p338 o2267, 02Vin02 p108/p123/p158/p235 (āmantesi– tena already attested)"
+        }
+      }
+    },
+    {
+      "id": "roman-ujjhayantana-long-a",
+      "when": {
+        "match": "ujjhayantānaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "ujjhāyantānaṃ",
+          "remark": "Roman -ā- (long a); edition typo ujjhayantānaṃ in 01Vin01 p313 o2076, p347 o2327 (ujjhāyantānaṃ already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-so-yeva-sandhi-annotate",
+      "when": {
+        "match": "so yeva"
+      },
+      "do": {
+        "annotate": {
+          "footnote": "soyeva sandhi – ม.พ.ป."
+        }
+      }
+    },
+    {
+      "id": "roman-tenupasankami-comma-space",
+      "when": {
+        "match": "tenupasaṅkami ,"
+      },
+      "do": {
+        "replace": {
+          "with": "tenupasaṅkami,",
+          "remark": "No space before comma; edition tenupasaṅkami , in 01Vin01 p350 o2344 (tenupasaṅkami, already attested corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-majjhimo-nama-patto-comma",
+      "when": {
+        "match": "majjhimo nāma, patto"
+      },
+      "do": {
+        "replace": {
+          "with": "Majjhimo nāma patto",
+          "remark": "No comma after nāma; edition Majjhimo nāma, patto in 01Vin01 p353 o2366 (Majjhimo nāma patto already attested 02Vin02 p318)"
+        }
+      }
+    },
+    {
+      "id": "roman-bhijjeyyava-space",
+      "when": {
+        "match": "bhijjeyyavā"
+      },
+      "do": {
+        "replace": {
+          "with": "bhijjeyya vā",
+          "remark": "Roman false join; edition typo bhijjeyyavā in 01Vin01 p358 o2394 (nasseyya vā vinasseyya vā already spaced in the same clause)"
+        }
+      }
+    },
+    {
+      "id": "roman-sodhapeti-join",
+      "when": {
+        "match": "so dhāpeti"
+      },
+      "do": {
+        "replace": {
+          "with": "sodhāpeti",
+          "remark": "Roman false space; edition typo so dhāpeti in 01Vin01 p360 o2414 (sodhāpeti already attested 03Vin03 p299 same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-bimbhisaram-s",
+      "when": {
+        "match": "bimbhisāraṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "Bimbisāraṃ",
+          "remark": "Roman Bimbisāraṃ (single h); edition typo Bimbhisāraṃ in 01Vin01 p360 o2414 (Bimbisāraṃ already attested same story and corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-aramikasanani-t",
+      "when": {
+        "match": "ārāmikasanāni"
+      },
+      "do": {
+        "replace": {
+          "with": "ārāmikasatāni",
+          "remark": "Roman -satāni; edition typo ārāmikasanāni in 01Vin01 p361 o2416 (ārāmikasatāni already attested same page and 03Vin03 p301)"
+        }
+      }
+    },
+    {
+      "id": "roman-ayasmanam-ayasmantam",
+      "when": {
+        "match": "āyasmanaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "āyasmantaṃ",
+          "remark": "Roman accusative āyasmantaṃ; edition typo āyasmanaṃ in 01Vin01 p362 o2419 (āyasmantaṃ Pilindavacchaṃ abhivādetvā already attested 03Vin03 p300/p301 same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-khiyyantana-n",
+      "when": {
+        "match": "khiyyantāṇaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "khiyyantānaṃ",
+          "remark": "Roman -ānaṃ (n not ṇ); edition typo khiyyantāṇaṃ in 01Vin01 p363 o2420 (khiyyantānaṃ already attested same formula corpus-wide)"
+        }
+      }
+    },
+    {
+      "id": "roman-attahaparama-s",
+      "when": {
+        "match": "attāhaparamaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "sattāhaparamaṃ",
+          "remark": "Roman sattāha-; edition typo attāhaparamaṃ in 01Vin01 p363 o2421 (sattāhaparamaṃ already attested same page o2423 and 03Vin03 p303)"
+        }
+      }
+    },
+    {
+      "id": "roman-bhikkave-h",
+      "when": {
+        "match": "bhikkave"
+      },
+      "do": {
+        "replace": {
+          "with": "bhikkhave",
+          "remark": "Roman bhikkhave; edition typo bhikkave in 01Vin01 p286 o1894, p363 o2424, 15An01 p455 o3075, 16An02 p316 o2051"
+        }
+      }
+    },
+    {
+      "id": "roman-sattahatikkante-short-a",
+      "when": {
+        "match": "sattāhātikkānte"
+      },
+      "do": {
+        "replace": {
+          "with": "Sattāhātikkante",
+          "remark": "Roman -ikkante (short a); edition typo Sattāhātikkānte in 01Vin01 p364 o2425 (Sattāhātikkante already attested same segment)"
+        }
+      }
+    },
+    {
+      "id": "roman-atikkantesanni-a",
+      "when": {
+        "match": "atikkantesaññī"
+      },
+      "do": {
+        "replace": {
+          "with": "atikkantasaññī",
+          "remark": "Roman atikkanta-; edition typo atikkantesaññī in 01Vin01 p364 o2427 (atikkantasaññī already attested same chapter)"
+        }
+      }
+    },
+    {
+      "id": "roman-dammiti-long-i",
+      "when": {
+        "match": "dammiti"
+      },
+      "do": {
+        "replace": {
+          "with": "dammīti",
+          "remark": "Roman dammi + iti (-ī-); edition typo dammiti in 01Vin01 p370 o2468 (dammīti already attested same formula)"
+        }
+      }
+    },
+    {
+      "id": "roman-appitam-va-katu-long-a",
+      "when": {
+        "match": "appitaṃ va kātuṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "appitaṃ vā kātuṃ",
+          "remark": "Roman vā; edition typo appitaṃ va kātuṃ in 01Vin01 p371 o2475 (āyataṃ vā vitthataṃ vā already in the same clause)"
+        }
+      }
+    },
+    {
+      "id": "roman-tanta-vayehi-join",
+      "when": {
+        "match": "tanta vāyehīti"
+      },
+      "do": {
+        "replace": {
+          "with": "Tantavāyehīti",
+          "remark": "Roman false space; edition typo Tanta vāyehīti in 01Vin01 p373 o2484 (Tantavāyehīti already attested p370 o2468)"
+        }
+      }
+    },
+    {
+      "id": "roman-kattikatemasika-punnama-join",
+      "when": {
+        "match": "kattikatemāsika puṇṇamaṃ"
+      },
+      "do": {
+        "replace": {
+          "with": "kattikatemāsikapuṇṇamaṃ",
+          "remark": "Roman false space; edition typo kattikatemāsika puṇṇamaṃ in 01Vin01 p375 o2501"
+        }
+      }
+    },
+    {
+      "id": "roman-arannakesu-long-a",
+      "when": {
+        "match": "araññakesu"
+      },
+      "do": {
+        "replace": {
+          "with": "āraññakesu",
+          "remark": "Roman āraññaka- (long a); edition typo araññakesu in 01Vin01 p376 o2514 (āraññakesu already attested same page)"
+        }
+      }
+    },
+    {
+      "id": "roman-kattikapunnamanti-short-a",
+      "when": {
+        "match": "kattikapuṇṇāmanti"
+      },
+      "do": {
+        "replace": {
+          "with": "Kattikapuṇṇamanti",
+          "remark": "Roman -puṇṇamaṃ + iti (short a); edition typo Kattikapuṇṇāmanti in 01Vin01 p377 o2518"
+        }
+      }
+    },
+    {
+      "id": "roman-icchamano-short-a",
+      "when": {
+        "match": "icchāmāno",
+        "loci": [
+          {
+            "volume": "01Vin01",
+            "page": 378,
+            "order": 2523
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "icchamāno",
+          "remark": "Roman icchamāno (short a); edition typo icchāmāno in 01Vin01 p378 o2523. Spare 21Khu04 p77 o1117 capital (separate rule)"
+        }
+      }
+    },
+    {
+      "id": "roman-icchamano-short-a-capital",
+      "when": {
+        "match": "icchāmāno",
+        "loci": [
+          {
+            "volume": "21Khu04",
+            "page": 77,
+            "order": 1117
+          }
+        ]
+      },
+      "do": {
+        "replace": {
+          "with": "Icchamāno",
+          "remark": "Roman Icchamāno (short a); edition typo Icchāmāno in 21Khu04 p77 o1117 (Icchamāno already attested same volume p3 and 20Khu03)"
+        }
+      }
+    },
+    {
+      "id": "roman-bhesajja-parikkhara-hyphen-space",
+      "when": {
+        "match": "cīvarapiṇḍapātasenāsanagilānappaccayabhesajja- parikkhārā"
+      },
+      "do": {
+        "replace": {
+          "with": "cīvarapiṇḍapātasenāsanagilānappaccayabhesajjaparikkhārā",
+          "remark": "Join line-wrap hyphen; edition cīvara…bhesajja- parikkhārā in 01Vin01 p380 o2541 (joined form already attested p351 o2347, 02Vin02 p202)"
         }
       }
     }

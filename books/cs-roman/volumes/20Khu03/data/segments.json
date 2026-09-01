@@ -215830,31 +215830,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kesarapupphiyattherassāpadānaṃ catutthaṃ.",
-          "runs": [
-            {
-              "value": "Kesarapupphiyatthera",
-              "bold": true
-            },
-            {
-              "value": "ssāpadānaṃ catutthaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Kesarapupphiyattherassāpadānaṃ catutthaṃ."
         },
         {
           "script": "thai",
-          "value": "เกสรปุปฺผิยตฺเถรสฺสาปทานํ จตุตฺถํ.",
-          "runs": [
-            {
-              "value": "เกสรปุปฺผิยตฺเถร",
-              "bold": true
-            },
-            {
-              "value": "สฺสาปทานํ จตุตฺถํ.",
-              "bold": false
-            }
-          ]
+          "value": "เกสรปุปฺผิยตฺเถรสฺสาปทานํ จตุตฺถํ."
         }
       ],
       "source_layout": "center",
@@ -222635,11 +222615,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Kaṇikāraṃva jalitaṃ,"
+                  "value": "Kaṇikāraṃva jalitaṃ,",
+                  "runs": [
+                    {
+                      "value": "Kaṇikāraṃva jali",
+                      "bold": true
+                    },
+                    {
+                      "value": "taṃ,",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "กณิการํว ชลิตํ,"
+                  "value": "กณิการํว ชลิตํ,",
+                  "runs": [
+                    {
+                      "value": "กณิการํว ชลิ",
+                      "bold": true
+                    },
+                    {
+                      "value": "ตํ,",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             },
@@ -233629,7 +233629,7 @@
           "value": "(3.{{sp1}} ปตฺตานิสํส)",
           "runs": [
             {
-              "value": "(3.{{sp1}}",
+              "value": "(3. ",
               "bold": false
             },
             {
@@ -234233,7 +234233,7 @@
           "value": "(5.{{sp1}} สตฺถกานิสํส)",
           "runs": [
             {
-              "value": "(5.{{sp1}}",
+              "value": "(5. ",
               "bold": false
             },
             {
@@ -234679,7 +234679,7 @@
           "value": "(7.{{sp1}} นขจฺเฉทนานิสํส)",
           "runs": [
             {
-              "value": "(7.{{sp1}}",
+              "value": "(7. ",
               "bold": false
             },
             {
@@ -234850,7 +234850,7 @@
           "value": "(8.{{sp1}} วิธูปนตาลวณฺฏานิสํส)",
           "runs": [
             {
-              "value": "(8.{{sp1}}",
+              "value": "(8. ",
               "bold": false
             },
             {

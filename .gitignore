@@ -32,7 +32,8 @@ staticfiles/
 
 # IDE
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 *.swp
 *.swo
 .DS_Store
@@ -80,4 +81,13 @@ books/cs-roman/scripts/scratch/*
 !books/cs-roman/scripts/scratch/archive/
 !books/cs-roman/scripts/scratch/archive/**
 books/cs-roman/scripts/scratch/archive/**/*.pdf
+
+# CS Roman ephemeral one-offs: leading underscore = local only (not pipeline)
+books/cs-roman/research/_*
+books/cs-roman/scripts/_*
+books/cs-roman/tmp_scan*.txt
+books/cs-roman/research/annotate_*.html
+
+# Repo-wide scratch workspace (never commit)
+tmp/
 

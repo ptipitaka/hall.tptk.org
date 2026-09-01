@@ -2476,7 +2476,7 @@
               "bold": false
             },
             {
-              "value": "5.{{sp1}} อนงฺคณสุตฺต",
+              "value": "5. อนงฺคณสุตฺต",
               "bold": true
             }
           ]
@@ -4781,7 +4781,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} สมฺมาทิฏฺฐิสุตฺต",
+              "value": "9. สมฺมาทิฏฺฐิสุตฺต",
               "bold": true
             }
           ]
@@ -6475,31 +6475,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Cittānupassanā niṭṭhitā.",
-          "runs": [
-            {
-              "value": "Cittānupassanā",
-              "bold": true
-            },
-            {
-              "value": " niṭṭhitā.",
-              "bold": false
-            }
-          ]
+          "value": "Cittānupassanā niṭṭhitā."
         },
         {
           "script": "thai",
-          "value": "จิตฺตานุปสฺสนา นิฏฺฐิตา.",
-          "runs": [
-            {
-              "value": "จิตฺตานุปสฺสนา",
-              "bold": true
-            },
-            {
-              "value": " นิฏฺฐิตา.",
-              "bold": false
-            }
-          ]
+          "value": "จิตฺตานุปสฺสนา นิฏฺฐิตา."
         }
       ],
       "source_layout": "center",
@@ -10743,11 +10723,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "ceteti, abyābajjhaṃyeva tasmiṃ samaye vedanaṃ vedeti.{{sp1}} Abyābajjhaparamāhaṃ bhikkhave vedanānaṃ assādaṃ vadāmi."
+          "value": "ceteti, abyābajjhaṃyeva tasmiṃ samaye vedanaṃ vedeti.{{sp1}} Abyābajjhaparamāhaṃ bhikkhave vedanānaṃ assādaṃ vadāmi.",
+          "runs": [
+            {
+              "value": "ceteti, abyābajjhaṃyeva tasmiṃ samaye vedanaṃ vedeti.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}} Abyābajjhaparamāhaṃ bhikkhave vedanānaṃ assādaṃ vadāmi.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เจเตติ, อพฺยาพชฺฌํเยว ตสฺมิํ สมเย เวทนํ เวเทติ.{{sp1}} อพฺยาพชฺฌปรมาหํ ภิกฺขเว เวทนานํ อสฺสาทํ วทามิ."
+          "value": "เจเตติ, อพฺยาพชฺฌํเยว ตสฺมิํ สมเย เวทนํ เวเทติ.{{sp1}} อพฺยาพชฺฌปรมาหํ ภิกฺขเว เวทนานํ อสฺสาทํ วทามิ.",
+          "runs": [
+            {
+              "value": "เจเตติ, อพฺยาพชฺฌํเยว ตสฺมิํ สมเย เวทนํ เวเทติ.",
+              "bold": true
+            },
+            {
+              "value": " อพฺยาพชฺฌปรมาหํ ภิกฺขเว เวทนานํ อสฺสาทํ วทามิ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -12553,7 +12553,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} เจโตขิลสุตฺต",
+              "value": "6. เจโตขิลสุตฺต",
               "bold": true
             }
           ]
@@ -16108,7 +16108,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} รถวินีตสุตฺต",
+              "value": "4. รถวินีตสุตฺต",
               "bold": true
             }
           ]
@@ -24428,7 +24428,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} มหาตณฺหาสงฺขยสุตฺต",
+              "value": "8. มหาตณฺหาสงฺขยสุตฺต",
               "bold": true
             }
           ]

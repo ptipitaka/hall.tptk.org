@@ -684,7 +684,7 @@
           "value": "ตตฺถ กตเม ปญฺจ นยา, นนฺทิยาวฏฺโฏ ติปุกฺขโล สีหวิกฺกีฬิโต ทิสาโลจโน องฺกุโส อิติ.{{sp1}} ตสฺสานุคีติ",
           "runs": [
             {
-              "value": "ตตฺถ กตเม ปญฺจ นยา, นนฺทิยาวฏฺโฏ ติปุกฺขโล สีหวิกฺกีฬิโต ทิสาโลจโน องฺกุโส อิติ.{{sp1}} ",
+              "value": "ตตฺถ กตเม ปญฺจ นยา, นนฺทิยาวฏฺโฏ ติปุกฺขโล สีหวิกฺกีฬิโต ทิสาโลจโน องฺกุโส อิติ. ",
               "bold": false
             },
             {
@@ -1252,11 +1252,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "yogīnaṃ desanāhāro."
+                  "value": "yogīnaṃ desanāhāro.",
+                  "runs": [
+                    {
+                      "value": "yogīnaṃ ",
+                      "bold": false
+                    },
+                    {
+                      "value": "desanāhāro.",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "โยคีนํ เทสนาหาโร."
+                  "value": "โยคีนํ เทสนาหาโร.",
+                  "runs": [
+                    {
+                      "value": "โยคีนํ ",
+                      "bold": false
+                    },
+                    {
+                      "value": "เทสนาหาโร.",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -1305,11 +1325,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Suttassa yo pavicayo,"
+                  "value": "Suttassa yo pavicayo,",
+                  "runs": [
+                    {
+                      "value": "Suttassa yo pa",
+                      "bold": false
+                    },
+                    {
+                      "value": "vicayo",
+                      "bold": true
+                    },
+                    {
+                      "value": ",",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สุตฺตสฺส โย ปวิจโย,"
+                  "value": "สุตฺตสฺส โย ปวิจโย,",
+                  "runs": [
+                    {
+                      "value": "สุตฺตสฺส โย ป",
+                      "bold": false
+                    },
+                    {
+                      "value": "วิจโย",
+                      "bold": true
+                    },
+                    {
+                      "value": ",",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             },
@@ -1317,11 +1365,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "hāro vicayoti niddiṭṭho."
+                  "value": "hāro vicayoti niddiṭṭho.",
+                  "runs": [
+                    {
+                      "value": "hāro ",
+                      "bold": false
+                    },
+                    {
+                      "value": "vicayo",
+                      "bold": true
+                    },
+                    {
+                      "value": "ti niddiṭṭho.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "หาโร วิจโยติ นิทฺทิฏฺโฐ."
+                  "value": "หาโร วิจโยติ นิทฺทิฏฺโฐ.",
+                  "runs": [
+                    {
+                      "value": "หาโร ",
+                      "bold": false
+                    },
+                    {
+                      "value": "วิจโย",
+                      "bold": true
+                    },
+                    {
+                      "value": "ติ นิทฺทิฏฺโฐ.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1382,11 +1458,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "hāro yuttīti niddiṭṭho."
+                  "value": "hāro yuttīti niddiṭṭho.",
+                  "runs": [
+                    {
+                      "value": "hāro ",
+                      "bold": false
+                    },
+                    {
+                      "value": "yuttī",
+                      "bold": true
+                    },
+                    {
+                      "value": "ti niddiṭṭho.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "หาโร ยุตฺตีติ นิทฺทิฏฺโฐ."
+                  "value": "หาโร ยุตฺตีติ นิทฺทิฏฺโฐ.",
+                  "runs": [
+                    {
+                      "value": "หาโร ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ยุตฺตี",
+                      "bold": true
+                    },
+                    {
+                      "value": "ติ นิทฺทิฏฺโฐ.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1447,11 +1551,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "eso hāro padaṭṭhāno."
+                  "value": "eso hāro padaṭṭhāno.",
+                  "runs": [
+                    {
+                      "value": "eso hāro ",
+                      "bold": false
+                    },
+                    {
+                      "value": "padaṭṭhāno.",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "เอโส หาโร ปทฏฺฐาโน."
+                  "value": "เอโส หาโร ปทฏฺฐาโน.",
+                  "runs": [
+                    {
+                      "value": "เอโส หาโร ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ปทฏฺฐาโน.",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -1512,11 +1636,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "so hāro lakkhaṇo nāma."
+                  "value": "so hāro lakkhaṇo nāma.",
+                  "runs": [
+                    {
+                      "value": "so hāro ",
+                      "bold": false
+                    },
+                    {
+                      "value": "lakkhaṇo",
+                      "bold": true
+                    },
+                    {
+                      "value": " nāma.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "โส หาโร ลกฺขโณ นาม."
+                  "value": "โส หาโร ลกฺขโณ นาม.",
+                  "runs": [
+                    {
+                      "value": "โส หาโร ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ลกฺขโณ",
+                      "bold": true
+                    },
+                    {
+                      "value": " นาม.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1577,11 +1729,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "eso hāro catubyūho."
+                  "value": "eso hāro catubyūho.",
+                  "runs": [
+                    {
+                      "value": "eso hāro ",
+                      "bold": false
+                    },
+                    {
+                      "value": "catubyūho",
+                      "bold": true
+                    },
+                    {
+                      "value": ".",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "เอโส หาโร จตุพฺยูโห."
+                  "value": "เอโส หาโร จตุพฺยูโห.",
+                  "runs": [
+                    {
+                      "value": "เอโส หาโร ",
+                      "bold": false
+                    },
+                    {
+                      "value": "จตุพฺยูโห",
+                      "bold": true
+                    },
+                    {
+                      "value": ".",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1642,11 +1822,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "āvaṭṭo nāma so hāro."
+                  "value": "āvaṭṭo nāma so hāro.",
+                  "runs": [
+                    {
+                      "value": "āvaṭṭo",
+                      "bold": true
+                    },
+                    {
+                      "value": " nāma so hāro.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อาวฏฺโฏ นาม โส หาโร."
+                  "value": "อาวฏฺโฏ นาม โส หาโร.",
+                  "runs": [
+                    {
+                      "value": "อาวฏฺโฏ",
+                      "bold": true
+                    },
+                    {
+                      "value": " นาม โส หาโร.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1679,11 +1879,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Sādhāraṇe asādhāraṇe ca neyyo vibhattīti."
+                  "value": "Sādhāraṇe asādhāraṇe ca neyyo vibhattīti.",
+                  "runs": [
+                    {
+                      "value": "Sādhāraṇe asādhāraṇe ca neyyo ",
+                      "bold": false
+                    },
+                    {
+                      "value": "vibhattī",
+                      "bold": true
+                    },
+                    {
+                      "value": "ti.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สาธารเณ อสาธารเณ จ เนยฺโย วิภตฺตีติ."
+                  "value": "สาธารเณ อสาธารเณ จ เนยฺโย วิภตฺตีติ.",
+                  "runs": [
+                    {
+                      "value": "สาธารเณ อสาธารเณ จ เนยฺโย ",
+                      "bold": false
+                    },
+                    {
+                      "value": "วิภตฺตี",
+                      "bold": true
+                    },
+                    {
+                      "value": "ติ.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1744,11 +1972,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "hāro parivattano nāma."
+                  "value": "hāro parivattano nāma.",
+                  "runs": [
+                    {
+                      "value": "hāro ",
+                      "bold": false
+                    },
+                    {
+                      "value": "parivattano",
+                      "bold": true
+                    },
+                    {
+                      "value": " nāma.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "หาโร ปริวตฺตโน นาม."
+                  "value": "หาโร ปริวตฺตโน นาม.",
+                  "runs": [
+                    {
+                      "value": "หาโร ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ปริวตฺตโน",
+                      "bold": true
+                    },
+                    {
+                      "value": " นาม.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1809,11 +2065,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "vevacano nāma so hāro."
+                  "value": "vevacano nāma so hāro.",
+                  "runs": [
+                    {
+                      "value": "vevacano",
+                      "bold": true
+                    },
+                    {
+                      "value": " nāma so hāro.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "เววจโน นาม โส หาโร."
+                  "value": "เววจโน นาม โส หาโร.",
+                  "runs": [
+                    {
+                      "value": "เววจโน",
+                      "bold": true
+                    },
+                    {
+                      "value": " นาม โส หาโร.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1846,11 +2122,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "paññattīhi vividhāhi deseti."
+                  "value": "paññattīhi vividhāhi deseti.",
+                  "runs": [
+                    {
+                      "value": "paññattī",
+                      "bold": true
+                    },
+                    {
+                      "value": "hi vividhāhi deseti.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ปญฺญตฺตีหิ วิวิธาหิ เทเสติ."
+                  "value": "ปญฺญตฺตีหิ วิวิธาหิ เทเสติ.",
+                  "runs": [
+                    {
+                      "value": "ปญฺญตฺตี",
+                      "bold": true
+                    },
+                    {
+                      "value": "หิ วิวิธาหิ เทเสติ.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1874,11 +2170,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "paññattī nāma hāroti."
+                  "value": "paññattī nāma hāroti.",
+                  "runs": [
+                    {
+                      "value": "paññattī",
+                      "bold": true
+                    },
+                    {
+                      "value": " nāma hāroti.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ปญฺญตฺตี นาม หาโรติ."
+                  "value": "ปญฺญตฺตี นาม หาโรติ.",
+                  "runs": [
+                    {
+                      "value": "ปญฺญตฺตี",
+                      "bold": true
+                    },
+                    {
+                      "value": " นาม หาโรติ.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -1939,11 +2255,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "otaraṇo nāma so hāro."
+                  "value": "otaraṇo nāma so hāro.",
+                  "runs": [
+                    {
+                      "value": "otaraṇo",
+                      "bold": true
+                    },
+                    {
+                      "value": " nāma so hāro.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "โอตรโณ นาม โส หาโร."
+                  "value": "โอตรโณ นาม โส หาโร.",
+                  "runs": [
+                    {
+                      "value": "โอตรโณ",
+                      "bold": true
+                    },
+                    {
+                      "value": " นาม โส หาโร.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -2004,11 +2340,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "hāro so sodhano nāma."
+                  "value": "hāro so sodhano nāma.",
+                  "runs": [
+                    {
+                      "value": "hāro so ",
+                      "bold": false
+                    },
+                    {
+                      "value": "sodhano",
+                      "bold": true
+                    },
+                    {
+                      "value": " nāma.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "หาโร โส โสธโน นาม."
+                  "value": "หาโร โส โสธโน นาม.",
+                  "runs": [
+                    {
+                      "value": "หาโร โส ",
+                      "bold": false
+                    },
+                    {
+                      "value": "โสธโน",
+                      "bold": true
+                    },
+                    {
+                      "value": " นาม.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -2069,11 +2433,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "eso hāro adhiṭṭhāno."
+                  "value": "eso hāro adhiṭṭhāno.",
+                  "runs": [
+                    {
+                      "value": "eso hāro ",
+                      "bold": false
+                    },
+                    {
+                      "value": "adhiṭṭhāno.",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "เอโส หาโร อธิฏฺฐาโน."
+                  "value": "เอโส หาโร อธิฏฺฐาโน.",
+                  "runs": [
+                    {
+                      "value": "เอโส หาโร ",
+                      "bold": false
+                    },
+                    {
+                      "value": "อธิฏฺฐาโน.",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -2134,11 +2518,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "eso hāro parikkhāro."
+                  "value": "eso hāro parikkhāro.",
+                  "runs": [
+                    {
+                      "value": "eso hāro ",
+                      "bold": false
+                    },
+                    {
+                      "value": "parikkhāro.",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "เอโส หาโร ปริกฺขาโร."
+                  "value": "เอโส หาโร ปริกฺขาโร.",
+                  "runs": [
+                    {
+                      "value": "เอโส หาโร ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ปริกฺขาโร.",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -2199,11 +2603,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "esa samāropano hāro."
+                  "value": "esa samāropano hāro.",
+                  "runs": [
+                    {
+                      "value": "esa ",
+                      "bold": false
+                    },
+                    {
+                      "value": "samāropano",
+                      "bold": true
+                    },
+                    {
+                      "value": " hāro.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "เอส สมาโรปโน หาโร."
+                  "value": "เอส สมาโรปโน หาโร.",
+                  "runs": [
+                    {
+                      "value": "เอส ",
+                      "bold": false
+                    },
+                    {
+                      "value": "สมาโรปโน",
+                      "bold": true
+                    },
+                    {
+                      "value": " หาโร.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -2298,11 +2730,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "ayaṃ nayo nandiyāvaṭṭo."
+                  "value": "ayaṃ nayo nandiyāvaṭṭo.",
+                  "runs": [
+                    {
+                      "value": "ayaṃ nayo ",
+                      "bold": false
+                    },
+                    {
+                      "value": "nandiyāvaṭṭo.",
+                      "bold": true
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อยํ นโย นนฺทิยาวฏฺโฏ."
+                  "value": "อยํ นโย นนฺทิยาวฏฺโฏ.",
+                  "runs": [
+                    {
+                      "value": "อยํ นโย ",
+                      "bold": false
+                    },
+                    {
+                      "value": "นนฺทิยาวฏฺโฏ.",
+                      "bold": true
+                    }
+                  ]
                 }
               ]
             }
@@ -2351,11 +2803,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Bhūtaṃ tathaṃ avitathaṃ, tipukkhalaṃ taṃ nayaṃ āhu."
+                  "value": "Bhūtaṃ tathaṃ avitathaṃ, tipukkhalaṃ taṃ nayaṃ āhu.",
+                  "runs": [
+                    {
+                      "value": "Bhūtaṃ tathaṃ avitathaṃ, ",
+                      "bold": false
+                    },
+                    {
+                      "value": "tipukkhalaṃ",
+                      "bold": true
+                    },
+                    {
+                      "value": " taṃ nayaṃ āhu.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ภูตํ ตถํ อวิตถํ, ติปุกฺขลํ ตํ นยํ อาหุ."
+                  "value": "ภูตํ ตถํ อวิตถํ, ติปุกฺขลํ ตํ นยํ อาหุ.",
+                  "runs": [
+                    {
+                      "value": "ภูตํ ตถํ อวิตถํ, ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ติปุกฺขลํ",
+                      "bold": true
+                    },
+                    {
+                      "value": " ตํ นยํ อาหุ.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -2416,11 +2896,31 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sīhavikkīḷitaṃ āhu."
+                  "value": "sīhavikkīḷitaṃ āhu.",
+                  "runs": [
+                    {
+                      "value": "sīhavikkīḷitaṃ",
+                      "bold": true
+                    },
+                    {
+                      "value": " āhu.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "สีหวิกฺกีฬิตํ อาหุ."
+                  "value": "สีหวิกฺกีฬิตํ อาหุ.",
+                  "runs": [
+                    {
+                      "value": "สีหวิกฺกีฬิตํ",
+                      "bold": true
+                    },
+                    {
+                      "value": " อาหุ.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -2469,11 +2969,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "Manasā volokayate, taṃ khu disālocanaṃ āhu."
+                  "value": "Manasā volokayate, taṃ khu disālocanaṃ āhu.",
+                  "runs": [
+                    {
+                      "value": "Manasā volokayate, taṃ khu ",
+                      "bold": false
+                    },
+                    {
+                      "value": "disālocanaṃ",
+                      "bold": true
+                    },
+                    {
+                      "value": " āhu.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "มนสา โวโลกยเต, ตํ ขุ ทิสาโลจนํ อาหุ."
+                  "value": "มนสา โวโลกยเต, ตํ ขุ ทิสาโลจนํ อาหุ.",
+                  "runs": [
+                    {
+                      "value": "มนสา โวโลกยเต, ตํ ขุ ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ทิสาโลจนํ",
+                      "bold": true
+                    },
+                    {
+                      "value": " อาหุ.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -2534,11 +3062,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "ayaṃ nayo aṅkuso nāma."
+                  "value": "ayaṃ nayo aṅkuso nāma.",
+                  "runs": [
+                    {
+                      "value": "ayaṃ nayo ",
+                      "bold": false
+                    },
+                    {
+                      "value": "aṅkuso",
+                      "bold": true
+                    },
+                    {
+                      "value": " nāma.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "อยํ นโย องฺกุโส นาม."
+                  "value": "อยํ นโย องฺกุโส นาม.",
+                  "runs": [
+                    {
+                      "value": "อยํ นโย ",
+                      "bold": false
+                    },
+                    {
+                      "value": "องฺกุโส",
+                      "bold": true
+                    },
+                    {
+                      "value": " นาม.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -4035,7 +4591,7 @@
               "bold": true
             },
             {
-              "value": "ติ โลกุตฺตรํ น มิสฺสํ โลกิเยหิ ธมฺเมหิ.{{sp1}} ",
+              "value": "ติ โลกุตฺตรํ น มิสฺสํ โลกิเยหิ ธมฺเมหิ. ",
               "bold": false
             },
             {
@@ -4043,7 +4599,7 @@
               "bold": true
             },
             {
-              "value": "ติ ปริปูรํ อนูนํ อนติเรกํ.{{sp1}} ",
+              "value": "ติ ปริปูรํ อนูนํ อนติเรกํ. ",
               "bold": false
             },
             {
@@ -4051,7 +4607,7 @@
               "bold": true
             },
             {
-              "value": "ติ นิมฺมลํ สพฺพมลาปคตํ ปริโยทาตํ อุปฏฺฐิตํ สพฺพวิเสสานํ, อิทํ วุจฺจติ ตถาคตปทํอิติปิ ตถาคตนิเสวิตํอิติปิ ตถาคตารญฺชิตํอิติปิ, อโต เจตํ พฺรหฺมจริยํ ปญฺญายติ.{{sp1}} เตนาห ภควา “เกวลปริปุณฺณํ ปริสุทฺธํ พฺรหฺมจริยํ ปกาเสสฺสามี”ติ.",
+              "value": "ติ นิมฺมลํ สพฺพมลาปคตํ ปริโยทาตํ อุปฏฺฐิตํ สพฺพวิเสสานํ, อิทํ วุจฺจติ ตถาคตปทํอิติปิ ตถาคตนิเสวิตํอิติปิ ตถาคตารญฺชิตํอิติปิ, อโต เจตํ พฺรหฺมจริยํ ปญฺญายติ. เตนาห ภควา “เกวลปริปุณฺณํ ปริสุทฺธํ พฺรหฺมจริยํ ปกาเสสฺสามี”ติ.",
               "bold": false
             }
           ]
@@ -4813,7 +5369,7 @@
               "bold": true
             },
             {
-              "value": "ติ อสมาหิตสฺส สวนฺติ อภิชฺฌาพฺยาปาทปฺปมาทพหุลสฺส.{{sp1}} ตตฺถ ยา อภิชฺฌา อยํ โลโภ อกุสลมูลํ, โย พฺยาปาโท อยํ โทโส อกุสลมูลํ, โย ปมาโท อยํ โมโห อกุสลมูลํ.{{sp1}} ตสฺเสวํ อสมาหิตสฺส ฉสุ อายตเนสุ ตณฺหา สวนฺติ รูปตณฺหา สทฺทตณฺหา คนฺธตณฺหา รสตณฺหา โผฏฺฐพฺพตณฺหา ธมฺมตณฺหา, ยถาห ภควา–",
+              "value": "ติ อสมาหิตสฺส สวนฺติ อภิชฺฌาพฺยาปาทปฺปมาทพหุลสฺส. ตตฺถ ยา อภิชฺฌา อยํ โลโภ อกุสลมูลํ, โย พฺยาปาโท อยํ โทโส อกุสลมูลํ, โย ปมาโท อยํ โมโห อกุสลมูลํ. ตสฺเสวํ อสมาหิตสฺส ฉสุ อายตเนสุ ตณฺหา สวนฺติ รูปตณฺหา สทฺทตณฺหา คนฺธตณฺหา รสตณฺหา โผฏฺฐพฺพตณฺหา ธมฺมตณฺหา, ยถาห ภควา–",
               "bold": false
             }
           ]
@@ -10000,7 +10556,7 @@
               "bold": true
             },
             {
-              "value": " นาม วุจฺจติ ยา ภวิสฺสสฺส อตฺถสฺส อาสีสนา{{n0}} อวสฺสํ อาคมิสฺสตีติ อาสาสฺส อุปฺปชฺชติ.{{sp1}} ปิหา นาม ยา วตฺตมานสฺส{{n1}} อตฺถสฺส ปตฺถนา, เสยฺยตรํ วา ทิสฺวา “เอทิโส ภเวยฺยนฺ”ติ ปิหาสฺส อุปฺปชฺชติ.{{sp1}} อตฺถนิปฺผตฺติปฏิปาลนา อภินนฺทนา นาม, ปิยํ วา ญาติํ อภินนฺทติ, ปิยํ วา ธมฺมํ อภินนฺทติ, อปฺปฏิกูลโต วา อภินนฺทติ.",
+              "value": " นาม วุจฺจติ ยา ภวิสฺสสฺส อตฺถสฺส อาสีสนา{{n0}} อวสฺสํ อาคมิสฺสตีติ อาสาสฺส อุปฺปชฺชติ. ปิหา นาม ยา วตฺตมานสฺส{{n1}} อตฺถสฺส ปตฺถนา, เสยฺยตรํ วา ทิสฺวา “เอทิโส ภเวยฺยนฺ”ติ ปิหาสฺส อุปฺปชฺชติ. อตฺถนิปฺผตฺติปฏิปาลนา อภินนฺทนา นาม, ปิยํ วา ญาติํ อภินนฺทติ, ปิยํ วา ธมฺมํ อภินนฺทติ, อปฺปฏิกูลโต วา อภินนฺทติ.",
               "bold": false
             }
           ]
@@ -10076,7 +10632,7 @@
               "bold": true
             },
             {
-              "value": "ติ เกจิ รูปาธิมุตฺตา เกจิ สทฺทาธิมุตฺตา เกจิ คนฺธาธิมุตฺตา เกจิ รสาธิมุตฺตา เกจิ โผฏฺฐพฺพาธิมุตฺตา เกจิ ธมฺมาธิมุตฺตา.{{sp1}} ตตฺถ ยานิ ฉ เคหสิตานิ โทมนสฺสานิ ยานิ จ ฉ เคหสิตานิ โสมนสฺสานิ ยานิ จ ฉ เนกฺขมฺมสิตานิ โทมนสฺสานิ ยานิ จ ฉ เนกฺขมฺมสิตานิ โสมนสฺสานิ, อิมานิ จตุวีสปทานิ ตณฺหาปกฺโข, ตณฺหาย เอตํ เววจนํ.{{sp1}} ยา ฉ อุเปกฺขา เคหสิตา, อยํ ทิฏฺฐิปกฺโข.",
+              "value": "ติ เกจิ รูปาธิมุตฺตา เกจิ สทฺทาธิมุตฺตา เกจิ คนฺธาธิมุตฺตา เกจิ รสาธิมุตฺตา เกจิ โผฏฺฐพฺพาธิมุตฺตา เกจิ ธมฺมาธิมุตฺตา. ตตฺถ ยานิ ฉ เคหสิตานิ โทมนสฺสานิ ยานิ จ ฉ เคหสิตานิ โสมนสฺสานิ ยานิ จ ฉ เนกฺขมฺมสิตานิ โทมนสฺสานิ ยานิ จ ฉ เนกฺขมฺมสิตานิ โสมนสฺสานิ, อิมานิ จตุวีสปทานิ ตณฺหาปกฺโข, ตณฺหาย เอตํ เววจนํ. ยา ฉ อุเปกฺขา เคหสิตา, อยํ ทิฏฺฐิปกฺโข.",
               "bold": false
             }
           ]
@@ -11679,7 +12235,7 @@
           "value": "“Nissitassa calitan”ti nissayo nāma duvidho taṇhānissayo ca diṭṭhinissayo ca, tattha yā rattassa cetanā, ayaṃ taṇhānissayo.{{sp1}} Yā mūḷhassa cetanā, ayaṃ diṭṭhinissayo.{{sp1}} Cetanā pana saṅkhārā saṅkhārapaccayā",
           "runs": [
             {
-              "value": "“Nissitassa calitan”ti nissayo nāma duvidho taṇhānissayo ca diṭṭhi",
+              "value": "“Nissitassa calitan”ti ",
               "bold": false
             },
             {
@@ -11687,7 +12243,7 @@
               "bold": true
             },
             {
-              "value": " ca, tattha yā rattassa cetanā, ayaṃ taṇhānissayo.{{sp1}} Yā mūḷhassa cetanā, ayaṃ diṭṭhinissayo.{{sp1}} Cetanā pana saṅkhārā saṅkhārapaccayā",
+              "value": " nāma duvidho taṇhānissayo ca diṭṭhinissayo ca, tattha yā rattassa cetanā, ayaṃ taṇhānissayo.{{sp1}} Yā mūḷhassa cetanā, ayaṃ diṭṭhinissayo.{{sp1}} Cetanā pana saṅkhārā saṅkhārapaccayā",
               "bold": false
             }
           ]
@@ -11697,7 +12253,7 @@
           "value": "“นิสฺสิตสฺส จลิตนฺ”ติ นิสฺสโย นาม ทุวิโธ ตณฺหานิสฺสโย จ ทิฏฺฐินิสฺสโย จ, ตตฺถ ยา รตฺตสฺส เจตนา, อยํ ตณฺหานิสฺสโย.{{sp1}} ยา มูฬฺหสฺส เจตนา, อยํ ทิฏฺฐินิสฺสโย.{{sp1}} เจตนา ปน สงฺขารา สงฺขารปจฺจยา",
           "runs": [
             {
-              "value": "“นิสฺสิตสฺส จลิตนฺ”ติ นิสฺสโย นาม ทุวิโธ ตณฺหานิสฺสโย จ ทิฏฺฐิ",
+              "value": "“นิสฺสิตสฺส จลิตนฺ”ติ ",
               "bold": false
             },
             {
@@ -11705,7 +12261,7 @@
               "bold": true
             },
             {
-              "value": " จ, ตตฺถ ยา รตฺตสฺส เจตนา, อยํ ตณฺหานิสฺสโย.{{sp1}} ยา มูฬฺหสฺส เจตนา, อยํ ทิฏฺฐินิสฺสโย.{{sp1}} เจตนา ปน สงฺขารา สงฺขารปจฺจยา",
+              "value": " นาม ทุวิโธ ตณฺหานิสฺสโย จ ทิฏฺฐินิสฺสโย จ, ตตฺถ ยา รตฺตสฺส เจตนา, อยํ ตณฺหานิสฺสโย. ยา มูฬฺหสฺส เจตนา, อยํ ทิฏฺฐินิสฺสโย. เจตนา ปน สงฺขารา สงฺขารปจฺจยา",
               "bold": false
             }
           ]
@@ -11883,7 +12439,7 @@
           "value": "“Passaddhiyā satī”ti duvidhā passaddhi kāyikā ca cetasikā ca.{{sp1}} Yaṃ kāyikaṃ sukhaṃ, ayaṃ kāyapassaddhi.{{sp1}} Yaṃ cetasikaṃ sukhaṃ, ayaṃ cetasikā passaddhi.{{sp1}} Passaddhakāyo sukhaṃ vediyati{{n0}}, sukhino cittaṃ samādhiyati, samāhito yathābhūtaṃ pajānāti, yathābhūtaṃ pajānanto nibbindati,",
           "runs": [
             {
-              "value": "“Passaddhiyā satī”ti duvidhā passaddhi kāyikā ca cetasikā ca.{{sp1}} Yaṃ kāyikaṃ sukhaṃ, ayaṃ kāya",
+              "value": "“Passaddhiyā satī”ti duvidhā ",
               "bold": false
             },
             {
@@ -11891,7 +12447,7 @@
               "bold": true
             },
             {
-              "value": ".{{sp1}} Yaṃ cetasikaṃ sukhaṃ, ayaṃ cetasikā passaddhi.{{sp1}} Passaddhakāyo sukhaṃ vediyati{{n0}}, sukhino cittaṃ samādhiyati, samāhito yathābhūtaṃ pajānāti, yathābhūtaṃ pajānanto nibbindati,",
+              "value": " kāyikā ca cetasikā ca.{{sp1}} Yaṃ kāyikaṃ sukhaṃ, ayaṃ kāyapassaddhi.{{sp1}} Yaṃ cetasikaṃ sukhaṃ, ayaṃ cetasikā passaddhi.{{sp1}} Passaddhakāyo sukhaṃ vediyati{{n0}}, sukhino cittaṃ samādhiyati, samāhito yathābhūtaṃ pajānāti, yathābhūtaṃ pajānanto nibbindati,",
               "bold": false
             }
           ]
@@ -11901,7 +12457,7 @@
           "value": "“ปสฺสทฺธิยา สตี”ติ ทุวิธา ปสฺสทฺธิ กายิกา จ เจตสิกา จ.{{sp1}} ยํ กายิกํ สุขํ, อยํ กายปสฺสทฺธิ.{{sp1}} ยํ เจตสิกํ สุขํ, อยํ เจตสิกา ปสฺสทฺธิ.{{sp1}} ปสฺสทฺธกาโย สุขํ เวทิยติ{{n0}}, สุขิโน จิตฺตํ สมาธิยติ, สมาหิโต ยถาภูตํ ปชานาติ, ยถาภูตํ ปชานนฺโต นิพฺพินฺทติ,",
           "runs": [
             {
-              "value": "“ปสฺสทฺธิยา สตี”ติ ทุวิธา ปสฺสทฺธิ กายิกา จ เจตสิกา จ.{{sp1}} ยํ กายิกํ สุขํ, อยํ กาย",
+              "value": "“ปสฺสทฺธิยา สตี”ติ ทุวิธา ",
               "bold": false
             },
             {
@@ -11909,7 +12465,7 @@
               "bold": true
             },
             {
-              "value": ".{{sp1}} ยํ เจตสิกํ สุขํ, อยํ เจตสิกา ปสฺสทฺธิ.{{sp1}} ปสฺสทฺธกาโย สุขํ เวทิยติ{{n0}}, สุขิโน จิตฺตํ สมาธิยติ, สมาหิโต ยถาภูตํ ปชานาติ, ยถาภูตํ ปชานนฺโต นิพฺพินฺทติ,",
+              "value": " กายิกา จ เจตสิกา จ. ยํ กายิกํ สุขํ, อยํ กายปสฺสทฺธิ. ยํ เจตสิกํ สุขํ, อยํ เจตสิกา ปสฺสทฺธิ. ปสฺสทฺธกาโย สุขํ เวทิยติ{{n0}}, สุขิโน จิตฺตํ สมาธิยติ, สมาหิโต ยถาภูตํ ปชานาติ, ยถาภูตํ ปชานนฺโต นิพฺพินฺทติ,",
               "bold": false
             }
           ]
@@ -14776,7 +15332,7 @@
               "bold": true
             },
             {
-              "value": "ติ กิํ เทสยติ, ปมาทํ ตํ มจฺจุโน ปทํ.{{sp1}} ",
+              "value": "ติ กิํ เทสยติ, ปมาทํ ตํ มจฺจุโน ปทํ. ",
               "bold": false
             },
             {
@@ -14784,7 +15340,7 @@
               "bold": true
             },
             {
-              "value": "ติ มิจฺฉาทิฏฺฐิหตํ นาม วุจฺจติ ยทา “อนิจฺเจ นิจฺจนฺ”ติ ปสฺสติ, โส วิปลฺลาโส.{{sp1}} โส ปน วิปลฺลาโส กิํลกฺขโณ, วิปรีตคฺคาหลกฺขโณ วิปลฺลาโส.{{sp1}} โส กิํ วิปลฺลาสยติ, ตโย ธมฺเม สญฺญํ จิตฺตํ ทิฏฺฐิมิติ.{{sp1}} โส กุหิํ วิปลฺลาสยติ, จตูสุ อตฺตภาววตฺถูสุ,{{*}}รูปํ อตฺตโต สมนุปสฺสติ, รูปวนฺตํ วา อตฺตานํ, อตฺตนิ วา รูปํ, รูปสฺมิํ วา อตฺตานํ.{{sp1}} เอวํ เวทนํ ฯเปฯ สญฺญํ.{{sp1}} สงฺขาเร.{{sp1}} วิญฺญาณํ อตฺตโต สมนุปสฺสติ, วิญฺญาณวนฺตํ วา อตฺตานํ, อตฺตนิ วา วิญฺญาณํ, วิญฺญาณสฺมิํ วา อตฺตานํ.",
+              "value": "ติ มิจฺฉาทิฏฺฐิหตํ นาม วุจฺจติ ยทา “อนิจฺเจ นิจฺจนฺ”ติ ปสฺสติ, โส วิปลฺลาโส. โส ปน วิปลฺลาโส กิํลกฺขโณ, วิปรีตคฺคาหลกฺขโณ วิปลฺลาโส. โส กิํ วิปลฺลาสยติ, ตโย ธมฺเม สญฺญํ จิตฺตํ ทิฏฺฐิมิติ. โส กุหิํ วิปลฺลาสยติ, จตูสุ อตฺตภาววตฺถูสุ,{{*}}รูปํ อตฺตโต สมนุปสฺสติ, รูปวนฺตํ วา อตฺตานํ, อตฺตนิ วา รูปํ, รูปสฺมิํ วา อตฺตานํ. เอวํ เวทนํ ฯเปฯ สญฺญํ. สงฺขาเร. วิญฺญาณํ อตฺตโต สมนุปสฺสติ, วิญฺญาณวนฺตํ วา อตฺตานํ, อตฺตนิ วา วิญฺญาณํ, วิญฺญาณสฺมิํ วา อตฺตานํ.",
               "bold": false
             }
           ]
@@ -14863,7 +15419,7 @@
               "bold": true
             },
             {
-              "value": "ติ ถินํ{{n0}} นาม ยา จิตฺตสฺส อกลฺลตา อกมฺมนิยตา.{{sp1}} มิทฺธํ นาม ยํ กายสฺส ลีนตฺตํ.{{sp1}} ",
+              "value": "ติ ถินํ{{n0}} นาม ยา จิตฺตสฺส อกลฺลตา อกมฺมนิยตา. มิทฺธํ นาม ยํ กายสฺส ลีนตฺตํ. ",
               "bold": false
             },
             {
@@ -14871,7 +15427,7 @@
               "bold": true
             },
             {
-              "value": "ติ กิเลสมารสฺส จ สตฺตมารสฺส จ วสํ คจฺฉติ, โส หิ นิวุโต สํสาราภิมุโข โหติ.{{sp1}} อิมานิ ภควตา เทฺว สจฺจานิ เทสิตานิ ทุกฺขํ สมุทโย จ.{{sp1}} เตสํ ภควา ปริญฺญาย จ ปหานาย จ ธมฺมํ เทเสติ ทุกฺขสฺส ปริญฺญาย สมุทยสฺส ปหานาย.{{sp1}} เยน จ ปริชานาติ เยน จ ปชหติ, อยํ มคฺโค.{{sp1}} ยํ ตณฺหาย อวิชฺชาย จ ปหานํ, อยํ นิโรโธ.{{sp1}} อิมานิ จตฺตาริ สจฺจานิ.{{sp1}} เตนาห ภควา “อรกฺขิเตน จิตฺเตนา”ติ.{{sp1}} เตนาหายสฺมา มหากจฺจายโน “อสฺสาทาทีนวตา”ติ.",
+              "value": "ติ กิเลสมารสฺส จ สตฺตมารสฺส จ วสํ คจฺฉติ, โส หิ นิวุโต สํสาราภิมุโข โหติ. อิมานิ ภควตา เทฺว สจฺจานิ เทสิตานิ ทุกฺขํ สมุทโย จ. เตสํ ภควา ปริญฺญาย จ ปหานาย จ ธมฺมํ เทเสติ ทุกฺขสฺส ปริญฺญาย สมุทยสฺส ปหานาย. เยน จ ปริชานาติ เยน จ ปชหติ, อยํ มคฺโค. ยํ ตณฺหาย อวิชฺชาย จ ปหานํ, อยํ นิโรโธ. อิมานิ จตฺตาริ สจฺจานิ. เตนาห ภควา “อรกฺขิเตน จิตฺเตนา”ติ. เตนาหายสฺมา มหากจฺจายโน “อสฺสาทาทีนวตา”ติ.",
               "bold": false
             }
           ]
@@ -15494,7 +16050,7 @@
               "bold": true
             },
             {
-              "value": "ติ อริยา จ อนริยา จ สกฺกายปริยาปนฺนา จ สกฺกายวีติวตฺตา จ.{{sp1}} ",
+              "value": "ติ อริยา จ อนริยา จ สกฺกายปริยาปนฺนา จ สกฺกายวีติวตฺตา จ. ",
               "bold": false
             },
             {
@@ -15502,7 +16058,7 @@
               "bold": true
             },
             {
-              "value": "ติ ทฺวีหิ มรเณหิ ทนฺธมรเณน จ อทนฺธมรเณน จ, สกฺกายปริยาปนฺนานํ อทนฺธมรณํ สกฺกายวีติวตฺตานํ ทนฺธมรณํ.{{sp1}} ",
+              "value": "ติ ทฺวีหิ มรเณหิ ทนฺธมรเณน จ อทนฺธมรเณน จ, สกฺกายปริยาปนฺนานํ อทนฺธมรณํ สกฺกายวีติวตฺตานํ ทนฺธมรณํ. ",
               "bold": false
             },
             {
@@ -15510,7 +16066,7 @@
               "bold": true
             },
             {
-              "value": "ติ ขยา อายุสฺส อินฺทฺริยานํ อุปโรธา ชีวิตปริยนฺโต มรณปริยนฺโต.{{sp1}} ",
+              "value": "ติ ขยา อายุสฺส อินฺทฺริยานํ อุปโรธา ชีวิตปริยนฺโต มรณปริยนฺโต. ",
               "bold": false
             },
             {
@@ -15518,7 +16074,7 @@
               "bold": true
             },
             {
-              "value": "ติ กมฺมสฺสกตา.{{sp1}} ",
+              "value": "ติ กมฺมสฺสกตา. ",
               "bold": false
             },
             {
@@ -15578,7 +16134,7 @@
               "bold": true
             },
             {
-              "value": "ติ อปุญฺญสงฺขารา.{{sp1}} ",
+              "value": "ติ อปุญฺญสงฺขารา. ",
               "bold": false
             },
             {
@@ -15586,7 +16142,7 @@
               "bold": true
             },
             {
-              "value": "ติ ปุญฺญสงฺขารา สุคติํ คมิสฺสนฺติ.{{sp1}} ",
+              "value": "ติ ปุญฺญสงฺขารา สุคติํ คมิสฺสนฺติ. ",
               "bold": false
             },
             {
@@ -15594,7 +16150,7 @@
               "bold": true
             },
             {
-              "value": "ติ สพฺพสงฺขารานํ สมติกฺกมนํ.{{sp1}} เตนาห ภควา–“สพฺเพ ฯเปฯ นาสวา”ติ.",
+              "value": "ติ สพฺพสงฺขารานํ สมติกฺกมนํ. เตนาห ภควา–“สพฺเพ ฯเปฯ นาสวา”ติ.",
               "bold": false
             }
           ]
@@ -15609,39 +16165,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "“Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ.{{sp1}} Yathākammaṃ gamissanti, puññapāpaphalūpagā.{{sp1}} Nirayaṃ pāpakammantā”ti āgāḷhā ca nijjhāmā ca paṭipadā. “Apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti majjhimā paṭipadā. “Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ, yathākammaṃ gamissanti, puññapāpaphalūpagā, nirayaṃ pāpakammantā”ti ayaṃ saṃkileso.{{sp1}} Evaṃ saṃsāraṃ nibbattayati. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti ime tayo vaṭṭā dukkhavaṭṭo kammavaṭṭo kilesavaṭṭo. “Apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti tiṇṇaṃ vaṭṭānaṃ vivaṭṭanā. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti ādīnavo, “puññakammā ca suggatin”ti assādo, “apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti nissaraṇaṃ. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti hetu ca phalañca, pañcakkhandhā phalaṃ, taṇhā hetu, “apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti maggo ca phalañca. “Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ.{{sp1}} Yathākammaṃ gamissanti, puññapāpaphalūpagā, nirayaṃ pāpakammantā”ti ayaṃ saṃkileso, so saṃkileso tividho taṇhāsaṃkileso diṭṭhisaṃkileso duccaritasaṃkilesoti.",
-          "runs": [
-            {
-              "value": "“Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ.{{sp1}} Yathākammaṃ gamissanti, puññapāpaphalūpagā.{{sp1}} ",
-              "bold": false
-            },
-            {
-              "value": "Nirayaṃ pāpakammantā",
-              "bold": true
-            },
-            {
-              "value": "”ti āgāḷhā ca nijjhāmā ca paṭipadā. “Apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti majjhimā paṭipadā. “Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ, yathākammaṃ gamissanti, puññapāpaphalūpagā, nirayaṃ pāpakammantā”ti ayaṃ saṃkileso.{{sp1}} Evaṃ saṃsāraṃ nibbattayati. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti ime tayo vaṭṭā dukkhavaṭṭo kammavaṭṭo kilesavaṭṭo. “Apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti tiṇṇaṃ vaṭṭānaṃ vivaṭṭanā. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti ādīnavo, “puññakammā ca suggatin”ti assādo, “apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti nissaraṇaṃ. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti hetu ca phalañca, pañcakkhandhā phalaṃ, taṇhā hetu, “apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti maggo ca phalañca. “Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ.{{sp1}} Yathākammaṃ gamissanti, puññapāpaphalūpagā, nirayaṃ pāpakammantā”ti ayaṃ saṃkileso, so saṃkileso tividho taṇhāsaṃkileso diṭṭhisaṃkileso duccaritasaṃkilesoti.",
-              "bold": false
-            }
-          ]
+          "value": "“Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ.{{sp1}} Yathākammaṃ gamissanti, puññapāpaphalūpagā.{{sp1}} Nirayaṃ pāpakammantā”ti āgāḷhā ca nijjhāmā ca paṭipadā. “Apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti majjhimā paṭipadā. “Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ, yathākammaṃ gamissanti, puññapāpaphalūpagā, nirayaṃ pāpakammantā”ti ayaṃ saṃkileso.{{sp1}} Evaṃ saṃsāraṃ nibbattayati. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti ime tayo vaṭṭā dukkhavaṭṭo kammavaṭṭo kilesavaṭṭo. “Apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti tiṇṇaṃ vaṭṭānaṃ vivaṭṭanā. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti ādīnavo, “puññakammā ca suggatin”ti assādo, “apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti nissaraṇaṃ. “Sabbe sattā marissanti -pa- nirayaṃ pāpakammantā”ti hetu ca phalañca, pañcakkhandhā phalaṃ, taṇhā hetu, “apare ca maggaṃ bhāvetvā, parinibbanti’nāsavā”ti maggo ca phalañca. “Sabbe sattā marissanti, maraṇantaṃ hi jīvitaṃ.{{sp1}} Yathākammaṃ gamissanti, puññapāpaphalūpagā, nirayaṃ pāpakammantā”ti ayaṃ saṃkileso, so saṃkileso tividho taṇhāsaṃkileso diṭṭhisaṃkileso duccaritasaṃkilesoti."
         },
         {
           "script": "thai",
-          "value": "“สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ.{{sp1}} ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา.{{sp1}} นิรยํ ปาปกมฺมนฺตา”ติ อาคาฬฺหา จ นิชฺฌามา จ ปฏิปทา. “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ มชฺฌิมา ปฏิปทา. “สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ, ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา, นิรยํ ปาปกมฺมนฺตา”ติ อยํ สํกิเลโส.{{sp1}} เอวํ สํสารํ นิพฺพตฺตยติ. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ อิเม ตโย วฏฺฏา ทุกฺขวฏฺโฏ กมฺมวฏฺโฏ กิเลสวฏฺโฏ. “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ ติณฺณํ วฏฺฏานํ วิวฏฺฏนา. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ อาทีนโว, “ปุญฺญกมฺมา จ สุคฺคตินฺ”ติ อสฺสาโท, “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ นิสฺสรณํ. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ เหตุ จ ผลญฺจ, ปญฺจกฺขนฺธา ผลํ, ตณฺหา เหตุ, “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ มคฺโค จ ผลญฺจ. “สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ.{{sp1}} ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา, นิรยํ ปาปกมฺมนฺตา”ติ อยํ สํกิเลโส, โส สํกิเลโส ติวิโธ ตณฺหาสํกิเลโส ทิฏฺฐิสํกิเลโส ทุจฺจริตสํกิเลโสติ.",
-          "runs": [
-            {
-              "value": "“สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ.{{sp1}} ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา.{{sp1}} ",
-              "bold": false
-            },
-            {
-              "value": "นิรยํ ปาปกมฺมนฺตา",
-              "bold": true
-            },
-            {
-              "value": "”ติ อาคาฬฺหา จ นิชฺฌามา จ ปฏิปทา. “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ มชฺฌิมา ปฏิปทา. “สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ, ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา, นิรยํ ปาปกมฺมนฺตา”ติ อยํ สํกิเลโส.{{sp1}} เอวํ สํสารํ นิพฺพตฺตยติ. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ อิเม ตโย วฏฺฏา ทุกฺขวฏฺโฏ กมฺมวฏฺโฏ กิเลสวฏฺโฏ. “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ ติณฺณํ วฏฺฏานํ วิวฏฺฏนา. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ อาทีนโว, “ปุญฺญกมฺมา จ สุคฺคตินฺ”ติ อสฺสาโท, “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ นิสฺสรณํ. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ เหตุ จ ผลญฺจ, ปญฺจกฺขนฺธา ผลํ, ตณฺหา เหตุ, “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ มคฺโค จ ผลญฺจ. “สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ.{{sp1}} ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา, นิรยํ ปาปกมฺมนฺตา”ติ อยํ สํกิเลโส, โส สํกิเลโส ติวิโธ ตณฺหาสํกิเลโส ทิฏฺฐิสํกิเลโส ทุจฺจริตสํกิเลโสติ.",
-              "bold": false
-            }
-          ]
+          "value": "“สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ.{{sp1}} ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา.{{sp1}} นิรยํ ปาปกมฺมนฺตา”ติ อาคาฬฺหา จ นิชฺฌามา จ ปฏิปทา. “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ มชฺฌิมา ปฏิปทา. “สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ, ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา, นิรยํ ปาปกมฺมนฺตา”ติ อยํ สํกิเลโส.{{sp1}} เอวํ สํสารํ นิพฺพตฺตยติ. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ อิเม ตโย วฏฺฏา ทุกฺขวฏฺโฏ กมฺมวฏฺโฏ กิเลสวฏฺโฏ. “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ ติณฺณํ วฏฺฏานํ วิวฏฺฏนา. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ อาทีนโว, “ปุญฺญกมฺมา จ สุคฺคตินฺ”ติ อสฺสาโท, “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ นิสฺสรณํ. “สพฺเพ สตฺตา มริสฺสนฺติ ฯเปฯ นิรยํ ปาปกมฺมนฺตา”ติ เหตุ จ ผลญฺจ, ปญฺจกฺขนฺธา ผลํ, ตณฺหา เหตุ, “อปเร จ มคฺคํ ภาเวตฺวา, ปรินิพฺพนฺติ’นาสวา”ติ มคฺโค จ ผลญฺจ. “สพฺเพ สตฺตา มริสฺสนฺติ, มรณนฺตํ หิ ชีวิตํ.{{sp1}} ยถากมฺมํ คมิสฺสนฺติ, ปุญฺญปาปผลูปคา, นิรยํ ปาปกมฺมนฺตา”ติ อยํ สํกิเลโส, โส สํกิเลโส ติวิโธ ตณฺหาสํกิเลโส ทิฏฺฐิสํกิเลโส ทุจฺจริตสํกิเลโสติ."
         }
       ]
     },
@@ -39594,7 +40122,7 @@
           "value": "สํกิเลสภาคิเยน จ วาสนาภาคิเยน จ สุตฺเตน นิทฺทิสิตพฺโพ.{{sp1}} ตตฺถ กุสลํ จตูหิ สุตฺเตหิ นิทฺทิสิตพฺพํ วาสนาภาคิเยน ทสฺสนภาคิเยน ภาวนาภาคิเยน อเสกฺขภาคิเยน จ.{{sp1}} อกุสลํ สํ กิเลสภาคิเยน สุตฺเตน นิทฺทิสิตพฺพํ.{{sp1}} กุสลญฺจ อกุสลญฺจ ตทุภเยน{{n0}} นิทฺทิสิตฺตพฺพํ.{{sp1}} อนุญฺญาตํ ภควโต อนุญฺญาตาย นิทฺทิสิตพฺพํ, ตํ ปญฺจวิธํ สํวโร ปหานํ ภาวนา สจฺฉิกิริยา กปฺปิยานุโลโมติ, ยํ ทิสฺสติ ตาสุ ตาสุ ภูมีสุ, ตํ กปฺปิยานุโลเมน นิทฺทิสิตพฺพํ.{{sp1}} ปฏิกฺขิตฺตํ ภควตา ปฏิกฺขิตฺตการเณน นิทฺทิสิตพฺพํ.{{sp1}} อนุญฺญาตญฺจ ปฏิกฺขิตฺตญฺจ ตทุภเยน นิทฺทิสิตพฺพํ.{{sp1}} ถโว ปสํสาย นิทฺทิสิตพฺโพ, โส ปญฺจวิเธน เวทิตพฺโพ ภควโต ธมฺมสฺส อริยสํฆสฺส อริยธมฺมานํ สิกฺขาย โลกิยคุณสมฺปตฺติยาติ.{{sp1}} เอวํ ถโว ปญฺจวิเธน นิทฺทิสิตพฺโพ.",
           "runs": [
             {
-              "value": "สํกิเลสภาคิเยน จ วาสนาภาคิเยน จ สุตฺเตน นิทฺทิสิตพฺโพ.{{sp1}} ตตฺถ กุสลํ จตูหิ สุตฺเตหิ นิทฺทิสิตพฺพํ วาสนาภาคิเยน ทสฺสนภาคิเยน ",
+              "value": "สํกิเลสภาคิเยน จ วาสนาภาคิเยน จ สุตฺเตน นิทฺทิสิตพฺโพ. ตตฺถ กุสลํ จตูหิ สุตฺเตหิ นิทฺทิสิตพฺพํ วาสนาภาคิเยน ทสฺสนภาคิเยน ",
               "bold": false
             },
             {
@@ -39602,7 +40130,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}}",
+              "value": "",
               "bold": false
             },
             {
@@ -39610,7 +40138,7 @@
               "bold": true
             },
             {
-              "value": " สุตฺเตน นิทฺทิสิตพฺพํ.{{sp1}} กุสลญฺจ อกุสลญฺจ ตทุภเยน{{n0}} นิทฺทิสิตฺตพฺพํ.{{sp1}} ",
+              "value": " สุตฺเตน นิทฺทิสิตพฺพํ. กุสลญฺจ อกุสลญฺจ ตทุภเยน{{n0}} นิทฺทิสิตฺตพฺพํ. ",
               "bold": false
             },
             {
@@ -39618,7 +40146,7 @@
               "bold": true
             },
             {
-              "value": " สํวโร ปหานํ ภาวนา สจฺฉิกิริยา กปฺปิยานุโลโมติ, ยํ ทิสฺสติ ตาสุ ตาสุ ภูมีสุ, ตํ กปฺปิยานุโลเมน นิทฺทิสิตพฺพํ.{{sp1}} ปฏิกฺขิตฺตํ ภควตา ปฏิกฺขิตฺตการเณน นิทฺทิสิตพฺพํ.{{sp1}} อนุญฺญาตญฺจ ปฏิกฺขิตฺตญฺจ ตทุภเยน นิทฺทิสิตพฺพํ.{{sp1}} ถโว ปสํสาย นิทฺทิสิตพฺโพ, โส ปญฺจวิเธน เวทิตพฺโพ ",
+              "value": " สํวโร ปหานํ ภาวนา สจฺฉิกิริยา กปฺปิยานุโลโมติ, ยํ ทิสฺสติ ตาสุ ตาสุ ภูมีสุ, ตํ กปฺปิยานุโลเมน นิทฺทิสิตพฺพํ. ปฏิกฺขิตฺตํ ภควตา ปฏิกฺขิตฺตการเณน นิทฺทิสิตพฺพํ. อนุญฺญาตญฺจ ปฏิกฺขิตฺตญฺจ ตทุภเยน นิทฺทิสิตพฺพํ. ถโว ปสํสาย นิทฺทิสิตพฺโพ, โส ปญฺจวิเธน เวทิตพฺโพ ",
               "bold": false
             },
             {
@@ -39634,7 +40162,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}}",
+              "value": "",
               "bold": false
             },
             {
@@ -57505,7 +58033,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} สุตฺตตฺถสมุจฺจยภูมิ",
+              "value": "6. สุตฺตตฺถสมุจฺจยภูมิ",
               "bold": true
             }
           ]
@@ -59799,11 +60327,103 @@
       "text": [
         {
           "script": "roman",
-          "value": "evameva dhammānaṃ manopubbaṅgamā.{{sp1}} Tattha tividhānaṃ pubbaṅgamānaṃ nekkhammacchandena abyāpādacchandena avihiṃsāchandena.{{sp1}} Alobhassa nekkhammacchandena pubbaṅgamā.{{sp1}} Adosassa abyāpādacchandena pubbaṅgamā.{{sp1}} Amohassa avihiṃsāchandena pubbaṅgamā.{{sp1}} Tattha manoseṭṭhāti manasā ime dhammā ussaṭā manena vā nimmitā.{{sp1}} Manova imesaṃ dhammānaṃ seṭṭhoti manova imesaṃ dhammānaṃ seṭṭhajeṭṭhoti manova imesaṃ dhammānaṃ ādhipaccaṃ karotīti manoseṭṭhā.{{sp1}} Manojavāti yattha mano gacchati.{{sp1}} Tattha ime dhammā gacchantīti manojavā.{{sp1}} Yathā vāto sīghaṃ gacchati añño vā koci sīghaṃ gāmako vuccate vātajavoti pakkhigāmikoti, evameva ime dhammā manena sampajāyamānā gacchanti, tattha ime dhammā gacchantīti manojavāti.{{sp1}} Te tividhā chandasamudānitā anāvilatā ca saṅkappo.{{sp1}} Sattavidhā ca kāyikaṃ sucaritaṃ vācasikaṃ sucaritaṃ, te dasa kusalakammapathā.{{sp1}} Tattha manasā ce pasannenāti manokammaṃ.{{sp1}} Bhāsati vāti vacīkammaṃ.{{sp1}} Karoti vāti kāyakammaṃ.{{sp1}} Imehi imasmiṃ sutte dasa kusalakammapathā paramāpi santā sīlavatā paramā.{{sp1}} So bhavati vivattiyaṃ na lokaniyyānāya vāsanābhāgiyaṃ suttaṃ bhavati.{{sp1}} Ayaṃ desanā."
+          "value": "evameva dhammānaṃ manopubbaṅgamā.{{sp1}} Tattha tividhānaṃ pubbaṅgamānaṃ nekkhammacchandena abyāpādacchandena avihiṃsāchandena.{{sp1}} Alobhassa nekkhammacchandena pubbaṅgamā.{{sp1}} Adosassa abyāpādacchandena pubbaṅgamā.{{sp1}} Amohassa avihiṃsāchandena pubbaṅgamā.{{sp1}} Tattha manoseṭṭhāti manasā ime dhammā ussaṭā manena vā nimmitā.{{sp1}} Manova imesaṃ dhammānaṃ seṭṭhoti manova imesaṃ dhammānaṃ seṭṭhajeṭṭhoti manova imesaṃ dhammānaṃ ādhipaccaṃ karotīti manoseṭṭhā.{{sp1}} Manojavāti yattha mano gacchati.{{sp1}} Tattha ime dhammā gacchantīti manojavā.{{sp1}} Yathā vāto sīghaṃ gacchati añño vā koci sīghaṃ gāmako vuccate vātajavoti pakkhigāmikoti, evameva ime dhammā manena sampajāyamānā gacchanti, tattha ime dhammā gacchantīti manojavāti.{{sp1}} Te tividhā chandasamudānitā anāvilatā ca saṅkappo.{{sp1}} Sattavidhā ca kāyikaṃ sucaritaṃ vācasikaṃ sucaritaṃ, te dasa kusalakammapathā.{{sp1}} Tattha manasā ce pasannenāti manokammaṃ.{{sp1}} Bhāsati vāti vacīkammaṃ.{{sp1}} Karoti vāti kāyakammaṃ.{{sp1}} Imehi imasmiṃ sutte dasa kusalakammapathā paramāpi santā sīlavatā paramā.{{sp1}} So bhavati vivattiyaṃ na lokaniyyānāya vāsanābhāgiyaṃ suttaṃ bhavati.{{sp1}} Ayaṃ desanā.",
+          "runs": [
+            {
+              "value": "evameva dhammānaṃ manopubbaṅgamā.{{sp1}} Tattha tividhānaṃ pubbaṅgamānaṃ nekkhammacchandena abyāpādacchandena avihiṃsāchandena.{{sp1}} Alobhassa nekkhammacchandena pubbaṅgamā.{{sp1}} Adosassa abyāpādacchandena pubbaṅgamā.{{sp1}} Amohassa avihiṃsāchandena pubbaṅgamā.{{sp1}} Tattha ",
+              "bold": false
+            },
+            {
+              "value": "manoseṭṭhā",
+              "bold": true
+            },
+            {
+              "value": "ti manasā ime dhammā ussaṭā manena vā nimmitā.{{sp1}} Manova imesaṃ dhammānaṃ seṭṭhoti manova imesaṃ dhammānaṃ seṭṭhajeṭṭhoti manova imesaṃ dhammānaṃ ādhipaccaṃ karotīti manoseṭṭhā.{{sp1}} ",
+              "bold": false
+            },
+            {
+              "value": "Manojavā",
+              "bold": true
+            },
+            {
+              "value": "ti yattha mano gacchati.{{sp1}} Tattha ime dhammā gacchantīti manojavā.{{sp1}} Yathā vāto sīghaṃ gacchati añño vā koci sīghaṃ gāmako vuccate vātajavoti pakkhigāmikoti, evameva ime dhammā manena sampajāyamānā gacchanti, tattha ime dhammā gacchantīti manojavāti.{{sp1}} Te tividhā chandasamudānitā anāvilatā ca saṅkappo.{{sp1}} Sattavidhā ca kāyikaṃ sucaritaṃ vācasikaṃ sucaritaṃ, te dasa kusalakammapathā.{{sp1}} Tattha ",
+              "bold": false
+            },
+            {
+              "value": "manasā ce pasannenā",
+              "bold": true
+            },
+            {
+              "value": "ti manokammaṃ.{{sp1}} ",
+              "bold": false
+            },
+            {
+              "value": "Bhāsati vā",
+              "bold": true
+            },
+            {
+              "value": "ti vacīkammaṃ.{{sp1}} ",
+              "bold": false
+            },
+            {
+              "value": "Karoti vā",
+              "bold": true
+            },
+            {
+              "value": "ti kāyakammaṃ.{{sp1}} Imehi imasmiṃ sutte dasa kusalakammapathā paramāpi santā sīlavatā paramā.{{sp1}} So bhavati vivattiyaṃ na lokaniyyānāya vāsanābhāgiyaṃ suttaṃ bhavati.{{sp1}} Ayaṃ desanā.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เอวเมว ธมฺมานํ มโนปุพฺพงฺคมา.{{sp1}} ตตฺถ ติวิธานํ ปุพฺพงฺคมานํ เนกฺขมฺมจฺฉนฺเทน อพฺยาปาทจฺฉนฺเทน อวิหิํสาฉนฺเทน.{{sp1}} อโลภสฺส เนกฺขมฺมจฺฉนฺเทน ปุพฺพงฺคมา.{{sp1}} อโทสสฺส อพฺยาปาทจฺฉนฺเทน ปุพฺพงฺคมา.{{sp1}} อโมหสฺส อวิหิํสาฉนฺเทน ปุพฺพงฺคมา.{{sp1}} ตตฺถ มโนเสฏฺฐาติ มนสา อิเม ธมฺมา อุสฺสฏา มเนน วา นิมฺมิตา.{{sp1}} มโนว อิเมสํ ธมฺมานํ เสฏฺโฐติ มโนว อิเมสํ ธมฺมานํ เสฏฺฐเชฏฺโฐติ มโนว อิเมสํ ธมฺมานํ อาธิปจฺจํ กโรตีติ มโนเสฏฺฐา.{{sp1}} มโนชวาติ ยตฺถ มโน คจฺฉติ.{{sp1}} ตตฺถ อิเม ธมฺมา คจฺฉนฺตีติ มโนชวา.{{sp1}} ยถา วาโต สีฆํ คจฺฉติ อญฺโญ วา โกจิ สีฆํ คามโก วุจฺจเต วาตชโวติ ปกฺขิคามิโกติ, เอวเมว อิเม ธมฺมา มเนน สมฺปชายมานา คจฺฉนฺติ, ตตฺถ อิเม ธมฺมา คจฺฉนฺตีติ มโนชวาติ.{{sp1}} เต ติวิธา ฉนฺทสมุทานิตา อนาวิลตา จ สงฺกปฺโป.{{sp1}} สตฺตวิธา จ กายิกํ สุจริตํ วาจสิกํ สุจริตํ, เต ทส กุสลกมฺมปถา.{{sp1}} ตตฺถ มนสา เจ ปสนฺเนนาติ มโนกมฺมํ.{{sp1}} ภาสติ วาติ วจีกมฺมํ.{{sp1}} กโรติ วาติ กายกมฺมํ.{{sp1}} อิเมหิ อิมสฺมิํ สุตฺเต ทส กุสลกมฺมปถา ปรมาปิ สนฺตา สีลวตา ปรมา.{{sp1}} โส ภวติ วิวตฺติยํ น โลกนิยฺยานาย วาสนาภาคิยํ สุตฺตํ ภวติ.{{sp1}} อยํ เทสนา."
+          "value": "เอวเมว ธมฺมานํ มโนปุพฺพงฺคมา.{{sp1}} ตตฺถ ติวิธานํ ปุพฺพงฺคมานํ เนกฺขมฺมจฺฉนฺเทน อพฺยาปาทจฺฉนฺเทน อวิหิํสาฉนฺเทน.{{sp1}} อโลภสฺส เนกฺขมฺมจฺฉนฺเทน ปุพฺพงฺคมา.{{sp1}} อโทสสฺส อพฺยาปาทจฺฉนฺเทน ปุพฺพงฺคมา.{{sp1}} อโมหสฺส อวิหิํสาฉนฺเทน ปุพฺพงฺคมา.{{sp1}} ตตฺถ มโนเสฏฺฐาติ มนสา อิเม ธมฺมา อุสฺสฏา มเนน วา นิมฺมิตา.{{sp1}} มโนว อิเมสํ ธมฺมานํ เสฏฺโฐติ มโนว อิเมสํ ธมฺมานํ เสฏฺฐเชฏฺโฐติ มโนว อิเมสํ ธมฺมานํ อาธิปจฺจํ กโรตีติ มโนเสฏฺฐา.{{sp1}} มโนชวาติ ยตฺถ มโน คจฺฉติ.{{sp1}} ตตฺถ อิเม ธมฺมา คจฺฉนฺตีติ มโนชวา.{{sp1}} ยถา วาโต สีฆํ คจฺฉติ อญฺโญ วา โกจิ สีฆํ คามโก วุจฺจเต วาตชโวติ ปกฺขิคามิโกติ, เอวเมว อิเม ธมฺมา มเนน สมฺปชายมานา คจฺฉนฺติ, ตตฺถ อิเม ธมฺมา คจฺฉนฺตีติ มโนชวาติ.{{sp1}} เต ติวิธา ฉนฺทสมุทานิตา อนาวิลตา จ สงฺกปฺโป.{{sp1}} สตฺตวิธา จ กายิกํ สุจริตํ วาจสิกํ สุจริตํ, เต ทส กุสลกมฺมปถา.{{sp1}} ตตฺถ มนสา เจ ปสนฺเนนาติ มโนกมฺมํ.{{sp1}} ภาสติ วาติ วจีกมฺมํ.{{sp1}} กโรติ วาติ กายกมฺมํ.{{sp1}} อิเมหิ อิมสฺมิํ สุตฺเต ทส กุสลกมฺมปถา ปรมาปิ สนฺตา สีลวตา ปรมา.{{sp1}} โส ภวติ วิวตฺติยํ น โลกนิยฺยานาย วาสนาภาคิยํ สุตฺตํ ภวติ.{{sp1}} อยํ เทสนา.",
+          "runs": [
+            {
+              "value": "เอวเมว ธมฺมานํ มโนปุพฺพงฺคมา. ตตฺถ ติวิธานํ ปุพฺพงฺคมานํ เนกฺขมฺมจฺฉนฺเทน อพฺยาปาทจฺฉนฺเทน อวิหิํสาฉนฺเทน. อโลภสฺส เนกฺขมฺมจฺฉนฺเทน ปุพฺพงฺคมา. อโทสสฺส อพฺยาปาทจฺฉนฺเทน ปุพฺพงฺคมา. อโมหสฺส อวิหิํสาฉนฺเทน ปุพฺพงฺคมา. ตตฺถ ",
+              "bold": false
+            },
+            {
+              "value": "มโนเสฏฺฐา",
+              "bold": true
+            },
+            {
+              "value": "ติ มนสา อิเม ธมฺมา อุสฺสฏา มเนน วา นิมฺมิตา. มโนว อิเมสํ ธมฺมานํ เสฏฺโฐติ มโนว อิเมสํ ธมฺมานํ เสฏฺฐเชฏฺโฐติ มโนว อิเมสํ ธมฺมานํ อาธิปจฺจํ กโรตีติ มโนเสฏฺฐา. ",
+              "bold": false
+            },
+            {
+              "value": "มโนชวา",
+              "bold": true
+            },
+            {
+              "value": "ติ ยตฺถ มโน คจฺฉติ. ตตฺถ อิเม ธมฺมา คจฺฉนฺตีติ มโนชวา. ยถา วาโต สีฆํ คจฺฉติ อญฺโญ วา โกจิ สีฆํ คามโก วุจฺจเต วาตชโวติ ปกฺขิคามิโกติ, เอวเมว อิเม ธมฺมา มเนน สมฺปชายมานา คจฺฉนฺติ, ตตฺถ อิเม ธมฺมา คจฺฉนฺตีติ มโนชวาติ. เต ติวิธา ฉนฺทสมุทานิตา อนาวิลตา จ สงฺกปฺโป. สตฺตวิธา จ กายิกํ สุจริตํ วาจสิกํ สุจริตํ, เต ทส กุสลกมฺมปถา. ตตฺถ ",
+              "bold": false
+            },
+            {
+              "value": "มนสา เจ ปสนฺเนนา",
+              "bold": true
+            },
+            {
+              "value": "ติ มโนกมฺมํ. ",
+              "bold": false
+            },
+            {
+              "value": "ภาสติ วา",
+              "bold": true
+            },
+            {
+              "value": "ติ วจีกมฺมํ. ",
+              "bold": false
+            },
+            {
+              "value": "กโรติ วา",
+              "bold": true
+            },
+            {
+              "value": "ติ กายกมฺมํ. อิเมหิ อิมสฺมิํ สุตฺเต ทส กุสลกมฺมปถา ปรมาปิ สนฺตา สีลวตา ปรมา. โส ภวติ วิวตฺติยํ น โลกนิยฺยานาย วาสนาภาคิยํ สุตฺตํ ภวติ. อยํ เทสนา.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -59881,7 +60501,7 @@
           "value": "ปทฏฺฐานนฺติ อฏฺฐารสนฺนํ มโนปวิจารานํ ปทฏฺฐานํ.{{sp1}} มโนปุพฺพงฺคมา ธมฺมาติ สพฺพกุสลปกฺขสฺส อิเม ธามฺมา ปทฏฺฐานํ.{{sp1}} มนสา เจ ปสนฺเนนาติ โย เจตโส ปสาโท, อิทํ สทฺธินฺทฺริยสฺส ปทฏฺฐานํ.{{sp1}} ภาสติ วาติ สมฺมาวาจาย.{{sp1}} กโรติ วาติ สมฺมากมฺมนฺตสฺส จ สมฺมาวายามสฺส จ ปทฏฺฐานํ.",
           "runs": [
             {
-              "value": "ปทฏฺฐานนฺติ อฏฺฐารสนฺนํ มโนปวิจารานํ ปทฏฺฐานํ.{{sp1}} มโนปุพฺพงฺคมา ธมฺมาติ สพฺพกุสลปกฺขสฺส อิเม ธามฺมา ปทฏฺฐานํ.{{sp1}} ",
+              "value": "ปทฏฺฐานนฺติ อฏฺฐารสนฺนํ มโนปวิจารานํ ปทฏฺฐานํ. มโนปุพฺพงฺคมา ธมฺมาติ สพฺพกุสลปกฺขสฺส อิเม ธามฺมา ปทฏฺฐานํ. ",
               "bold": false
             },
             {
@@ -59889,7 +60509,7 @@
               "bold": true
             },
             {
-              "value": "ติ โย เจตโส ปสาโท, อิทํ สทฺธินฺทฺริยสฺส ปทฏฺฐานํ.{{sp1}} ",
+              "value": "ติ โย เจตโส ปสาโท, อิทํ สทฺธินฺทฺริยสฺส ปทฏฺฐานํ. ",
               "bold": false
             },
             {
@@ -59897,7 +60517,7 @@
               "bold": true
             },
             {
-              "value": "ติ สมฺมาวาจาย.{{sp1}} ",
+              "value": "ติ สมฺมาวาจาย. ",
               "bold": false
             },
             {
@@ -59940,7 +60560,7 @@
           "value": "ลกฺขโณติ อิติ ปุพฺพงฺคมา ธมฺมาติ เวทนาปุพฺพงฺคมาปิ เอเต, สญฺญาปุพฺพงฺคมาปิ เอเต, สงฺขารปุพฺพงฺคมาปิ เอเต.{{sp1}} เย เกจิ ธมฺมา สหชาตา สพฺเพ ปุพฺพงฺคมา เอเตสํ ธมฺมานํ.{{sp1}} ตโต นํ สุขมเนฺวตีติ โสมนสฺสมปิ นํ อเนฺวติ ยํ สุสุขจฺฉายา ตทาปิ นํ สุขํ ตทป อเนฺวติ.",
           "runs": [
             {
-              "value": "ลกฺขโณติ อิติ ปุพฺพงฺคมา ธมฺมาติ เวทนาปุพฺพงฺคมาปิ เอเต, สญฺญาปุพฺพงฺคมาปิ เอเต, สงฺขารปุพฺพงฺคมาปิ เอเต.{{sp1}} เย เกจิ ธมฺมา สหชาตา สพฺเพ ปุพฺพงฺคมา เอเตสํ ธมฺมานํ.{{sp1}} ",
+              "value": "ลกฺขโณติ อิติ ปุพฺพงฺคมา ธมฺมาติ เวทนาปุพฺพงฺคมาปิ เอเต, สญฺญาปุพฺพงฺคมาปิ เอเต, สงฺขารปุพฺพงฺคมาปิ เอเต. เย เกจิ ธมฺมา สหชาตา สพฺเพ ปุพฺพงฺคมา เอเตสํ ธมฺมานํ. ",
               "bold": false
             },
             {

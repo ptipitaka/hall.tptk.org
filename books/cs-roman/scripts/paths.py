@@ -11,6 +11,7 @@ REPO = BOOKS.parents[1]  # hall.tptk.org
 SOURCE_DIR = BOOKS / "source"
 OUTPUT_DIR = BOOKS / "output"
 VOLUMES_DIR = BOOKS / "volumes"
+TMP_DIR = REPO / "tmp" / "cs-roman"
 PALI_SCRIPT_PYTHON = REPO / "packages" / "pali_script" / "python"
 
 

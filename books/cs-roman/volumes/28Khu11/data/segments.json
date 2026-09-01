@@ -502,11 +502,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pubbayogoti tesaṃ pubbakammaṃ.{{sp1}} Atīte kira Kassapassa Bhagavato sāsane vattamāne Gaṅgāya samīpe ekasmiṃ āvāse mahābhikkhusaṃgho paṭivasati, tattha vattasīlasampannā bhikkhū pātova uṭṭhāya yaṭṭhisammajjaniyo{{n0}} ādāya Buddhaguṇe āvajjentā aṅgaṇaṃ sammajjitvā kacavarabyūhaṃ karonti.{{sp1}} Atheko bhikkhu ekaṃ sāmaṇeraṃ “ehi sāmaṇera, imaṃ kacavaraṃ chaḍḍehī”ti āha, so asuṇanto viya gacchati, so dutiyampi.{{sp1}} Tatiyampi āmantiyamāno asuṇanto viya gacchateva.{{sp1}} Tato so bhikkhu “dubbaco vatāyaṃ sāmaṇero”ti kuddho sammajjanidaṇḍena pahāraṃ adāsi.{{sp1}} Tato so rodanto bhayena kacavaraṃ chaḍḍento “iminā kacavarachaḍḍanapuññakammena yāvāhaṃ nibbānaṃ pāpuṇāmi{{n1}}, etthantare nibbattanibbattaṭṭhāne majjhanhikasūriyo{{n2}} viya mahesakkho mahātejo bhaveyyan”ti paṭhamaṃ patthanaṃ paṭṭhapesi.{{sp1}} Kacavaraṃ chaḍḍetvā nahānatthāya Gaṅgātitthaṃ gato Gaṅgāya ūmivegaṃ gaggarāyamānaṃ disvā “yāvāhaṃ nibbānaṃ pāpuṇāmi{{n3}}, etthantare nibbattanibbattaṭṭhāne ayaṃ ūmivego viya ṭhānuppattitapaṭibhāno bhaveyyaṃ akkhayapaṭibhāno”ti dutiyampi patthanaṃ paṭṭhapesi."
+          "value": "Pubbayogoti tesaṃ pubbakammaṃ.{{sp1}} Atīte kira Kassapassa Bhagavato sāsane vattamāne Gaṅgāya samīpe ekasmiṃ āvāse mahābhikkhusaṃgho paṭivasati, tattha vattasīlasampannā bhikkhū pātova uṭṭhāya yaṭṭhisammajjaniyo{{n0}} ādāya Buddhaguṇe āvajjentā aṅgaṇaṃ sammajjitvā kacavarabyūhaṃ karonti.{{sp1}} Atheko bhikkhu ekaṃ sāmaṇeraṃ “ehi sāmaṇera, imaṃ kacavaraṃ chaḍḍehī”ti āha, so asuṇanto viya gacchati, so dutiyampi.{{sp1}} Tatiyampi āmantiyamāno asuṇanto viya gacchateva.{{sp1}} Tato so bhikkhu “dubbaco vatāyaṃ sāmaṇero”ti kuddho sammajjanidaṇḍena pahāraṃ adāsi.{{sp1}} Tato so rodanto bhayena kacavaraṃ chaḍḍento “iminā kacavarachaḍḍanapuññakammena yāvāhaṃ nibbānaṃ pāpuṇāmi{{n1}}, etthantare nibbattanibbattaṭṭhāne majjhanhikasūriyo{{n2}} viya mahesakkho mahātejo bhaveyyan”ti paṭhamaṃ patthanaṃ paṭṭhapesi.{{sp1}} Kacavaraṃ chaḍḍetvā nahānatthāya Gaṅgātitthaṃ gato Gaṅgāya ūmivegaṃ gaggarāyamānaṃ disvā “yāvāhaṃ nibbānaṃ pāpuṇāmi{{n3}}, etthantare nibbattanibbattaṭṭhāne ayaṃ ūmivego viya ṭhānuppattitapaṭibhāno bhaveyyaṃ akkhayapaṭibhāno”ti dutiyampi patthanaṃ paṭṭhapesi.",
+          "runs": [
+            {
+              "value": "Pubbayogo",
+              "bold": true
+            },
+            {
+              "value": "ti tesaṃ pubbakammaṃ.{{sp1}} Atīte kira Kassapassa Bhagavato sāsane vattamāne Gaṅgāya samīpe ekasmiṃ āvāse mahābhikkhusaṃgho paṭivasati, tattha vattasīlasampannā bhikkhū pātova uṭṭhāya yaṭṭhisammajjaniyo{{n0}} ādāya Buddhaguṇe āvajjentā aṅgaṇaṃ sammajjitvā kacavarabyūhaṃ karonti.{{sp1}} Atheko bhikkhu ekaṃ sāmaṇeraṃ “ehi sāmaṇera, imaṃ kacavaraṃ chaḍḍehī”ti āha, so asuṇanto viya gacchati, so dutiyampi.{{sp1}} Tatiyampi āmantiyamāno asuṇanto viya gacchateva.{{sp1}} Tato so bhikkhu “dubbaco vatāyaṃ sāmaṇero”ti kuddho sammajjanidaṇḍena pahāraṃ adāsi.{{sp1}} Tato so rodanto bhayena kacavaraṃ chaḍḍento “iminā kacavarachaḍḍanapuññakammena yāvāhaṃ nibbānaṃ pāpuṇāmi{{n1}}, etthantare nibbattanibbattaṭṭhāne majjhanhikasūriyo{{n2}} viya mahesakkho mahātejo bhaveyyan”ti paṭhamaṃ patthanaṃ paṭṭhapesi.{{sp1}} Kacavaraṃ chaḍḍetvā nahānatthāya Gaṅgātitthaṃ gato Gaṅgāya ūmivegaṃ gaggarāyamānaṃ disvā “yāvāhaṃ nibbānaṃ pāpuṇāmi{{n3}}, etthantare nibbattanibbattaṭṭhāne ayaṃ ūmivego viya ṭhānuppattitapaṭibhāno bhaveyyaṃ akkhayapaṭibhāno”ti dutiyampi patthanaṃ paṭṭhapesi.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปุพฺพโยโคติ เตสํ ปุพฺพกมฺมํ.{{sp1}} อตีเต กิร กสฺสปสฺส ภควโต สาสเน วตฺตมาเน คงฺคาย สมีเป เอกสฺมิํ อาวาเส มหาภิกฺขุสํโฆ ปฏิวสติ, ตตฺถ วตฺตสีลสมฺปนฺนา ภิกฺขู ปาโตว อุฏฺฐาย ยฏฺฐิสมฺมชฺชนิโย{{n0}} อาทาย พุทฺธคุเณ อาวชฺเชนฺตา องฺคณํ สมฺมชฺชิตฺวา กจวรพฺยูหํ กโรนฺติ.{{sp1}} อเถโก ภิกฺขุ เอกํ สามเณรํ “เอหิ สามเณร, อิมํ กจวรํ ฉฑฺเฑหี”ติ อาห, โส อสุณนฺโต วิย คจฺฉติ, โส ทุติยมฺปิ.{{sp1}} ตติยมฺปิ อามนฺติยมาโน อสุณนฺโต วิย คจฺฉเตว.{{sp1}} ตโต โส ภิกฺขุ “ทุพฺพโจ วตายํ สามเณโร”ติ กุทฺโธ สมฺมชฺชนิทณฺเฑน ปหารํ อทาสิ.{{sp1}} ตโต โส โรทนฺโต ภเยน กจวรํ ฉฑฺเฑนฺโต “อิมินา กจวรฉฑฺฑนปุญฺญกมฺเมน ยาวาหํ นิพฺพานํ ปาปุณามิ{{n1}}, เอตฺถนฺตเร นิพฺพตฺตนิพฺพตฺตฏฺฐาเน มชฺฌนฺหิกสูริโย{{n2}} วิย มเหสกฺโข มหาเตโช ภเวยฺยนฺ”ติ ปฐมํ ปตฺถนํ ปฏฺฐเปสิ.{{sp1}} กจวรํ ฉฑฺเฑตฺวา นหานตฺถาย คงฺคาติตฺถํ คโต คงฺคาย อูมิเวคํ คคฺครายมานํ ทิสฺวา “ยาวาหํ นิพฺพานํ ปาปุณามิ{{n3}}, เอตฺถนฺตเร นิพฺพตฺตนิพฺพตฺตฏฺฐาเน อยํ อูมิเวโค วิย ฐานุปฺปตฺติตปฏิภาโน ภเวยฺยํ อกฺขยปฏิภาโน”ติ ทุติยมฺปิ ปตฺถนํ ปฏฺฐเปสิ."
+          "value": "ปุพฺพโยโคติ เตสํ ปุพฺพกมฺมํ.{{sp1}} อตีเต กิร กสฺสปสฺส ภควโต สาสเน วตฺตมาเน คงฺคาย สมีเป เอกสฺมิํ อาวาเส มหาภิกฺขุสํโฆ ปฏิวสติ, ตตฺถ วตฺตสีลสมฺปนฺนา ภิกฺขู ปาโตว อุฏฺฐาย ยฏฺฐิสมฺมชฺชนิโย{{n0}} อาทาย พุทฺธคุเณ อาวชฺเชนฺตา องฺคณํ สมฺมชฺชิตฺวา กจวรพฺยูหํ กโรนฺติ.{{sp1}} อเถโก ภิกฺขุ เอกํ สามเณรํ “เอหิ สามเณร, อิมํ กจวรํ ฉฑฺเฑหี”ติ อาห, โส อสุณนฺโต วิย คจฺฉติ, โส ทุติยมฺปิ.{{sp1}} ตติยมฺปิ อามนฺติยมาโน อสุณนฺโต วิย คจฺฉเตว.{{sp1}} ตโต โส ภิกฺขุ “ทุพฺพโจ วตายํ สามเณโร”ติ กุทฺโธ สมฺมชฺชนิทณฺเฑน ปหารํ อทาสิ.{{sp1}} ตโต โส โรทนฺโต ภเยน กจวรํ ฉฑฺเฑนฺโต “อิมินา กจวรฉฑฺฑนปุญฺญกมฺเมน ยาวาหํ นิพฺพานํ ปาปุณามิ{{n1}}, เอตฺถนฺตเร นิพฺพตฺตนิพฺพตฺตฏฺฐาเน มชฺฌนฺหิกสูริโย{{n2}} วิย มเหสกฺโข มหาเตโช ภเวยฺยนฺ”ติ ปฐมํ ปตฺถนํ ปฏฺฐเปสิ.{{sp1}} กจวรํ ฉฑฺเฑตฺวา นหานตฺถาย คงฺคาติตฺถํ คโต คงฺคาย อูมิเวคํ คคฺครายมานํ ทิสฺวา “ยาวาหํ นิพฺพานํ ปาปุณามิ{{n3}}, เอตฺถนฺตเร นิพฺพตฺตนิพฺพตฺตฏฺฐาเน อยํ อูมิเวโค วิย ฐานุปฺปตฺติตปฏิภาโน ภเวยฺยํ อกฺขยปฏิภาโน”ติ ทุติยมฺปิ ปตฺถนํ ปฏฺฐเปสิ.",
+          "runs": [
+            {
+              "value": "ปุพฺพโยโค",
+              "bold": true
+            },
+            {
+              "value": "ติ เตสํ ปุพฺพกมฺมํ. อตีเต กิร กสฺสปสฺส ภควโต สาสเน วตฺตมาเน คงฺคาย สมีเป เอกสฺมิํ อาวาเส มหาภิกฺขุสํโฆ ปฏิวสติ, ตตฺถ วตฺตสีลสมฺปนฺนา ภิกฺขู ปาโตว อุฏฺฐาย ยฏฺฐิสมฺมชฺชนิโย{{n0}} อาทาย พุทฺธคุเณ อาวชฺเชนฺตา องฺคณํ สมฺมชฺชิตฺวา กจวรพฺยูหํ กโรนฺติ. อเถโก ภิกฺขุ เอกํ สามเณรํ “เอหิ สามเณร, อิมํ กจวรํ ฉฑฺเฑหี”ติ อาห, โส อสุณนฺโต วิย คจฺฉติ, โส ทุติยมฺปิ. ตติยมฺปิ อามนฺติยมาโน อสุณนฺโต วิย คจฺฉเตว. ตโต โส ภิกฺขุ “ทุพฺพโจ วตายํ สามเณโร”ติ กุทฺโธ สมฺมชฺชนิทณฺเฑน ปหารํ อทาสิ. ตโต โส โรทนฺโต ภเยน กจวรํ ฉฑฺเฑนฺโต “อิมินา กจวรฉฑฺฑนปุญฺญกมฺเมน ยาวาหํ นิพฺพานํ ปาปุณามิ{{n1}}, เอตฺถนฺตเร นิพฺพตฺตนิพฺพตฺตฏฺฐาเน มชฺฌนฺหิกสูริโย{{n2}} วิย มเหสกฺโข มหาเตโช ภเวยฺยนฺ”ติ ปฐมํ ปตฺถนํ ปฏฺฐเปสิ. กจวรํ ฉฑฺเฑตฺวา นหานตฺถาย คงฺคาติตฺถํ คโต คงฺคาย อูมิเวคํ คคฺครายมานํ ทิสฺวา “ยาวาหํ นิพฺพานํ ปาปุณามิ{{n3}}, เอตฺถนฺตเร นิพฺพตฺตนิพฺพตฺตฏฺฐาเน อยํ อูมิเวโค วิย ฐานุปฺปตฺติตปฏิภาโน ภเวยฺยํ อกฺขยปฏิภาโน”ติ ทุติยมฺปิ ปตฺถนํ ปฏฺฐเปสิ.",
+              "bold": false
+            }
+          ]
         }
       ],
       "notes": [
@@ -765,7 +785,7 @@
           "value": "เอวํ วุตฺเต โกฏิสตา อรหนฺโต ตุณฺหี อเหสุํ.{{sp1}} ทุติยมฺปิ.{{sp1}} ตติยมฺปิ ปุฏฺฐา ตุณฺหี อเหสุํ.{{sp1}} อถ โข อายสฺมา อสฺสคุตฺโต ภิกฺขุสํฆํ เอตทโวจ “อตฺถาวุโส ตาวติํสภวเน เวชยนฺตสฺส ปาจีนโต เกตุมตี นาม วิมานํ, ตตฺถ มหาเสโน นาม เทวปุตฺโต ปฏิวสติ, โส ปฏิพโล เตน มิลินฺเทน รญฺญา สทฺธิํ สลฺลปิตุํ กงฺขํ ปฏิวิเนตุนฺ”ติ.",
           "runs": [
             {
-              "value": "เอวํ วุตฺเต โกฏิสตา อรหนฺโต ตุณฺหี อเหสุํ.{{sp1}} ทุติยมฺปิ.{{sp1}} ตติยมฺปิ ปุฏฺฐา ตุณฺหี อเหสุํ.{{sp1}} อถ โข อายสฺมา อสฺสคุตฺโต ภิกฺขุสํฆํ เอตทโวจ “อตฺถาวุโส ตาวติํสภวเน เวชยนฺตสฺส ปาจีนโต ",
+              "value": "เอวํ วุตฺเต โกฏิสตา อรหนฺโต ตุณฺหี อเหสุํ. ทุติยมฺปิ. ตติยมฺปิ ปุฏฺฐา ตุณฺหี อเหสุํ. อถ โข อายสฺมา อสฺสคุตฺโต ภิกฺขุสํฆํ เอตทโวจ “อตฺถาวุโส ตาวติํสภวเน เวชยนฺตสฺส ปาจีนโต ",
               "bold": false
             },
             {
@@ -981,7 +1001,7 @@
               "bold": true
             },
             {
-              "value": " อิโต สตฺตเม ทิวเส หิมวนฺตํ ปพฺพตํ ปวิสิตฺวา นิโรธํ สมาปนฺโน, ตสฺส สนฺติเก ทูตํ ปาเหถา”ติ.{{sp1}} อายสฺมาปิ โรหโณ ตงฺขณญฺเญว นิโรธา วุฏฺฐาย “สํโฆ มํ ปฏิมาเนตี”ติ หิมวนฺเต ปพฺพเต อนฺตรหิโต รกฺขิตตเล โกฏิสตานํ อรหนฺตานํ ปุรโต ปาตุรโหสิ.",
+              "value": " อิโต สตฺตเม ทิวเส หิมวนฺตํ ปพฺพตํ ปวิสิตฺวา นิโรธํ สมาปนฺโน, ตสฺส สนฺติเก ทูตํ ปาเหถา”ติ. อายสฺมาปิ โรหโณ ตงฺขณญฺเญว นิโรธา วุฏฺฐาย “สํโฆ มํ ปฏิมาเนตี”ติ หิมวนฺเต ปพฺพเต อนฺตรหิโต รกฺขิตตเล โกฏิสตานํ อรหนฺตานํ ปุรโต ปาตุรโหสิ.",
               "bold": false
             }
           ]
@@ -1052,7 +1072,7 @@
           "value": "เตน หาวุโส โรหณ ทณฺฑกมฺมํ กโรหีติ.{{sp1}} กิํ ภนฺเต กโรมีติ.{{sp1}} อตฺถาวุโส โรหณ หิมวนฺตปพฺพตปสฺเส คชงฺคลํ{{n0}} นาม พฺราหฺมณคาโม, ตตฺถ โสณุตฺตโร นาม พฺราหฺมโณ ปฏิวสติ, ตสฺส ปุตฺโต อุปฺปชฺชิสฺสติ นาคเสโน นาม ทารโก, เตน หิ ตฺวํ อาวุโส โรหณ ทสมาสาธิกานิ สตฺต วสฺสานิ ตํ กุลํ ปิณฺฑาย ปวิสิตฺวา นาคเสนํ ทารกํ นีหริตฺวา ปพฺพาเชหิ, ปพฺพชิเตว ตสฺมิํ ทณฺฑกมฺมโต มุจฺจิสฺสสีติ.{{sp1}} อายสฺมาปิ โข โรหโณ “สาธู”ติ สมฺปฏิจฺฉิ.",
           "runs": [
             {
-              "value": "เตน หาวุโส โรหณ ทณฺฑกมฺมํ กโรหีติ.{{sp1}} กิํ ภนฺเต กโรมีติ.{{sp1}} อตฺถาวุโส โรหณ หิมวนฺตปพฺพตปสฺเส ",
+              "value": "เตน หาวุโส โรหณ ทณฺฑกมฺมํ กโรหีติ. กิํ ภนฺเต กโรมีติ. อตฺถาวุโส โรหณ หิมวนฺตปพฺพตปสฺเส ",
               "bold": false
             },
             {
@@ -1076,7 +1096,7 @@
               "bold": true
             },
             {
-              "value": " นาม ทารโก, เตน หิ ตฺวํ อาวุโส โรหณ ทสมาสาธิกานิ สตฺต วสฺสานิ ตํ กุลํ ปิณฺฑาย ปวิสิตฺวา นาคเสนํ ทารกํ นีหริตฺวา ปพฺพาเชหิ, ปพฺพชิเตว ตสฺมิํ ทณฺฑกมฺมโต มุจฺจิสฺสสีติ.{{sp1}} อายสฺมาปิ โข โรหโณ “สาธู”ติ สมฺปฏิจฺฉิ.",
+              "value": " นาม ทารโก, เตน หิ ตฺวํ อาวุโส โรหณ ทสมาสาธิกานิ สตฺต วสฺสานิ ตํ กุลํ ปิณฺฑาย ปวิสิตฺวา นาคเสนํ ทารกํ นีหริตฺวา ปพฺพาเชหิ, ปพฺพชิเตว ตสฺมิํ ทณฺฑกมฺมโต มุจฺจิสฺสสีติ. อายสฺมาปิ โข โรหโณ “สาธู”ติ สมฺปฏิจฺฉิ.",
               "bold": false
             }
           ]
@@ -1207,7 +1227,7 @@
           "value": "อถ โข นาคเสนสฺส ทารกสฺส ปิตา นาคเสนํ ทารกํ เอตทโวจ “อิมสฺมิํ โข ตาต นาคเสน พฺราหฺมณกุเล สิกฺขานิ สิกฺเขยฺยาสี”ติ.{{sp1}} กตมานิ ตาต อิมสฺมิํ พฺราหฺมณกุเล สิกฺขานิ นามาติ.{{sp1}} ตโย โข ตาต นาคเสน เวทา สิกฺขานิ นาม, อวเสสานิ สิปฺปานิ สิปฺปํ นามาติ.{{sp1}} เตน หิ ตาต สิกฺขิสฺสามีติ.",
           "runs": [
             {
-              "value": "อถ โข นาคเสนสฺส ทารกสฺส ปิตา นาคเสนํ ทารกํ เอตทโวจ “อิมสฺมิํ โข ตาต นาคเสน พฺราหฺมณกุเล สิกฺขานิ สิกฺเขยฺยาสี”ติ.{{sp1}} กตมานิ ตาต อิมสฺมิํ พฺราหฺมณกุเล สิกฺขานิ นามาติ.{{sp1}} ตโย โข ตาต นาคเสน เวทา ",
+              "value": "อถ โข นาคเสนสฺส ทารกสฺส ปิตา นาคเสนํ ทารกํ เอตทโวจ “อิมสฺมิํ โข ตาต นาคเสน พฺราหฺมณกุเล สิกฺขานิ สิกฺเขยฺยาสี”ติ. กตมานิ ตาต อิมสฺมิํ พฺราหฺมณกุเล สิกฺขานิ นามาติ. ตโย โข ตาต นาคเสน เวทา ",
               "bold": false
             },
             {
@@ -1223,7 +1243,7 @@
               "bold": true
             },
             {
-              "value": " นามาติ.{{sp1}} เตน หิ ตาต สิกฺขิสฺสามีติ.",
+              "value": " นามาติ. เตน หิ ตาต สิกฺขิสฺสามีติ.",
               "bold": false
             }
           ]
@@ -2617,11 +2637,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Bāhirakathā niṭṭhitā."
+          "value": "Bāhirakathā niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Bāhirakathā niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "พาหิรกถา นิฏฺฐิตา."
+          "value": "พาหิรกถา นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "พาหิรกถา นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -2679,7 +2711,7 @@
           "value": "มหาวคฺค 1. ปญฺญตฺติปญฺห",
           "runs": [
             {
-              "value": "มหาวคฺค 1.{{sp1}} ปญฺญตฺติปญฺห",
+              "value": "มหาวคฺค 1. ปญฺญตฺติปญฺห",
               "bold": true
             }
           ]
@@ -2936,7 +2968,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} วสฺสคณนปญฺห",
+              "value": "2. วสฺสคณนปญฺห",
               "bold": true
             }
           ]
@@ -3432,7 +3464,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} ปฏิสนฺธิปญฺห",
+              "value": "6. ปฏิสนฺธิปญฺห",
               "bold": true
             }
           ]
@@ -6670,11 +6702,63 @@
       "text": [
         {
           "script": "roman",
-          "value": "ubhato chinnā sakkā vaḍḍhetunti.{{sp1}} Āma sāpi sakkā vaḍḍhetunti.{{sp1}} Nāhaṃ bhante etaṃ pucchāmi koṭito sakkā vaḍḍhetunti.{{sp1}} Āma sakkā vaḍḍhetunti."
+          "value": "ubhato chinnā sakkā vaḍḍhetunti.{{sp1}} Āma sāpi sakkā vaḍḍhetunti.{{sp1}} Nāhaṃ bhante etaṃ pucchāmi koṭito sakkā vaḍḍhetunti.{{sp1}} Āma sakkā vaḍḍhetunti.",
+          "runs": [
+            {
+              "value": "ubhato chinnā sakkā vaḍḍhetunti.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " Āma sāpi sakkā vaḍḍhetunti.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " Nāhaṃ",
+              "bold": true
+            },
+            {
+              "value": " bhante etaṃ pucchāmi koṭito sakkā vaḍḍhetunti.{{sp1}} Āma sakkā vaḍḍhetunti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "อุภโต ฉินฺนา สกฺกา วฑฺเฒตุนฺติ.{{sp1}} อาม สาปิ สกฺกา วฑฺเฒตุนฺติ.{{sp1}} นาหํ ภนฺเต เอตํ ปุจฺฉามิ โกฏิโต สกฺกา วฑฺเฒตุนฺติ.{{sp1}} อาม สกฺกา วฑฺเฒตุนฺติ."
+          "value": "อุภโต ฉินฺนา สกฺกา วฑฺเฒตุนฺติ.{{sp1}} อาม สาปิ สกฺกา วฑฺเฒตุนฺติ.{{sp1}} นาหํ ภนฺเต เอตํ ปุจฺฉามิ โกฏิโต สกฺกา วฑฺเฒตุนฺติ.{{sp1}} อาม สกฺกา วฑฺเฒตุนฺติ.",
+          "runs": [
+            {
+              "value": "อุภโต ฉินฺนา สกฺกา วฑฺเฒตุนฺติ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " อาม สาปิ สกฺกา วฑฺเฒตุนฺติ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " นาหํ",
+              "bold": true
+            },
+            {
+              "value": " ภนฺเต เอตํ ปุจฺฉามิ โกฏิโต สกฺกา วฑฺเฒตุนฺติ. อาม สกฺกา วฑฺเฒตุนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -7663,7 +7747,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} ผสฺสลกฺขณปญฺห",
+              "value": "8. ผสฺสลกฺขณปญฺห",
               "bold": true
             }
           ]
@@ -8854,31 +8938,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pañcāyatanakammanibbattapañho tatiyo.",
-          "runs": [
-            {
-              "value": "Pañcāyatanakammanibb",
-              "bold": true
-            },
-            {
-              "value": "attapañho tatiyo.",
-              "bold": false
-            }
-          ]
+          "value": "Pañcāyatanakammanibbattapañho tatiyo."
         },
         {
           "script": "thai",
-          "value": "ปญฺจายตนกมฺมนิพฺพตฺตปโญฺห ตติโย.",
-          "runs": [
-            {
-              "value": "ปญฺจายตนกมฺมนิพฺพฺ",
-              "bold": true
-            },
-            {
-              "value": "อตฺตปโญฺห ตติโย.",
-              "bold": false
-            }
-          ]
+          "value": "ปญฺจายตนกมฺมนิพฺพตฺตปโญฺห ตติโย."
         }
       ],
       "source_layout": "center"
@@ -8912,7 +8976,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} กมฺมนานากรณปญฺห",
+              "value": "4. กมฺมนานากรณปญฺห",
               "bold": true
             }
           ]
@@ -9857,7 +9921,7 @@
           "value": "หตฺถปาทา, ชาเนยฺยุํ เต มหาราช “ทุกฺขํ หตฺถปาทจฺเฉทนนฺ”ติ.{{sp1}} อาม ภนฺเต ชาเนยฺยุนฺติ.{{sp1}} กถํ ชานายฺยุนฺติ.{{sp1}} อญฺเญสํ ภนฺเต ฉินฺนหตฺถปาทานํ ปริเทวิตสทฺทํ สุตฺวา ชานนฺติ “ทุกฺขํ หตฺถปาทจฺเฉทนนฺ”ติ.{{sp1}} เอวเมว โข มหาราช เยสํ ทิฏฺฐํ นิพฺพานํ, เตสํ สทฺทํ สุตฺวา ชานาติ “สุขํ นิพฺพานนฺ”ติ.",
           "runs": [
             {
-              "value": "หตฺถปาทา, ชาเนยฺยุํ เต มหาราช “ทุกฺขํ หตฺถปาทจฺเฉทนนฺ”ติ.{{sp1}} อาม ภนฺเต ชาเนยฺยุนฺติ.{{sp1}} กถํ ชานายฺยุนฺติ.{{sp1}} อญฺเญสํ ภนฺเต ",
+              "value": "หตฺถปาทา, ชาเนยฺยุํ เต มหาราช “ทุกฺขํ หตฺถปาทจฺเฉทนนฺ”ติ. อาม ภนฺเต ชาเนยฺยุนฺติ. กถํ ชานายฺยุนฺติ. อญฺเญสํ ภนฺเต ",
               "bold": false
             },
             {
@@ -9865,7 +9929,7 @@
               "bold": true
             },
             {
-              "value": " หตฺถปาทจฺเฉทนนฺ”ติ.{{sp1}} เอวเมว โข มหาราช เยสํ ทิฏฺฐํ นิพฺพานํ, เตสํ สทฺทํ สุตฺวา ชานาติ “สุขํ นิพฺพานนฺ”ติ.",
+              "value": " หตฺถปาทจฺเฉทนนฺ”ติ. เอวเมว โข มหาราช เยสํ ทิฏฺฐํ นิพฺพานํ, เตสํ สทฺทํ สุตฺวา ชานาติ “สุขํ นิพฺพานนฺ”ติ.",
               "bold": false
             }
           ]
@@ -10054,31 +10118,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Buddhassa atthinatthibhāvapañho paṭhamo.",
-          "runs": [
-            {
-              "value": "Buddhassa atthinatthi",
-              "bold": true
-            },
-            {
-              "value": "bhāvapañho paṭhamo.",
-              "bold": false
-            }
-          ]
+          "value": "Buddhassa atthinatthibhāvapañho paṭhamo."
         },
         {
           "script": "thai",
-          "value": "พุทฺธสฺส อตฺถินตฺถิภาวปโญฺห ปฐโม.",
-          "runs": [
-            {
-              "value": "พุทฺธสฺส อตฺถินตฺถิ",
-              "bold": true
-            },
-            {
-              "value": "ภาวปโญฺห ปฐโม.",
-              "bold": false
-            }
-          ]
+          "value": "พุทฺธสฺส อตฺถินตฺถิภาวปโญฺห ปฐโม."
         }
       ],
       "source_layout": "center",
@@ -10242,31 +10286,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Buddhassa anuttarabhāvajānanapañho tatiyo.",
-          "runs": [
-            {
-              "value": "Buddhassa anuttarabhāva",
-              "bold": true
-            },
-            {
-              "value": "jānanapañho tatiyo.",
-              "bold": false
-            }
-          ]
+          "value": "Buddhassa anuttarabhāvajānanapañho tatiyo."
         },
         {
           "script": "thai",
-          "value": "พุทฺธสฺส อนุตฺตรภาวชานนปโญฺห ตติโย.",
-          "runs": [
-            {
-              "value": "พุทฺธสฺส อนุตฺตรภาว",
-              "bold": true
-            },
-            {
-              "value": "ชานนปโญฺห ตติโย.",
-              "bold": false
-            }
-          ]
+          "value": "พุทฺธสฺส อนุตฺตรภาวชานนปโญฺห ตติโย."
         }
       ],
       "source_layout": "center",
@@ -11658,7 +11682,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} อสฺสุเภสชฺชาเภสชฺชปญฺห",
+              "value": "6. อสฺสุเภสชฺชาเภสชฺชปญฺห",
               "bold": true
             }
           ]
@@ -11795,31 +11819,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sarāgavītarāganānākaraṇapañho sattamo.",
-          "runs": [
-            {
-              "value": "Sarāgavītarāganānāka",
-              "bold": true
-            },
-            {
-              "value": "raṇapañho sattamo.",
-              "bold": false
-            }
-          ]
+          "value": "Sarāgavītarāganānākaraṇapañho sattamo."
         },
         {
           "script": "thai",
-          "value": "สราควีตราคนานากรณปโญฺห สตฺตโม.",
-          "runs": [
-            {
-              "value": "สราควีตราคนานาก",
-              "bold": true
-            },
-            {
-              "value": "รณปโญฺห สตฺตโม.",
-              "bold": false
-            }
-          ]
+          "value": "สราควีตราคนานากรณปโญฺห สตฺตโม."
         }
       ],
       "source_layout": "center",
@@ -12126,7 +12130,7 @@
               "bold": false
             },
             {
-              "value": "11.{{sp1}} อภิชานนฺตสติปญฺห",
+              "value": "11. อภิชานนฺตสติปญฺห",
               "bold": true
             }
           ]
@@ -13243,31 +13247,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pāpapuññānaṃ appānappabhāvapañho sattamo.",
-          "runs": [
-            {
-              "value": "Pāpapuññānaṃ appānappa",
-              "bold": true
-            },
-            {
-              "value": "bhāvapañho sattamo.",
-              "bold": false
-            }
-          ]
+          "value": "Pāpapuññānaṃ appānappabhāvapañho sattamo."
         },
         {
           "script": "thai",
-          "value": "ปาปปุญฺญานํ อปฺปานปฺปภาวปโญฺห สตฺตโม.",
-          "runs": [
-            {
-              "value": "ปาปปุญฺญานํ อปฺปานปฺป",
-              "bold": true
-            },
-            {
-              "value": "ภาวปโญฺห สตฺตโม.",
-              "bold": false
-            }
-          ]
+          "value": "ปาปปุญฺญานํ อปฺปานปฺปภาวปโญฺห สตฺตโม."
         }
       ],
       "source_layout": "center",
@@ -13356,31 +13340,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Jānantājānantapāpakaraṇapañho aṭṭhamo.",
-          "runs": [
-            {
-              "value": "Jānantājānantapāpaka",
-              "bold": true
-            },
-            {
-              "value": "raṇapañho aṭṭhamo.",
-              "bold": false
-            }
-          ]
+          "value": "Jānantājānantapāpakaraṇapañho aṭṭhamo."
         },
         {
           "script": "thai",
-          "value": "ชานนฺตาชานนฺตปาปกรณปโญฺห อฏฺฐโม.",
-          "runs": [
-            {
-              "value": "ชานนฺตาชานนฺตปาปก",
-              "bold": true
-            },
-            {
-              "value": "รณปโญฺห อฏฺฐโม.",
-              "bold": false
-            }
-          ]
+          "value": "ชานนฺตาชานนฺตปาปกรณปโญฺห อฏฺฐโม."
         }
       ],
       "source_layout": "center"
@@ -13414,7 +13378,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} อุตฺตรกุรุกาทิคมนปญฺห",
+              "value": "9. อุตฺตรกุรุกาทิคมนปญฺห",
               "bold": true
             }
           ]
@@ -13866,7 +13830,7 @@
               "bold": false
             },
             {
-              "value": "14.{{sp1}} สุขุมปญฺห",
+              "value": "14. สุขุมปญฺห",
               "bold": true
             }
           ]
@@ -14088,31 +14052,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Arūpadhammavavatthānadukkarapañho soḷasamo.",
-          "runs": [
-            {
-              "value": "Arūpadhammavavatthānadu",
-              "bold": true
-            },
-            {
-              "value": "kkarapañho soḷasamo.",
-              "bold": false
-            }
-          ]
+          "value": "Arūpadhammavavatthānadukkarapañho soḷasamo."
         },
         {
           "script": "thai",
-          "value": "อรูปธมฺมววตฺถานทุกฺกรปโญฺห โสฬสโม.",
-          "runs": [
-            {
-              "value": "อรูปธมฺมววตฺถานทุ",
-              "bold": true
-            },
-            {
-              "value": "กฺกรปโญฺห โสฬสโม.",
-              "bold": false
-            }
-          ]
+          "value": "อรูปธมฺมววตฺถานทุกฺกรปโญฺห โสฬสโม."
         }
       ],
       "source_layout": "center"
@@ -15758,7 +15702,7 @@
           "value": "อิทฺธิพลวคฺค 1. กตาธิการสผลปญฺห",
           "runs": [
             {
-              "value": "อิทฺธิพลวคฺค 1.{{sp1}} กตาธิการสผลปญฺห",
+              "value": "อิทฺธิพลวคฺค 1. กตาธิการสผลปญฺห",
               "bold": true
             }
           ]
@@ -19529,7 +19473,7 @@
           "value": "ปญฺจวิเธหิ มหาราช การเณหิ อตฺโถ สมฺปฏิจฺฉิตพฺโพ อาหจฺจปเทน รเสน อาจริยวํเสน{{n0}} อธิปฺปายา การณุตฺตริยตาย.{{sp1}} เอตฺถ หิ อาหจฺจปทนฺติ สุตฺตํ อธิปฺเปตํ.{{sp1}} รโสติ สุตฺตานุโลมํ.{{sp1}} อาจริยวํโสติ อาจริยวาโท.{{sp1}} อธิปฺปาโยติ อตฺตโน มติ.{{sp1}} การณุตฺตริยตาติ อิเมหิ จตูหิ สเมนฺตํ{{n1}} การณํ.{{sp1}} อิเมหิ โข มหาราช ปญฺจหิ การเณหิ อตฺโถ สมฺปฏิจฺฉิตพฺโพ.{{sp1}} เอวเมโส ปโญฺห สุวินิจฺฉิโต โหตีติ.",
           "runs": [
             {
-              "value": "ปญฺจวิเธหิ มหาราช การเณหิ อตฺโถ สมฺปฏิจฺฉิตพฺโพ อาหจฺจปเทน รเสน อาจริยวํเสน{{n0}} อธิปฺปายา การณุตฺตริยตาย.{{sp1}} เอตฺถ หิ ",
+              "value": "ปญฺจวิเธหิ มหาราช การเณหิ อตฺโถ สมฺปฏิจฺฉิตพฺโพ อาหจฺจปเทน รเสน อาจริยวํเสน{{n0}} อธิปฺปายา การณุตฺตริยตาย. เอตฺถ หิ ",
               "bold": false
             },
             {
@@ -19537,7 +19481,7 @@
               "bold": true
             },
             {
-              "value": "นฺติ สุตฺตํ อธิปฺเปตํ.{{sp1}} ",
+              "value": "นฺติ สุตฺตํ อธิปฺเปตํ. ",
               "bold": false
             },
             {
@@ -19545,7 +19489,7 @@
               "bold": true
             },
             {
-              "value": "ติ สุตฺตานุโลมํ.{{sp1}} ",
+              "value": "ติ สุตฺตานุโลมํ. ",
               "bold": false
             },
             {
@@ -19553,7 +19497,7 @@
               "bold": true
             },
             {
-              "value": "ติ อาจริยวาโท.{{sp1}} ",
+              "value": "ติ อาจริยวาโท. ",
               "bold": false
             },
             {
@@ -19561,7 +19505,7 @@
               "bold": true
             },
             {
-              "value": "ติ อตฺตโน มติ.{{sp1}} ",
+              "value": "ติ อตฺตโน มติ. ",
               "bold": false
             },
             {
@@ -19569,7 +19513,7 @@
               "bold": true
             },
             {
-              "value": "ติ อิเมหิ จตูหิ สเมนฺตํ{{n1}} การณํ.{{sp1}} อิเมหิ โข มหาราช ปญฺจหิ การเณหิ อตฺโถ สมฺปฏิจฺฉิตพฺโพ.{{sp1}} เอวเมโส ปโญฺห สุวินิจฺฉิโต โหตีติ.",
+              "value": "ติ อิเมหิ จตูหิ สเมนฺตํ{{n1}} การณํ. อิเมหิ โข มหาราช ปญฺจหิ การเณหิ อตฺโถ สมฺปฏิจฺฉิตพฺโพ. เอวเมโส ปโญฺห สุวินิจฺฉิโต โหตีติ.",
               "bold": false
             }
           ]
@@ -21204,7 +21148,7 @@
           "value": "ภนฺเต นาคเสน ตุเมฺห ภณถ “ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหตี”ติ.{{sp1}} ปุน จ ภณถ{{*}}อคฺคิกฺขนฺธูปเม ธมฺมปริยาเย ภญฺญมาเน “สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตนฺ”ติ.{{sp1}} อคฺคิกฺขนฺธูปมํ ภนฺเต ธมฺมปริยายํ เทเสนฺเตน ตถาคเตน สฏฺฐิมตฺตานํ ภิกฺขูนํ หิตมปเนตฺวา อหิตมุปทหิตํ.{{sp1}} ยทิ ภนฺเต นาคเสน ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหติ, เตน หิ อคฺคิกฺขนฺธูปเม ธมฺมปริยาเย ภญฺญมาเน สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตนฺติ ยํ วจนํ, ตํ มิจฺฉา.{{sp1}} ยทิ อคฺคิกฺขนฺธูปเม ธมฺมปริยาเย ภญฺญมาเน สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตํ, เตน หิ ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหตีติ ตมฺปิ วจนํ มิจฺฉา.{{sp1}} อยมฺปิ อุภโต โกฏิโก ปโญฺห ตวานุปฺปตฺโต, โส ตยา นิพฺพาหิตพฺโพติ.",
           "runs": [
             {
-              "value": "ภนฺเต นาคเสน ตุเมฺห ภณถ “ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหตี”ติ.{{sp1}} ปุน จ ภณถ{{*}}",
+              "value": "ภนฺเต นาคเสน ตุเมฺห ภณถ “ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหตี”ติ. ปุน จ ภณถ{{*}}",
               "bold": false
             },
             {
@@ -21212,7 +21156,7 @@
               "bold": true
             },
             {
-              "value": " ธมฺมปริยาเย ภญฺญมาเน “สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตนฺ”ติ.{{sp1}} อคฺคิกฺขนฺธูปมํ ภนฺเต ธมฺมปริยายํ เทเสนฺเตน ตถาคเตน สฏฺฐิมตฺตานํ ภิกฺขูนํ หิตมปเนตฺวา อหิตมุปทหิตํ.{{sp1}} ยทิ ภนฺเต นาคเสน ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหติ, เตน หิ อคฺคิกฺขนฺธูปเม ธมฺมปริยาเย ภญฺญมาเน สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตนฺติ ยํ วจนํ, ตํ มิจฺฉา.{{sp1}} ยทิ อคฺคิกฺขนฺธูปเม ธมฺมปริยาเย ภญฺญมาเน สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตํ, เตน หิ ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหตีติ ตมฺปิ วจนํ มิจฺฉา.{{sp1}} อยมฺปิ อุภโต โกฏิโก ปโญฺห ตวานุปฺปตฺโต, โส ตยา นิพฺพาหิตพฺโพติ.",
+              "value": " ธมฺมปริยาเย ภญฺญมาเน “สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตนฺ”ติ. อคฺคิกฺขนฺธูปมํ ภนฺเต ธมฺมปริยายํ เทเสนฺเตน ตถาคเตน สฏฺฐิมตฺตานํ ภิกฺขูนํ หิตมปเนตฺวา อหิตมุปทหิตํ. ยทิ ภนฺเต นาคเสน ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหติ, เตน หิ อคฺคิกฺขนฺธูปเม ธมฺมปริยาเย ภญฺญมาเน สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตนฺติ ยํ วจนํ, ตํ มิจฺฉา. ยทิ อคฺคิกฺขนฺธูปเม ธมฺมปริยาเย ภญฺญมาเน สฏฺฐิมตฺตานํ ภิกฺขูนํ อุณฺหํ โลหิตํ มุขโต อุคฺคตํ, เตน หิ ตถาคโต สพฺพสตฺตานํ อหิตมปเนตฺวา หิตมุปทหตีติ ตมฺปิ วจนํ มิจฺฉา. อยมฺปิ อุภโต โกฏิโก ปโญฺห ตวานุปฺปตฺโต, โส ตยา นิพฺพาหิตพฺโพติ.",
               "bold": false
             }
           ]
@@ -21776,7 +21720,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} ผรุสวาจาภาวปญฺห",
+              "value": "4. ผรุสวาจาภาวปญฺห",
               "bold": true
             }
           ]
@@ -22581,7 +22525,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} พุทฺธปูชนปญฺห",
+              "value": "7. พุทฺธปูชนปญฺห",
               "bold": true
             }
           ]
@@ -23544,7 +23488,7 @@
               "bold": false
             },
             {
-              "value": "12.{{sp1}} ภิกฺขุปณามิตปญฺห",
+              "value": "12. ภิกฺขุปณามิตปญฺห",
               "bold": true
             }
           ]
@@ -24159,11 +24103,87 @@
       "text": [
         {
           "script": "roman",
-          "value": "āpattiṃ āpajjati ekassa santike desanāvatthukan”ti.{{sp1}} Bhante Nāgasena ko panettha viseso, kiṃ kāraṇaṃ, yañcekena musāvādena ucchijjati, yañcekena musāvādena satekiccho hoti.{{sp1}} Yadi bhante Nāgasena Bhagavatā bhaṇitaṃ “sampajānamusāvāde pārājiko hotī”ti, tena hi “sampajānamusāvāde lahukaṃ āpattiṃ āpajjati ekassa santike desanāvatthukan”ti yaṃ vacanaṃ, taṃ micchā.{{sp1}} Yadi Tathāgatena bhaṇitaṃ “sampajānamusāvāde lahukaṃ āpattiṃ āpajjati ekassa santike desanāvatthukan”ti, tena hi “sampajāmusāvāde pārājiko hotī”ti tampi vacanaṃ micchā.{{sp1}} Ayampi ubhato koṭiko pañho tavānuppatto, so tayā nibbāhitabboti."
+          "value": "āpattiṃ āpajjati ekassa santike desanāvatthukan”ti.{{sp1}} Bhante Nāgasena ko panettha viseso, kiṃ kāraṇaṃ, yañcekena musāvādena ucchijjati, yañcekena musāvādena satekiccho hoti.{{sp1}} Yadi bhante Nāgasena Bhagavatā bhaṇitaṃ “sampajānamusāvāde pārājiko hotī”ti, tena hi “sampajānamusāvāde lahukaṃ āpattiṃ āpajjati ekassa santike desanāvatthukan”ti yaṃ vacanaṃ, taṃ micchā.{{sp1}} Yadi Tathāgatena bhaṇitaṃ “sampajānamusāvāde lahukaṃ āpattiṃ āpajjati ekassa santike desanāvatthukan”ti, tena hi “sampajāmusāvāde pārājiko hotī”ti tampi vacanaṃ micchā.{{sp1}} Ayampi ubhato koṭiko pañho tavānuppatto, so tayā nibbāhitabboti.",
+          "runs": [
+            {
+              "value": "āpattiṃ āpajjati ekassa santike desanāvatthukan”ti.{{sp1}} Bhante Nāgasena ko ",
+              "bold": false
+            },
+            {
+              "value": "panettha viseso, kiṃ kāraṇaṃ, yañcekena musāvādena ucchijjati, yañcekena",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "musāvādena satekiccho hoti.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " Yadi bhante Nāgasena Bhagavatā bhaṇitaṃ",
+              "bold": true
+            },
+            {
+              "value": " “",
+              "bold": false
+            },
+            {
+              "value": "sampajānamusāvāde pārājiko hotī”ti, tena hi “sampajānamusāvāde lahukaṃ",
+              "bold": true
+            },
+            {
+              "value": " āpattiṃ āpajjati ekassa santike desanāvatthukan”ti yaṃ vacanaṃ, taṃ micchā.{{sp1}} Yadi Tathāgatena bhaṇitaṃ “sampajānamusāvāde lahukaṃ āpattiṃ āpajjati ekassa santike desanāvatthukan”ti, tena hi “sampajāmusāvāde pārājiko hotī”ti tampi vacanaṃ micchā.{{sp1}} Ayampi ubhato koṭiko pañho tavānuppatto, so tayā nibbāhitabboti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ.{{sp1}} ภนฺเต นาคเสน โก ปเนตฺถ วิเสโส, กิํ การณํ, ยญฺเจเกน มุสาวาเทน อุจฺฉิชฺชติ, ยญฺเจเกน มุสาวาเทน สเตกิจฺโฉ โหติ.{{sp1}} ยทิ ภนฺเต นาคเสน ภควตา ภณิตํ “สมฺปชานมุสาวาเท ปาราชิโก โหตี”ติ, เตน หิ “สมฺปชานมุสาวาเท ลหุกํ อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ ยํ วจนํ, ตํ มิจฺฉา.{{sp1}} ยทิ ตถาคเตน ภณิตํ “สมฺปชานมุสาวาเท ลหุกํ อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ, เตน หิ “สมฺปชามุสาวาเท ปาราชิโก โหตี”ติ ตมฺปิ วจนํ มิจฺฉา.{{sp1}} อยมฺปิ อุภโต โกฏิโก ปโญฺห ตวานุปฺปตฺโต, โส ตยา นิพฺพาหิตพฺโพติ."
+          "value": "อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ.{{sp1}} ภนฺเต นาคเสน โก ปเนตฺถ วิเสโส, กิํ การณํ, ยญฺเจเกน มุสาวาเทน อุจฺฉิชฺชติ, ยญฺเจเกน มุสาวาเทน สเตกิจฺโฉ โหติ.{{sp1}} ยทิ ภนฺเต นาคเสน ภควตา ภณิตํ “สมฺปชานมุสาวาเท ปาราชิโก โหตี”ติ, เตน หิ “สมฺปชานมุสาวาเท ลหุกํ อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ ยํ วจนํ, ตํ มิจฺฉา.{{sp1}} ยทิ ตถาคเตน ภณิตํ “สมฺปชานมุสาวาเท ลหุกํ อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ, เตน หิ “สมฺปชามุสาวาเท ปาราชิโก โหตี”ติ ตมฺปิ วจนํ มิจฺฉา.{{sp1}} อยมฺปิ อุภโต โกฏิโก ปโญฺห ตวานุปฺปตฺโต, โส ตยา นิพฺพาหิตพฺโพติ.",
+          "runs": [
+            {
+              "value": "อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ. ภนฺเต นาคเสน โก ",
+              "bold": false
+            },
+            {
+              "value": "ปเนตฺถ วิเสโส, กิํ การณํ, ยญฺเจเกน มุสาวาเทน อุจฺฉิชฺชติ, ยญฺเจเกน",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "มุสาวาเทน สเตกิจฺโฉ โหติ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " ยทิ ภนฺเต นาคเสน ภควตา ภณิตํ",
+              "bold": true
+            },
+            {
+              "value": " “",
+              "bold": false
+            },
+            {
+              "value": "สมฺปชานมุสาวาเท ปาราชิโก โหตี”ติ, เตน หิ “สมฺปชานมุสาวาเท ลหุกํ",
+              "bold": true
+            },
+            {
+              "value": " อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ ยํ วจนํ, ตํ มิจฺฉา. ยทิ ตถาคเตน ภณิตํ “สมฺปชานมุสาวาเท ลหุกํ อาปตฺติํ อาปชฺชติ เอกสฺส สนฺติเก เทสนาวตฺถุกนฺ”ติ, เตน หิ “สมฺปชามุสาวาเท ปาราชิโก โหตี”ติ ตมฺปิ วจนํ มิจฺฉา. อยมฺปิ อุภโต โกฏิโก ปโญฺห ตวานุปฺปตฺโต, โส ตยา นิพฺพาหิตพฺโพติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -24272,7 +24292,7 @@
               "bold": true
             },
             {
-              "value": " “ปุพฺเพว โพธิสตฺตานํ มาตาปิตโร นิยตา โหนฺติ, โพธิ นิยตา โหติ, อคฺคสาวกา นิยตา โหนฺติ, ปุตฺโต นิยโต โหติ, อุปฏฺฐาโก นิยโต โหตี”ติ.{{sp1}} ปุน จ ตุเมฺห ภณถ “ตุสิเต กาเย ฐิโต โพธิสตฺโต อฏฺฐ มหาวิโลกนานิ วิโลเกติ, กาลํ วิโลเกติ, ทีปํ วิโลเกติ, เทสํ วิโลเกติ, กุลํ วิโลเกติ, ชเนตฺติํ วิโลเกติ, อายุํ วิโลเกติ, มาสํ วิโลเกติ, เนกฺขมฺมํ วิโลเกตี”ติ.{{sp1}} ภนฺเต นาคเสน อปริปกฺเก ญาเณ พุชฺฌนํ นตฺถิ, ปริปกฺเก ญาเณ น สกฺกา นิเมสนฺตรมฺปิ อาคเมตุํ, อนติกฺกมนียํ ปริปกฺกมานสํ.{{sp1}} กสฺมา โพธิสตฺโต กาลํ วิโลเกติ “กมฺหิ กาเล อุปฺปชฺชามี”ติ.{{sp1}} อปริปกฺเก ญาเณ พุชฺฌนํ นตฺถิ, ปริปกฺเก ญาเณ น สกฺกา นิเมสนฺตรมฺปิ อาคเมตุํ, กสฺมา โพธิสตฺโต กุลํ วิโลเกติ “กมฺหิ กุเล อุปฺปชฺชามี”ติ.{{sp1}} ยทิ ภนฺเต นาคเสน ปุพฺเพว โพธิสตฺตสฺส มาตาปิตโร นิยตา, เตน หิ “กุลํ วิโลเกตี”ติ ยํ วจนํ, ตํ มิจฺฉา.{{sp1}} ยทิ กุลํ วิโลเกติ, เตน หิ “ปุพฺเพว โพธิสตฺตสฺส มาตาปิตโร นิยตา”ติ ตมฺปิ วจนํ มิจฺฉา.{{sp1}} อยมฺปิ อุภโต โกฏิโก ปโญฺห ตวานุปฺปตฺโต, โส ตยา นิพฺพาหิตพฺโพติ.",
+              "value": " “ปุพฺเพว โพธิสตฺตานํ มาตาปิตโร นิยตา โหนฺติ, โพธิ นิยตา โหติ, อคฺคสาวกา นิยตา โหนฺติ, ปุตฺโต นิยโต โหติ, อุปฏฺฐาโก นิยโต โหตี”ติ. ปุน จ ตุเมฺห ภณถ “ตุสิเต กาเย ฐิโต โพธิสตฺโต อฏฺฐ มหาวิโลกนานิ วิโลเกติ, กาลํ วิโลเกติ, ทีปํ วิโลเกติ, เทสํ วิโลเกติ, กุลํ วิโลเกติ, ชเนตฺติํ วิโลเกติ, อายุํ วิโลเกติ, มาสํ วิโลเกติ, เนกฺขมฺมํ วิโลเกตี”ติ. ภนฺเต นาคเสน อปริปกฺเก ญาเณ พุชฺฌนํ นตฺถิ, ปริปกฺเก ญาเณ น สกฺกา นิเมสนฺตรมฺปิ อาคเมตุํ, อนติกฺกมนียํ ปริปกฺกมานสํ. กสฺมา โพธิสตฺโต กาลํ วิโลเกติ “กมฺหิ กาเล อุปฺปชฺชามี”ติ. อปริปกฺเก ญาเณ พุชฺฌนํ นตฺถิ, ปริปกฺเก ญาเณ น สกฺกา นิเมสนฺตรมฺปิ อาคเมตุํ, กสฺมา โพธิสตฺโต กุลํ วิโลเกติ “กมฺหิ กุเล อุปฺปชฺชามี”ติ. ยทิ ภนฺเต นาคเสน ปุพฺเพว โพธิสตฺตสฺส มาตาปิตโร นิยตา, เตน หิ “กุลํ วิโลเกตี”ติ ยํ วจนํ, ตํ มิจฺฉา. ยทิ กุลํ วิโลเกติ, เตน หิ “ปุพฺเพว โพธิสตฺตสฺส มาตาปิตโร นิยตา”ติ ตมฺปิ วจนํ มิจฺฉา. อยมฺปิ อุภโต โกฏิโก ปโญฺห ตวานุปฺปตฺโต, โส ตยา นิพฺพาหิตพฺโพติ.",
               "bold": false
             }
           ]
@@ -28735,7 +28755,7 @@
           "value": "พุทฺธวคฺค 1. ทฺวินฺนํ พุทฺธานํ อนุปฺปชฺชมานปญฺห",
           "runs": [
             {
-              "value": "พุทฺธวคฺค 1.{{sp1}} ทฺวินฺนํ พุทฺธานํ อนุปฺปชฺชมานปญฺห",
+              "value": "พุทฺธวคฺค 1. ทฺวินฺนํ พุทฺธานํ อนุปฺปชฺชมานปญฺห",
               "bold": true
             }
           ]
@@ -31356,7 +31376,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} ขีณาสวภาวปญฺห",
+              "value": "2. ขีณาสวภาวปญฺห",
               "bold": true
             }
           ]
@@ -35771,7 +35791,7 @@
               "bold": false
             },
             {
-              "value": "10.{{sp1}} นิพฺพานรูปสณฺฐานปญฺห",
+              "value": "10. นิพฺพานรูปสณฺฐานปญฺห",
               "bold": true
             }
           ]
@@ -36137,7 +36157,7 @@
               "bold": false
             },
             {
-              "value": "11.{{sp1}} นิพฺพานสจฺฉิกรณปญฺห",
+              "value": "11. นิพฺพานสจฺฉิกรณปญฺห",
               "bold": true
             }
           ]
@@ -39374,11 +39394,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū parisuddhā vimalā nikkilesā cutūpapātakusalā dibbacakkhumhi pāramiṃ gatā, evarūpā kho mahāra bhikkhū Bhagavato dhammanagare “nagarajotakā”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū parisuddhā vimalā nikkilesā cutūpapātakusalā dibbacakkhumhi pāramiṃ gatā, evarūpā kho mahāra bhikkhū Bhagavato dhammanagare “nagarajotakā”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū parisuddhā vimalā nikkilesā cutūpapātakusalā dibbacakkhumhi pāramiṃ gatā, evarūpā kho mahāra bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“nagarajotakā”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู ปริสุทฺธา วิมลา นิกฺกิเลสา จุตูปปาตกุสลา ทิพฺพจกฺขุมฺหิ ปารมิํ คตา, เอวรูปา โข มหาร ภิกฺขู ภควโต ธมฺมนคเร “นครโชตกา”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู ปริสุทฺธา วิมลา นิกฺกิเลสา จุตูปปาตกุสลา ทิพฺพจกฺขุมฺหิ ปารมิํ คตา, เอวรูปา โข มหาร ภิกฺขู ภควโต ธมฺมนคเร “นครโชตกา”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู ปริสุทฺธา วิมลา นิกฺกิเลสา จุตูปปาตกุสลา ทิพฺพจกฺขุมฺหิ ปารมิํ คตา, เอวรูปา โข มหาร ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“นครโชตกา”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -39389,11 +39437,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū bahussutā āgatāgamā dhammadharā vinayadharā mātikādharā sithiladhanitadīgharassagarukalahukakkharaparicchedakusalā navaṅgasāsanadharā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “dhammarakkhā”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū bahussutā āgatāgamā dhammadharā vinayadharā mātikādharā sithiladhanitadīgharassagarukalahukakkharaparicchedakusalā navaṅgasāsanadharā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “dhammarakkhā”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū bahussutā āgatāgamā dhammadharā vinayadharā mātikādharā sithiladhanitadīgharassagarukalahukakkharaparicchedakusalā navaṅgasāsanadharā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“dhammarakkhā”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู พหุสฺสุตา อาคตาคมา ธมฺมธรา วินยธรา มาติกาธรา สิถิลธนิตทีฆรสฺสครุกลหุกกฺขรปริจฺเฉทกุสลา นวงฺคสาสนธรา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ธมฺมรกฺขา”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู พหุสฺสุตา อาคตาคมา ธมฺมธรา วินยธรา มาติกาธรา สิถิลธนิตทีฆรสฺสครุกลหุกกฺขรปริจฺเฉทกุสลา นวงฺคสาสนธรา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ธมฺมรกฺขา”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู พหุสฺสุตา อาคตาคมา ธมฺมธรา วินยธรา มาติกาธรา สิถิลธนิตทีฆรสฺสครุกลหุกกฺขรปริจฺเฉทกุสลา นวงฺคสาสนธรา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“ธมฺมรกฺขา”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -39404,11 +39480,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū vinayaññū vinayakovidā ṭhānāṭṭhānakusalā{{n0}} āpattānāpattigarūkalahukasatekiccha- atekicchavuṭṭhānadesanāniggahapaṭikamma- osāraṇanissāraṇapaṭisāraṇakusalā vinaye pāramiṃ gatā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “rūparakkhā”ti{{n1}} vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū vinayaññū vinayakovidā ṭhānāṭṭhānakusalā{{n0}} āpattānāpattigarūkalahukasatekiccha- atekicchavuṭṭhānadesanāniggahapaṭikamma- osāraṇanissāraṇapaṭisāraṇakusalā vinaye pāramiṃ gatā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “rūparakkhā”ti{{n1}} vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū vinayaññū vinayakovidā ṭhānāṭṭhānakusalā{{n0}} āpattānāpattigarūkalahukasatekiccha- atekicchavuṭṭhānadesanāniggahapaṭikamma- osāraṇanissāraṇapaṭisāraṇakusalā vinaye pāramiṃ gatā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“rūparakkhā”ti",
+              "bold": true
+            },
+            {
+              "value": "{{n1}} vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู วินยญฺญู วินยโกวิทา ฐานาฏฺฐานกุสลา{{n0}} อาปตฺตานาปตฺติครูกลหุกสเตกิจฺฉ- อเตกิจฺฉวุฏฺฐานเทสนานิคฺคหปฏิกมฺม- โอสารณนิสฺสารณปฏิสารณกุสลา วินเย ปารมิํ คตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “รูปรกฺขา”ติ{{n1}} วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู วินยญฺญู วินยโกวิทา ฐานาฏฺฐานกุสลา{{n0}} อาปตฺตานาปตฺติครูกลหุกสเตกิจฺฉ- อเตกิจฺฉวุฏฺฐานเทสนานิคฺคหปฏิกมฺม- โอสารณนิสฺสารณปฏิสารณกุสลา วินเย ปารมิํ คตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “รูปรกฺขา”ติ{{n1}} วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู วินยญฺญู วินยโกวิทา ฐานาฏฺฐานกุสลา{{n0}} อาปตฺตานาปตฺติครูกลหุกสเตกิจฺฉ- อเตกิจฺฉวุฏฺฐานเทสนานิคฺคหปฏิกมฺม- โอสารณนิสฺสารณปฏิสารณกุสลา วินเย ปารมิํ คตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“รูปรกฺขา”ติ",
+              "bold": true
+            },
+            {
+              "value": "{{n1}} วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ],
       "notes": [
@@ -39423,11 +39527,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū vimuttivarakusumamālabaddhā varapavaramahagghaseṭṭhabhāvamanuppattā bahujanakantamabhipatthitā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “pupphāpaṇikā”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū vimuttivarakusumamālabaddhā varapavaramahagghaseṭṭhabhāvamanuppattā bahujanakantamabhipatthitā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “pupphāpaṇikā”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū vimuttivarakusumamālabaddhā varapavaramahagghaseṭṭhabhāvamanuppattā bahujanakantamabhipatthitā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“pupphāpaṇikā”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู วิมุตฺติวรกุสุมมาลพทฺธา วรปวรมหคฺฆเสฏฺฐภาวมนุปฺปตฺตา พหุชนกนฺตมภิปตฺถิตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ปุปฺผาปณิกา”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู วิมุตฺติวรกุสุมมาลพทฺธา วรปวรมหคฺฆเสฏฺฐภาวมนุปฺปตฺตา พหุชนกนฺตมภิปตฺถิตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ปุปฺผาปณิกา”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู วิมุตฺติวรกุสุมมาลพทฺธา วรปวรมหคฺฆเสฏฺฐภาวมนุปฺปตฺตา พหุชนกนฺตมภิปตฺถิตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“ปุปฺผาปณิกา”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -39438,11 +39570,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū catusaccābhisamayappaṭividdhā diṭṭhasaccā viññātasāsanā catūsu sāmaññaphalesu tiṇṇavicikicchā paṭiladdhaphalasukhā aññesampi paṭipannānaṃ te phale saṃvibhajanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “phalāpaṇikā”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū catusaccābhisamayappaṭividdhā diṭṭhasaccā viññātasāsanā catūsu sāmaññaphalesu tiṇṇavicikicchā paṭiladdhaphalasukhā aññesampi paṭipannānaṃ te phale saṃvibhajanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “phalāpaṇikā”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū catusaccābhisamayappaṭividdhā diṭṭhasaccā viññātasāsanā catūsu sāmaññaphalesu tiṇṇavicikicchā paṭiladdhaphalasukhā aññesampi paṭipannānaṃ te phale saṃvibhajanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“phalāpaṇikā”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู จตุสจฺจาภิสมยปฺปฏิวิทฺธา ทิฏฺฐสจฺจา วิญฺญาตสาสนา จตูสุ สามญฺญผเลสุ ติณฺณวิจิกิจฺฉา ปฏิลทฺธผลสุขา อญฺเญสมฺปิ ปฏิปนฺนานํ เต ผเล สํวิภชนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ผลาปณิกา”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู จตุสจฺจาภิสมยปฺปฏิวิทฺธา ทิฏฺฐสจฺจา วิญฺญาตสาสนา จตูสุ สามญฺญผเลสุ ติณฺณวิจิกิจฺฉา ปฏิลทฺธผลสุขา อญฺเญสมฺปิ ปฏิปนฺนานํ เต ผเล สํวิภชนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ผลาปณิกา”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู จตุสจฺจาภิสมยปฺปฏิวิทฺธา ทิฏฺฐสจฺจา วิญฺญาตสาสนา จตูสุ สามญฺญผเลสุ ติณฺณวิจิกิจฺฉา ปฏิลทฺธผลสุขา อญฺเญสมฺปิ ปฏิปนฺนานํ เต ผเล สํวิภชนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“ผลาปณิกา”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -39499,11 +39659,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū dhammakāmā piyasamudāhārā abhidhamme abhivinaye uḷārapāmojjā araññagatāpi rukkhamūlagatāpi suññāgāragatāpi dhammavararasaṃ pivanti, kāyena vācāya manasā dhammavararasamogāḷhā adhimattapaṭibhānā dhammesu dhammesanappaṭipannā ito vā tato vā yattha yattha appicchakathā santuṭṭhikathā pavivekakathā asaṃsaggakathā vīriyārambhakathā sīlakathā samādhikathā paññākathā vimuttikathā vimuttiñāṇadassanakathā, tattha tattha gantvā taṃ taṃ kathārasaṃ pivanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “soṇḍā pipāsā”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū dhammakāmā piyasamudāhārā abhidhamme abhivinaye uḷārapāmojjā araññagatāpi rukkhamūlagatāpi suññāgāragatāpi dhammavararasaṃ pivanti, kāyena vācāya manasā dhammavararasamogāḷhā adhimattapaṭibhānā dhammesu dhammesanappaṭipannā ito vā tato vā yattha yattha appicchakathā santuṭṭhikathā pavivekakathā asaṃsaggakathā vīriyārambhakathā sīlakathā samādhikathā paññākathā vimuttikathā vimuttiñāṇadassanakathā, tattha tattha gantvā taṃ taṃ kathārasaṃ pivanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “soṇḍā pipāsā”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū dhammakāmā piyasamudāhārā abhidhamme abhivinaye uḷārapāmojjā araññagatāpi rukkhamūlagatāpi suññāgāragatāpi dhammavararasaṃ pivanti, kāyena vācāya manasā dhammavararasamogāḷhā adhimattapaṭibhānā dhammesu dhammesanappaṭipannā ito vā tato vā yattha yattha appicchakathā santuṭṭhikathā pavivekakathā asaṃsaggakathā vīriyārambhakathā sīlakathā samādhikathā paññākathā vimuttikathā vimuttiñāṇadassanakathā, tattha tattha gantvā taṃ taṃ kathārasaṃ pivanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“soṇḍā pipāsā”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู ธมฺมกามา ปิยสมุทาหารา อภิธมฺเม อภิวินเย อุฬารปาโมชฺชา อรญฺญคตาปิ รุกฺขมูลคตาปิ สุญฺญาคารคตาปิ ธมฺมวรรสํ ปิวนฺติ, กาเยน วาจาย มนสา ธมฺมวรรสโมคาฬฺหา อธิมตฺตปฏิภานา ธมฺเมสุ ธมฺเมสนปฺปฏิปนฺนา อิโต วา ตโต วา ยตฺถ ยตฺถ อปฺปิจฺฉกถา สนฺตุฏฺฐิกถา ปวิเวกกถา อสํสคฺคกถา วีริยารมฺภกถา สีลกถา สมาธิกถา ปญฺญากถา วิมุตฺติกถา วิมุตฺติญาณทสฺสนกถา, ตตฺถ ตตฺถ คนฺตฺวา ตํ ตํ กถารสํ ปิวนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “โสณฺฑา ปิปาสา”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู ธมฺมกามา ปิยสมุทาหารา อภิธมฺเม อภิวินเย อุฬารปาโมชฺชา อรญฺญคตาปิ รุกฺขมูลคตาปิ สุญฺญาคารคตาปิ ธมฺมวรรสํ ปิวนฺติ, กาเยน วาจาย มนสา ธมฺมวรรสโมคาฬฺหา อธิมตฺตปฏิภานา ธมฺเมสุ ธมฺเมสนปฺปฏิปนฺนา อิโต วา ตโต วา ยตฺถ ยตฺถ อปฺปิจฺฉกถา สนฺตุฏฺฐิกถา ปวิเวกกถา อสํสคฺคกถา วีริยารมฺภกถา สีลกถา สมาธิกถา ปญฺญากถา วิมุตฺติกถา วิมุตฺติญาณทสฺสนกถา, ตตฺถ ตตฺถ คนฺตฺวา ตํ ตํ กถารสํ ปิวนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “โสณฺฑา ปิปาสา”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู ธมฺมกามา ปิยสมุทาหารา อภิธมฺเม อภิวินเย อุฬารปาโมชฺชา อรญฺญคตาปิ รุกฺขมูลคตาปิ สุญฺญาคารคตาปิ ธมฺมวรรสํ ปิวนฺติ, กาเยน วาจาย มนสา ธมฺมวรรสโมคาฬฺหา อธิมตฺตปฏิภานา ธมฺเมสุ ธมฺเมสนปฺปฏิปนฺนา อิโต วา ตโต วา ยตฺถ ยตฺถ อปฺปิจฺฉกถา สนฺตุฏฺฐิกถา ปวิเวกกถา อสํสคฺคกถา วีริยารมฺภกถา สีลกถา สมาธิกถา ปญฺญากถา วิมุตฺติกถา วิมุตฺติญาณทสฺสนกถา, ตตฺถ ตตฺถ คนฺตฺวา ตํ ตํ กถารสํ ปิวนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“โสณฺฑา ปิปาสา”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -39514,11 +39702,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū pubbarattāpararattaṃ jāgariyānuyogamanuyuttā nisajjaṭṭhānacaṅkamehi rattindivaṃ vītināmenti, bhāvanānuyogamanuyuttā kilesapaṭibāhanāya sadatthappasutā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “nagaraguttikā”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū pubbarattāpararattaṃ jāgariyānuyogamanuyuttā nisajjaṭṭhānacaṅkamehi rattindivaṃ vītināmenti, bhāvanānuyogamanuyuttā kilesapaṭibāhanāya sadatthappasutā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “nagaraguttikā”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū pubbarattāpararattaṃ jāgariyānuyogamanuyuttā nisajjaṭṭhānacaṅkamehi rattindivaṃ vītināmenti, bhāvanānuyogamanuyuttā kilesapaṭibāhanāya sadatthappasutā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“nagaraguttikā”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู ปุพฺพรตฺตาปรรตฺตํ ชาคริยานุโยคมนุยุตฺตา นิสชฺชฏฺฐานจงฺกเมหิ รตฺตินฺทิวํ วีตินาเมนฺติ, ภาวนานุโยคมนุยุตฺตา กิเลสปฏิพาหนาย สทตฺถปฺปสุตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “นครคุตฺติกา”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู ปุพฺพรตฺตาปรรตฺตํ ชาคริยานุโยคมนุยุตฺตา นิสชฺชฏฺฐานจงฺกเมหิ รตฺตินฺทิวํ วีตินาเมนฺติ, ภาวนานุโยคมนุยุตฺตา กิเลสปฏิพาหนาย สทตฺถปฺปสุตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “นครคุตฺติกา”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู ปุพฺพรตฺตาปรรตฺตํ ชาคริยานุโยคมนุยุตฺตา นิสชฺชฏฺฐานจงฺกเมหิ รตฺตินฺทิวํ วีตินาเมนฺติ, ภาวนานุโยคมนุยุตฺตา กิเลสปฏิพาหนาย สทตฺถปฺปสุตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“นครคุตฺติกา”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -39529,11 +39745,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū navaṅgaṃ Buddhavacanaṃ atthato ca byañjanato ca nayato ca kāraṇato ca hetuto ca udāharaṇato ca vācenti anuvācenti bhāsanti anubhāsanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “dhammāpaṇikā”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū navaṅgaṃ Buddhavacanaṃ atthato ca byañjanato ca nayato ca kāraṇato ca hetuto ca udāharaṇato ca vācenti anuvācenti bhāsanti anubhāsanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “dhammāpaṇikā”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū navaṅgaṃ Buddhavacanaṃ atthato ca byañjanato ca nayato ca kāraṇato ca hetuto ca udāharaṇato ca vācenti anuvācenti bhāsanti anubhāsanti, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“dhammāpaṇikā”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู นวงฺคํ พุทฺธวจนํ อตฺถโต จ พฺยญฺชนโต จ นยโต จ การณโต จ เหตุโต จ อุทาหรณโต จ วาเจนฺติ อนุวาเจนฺติ ภาสนฺติ อนุภาสนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ธมฺมาปณิกา”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู นวงฺคํ พุทฺธวจนํ อตฺถโต จ พฺยญฺชนโต จ นยโต จ การณโต จ เหตุโต จ อุทาหรณโต จ วาเจนฺติ อนุวาเจนฺติ ภาสนฺติ อนุภาสนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ธมฺมาปณิกา”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู นวงฺคํ พุทฺธวจนํ อตฺถโต จ พฺยญฺชนโต จ นยโต จ การณโต จ เหตุโต จ อุทาหรณโต จ วาเจนฺติ อนุวาเจนฺติ ภาสนฺติ อนุภาสนฺติ, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“ธมฺมาปณิกา”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -39544,11 +39788,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū dhammaratanabhogena āgamapariyattisutabhogena bhogino dhanino niddiṭṭhasarabyañjanalakkhaṇappaṭivedhā viññū pharaṇā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “dhammaseṭṭhino”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū dhammaratanabhogena āgamapariyattisutabhogena bhogino dhanino niddiṭṭhasarabyañjanalakkhaṇappaṭivedhā viññū pharaṇā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “dhammaseṭṭhino”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū dhammaratanabhogena āgamapariyattisutabhogena bhogino dhanino niddiṭṭhasarabyañjanalakkhaṇappaṭivedhā viññū pharaṇā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“dhammaseṭṭhino”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู ธมฺมรตนโภเคน อาคมปริยตฺติสุตโภเคน โภคิโน ธนิโน นิทฺทิฏฺฐสรพฺยญฺชนลกฺขณปฺปฏิเวธา วิญฺญู ผรณา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ธมฺมเสฏฺฐิโน”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู ธมฺมรตนโภเคน อาคมปริยตฺติสุตโภเคน โภคิโน ธนิโน นิทฺทิฏฺฐสรพฺยญฺชนลกฺขณปฺปฏิเวธา วิญฺญู ผรณา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “ธมฺมเสฏฺฐิโน”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู ธมฺมรตนโภเคน อาคมปริยตฺติสุตโภเคน โภคิโน ธนิโน นิทฺทิฏฺฐสรพฺยญฺชนลกฺขณปฺปฏิเวธา วิญฺญู ผรณา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“ธมฺมเสฏฺฐิโน”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -39559,11 +39831,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ye pana te mahārāja bhikkhū uḷāradesanāpaṭivedhā pariciṇṇārammaṇavibhattiniddesā sikkhāguṇapāramippattā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “vissutadhammikā”ti vuccanti."
+          "value": "Ye pana te mahārāja bhikkhū uḷāradesanāpaṭivedhā pariciṇṇārammaṇavibhattiniddesā sikkhāguṇapāramippattā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare “vissutadhammikā”ti vuccanti.",
+          "runs": [
+            {
+              "value": "Ye pana te mahārāja bhikkhū uḷāradesanāpaṭivedhā pariciṇṇārammaṇavibhattiniddesā sikkhāguṇapāramippattā, evarūpā kho mahārāja bhikkhū Bhagavato dhammanagare ",
+              "bold": false
+            },
+            {
+              "value": "“vissutadhammikā”ti",
+              "bold": true
+            },
+            {
+              "value": " vuccanti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เย ปน เต มหาราช ภิกฺขู อุฬารเทสนาปฏิเวธา ปริจิณฺณารมฺมณวิภตฺตินิทฺเทสา สิกฺขาคุณปารมิปฺปตฺตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “วิสฺสุตธมฺมิกา”ติ วุจฺจนฺติ."
+          "value": "เย ปน เต มหาราช ภิกฺขู อุฬารเทสนาปฏิเวธา ปริจิณฺณารมฺมณวิภตฺตินิทฺเทสา สิกฺขาคุณปารมิปฺปตฺตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร “วิสฺสุตธมฺมิกา”ติ วุจฺจนฺติ.",
+          "runs": [
+            {
+              "value": "เย ปน เต มหาราช ภิกฺขู อุฬารเทสนาปฏิเวธา ปริจิณฺณารมฺมณวิภตฺตินิทฺเทสา สิกฺขาคุณปารมิปฺปตฺตา, เอวรูปา โข มหาราช ภิกฺขู ภควโต ธมฺมนคเร ",
+              "bold": false
+            },
+            {
+              "value": "“วิสฺสุตธมฺมิกา”ติ",
+              "bold": true
+            },
+            {
+              "value": " วุจฺจนฺติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -44013,7 +44313,7 @@
           "value": "คทฺรภวคฺค 1. คทฺรภงฺคปญฺห",
           "runs": [
             {
-              "value": "คทฺรภวคฺค 1.{{sp1}} คทฺรภงฺคปญฺห",
+              "value": "คทฺรภวคฺค 1. คทฺรภงฺคปญฺห",
               "bold": true
             }
           ]
@@ -44750,7 +45050,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} ทีปินิยงฺคปญฺห",
+              "value": "4. ทีปินิยงฺคปญฺห",
               "bold": true
             }
           ]
@@ -46768,7 +47068,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} สาลกลฺยาณิกงฺคปญฺห",
+              "value": "4. สาลกลฺยาณิกงฺคปญฺห",
               "bold": true
             }
           ]
@@ -47644,7 +47944,7 @@
               "bold": false
             },
             {
-              "value": "10.{{sp1}} สมุทฺทงฺคปญฺห",
+              "value": "10. สมุทฺทงฺคปญฺห",
               "bold": true
             }
           ]
@@ -52528,7 +52828,7 @@
               "bold": false
             },
             {
-              "value": "10.{{sp1}} หตฺถิงฺคปญฺห",
+              "value": "10. หตฺถิงฺคปญฺห",
               "bold": true
             }
           ]
@@ -57220,7 +57520,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} เขตฺตงฺคปญฺห",
+              "value": "4. เขตฺตงฺคปญฺห",
               "bold": true
             }
           ]
@@ -57708,7 +58008,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} อิสฺสาสงฺคปญฺห",
+              "value": "7. อิสฺสาสงฺคปญฺห",
               "bold": true
             }
           ]

@@ -38458,11 +38458,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Saṭṭhinipātaṃ niṭṭhitaṃ."
+          "value": "Saṭṭhinipātaṃ niṭṭhitaṃ.",
+          "runs": [
+            {
+              "value": "Saṭṭhinipātaṃ niṭṭhitaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สฏฺฐินิปาตํ นิฏฺฐิตํ."
+          "value": "สฏฺฐินิปาตํ นิฏฺฐิตํ.",
+          "runs": [
+            {
+              "value": "สฏฺฐินิปาตํ นิฏฺฐิตํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -90260,11 +90272,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "yattha sammati Temiyo."
+                  "value": "yattha sammati Temiyo.",
+                  "runs": [
+                    {
+                      "value": "yattha sammati ",
+                      "bold": false
+                    },
+                    {
+                      "value": "Temiyo",
+                      "bold": true
+                    },
+                    {
+                      "value": ".",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ยตฺถ สมฺมติ เตมิโย."
+                  "value": "ยตฺถ สมฺมติ เตมิโย.",
+                  "runs": [
+                    {
+                      "value": "ยตฺถ สมฺมติ ",
+                      "bold": false
+                    },
+                    {
+                      "value": "เตมิโย",
+                      "bold": true
+                    },
+                    {
+                      "value": ".",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -186887,11 +186927,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sa Rājavasatiṃ vase."
+                  "value": "sa Rājavasatiṃ vase.",
+                  "runs": [
+                    {
+                      "value": "sa ",
+                      "bold": false
+                    },
+                    {
+                      "value": "Rājavasatiṃ",
+                      "bold": true
+                    },
+                    {
+                      "value": " vase.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ส ราชวสติํ วเส."
+                  "value": "ส ราชวสติํ วเส.",
+                  "runs": [
+                    {
+                      "value": "ส ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ราชวสติํ",
+                      "bold": true
+                    },
+                    {
+                      "value": " วเส.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -186952,11 +187020,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sa Rājavasatiṃ vase."
+                  "value": "sa Rājavasatiṃ vase.",
+                  "runs": [
+                    {
+                      "value": "sa ",
+                      "bold": false
+                    },
+                    {
+                      "value": "Rājavasatiṃ",
+                      "bold": true
+                    },
+                    {
+                      "value": " vase.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ส ราชวสติํ วเส."
+                  "value": "ส ราชวสติํ วเส.",
+                  "runs": [
+                    {
+                      "value": "ส ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ราชวสติํ",
+                      "bold": true
+                    },
+                    {
+                      "value": " วเส.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -187017,11 +187113,39 @@
               "text": [
                 {
                   "script": "roman",
-                  "value": "sa Rājavasatiṃ vase."
+                  "value": "sa Rājavasatiṃ vase.",
+                  "runs": [
+                    {
+                      "value": "sa ",
+                      "bold": false
+                    },
+                    {
+                      "value": "Rājavasatiṃ",
+                      "bold": true
+                    },
+                    {
+                      "value": " vase.",
+                      "bold": false
+                    }
+                  ]
                 },
                 {
                   "script": "thai",
-                  "value": "ส ราชวสติํ วเส."
+                  "value": "ส ราชวสติํ วเส.",
+                  "runs": [
+                    {
+                      "value": "ส ",
+                      "bold": false
+                    },
+                    {
+                      "value": "ราชวสติํ",
+                      "bold": true
+                    },
+                    {
+                      "value": " วเส.",
+                      "bold": false
+                    }
+                  ]
                 }
               ]
             }
@@ -253354,11 +253478,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Jātakapāḷi niṭṭhitā."
+          "value": "Jātakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Jātakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ชาตกปาฬิ นิฏฺฐิตา."
+          "value": "ชาตกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "ชาตกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",

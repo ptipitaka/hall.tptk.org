@@ -132,7 +132,7 @@
           "value": "กุสลตฺติก 1. เวทนาตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} เวทนาตฺติก",
+              "value": "กุสลตฺติก 1. เวทนาตฺติก",
               "bold": true
             }
           ]
@@ -167,7 +167,7 @@
           "value": "สุขายเวทนายสมฺปยุตฺตปท 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "สุขายเวทนายสมฺปยุตฺตปท 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "สุขายเวทนายสมฺปยุตฺตปท 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -370,7 +370,7 @@
           "value": "ทุกฺขายเวทนายสมฺปยุตฺตปท 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "ทุกฺขายเวทนายสมฺปยุตฺตปท 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "ทุกฺขายเวทนายสมฺปยุตฺตปท 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -564,7 +564,7 @@
           "value": "อทุกฺขมสุขเวทนายสมฺปยุตฺตปท 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "อทุกฺขมสุขเวทนายสมฺปยุตฺตปท 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "อทุกฺขมสุขเวทนายสมฺปยุตฺตปท 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -735,7 +735,7 @@
           "value": "กุสลตฺติก 2. วิปากตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 2.{{sp1}} วิปากตฺติก",
+              "value": "กุสลตฺติก 2. วิปากตฺติก",
               "bold": true
             }
           ]
@@ -1357,7 +1357,7 @@
           "value": "กุสลตฺติก 4. สํกิลิฏฺฐตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 4.{{sp1}} สํกิลิฏฺฐตฺติก",
+              "value": "กุสลตฺติก 4. สํกิลิฏฺฐตฺติก",
               "bold": true
             }
           ]
@@ -2210,7 +2210,7 @@
           "value": "กุสลตฺติก 7. ทสฺสนตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 7.{{sp1}} ทสฺสนตฺติก",
+              "value": "กุสลตฺติก 7. ทสฺสนตฺติก",
               "bold": true
             }
           ]
@@ -2509,7 +2509,7 @@
           "value": "กุสลตฺติก 9. อาจยคามิตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 9.{{sp1}} อาจยคามิตฺติก",
+              "value": "กุสลตฺติก 9. อาจยคามิตฺติก",
               "bold": true
             }
           ]
@@ -2646,7 +2646,7 @@
               "bold": true
             },
             {
-              "value": " 10.{{sp1}} เสกฺขตฺติก",
+              "value": " 10. เสกฺขตฺติก",
               "bold": false
             }
           ]
@@ -3414,7 +3414,7 @@
               "bold": true
             },
             {
-              "value": " 13.{{sp1}} หีนตฺติก",
+              "value": " 13. หีนตฺติก",
               "bold": false
             }
           ]
@@ -3990,7 +3990,7 @@
               "bold": true
             },
             {
-              "value": " 15.{{sp1}} มคฺคารมฺมณตฺติก",
+              "value": " 15. มคฺคารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -4179,7 +4179,7 @@
               "bold": true
             },
             {
-              "value": " 16.{{sp1}} อุปฺปนฺนตฺติก",
+              "value": " 16. อุปฺปนฺนตฺติก",
               "bold": false
             }
           ]
@@ -4377,7 +4377,7 @@
               "bold": true
             },
             {
-              "value": " 18.{{sp1}} อตีตารมฺมณตฺติก",
+              "value": " 18. อตีตารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -5206,7 +5206,7 @@
               "bold": true
             },
             {
-              "value": " 21.{{sp1}} สนิทสฺสนตฺติก",
+              "value": " 21. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -5385,7 +5385,7 @@
           "value": "เวทนาตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เวทนาตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "เวทนาตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -5663,7 +5663,7 @@
           "value": "วิปากตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "วิปากตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "วิปากตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -5840,7 +5840,7 @@
           "value": "อุปาทินฺนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อุปาทินฺนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อุปาทินฺนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -6068,7 +6068,7 @@
           "value": "สํกิลิฏฺฐตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สํกิลิฏฺฐตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "สํกิลิฏฺฐตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -6430,7 +6430,7 @@
           "value": "ปีติตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปีติตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปีติตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -6693,7 +6693,7 @@
           "value": "ทสฺสนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ทสฺสนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ทสฺสนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -6808,7 +6808,7 @@
           "value": "ทสฺสนเหตุตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ทสฺสนเหตุตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ทสฺสนเหตุตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -6962,7 +6962,7 @@
           "value": "อาจยคามิตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาจยคามิตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อาจยคามิตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -7192,7 +7192,7 @@
           "value": "ปริตฺตติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปริตฺตติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปริตฺตติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -7371,7 +7371,7 @@
           "value": "ปริตฺตารมฺมณตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปริตฺตารมฺมณตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปริตฺตารมฺมณตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -7720,7 +7720,7 @@
           "value": "มิจฺฉตฺตตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "มิจฺฉตฺตตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "มิจฺฉตฺตตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -7851,7 +7851,7 @@
           "value": "มคฺคารมฺมณตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "มคฺคารมฺมณตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "มคฺคารมฺมณตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -8066,7 +8066,7 @@
           "value": "อุปฺปนฺนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อุปฺปนฺนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อุปฺปนฺนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -8283,7 +8283,7 @@
           "value": "อตีตารมฺมณตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อตีตารมฺมณตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อตีตารมฺมณตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -8484,7 +8484,7 @@
           "value": "สนิทสฺสนตฺติก 1.{{sp1}} กุสลตฺติก 20.{{sp1}} อชฺฌตฺตตฺติก 1.{{sp1}} กุสลตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 1.{{sp1}} กุสลตฺติก 20.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 1. กุสลตฺติก 20. ",
               "bold": false
             },
             {
@@ -8492,7 +8492,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} กุสลตฺติก",
+              "value": " กุสลตฺติก",
               "bold": false
             }
           ]
@@ -8633,7 +8633,7 @@
           "value": "อชฺฌตฺตารมฺมณตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อชฺฌตฺตารมฺมณตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อชฺฌตฺตารมฺมณตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -8986,7 +8986,7 @@
           "value": "เหตุทุก 1. สเหตุกทุก",
           "runs": [
             {
-              "value": "เหตุทุก 1.{{sp1}} สเหตุกทุก",
+              "value": "เหตุทุก 1. สเหตุกทุก",
               "bold": true
             }
           ]
@@ -9020,7 +9020,7 @@
           "value": "สเหตุกปท 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "สเหตุกปท 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "สเหตุกปท 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -9554,7 +9554,7 @@
           "value": "เหตุทุก 2. เหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "เหตุทุก 2.{{sp1}} เหตุสมฺปยุตฺตทุก",
+              "value": "เหตุทุก 2. เหตุสมฺปยุตฺตทุก",
               "bold": true
             }
           ]
@@ -9853,7 +9853,7 @@
           "value": "เหตุทุก 3. เหตุสเหตุกทุก",
           "runs": [
             {
-              "value": "เหตุทุก 3.{{sp1}} เหตุสเหตุกทุก",
+              "value": "เหตุทุก 3. เหตุสเหตุกทุก",
               "bold": true
             }
           ]
@@ -9936,7 +9936,7 @@
           "value": "เหตุทุก 4. เหตุเหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "เหตุทุก 4.{{sp1}} เหตุเหตุสมฺปยุตฺตทุก",
+              "value": "เหตุทุก 4. เหตุเหตุสมฺปยุตฺตทุก",
               "bold": true
             }
           ]
@@ -10091,7 +10091,7 @@
           "value": "เหตุทุก 6. สปฺปจฺจยทุก",
           "runs": [
             {
-              "value": "เหตุทุก 6.{{sp1}} สปฺปจฺจยทุก",
+              "value": "เหตุทุก 6. สปฺปจฺจยทุก",
               "bold": true
             }
           ]
@@ -10237,7 +10237,7 @@
           "value": "เหตุทุก 7. สงฺขตทุก",
           "runs": [
             {
-              "value": "เหตุทุก 7.{{sp1}} สงฺขตทุก",
+              "value": "เหตุทุก 7. สงฺขตทุก",
               "bold": true
             }
           ]
@@ -10303,7 +10303,7 @@
           "value": "เหตุทุก 8. สนิทสฺสนทุก",
           "runs": [
             {
-              "value": "เหตุทุก 8.{{sp1}} สนิทสฺสนทุก",
+              "value": "เหตุทุก 8. สนิทสฺสนทุก",
               "bold": true
             }
           ]
@@ -10422,7 +10422,7 @@
           "value": "เหตุทุก 9. สปฺปฏิฆทุก",
           "runs": [
             {
-              "value": "เหตุทุก 9.{{sp1}} สปฺปฏิฆทุก",
+              "value": "เหตุทุก 9. สปฺปฏิฆทุก",
               "bold": true
             }
           ]
@@ -13174,7 +13174,7 @@
           "value": "สเหตุกทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "สเหตุกทุก 1.{{sp1}} เหตุทุก",
+              "value": "สเหตุกทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -13257,7 +13257,7 @@
           "value": "เหตุสมฺปยุตฺตทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "เหตุสมฺปยุตฺตทุก 1.{{sp1}} เหตุทุก",
+              "value": "เหตุสมฺปยุตฺตทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -13340,7 +13340,7 @@
           "value": "เหตุสเหตุกทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "เหตุสเหตุกทุก 1.{{sp1}} เหตุทุก",
+              "value": "เหตุสเหตุกทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -13462,7 +13462,7 @@
           "value": "นเหตุสเหตุกทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "นเหตุสเหตุกทุก 1.{{sp1}} เหตุทุก",
+              "value": "นเหตุสเหตุกทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -13529,7 +13529,7 @@
           "value": "จูฬนฺตรทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "จูฬนฺตรทุก 1.{{sp1}} เหตุทุก",
+              "value": "จูฬนฺตรทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -13946,7 +13946,7 @@
           "value": "อาสวโคจฺฉก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อาสวโคจฺฉก 1.{{sp1}} เหตุทุก",
+              "value": "อาสวโคจฺฉก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -14177,11 +14177,11 @@
           "value": "มหนฺตรทุก 1. เหตุทุก 20. สญฺโญชนาทิทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "มหนฺตรทุก 1.{{sp1}} เหตุทุก ",
+              "value": "มหนฺตรทุก 1. เหตุทุก ",
               "bold": false
             },
             {
-              "value": "20.{{sp1}} สญฺโญชนาทิทุก 1.{{sp1}} เหตุทุก",
+              "value": "20. สญฺโญชนาทิทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -14525,7 +14525,7 @@
           "value": "อุปาทานโคจฺฉก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อุปาทานโคจฺฉก 1.{{sp1}} เหตุทุก",
+              "value": "อุปาทานโคจฺฉก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -14577,7 +14577,7 @@
           "value": "กิเลสโคจฺฉก 1. เหตุทุก",
           "runs": [
             {
-              "value": "กิเลสโคจฺฉก 1.{{sp1}} เหตุทุก",
+              "value": "กิเลสโคจฺฉก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -14629,7 +14629,7 @@
           "value": "ปิฏฺฐิทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "ปิฏฺฐิทุก 1.{{sp1}} เหตุทุก",
+              "value": "ปิฏฺฐิทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -15151,7 +15151,7 @@
           "value": "กุสลตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "กุสลตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -15348,11 +15348,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kusalattika 7. Pañhāvāra"
+          "value": "Kusalattika 7. Pañhāvāra",
+          "runs": [
+            {
+              "value": "Kusalattika 7. Pañhāvāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "กุสลตฺติก 7. ปญฺหาวาร"
+          "value": "กุสลตฺติก 7. ปญฺหาวาร",
+          "runs": [
+            {
+              "value": "กุสลตฺติก 7. ปญฺหาวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -15573,7 +15585,7 @@
           "value": "เวทนาตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เวทนาตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เวทนาตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -15673,7 +15685,7 @@
           "value": "วิปากตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "วิปากตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "วิปากตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -15740,7 +15752,7 @@
           "value": "อุปาทินฺนตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อุปาทินฺนตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อุปาทินฺนตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -15810,11 +15822,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Saṃkiliṭṭhattika 1. Paṭiccavāra"
+          "value": "Saṃkiliṭṭhattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Saṃkiliṭṭhattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สํกิลิฏฺฐตฺติก 1. ปฏิจฺจวาร"
+          "value": "สํกิลิฏฺฐตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "สํกิลิฏฺฐตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -15901,7 +15925,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} วิตกฺกตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "6. วิตกฺกตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -16003,7 +16027,7 @@
           "value": "นสุขสหคตํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นอุเปกฺขาสหคตํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 8.{{sp1}} ทสฺสนตฺติก 1.{{sp1}} ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "นสุขสหคตํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นฺเอาเปกฺขาสหคตํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 8.{{sp1}}",
+              "value": "นสุขสหคตํ ธมฺมํ ปฏิจฺจ ฯเปฯ. นฺเอาเปกฺขาสหคตํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 8. ",
               "bold": false
             },
             {
@@ -16011,7 +16035,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} ปฏิจฺจวาร",
+              "value": " ปฏิจฺจวาร",
               "bold": false
             }
           ]
@@ -16047,7 +16071,7 @@
           "value": "นทสฺสเนน ปหาตพฺพํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นภาวนาย ปหาตพฺพํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นเนวทสฺสเนน นภาวนาย ปหาตพฺพํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 9.{{sp1}} ทสฺสนเหตุตฺติก 1.{{sp1}} ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "นทสฺสเนน ปหาตพฺพํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นภาวนาย ปหาตพฺพํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นเนวทสฺสเนน นภาวนาย ปหาตพฺพํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 9.{{sp1}}",
+              "value": "นทสฺสเนน ปหาตพฺพํ ธมฺมํ ปฏิจฺจ ฯเปฯ. นภาวนาย ปหาตพฺพํ ธมฺมํ ปฏิจฺจ ฯเปฯ. นเนวทสฺสเนน นภาวนาย ปหาตพฺพํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 9. ",
               "bold": false
             },
             {
@@ -16055,7 +16079,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} ปฏิจฺจวาร",
+              "value": " ปฏิจฺจวาร",
               "bold": false
             }
           ]
@@ -16139,7 +16163,7 @@
               "bold": false
             },
             {
-              "value": "12.{{sp1}} ปริตฺตตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "12. ปริตฺตตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -16198,7 +16222,7 @@
           "value": "นปริตฺตารมฺมณํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นมหคฺคตารมฺมณํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นอปฺปมาณารมฺมณํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 14.{{sp1}} หีนตฺติก 1.{{sp1}} ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "นปริตฺตารมฺมณํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นมหคฺคตารมฺมณํ ธมฺมํ ปฏิจฺจ ฯเปฯ.{{sp1}}{{sp1}}นอปฺปมาณารมฺมณํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 14.{{sp1}}",
+              "value": "นปริตฺตารมฺมณํ ธมฺมํ ปฏิจฺจ ฯเปฯ. นมหคฺคตารมฺมณํ ธมฺมํ ปฏิจฺจ ฯเปฯ. นอปฺปมาณารมฺมณํ ธมฺมํ ปฏิจฺจ. (สํขิตฺตํ.) 14. ",
               "bold": false
             },
             {
@@ -16206,7 +16230,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} ปฏิจฺจวาร",
+              "value": " ปฏิจฺจวาร",
               "bold": false
             }
           ]
@@ -16337,7 +16361,7 @@
               "bold": false
             },
             {
-              "value": "18.{{sp1}} อตีตตฺติก 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "18. อตีตตฺติก 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -16431,7 +16455,7 @@
           "value": "อตีตารมฺมณตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อตีตารมฺมณตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อตีตารมฺมณตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -16482,7 +16506,7 @@
           "value": "อชฺฌตฺตตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อชฺฌตฺตตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อชฺฌตฺตตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -16533,7 +16557,7 @@
           "value": "อชฺฌตฺตารมฺมณตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อชฺฌตฺตารมฺมณตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อชฺฌตฺตารมฺมณตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -16609,11 +16633,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sanidassanattika 1. Paṭiccavāra"
+          "value": "Sanidassanattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Sanidassanattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สนิทสฺสนตฺติก 1. ปฏิจฺจวาร"
+          "value": "สนิทสฺสนตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "สนิทสฺสนตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -16632,11 +16668,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanaappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho ca naanidassanaappaṭigho ca dhammā uppajjanti hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanasappaṭigho ca naanidassanaappaṭigho ca dhammā uppajjanti hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho ca naanidassanasappaṭigho ca dhammā uppajjanti hetupaccayā. (6)"
+          "value": "Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanaappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho ca naanidassanaappaṭigho ca dhammā uppajjanti hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanasappaṭigho ca naanidassanaappaṭigho ca dhammā uppajjanti hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho ca naanidassanasappaṭigho ca dhammā uppajjanti hetupaccayā. (6)",
+          "runs": [
+            {
+              "value": "Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanaappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": "Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho ca",
+              "bold": true
+            },
+            {
+              "value": " naanidassanaappaṭigho ca dhammā uppajjanti hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca naanidassanasappaṭigho ca naanidassanaappaṭigho ca dhammā uppajjanti hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ dhammaṃ paṭicca nasanidassanasappaṭigho ca naanidassanasappaṭigho ca dhammā uppajjanti hetupaccayā. (6)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนอปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ จ นอนิทสฺสนอปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ จ นอนิทสฺสนอปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ จ นอนิทสฺสนสปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (6)"
+          "value": "นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนอปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ จ นอนิทสฺสนอปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ จ นอนิทสฺสนอปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ จ นอนิทสฺสนสปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (6)",
+          "runs": [
+            {
+              "value": "นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนอปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. ",
+              "bold": false
+            },
+            {
+              "value": "นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ จ",
+              "bold": true
+            },
+            {
+              "value": " นอนิทสฺสนอปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ จ นอนิทสฺสนอปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ จ นอนิทสฺสนสปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (6)",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -16857,7 +16921,7 @@
           "value": "เหตุทุก 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "เหตุทุก 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "เหตุทุก 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -17100,7 +17164,7 @@
           "value": "สเหตุกทุก 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "สเหตุกทุก 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "สเหตุกทุก 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -17333,11 +17397,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Hetusampayuttaduka 1. Paṭiccavāra"
+          "value": "Hetusampayuttaduka 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Hetusampayuttaduka 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เหตุสมฺปยุตฺตทุก 1. ปฏิจฺจวาร"
+          "value": "เหตุสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "เหตุสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -17465,7 +17541,7 @@
           "value": "เหตุสเหตุกทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เหตุสเหตุกทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เหตุสเหตุกทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -17580,7 +17656,7 @@
           "value": "เหตุเหตุสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เหตุเหตุสมฺปยุตฺตทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เหตุเหตุสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -17682,11 +17758,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Nahetusahetukaduka 1-7. Paṭiccādivāra"
+          "value": "Nahetusahetukaduka 1-7. Paṭiccādivāra",
+          "runs": [
+            {
+              "value": "Nahetusahetukaduka 1-7. Paṭiccādivāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "นเหตุสเหตุกทุก 1-7. ปฏิจฺจาทิวาร"
+          "value": "นเหตุสเหตุกทุก 1-7. ปฏิจฺจาทิวาร",
+          "runs": [
+            {
+              "value": "นเหตุสเหตุกทุก 1-7. ปฏิจฺจาทิวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -17753,11 +17841,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "paṭicca nahetu nasahetuko ca nahetu naahetuko ca dhammā uppajjanti hetupaccayā. (3) (Saṃkhittaṃ.)"
+          "value": "paṭicca nahetu nasahetuko ca nahetu naahetuko ca dhammā uppajjanti hetupaccayā. (3) (Saṃkhittaṃ.)",
+          "runs": [
+            {
+              "value": "paṭicca nahetu nasahetuko",
+              "bold": true
+            },
+            {
+              "value": " ca nahetu naahetuko ca dhammā uppajjanti hetupaccayā. (3) (Saṃkhittaṃ.)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปฏิจฺจ นเหตุ นสเหตุโก จ นเหตุ นอเหตุโก จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3) (สํขิตฺตํ.)"
+          "value": "ปฏิจฺจ นเหตุ นสเหตุโก จ นเหตุ นอเหตุโก จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3) (สํขิตฺตํ.)",
+          "runs": [
+            {
+              "value": "ปฏิจฺจ นเหตุ นสเหตุโก",
+              "bold": true
+            },
+            {
+              "value": " จ นเหตุ นอเหตุโก จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3) (สํขิตฺตํ.)",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -17897,7 +18005,7 @@
           "value": "สปฺปจฺจยทุก 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "สปฺปจฺจยทุก 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "สปฺปจฺจยทุก 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -18011,7 +18119,7 @@
           "value": "สงฺขตทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "สงฺขตทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "สงฺขตทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -18070,7 +18178,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} สนิทสฺสนทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "9. สนิทสฺสนทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -18124,11 +18232,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sappaṭighaduka 1-7. Paṭiccādivāra"
+          "value": "Sappaṭighaduka 1-7. Paṭiccādivāra",
+          "runs": [
+            {
+              "value": "Sappaṭighaduka 1-7. Paṭiccādivāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สปฺปฏิฆทุก 1-7. ปฏิจฺจาทิวาร"
+          "value": "สปฺปฏิฆทุก 1-7. ปฏิจฺจาทิวาร",
+          "runs": [
+            {
+              "value": "สปฺปฏิฆทุก 1-7. ปฏิจฺจาทิวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -18385,7 +18505,7 @@
           "value": "โลกิยทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "โลกิยทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "โลกิยทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -18484,7 +18604,7 @@
           "value": "เกนจิวิญฺเญยฺยทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เกนจิวิญฺเญยฺยทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เกนจิวิญฺเญยฺยทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -18620,7 +18740,7 @@
           "value": "อาสวทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาสวทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาสวทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -18706,11 +18826,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sāsavaduka 1. Paṭiccavāra"
+          "value": "Sāsavaduka 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Sāsavaduka 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สาสวทุก 1. ปฏิจฺจวาร"
+          "value": "สาสวทุก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "สาสวทุก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -18820,7 +18952,7 @@
           "value": "อาสวสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาสวสมฺปยุตฺตทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาสวสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -18919,7 +19051,7 @@
           "value": "อาสวสาสวทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาสวสาสวทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาสวสาสวทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -19130,7 +19262,7 @@
           "value": "อาสววิปฺปยุตฺตสาสวทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาสววิปฺปยุตฺตสาสวทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาสววิปฺปยุตฺตสาสวทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -19350,7 +19482,7 @@
           "value": "เหตุยา นว, อารมฺมเณ นว ฯเปฯ อวิคเต นว. (สพฺพตฺถ วิตฺถาโร.) 21.{{sp1}} สญฺโญชนิยทุก",
           "runs": [
             {
-              "value": "เหตุยา นว, อารมฺมเณ นว ฯเปฯ อวิคเต นว. (สพฺพตฺถ วิตฺถาโร.) 21.{{sp1}}",
+              "value": "เหตุยา นว, อารมฺมเณ นว ฯเปฯ อวิคเต นว. (สพฺพตฺถ วิตฺถาโร.) 21. ",
               "bold": false
             },
             {
@@ -19434,7 +19566,7 @@
           "value": "เหตุยา ปญฺจ, อารมฺมเณ เทฺว ฯเปฯ อวิคเต ปญฺจ. (สพฺพตฺถ วิตฺถาโร.) 22.{{sp1}} สญฺโญชนสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "เหตุยา ปญฺจ, อารมฺมเณ เทฺว ฯเปฯ อวิคเต ปญฺจ. (สพฺพตฺถ วิตฺถาโร.) 22.{{sp1}}",
+              "value": "เหตุยา ปญฺจ, อารมฺมเณ เทฺว ฯเปฯ อวิคเต ปญฺจ. (สพฺพตฺถ วิตฺถาโร.) 22. ",
               "bold": false
             },
             {
@@ -21058,11 +21190,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nacetasikañca naacetasikañca dhammaṃ paṭicca nacetasiko ca naacetasiko ca dhammā uppajjanti hetupaccayā. (3)"
+          "value": "dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nacetasikañca naacetasikañca dhammaṃ paṭicca nacetasiko ca naacetasiko ca dhammā uppajjanti hetupaccayā. (3)",
+          "runs": [
+            {
+              "value": "dhammo uppajjati hetupaccayā",
+              "bold": true
+            },
+            {
+              "value": ".{{sp1}}{{sp1}}Nacetasikañca naacetasikañca dhammaṃ paṭicca nacetasiko ca naacetasiko ca dhammā uppajjanti hetupaccayā. (3)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นเจตสิกญฺจ นอเจตสิกญฺจ ธมฺมํ ปฏิจฺจ นเจตสิโก จ นอเจตสิโก จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)"
+          "value": "ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นเจตสิกญฺจ นอเจตสิกญฺจ ธมฺมํ ปฏิจฺจ นเจตสิโก จ นอเจตสิโก จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+          "runs": [
+            {
+              "value": "ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา",
+              "bold": true
+            },
+            {
+              "value": ". นเจตสิกญฺจ นอเจตสิกญฺจ ธมฺมํ ปฏิจฺจ นเจตสิโก จ นอเจตสิโก จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -21464,7 +21616,7 @@
               "bold": false
             },
             {
-              "value": "64.{{sp1}} จิตฺตสํสฏฺฐสมุฏฺฐานสหภูทุก",
+              "value": "64. จิตฺตสํสฏฺฐสมุฏฺฐานสหภูทุก",
               "bold": true
             }
           ]
@@ -21965,7 +22117,7 @@
               "bold": false
             },
             {
-              "value": "76.{{sp1}} สํกิเลสิกทุก",
+              "value": "76. สํกิเลสิกทุก",
               "bold": true
             }
           ]
@@ -22577,11 +22729,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca kilesavippayutto nasaṃkilesiko dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca kilesavippayutto naasaṃkilesiko dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca"
+          "value": "Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca kilesavippayutto nasaṃkilesiko dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca kilesavippayutto naasaṃkilesiko dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca",
+          "runs": [
+            {
+              "value": "Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca kilesavippayutto",
+              "bold": true
+            },
+            {
+              "value": " nasaṃkilesiko dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca kilesavippayutto naasaṃkilesiko dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Kilesavippayuttaṃ nasaṃkilesikaṃ dhammaṃ paṭicca",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ กิเลสวิปฺปยุตฺโต นสํกิเลสิโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ กิเลสวิปฺปยุตฺโต นอสํกิเลสิโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ"
+          "value": "กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ กิเลสวิปฺปยุตฺโต นสํกิเลสิโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ กิเลสวิปฺปยุตฺโต นอสํกิเลสิโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ",
+          "runs": [
+            {
+              "value": "กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ กิเลสวิปฺปยุตฺโต",
+              "bold": true
+            },
+            {
+              "value": " นสํกิเลสิโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ กิเลสวิปฺปยุตฺโต นอสํกิเลสิโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. กิเลสวิปฺปยุตฺตํ นสํกิเลสิกํ ธมฺมํ ปฏิจฺจ",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -24531,7 +24703,7 @@
           "value": "เหตุทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "เหตุทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -25043,7 +25215,7 @@
           "value": "เหตุทุก 3-9. วิปากตฺติกาทิ",
           "runs": [
             {
-              "value": "เหตุทุก 3-9.{{sp1}} วิปากตฺติกาทิ",
+              "value": "เหตุทุก 3-9. วิปากตฺติกาทิ",
               "bold": true
             }
           ]
@@ -26258,7 +26430,7 @@
           "value": "สเหตุกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สเหตุกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "สเหตุกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -26685,7 +26857,7 @@
           "value": "นเหตุสเหตุกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "นเหตุสเหตุกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "นเหตุสเหตุกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -26804,11 +26976,11 @@
           "value": "อาสวโคจฺฉก 1. กุสลตฺติก 7. จูฬนฺตรทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาสวโคจฺฉก 1.{{sp1}} กุสลตฺติก ",
+              "value": "อาสวโคจฺฉก 1. กุสลตฺติก ",
               "bold": false
             },
             {
-              "value": "7.{{sp1}} จูฬนฺตรทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "7. จูฬนฺตรทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -27123,7 +27295,7 @@
           "value": "มหนฺตรทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "มหนฺตรทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "มหนฺตรทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -27338,11 +27510,11 @@
           "value": "ปิฏฺฐิทุก 1. กุสลตฺติก 69. อุปาทานโคจฺฉก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปิฏฺฐิทุก 1.{{sp1}} กุสลตฺติก ",
+              "value": "ปิฏฺฐิทุก 1. กุสลตฺติก ",
               "bold": false
             },
             {
-              "value": "69.{{sp1}} อุปาทานโคจฺฉก 1.{{sp1}} กุสลตฺติก",
+              "value": "69. อุปาทานโคจฺฉก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -27394,7 +27566,7 @@
           "value": "กิเลสโคจฺฉก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "กิเลสโคจฺฉก 1.{{sp1}} กุสลตฺติก",
+              "value": "กิเลสโคจฺฉก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -28029,7 +28201,7 @@
               "bold": true
             },
             {
-              "value": "2.{{sp1}} สนิทสฺสนตฺติก",
+              "value": "2. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -28361,7 +28533,7 @@
           "value": "กุสลตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "กุสลตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -28696,11 +28868,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "dhammaṃ paṭicca nakusalo nasahetuko ca naakusalo nasahetuko ca dhammā uppajjanti hetupaccayā. (3)"
+          "value": "dhammaṃ paṭicca nakusalo nasahetuko ca naakusalo nasahetuko ca dhammā uppajjanti hetupaccayā. (3)",
+          "runs": [
+            {
+              "value": "dhammaṃ paṭicca nakusalo",
+              "bold": true
+            },
+            {
+              "value": " nasahetuko ca naakusalo nasahetuko ca ",
+              "bold": false
+            },
+            {
+              "value": "dhammā uppajjanti hetupaccayā. (3)",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ธมฺมํ ปฏิจฺจ นกุสโล นสเหตุโก จ นอกุสโล นสเหตุโก จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)"
+          "value": "ธมฺมํ ปฏิจฺจ นกุสโล นสเหตุโก จ นอกุสโล นสเหตุโก จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+          "runs": [
+            {
+              "value": "ธมฺมํ ปฏิจฺจ นกุสโล",
+              "bold": true
+            },
+            {
+              "value": " นสเหตุโก จ นอกุสโล นสเหตุโก จ ",
+              "bold": false
+            },
+            {
+              "value": "ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+              "bold": true
+            }
+          ]
         }
       ]
     },
@@ -29013,7 +29213,7 @@
           "value": "กุสลตฺติก 7. จูฬนฺตรทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 7.{{sp1}} จูฬนฺตรทุก",
+              "value": "กุสลตฺติก 7. จูฬนฺตรทุก",
               "bold": true
             }
           ]
@@ -29415,7 +29615,7 @@
               "bold": true
             },
             {
-              "value": "0.{{sp1}} สญฺโญชนโคจฺฉกาทิ",
+              "value": "0. สญฺโญชนโคจฺฉกาทิ",
               "bold": false
             }
           ]
@@ -29490,7 +29690,7 @@
               "bold": true
             },
             {
-              "value": " 55.{{sp1}} มหนฺตรทุก",
+              "value": " 55. มหนฺตรทุก",
               "bold": false
             }
           ]
@@ -29747,7 +29947,7 @@
               "bold": true
             },
             {
-              "value": " 69.{{sp1}} อุปาทานทุกาทิ",
+              "value": " 69. อุปาทานทุกาทิ",
               "bold": false
             }
           ]
@@ -30398,7 +30598,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} วิปากตฺติกาทิ 1.{{sp1}} เหตุทุก",
+              "value": "3. วิปากตฺติกาทิ 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -31039,7 +31239,7 @@
           "value": "สนิทสฺสนตฺติก 7. จูฬนฺตรทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 7.{{sp1}} จูฬนฺตรทุก",
+              "value": "สนิทสฺสนตฺติก 7. จูฬนฺตรทุก",
               "bold": true
             }
           ]
@@ -31210,7 +31410,7 @@
               "bold": true
             },
             {
-              "value": "ก 14.{{sp1}} อาสวโคจฺฉกาทิ",
+              "value": "ก 14. อาสวโคจฺฉกาทิ",
               "bold": false
             }
           ]
@@ -31468,7 +31668,7 @@
               "bold": true
             },
             {
-              "value": "อิก 69.{{sp1}} อุปาทานาทิทุก",
+              "value": "อิก 69. อุปาทานาทิทุก",
               "bold": false
             }
           ]
@@ -31527,7 +31727,7 @@
               "bold": true
             },
             {
-              "value": "ติก 83.{{sp1}} ปิฏฺฐิทุก",
+              "value": "ติก 83. ปิฏฺฐิทุก",
               "bold": false
             }
           ]
@@ -31859,7 +32059,7 @@
           "value": "กุสลตฺติก 1. เวทนาตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} เวทนาตฺติก",
+              "value": "กุสลตฺติก 1. เวทนาตฺติก",
               "bold": true
             }
           ]
@@ -32611,7 +32811,7 @@
           "value": "กุสลตฺติก 3. อุปาทินฺนตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 3.{{sp1}} อุปาทินฺนตฺติก",
+              "value": "กุสลตฺติก 3. อุปาทินฺนตฺติก",
               "bold": true
             }
           ]
@@ -32694,7 +32894,7 @@
           "value": "กุสลตฺติก 4. สํกิลิฏฺฐตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 4.{{sp1}} สํกิลิฏฺฐตฺติก",
+              "value": "กุสลตฺติก 4. สํกิลิฏฺฐตฺติก",
               "bold": true
             }
           ]
@@ -32777,7 +32977,7 @@
           "value": "กุสลตฺติก 5. วิตกฺกตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 5.{{sp1}} วิตกฺกตฺติก",
+              "value": "กุสลตฺติก 5. วิตกฺกตฺติก",
               "bold": true
             }
           ]
@@ -32906,7 +33106,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 7-12.{{sp1}} ทสฺสนตฺติกาทิ",
+              "value": "1. กุสลตฺติก 7-12. ทสฺสนตฺติกาทิ",
               "bold": true
             }
           ]
@@ -33120,7 +33320,7 @@
               "bold": true
             },
             {
-              "value": " 13-20.{{sp1}} หีนตฺติกาทิ",
+              "value": " 13-20. หีนตฺติกาทิ",
               "bold": false
             }
           ]
@@ -33781,7 +33981,7 @@
           "value": "เวทนาตฺติก 2. วิปากตฺติก",
           "runs": [
             {
-              "value": "เวทนาตฺติก 2.{{sp1}} วิปากตฺติก",
+              "value": "เวทนาตฺติก 2. วิปากตฺติก",
               "bold": true
             }
           ]
@@ -33834,11 +34034,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Vipākattika 1. Kusalattika"
+          "value": "Vipākattika 1. Kusalattika",
+          "runs": [
+            {
+              "value": "Vipākattika 1. Kusalattika",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "วิปากตฺติก 1. กุสลตฺติก"
+          "value": "วิปากตฺติก 1. กุสลตฺติก",
+          "runs": [
+            {
+              "value": "วิปากตฺติก 1. กุสลตฺติก",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -33902,7 +34114,7 @@
           "value": "อุปาทินฺนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อุปาทินฺนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อุปาทินฺนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -33956,7 +34168,7 @@
           "value": "สํกิลิฏฺฐตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สํกิลิฏฺฐตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "สํกิลิฏฺฐตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -34483,7 +34695,7 @@
               "bold": false
             },
             {
-              "value": "22.{{sp1}} สนิทสฺสนตฺติก 2-21.{{sp1}} เวทนาตฺติกาทิ",
+              "value": "22. สนิทสฺสนตฺติก 2-21. เวทนาตฺติกาทิ",
               "bold": true
             }
           ]
@@ -35194,47 +35406,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Nasanidassanasappaṭighaṃ nabahiddhārammaṇaṃ dhammaṃ paṭicca nasanidassanasappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ nabahiddhārammaṇaṃ dhammaṃ paṭicca naanidassanasappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ nabahiddhārammaṇaṃ dhammaṃ paṭicca naanidassanaappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā -pa-.{{sp1}} Cha.",
-          "runs": [
-            {
-              "value": "Nasanidassanasappaṭighaṃ nabahiddhā",
-              "bold": true
-            },
-            {
-              "value": "rammaṇaṃ dhammaṃ paṭicca nasanidassanasappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}",
-              "bold": false
-            },
-            {
-              "value": "Nasanidassanasappaṭighaṃ",
-              "bold": true
-            },
-            {
-              "value": " nabahiddhārammaṇaṃ dhammaṃ paṭicca naanidassanasappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ nabahiddhārammaṇaṃ dhammaṃ paṭicca naanidassanaappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā -pa-.{{sp1}} Cha.",
-              "bold": false
-            }
-          ]
+          "value": "Nasanidassanasappaṭighaṃ nabahiddhārammaṇaṃ dhammaṃ paṭicca nasanidassanasappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ nabahiddhārammaṇaṃ dhammaṃ paṭicca naanidassanasappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nasanidassanasappaṭighaṃ nabahiddhārammaṇaṃ dhammaṃ paṭicca naanidassanaappaṭigho nabahiddhārammaṇo dhammo uppajjati hetupaccayā -pa-.{{sp1}} Cha."
         },
         {
           "script": "thai",
-          "value": "นสนิทสฺสนสปฺปฏิฆํ นพหิทฺธารมฺมณํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ นพหิทฺธารมฺมณํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ นพหิทฺธารมฺมณํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนอปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา ฯเปฯ.{{sp1}} ฉ.",
-          "runs": [
-            {
-              "value": "นสนิทสฺสนสปฺปฏิฆํ นพหิทฺธา",
-              "bold": true
-            },
-            {
-              "value": "รมฺมณํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}",
-              "bold": false
-            },
-            {
-              "value": "นสนิทสฺสนสปฺปฏิฆํ",
-              "bold": true
-            },
-            {
-              "value": " นพหิทฺธารมฺมณํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ นพหิทฺธารมฺมณํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนอปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา ฯเปฯ.{{sp1}} ฉ.",
-              "bold": false
-            }
-          ]
+          "value": "นสนิทสฺสนสปฺปฏิฆํ นพหิทฺธารมฺมณํ ธมฺมํ ปฏิจฺจ นสนิทสฺสนสปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ นพหิทฺธารมฺมณํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนสปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นสนิทสฺสนสปฺปฏิฆํ นพหิทฺธารมฺมณํ ธมฺมํ ปฏิจฺจ นอนิทสฺสนอปฺปฏิโฆ นพหิทฺธารมฺมโณ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา ฯเปฯ.{{sp1}} ฉ."
         }
       ]
     },
@@ -35446,7 +35622,7 @@
           "value": "เหตุทุก 1-5. สเหตุกทุกาทิ",
           "runs": [
             {
-              "value": "เหตุทุก 1-5.{{sp1}} สเหตุกทุกาทิ",
+              "value": "เหตุทุก 1-5. สเหตุกทุกาทิ",
               "bold": true
             }
           ]
@@ -36115,7 +36291,7 @@
               "bold": true
             },
             {
-              "value": "18.{{sp1}} อาสวโคจฺฉก",
+              "value": "18. อาสวโคจฺฉก",
               "bold": false
             }
           ]
@@ -36318,7 +36494,7 @@
               "bold": true
             },
             {
-              "value": "53.{{sp1}} สญฺโญชนาทิทุก",
+              "value": "53. สญฺโญชนาทิทุก",
               "bold": false
             }
           ]
@@ -37054,7 +37230,7 @@
           "value": "จูฬนฺตรทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "จูฬนฺตรทุก 1.{{sp1}} เหตุทุก",
+              "value": "จูฬนฺตรทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -37185,7 +37361,7 @@
           "value": "อาสวโคจฺฉก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อาสวโคจฺฉก 1.{{sp1}} เหตุทุก",
+              "value": "อาสวโคจฺฉก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -37316,7 +37492,7 @@
           "value": "สญฺโญชนาทิทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "สญฺโญชนาทิทุก 1.{{sp1}} เหตุทุก",
+              "value": "สญฺโญชนาทิทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -37454,7 +37630,7 @@
           "value": "มหนฺตรทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "มหนฺตรทุก 1.{{sp1}} เหตุทุก",
+              "value": "มหนฺตรทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -37633,7 +37809,7 @@
           "value": "อุปาทานทุกาทิ 1. เหตุทุก",
           "runs": [
             {
-              "value": "อุปาทานทุกาทิ 1.{{sp1}} เหตุทุก",
+              "value": "อุปาทานทุกาทิ 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -37983,7 +38159,7 @@
           "value": "สรณทุก 2. สเหตุกทุกาทิ",
           "runs": [
             {
-              "value": "สรณทุก 2.{{sp1}} สเหตุกทุกาทิ",
+              "value": "สรณทุก 2. สเหตุกทุกาทิ",
               "bold": true
             }
           ]
@@ -38256,7 +38432,7 @@
               "bold": false
             },
             {
-              "value": "100.{{sp1}} สรณทุก 14.{{sp1}} อาสวโคจฺฉก",
+              "value": "100. สรณทุก 14. อาสวโคจฺฉก",
               "bold": true
             }
           ]
@@ -38470,7 +38646,7 @@
               "bold": true
             },
             {
-              "value": "0.{{sp1}} สญฺโญชนทุกาทิ",
+              "value": "0. สญฺโญชนทุกาทิ",
               "bold": false
             }
           ]
@@ -38545,7 +38721,7 @@
               "bold": true
             },
             {
-              "value": "5.{{sp1}} มหนฺตรทุก",
+              "value": "5. มหนฺตรทุก",
               "bold": false
             }
           ]
@@ -38798,7 +38974,7 @@
               "bold": true
             },
             {
-              "value": "9.{{sp1}} อุปาทานาทิทุก",
+              "value": "9. อุปาทานาทิทุก",
               "bold": false
             }
           ]
@@ -39349,7 +39525,7 @@
           "value": "กุสลตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "กุสลตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -39728,7 +39904,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 7.{{sp1}} ปญฺหาวาร",
+              "value": "1. กุสลตฺติก 7. ปญฺหาวาร",
               "bold": true
             }
           ]
@@ -39893,7 +40069,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} เวทนาตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "2. เวทนาตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -40086,7 +40262,7 @@
           "value": "เวทนาตฺติก 7. ปญฺหาวาร",
           "runs": [
             {
-              "value": "เวทนาตฺติก 7.{{sp1}} ปญฺหาวาร",
+              "value": "เวทนาตฺติก 7. ปญฺหาวาร",
               "bold": true
             }
           ]
@@ -40171,11 +40347,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Vipākattika 1. Paṭiccavāra"
+          "value": "Vipākattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Vipākattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "วิปากตฺติก 1. ปฏิจฺจวาร"
+          "value": "วิปากตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "วิปากตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -40400,11 +40588,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Vipākattika 7. Pañhāvāra"
+          "value": "Vipākattika 7. Pañhāvāra",
+          "runs": [
+            {
+              "value": "Vipākattika 7. Pañhāvāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "วิปากตฺติก 7. ปญฺหาวาร"
+          "value": "วิปากตฺติก 7. ปญฺหาวาร",
+          "runs": [
+            {
+              "value": "วิปากตฺติก 7. ปญฺหาวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -40531,7 +40731,7 @@
           "value": "อุปาทินฺนตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อุปาทินฺนตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อุปาทินฺนตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -40697,11 +40897,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Upādinnattika 7. Pañhāvāra"
+          "value": "Upādinnattika 7. Pañhāvāra",
+          "runs": [
+            {
+              "value": "Upādinnattika 7. Pañhāvāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "อุปาทินฺนตฺติก 7. ปญฺหาวาร"
+          "value": "อุปาทินฺนตฺติก 7. ปญฺหาวาร",
+          "runs": [
+            {
+              "value": "อุปาทินฺนตฺติก 7. ปญฺหาวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -40844,7 +41056,7 @@
           "value": "สํกิลิฏฺฐตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "สํกิลิฏฺฐตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "สํกิลิฏฺฐตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -41011,11 +41223,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Vitakkattika 1. Paṭiccavāra"
+          "value": "Vitakkattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Vitakkattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "วิตกฺกตฺติก 1. ปฏิจฺจวาร"
+          "value": "วิตกฺกตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "วิตกฺกตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -41207,7 +41431,7 @@
           "value": "ปีติตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "ปีติตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "ปีติตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -41358,11 +41582,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Dassanattika 1. Paṭiccavāra"
+          "value": "Dassanattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Dassanattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ทสฺสนตฺติก 1. ปฏิจฺจวาร"
+          "value": "ทสฺสนตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "ทสฺสนตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -41518,7 +41754,7 @@
           "value": "ทสฺสนเหตุตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "ทสฺสนเหตุตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "ทสฺสนเหตุตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -41584,7 +41820,7 @@
           "value": "อาจยคามิตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาจยคามิตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาจยคามิตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -41737,11 +41973,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sekkhattika 1. Paṭiccavāra"
+          "value": "Sekkhattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Sekkhattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เสกฺขตฺติก 1. ปฏิจฺจวาร"
+          "value": "เสกฺขตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "เสกฺขตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -41881,7 +42129,7 @@
           "value": "ปริตฺตตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "ปริตฺตตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "ปริตฺตตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -42045,7 +42293,7 @@
           "value": "ปริตฺตารมฺมณตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "ปริตฺตารมฺมณตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "ปริตฺตารมฺมณตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -42112,7 +42360,7 @@
           "value": "หีนตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "หีนตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "หีนตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -42166,11 +42414,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Micchattattika 1. Paṭiccavāra"
+          "value": "Micchattattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Micchattattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "มิจฺฉตฺตตฺติก 1. ปฏิจฺจวาร"
+          "value": "มิจฺฉตฺตตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "มิจฺฉตฺตตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -42329,7 +42589,7 @@
           "value": "มคฺคารมฺมณตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "มคฺคารมฺมณตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "มคฺคารมฺมณตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -42404,7 +42664,7 @@
               "bold": false
             },
             {
-              "value": "17.{{sp1}} อุปฺปนฺนตฺติก 7.{{sp1}} ปญฺหาวาร",
+              "value": "17. อุปฺปนฺนตฺติก 7. ปญฺหาวาร",
               "bold": true
             }
           ]
@@ -42471,7 +42731,7 @@
           "value": "อตีตตฺติก 7. ปญฺหาวาร",
           "runs": [
             {
-              "value": "อตีตตฺติก 7.{{sp1}} ปญฺหาวาร",
+              "value": "อตีตตฺติก 7. ปญฺหาวาร",
               "bold": true
             }
           ]
@@ -42538,7 +42798,7 @@
           "value": "อตีตารมฺมณตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อตีตารมฺมณตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อตีตารมฺมณตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -42592,11 +42852,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ajjhattattika 1. Paṭiccavāra"
+          "value": "Ajjhattattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Ajjhattattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "อชฺฌตฺตตฺติก 1. ปฏิจฺจวาร"
+          "value": "อชฺฌตฺตตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "อชฺฌตฺตตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -42666,7 +42938,7 @@
               "bold": false
             },
             {
-              "value": "21.{{sp1}} อชฺฌตฺตารมฺมณตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "21. อชฺฌตฺตารมฺมณตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -42728,7 +43000,7 @@
           "value": "สนิทสฺสนตฺติก 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "สนิทสฺสนตฺติก 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -42995,7 +43267,7 @@
           "value": "เหตุทุก 1. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "เหตุทุก 1.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "เหตุทุก 1. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -43222,7 +43494,7 @@
           "value": "สเหตุกทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "สเหตุกทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "สเหตุกทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -43345,7 +43617,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} เหตุสมฺปยุตฺตทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "3. เหตุสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -43447,11 +43719,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Hetusahetukaduka 1. Paṭiccavāra"
+          "value": "Hetusahetukaduka 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Hetusahetukaduka 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เหตุสเหตุกทุก 1. ปฏิจฺจวาร"
+          "value": "เหตุสเหตุกทุก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "เหตุสเหตุกทุก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -43518,11 +43802,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "ceva nanahetu ca dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuñceva sahetukañca sahetukañceva na ca hetuṃ dhammaṃ paṭicca nahetu ceva naahetuko ca naahetuko ceva nanahetu ca dhammā uppajjanti hetupaccayā. (3)"
+          "value": "ceva nanahetu ca dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuñceva sahetukañca sahetukañceva na ca hetuṃ dhammaṃ paṭicca nahetu ceva naahetuko ca naahetuko ceva nanahetu ca dhammā uppajjanti hetupaccayā. (3)",
+          "runs": [
+            {
+              "value": "ceva nanahetu ca dhammo uppa",
+              "bold": true
+            },
+            {
+              "value": "jjati hetupaccayā.{{sp1}}{{sp1}}Hetuñceva sahetukañca sahetukañceva na ca hetuṃ dhammaṃ paṭicca nahetu ceva naahetuko ca naahetuko ceva nanahetu ca dhammā uppajjanti hetupaccayā. (3)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เจว นนเหตุ จ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุญฺเจว สเหตุกญฺจ สเหตุกญฺเจว น จ เหตุํ ธมฺมํ ปฏิจฺจ นเหตุ เจว นอเหตุโก จ นอเหตุโก เจว นนเหตุ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)"
+          "value": "เจว นนเหตุ จ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุญฺเจว สเหตุกญฺจ สเหตุกญฺเจว น จ เหตุํ ธมฺมํ ปฏิจฺจ นเหตุ เจว นอเหตุโก จ นอเหตุโก เจว นนเหตุ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+          "runs": [
+            {
+              "value": "เจว นนเหตุ จ ธมฺโม อุปฺป",
+              "bold": true
+            },
+            {
+              "value": "ชฺชติ เหตุปจฺจยา. เหตุญฺเจว สเหตุกญฺจ สเหตุกญฺเจว น จ เหตุํ ธมฺมํ ปฏิจฺจ นเหตุ เจว นอเหตุโก จ นอเหตุโก เจว นนเหตุ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -43579,7 +43883,7 @@
           "value": "เหตุเหตุสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เหตุเหตุสมฺปยุตฺตทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เหตุเหตุสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -43702,7 +44006,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} นเหตุสเหตุกทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "6. นเหตุสเหตุกทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -43788,7 +44092,7 @@
           "value": "สปฺปจฺจยทุก 1. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "สปฺปจฺจยทุก 1.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "สปฺปจฺจยทุก 1. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -43871,7 +44175,7 @@
           "value": "สนิทสฺสนทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "สนิทสฺสนทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "สนิทสฺสนทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -43924,11 +44228,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sappaṭighaduka 1. Paṭiccavāra"
+          "value": "Sappaṭighaduka 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Sappaṭighaduka 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สปฺปฏิฆทุก 1. ปฏิจฺจวาร"
+          "value": "สปฺปฏิฆทุก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "สปฺปฏิฆทุก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -44042,7 +44358,7 @@
           "value": "รูปีทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "รูปีทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "รูปีทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -44108,7 +44424,7 @@
           "value": "โลกิยทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "โลกิยทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "โลกิยทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -44204,7 +44520,7 @@
           "value": "เกนจิวิญฺเญยฺยทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เกนจิวิญฺเญยฺยทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เกนจิวิญฺเญยฺยทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -44326,7 +44642,7 @@
           "value": "อาสวทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาสวทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาสวทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -44396,11 +44712,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sāsavaduka 1. Paṭiccavāra"
+          "value": "Sāsavaduka 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Sāsavaduka 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สาสวทุก 1. ปฏิจฺจวาร"
+          "value": "สาสวทุก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "สาสวทุก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -44500,7 +44828,7 @@
               "bold": false
             },
             {
-              "value": "16.{{sp1}} อาสวสมฺปยุตฺตทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "16. อาสวสมฺปยุตฺตทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -44593,7 +44921,7 @@
           "value": "อาสวสาสวทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาสวสาสวทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาสวสาสวทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -44747,7 +45075,7 @@
           "value": "อาสววิปฺปยุตฺตสาสวทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาสววิปฺปยุตฺตสาสวทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาสววิปฺปยุตฺตสาสวทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -44862,7 +45190,7 @@
           "value": "สญฺโญชนทุกาทิ 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "สญฺโญชนทุกาทิ 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "สญฺโญชนทุกาทิ 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -44900,11 +45228,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Parāmāsaduka 1. Paṭiccavāra"
+          "value": "Parāmāsaduka 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Parāmāsaduka 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปรามาสทุก 1. ปฏิจฺจวาร"
+          "value": "ปรามาสทุก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "ปรามาสทุก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -44959,7 +45299,7 @@
               "bold": false
             },
             {
-              "value": "55.{{sp1}} สารมฺมณทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "55. สารมฺมณทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -45052,7 +45392,7 @@
           "value": "จิตฺตทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "จิตฺตทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "จิตฺตทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -45135,7 +45475,7 @@
           "value": "เจตสิกทุกาทิ 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เจตสิกทุกาทิ 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เจตสิกทุกาทิ 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -45577,11 +45917,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "pahātabbo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Dassanena pahātabbaṃ dhammaṃ paṭicca nadassanena pahātabbo ca nanadassanena pahātabbo ca dhammā uppajjanti hetupaccayā. (3)"
+          "value": "pahātabbo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Dassanena pahātabbaṃ dhammaṃ paṭicca nadassanena pahātabbo ca nanadassanena pahātabbo ca dhammā uppajjanti hetupaccayā. (3)",
+          "runs": [
+            {
+              "value": "pahātabbo dhammo uppajja",
+              "bold": true
+            },
+            {
+              "value": "ti hetupaccayā.{{sp1}}{{sp1}}Dassanena pahātabbaṃ dhammaṃ paṭicca nadassanena pahātabbo ca nanadassanena pahātabbo ca dhammā uppajjanti hetupaccayā. (3)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปหาตพฺโพ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}ทสฺสเนน ปหาตพฺพํ ธมฺมํ ปฏิจฺจ นทสฺสเนน ปหาตพฺโพ จ นนทสฺสเนน ปหาตพฺโพ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)"
+          "value": "ปหาตพฺโพ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}ทสฺสเนน ปหาตพฺพํ ธมฺมํ ปฏิจฺจ นทสฺสเนน ปหาตพฺโพ จ นนทสฺสเนน ปหาตพฺโพ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+          "runs": [
+            {
+              "value": "ปหาตพฺโพ ธมฺโม อุปฺปชฺช",
+              "bold": true
+            },
+            {
+              "value": "ติ เหตุปจฺจยา. ทสฺสเนน ปหาตพฺพํ ธมฺมํ ปฏิจฺจ นทสฺสเนน ปหาตพฺโพ จ นนทสฺสเนน ปหาตพฺโพ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -45822,7 +46182,7 @@
               "bold": false
             },
             {
-              "value": "86.{{sp1}} ภาวนายปหาตพฺพเหตุกทุก",
+              "value": "86. ภาวนายปหาตพฺพเหตุกทุก",
               "bold": true
             }
           ]
@@ -46254,7 +46614,7 @@
               "bold": false
             },
             {
-              "value": "96.{{sp1}} ปริยาปนฺนทุก",
+              "value": "96. ปริยาปนฺนทุก",
               "bold": true
             }
           ]
@@ -46556,7 +46916,7 @@
           "value": "สรณทุก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "สรณทุก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "สรณทุก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -46737,7 +47097,7 @@
           "value": "สรณทุก 7. ปญฺหาวาร",
           "runs": [
             {
-              "value": "สรณทุก 7.{{sp1}} ปญฺหาวาร",
+              "value": "สรณทุก 7. ปญฺหาวาร",
               "bold": true
             }
           ]
@@ -47043,7 +47403,7 @@
           "value": "เหตุทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "เหตุทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -47078,7 +47438,7 @@
           "value": "กุสลปท 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "กุสลปท 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "กุสลปท 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -47255,7 +47615,7 @@
           "value": "อกุสลปท 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "อกุสลปท 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "อกุสลปท 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -47431,7 +47791,7 @@
           "value": "อพฺยากตปท 3. ปจฺจยวาร",
           "runs": [
             {
-              "value": "อพฺยากตปท 3.{{sp1}} ปจฺจยวาร",
+              "value": "อพฺยากตปท 3. ปจฺจยวาร",
               "bold": true
             }
           ]
@@ -47502,11 +47862,11 @@
           "value": "เหตุทุก 4. อุปาทินฺนตฺติก 1. เหตุทุก 2. เวทนาตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 4.{{sp1}} อุปาทินฺนตฺติก ",
+              "value": "เหตุทุก 4. อุปาทินฺนตฺติก ",
               "bold": false
             },
             {
-              "value": "1.{{sp1}} เหตุทุก 2.{{sp1}} เวทนาตฺติก",
+              "value": "1. เหตุทุก 2. เวทนาตฺติก",
               "bold": true
             }
           ]
@@ -47637,7 +47997,7 @@
           "value": "เหตุทุก 3. วิปากตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 3.{{sp1}} วิปากตฺติก",
+              "value": "เหตุทุก 3. วิปากตฺติก",
               "bold": true
             }
           ]
@@ -47806,7 +48166,7 @@
           "value": "เหตุทุก 5. สํกิลิฏฺฐตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 5.{{sp1}} สํกิลิฏฺฐตฺติก",
+              "value": "เหตุทุก 5. สํกิลิฏฺฐตฺติก",
               "bold": true
             }
           ]
@@ -47889,7 +48249,7 @@
           "value": "เหตุทุก 6. วิตกฺกตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 6.{{sp1}} วิตกฺกตฺติก",
+              "value": "เหตุทุก 6. วิตกฺกตฺติก",
               "bold": true
             }
           ]
@@ -47972,7 +48332,7 @@
           "value": "เหตุทุก 7. ปีติตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 7.{{sp1}} ปีติตฺติก",
+              "value": "เหตุทุก 7. ปีติตฺติก",
               "bold": true
             }
           ]
@@ -48059,11 +48419,11 @@
           "value": "เหตุทุก 11. เสกฺขตฺติก 1. เหตุทุก 8. ทสฺสนตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 11.{{sp1}} เสกฺขตฺติก ",
+              "value": "เหตุทุก 11. เสกฺขตฺติก ",
               "bold": false
             },
             {
-              "value": "1.{{sp1}} เหตุทุก 8.{{sp1}} ทสฺสนตฺติก",
+              "value": "1. เหตุทุก 8. ทสฺสนตฺติก",
               "bold": true
             }
           ]
@@ -48146,7 +48506,7 @@
           "value": "เหตุทุก 9. ทสฺสนเหตุตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 9.{{sp1}} ทสฺสนเหตุตฺติก",
+              "value": "เหตุทุก 9. ทสฺสนเหตุตฺติก",
               "bold": true
             }
           ]
@@ -48603,11 +48963,11 @@
           "value": "เหตุทุก 18. อตีตตฺติก 1. เหตุทุก 15. มิจฺฉตฺตนิยตตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 18.{{sp1}} อตีตตฺติก ",
+              "value": "เหตุทุก 18. อตีตตฺติก ",
               "bold": false
             },
             {
-              "value": "1.{{sp1}} เหตุทุก 15.{{sp1}} มิจฺฉตฺตนิยตตฺติก",
+              "value": "1. เหตุทุก 15. มิจฺฉตฺตนิยตตฺติก",
               "bold": true
             }
           ]
@@ -49086,7 +49446,7 @@
           "value": "เหตุสเหตุกทุก 1.{{sp1}} กุสลตฺติก 2.{{sp1}} สเหตุกทุก 1.{{sp1}} กุสลตฺติก",
           "runs": [
             {
-              "value": "เหตุสเหตุกทุก 1.{{sp1}} กุสลตฺติก 2.{{sp1}}",
+              "value": "เหตุสเหตุกทุก 1. กุสลตฺติก 2. ",
               "bold": false
             },
             {
@@ -49094,7 +49454,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} กุสลตฺติก",
+              "value": " กุสลตฺติก",
               "bold": false
             }
           ]
@@ -49171,7 +49531,7 @@
           "value": "เหตุสมฺปยุตฺตทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เหตุสมฺปยุตฺตทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "เหตุสมฺปยุตฺตทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -49390,7 +49750,7 @@
           "value": "นเหตุสเหตุกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "นเหตุสเหตุกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "นเหตุสเหตุกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -49494,11 +49854,11 @@
           "value": "โลกิยทุก 1. กุสลตฺติก 7. สปฺปจฺจยทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "โลกิยทุก 1.{{sp1}} กุสลตฺติก ",
+              "value": "โลกิยทุก 1. กุสลตฺติก ",
               "bold": false
             },
             {
-              "value": "7.{{sp1}} สปฺปจฺจยทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "7. สปฺปจฺจยทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -49581,7 +49941,7 @@
           "value": "สนิทสฺสนทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "สนิทสฺสนทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -49696,7 +50056,7 @@
           "value": "รูปีทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "รูปีทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "รูปีทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -49865,7 +50225,7 @@
           "value": "เกนจิวิญฺเญยฺยทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เกนจิวิญฺเญยฺยทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "เกนจิวิญฺเญยฺยทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -49965,7 +50325,7 @@
           "value": "อาสวทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาสวทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "อาสวทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50048,7 +50408,7 @@
           "value": "สาสวทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สาสวทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "สาสวทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50153,7 +50513,7 @@
           "value": "อาสวสมฺปยุตฺตทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาสวสมฺปยุตฺตทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "อาสวสมฺปยุตฺตทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50236,7 +50596,7 @@
           "value": "อาสวสาสวทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาสวสาสวทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "อาสวสาสวทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50454,7 +50814,7 @@
           "value": "สญฺโญชนาทิทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สญฺโญชนาทิทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "สญฺโญชนาทิทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50505,7 +50865,7 @@
           "value": "สารมฺมณทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สารมฺมณทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "สารมฺมณทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50588,7 +50948,7 @@
           "value": "จิตฺตทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "จิตฺตทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "จิตฺตทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50692,7 +51052,7 @@
           "value": "เจตสิกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เจตสิกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "เจตสิกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50775,7 +51135,7 @@
           "value": "จิตฺตสมฺปยุตฺตทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "จิตฺตสมฺปยุตฺตทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "จิตฺตสมฺปยุตฺตทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50842,7 +51202,7 @@
           "value": "จิตฺตสํสฏฺฐทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "จิตฺตสํสฏฺฐทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "จิตฺตสํสฏฺฐทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -50980,7 +51340,7 @@
           "value": "จิตฺตสหภูทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "จิตฺตสหภูทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "จิตฺตสหภูทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51047,7 +51407,7 @@
           "value": "จิตฺตานุปริวตฺติทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "จิตฺตานุปริวตฺติทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "จิตฺตานุปริวตฺติทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51114,7 +51474,7 @@
           "value": "จิตฺตสํสฏฺฐสมุฏฺฐานทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "จิตฺตสํสฏฺฐสมุฏฺฐานทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "จิตฺตสํสฏฺฐสมุฏฺฐานทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51181,7 +51541,7 @@
           "value": "จิตฺตสํสฏฺฐสมุฏฺฐานสหภูทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "จิตฺตสํสฏฺฐสมุฏฺฐานสหภูทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "จิตฺตสํสฏฺฐสมุฏฺฐานสหภูทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51196,31 +51556,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Cittasaṃsaṭṭhasamuṭṭhānasahabhuṃ kusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānasahabhū nakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi.",
-          "runs": [
-            {
-              "value": "Cittasaṃsaṭṭhasamuṭṭ",
-              "bold": true
-            },
-            {
-              "value": "hānasahabhuṃ kusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānasahabhū nakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi.",
-              "bold": false
-            }
-          ]
+          "value": "Cittasaṃsaṭṭhasamuṭṭhānasahabhuṃ kusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānasahabhū nakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi."
         },
         {
           "script": "thai",
-          "value": "จิตฺตสํสฏฺฐสมุฏฺฐานสหภุํ กุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานสหภู นกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ.",
-          "runs": [
-            {
-              "value": "จิตฺตสํสฏฺฐสมุฏฺฏฺ",
-              "bold": true
-            },
-            {
-              "value": "หานสหภุํ กุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานสหภู นกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ.",
-              "bold": false
-            }
-          ]
+          "value": "จิตฺตสํสฏฺฐสมุฏฺฐานสหภุํ กุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานสหภู นกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ."
         }
       ]
     },
@@ -51232,31 +51572,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Cittasaṃsaṭṭhasamuṭṭhānasahabhuṃ akusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānasahabhū naakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi. (Abyākatamūlaṃ tīṇiyeva paccayavasena.)",
-          "runs": [
-            {
-              "value": "Cittasaṃsaṭṭhasamuṭṭ",
-              "bold": true
-            },
-            {
-              "value": "hānasahabhuṃ akusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānasahabhū naakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi. (Abyākatamūlaṃ tīṇiyeva paccayavasena.)",
-              "bold": false
-            }
-          ]
+          "value": "Cittasaṃsaṭṭhasamuṭṭhānasahabhuṃ akusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānasahabhū naakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi. (Abyākatamūlaṃ tīṇiyeva paccayavasena.)"
         },
         {
           "script": "thai",
-          "value": "จิตฺตสํสฏฺฐสมุฏฺฐานสหภุํ อกุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานสหภู นอกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ. (อพฺยากตมูลํ ตีณิเยว ปจฺจยวเสน.)",
-          "runs": [
-            {
-              "value": "จิตฺตสํสฏฺฐสมุฏฺฏฺ",
-              "bold": true
-            },
-            {
-              "value": "หานสหภุํ อกุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานสหภู นอกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ. (อพฺยากตมูลํ ตีณิเยว ปจฺจยวเสน.)",
-              "bold": false
-            }
-          ]
+          "value": "จิตฺตสํสฏฺฐสมุฏฺฐานสหภุํ อกุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานสหภู นอกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ. (อพฺยากตมูลํ ตีณิเยว ปจฺจยวเสน.)"
         }
       ]
     },
@@ -51289,7 +51609,7 @@
           "value": "อุปาทินฺนทุก 1.{{sp1}} กุสลตฺติก 65.{{sp1}} จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติทุก 1.{{sp1}} กุสลตฺติก",
           "runs": [
             {
-              "value": "อุปาทินฺนทุก 1.{{sp1}} กุสลตฺติก 65.{{sp1}}",
+              "value": "อุปาทินฺนทุก 1. กุสลตฺติก 65. ",
               "bold": false
             },
             {
@@ -51297,7 +51617,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} กุสลตฺติก",
+              "value": " กุสลตฺติก",
               "bold": false
             }
           ]
@@ -51313,31 +51633,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Cittasaṃsaṭṭhasamuṭṭhānānuparivattiṃ kusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānānuparivattī nakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi.",
-          "runs": [
-            {
-              "value": "Cittasaṃsaṭṭhasamuṭṭh",
-              "bold": true
-            },
-            {
-              "value": "ānānuparivattiṃ kusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānānuparivattī nakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi.",
-              "bold": false
-            }
-          ]
+          "value": "Cittasaṃsaṭṭhasamuṭṭhānānuparivattiṃ kusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānānuparivattī nakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi."
         },
         {
           "script": "thai",
-          "value": "จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติํ กุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺตี นกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ.",
-          "runs": [
-            {
-              "value": "จิตฺตสํสฏฺฐสมุฏฺฐฺ",
-              "bold": true
-            },
-            {
-              "value": "อานานุปริวตฺติํ กุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺตี นกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ.",
-              "bold": false
-            }
-          ]
+          "value": "จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติํ กุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺตี นกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ."
         }
       ]
     },
@@ -51349,31 +51649,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Cittasaṃsaṭṭhasamuṭṭhānānuparivattiṃ akusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānānuparivattī naakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi. (Abyākatamūlaṃ tīṇiyeva.)",
-          "runs": [
-            {
-              "value": "Cittasaṃsaṭṭhasamuṭṭh",
-              "bold": true
-            },
-            {
-              "value": "ānānuparivattiṃ akusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānānuparivattī naakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi. (Abyākatamūlaṃ tīṇiyeva.)",
-              "bold": false
-            }
-          ]
+          "value": "Cittasaṃsaṭṭhasamuṭṭhānānuparivattiṃ akusalaṃ dhammaṃ paṭicca nocittasaṃsaṭṭhasamuṭṭhānānuparivattī naakusalo dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā tīṇi. (Abyākatamūlaṃ tīṇiyeva.)"
         },
         {
           "script": "thai",
-          "value": "จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติํ อกุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺตี นอกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ. (อพฺยากตมูลํ ตีณิเยว.)",
-          "runs": [
-            {
-              "value": "จิตฺตสํสฏฺฐสมุฏฺฐฺ",
-              "bold": true
-            },
-            {
-              "value": "อานานุปริวตฺติํ อกุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺตี นอกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ. (อพฺยากตมูลํ ตีณิเยว.)",
-              "bold": false
-            }
-          ]
+          "value": "จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติํ อกุสลํ ธมฺมํ ปฏิจฺจ โนจิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺตี นอกุสโล ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา ตีณิ. (อพฺยากตมูลํ ตีณิเยว.)"
         }
       ]
     },
@@ -51398,7 +51678,7 @@
           "value": "อชฺฌตฺติกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อชฺฌตฺติกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "อชฺฌตฺติกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51465,7 +51745,7 @@
           "value": "อุปาทาทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อุปาทาทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "อุปาทาทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51620,7 +51900,7 @@
           "value": "ทฺวิโคจฺฉก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ทฺวิโคจฺฉก 1.{{sp1}} กุสลตฺติก",
+              "value": "ทฺวิโคจฺฉก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51703,7 +51983,7 @@
           "value": "ทสฺสเนนปหาตพฺพทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ทสฺสเนนปหาตพฺพทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "ทสฺสเนนปหาตพฺพทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51786,7 +52066,7 @@
           "value": "ภาวนายปหาตพฺพทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ภาวนายปหาตพฺพทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "ภาวนายปหาตพฺพทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -51877,7 +52157,7 @@
           "value": "สวิจารทุก 1.{{sp1}} กุสลตฺติก 85.{{sp1}} ทสฺสเนนปหาตพฺพเหตุกทุก 1.{{sp1}} กุสลตฺติก",
           "runs": [
             {
-              "value": "สวิจารทุก 1.{{sp1}} กุสลตฺติก 85.{{sp1}}",
+              "value": "สวิจารทุก 1. กุสลตฺติก 85. ",
               "bold": false
             },
             {
@@ -51885,7 +52165,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} กุสลตฺติก",
+              "value": " กุสลตฺติก",
               "bold": false
             }
           ]
@@ -51978,7 +52258,7 @@
           "value": "ภาวนายปหาตพฺพเหตุกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ภาวนายปหาตพฺพเหตุกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "ภาวนายปหาตพฺพเหตุกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52045,7 +52325,7 @@
           "value": "สวิตกฺกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สวิตกฺกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "สวิตกฺกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52174,7 +52454,7 @@
               "bold": false
             },
             {
-              "value": "89.{{sp1}} สปฺปีติกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "89. สปฺปีติกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52236,7 +52516,7 @@
           "value": "ปีติสหคตทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปีติสหคตทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปีติสหคตทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52303,7 +52583,7 @@
           "value": "สุขสหคตทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สุขสหคตทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "สุขสหคตทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52378,7 +52658,7 @@
           "value": "อรูปาวจรทุก 1.{{sp1}} กุสลตฺติก 92.{{sp1}} อุเปกฺขาสหคตทุก 1.{{sp1}} กุสลตฺติก",
           "runs": [
             {
-              "value": "อรูปาวจรทุก 1.{{sp1}} กุสลตฺติก 92.{{sp1}}",
+              "value": "อรูปาวจรทุก 1. กุสลตฺติก 92. ",
               "bold": false
             },
             {
@@ -52386,7 +52666,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} กุสลตฺติก",
+              "value": " กุสลตฺติก",
               "bold": false
             }
           ]
@@ -52447,7 +52727,7 @@
           "value": "กามาวจรทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "กามาวจรทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "กามาวจรทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52514,7 +52794,7 @@
           "value": "รูปาวจรทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "รูปาวจรทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "รูปาวจรทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52652,7 +52932,7 @@
           "value": "ปริยาปนฺนทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปริยาปนฺนทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปริยาปนฺนทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52719,7 +52999,7 @@
           "value": "นิยฺยานิกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "นิยฺยานิกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "นิยฺยานิกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52786,7 +53066,7 @@
           "value": "นิยตทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "นิยตทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "นิยตทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -52905,11 +53185,11 @@
           "value": "สรณทุก 2. เวทนาตฺติก 100. สรณทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สรณทุก 2.{{sp1}} เวทนาตฺติก ",
+              "value": "สรณทุก 2. เวทนาตฺติก ",
               "bold": false
             },
             {
-              "value": "100.{{sp1}} สรณทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "100. สรณทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -53066,11 +53346,55 @@
       "text": [
         {
           "script": "roman",
-          "value": "Saraṇaṃ sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca nasaraṇo nasukhāya vedanāya sampayutto dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Saraṇaṃ sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca naaraṇo nasukhāya vedanāya sampayutto dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Saraṇaṃ sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca nasaraṇo nasukhāya vedanāya sampayutto ca naaraṇo nasukhāya vedanāya sampayutto ca dhammā uppajjanti hetupaccayā. (3)"
+          "value": "Saraṇaṃ sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca nasaraṇo nasukhāya vedanāya sampayutto dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Saraṇaṃ sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca naaraṇo nasukhāya vedanāya sampayutto dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Saraṇaṃ sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca nasaraṇo nasukhāya vedanāya sampayutto ca naaraṇo nasukhāya vedanāya sampayutto ca dhammā uppajjanti hetupaccayā. (3)",
+          "runs": [
+            {
+              "value": "Saraṇaṃ sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca nasaraṇo nasukhāya vedanāya sampayutto dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Saraṇaṃ sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca naaraṇo nasukhāya vedanāya sampayutto dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Saraṇaṃ ",
+              "bold": false
+            },
+            {
+              "value": "sukhāya vedanāya sampayuttaṃ dhammaṃ paṭicca nasaraṇo nasukhāya",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "vedanāya sampayutto ca na",
+              "bold": true
+            },
+            {
+              "value": "araṇo nasukhāya vedanāya sampayutto ca dhammā uppajjanti hetupaccayā. (3)",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สรณํ สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นสรโณ นสุขาย เวทนาย สมฺปยุตฺโต ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}สรณํ สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นอรโณ นสุขาย เวทนาย สมฺปยุตฺโต ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}สรณํ สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นสรโณ นสุขาย เวทนาย สมฺปยุตฺโต จ นอรโณ นสุขาย เวทนาย สมฺปยุตฺโต จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)"
+          "value": "สรณํ สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นสรโณ นสุขาย เวทนาย สมฺปยุตฺโต ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}สรณํ สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นอรโณ นสุขาย เวทนาย สมฺปยุตฺโต ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}สรณํ สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นสรโณ นสุขาย เวทนาย สมฺปยุตฺโต จ นอรโณ นสุขาย เวทนาย สมฺปยุตฺโต จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+          "runs": [
+            {
+              "value": "สรณํ สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นสรโณ นสุขาย เวทนาย สมฺปยุตฺโต ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. สรณํ สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นอรโณ นสุขาย เวทนาย สมฺปยุตฺโต ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. สรณํ ",
+              "bold": false
+            },
+            {
+              "value": "สุขาย เวทนาย สมฺปยุตฺตํ ธมฺมํ ปฏิจฺจ นสรโณ นสุขาย",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "เวทนาย สมฺปยุตฺโต จ น",
+              "bold": true
+            },
+            {
+              "value": "อรโณ นสุขาย เวทนาย สมฺปยุตฺโต จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -53206,7 +53530,7 @@
           "value": "สรณทุก 3. วิปากตฺติก",
           "runs": [
             {
-              "value": "สรณทุก 3.{{sp1}} วิปากตฺติก",
+              "value": "สรณทุก 3. วิปากตฺติก",
               "bold": true
             }
           ]
@@ -53289,7 +53613,7 @@
           "value": "สรณทุก 4. อุปาทินฺนตฺติก",
           "runs": [
             {
-              "value": "สรณทุก 4.{{sp1}} อุปาทินฺนตฺติก",
+              "value": "สรณทุก 4. อุปาทินฺนตฺติก",
               "bold": true
             }
           ]
@@ -53356,7 +53680,7 @@
           "value": "สรณทุก 5. สํกิลิฏฺฐตฺติก",
           "runs": [
             {
-              "value": "สรณทุก 5.{{sp1}} สํกิลิฏฺฐตฺติก",
+              "value": "สรณทุก 5. สํกิลิฏฺฐตฺติก",
               "bold": true
             }
           ]
@@ -53443,11 +53767,11 @@
           "value": "สรณทุก 8. ทสฺสนตฺติก 100. สรณทุก 6. วิตกฺกตฺติก",
           "runs": [
             {
-              "value": "สรณทุก 8.{{sp1}} ทสฺสนตฺติก ",
+              "value": "สรณทุก 8. ทสฺสนตฺติก ",
               "bold": false
             },
             {
-              "value": "100.{{sp1}} สรณทุก 6.{{sp1}} วิตกฺกตฺติก",
+              "value": "100. สรณทุก 6. วิตกฺกตฺติก",
               "bold": true
             }
           ]
@@ -53546,7 +53870,7 @@
           "value": "สรณทุก 7. ปีติตฺติก",
           "runs": [
             {
-              "value": "สรณทุก 7.{{sp1}} ปีติตฺติก",
+              "value": "สรณทุก 7. ปีติตฺติก",
               "bold": true
             }
           ]
@@ -53748,7 +54072,7 @@
           "value": "สรณทุก 9. ทสฺสนเหตุตฺติก",
           "runs": [
             {
-              "value": "สรณทุก 9.{{sp1}} ทสฺสนเหตุตฺติก",
+              "value": "สรณทุก 9. ทสฺสนเหตุตฺติก",
               "bold": true
             }
           ]
@@ -53839,7 +54163,7 @@
               "bold": true
             },
             {
-              "value": "0.{{sp1}} อาจยคามิตฺติก",
+              "value": "0. อาจยคามิตฺติก",
               "bold": false
             }
           ]
@@ -53930,7 +54254,7 @@
               "bold": true
             },
             {
-              "value": "1.{{sp1}} เสกฺขตฺติก",
+              "value": "1. เสกฺขตฺติก",
               "bold": false
             }
           ]
@@ -54043,7 +54367,7 @@
               "bold": true
             },
             {
-              "value": "2.{{sp1}} ปริตฺตตฺติก",
+              "value": "2. ปริตฺตตฺติก",
               "bold": false
             }
           ]
@@ -54341,7 +54665,7 @@
               "bold": true
             },
             {
-              "value": "6.{{sp1}} มคฺคารมฺมณตฺติก",
+              "value": "6. มคฺคารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -54432,7 +54756,7 @@
               "bold": true
             },
             {
-              "value": "7.{{sp1}} อุปฺปนฺนตฺติก",
+              "value": "7. อุปฺปนฺนตฺติก",
               "bold": false
             }
           ]
@@ -54507,7 +54831,7 @@
               "bold": true
             },
             {
-              "value": "8.{{sp1}} อตีตตฺติก",
+              "value": "8. อตีตตฺติก",
               "bold": false
             }
           ]
@@ -54566,7 +54890,7 @@
           "value": "สรณทุก 22.{{sp1}} สนิทสฺสนตฺติก 100.{{sp1}} สรณทุก 19.{{sp1}} อตีตารมฺมณตฺติก",
           "runs": [
             {
-              "value": "สรณทุก 22.{{sp1}} สนิทสฺสนตฺติก 100.{{sp1}}",
+              "value": "สรณทุก 22. สนิทสฺสนตฺติก 100. ",
               "bold": false
             },
             {
@@ -54574,7 +54898,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} อตีตารมฺมณตฺติก",
+              "value": " อตีตารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -55060,7 +55384,7 @@
           "value": "กุสลตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "กุสลตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -55682,7 +56006,7 @@
           "value": "กุสลตฺติก 3. เหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 3.{{sp1}} เหตุสมฺปยุตฺตทุก",
+              "value": "กุสลตฺติก 3. เหตุสมฺปยุตฺตทุก",
               "bold": true
             }
           ]
@@ -55733,7 +56057,7 @@
           "value": "กุสลตฺติก 4. เหตุสเหตุกทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 4.{{sp1}} เหตุสเหตุกทุก",
+              "value": "กุสลตฺติก 4. เหตุสเหตุกทุก",
               "bold": true
             }
           ]
@@ -55914,7 +56238,7 @@
           "value": "กุสลตฺติก 5. เหตุเหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 5.{{sp1}} เหตุเหตุสมฺปยุตฺตทุก",
+              "value": "กุสลตฺติก 5. เหตุเหตุสมฺปยุตฺตทุก",
               "bold": true
             }
           ]
@@ -56029,7 +56353,7 @@
           "value": "กุสลตฺติก 6. เหตุสเหตุกทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 6.{{sp1}} เหตุสเหตุกทุก",
+              "value": "กุสลตฺติก 6. เหตุสเหตุกทุก",
               "bold": true
             }
           ]
@@ -56223,7 +56547,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 9.{{sp1}} สนิทสฺสนทุก",
+              "value": "1. กุสลตฺติก 9. สนิทสฺสนทุก",
               "bold": true
             }
           ]
@@ -56293,7 +56617,7 @@
               "bold": true
             },
             {
-              "value": " 10.{{sp1}} สปฺปฏิฆทุก",
+              "value": " 10. สปฺปฏิฆทุก",
               "bold": false
             }
           ]
@@ -56368,7 +56692,7 @@
               "bold": true
             },
             {
-              "value": " 11.{{sp1}} รูปีทุก",
+              "value": " 11. รูปีทุก",
               "bold": false
             }
           ]
@@ -56443,7 +56767,7 @@
               "bold": true
             },
             {
-              "value": " 12.{{sp1}} โลกิยทุก",
+              "value": " 12. โลกิยทุก",
               "bold": false
             }
           ]
@@ -56621,7 +56945,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 14.{{sp1}} อาสวโคจฺฉก",
+              "value": "1. กุสลตฺติก 14. อาสวโคจฺฉก",
               "bold": true
             }
           ]
@@ -56836,7 +57160,7 @@
               "bold": true
             },
             {
-              "value": " 20.{{sp1}} ฉโคจฺฉกทุก",
+              "value": " 20. ฉโคจฺฉกทุก",
               "bold": false
             }
           ]
@@ -57015,7 +57339,7 @@
               "bold": true
             },
             {
-              "value": " 56.{{sp1}} จิตฺตทุก",
+              "value": " 56. จิตฺตทุก",
               "bold": false
             }
           ]
@@ -57275,7 +57599,7 @@
               "bold": true
             },
             {
-              "value": "8.{{sp1}} จิตฺตสมฺปยุตฺตทุก",
+              "value": "8. จิตฺตสมฺปยุตฺตทุก",
               "bold": false
             }
           ]
@@ -57565,7 +57889,7 @@
               "bold": true
             },
             {
-              "value": " 61.{{sp1}} จิตฺตสหภูทุก",
+              "value": " 61. จิตฺตสหภูทุก",
               "bold": false
             }
           ]
@@ -57781,7 +58105,7 @@
               "bold": true
             },
             {
-              "value": " 66.{{sp1}} อชฺฌตฺติกทุกาทิ",
+              "value": " 66. อชฺฌตฺติกทุกาทิ",
               "bold": false
             }
           ]
@@ -57958,7 +58282,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 83.{{sp1}} ปิฏฺฐิทุก",
+              "value": "1. กุสลตฺติก 83. ปิฏฺฐิทุก",
               "bold": true
             }
           ]
@@ -58776,7 +59100,7 @@
           "value": "วิปากตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "วิปากตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "วิปากตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59044,7 +59368,7 @@
           "value": "สํกิลิฏฺฐตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "สํกิลิฏฺฐตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "สํกิลิฏฺฐตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59111,7 +59435,7 @@
           "value": "วิตกฺกตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "วิตกฺกตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "วิตกฺกตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59178,7 +59502,7 @@
           "value": "ปีติตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "ปีติตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "ปีติตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59270,7 +59594,7 @@
           "value": "ทสฺสนตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "ทสฺสนตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "ทสฺสนตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59337,7 +59661,7 @@
           "value": "ทสฺสนเหตุตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "ทสฺสนเหตุตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "ทสฺสนเหตุตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59404,7 +59728,7 @@
           "value": "อาจยคามิตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อาจยคามิตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "อาจยคามิตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59533,7 +59857,7 @@
               "bold": false
             },
             {
-              "value": "12.{{sp1}} ปริตฺตตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "12. ปริตฺตตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59595,7 +59919,7 @@
           "value": "ปริตฺตารมฺมณตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "ปริตฺตารมฺมณตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "ปริตฺตารมฺมณตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59662,7 +59986,7 @@
           "value": "หีนตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "หีนตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "หีนตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59729,7 +60053,7 @@
           "value": "มิจฺฉตฺตนิยตตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "มิจฺฉตฺตนิยตตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "มิจฺฉตฺตนิยตตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59796,7 +60120,7 @@
           "value": "มคฺคารมฺมณตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "มคฺคารมฺมณตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "มคฺคารมฺมณตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59874,7 +60198,7 @@
           "value": "อชฺฌตฺตารมฺมณตฺติก 1.{{sp1}} เหตุทุก 17.{{sp1}} อุปฺปนฺนตฺติก 1.{{sp1}} เหตุทุก",
           "runs": [
             {
-              "value": "อชฺฌตฺตารมฺมณตฺติก 1.{{sp1}} เหตุทุก 17.{{sp1}}",
+              "value": "อชฺฌตฺตารมฺมณตฺติก 1. เหตุทุก 17. ",
               "bold": false
             },
             {
@@ -59882,7 +60206,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} เหตุทุก",
+              "value": " เหตุทุก",
               "bold": false
             }
           ]
@@ -59927,7 +60251,7 @@
           "value": "อตีตตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อตีตตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "อตีตตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -59978,7 +60302,7 @@
           "value": "อตีตารมฺมณตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อตีตารมฺมณตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "อตีตารมฺมณตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -60045,7 +60369,7 @@
           "value": "อชฺฌตฺตตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อชฺฌตฺตตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "อชฺฌตฺตตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -60175,7 +60499,7 @@
           "value": "อชฺฌตฺตารมฺมณํ นเหตุํ ธมฺมํ ปฏิจฺจ นพหิทฺธารมฺมโณ นนเหตุ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา เทฺว. 22.{{sp1}} สนิทสฺสนตฺติก 1.{{sp1}} เหตุทุก",
           "runs": [
             {
-              "value": "อชฺฌตฺตารมฺมณํ นเหตุํ ธมฺมํ ปฏิจฺจ นพหิทฺธารมฺมโณ นนเหตุ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา เทฺว. 22.{{sp1}}",
+              "value": "อชฺฌตฺตารมฺมณํ นเหตุํ ธมฺมํ ปฏิจฺจ นพหิทฺธารมฺมโณ นนเหตุ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. เหตุยา เทฺว. 22. ",
               "bold": false
             },
             {
@@ -60183,7 +60507,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} เหตุทุก",
+              "value": " เหตุทุก",
               "bold": false
             }
           ]
@@ -60275,7 +60599,7 @@
           "value": "สนิทสฺสนตฺติก 3. เหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 3.{{sp1}} เหตุสมฺปยุตฺตทุก",
+              "value": "สนิทสฺสนตฺติก 3. เหตุสมฺปยุตฺตทุก",
               "bold": true
             }
           ]
@@ -60359,7 +60683,7 @@
           "value": "สนิทสฺสนตฺติก 4. เหตุสเหตุกทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 4.{{sp1}} เหตุสเหตุกทุก",
+              "value": "สนิทสฺสนตฺติก 4. เหตุสเหตุกทุก",
               "bold": true
             }
           ]
@@ -60426,7 +60750,7 @@
           "value": "สนิทสฺสนตฺติก 5. เหตุเหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 5.{{sp1}} เหตุเหตุสมฺปยุตฺตทุก",
+              "value": "สนิทสฺสนตฺติก 5. เหตุเหตุสมฺปยุตฺตทุก",
               "bold": true
             }
           ]
@@ -60564,7 +60888,7 @@
           "value": "สนิทสฺสนตฺติก 7. สปฺปจฺจยทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 7.{{sp1}} สปฺปจฺจยทุก",
+              "value": "สนิทสฺสนตฺติก 7. สปฺปจฺจยทุก",
               "bold": true
             }
           ]
@@ -60631,7 +60955,7 @@
           "value": "สนิทสฺสนตฺติก 9. สนิทสฺสนทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 9.{{sp1}} สนิทสฺสนทุก",
+              "value": "สนิทสฺสนตฺติก 9. สนิทสฺสนทุก",
               "bold": true
             }
           ]
@@ -60706,7 +61030,7 @@
               "bold": true
             },
             {
-              "value": "อิก 10.{{sp1}} สปฺปฏิฆทุก",
+              "value": "อิก 10. สปฺปฏิฆทุก",
               "bold": false
             }
           ]
@@ -60781,7 +61105,7 @@
           "value": "สนิทสฺสนตฺติก 13.{{sp1}} เกนจิวิญฺเญยฺยทุก 22.{{sp1}} สนิทสฺสนตฺติก 11.{{sp1}} รูปีทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 13.{{sp1}} เกนจิวิญฺเญยฺยทุก 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 13. เกนจิวิญฺเญยฺยทุก 22. ",
               "bold": false
             },
             {
@@ -60789,7 +61113,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} รูปีทุก",
+              "value": " รูปีทุก",
               "bold": false
             }
           ]
@@ -60858,7 +61182,7 @@
               "bold": true
             },
             {
-              "value": "ติก 12.{{sp1}} โลกิยทุก",
+              "value": "ติก 12. โลกิยทุก",
               "bold": false
             }
           ]
@@ -61036,7 +61360,7 @@
               "bold": true
             },
             {
-              "value": "ติก 14.{{sp1}} อาสวทุก",
+              "value": "ติก 14. อาสวทุก",
               "bold": false
             }
           ]
@@ -61111,7 +61435,7 @@
               "bold": true
             },
             {
-              "value": "ติก 15.{{sp1}} สาสวทุก",
+              "value": "ติก 15. สาสวทุก",
               "bold": false
             }
           ]
@@ -61186,7 +61510,7 @@
           "value": "สนิทสฺสนตฺติก 17.{{sp1}} อาสวสาสวทุก 22.{{sp1}} สนิทสฺสนตฺติก 16.{{sp1}} อาสวสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 17.{{sp1}} อาสวสาสวทุก 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 17. อาสวสาสวทุก 22. ",
               "bold": false
             },
             {
@@ -61194,7 +61518,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} อาสวสมฺปยุตฺตทุก",
+              "value": " อาสวสมฺปยุตฺตทุก",
               "bold": false
             }
           ]
@@ -61367,7 +61691,7 @@
               "bold": true
             },
             {
-              "value": "9.{{sp1}} อาสววิปฺปยุตฺตสาสวทุก",
+              "value": "9. อาสววิปฺปยุตฺตสาสวทุก",
               "bold": false
             }
           ]
@@ -61435,7 +61759,7 @@
           "value": "สนิทสฺสนตฺติก 56.{{sp1}} จิตฺตทุก 22.{{sp1}} สนิทสฺสนตฺติก 20-54.{{sp1}} สญฺโญชนาทิทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 56.{{sp1}} จิตฺตทุก 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 56. จิตฺตทุก 22. ",
               "bold": false
             },
             {
@@ -61443,7 +61767,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} สญฺโญชนาทิทุก",
+              "value": " สญฺโญชนาทิทุก",
               "bold": false
             }
           ]
@@ -61576,7 +61900,7 @@
               "bold": true
             },
             {
-              "value": "อิก 55.{{sp1}} สารมฺมณทุก",
+              "value": "อิก 55. สารมฺมณทุก",
               "bold": false
             }
           ]
@@ -61723,7 +62047,7 @@
               "bold": true
             },
             {
-              "value": "ติก 57.{{sp1}} เจตสิกทุก",
+              "value": "ติก 57. เจตสิกทุก",
               "bold": false
             }
           ]
@@ -61764,11 +62088,11 @@
           "value": "Sanidassanattika 58. Cittasampayuttaduka",
           "runs": [
             {
-              "value": "Sanidassanattik",
+              "value": "Sanidassanattika",
               "bold": true
             },
             {
-              "value": "a 58. Cittasampayuttaduka",
+              "value": " 58. Cittasampayuttaduka",
               "bold": false
             }
           ]
@@ -61778,11 +62102,11 @@
           "value": "สนิทสฺสนตฺติก 58. จิตฺตสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติกฺ",
+              "value": "สนิทสฺสนตฺติก",
               "bold": true
             },
             {
-              "value": "อ 58.{{sp1}} จิตฺตสมฺปยุตฺตทุก",
+              "value": " 58. จิตฺตสมฺปยุตฺตทุก",
               "bold": false
             }
           ]
@@ -61823,11 +62147,11 @@
           "value": "Sanidassanattika 59. Cittasaṃsaṭṭhaduka",
           "runs": [
             {
-              "value": "Sanidassanattik",
+              "value": "Sanidassanattika",
               "bold": true
             },
             {
-              "value": "a 59. Cittasaṃsaṭṭhaduka",
+              "value": " 59. Cittasaṃsaṭṭhaduka",
               "bold": false
             }
           ]
@@ -61837,11 +62161,11 @@
           "value": "สนิทสฺสนตฺติก 59. จิตฺตสํสฏฺฐทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติกฺ",
+              "value": "สนิทสฺสนตฺติก",
               "bold": true
             },
             {
-              "value": "อ 59.{{sp1}} จิตฺตสํสฏฺฐทุก",
+              "value": " 59. จิตฺตสํสฏฺฐทุก",
               "bold": false
             }
           ]
@@ -61900,7 +62224,7 @@
           "value": "สนิทสฺสนตฺติก 66.{{sp1}} อชฺฌตฺตทุก 22.{{sp1}} สนิทสฺสนตฺติก 60.{{sp1}} จิตฺตสมุฏฺฐานทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 66.{{sp1}} อชฺฌตฺตทุก 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 66. อชฺฌตฺตทุก 22. ",
               "bold": false
             },
             {
@@ -61908,7 +62232,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} จิตฺตสมุฏฺฐานทุก",
+              "value": " จิตฺตสมุฏฺฐานทุก",
               "bold": false
             }
           ]
@@ -61961,7 +62285,7 @@
               "bold": true
             },
             {
-              "value": "ก 61.{{sp1}} จิตฺตสหภูทุก",
+              "value": "ก 61. จิตฺตสหภูทุก",
               "bold": false
             }
           ]
@@ -62020,7 +62344,7 @@
               "bold": true
             },
             {
-              "value": " 62.{{sp1}} จิตฺตานุปริวตฺติทุก",
+              "value": " 62. จิตฺตานุปริวตฺติทุก",
               "bold": false
             }
           ]
@@ -62079,7 +62403,7 @@
               "bold": true
             },
             {
-              "value": "5.{{sp1}} จิตฺตสํสฏฺฐสมุฏฺฐานทุกาทิ",
+              "value": "5. จิตฺตสํสฏฺฐสมุฏฺฐานทุกาทิ",
               "bold": false
             }
           ]
@@ -62234,7 +62558,7 @@
               "bold": true
             },
             {
-              "value": "ติก 67.{{sp1}} อุปาทาทุก",
+              "value": "ติก 67. อุปาทาทุก",
               "bold": false
             }
           ]
@@ -62341,7 +62665,7 @@
               "bold": true
             },
             {
-              "value": "ติก 68.{{sp1}} อุปาทินฺนทุก",
+              "value": "ติก 68. อุปาทินฺนทุก",
               "bold": false
             }
           ]
@@ -62416,7 +62740,7 @@
               "bold": true
             },
             {
-              "value": "ก 69-82.{{sp1}} อุปาทานทุกาทิ",
+              "value": "ก 69-82. อุปาทานทุกาทิ",
               "bold": false
             }
           ]
@@ -62539,7 +62863,7 @@
               "bold": true
             },
             {
-              "value": " 84.{{sp1}} ภาวนายปหาตพฺพทุก",
+              "value": " 84. ภาวนายปหาตพฺพทุก",
               "bold": false
             }
           ]
@@ -62711,7 +63035,7 @@
               "bold": true
             },
             {
-              "value": "อิก 87.{{sp1}} สวิตกฺกทุก",
+              "value": "อิก 87. สวิตกฺกทุก",
               "bold": false
             }
           ]
@@ -62786,7 +63110,7 @@
               "bold": true
             },
             {
-              "value": "ติก 88.{{sp1}} สวิจารทุก",
+              "value": "ติก 88. สวิจารทุก",
               "bold": false
             }
           ]
@@ -62861,7 +63185,7 @@
           "value": "สนิทสฺสนตฺติก 91.{{sp1}} สุขสหคตทุก 22.{{sp1}} สนิทสฺสนตฺติก 89.{{sp1}} สปฺปีติกทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 91.{{sp1}} สุขสหคตทุก 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 91. สุขสหคตทุก 22. ",
               "bold": false
             },
             {
@@ -62869,7 +63193,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} สปฺปีติกทุก",
+              "value": " สปฺปีติกทุก",
               "bold": false
             }
           ]
@@ -62938,7 +63262,7 @@
               "bold": true
             },
             {
-              "value": "ก 90.{{sp1}} ปีติสหคตทุก",
+              "value": "ก 90. ปีติสหคตทุก",
               "bold": false
             }
           ]
@@ -63117,7 +63441,7 @@
               "bold": true
             },
             {
-              "value": "อิก 93.{{sp1}} กามาวจรทุก",
+              "value": "อิก 93. กามาวจรทุก",
               "bold": false
             }
           ]
@@ -63192,7 +63516,7 @@
               "bold": true
             },
             {
-              "value": "อิก 94.{{sp1}} รูปาวจรทุก",
+              "value": "อิก 94. รูปาวจรทุก",
               "bold": false
             }
           ]
@@ -63267,7 +63591,7 @@
               "bold": true
             },
             {
-              "value": "ก 95.{{sp1}} อรูปาวจรทุก",
+              "value": "ก 95. อรูปาวจรทุก",
               "bold": false
             }
           ]
@@ -63357,7 +63681,7 @@
               "bold": true
             },
             {
-              "value": "ก 96.{{sp1}} ปริยาปนฺนทุก",
+              "value": "ก 96. ปริยาปนฺนทุก",
               "bold": false
             }
           ]
@@ -63432,7 +63756,7 @@
               "bold": true
             },
             {
-              "value": "อิก 97.{{sp1}} นิยฺยานิกทุก",
+              "value": "อิก 97. นิยฺยานิกทุก",
               "bold": false
             }
           ]
@@ -63507,7 +63831,7 @@
               "bold": true
             },
             {
-              "value": "ติก 98.{{sp1}} นิยตทุก",
+              "value": "ติก 98. นิยตทุก",
               "bold": false
             }
           ]
@@ -63629,7 +63953,7 @@
               "bold": false
             },
             {
-              "value": "22.{{sp1}} สนิทสฺสนตฺติก 100.{{sp1}} สรณทุก",
+              "value": "22. สนิทสฺสนตฺติก 100. สรณทุก",
               "bold": true
             }
           ]
@@ -63811,7 +64135,7 @@
           "value": "กุสลตฺติก 1. เวทนาตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} เวทนาตฺติก",
+              "value": "กุสลตฺติก 1. เวทนาตฺติก",
               "bold": true
             }
           ]
@@ -64240,7 +64564,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 2.{{sp1}} วิปากตฺติก",
+              "value": "1. กุสลตฺติก 2. วิปากตฺติก",
               "bold": true
             }
           ]
@@ -64334,7 +64658,7 @@
           "value": "กุสลตฺติก 3. อุปาทินฺนตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 3.{{sp1}} อุปาทินฺนตฺติก",
+              "value": "กุสลตฺติก 3. อุปาทินฺนตฺติก",
               "bold": true
             }
           ]
@@ -64569,7 +64893,7 @@
           "value": "กุสลตฺติก 5. วิตกฺกตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 5.{{sp1}} วิตกฺกตฺติก",
+              "value": "กุสลตฺติก 5. วิตกฺกตฺติก",
               "bold": true
             }
           ]
@@ -64668,7 +64992,7 @@
           "value": "กุสลตฺติก 6. ปีติตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 6.{{sp1}} ปีติตฺติก",
+              "value": "กุสลตฺติก 6. ปีติตฺติก",
               "bold": true
             }
           ]
@@ -64751,7 +65075,7 @@
           "value": "กุสลตฺติก 7. ทสฺสนตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 7.{{sp1}} ทสฺสนตฺติก",
+              "value": "กุสลตฺติก 7. ทสฺสนตฺติก",
               "bold": true
             }
           ]
@@ -64856,7 +65180,7 @@
           "value": "กุสลตฺติก 8. ทสฺสนเหตุตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 8.{{sp1}} ทสฺสนเหตุตฺติก",
+              "value": "กุสลตฺติก 8. ทสฺสนเหตุตฺติก",
               "bold": true
             }
           ]
@@ -64955,7 +65279,7 @@
           "value": "กุสลตฺติก 9. อาจยคามิตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 9.{{sp1}} อาจยคามิตฺติก",
+              "value": "กุสลตฺติก 9. อาจยคามิตฺติก",
               "bold": true
             }
           ]
@@ -65132,7 +65456,7 @@
               "bold": true
             },
             {
-              "value": " 11.{{sp1}} ปริตฺตตฺติก",
+              "value": " 11. ปริตฺตตฺติก",
               "bold": false
             }
           ]
@@ -65223,7 +65547,7 @@
               "bold": true
             },
             {
-              "value": "2.{{sp1}} ปริตฺตารมฺมณตฺติก",
+              "value": "2. ปริตฺตารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -65314,7 +65638,7 @@
               "bold": true
             },
             {
-              "value": " 13.{{sp1}} หีนตฺติก",
+              "value": " 13. หีนตฺติก",
               "bold": false
             }
           ]
@@ -65470,7 +65794,7 @@
               "bold": true
             },
             {
-              "value": " 15.{{sp1}} มคฺคารมฺมณตฺติก",
+              "value": " 15. มคฺคารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -65561,7 +65885,7 @@
               "bold": true
             },
             {
-              "value": " 16.{{sp1}} อุปฺปนฺนตฺติก",
+              "value": " 16. อุปฺปนฺนตฺติก",
               "bold": false
             }
           ]
@@ -65620,7 +65944,7 @@
               "bold": true
             },
             {
-              "value": " 17.{{sp1}} อตีตตฺติก",
+              "value": " 17. อตีตตฺติก",
               "bold": false
             }
           ]
@@ -65780,7 +66104,7 @@
               "bold": true
             },
             {
-              "value": "-19.{{sp1}} อชฺฌตฺตตฺติกทฺวย",
+              "value": "-19. อชฺฌตฺตตฺติกทฺวย",
               "bold": false
             }
           ]
@@ -65887,7 +66211,7 @@
               "bold": true
             },
             {
-              "value": " 21.{{sp1}} สนิทสฺสนตฺติก",
+              "value": " 21. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -66234,7 +66558,7 @@
           "value": "วิปากตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "วิปากตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "วิปากตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -66338,7 +66662,7 @@
           "value": "อุปาทินฺนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อุปาทินฺนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อุปาทินฺนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -66437,7 +66761,7 @@
           "value": "สํกิลิฏฺฐตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สํกิลิฏฺฐตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "สํกิลิฏฺฐตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -66622,7 +66946,7 @@
           "value": "ปีติตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปีติตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปีติตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -66705,7 +67029,7 @@
           "value": "สนิทสฺสนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "สนิทสฺสนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -66805,7 +67129,7 @@
           "value": "สนิทสฺสนตฺติก 2. เวทนาตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 2.{{sp1}} เวทนาตฺติก",
+              "value": "สนิทสฺสนตฺติก 2. เวทนาตฺติก",
               "bold": true
             }
           ]
@@ -66888,7 +67212,7 @@
           "value": "สนิทสฺสนตฺติก 3. วิปากตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 3.{{sp1}} วิปากตฺติก",
+              "value": "สนิทสฺสนตฺติก 3. วิปากตฺติก",
               "bold": true
             }
           ]
@@ -67085,7 +67409,7 @@
           "value": "สนิทสฺสนตฺติก 5. สํกิลิฏฺฐตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 5.{{sp1}} สํกิลิฏฺฐตฺติก",
+              "value": "สนิทสฺสนตฺติก 5. สํกิลิฏฺฐตฺติก",
               "bold": true
             }
           ]
@@ -67168,7 +67492,7 @@
           "value": "สนิทสฺสนตฺติก 6. วิตกฺกตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 6.{{sp1}} วิตกฺกตฺติก",
+              "value": "สนิทสฺสนตฺติก 6. วิตกฺกตฺติก",
               "bold": true
             }
           ]
@@ -67259,7 +67583,7 @@
               "bold": true
             },
             {
-              "value": " 21.{{sp1}} อชฺฌตฺตารมฺมณตฺติก",
+              "value": " 21. อชฺฌตฺตารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -67420,7 +67744,7 @@
           "value": "เหตุทุก 1. สเหตุกทุก",
           "runs": [
             {
-              "value": "เหตุทุก 1.{{sp1}} สเหตุกทุก",
+              "value": "เหตุทุก 1. สเหตุกทุก",
               "bold": true
             }
           ]
@@ -67627,7 +67951,7 @@
           "value": "เหตุทุก 2. เหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "เหตุทุก 2.{{sp1}} เหตุสมฺปยุตฺตทุก",
+              "value": "เหตุทุก 2. เหตุสมฺปยุตฺตทุก",
               "bold": true
             }
           ]
@@ -67710,7 +68034,7 @@
           "value": "เหตุทุก 3-5. เหตุสเหตุกทุกาทิ",
           "runs": [
             {
-              "value": "เหตุทุก 3-5.{{sp1}} เหตุสเหตุกทุกาทิ",
+              "value": "เหตุทุก 3-5. เหตุสเหตุกทุกาทิ",
               "bold": true
             }
           ]
@@ -69024,7 +69348,7 @@
           "value": "สเหตุกทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "สเหตุกทุก 1.{{sp1}} เหตุทุก",
+              "value": "สเหตุกทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -69128,7 +69452,7 @@
           "value": "เหตุสมฺปยุตฺตทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "เหตุสมฺปยุตฺตทุก 1.{{sp1}} เหตุทุก",
+              "value": "เหตุสมฺปยุตฺตทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -69211,7 +69535,7 @@
           "value": "เหตุสเหตุกทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "เหตุสเหตุกทุก 1.{{sp1}} เหตุทุก",
+              "value": "เหตุสเหตุกทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -69278,7 +69602,7 @@
           "value": "เหตุเหตุสมฺปยุตฺตทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "เหตุเหตุสมฺปยุตฺตทุก 1.{{sp1}} เหตุทุก",
+              "value": "เหตุเหตุสมฺปยุตฺตทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -69677,7 +70001,7 @@
           "value": "อาสวทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อาสวทุก 1.{{sp1}} เหตุทุก",
+              "value": "อาสวทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -69776,7 +70100,7 @@
           "value": "สาสวทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "สาสวทุก 1.{{sp1}} เหตุทุก",
+              "value": "สาสวทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -69962,7 +70286,7 @@
           "value": "อาสวสาสวทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อาสวสาสวทุก 1.{{sp1}} เหตุทุก",
+              "value": "อาสวสาสวทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -70141,7 +70465,7 @@
           "value": "อาสววิปฺปยุตฺตสาสวทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อาสววิปฺปยุตฺตสาสวทุก 1.{{sp1}} เหตุทุก",
+              "value": "อาสววิปฺปยุตฺตสาสวทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -70245,7 +70569,7 @@
           "value": "สญฺโญชนโคจฺฉกาทิ 1. เหตุทุก",
           "runs": [
             {
-              "value": "สญฺโญชนโคจฺฉกาทิ 1.{{sp1}} เหตุทุก",
+              "value": "สญฺโญชนโคจฺฉกาทิ 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -70853,7 +71177,7 @@
               "bold": false
             },
             {
-              "value": "83.{{sp1}} ปิฏฺฐิทุก 1.{{sp1}} เหตุทุก",
+              "value": "83. ปิฏฺฐิทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -71047,11 +71371,11 @@
           "value": "สรณทุก 1. เหตุทุกาทิ 100. สรณทุก 1. เหตุทุกาทิ",
           "runs": [
             {
-              "value": "สรณทุก 1.{{sp1}} เหตุทุกาทิ ",
+              "value": "สรณทุก 1. เหตุทุกาทิ ",
               "bold": false
             },
             {
-              "value": "100.{{sp1}} สรณทุก 1.{{sp1}} เหตุทุกาทิ",
+              "value": "100. สรณทุก 1. เหตุทุกาทิ",
               "bold": true
             }
           ]
@@ -71374,7 +71698,7 @@
           "value": "สรณทุก 7. จูฬนฺตรทุก",
           "runs": [
             {
-              "value": "สรณทุก 7.{{sp1}} จูฬนฺตรทุก",
+              "value": "สรณทุก 7. จูฬนฺตรทุก",
               "bold": true
             }
           ]
@@ -71465,7 +71789,7 @@
               "bold": true
             },
             {
-              "value": "4.{{sp1}} อาสวโคจฺฉก",
+              "value": "4. อาสวโคจฺฉก",
               "bold": false
             }
           ]
@@ -71594,7 +71918,7 @@
               "bold": true
             },
             {
-              "value": "5.{{sp1}} มหนฺตรทุก",
+              "value": "5. มหนฺตรทุก",
               "bold": false
             }
           ]
@@ -71871,7 +72195,7 @@
           "value": "กุสลตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "กุสลตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -72207,11 +72531,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kusalattika 3. Paccayavāra"
+          "value": "Kusalattika 3. Paccayavāra",
+          "runs": [
+            {
+              "value": "Kusalattika 3. Paccayavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "กุสลตฺติก 3. ปจฺจยวาร"
+          "value": "กุสลตฺติก 3. ปจฺจยวาร",
+          "runs": [
+            {
+              "value": "กุสลตฺติก 3. ปจฺจยวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -72345,7 +72681,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 7.{{sp1}} ปญฺหาวาร",
+              "value": "1. กุสลตฺติก 7. ปญฺหาวาร",
               "bold": true
             }
           ]
@@ -72616,7 +72952,7 @@
           "value": "เวทนาตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เวทนาตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เวทนาตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -72686,11 +73022,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Vipākattika 1. Paṭiccavāra"
+          "value": "Vipākattika 1. Paṭiccavāra",
+          "runs": [
+            {
+              "value": "Vipākattika 1. Paṭiccavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "วิปากตฺติก 1. ปฏิจฺจวาร"
+          "value": "วิปากตฺติก 1. ปฏิจฺจวาร",
+          "runs": [
+            {
+              "value": "วิปากตฺติก 1. ปฏิจฺจวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -72769,7 +73117,7 @@
           "value": "อุปาทินฺนตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อุปาทินฺนตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อุปาทินฺนตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -72900,7 +73248,7 @@
           "value": "สํกิลิฏฺฐตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "สํกิลิฏฺฐตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "สํกิลิฏฺฐตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -73142,7 +73490,7 @@
           "value": "ทสฺสนเหตุตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "ทสฺสนเหตุตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "ทสฺสนเหตุตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -73193,7 +73541,7 @@
           "value": "อาจยคามิตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "อาจยคามิตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "อาจยคามิตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -73244,7 +73592,7 @@
           "value": "เสกฺขตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "เสกฺขตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "เสกฺขตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -73425,7 +73773,7 @@
           "value": "อุปฺปนฺนตฺติก 7. ปญฺหาวาร",
           "runs": [
             {
-              "value": "อุปฺปนฺนตฺติก 7.{{sp1}} ปญฺหาวาร",
+              "value": "อุปฺปนฺนตฺติก 7. ปญฺหาวาร",
               "bold": true
             }
           ]
@@ -73668,7 +74016,7 @@
           "value": "สนิทสฺสนตฺติก 1. ปฏิจฺจวาร",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 1.{{sp1}} ปฏิจฺจวาร",
+              "value": "สนิทสฺสนตฺติก 1. ปฏิจฺจวาร",
               "bold": true
             }
           ]
@@ -75706,7 +76054,7 @@
           "value": "สรณทุก 1-7. ปฏิจฺจาทิวาร",
           "runs": [
             {
-              "value": "สรณทุก 1-7.{{sp1}} ปฏิจฺจาทิวาร",
+              "value": "สรณทุก 1-7. ปฏิจฺจาทิวาร",
               "bold": true
             }
           ]
@@ -76163,7 +76511,7 @@
           "value": "เหตุทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "เหตุทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -76430,7 +76778,7 @@
           "value": "เหตุเหตุสมฺปยุตฺตทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เหตุเหตุสมฺปยุตฺตทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "เหตุเหตุสมฺปยุตฺตทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -76534,7 +76882,7 @@
           "value": "นเหตุสเหตุกทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "นเหตุสเหตุกทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "นเหตุสเหตุกทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -76980,7 +77328,7 @@
           "value": "อาสวทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาสวทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "อาสวทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -77063,7 +77411,7 @@
           "value": "สาสวทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สาสวทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "สาสวทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -77216,7 +77564,7 @@
           "value": "อาสวสาสวทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาสวสาสวทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "อาสวสาสวทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -77299,7 +77647,7 @@
           "value": "อาสววิปฺปยุตฺตสาสวทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาสววิปฺปยุตฺตสาสวทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "อาสววิปฺปยุตฺตสาสวทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -77795,11 +78143,11 @@
           "value": "ปิฏฺฐิทุก 1. กุสลตฺติก 69. อุปาทานทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปิฏฺฐิทุก 1.{{sp1}} กุสลตฺติก ",
+              "value": "ปิฏฺฐิทุก 1. กุสลตฺติก ",
               "bold": false
             },
             {
-              "value": "69.{{sp1}} อุปาทานทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "69. อุปาทานทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -77850,7 +78198,7 @@
           "value": "กิเลสทุก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "กิเลสทุก 1.{{sp1}} กุสลตฺติก",
+              "value": "กิเลสทุก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -78316,7 +78664,7 @@
           "value": "เหตุทุก 2. เวทนาตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 2.{{sp1}} เวทนาตฺติก",
+              "value": "เหตุทุก 2. เวทนาตฺติก",
               "bold": true
             }
           ]
@@ -78469,7 +78817,7 @@
           "value": "เหตุทุก 4. อุปาทินฺนตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 4.{{sp1}} อุปาทินฺนตฺติก",
+              "value": "เหตุทุก 4. อุปาทินฺนตฺติก",
               "bold": true
             }
           ]
@@ -78584,7 +78932,7 @@
           "value": "เหตุทุก 5. สํกิลิฏฺฐตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 5.{{sp1}} สํกิลิฏฺฐตฺติก",
+              "value": "เหตุทุก 5. สํกิลิฏฺฐตฺติก",
               "bold": true
             }
           ]
@@ -78671,11 +79019,11 @@
           "value": "เหตุทุก 9. ทสฺสนเหตุตฺติก 1. เหตุทุก 6. วิตกฺกตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 9.{{sp1}} ทสฺสนเหตุตฺติก ",
+              "value": "เหตุทุก 9. ทสฺสนเหตุตฺติก ",
               "bold": false
             },
             {
-              "value": "1.{{sp1}} เหตุทุก 6.{{sp1}} วิตกฺกตฺติก",
+              "value": "1. เหตุทุก 6. วิตกฺกตฺติก",
               "bold": true
             }
           ]
@@ -78758,7 +79106,7 @@
           "value": "เหตุทุก 7. ปีติตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 7.{{sp1}} ปีติตฺติก",
+              "value": "เหตุทุก 7. ปีติตฺติก",
               "bold": true
             }
           ]
@@ -78841,7 +79189,7 @@
           "value": "เหตุทุก 8. ทสฺสนตฺติก",
           "runs": [
             {
-              "value": "เหตุทุก 8.{{sp1}} ทสฺสนตฺติก",
+              "value": "เหตุทุก 8. ทสฺสนตฺติก",
               "bold": true
             }
           ]
@@ -79984,7 +80332,7 @@
           "value": "(นเหตุสมฺปยุตฺตํ นสนิทสฺสนสปฺปฏิฆํ สเหตุกทุกสทิสํ.{{sp1}} ตีณิ ปญฺหา.{{sp1}} เหตุสเหตุกทุเก จ เหตุเหตุสมฺปยุตฺตทุเก จ ปญฺหา โน ลพฺภติ.) 6.{{sp1}} นเหตุสเหตุกทุก 22.{{sp1}} สนิทสฺสนตฺติก",
           "runs": [
             {
-              "value": "(นเหตุสมฺปยุตฺตํ นสนิทสฺสนสปฺปฏิฆํ สเหตุกทุกสทิสํ.{{sp1}} ตีณิ ปญฺหา.{{sp1}} เหตุสเหตุกทุเก จ เหตุเหตุสมฺปยุตฺตทุเก จ ปญฺหา โน ลพฺภติ.) 6.{{sp1}}",
+              "value": "(นเหตุสมฺปยุตฺตํ นสนิทสฺสนสปฺปฏิฆํ สเหตุกทุกสทิสํ. ตีณิ ปญฺหา. เหตุสเหตุกทุเก จ เหตุเหตุสมฺปยุตฺตทุเก จ ปญฺหา โน ลพฺภติ.) 6. ",
               "bold": false
             },
             {
@@ -79992,7 +80340,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} สนิทสฺสนตฺติก",
+              "value": " สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -80191,11 +80539,11 @@
           "value": "Sappaṭighaduka 22. Sanidassanattika",
           "runs": [
             {
-              "value": "Sappaṭighaduk",
+              "value": "Sappaṭighaduka",
               "bold": true
             },
             {
-              "value": "a 22. Sanidassanattika",
+              "value": " 22. Sanidassanattika",
               "bold": false
             }
           ]
@@ -80205,11 +80553,11 @@
           "value": "สปฺปฏิฆทุก 22. สนิทสฺสนตฺติก",
           "runs": [
             {
-              "value": "สปฺปฏิฆทุกฺ",
+              "value": "สปฺปฏิฆทุก",
               "bold": true
             },
             {
-              "value": "อ 22.{{sp1}} สนิทสฺสนตฺติก",
+              "value": " 22. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -80519,7 +80867,7 @@
               "bold": true
             },
             {
-              "value": "อุก 22.{{sp1}} สนิทสฺสนตฺติก",
+              "value": "อุก 22. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -80541,11 +80889,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci viññeyyo sanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci naviññeyyo sanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci viññeyyo sanidassanasappaṭigho ca kenaci naviññeyyo sanidassanasappaṭigho ca dhammā uppajjanti hetupaccayā. (3)"
+          "value": "Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci viññeyyo sanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci naviññeyyo sanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci viññeyyo sanidassanasappaṭigho ca kenaci naviññeyyo sanidassanasappaṭigho ca dhammā uppajjanti hetupaccayā. (3)",
+          "runs": [
+            {
+              "value": "Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci viññeyyo sanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci naviññeyyo sanidassanasappaṭigho dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Nakenaci viññeyyaṃ nasanidassanasappaṭighaṃ dhammaṃ paṭicca kenaci viññeyyo sanidassanasappaṭigho ca kenaci naviññeyyo ",
+              "bold": false
+            },
+            {
+              "value": "sanidassanasappaṭigho ca dhammā uppajjanti hetupaccayā. (3)",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ วิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ นวิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ วิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ จ เกนจิ นวิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)"
+          "value": "นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ วิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ นวิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ วิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ จ เกนจิ นวิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+          "runs": [
+            {
+              "value": "นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ วิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ นวิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. นเกนจิ วิญฺเญยฺยํ นสนิทสฺสนสปฺปฏิฆํ ธมฺมํ ปฏิจฺจ เกนจิ วิญฺเญยฺโย สนิทสฺสนสปฺปฏิโฆ จ เกนจิ นวิญฺเญยฺโย ",
+              "bold": false
+            },
+            {
+              "value": "สนิทสฺสนสปฺปฏิโฆ จ ธมฺมา อุปฺปชฺชนฺติ เหตุปจฺจยา. (3)",
+              "bold": true
+            }
+          ]
         }
       ]
     },
@@ -80734,7 +81102,7 @@
               "bold": true
             },
             {
-              "value": "2.{{sp1}} สนิทสฺสนตฺติก",
+              "value": "2. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -80841,7 +81209,7 @@
               "bold": true
             },
             {
-              "value": "ทุก 22.{{sp1}} สนิทสฺสนตฺติก",
+              "value": "ทุก 22. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -81065,7 +81433,7 @@
               "bold": true
             },
             {
-              "value": "อวทุก 22.{{sp1}} สนิทสฺสนตฺติก",
+              "value": "อวทุก 22. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -81667,7 +82035,7 @@
               "bold": true
             },
             {
-              "value": " 22.{{sp1}} สนิทสฺสนตฺติก",
+              "value": " 22. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -81726,7 +82094,7 @@
               "bold": true
             },
             {
-              "value": "2.{{sp1}} สนิทสฺสนตฺติก",
+              "value": "2. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -82421,7 +82789,7 @@
           "value": "กุสลตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "กุสลตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -82633,7 +83001,7 @@
           "value": "กุสลตฺติก 2. สเหตุกทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 2.{{sp1}} สเหตุกทุก",
+              "value": "กุสลตฺติก 2. สเหตุกทุก",
               "bold": true
             }
           ]
@@ -82717,7 +83085,7 @@
           "value": "กุสลตฺติก 3. เหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "กุสลตฺติก 3.{{sp1}} เหตุสมฺปยุตฺตทุก",
+              "value": "กุสลตฺติก 3. เหตุสมฺปยุตฺตทุก",
               "bold": true
             }
           ]
@@ -82975,7 +83343,7 @@
               "bold": true
             },
             {
-              "value": " 7-13.{{sp1}} จูฬนฺตรทุก",
+              "value": " 7-13. จูฬนฺตรทุก",
               "bold": false
             }
           ]
@@ -83432,7 +83800,7 @@
               "bold": true
             },
             {
-              "value": "0.{{sp1}} สญฺโญชนาทิโคจฺฉก",
+              "value": "0. สญฺโญชนาทิโคจฺฉก",
               "bold": false
             }
           ]
@@ -83594,7 +83962,7 @@
               "bold": true
             },
             {
-              "value": " 55.{{sp1}} มหนฺตรทุก",
+              "value": " 55. มหนฺตรทุก",
               "bold": false
             }
           ]
@@ -83653,7 +84021,7 @@
               "bold": true
             },
             {
-              "value": " 93.{{sp1}} กามาวจรทุก",
+              "value": " 93. กามาวจรทุก",
               "bold": false
             }
           ]
@@ -83728,7 +84096,7 @@
               "bold": true
             },
             {
-              "value": " 94.{{sp1}} รูปาวจรทุก",
+              "value": " 94. รูปาวจรทุก",
               "bold": false
             }
           ]
@@ -83803,7 +84171,7 @@
               "bold": true
             },
             {
-              "value": " 95.{{sp1}} อรูปาวจรทุก",
+              "value": " 95. อรูปาวจรทุก",
               "bold": false
             }
           ]
@@ -83949,7 +84317,7 @@
               "bold": true
             },
             {
-              "value": " 97.{{sp1}} นิยฺยานิกทุก",
+              "value": " 97. นิยฺยานิกทุก",
               "bold": false
             }
           ]
@@ -84024,7 +84392,7 @@
               "bold": true
             },
             {
-              "value": " 98.{{sp1}} นิยตทุก",
+              "value": " 98. นิยตทุก",
               "bold": false
             }
           ]
@@ -84164,7 +84532,7 @@
               "bold": true
             },
             {
-              "value": " 100.{{sp1}} สรณทุก",
+              "value": " 100. สรณทุก",
               "bold": false
             }
           ]
@@ -84379,7 +84747,7 @@
           "value": "วิปากตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "วิปากตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "วิปากตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -84543,7 +84911,7 @@
           "value": "อุปาทินฺนตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "อุปาทินฺนตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "อุปาทินฺนตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -84610,7 +84978,7 @@
           "value": "สํกิลิฏฺฐตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "สํกิลิฏฺฐตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "สํกิลิฏฺฐตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -85104,7 +85472,7 @@
           "value": "สนิทสฺสนตฺติก 1. เหตุทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 1.{{sp1}} เหตุทุก",
+              "value": "สนิทสฺสนตฺติก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -85275,7 +85643,7 @@
           "value": "สนิทสฺสนตฺติก 3-6. เหตุสมฺปยุตฺตทุกาทิ",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 3-6.{{sp1}} เหตุสมฺปยุตฺตทุกาทิ",
+              "value": "สนิทสฺสนตฺติก 3-6. เหตุสมฺปยุตฺตทุกาทิ",
               "bold": true
             }
           ]
@@ -85714,7 +86082,7 @@
               "bold": true
             },
             {
-              "value": "อิก 14.{{sp1}} อาสวโคจฺฉก",
+              "value": "อิก 14. อาสวโคจฺฉก",
               "bold": false
             }
           ]
@@ -86578,7 +86946,7 @@
               "bold": true
             },
             {
-              "value": "ติก 69.{{sp1}} อุปาทานทุก",
+              "value": "ติก 69. อุปาทานทุก",
               "bold": false
             }
           ]
@@ -86637,7 +87005,7 @@
           "value": "สนิทสฺสนตฺติก 83-99.{{sp1}} ปิฏฺฐิทุก 22.{{sp1}} สนิทสฺสนตฺติก 75.{{sp1}} กิเลสทุก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 83-99.{{sp1}} ปิฏฺฐิทุก 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 83-99. ปิฏฺฐิทุก 22. ",
               "bold": false
             },
             {
@@ -86645,7 +87013,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} กิเลสทุก",
+              "value": " กิเลสทุก",
               "bold": false
             }
           ]
@@ -87321,7 +87689,7 @@
               "bold": true
             },
             {
-              "value": "ติก 100.{{sp1}} สรณทุก",
+              "value": "ติก 100. สรณทุก",
               "bold": false
             }
           ]
@@ -87694,7 +88062,7 @@
           "value": "กุสลตฺติก 1. เวทนาตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 1.{{sp1}} เวทนาตฺติก",
+              "value": "กุสลตฺติก 1. เวทนาตฺติก",
               "bold": true
             }
           ]
@@ -88005,7 +88373,7 @@
           "value": "กุสลตฺติก 2. วิปากตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 2.{{sp1}} วิปากตฺติก",
+              "value": "กุสลตฺติก 2. วิปากตฺติก",
               "bold": true
             }
           ]
@@ -88238,7 +88606,7 @@
           "value": "กุสลตฺติก 4. สํกิลิฏฺฐตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 4.{{sp1}} สํกิลิฏฺฐตฺติก",
+              "value": "กุสลตฺติก 4. สํกิลิฏฺฐตฺติก",
               "bold": true
             }
           ]
@@ -88321,7 +88689,7 @@
           "value": "กุสลตฺติก 5. วิตกฺกตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 5.{{sp1}} วิตกฺกตฺติก",
+              "value": "กุสลตฺติก 5. วิตกฺกตฺติก",
               "bold": true
             }
           ]
@@ -88404,7 +88772,7 @@
           "value": "กุสลตฺติก 6. ปีติตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 6.{{sp1}} ปีติตฺติก",
+              "value": "กุสลตฺติก 6. ปีติตฺติก",
               "bold": true
             }
           ]
@@ -88491,11 +88859,11 @@
           "value": "กุสลตฺติก 9. อาจยคามิตฺติก 1. กุสลตฺติก 7. ทสฺสนตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 9.{{sp1}} อาจยคามิตฺติก ",
+              "value": "กุสลตฺติก 9. อาจยคามิตฺติก ",
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 7.{{sp1}} ทสฺสนตฺติก",
+              "value": "1. กุสลตฺติก 7. ทสฺสนตฺติก",
               "bold": true
             }
           ]
@@ -88578,7 +88946,7 @@
           "value": "กุสลตฺติก 8. ทสฺสนเหตุตฺติก",
           "runs": [
             {
-              "value": "กุสลตฺติก 8.{{sp1}} ทสฺสนเหตุตฺติก",
+              "value": "กุสลตฺติก 8. ทสฺสนเหตุตฺติก",
               "bold": true
             }
           ]
@@ -88739,7 +89107,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} กุสลตฺติก 10.{{sp1}} เสกฺขตฺติก",
+              "value": "1. กุสลตฺติก 10. เสกฺขตฺติก",
               "bold": true
             }
           ]
@@ -88825,7 +89193,7 @@
               "bold": true
             },
             {
-              "value": " 11.{{sp1}} ปริตฺตตฺติก",
+              "value": " 11. ปริตฺตตฺติก",
               "bold": false
             }
           ]
@@ -88916,7 +89284,7 @@
               "bold": true
             },
             {
-              "value": "2.{{sp1}} ปริตฺตารมฺมณตฺติก",
+              "value": "2. ปริตฺตารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -89007,7 +89375,7 @@
               "bold": true
             },
             {
-              "value": " 13.{{sp1}} หีนตฺติก",
+              "value": " 13. หีนตฺติก",
               "bold": false
             }
           ]
@@ -89191,7 +89559,7 @@
               "bold": true
             },
             {
-              "value": " 15.{{sp1}} มคฺคารมฺมณตฺติก",
+              "value": " 15. มคฺคารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -89282,7 +89650,7 @@
               "bold": true
             },
             {
-              "value": " 16.{{sp1}} อุปฺปนฺนตฺติก",
+              "value": " 16. อุปฺปนฺนตฺติก",
               "bold": false
             }
           ]
@@ -89443,7 +89811,7 @@
               "bold": true
             },
             {
-              "value": "-20.{{sp1}} อชฺฌตฺตตฺติกทฺวย",
+              "value": "-20. อชฺฌตฺตตฺติกทฺวย",
               "bold": false
             }
           ]
@@ -89550,7 +89918,7 @@
               "bold": true
             },
             {
-              "value": " 21.{{sp1}} สนิทสฺสนตฺติก",
+              "value": " 21. สนิทสฺสนตฺติก",
               "bold": false
             }
           ]
@@ -89854,7 +90222,7 @@
           "value": "วิปากตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "วิปากตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "วิปากตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -89937,7 +90305,7 @@
           "value": "อุปาทินฺนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อุปาทินฺนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อุปาทินฺนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90020,7 +90388,7 @@
           "value": "สํกิลิฏฺฐตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สํกิลิฏฺฐตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "สํกิลิฏฺฐตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90107,11 +90475,11 @@
           "value": "ทสฺสนตฺติก 1. กุสลตฺติก 6. วิตกฺกตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ทสฺสนตฺติก 1.{{sp1}} กุสลตฺติก ",
+              "value": "ทสฺสนตฺติก 1. กุสลตฺติก ",
               "bold": false
             },
             {
-              "value": "6.{{sp1}} วิตกฺกตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "6. วิตกฺกตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90194,7 +90562,7 @@
           "value": "ปีติตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปีติตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปีติตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90355,7 +90723,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} ทสฺสนเหตุตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "9. ทสฺสนเหตุตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90433,7 +90801,7 @@
           "value": "อาจยคามิตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อาจยคามิตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อาจยคามิตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90516,7 +90884,7 @@
           "value": "เสกฺขตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "เสกฺขตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "เสกฺขตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90599,7 +90967,7 @@
           "value": "ปริตฺตตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปริตฺตตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปริตฺตตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90703,7 +91071,7 @@
           "value": "ปริตฺตารมฺมณตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "ปริตฺตารมฺมณตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "ปริตฺตารมฺมณตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90786,7 +91154,7 @@
           "value": "หีนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "หีนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "หีนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90947,7 +91315,7 @@
               "bold": false
             },
             {
-              "value": "16.{{sp1}} มคฺคารมฺมณตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "16. มคฺคารมฺมณตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -90993,7 +91361,7 @@
           "value": "อุปฺปนฺนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อุปฺปนฺนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อุปฺปนฺนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -91076,7 +91444,7 @@
           "value": "อตีตารมฺมณตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อตีตารมฺมณตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อตีตารมฺมณตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -91143,7 +91511,7 @@
           "value": "อชฺฌตฺตตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "อชฺฌตฺตตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "อชฺฌตฺตตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -91218,7 +91586,7 @@
           "value": "สนิทสฺสนตฺติก 2.{{sp1}} เวทนาตฺติก 21.{{sp1}} อชฺฌตฺตารมฺมณตฺติก 1.{{sp1}} กุสลตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 2.{{sp1}} เวทนาตฺติก 21.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 2. เวทนาตฺติก 21. ",
               "bold": false
             },
             {
@@ -91226,7 +91594,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} กุสลตฺติก",
+              "value": " กุสลตฺติก",
               "bold": false
             }
           ]
@@ -91287,7 +91655,7 @@
           "value": "สนิทสฺสนตฺติก 1. กุสลตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 1.{{sp1}} กุสลตฺติก",
+              "value": "สนิทสฺสนตฺติก 1. กุสลตฺติก",
               "bold": true
             }
           ]
@@ -91464,7 +91832,7 @@
               "bold": false
             },
             {
-              "value": "22.{{sp1}} สนิทสฺสนตฺติก 3.{{sp1}} วิปากตฺติก",
+              "value": "22. สนิทสฺสนตฺติก 3. วิปากตฺติก",
               "bold": true
             }
           ]
@@ -91542,7 +91910,7 @@
           "value": "สนิทสฺสนตฺติก 4. อุปาทินฺนตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 4.{{sp1}} อุปาทินฺนตฺติก",
+              "value": "สนิทสฺสนตฺติก 4. อุปาทินฺนตฺติก",
               "bold": true
             }
           ]
@@ -91625,7 +91993,7 @@
           "value": "สนิทสฺสนตฺติก 5. สํกิลิฏฺฐตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 5.{{sp1}} สํกิลิฏฺฐตฺติก",
+              "value": "สนิทสฺสนตฺติก 5. สํกิลิฏฺฐตฺติก",
               "bold": true
             }
           ]
@@ -91716,7 +92084,7 @@
           "value": "สนิทสฺสนตฺติก 8.{{sp1}} ทสฺสนตฺติก 22.{{sp1}} สนิทสฺสนตฺติก 6.{{sp1}} วิตกฺกตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 8.{{sp1}} ทสฺสนตฺติก 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 8. ทสฺสนตฺติก 22. ",
               "bold": false
             },
             {
@@ -91724,7 +92092,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} วิตกฺกตฺติก",
+              "value": " วิตกฺกตฺติก",
               "bold": false
             }
           ]
@@ -91801,7 +92169,7 @@
           "value": "สนิทสฺสนตฺติก 7. ปีติตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 7.{{sp1}} ปีติตฺติก",
+              "value": "สนิทสฺสนตฺติก 7. ปีติตฺติก",
               "bold": true
             }
           ]
@@ -91963,7 +92331,7 @@
           "value": "ธมฺมปจฺจนียานุโลม ติกติกปฏฺฐานปาฬิ 22.{{sp1}} สนิทสฺสนตฺติก 9.{{sp1}} ทสฺสนเหตุตฺติก",
           "runs": [
             {
-              "value": "ธมฺมปจฺจนียานุโลม ติกติกปฏฺฐานปาฬิ 22.{{sp1}}",
+              "value": "ธมฺมปจฺจนียานุโลม ติกติกปฏฺฐานปาฬิ 22. ",
               "bold": false
             },
             {
@@ -91971,7 +92339,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} ทสฺสนเหตุตฺติก",
+              "value": " ทสฺสนเหตุตฺติก",
               "bold": false
             }
           ]
@@ -92040,7 +92408,7 @@
           "value": "นสนิทสฺสนสปฺปฏิฆํ นเนวทสฺสเนน นภาวนาย ปหาตพฺพเหตุกํ ธมฺมํ ปฏิจฺจ สนิทสฺสนสปฺปฏิโฆ เนวทสฺสเนน นภาวนาย ปหาตพฺพเหตุโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา เอกวีส. 22.{{sp1}} สนิทสฺสนตฺติก 10.{{sp1}} อาจยคามิตฺติก",
           "runs": [
             {
-              "value": "นสนิทสฺสนสปฺปฏิฆํ นเนวทสฺสเนน นภาวนาย ปหาตพฺพเหตุกํ ธมฺมํ ปฏิจฺจ สนิทสฺสนสปฺปฏิโฆ เนวทสฺสเนน นภาวนาย ปหาตพฺพเหตุโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา เอกวีส. 22.{{sp1}}",
+              "value": "นสนิทสฺสนสปฺปฏิฆํ นเนวทสฺสเนน นภาวนาย ปหาตพฺพเหตุกํ ธมฺมํ ปฏิจฺจ สนิทสฺสนสปฺปฏิโฆ เนวทสฺสเนน นภาวนาย ปหาตพฺพเหตุโก ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. เหตุยา เอกวีส. 22. ",
               "bold": false
             },
             {
@@ -92048,7 +92416,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} อาจยคามิตฺติก",
+              "value": " อาจยคามิตฺติก",
               "bold": false
             }
           ]
@@ -92095,11 +92463,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Nasanidassanasappaṭighaṃ nanevācayagāmināpacayagāmiṃ dhammaṃ paṭicca sanidassanasappaṭigho nevācayagāmināpacayagāmī dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā ekavīsa. 22.{{sp1}} Sanidassanattika 11.{{sp1}} Sekkhattika"
+          "value": "Nasanidassanasappaṭighaṃ nanevācayagāmināpacayagāmiṃ dhammaṃ paṭicca sanidassanasappaṭigho nevācayagāmināpacayagāmī dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā ekavīsa. 22.{{sp1}} Sanidassanattika 11.{{sp1}} Sekkhattika",
+          "runs": [
+            {
+              "value": "Nasanidassanasappaṭighaṃ nanevācayagāmināpacayagāmiṃ dhammaṃ paṭicca sanidassanasappaṭigho nevācayagāmināpacayagāmī dhammo uppajjati hetupaccayā.{{sp1}}{{sp1}}Hetuyā ekavīsa. 22.{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " Sanidassanattika 11.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}} Sekkhattika",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "นสนิทสฺสนสปฺปฏิฆํ นเนวาจยคามินาปจยคามิํ ธมฺมํ ปฏิจฺจ สนิทสฺสนสปฺปฏิโฆ เนวาจยคามินาปจยคามี ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา เอกวีส. 22.{{sp1}} สนิทสฺสนตฺติก 11.{{sp1}} เสกฺขตฺติก"
+          "value": "นสนิทสฺสนสปฺปฏิฆํ นเนวาจยคามินาปจยคามิํ ธมฺมํ ปฏิจฺจ สนิทสฺสนสปฺปฏิโฆ เนวาจยคามินาปจยคามี ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา.{{sp1}}{{sp1}}เหตุยา เอกวีส. 22.{{sp1}} สนิทสฺสนตฺติก 11.{{sp1}} เสกฺขตฺติก",
+          "runs": [
+            {
+              "value": "นสนิทสฺสนสปฺปฏิฆํ นเนวาจยคามินาปจยคามิํ ธมฺมํ ปฏิจฺจ สนิทสฺสนสปฺปฏิโฆ เนวาจยคามินาปจยคามี ธมฺโม อุปฺปชฺชติ เหตุปจฺจยา. เหตุยา เอกวีส. 22. ",
+              "bold": false
+            },
+            {
+              "value": " สนิทสฺสนตฺติก 11.",
+              "bold": true
+            },
+            {
+              "value": " เสกฺขตฺติก",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -92180,7 +92576,7 @@
           "value": "สนิทสฺสนตฺติก 15.{{sp1}} มิจฺฉตฺตนิยตตฺติก 22.{{sp1}} สนิทสฺสนตฺติก 12.{{sp1}} ปริตฺตตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 15.{{sp1}} มิจฺฉตฺตนิยตตฺติก 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 15. มิจฺฉตฺตนิยตตฺติก 22. ",
               "bold": false
             },
             {
@@ -92188,7 +92584,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} ปริตฺตตฺติก",
+              "value": " ปริตฺตตฺติก",
               "bold": false
             }
           ]
@@ -92255,11 +92651,11 @@
           "value": "Sanidassanattika 13. Parittārammaṇattika",
           "runs": [
             {
-              "value": "Sanidassanattik",
+              "value": "Sanidassanattika",
               "bold": true
             },
             {
-              "value": "a 13. Parittārammaṇattika",
+              "value": " 13. Parittārammaṇattika",
               "bold": false
             }
           ]
@@ -92269,11 +92665,11 @@
           "value": "สนิทสฺสนตฺติก 13. ปริตฺตารมฺมณตฺติก",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติกฺ",
+              "value": "สนิทสฺสนตฺติก",
               "bold": true
             },
             {
-              "value": "อ 13.{{sp1}} ปริตฺตารมฺมณตฺติก",
+              "value": " 13. ปริตฺตารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -92364,7 +92760,7 @@
               "bold": true
             },
             {
-              "value": "ติก 14.{{sp1}} หีนตฺติก",
+              "value": "ติก 14. หีนตฺติก",
               "bold": false
             }
           ]
@@ -92541,7 +92937,7 @@
               "bold": true
             },
             {
-              "value": "ก 16.{{sp1}} มคฺคารมฺมณตฺติก",
+              "value": "ก 16. มคฺคารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -92632,7 +93028,7 @@
               "bold": true
             },
             {
-              "value": "ติก 17.{{sp1}} อุปฺปนฺนตฺติก",
+              "value": "ติก 17. อุปฺปนฺนตฺติก",
               "bold": false
             }
           ]
@@ -92691,7 +93087,7 @@
               "bold": true
             },
             {
-              "value": "ติก 18.{{sp1}} อตีตตฺติก",
+              "value": "ติก 18. อตีตตฺติก",
               "bold": false
             }
           ]
@@ -92750,7 +93146,7 @@
               "bold": true
             },
             {
-              "value": "ก 19.{{sp1}} อตีตารมฺมณตฺติก",
+              "value": "ก 19. อตีตารมฺมณตฺติก",
               "bold": false
             }
           ]
@@ -92841,7 +93237,7 @@
           "value": "สนิทสฺสนตฺติก 20-21.{{sp1}} อชฺฌตฺตตฺติกทฺวย 22.{{sp1}} สนิทสฺสนตฺติก 20-21.{{sp1}} อชฺฌตฺตตฺติกทฺวย",
           "runs": [
             {
-              "value": "สนิทสฺสนตฺติก 20-21.{{sp1}} อชฺฌตฺตตฺติกทฺวย 22.{{sp1}}",
+              "value": "สนิทสฺสนตฺติก 20-21. อชฺฌตฺตตฺติกทฺวย 22. ",
               "bold": false
             },
             {
@@ -92849,7 +93245,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} อชฺฌตฺตตฺติกทฺวย",
+              "value": " อชฺฌตฺตตฺติกทฺวย",
               "bold": false
             }
           ]
@@ -93064,7 +93460,7 @@
           "value": "เหตุทุก 1. สเหตุกทุก",
           "runs": [
             {
-              "value": "เหตุทุก 1.{{sp1}} สเหตุกทุก",
+              "value": "เหตุทุก 1. สเหตุกทุก",
               "bold": true
             }
           ]
@@ -93242,7 +93638,7 @@
           "value": "เหตุทุก 2-5. เหตุสมฺปยุตฺตทุกาทิ",
           "runs": [
             {
-              "value": "เหตุทุก 2-5.{{sp1}} เหตุสมฺปยุตฺตทุกาทิ",
+              "value": "เหตุทุก 2-5. เหตุสมฺปยุตฺตทุกาทิ",
               "bold": true
             }
           ]
@@ -93413,7 +93809,7 @@
               "bold": true
             },
             {
-              "value": "2.{{sp1}} จูฬนฺตรทุก",
+              "value": "2. จูฬนฺตรทุก",
               "bold": false
             }
           ]
@@ -95416,7 +95812,7 @@
           "value": "มหนฺตรทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "มหนฺตรทุก 1.{{sp1}} เหตุทุก",
+              "value": "มหนฺตรทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -95483,7 +95879,7 @@
           "value": "สรณทุก 1. เหตุทุก",
           "runs": [
             {
-              "value": "สรณทุก 1.{{sp1}} เหตุทุก",
+              "value": "สรณทุก 1. เหตุทุก",
               "bold": true
             }
           ]
@@ -95566,7 +95962,7 @@
           "value": "สรณทุก 2. สเหตุกทุก",
           "runs": [
             {
-              "value": "สรณทุก 2.{{sp1}} สเหตุกทุก",
+              "value": "สรณทุก 2. สเหตุกทุก",
               "bold": true
             }
           ]
@@ -95637,7 +96033,7 @@
           "value": "สรณทุก 6.{{sp1}} นเหตุสเหตุกทุก 100.{{sp1}} สรณทุก 3.{{sp1}} เหตุสมฺปยุตฺตทุก",
           "runs": [
             {
-              "value": "สรณทุก 6.{{sp1}} นเหตุสเหตุกทุก 100.{{sp1}} สรณทุก 3.{{sp1}}",
+              "value": "สรณทุก 6. นเหตุสเหตุกทุก 100. สรณทุก 3. ",
               "bold": false
             },
             {
@@ -95702,7 +96098,7 @@
           "value": "สรณทุก 4. เหตุสเหตุกทุก",
           "runs": [
             {
-              "value": "สรณทุก 4.{{sp1}} เหตุสเหตุกทุก",
+              "value": "สรณทุก 4. เหตุสเหตุกทุก",
               "bold": true
             }
           ]
@@ -95847,7 +96243,7 @@
               "bold": false
             },
             {
-              "value": "100.{{sp1}} สรณทุก 7.{{sp1}} จูฬนฺตรทุก",
+              "value": "100. สรณทุก 7. จูฬนฺตรทุก",
               "bold": true
             }
           ]
@@ -96061,7 +96457,7 @@
           "value": "สรณทุก 55.{{sp1}} มหนฺตรทุก 100.{{sp1}} สรณทุก 14.{{sp1}} อาสวโคจฺฉกาทิ",
           "runs": [
             {
-              "value": "สรณทุก 55.{{sp1}} มหนฺตรทุก 100.{{sp1}}",
+              "value": "สรณทุก 55. มหนฺตรทุก 100. ",
               "bold": false
             },
             {
@@ -96069,7 +96465,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} อาสวโคจฺฉกาทิ",
+              "value": " อาสวโคจฺฉกาทิ",
               "bold": false
             }
           ]
@@ -96354,7 +96750,7 @@
               "bold": true
             },
             {
-              "value": "3.{{sp1}} ปิฏฺฐิทุก",
+              "value": "3. ปิฏฺฐิทุก",
               "bold": false
             }
           ]

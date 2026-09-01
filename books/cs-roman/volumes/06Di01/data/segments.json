@@ -4333,11 +4333,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Brahmajālasuttaṃ niṭṭhitaṃ paṭhamaṃ."
+          "value": "Brahmajālasuttaṃ niṭṭhitaṃ paṭhamaṃ.",
+          "runs": [
+            {
+              "value": "Brahmajālasuttaṃ niṭṭhitaṃ paṭhamaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "พฺรหฺมชาลสุตฺตํ นิฏฺฐิตํ ปฐมํ."
+          "value": "พฺรหฺมชาลสุตฺตํ นิฏฺฐิตํ ปฐมํ.",
+          "runs": [
+            {
+              "value": "พฺรหฺมชาลสุตฺตํ นิฏฺฐิตํ ปฐมํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -7552,11 +7564,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sāmaññaphalasuttaṃ niṭṭhitaṃ dutiyaṃ."
+          "value": "Sāmaññaphalasuttaṃ niṭṭhitaṃ dutiyaṃ.",
+          "runs": [
+            {
+              "value": "Sāmaññaphalasuttaṃ niṭṭhitaṃ dutiyaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สามญฺญผลสุตฺตํ นิฏฺฐิตํ ทุติยํ."
+          "value": "สามญฺญผลสุตฺตํ นิฏฺฐิตํ ทุติยํ.",
+          "runs": [
+            {
+              "value": "สามญฺญผลสุตฺตํ นิฏฺฐิตํ ทุติยํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -9654,11 +9678,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Ambaṭṭhasuttaṃ niṭṭhitaṃ tatiyaṃ."
+          "value": "Ambaṭṭhasuttaṃ niṭṭhitaṃ tatiyaṃ.",
+          "runs": [
+            {
+              "value": "Ambaṭṭhasuttaṃ niṭṭhitaṃ tatiyaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "อมฺพฏฺฐสุตฺตํ นิฏฺฐิตํ ตติยํ."
+          "value": "อมฺพฏฺฐสุตฺตํ นิฏฺฐิตํ ตติยํ.",
+          "runs": [
+            {
+              "value": "อมฺพฏฺฐสุตฺตํ นิฏฺฐิตํ ตติยํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -11139,11 +11175,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Soṇadaṇḍasuttaṃ niṭṭhitaṃ catutthaṃ."
+          "value": "Soṇadaṇḍasuttaṃ niṭṭhitaṃ catutthaṃ.",
+          "runs": [
+            {
+              "value": "Soṇadaṇḍasuttaṃ niṭṭhitaṃ catutthaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "โสณทณฺฑสุตฺตํ นิฏฺฐิตํ จตุตฺถํ."
+          "value": "โสณทณฺฑสุตฺตํ นิฏฺฐิตํ จตุตฺถํ.",
+          "runs": [
+            {
+              "value": "โสณทณฺฑสุตฺตํ นิฏฺฐิตํ จตุตฺถํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -17320,11 +17368,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Poṭṭhapādasuttaṃ niṭṭhitaṃ navamaṃ."
+          "value": "Poṭṭhapādasuttaṃ niṭṭhitaṃ navamaṃ.",
+          "runs": [
+            {
+              "value": "Poṭṭhapādasuttaṃ niṭṭhitaṃ navamaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "โปฏฺฐปาทสุตฺตํ นิฏฺฐิตํ นวมํ."
+          "value": "โปฏฺฐปาทสุตฺตํ นิฏฺฐิตํ นวมํ.",
+          "runs": [
+            {
+              "value": "โปฏฺฐปาทสุตฺตํ นิฏฺฐิตํ นวมํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -18513,11 +18573,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "khayañāṇāya cittaṃ abhinīharati abhininnāmeti.{{sp1}} So idaṃ dukkhanti yathābhūtaṃ pajānāti, ayaṃ dukkhasamudayoti yathābhūtaṃ pajānāti, ayaṃ dukkhanirodhoti yathābhūtaṃ pajānāti, ayaṃ dukkhanirodhagāminī paṭipadāti yathābhūtaṃ pajānāti, ime āsavāti yathābhūtaṃ pajānāti, ayaṃ āsavasamudayoti yathābhūtaṃ pajānāti, ayaṃ āsavanirodhoti yathābhūtaṃ pajānāti, ayaṃ āsavanirodhagāminī paṭipadāti yathābhūtaṃ pajānāti.{{sp1}} Tassa evaṃ jānato evaṃ passato kāmāsavāpi cittaṃ vimuccati, bhavāsavāpi cittaṃ vimuccati, avijjāsavāpi cittaṃ vimuccati, vimuttasmiṃ vimuttamiti ñāṇaṃ hoti, “khīṇā jāti, vusitaṃ brahmacariyaṃ, kataṃ karaṇīyaṃ, nāparaṃ itthattāyā”ti pajānāti."
+          "value": "khayañāṇāya cittaṃ abhinīharati abhininnāmeti.{{sp1}} So idaṃ dukkhanti yathābhūtaṃ pajānāti, ayaṃ dukkhasamudayoti yathābhūtaṃ pajānāti, ayaṃ dukkhanirodhoti yathābhūtaṃ pajānāti, ayaṃ dukkhanirodhagāminī paṭipadāti yathābhūtaṃ pajānāti, ime āsavāti yathābhūtaṃ pajānāti, ayaṃ āsavasamudayoti yathābhūtaṃ pajānāti, ayaṃ āsavanirodhoti yathābhūtaṃ pajānāti, ayaṃ āsavanirodhagāminī paṭipadāti yathābhūtaṃ pajānāti.{{sp1}} Tassa evaṃ jānato evaṃ passato kāmāsavāpi cittaṃ vimuccati, bhavāsavāpi cittaṃ vimuccati, avijjāsavāpi cittaṃ vimuccati, vimuttasmiṃ vimuttamiti ñāṇaṃ hoti, “khīṇā jāti, vusitaṃ brahmacariyaṃ, kataṃ karaṇīyaṃ, nāparaṃ itthattāyā”ti pajānāti.",
+          "runs": [
+            {
+              "value": "khayañāṇāya cittaṃ abhinīharati abhininnāmeti.{{sp1}} So idaṃ dukkhanti yathābhūtaṃ pajānāti, ayaṃ dukkhasamudayoti yathābhūtaṃ pajānāti, ayaṃ dukkhanirodhoti yathābhūtaṃ pajānāti, ayaṃ dukkhanirodhagāminī paṭipadāti yathābhūtaṃ pajānāti, ime āsavāti yathābhūtaṃ pajānāti, ayaṃ āsavasamudayoti yathābhūtaṃ pajānāti, ayaṃ āsavanirodhoti yathābhūtaṃ pajānāti, ayaṃ āsavanirodhagāminī paṭipadāti yathābhūtaṃ pajānāti.{{sp1}} Tassa evaṃ jānato evaṃ passato kāmāsavāpi cittaṃ vimuccati, bhavāsavāpi cittaṃ vimuccati, avijjāsavāpi cittaṃ vimuccati, vimuttasmiṃ vimuttamiti ñāṇaṃ ",
+              "bold": false
+            },
+            {
+              "value": "hoti, “khīṇā jāti, vusitaṃ brahmacariyaṃ, kataṃ karaṇīyaṃ, nāparaṃ",
+              "bold": true
+            },
+            {
+              "value": " itthattāyā”ti pajānāti.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ขยญาณาย จิตฺตํ อภินีหรติ อภินินฺนาเมติ.{{sp1}} โส อิทํ ทุกฺขนฺติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขสมุทโยติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขนิโรโธติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขนิโรธคามินี ปฏิปทาติ ยถาภูตํ ปชานาติ, อิเม อาสวาติ ยถาภูตํ ปชานาติ, อยํ อาสวสมุทโยติ ยถาภูตํ ปชานาติ, อยํ อาสวนิโรโธติ ยถาภูตํ ปชานาติ, อยํ อาสวนิโรธคามินี ปฏิปทาติ ยถาภูตํ ปชานาติ.{{sp1}} ตสฺส เอวํ ชานโต เอวํ ปสฺสโต กามาสวาปิ จิตฺตํ วิมุจฺจติ, ภวาสวาปิ จิตฺตํ วิมุจฺจติ, อวิชฺชาสวาปิ จิตฺตํ วิมุจฺจติ, วิมุตฺตสฺมิํ วิมุตฺตมิติ ญาณํ โหติ, “ขีณา ชาติ, วุสิตํ พฺรหฺมจริยํ, กตํ กรณียํ, นาปรํ อิตฺถตฺตายา”ติ ปชานาติ."
+          "value": "ขยญาณาย จิตฺตํ อภินีหรติ อภินินฺนาเมติ.{{sp1}} โส อิทํ ทุกฺขนฺติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขสมุทโยติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขนิโรโธติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขนิโรธคามินี ปฏิปทาติ ยถาภูตํ ปชานาติ, อิเม อาสวาติ ยถาภูตํ ปชานาติ, อยํ อาสวสมุทโยติ ยถาภูตํ ปชานาติ, อยํ อาสวนิโรโธติ ยถาภูตํ ปชานาติ, อยํ อาสวนิโรธคามินี ปฏิปทาติ ยถาภูตํ ปชานาติ.{{sp1}} ตสฺส เอวํ ชานโต เอวํ ปสฺสโต กามาสวาปิ จิตฺตํ วิมุจฺจติ, ภวาสวาปิ จิตฺตํ วิมุจฺจติ, อวิชฺชาสวาปิ จิตฺตํ วิมุจฺจติ, วิมุตฺตสฺมิํ วิมุตฺตมิติ ญาณํ โหติ, “ขีณา ชาติ, วุสิตํ พฺรหฺมจริยํ, กตํ กรณียํ, นาปรํ อิตฺถตฺตายา”ติ ปชานาติ.",
+          "runs": [
+            {
+              "value": "ขยญาณาย จิตฺตํ อภินีหรติ อภินินฺนาเมติ. โส อิทํ ทุกฺขนฺติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขสมุทโยติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขนิโรโธติ ยถาภูตํ ปชานาติ, อยํ ทุกฺขนิโรธคามินี ปฏิปทาติ ยถาภูตํ ปชานาติ, อิเม อาสวาติ ยถาภูตํ ปชานาติ, อยํ อาสวสมุทโยติ ยถาภูตํ ปชานาติ, อยํ อาสวนิโรโธติ ยถาภูตํ ปชานาติ, อยํ อาสวนิโรธคามินี ปฏิปทาติ ยถาภูตํ ปชานาติ. ตสฺส เอวํ ชานโต เอวํ ปสฺสโต กามาสวาปิ จิตฺตํ วิมุจฺจติ, ภวาสวาปิ จิตฺตํ วิมุจฺจติ, อวิชฺชาสวาปิ จิตฺตํ วิมุจฺจติ, วิมุตฺตสฺมิํ วิมุตฺตมิติ ญาณํ ",
+              "bold": false
+            },
+            {
+              "value": "โหติ, “ขีณา ชาติ, วุสิตํ พฺรหฺมจริยํ, กตํ กรณียํ, นาปรํ",
+              "bold": true
+            },
+            {
+              "value": " อิตฺถตฺตายา”ติ ปชานาติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -19608,11 +19696,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kevaṭṭasuttaṃ niṭṭhitaṃ ekādasamaṃ."
+          "value": "Kevaṭṭasuttaṃ niṭṭhitaṃ ekādasamaṃ.",
+          "runs": [
+            {
+              "value": "Kevaṭṭasuttaṃ niṭṭhitaṃ ekādasamaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เกวฏฺฏสุตฺตํ นิฏฺฐิตํ เอกาทสมํ."
+          "value": "เกวฏฺฏสุตฺตํ นิฏฺฐิตํ เอกาทสมํ.",
+          "runs": [
+            {
+              "value": "เกวฏฺฏสุตฺตํ นิฏฺฐิตํ เอกาทสมํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -20274,11 +20374,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Lohiccasuttaṃ niṭṭhitaṃ dvādasamaṃ."
+          "value": "Lohiccasuttaṃ niṭṭhitaṃ dvādasamaṃ.",
+          "runs": [
+            {
+              "value": "Lohiccasuttaṃ niṭṭhitaṃ dvādasamaṃ.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "โลหิจฺจสุตฺตํ นิฏฺฐิตํ ทฺวาทสมํ."
+          "value": "โลหิจฺจสุตฺตํ นิฏฺฐิตํ ทฺวาทสมํ.",
+          "runs": [
+            {
+              "value": "โลหิจฺจสุตฺตํ นิฏฺฐิตํ ทฺวาทสมํ.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -21829,11 +21941,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Sīlakkhandhavaggapāḷi niṭṭhitā."
+          "value": "Sīlakkhandhavaggapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Sīlakkhandhavaggapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สีลกฺขนฺธวคฺคปาฬิ นิฏฺฐิตา."
+          "value": "สีลกฺขนฺธวคฺคปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "สีลกฺขนฺธวคฺคปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",

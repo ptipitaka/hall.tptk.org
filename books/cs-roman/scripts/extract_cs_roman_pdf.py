@@ -54,9 +54,12 @@ from cs_roman_bold import (  # noqa: E402
     substantial_bold_ranges,
 )
 from cs_roman_hanging import (  # noqa: E402
+    PageLine,
+    _is_body_flush,
     _is_first_indent,
     _is_gatha_geometry_indent,
     _is_gatha_indent,
+    _is_hang_indent,
     _match_cached_line,
     _seg_pdf_page,
     collect_hanging_groups,
@@ -67,6 +70,7 @@ from cs_roman_hanging import (  # noqa: E402
     segment_roman_text,
     tag_center_layout_by_geometry,
 )
+from cs_roman_item_corrections import apply_item_corrections  # noqa: E402
 from cs_roman_segments import (  # noqa: E402
     SCHEMA_VERSION,
     layout_path_for,
@@ -578,11 +582,25 @@ def _attach_section_rule_tail(text: str) -> str:
 
 
 def is_running_header_folio_label(text: str) -> bool:
-    """True for ``Name (folio)`` / ``N. Name (folio)`` page-furniture labels."""
+    """True for ``Name (folio)`` / ``N. Name (folio)`` page-furniture labels.
+
+    Peyyāla / paragraph tails such as ``…ahosi -pa-. (39)`` also end with
+    ``(N)`` and can sit isolated at a page start; those are body, not furniture.
+    """
     s = (text or "").strip()
     if not s or len(s) > _FOLIO_HEADER_MAX_LEN:
         return False
-    return bool(_RUNNING_HEADER_FOLIO_LINE_RE.match(s))
+    if re.search(r"-pa-", s, flags=re.IGNORECASE):
+        return False
+    if not _RUNNING_HEADER_FOLIO_LINE_RE.match(s):
+        return False
+    name = s[: s.rfind("(")].strip()
+    numbered = ITEM_SINGLE_RE.match(name)
+    if numbered:
+        name = (numbered.group(2) or "").strip()
+    if not name or re.search(r"[.,;:!?]", name):
+        return False
+    return name[0].isupper()
 
 
 def _is_running_header(block: str, headers: set[str]) -> bool:
@@ -795,14 +813,14 @@ def peel_glued_running_header_prefix(
     fm = _GLUED_RUNNING_HEADER_FOLIO_PREFIX_RE.match(t)
     if fm:
         rest = t[fm.end() :]
-        if len(rest) >= 40:
+        label = fm.group(0).strip()
+        if len(rest) >= 40 and is_running_header_folio_label(label):
             item: int | None = None
             if fm.group(1):
                 try:
                     item = int(fm.group(1))
                 except ValueError:
                     item = None
-            label = fm.group(0).strip()
             return rest, label, item
     return None
 
@@ -1124,6 +1142,50 @@ def expand_glued_numbered_notes(
     return rows
 
 
+def _append_prose_block(
+    blocks_out: list[dict],
+    *,
+    text: str,
+    printed_page: int,
+    pdf_page: int,
+    item: int | None = None,
+    flags: list[str] | None = None,
+    source_layout: str | None = None,
+) -> None:
+    """Emit prose, peeling a trailing section-closer formula when present.
+
+    Item-prefixed Anāpatti lines often glue the next centered sikkhāpada
+    closer (``…ādikammikassāti. (Aññābhāgiya) …niṭṭhitaṃ navamaṃ.``) because
+    the PDF text layer has no blank line. Peel so TeX gets a closer band.
+    """
+    body = text
+    closer = None
+    peeled = peel_trailing_section_closer(text)
+    if peeled is not None:
+        body, closer = peeled
+    block: dict[str, Any] = {
+        "kind": "prose",
+        "item": item,
+        "text": body,
+        "flags": list(flags or []),
+        "page": printed_page,
+        "pdf_page": pdf_page,
+        "source_layout": source_layout,
+    }
+    blocks_out.append(block)
+    if closer is not None:
+        blocks_out.append(
+            {
+                "kind": "niṭṭhitaṃ",
+                "item": None,
+                "text": closer,
+                "flags": [],
+                "page": printed_page,
+                "pdf_page": pdf_page,
+            }
+        )
+
+
 def _blocks_from_region(
     region_text: str,
     *,
@@ -1314,15 +1376,13 @@ def _blocks_from_region(
                     }
                 )
             else:
-                blocks_out.append(
-                    {
-                        "kind": "prose",
-                        "item": item,
-                        "text": rest,
-                        "flags": flags,
-                        "page": printed_page,
-                        "pdf_page": pdf_page,
-                    }
+                _append_prose_block(
+                    blocks_out,
+                    text=rest,
+                    item=item,
+                    flags=flags,
+                    printed_page=printed_page,
+                    pdf_page=pdf_page,
                 )
             continue
 
@@ -1376,16 +1436,13 @@ def _blocks_from_region(
         prose_layout = None
         if is_expansion_parenthetical(text):
             prose_layout = "center"
-        blocks_out.append(
-            {
-                "kind": "prose",
-                "item": None,
-                "text": text,
-                "flags": prose_flags,
-                "page": printed_page,
-                "pdf_page": pdf_page,
-                "source_layout": prose_layout,
-            }
+        _append_prose_block(
+            blocks_out,
+            text=text,
+            flags=prose_flags,
+            printed_page=printed_page,
+            pdf_page=pdf_page,
+            source_layout=prose_layout,
         )
     return blocks_out
 
@@ -1961,7 +2018,7 @@ def _looks_like_gatha_seed_line(text: str) -> bool:
 
 
 def _looks_like_gatha_line(text: str) -> bool:
-    """True for bat_line, wak seed, or short wak/bat closing line."""
+    """True for bat_line, wak seed, short wak/bat closing line, or speaker cue."""
     if _looks_like_prose_not_gatha_wak(text):
         return False
     if _looks_like_gatha_seed_line(text):
@@ -1969,6 +2026,9 @@ def _looks_like_gatha_line(text: str) -> bool:
     body = _gatha_line_body(text)
     if not body or len(body) > 160:
         return False
+    # Speaker cue on its own printed line: ``Ettheva … (Kassapāti Bhagavā,)``.
+    if re.search(r"\([^()]*,\s*\)\s*$", body) and len(body) <= 90:
+        return True
     # wak_line second วรรค / short verse close
     if not re.search(r"[.!?…][\"'\u201c\u201d]?\s*$", body):
         return False
@@ -2104,6 +2164,10 @@ def tag_gatha_by_geometry(
     least two printed lines (one บาท as วรรค pairs — e.g. embedded udāna
     quotes). Deep gāthā column allows wak_line seeds with the usual grow.
 
+    First-indent numbered / item bat heads may mix hang-band wak_line and
+    further first-indent verse (quoted dialogue after ``gāthāya ajjhabhāsi–``).
+    Grow those siblings; do not require every child to be bat-shaped.
+
     Catches embedded quotes (no uddāna title). Returns how many printed-line
     segments were retagged.
     """
@@ -2154,29 +2218,25 @@ def tag_gatha_by_geometry(
         # with a single seed line (grow may still add pair lines).
         hang_band_wak = not seed_is_bat and not _is_gatha_indent(matched.x0)
 
-        # Grow a run; bat-line seeds stay bat-shaped on every line.
+        # Grow a run. First-indent numbered verse may mix bat_line and wak_line.
         run_end = i + 1
         while run_end < n:
             nxt = segments[run_end]
             nxt_base = _base_kind(nxt.segment_type)
-            shape_ok = (
-                (
-                    _looks_like_bat_gatha_line(nxt.text)
-                    or _is_bat_printed_line(nxt.text)
-                )
-                if seed_is_bat
-                else _looks_like_gatha_line(nxt.text)
-            )
             if (
                 nxt_base != "prose"
                 or nxt.bats is not None
                 or nxt.source_layout == "hanging"
                 or ends_with_speech_intro_dash(nxt.text)
                 or (
+                    nxt.item is not None
+                    and seg.item is not None
+                    and nxt.item != seg.item
+                )
+                or (
                     not seed_is_bat
                     and _looks_like_prose_not_gatha_wak(nxt.text)
                 )
-                or not shape_ok
             ):
                 break
             nxt_pdf = _seg_pdf_page(nxt, content_start=content_start)
@@ -2186,7 +2246,35 @@ def tag_gatha_by_geometry(
                 line_cache[nxt_pdf] = page_body_lines(doc[nxt_pdf - 1])
             nxt_roman = segment_roman_text(nxt) or nxt.text
             nxt_match = _match_cached_line(line_cache[nxt_pdf], nxt_roman)
-            if nxt_match is None or not _is_gatha_geometry_indent(nxt_match.x0):
+            if nxt_match is None:
+                break
+            indent_ok = _is_gatha_geometry_indent(nxt_match.x0)
+            if (
+                seed_first_indent
+                and seed_is_bat
+                and seg.item is not None
+                and _is_first_indent(nxt_match.x0)
+            ):
+                indent_ok = True
+            if not indent_ok:
+                break
+            shape_ok = (
+                _looks_like_bat_gatha_line(nxt.text)
+                or _is_bat_printed_line(nxt.text)
+                or _looks_like_gatha_line(nxt.text)
+            )
+            if seed_is_bat and not (
+                _looks_like_bat_gatha_line(nxt.text)
+                or _is_bat_printed_line(nxt.text)
+            ):
+                # Mixed verse: wak_line / speaker cue after a bat seed, only
+                # when the child sits in verse indent (hang/deep) or continues
+                # a first-indent numbered/quoted block.
+                mixed_ok = seed_first_indent or _is_gatha_geometry_indent(
+                    nxt_match.x0
+                )
+                shape_ok = mixed_ok and _looks_like_gatha_line(nxt.text)
+            if not shape_ok:
                 break
             run_end += 1
 
@@ -2744,45 +2832,45 @@ def _fold_gatha_printed_lines(
                 break
             stanzas.extend(closers_after_unit.pop(idx))
 
-    for unit in units:
-        buf.append(unit)
-        if len(buf) >= 4:
-            chunk = buf[:4]
-            buf = buf[4:]
-            layouts = {u[1] for u in chunk}
-            # Pure bat_line only when every unit came from ``A, B.``.
-            # Pure wak_line (comma/stop pairs or all singles) → wak_line.
-            # Bat pairs + single-line วรรค → mixed (keep Roman 3-line shape).
-            if layouts == {"bat_line"}:
-                layout = "bat_line"
-            elif layouts == {"wak_line"}:
-                layout = "wak_line"
-            else:
-                layout = "mixed"
-            template = chunk[0][2]
-            pages = [u[2].page for u in chunk]
-            pdf_pages = [u[2].pdf_page for u in chunk]
-            romans, notes, symbol_notes, flags = merge_note_carrying_units(
-                [(u[0], u[2]) for u in chunk]
-            )
-            stanza = _stanza_from_waks(
-                romans,
-                source_layout=layout,
-                template=template,
-                pages=pages,
-                pdf_pages=pdf_pages,
-                notes=notes,
-                symbol_notes=symbol_notes,
-                flags=flags,
-            )
-            # mixed_gatha_layout: audit-only (no needs_review).
-            if len(layouts) > 1 and "mixed_gatha_layout" not in stanza.review_reasons:
-                stanza.review_reasons.append("mixed_gatha_layout")
-            stanzas.append(stanza)
-            unit_cursor += 4
-            _flush_closers_through(unit_cursor - 1)
+    def _chunk_layout(chunk: list[tuple[str, str, Segment]]) -> str:
+        layouts = {u[1] for u in chunk}
+        if layouts == {"bat_line"}:
+            return "bat_line"
+        if layouts == {"wak_line"}:
+            return "wak_line"
+        return "mixed"
 
-    if buf:
+    def _emit_full_stanza(chunk: list[tuple[str, str, Segment]]) -> None:
+        nonlocal unit_cursor
+        layout = _chunk_layout(chunk)
+        template = chunk[0][2]
+        pages = [u[2].page for u in chunk]
+        pdf_pages = [u[2].pdf_page for u in chunk]
+        romans, notes, symbol_notes, flags = merge_note_carrying_units(
+            [(u[0], u[2]) for u in chunk]
+        )
+        stanza = _stanza_from_waks(
+            romans,
+            source_layout=layout,
+            template=template,
+            pages=pages,
+            pdf_pages=pdf_pages,
+            notes=notes,
+            symbol_notes=symbol_notes,
+            flags=flags,
+        )
+        # mixed_gatha_layout: audit-only (no needs_review).
+        if layout == "mixed" and "mixed_gatha_layout" not in stanza.review_reasons:
+            stanza.review_reasons.append("mixed_gatha_layout")
+        stanzas.append(stanza)
+        unit_cursor += len(chunk)
+        _flush_closers_through(unit_cursor - 1)
+
+    def _flush_leftover_buf() -> None:
+        """Emit ``buf`` when layout changes or the run ends."""
+        nonlocal buf, unit_cursor
+        if not buf:
+            return
         # One leftover บาท after a full บท → 1 บทครึ่ง (3 บาท); keep in one
         # segment so TeX does not insert \\[\\gathastanzaskip] mid-block.
         # Only bat_line leftovers qualify — wak pairs are often prose.
@@ -2791,6 +2879,7 @@ def _fold_gatha_printed_lines(
         if (
             half is not None
             and last is not None
+            and last.source_layout == "bat_line"
             and isinstance(last.bats, list)
             and len(last.bats) == 2
         ):
@@ -2814,7 +2903,9 @@ def _fold_gatha_printed_lines(
                     last.flags.append(fl)
             unit_cursor += len(buf)
             _flush_closers_through(unit_cursor - 1)
-        elif any(_looks_like_prose_not_gatha_wak(u[0]) for u in buf):
+            buf = []
+            return
+        if any(_looks_like_prose_not_gatha_wak(u[0]) for u in buf):
             # Demote prose leftovers (one segment per printed-line template).
             seen_ids: set[int] = set()
             for u in buf:
@@ -2827,35 +2918,53 @@ def _fold_gatha_printed_lines(
                 stanzas.append(_prose_segment_from_gatha_line(u[2], roman))
             unit_cursor += len(buf)
             _flush_closers_through(unit_cursor - 1)
+            buf = []
+            return
+        layout = _chunk_layout(buf)
+        template = buf[0][2]
+        romans, notes, symbol_notes, flags = merge_note_carrying_units(
+            [(u[0], u[2]) for u in buf]
+        )
+        stanza = _stanza_from_waks(
+            romans,
+            source_layout=layout,
+            template=template,
+            pages=[u[2].page for u in buf],
+            pdf_pages=[u[2].pdf_page for u in buf],
+            notes=notes,
+            symbol_notes=symbol_notes,
+            flags=flags,
+        )
+        # A complete บาท (two วรรค, one layout) is not irregular — layout
+        # change flushes 1-bat stanzas so bat columns are not packed with
+        # stacked wak_line neighbours.
+        complete_bat = len(buf) == 2 and layout in {"bat_line", "wak_line"}
+        if complete_bat:
+            stanza.needs_review = False
+            stanza.review_reasons = [
+                r for r in stanza.review_reasons if r != "irregular_gatha_stanza"
+            ]
         else:
-            # Other leftovers — emit irregular stanza for review.
-            template = buf[0][2]
-            layouts = {u[1] for u in buf}
-            if layouts == {"bat_line"}:
-                layout = "bat_line"
-            elif layouts == {"wak_line"}:
-                layout = "wak_line"
-            else:
-                layout = "mixed"
-            romans, notes, symbol_notes, flags = merge_note_carrying_units(
-                [(u[0], u[2]) for u in buf]
-            )
-            stanza = _stanza_from_waks(
-                romans,
-                source_layout=layout,
-                template=template,
-                pages=[u[2].page for u in buf],
-                pdf_pages=[u[2].pdf_page for u in buf],
-                notes=notes,
-                symbol_notes=symbol_notes,
-                flags=flags,
-            )
             stanza.needs_review = True
             if "irregular_gatha_stanza" not in stanza.review_reasons:
                 stanza.review_reasons.append("irregular_gatha_stanza")
-            stanzas.append(stanza)
-            unit_cursor += len(buf)
-            _flush_closers_through(unit_cursor - 1)
+        stanzas.append(stanza)
+        unit_cursor += len(buf)
+        _flush_closers_through(unit_cursor - 1)
+        buf = []
+
+    for unit in units:
+        # Do not glue leftover stacked วรรค onto a following printed ``A, B.``
+        # line. Bat then long wak singles may still complete one mixed บท.
+        if buf and buf[0][1] == "wak_line" and unit[1] == "bat_line":
+            _flush_leftover_buf()
+        buf.append(unit)
+        if len(buf) >= 4:
+            chunk = buf[:4]
+            buf = buf[4:]
+            _emit_full_stanza(chunk)
+
+    _flush_leftover_buf()
 
     # Closers with no preceding unit (run started with a closer) or any
     # leftover keys after flush.
@@ -3003,6 +3112,89 @@ def detect_back_matter_start(
     return None
 
 
+def _is_body_column_line(line: PageLine) -> bool:
+    """True for flush / first-indent / hang / gāthā body, not page numbers."""
+    s = (line.text or "").strip()
+    if not s or PAGE_NUM_RE.match(s) or FOOTNOTE_RULE_RE.match(s):
+        return False
+    x0 = line.x0
+    return (
+        _is_body_flush(x0)
+        or _is_first_indent(x0)
+        or _is_hang_indent(x0)
+        or _is_gatha_indent(x0)
+    )
+
+
+def running_header_candidates_from_lines(
+    lines: list[PageLine],
+    page_width: float | None = None,
+) -> list[str]:
+    """Return page-furniture texts sitting above the first body-column line.
+
+    Body-column lines (flush / first-indent / hang / gāthā) are never furniture,
+    even when they are the first ink on the page (01Vin01 p.146 peyyāla tail).
+    Edition page numbers in the flush band are skipped when locating that
+    first body line. ``page_width`` is accepted for call-site symmetry with
+    center-line helpers; candidates are not required to be centered.
+    """
+    del page_width
+    first_body_y: float | None = None
+    for ln in lines:
+        if _is_body_column_line(ln):
+            first_body_y = ln.y0
+            break
+    if first_body_y is None:
+        first_body_y = float("inf")
+    out: list[str] = []
+    seen: set[str] = set()
+    for ln in lines:
+        if ln.y0 >= first_body_y:
+            break
+        s = (ln.text or "").strip()
+        if not s or PAGE_NUM_RE.match(s) or FOOTNOTE_RULE_RE.match(s):
+            continue
+        if s in seen:
+            continue
+        seen.add(s)
+        out.append(s)
+    return out
+
+
+def _text_top_header_candidate_texts(page: Any, top_lines: int) -> list[str]:
+    """Fallback: first non-empty ``get_text('text')`` lines (FakeDoc / no dict)."""
+    raw = page.get_text("text")
+    if not isinstance(raw, str):
+        raw = ""
+    text = vztime_to_unicode(raw)
+    out: list[str] = []
+    for line in text.splitlines()[: max(1, top_lines)]:
+        s = line.strip()
+        if s:
+            out.append(s)
+    return out
+
+
+def _page_header_candidate_texts(page: Any, top_lines: int) -> list[str]:
+    """Furniture-zone texts: geometry when the page has dict blocks, else text."""
+    raw_dict = page.get_text("dict")
+    if isinstance(raw_dict, dict) and raw_dict.get("blocks"):
+        try:
+            lines = page_body_lines(page)
+        except (AttributeError, TypeError, RuntimeError):
+            lines = []
+        if lines:
+            width = None
+            rect = getattr(page, "rect", None)
+            if rect is not None:
+                try:
+                    width = float(rect.width)
+                except (TypeError, ValueError, AttributeError):
+                    width = None
+            return running_header_candidates_from_lines(lines, width)
+    return _text_top_header_candidate_texts(page, top_lines)
+
+
 def detect_running_headers(
     doc: fitz.Document,
     content_start_idx: int,
@@ -3020,18 +3212,17 @@ def detect_running_headers(
     ``Name (folio)`` / ``N. Name (folio)`` labels are accepted from a single
     page-top sighting (short suttas may span fewer than ``min_pages`` pages).
 
-    Counts each candidate at most once per page, and only among the first
-    ``top_lines`` raw lines (page furniture zone), so repeated body phrases
-    mid-page are not treated as headers.
+    On real PDFs, candidates are lines *above* the first body-column line
+    (flush / first-indent / hang / gāthā), not the first ``top_lines`` of
+    raw ``get_text`` order. Tests that feed string-only pages fall back to
+    that text window so repeated body phrases mid-page are still ignored.
     """
     counts: dict[str, int] = {}
     folio_once: set[str] = set()
     end = doc.page_count if content_end_idx is None else min(doc.page_count, content_end_idx)
     for i in range(content_start_idx, end):
-        text = vztime_to_unicode(doc[i].get_text("text"))
         seen_on_page: set[str] = set()
-        for line in text.splitlines()[: max(1, top_lines)]:
-            s = line.strip()
+        for s in _page_header_candidate_texts(doc[i], top_lines):
             if not s or PAGE_NUM_RE.match(s) or FOOTNOTE_RULE_RE.match(s):
                 continue
             is_folio = is_running_header_folio_label(s)
@@ -3069,12 +3260,16 @@ def extract_pdf(
             )
         content_start = detected
     start_idx = max(0, content_start - 1)
-    headers = detect_running_headers(doc, start_idx)
-
     back_matter_start = detect_back_matter_start(doc, content_start=content_start)
     if content_end is None and back_matter_start is not None:
         # Last printed body page = page before indexes (may be blank).
         content_end = back_matter_start - 1
+    header_end = doc.page_count
+    if content_end is not None:
+        header_end = min(header_end, content_start + content_end - 1)
+    headers = detect_running_headers(
+        doc, start_idx, content_end_idx=header_end
+    )
 
     end_idx = doc.page_count
     if max_pages is not None:
@@ -3159,6 +3354,8 @@ def extract_pdf(
         if _json_has_bold_runs(payload):
             segments_with_bold += 1
         json_segments.append(payload)
+
+    apply_item_corrections(json_segments, pdf_path.stem)
 
     # Lean schema v1 document. Extract stats are ephemeral for CLI/manifest
     # and stripped by normalize_document / save_segments.

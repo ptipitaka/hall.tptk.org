@@ -455,12 +455,30 @@ class CsRomanSegmentsTests(unittest.TestCase):
 
     def test_01vin01_layout_doc_comments_are_readable_thai(self) -> None:
         root = Path(__file__).resolve().parents[1]
-        path = root / "output" / "01Vin01.layout.json"
+        path = root / "volumes" / "01Vin01" / "data" / "layout.json"
         data = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(doc_comment_encoding_errors(data), [])
         overview = " ".join(data["//"])
         self.assertIn("ปรับจังหวะ", overview)
         self.assertIn("บังคับขึ้นหน้า", overview)
+
+    def test_rewrite_layout_origin_comments_points_at_git_copy(self) -> None:
+        from cs_roman_segments import rewrite_layout_origin_comments
+
+        data = {
+            "source": "books/cs-roman/source/01Vin01.pdf",
+            "//": [
+                "layout.json — ปรับจังหวะการพิมพ์ / บังคับขึ้นหน้า (ไม่ใช่เนื้อหา)",
+                "ไฟล์ต้นทาง (แก้ที่นี่): books/cs-roman/output/01Vin01.layout.json",
+                "sync คัดลอกมาที่ volumes/01Vin01/data/layout.json",
+                "รายละเอียดเต็ม: books/cs-roman/SCHEMA.md",
+            ],
+        }
+        updated = rewrite_layout_origin_comments(data)
+        overview = "\n".join(updated["//"])
+        self.assertIn("volumes/01Vin01/data/layout.json", overview)
+        self.assertNotIn("แก้ที่นี่): books/cs-roman/output/", overview)
+        self.assertIn("SCHEMA.md", overview)
 
     def test_split_roundtrip_files(self) -> None:
         doc = {

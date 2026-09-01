@@ -27913,7 +27913,7 @@
           "value": "อิตฺถิวิมาน 4. มญฺชิฏฺฐกวคฺค",
           "runs": [
             {
-              "value": "อิตฺถิวิมาน 4.{{sp1}} มญฺชิฏฺฐกวคฺค",
+              "value": "อิตฺถิวิมาน 4. มญฺชิฏฺฐกวคฺค",
               "bold": true
             }
           ]
@@ -42440,7 +42440,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} ทุติยกรณียวิมานวตฺถุ",
+              "value": "7. ทุติยกรณียวิมานวตฺถุ",
               "bold": true
             }
           ]
@@ -49790,7 +49790,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} ผลทายกวิมานวตฺถุ",
+              "value": "3. ผลทายกวิมานวตฺถุ",
               "bold": true
             }
           ]
@@ -50548,7 +50548,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} ภิกฺขาทายกวิมานวตฺถุ",
+              "value": "6. ภิกฺขาทายกวิมานวตฺถุ",
               "bold": true
             }
           ]
@@ -51363,7 +51363,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} ทุติยกุณฺฑลีวิมานตฺถุ",
+              "value": "9. ทุติยกุณฺฑลีวิมานตฺถุ",
               "bold": true
             }
           ]
@@ -52143,7 +52143,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} สุนิกฺขิตฺตวคฺค",
+              "value": "7. สุนิกฺขิตฺตวคฺค",
               "bold": true
             }
           ]
@@ -63885,31 +63885,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Khettūpamapetavatthu paṭhamaṃ.",
-          "runs": [
-            {
-              "value": "Khettūpamapetavatthu",
-              "bold": true
-            },
-            {
-              "value": " paṭhamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Khettūpamapetavatthu paṭhamaṃ."
         },
         {
           "script": "thai",
-          "value": "เขตฺตูปมเปตวตฺถุ ปฐมํ.",
-          "runs": [
-            {
-              "value": "เขตฺตูปมเปตวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " ปฐมํ.",
-              "bold": false
-            }
-          ]
+          "value": "เขตฺตูปมเปตวตฺถุ ปฐมํ."
         }
       ],
       "source_layout": "center"
@@ -64334,31 +64314,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pūtimukhapetavatthu tatiyaṃ.",
-          "runs": [
-            {
-              "value": "Pūtimukhapetavatthu",
-              "bold": true
-            },
-            {
-              "value": " tatiyaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Pūtimukhapetavatthu tatiyaṃ."
         },
         {
           "script": "thai",
-          "value": "ปูติมุขเปตวตฺถุ ตติยํ.",
-          "runs": [
-            {
-              "value": "ปูติมุขเปตวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " ตติยํ.",
-              "bold": false
-            }
-          ]
+          "value": "ปูติมุขเปตวตฺถุ ตติยํ."
         }
       ],
       "source_layout": "center"
@@ -68006,31 +67966,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Mahāpesakārapetivatthu navamaṃ.",
-          "runs": [
-            {
-              "value": "Mahāpesakārapetivatthu",
-              "bold": true
-            },
-            {
-              "value": " navamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Mahāpesakārapetivatthu navamaṃ."
         },
         {
           "script": "thai",
-          "value": "มหาเปสการเปติวตฺถุ นวมํ.",
-          "runs": [
-            {
-              "value": "มหาเปสการเปติวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " นวมํ.",
-              "bold": false
-            }
-          ]
+          "value": "มหาเปสการเปติวตฺถุ นวมํ."
         }
       ],
       "source_layout": "center"
@@ -100030,31 +99970,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kūṭavinicchayikapetavatthu navamaṃ.",
-          "runs": [
-            {
-              "value": "Kūṭavinicchayikapetavatthu",
-              "bold": true
-            },
-            {
-              "value": " navamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Kūṭavinicchayikapetavatthu navamaṃ."
         },
         {
           "script": "thai",
-          "value": "กูฏวินิจฺฉยิกเปตวตฺถุ นวมํ.",
-          "runs": [
-            {
-              "value": "กูฏวินิจฺฉยิกเปตวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " นวมํ.",
-              "bold": false
-            }
-          ]
+          "value": "กูฏวินิจฺฉยิกเปตวตฺถุ นวมํ."
         }
       ],
       "source_layout": "center"
@@ -119694,31 +119614,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Gūthakhādakapetivatthu navamaṃ.",
-          "runs": [
-            {
-              "value": "Gūthakhādakapetivatthu",
-              "bold": true
-            },
-            {
-              "value": " navamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Gūthakhādakapetivatthu navamaṃ."
         },
         {
           "script": "thai",
-          "value": "คูถขาทกเปติวตฺถุ นวมํ.",
-          "runs": [
-            {
-              "value": "คูถขาทกเปติวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " นวมํ.",
-              "bold": false
-            }
-          ]
+          "value": "คูถขาทกเปติวตฺถุ นวมํ."
         }
       ],
       "source_layout": "center"
@@ -119751,7 +119651,7 @@
               "bold": false
             },
             {
-              "value": "10.{{sp1}} คณเปตวตฺถุ",
+              "value": "10. คณเปตวตฺถุ",
               "bold": true
             }
           ]
@@ -120492,31 +120392,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Gaṇapetavatthu dasamaṃ.",
-          "runs": [
-            {
-              "value": "Gaṇapetavatthu",
-              "bold": true
-            },
-            {
-              "value": " dasamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Gaṇapetavatthu dasamaṃ."
         },
         {
           "script": "thai",
-          "value": "คณเปตวตฺถุ ทสมํ.",
-          "runs": [
-            {
-              "value": "คณเปตวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " ทสมํ.",
-              "bold": false
-            }
-          ]
+          "value": "คณเปตวตฺถุ ทสมํ."
         }
       ],
       "source_layout": "center"
@@ -120791,31 +120671,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pāṭaliputtapetavatthu ekādasamaṃ.",
-          "runs": [
-            {
-              "value": "Pāṭaliputtapetavatthu",
-              "bold": true
-            },
-            {
-              "value": " ekādasamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Pāṭaliputtapetavatthu ekādasamaṃ."
         },
         {
           "script": "thai",
-          "value": "ปาฏลิปุตฺตเปตวตฺถุ เอกาทสมํ.",
-          "runs": [
-            {
-              "value": "ปาฏลิปุตฺตเปตวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " เอกาทสมํ.",
-              "bold": false
-            }
-          ]
+          "value": "ปาฏลิปุตฺตเปตวตฺถุ เอกาทสมํ."
         }
       ],
       "source_layout": "center"
@@ -121244,31 +121104,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Akkharukkhapetavatthu terasamaṃ.",
-          "runs": [
-            {
-              "value": "Akkharukkhapetavatthu",
-              "bold": true
-            },
-            {
-              "value": " terasamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Akkharukkhapetavatthu terasamaṃ."
         },
         {
           "script": "thai",
-          "value": "อกฺขรุกฺขเปตวตฺถุ เตรสมํ.",
-          "runs": [
-            {
-              "value": "อกฺขรุกฺขเปตวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " เตรสมํ.",
-              "bold": false
-            }
-          ]
+          "value": "อกฺขรุกฺขเปตวตฺถุ เตรสมํ."
         }
       ],
       "source_layout": "center"
@@ -121716,31 +121556,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Seṭṭhiputtapetavatthu pannarasamaṃ.",
-          "runs": [
-            {
-              "value": "Seṭṭhiputtapetavatthu",
-              "bold": true
-            },
-            {
-              "value": " pannarasamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Seṭṭhiputtapetavatthu pannarasamaṃ."
         },
         {
           "script": "thai",
-          "value": "เสฏฺฐิปุตฺตเปตวตฺถุ ปนฺนรสมํ.",
-          "runs": [
-            {
-              "value": "เสฏฺฐิปุตฺตเปตวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " ปนฺนรสมํ.",
-              "bold": false
-            }
-          ]
+          "value": "เสฏฺฐิปุตฺตเปตวตฺถุ ปนฺนรสมํ."
         }
       ],
       "source_layout": "center"
@@ -122380,31 +122200,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Saṭṭhikūṭapetavatthu soḷasamaṃ.",
-          "runs": [
-            {
-              "value": "Saṭṭhikūṭapetavatthu",
-              "bold": true
-            },
-            {
-              "value": " soḷasamaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Saṭṭhikūṭapetavatthu soḷasamaṃ."
         },
         {
           "script": "thai",
-          "value": "สฏฺฐิกูฏเปตวตฺถุ โสฬสมํ.",
-          "runs": [
-            {
-              "value": "สฏฺฐิกูฏเปตวตฺถุ",
-              "bold": true
-            },
-            {
-              "value": " โสฬสมํ.",
-              "bold": false
-            }
-          ]
+          "value": "สฏฺฐิกูฏเปตวตฺถุ โสฬสมํ."
         }
       ],
       "source_layout": "center"
@@ -122705,11 +122505,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Petavatthupāḷi niṭṭhitā."
+          "value": "Petavatthupāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Petavatthupāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "เปตวตฺถุปาฬิ นิฏฺฐิตา."
+          "value": "เปตวตฺถุปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "เปตวตฺถุปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -123178,7 +122990,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} มหาโกฏฺฐิกตฺเถรคาถา",
+              "value": "2. มหาโกฏฺฐิกตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -123584,7 +123396,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} สีตวนิยตฺเถรคาถา",
+              "value": "6. สีตวนิยตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -124005,7 +123817,7 @@
               "bold": false
             },
             {
-              "value": "10.{{sp1}} ปุณฺณมาสตฺเถรคาถา",
+              "value": "10. ปุณฺณมาสตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -124517,7 +124329,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} วนวจฺฉตฺเถรคาถา",
+              "value": "3. วนวจฺฉตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -125122,7 +124934,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} สิงฺคาลปิตุตฺเถรคาถา",
+              "value": "8. สิงฺคาลปิตุตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -125756,7 +125568,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} จิตฺตกตฺเถรคาถา",
+              "value": "2. จิตฺตกตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -126312,7 +126124,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} โลมสกงฺคิยตฺเถรคาถา",
+              "value": "7. โลมสกงฺคิยตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -126868,7 +126680,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} จตุตฺถวคฺค",
+              "value": "4. จตุตฺถวคฺค",
               "bold": true
             }
           ]
@@ -127467,7 +127279,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} กุมาปุตฺตตฺเถรคาถา",
+              "value": "6. กุมาปุตฺตตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -128709,7 +128521,7 @@
               "bold": false
             },
             {
-              "value": "5.{{sp1}} รมณียวิหาริตฺเถรคาถา",
+              "value": "5. รมณียวิหาริตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -129266,7 +129078,7 @@
               "bold": false
             },
             {
-              "value": "10.{{sp1}} วิมลตฺเถรคาถา",
+              "value": "10. วิมลตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -129861,7 +129673,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} อุตฺติยตฺเถรคาถา",
+              "value": "4. อุตฺติยตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -130411,7 +130223,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} โกสลวิหาริตฺเถรคาถา",
+              "value": "9. โกสลวิหาริตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -130987,7 +130799,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} ปกฺขตฺเถรคาถา",
+              "value": "3. ปกฺขตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -131665,7 +131477,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} ฉนฺนตฺเถรคาถา",
+              "value": "9. ฉนฺนตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -132164,7 +131976,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} อาตุมตฺเถรคาถา",
+              "value": "2. อาตุมตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -132717,7 +132529,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} หตฺถาโรหปุตฺตตฺเถรคาถา",
+              "value": "7. หตฺถาโรหปุตฺตตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -133279,7 +133091,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} นวมวคฺค",
+              "value": "9. นวมวคฺค",
               "bold": true
             }
           ]
@@ -133945,7 +133757,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} ปวิฏฺฐตฺเถรคาถา",
+              "value": "7. ปวิฏฺฐตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -134632,7 +134444,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} วิชยตฺเถรคาถา",
+              "value": "2. วิชยตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -135330,7 +135142,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} อภยตฺเถรคาถา",
+              "value": "8. อภยตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -136003,7 +135815,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} เสตุจฺฉตฺเถรคาถา",
+              "value": "2. เสตุจฺฉตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -136537,7 +136349,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} ธมฺมสวตฺเถรคาถา",
+              "value": "7. ธมฺมสวตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -137124,7 +136936,7 @@
               "bold": false
             },
             {
-              "value": "12.{{sp1}} ทฺวาทสมวคฺค",
+              "value": "12. ทฺวาทสมวคฺค",
               "bold": true
             }
           ]
@@ -137694,7 +137506,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} ปาราปริยตฺเถรคาถา",
+              "value": "6. ปาราปริยตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -139067,7 +138879,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} คงฺคาตีริยตฺเถรคาถา",
+              "value": "4. คงฺคาตีริยตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -139755,7 +139567,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} สุราธตฺเถรคาถา",
+              "value": "8. สุราธตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -140403,7 +140215,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} ทุติยวคฺค",
+              "value": "2. ทุติยวคฺค",
               "bold": true
             }
           ]
@@ -141720,7 +141532,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} กิมิลตฺเถรคาถา",
+              "value": "8. กิมิลตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -142373,7 +142185,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} ตติยวคฺค",
+              "value": "3. ตติยวคฺค",
               "bold": true
             }
           ]
@@ -143088,7 +142900,7 @@
               "bold": false
             },
             {
-              "value": "5.{{sp1}} วีตโสกตฺเถรคาถา",
+              "value": "5. วีตโสกตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -143772,7 +143584,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} ภารทฺวาชตฺเถรคาถา",
+              "value": "9. ภารทฺวาชตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -144469,7 +144281,7 @@
               "bold": false
             },
             {
-              "value": "2.{{sp1}} สิวกตฺเถรคาถา",
+              "value": "2. สิวกตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -145039,7 +144851,7 @@
               "bold": false
             },
             {
-              "value": "5.{{sp1}} สมฺพุลกจฺจานตฺเถรคาถา",
+              "value": "5. สมฺพุลกจฺจานตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -145633,7 +145445,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} นิสภตฺเถรคาถา",
+              "value": "8. นิสภตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -153753,7 +153565,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} เสนกตฺเถรคาถา",
+              "value": "6. เสนกตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -158998,7 +158810,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} วิชิตเสนตฺเถรคาถา",
+              "value": "9. วิชิตเสนตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -159777,7 +159589,7 @@
               "bold": false
             },
             {
-              "value": "11.{{sp1}} โสณกุฏิกณฺณตฺเถรคาถา",
+              "value": "11. โสณกุฏิกณฺณตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -162866,7 +162678,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} สปฺปทาสตฺเถรคาถา",
+              "value": "6. สปฺปทาสตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -164252,7 +164064,7 @@
               "bold": false
             },
             {
-              "value": "9.{{sp1}} ปุโรหิตปุตฺตเชนฺตตฺเถรคาถา",
+              "value": "9. ปุโรหิตปุตฺตเชนฺตตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -165115,7 +164927,7 @@
               "bold": false
             },
             {
-              "value": "11.{{sp1}} นฺหาตกมุนิตฺเถรคาถา",
+              "value": "11. นฺหาตกมุนิตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -165994,7 +165806,7 @@
               "bold": false
             },
             {
-              "value": "13.{{sp1}} สิริมณฺฑตฺเถรคาถา",
+              "value": "13. สิริมณฺฑตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -168537,7 +168349,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} โสปากตฺเถรคาถา",
+              "value": "4. โสปากตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -191744,7 +191556,7 @@
               "bold": false
             },
             {
-              "value": "5.{{sp1}} มาลุกฺยปุตฺตตฺเถรคาถา",
+              "value": "5. มาลุกฺยปุตฺตตฺเถรคาถา",
               "bold": true
             }
           ]
@@ -225352,7 +225164,7 @@
               "bold": false
             },
             {
-              "value": "5.{{sp1}} อญฺญตราติสฺสาเถรีคาถา",
+              "value": "5. อญฺญตราติสฺสาเถรีคาถา",
               "bold": true
             }
           ]
@@ -225978,7 +225790,7 @@
               "bold": false
             },
             {
-              "value": "11.{{sp1}} มุตฺตาเถรีคาถา",
+              "value": "11. มุตฺตาเถรีคาถา",
               "bold": true
             }
           ]
@@ -226664,7 +226476,7 @@
               "bold": false
             },
             {
-              "value": "17.{{sp1}} ธมฺมาเถรีคาถา",
+              "value": "17. ธมฺมาเถรีคาถา",
               "bold": true
             }
           ]
@@ -231885,7 +231697,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} สีหาเถรีคาถา",
+              "value": "3. สีหาเถรีคาถา",
               "bold": true
             }
           ]

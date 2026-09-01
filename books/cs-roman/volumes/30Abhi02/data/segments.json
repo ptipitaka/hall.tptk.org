@@ -9299,31 +9299,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Suttantabhājanīyaṃ.",
-          "runs": [
-            {
-              "value": "Suttantabhājanīya",
-              "bold": true
-            },
-            {
-              "value": "ṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Suttantabhājanīyaṃ."
         },
         {
           "script": "thai",
-          "value": "สุตฺตนฺตภาชนียํ.",
-          "runs": [
-            {
-              "value": "สุตฺตนฺตภาชนีย",
-              "bold": true
-            },
-            {
-              "value": "ํ.",
-              "bold": false
-            }
-          ]
+          "value": "สุตฺตนฺตภาชนียํ."
         }
       ],
       "source_layout": "center",
@@ -11586,7 +11566,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} ติก",
+              "value": "1. ติก",
               "bold": true
             }
           ]
@@ -14318,7 +14298,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} ติก",
+              "value": "1. ติก",
               "bold": true
             }
           ]
@@ -22675,11 +22655,31 @@
       "text": [
         {
           "script": "roman",
-          "value": "ñāṇasampayuttaṃ sasaṅkhārena -pa- upekkhāsahagataṃ ñāṇavippayuttaṃ -pa- upekkhāsahagataṃ ñāṇavippayuttaṃ sasaṅkhārena rūpārammaṇaṃ vā -pa- dhammarammaṇaṃ vā yaṃ yaṃ vā panārabbha, tasmiṃ samaye avijjāpaccayā saṅkhāro, saṅkhārapaccayā viññāṇaṃ, viññāṇapaccayā nāmaṃ, nāmapaccayā chaṭṭhāyatanaṃ, chaṭṭhāyatanapaccayā phasso, phassapaccayā vedanā, vedanāpaccayā pasādo, pasādapaccayā adhimokkho, adhimokkhapaccayā bhavo, bhavapaccayā jāti, jātipaccayā jarāmaraṇaṃ, evametassa kevalassa dukkhakkhandhassa samudayo hoti."
+          "value": "ñāṇasampayuttaṃ sasaṅkhārena -pa- upekkhāsahagataṃ ñāṇavippayuttaṃ -pa- upekkhāsahagataṃ ñāṇavippayuttaṃ sasaṅkhārena rūpārammaṇaṃ vā -pa- dhammarammaṇaṃ vā yaṃ yaṃ vā panārabbha, tasmiṃ samaye avijjāpaccayā saṅkhāro, saṅkhārapaccayā viññāṇaṃ, viññāṇapaccayā nāmaṃ, nāmapaccayā chaṭṭhāyatanaṃ, chaṭṭhāyatanapaccayā phasso, phassapaccayā vedanā, vedanāpaccayā pasādo, pasādapaccayā adhimokkho, adhimokkhapaccayā bhavo, bhavapaccayā jāti, jātipaccayā jarāmaraṇaṃ, evametassa kevalassa dukkhakkhandhassa samudayo hoti.",
+          "runs": [
+            {
+              "value": "ñāṇasampayuttaṃ sasaṅkhārena -pa- upekkhāsahagataṃ ñāṇavippayuttaṃ -pa- upekkhāsahagataṃ ñāṇavippayuttaṃ sasaṅkhārena rūpārammaṇaṃ vā -pa- dhammarammaṇaṃ vā yaṃ yaṃ vā panārabbha, tasmiṃ samaye avijjāpaccayā saṅkhāro, saṅkhārapaccayā viññāṇaṃ, viññāṇapaccayā nāmaṃ, nāmapaccayā chaṭṭhāyatanaṃ, chaṭṭhāyatanapaccayā phasso, phassapaccayā vedanā, vedanāpaccayā pasādo, pasādapaccayā adhimokkho, adhimokkhapaccayā bhavo, bhavapaccayā jāti, jātipaccayā jarāmaraṇaṃ, ",
+              "bold": false
+            },
+            {
+              "value": "evametassa kevalassa dukkhakkhandhassa samudayo hoti.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ญาณสมฺปยุตฺตํ สสงฺขาเรน ฯเปฯ อุเปกฺขาสหคตํ ญาณวิปฺปยุตฺตํ ฯเปฯ อุเปกฺขาสหคตํ ญาณวิปฺปยุตฺตํ สสงฺขาเรน รูปารมฺมณํ วา ฯเปฯ ธมฺมรมฺมณํ วา ยํ ยํ วา ปนารพฺภ, ตสฺมิํ สมเย อวิชฺชาปจฺจยา สงฺขาโร, สงฺขารปจฺจยา วิญฺญาณํ, วิญฺญาณปจฺจยา นามํ, นามปจฺจยา ฉฏฺฐายตนํ, ฉฏฺฐายตนปจฺจยา ผสฺโส, ผสฺสปจฺจยา เวทนา, เวทนาปจฺจยา ปสาโท, ปสาทปจฺจยา อธิโมกฺโข, อธิโมกฺขปจฺจยา ภโว, ภวปจฺจยา ชาติ, ชาติปจฺจยา ชรามรณํ, เอวเมตสฺส เกวลสฺส ทุกฺขกฺขนฺธสฺส สมุทโย โหติ."
+          "value": "ญาณสมฺปยุตฺตํ สสงฺขาเรน ฯเปฯ อุเปกฺขาสหคตํ ญาณวิปฺปยุตฺตํ ฯเปฯ อุเปกฺขาสหคตํ ญาณวิปฺปยุตฺตํ สสงฺขาเรน รูปารมฺมณํ วา ฯเปฯ ธมฺมรมฺมณํ วา ยํ ยํ วา ปนารพฺภ, ตสฺมิํ สมเย อวิชฺชาปจฺจยา สงฺขาโร, สงฺขารปจฺจยา วิญฺญาณํ, วิญฺญาณปจฺจยา นามํ, นามปจฺจยา ฉฏฺฐายตนํ, ฉฏฺฐายตนปจฺจยา ผสฺโส, ผสฺสปจฺจยา เวทนา, เวทนาปจฺจยา ปสาโท, ปสาทปจฺจยา อธิโมกฺโข, อธิโมกฺขปจฺจยา ภโว, ภวปจฺจยา ชาติ, ชาติปจฺจยา ชรามรณํ, เอวเมตสฺส เกวลสฺส ทุกฺขกฺขนฺธสฺส สมุทโย โหติ.",
+          "runs": [
+            {
+              "value": "ญาณสมฺปยุตฺตํ สสงฺขาเรน ฯเปฯ อุเปกฺขาสหคตํ ญาณวิปฺปยุตฺตํ ฯเปฯ อุเปกฺขาสหคตํ ญาณวิปฺปยุตฺตํ สสงฺขาเรน รูปารมฺมณํ วา ฯเปฯ ธมฺมรมฺมณํ วา ยํ ยํ วา ปนารพฺภ, ตสฺมิํ สมเย อวิชฺชาปจฺจยา สงฺขาโร, สงฺขารปจฺจยา วิญฺญาณํ, วิญฺญาณปจฺจยา นามํ, นามปจฺจยา ฉฏฺฐายตนํ, ฉฏฺฐายตนปจฺจยา ผสฺโส, ผสฺสปจฺจยา เวทนา, เวทนาปจฺจยา ปสาโท, ปสาทปจฺจยา อธิโมกฺโข, อธิโมกฺขปจฺจยา ภโว, ภวปจฺจยา ชาติ, ชาติปจฺจยา ชรามรณํ, ",
+              "bold": false
+            },
+            {
+              "value": "เอวเมตสฺส เกวลสฺส ทุกฺขกฺขนฺธสฺส สมุทโย โหติ.",
+              "bold": true
+            }
+          ]
         }
       ]
     },
@@ -23025,7 +23025,7 @@
               "bold": false
             },
             {
-              "value": "14.{{sp1}} อกุสลมูลกวิปากนิทฺเทส",
+              "value": "14. อกุสลมูลกวิปากนิทฺเทส",
               "bold": true
             }
           ]
@@ -24629,11 +24629,79 @@
       "text": [
         {
           "script": "roman",
-          "value": "No yogā -pa-.{{sp1}} No nīvaraṇā -pa-.{{sp1}} No parāmāsā -pa- sārammaṇā, no cittā, cetasikā, cittasampayuttā, cittasaṃsaṭṭhā, cittasamuṭṭhānā, cittasahabhuno, cittānuparivattino, cittasaṃsaṭṭhasamuṭṭhānā, cittasaṃsaṭṭhasamuṭṭhānasahabhuno, cittasaṃsaṭṭhasamuṭṭhānānuparivattino, bāhirā.{{sp1}} No upādā, anupādinnā, no upādānā -pa- no kilesā -pa- na dassanena pahātabbā, na bhāvanāya pahātabbā.{{sp1}} Na dassanena pahātabbahetukā, na bhāvanāya pahātabbahetukā."
+          "value": "No yogā -pa-.{{sp1}} No nīvaraṇā -pa-.{{sp1}} No parāmāsā -pa- sārammaṇā, no cittā, cetasikā, cittasampayuttā, cittasaṃsaṭṭhā, cittasamuṭṭhānā, cittasahabhuno, cittānuparivattino, cittasaṃsaṭṭhasamuṭṭhānā, cittasaṃsaṭṭhasamuṭṭhānasahabhuno, cittasaṃsaṭṭhasamuṭṭhānānuparivattino, bāhirā.{{sp1}} No upādā, anupādinnā, no upādānā -pa- no kilesā -pa- na dassanena pahātabbā, na bhāvanāya pahātabbā.{{sp1}} Na dassanena pahātabbahetukā, na bhāvanāya pahātabbahetukā.",
+          "runs": [
+            {
+              "value": "No yogā -pa-.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " No nīvaraṇā -pa-.",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}}",
+              "bold": false
+            },
+            {
+              "value": " No parāmāsā -pa- sārammaṇā, no cittā,",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "cetasikā, cittasampayuttā, cittasaṃsaṭṭhā, cittasamuṭṭhānā, cittasahabhuno,",
+              "bold": true
+            },
+            {
+              "value": " cittānuparivattino, cittasaṃsaṭṭhasamuṭṭhānā, cittasaṃsaṭṭhasamuṭṭhānasahabhuno, cittasaṃsaṭṭhasamuṭṭhānānuparivattino, bāhirā.{{sp1}} No upādā, anupādinnā, no upādānā -pa- no kilesā -pa- na dassanena pahātabbā, na bhāvanāya pahātabbā.{{sp1}} Na dassanena pahātabbahetukā, na bhāvanāya pahātabbahetukā.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "โน โยคา ฯเปฯ.{{sp1}} โน นีวรณา ฯเปฯ.{{sp1}} โน ปรามาสา ฯเปฯ สารมฺมณา, โน จิตฺตา, เจตสิกา, จิตฺตสมฺปยุตฺตา, จิตฺตสํสฏฺฐา, จิตฺตสมุฏฺฐานา, จิตฺตสหภุโน, จิตฺตานุปริวตฺติโน, จิตฺตสํสฏฺฐสมุฏฺฐานา, จิตฺตสํสฏฺฐสมุฏฺฐานสหภุโน, จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติโน, พาหิรา.{{sp1}} โน อุปาทา, อนุปาทินฺนา, โน อุปาทานา ฯเปฯ โน กิเลสา ฯเปฯ น ทสฺสเนน ปหาตพฺพา, น ภาวนาย ปหาตพฺพา.{{sp1}} น ทสฺสเนน ปหาตพฺพเหตุกา, น ภาวนาย ปหาตพฺพเหตุกา."
+          "value": "โน โยคา ฯเปฯ.{{sp1}} โน นีวรณา ฯเปฯ.{{sp1}} โน ปรามาสา ฯเปฯ สารมฺมณา, โน จิตฺตา, เจตสิกา, จิตฺตสมฺปยุตฺตา, จิตฺตสํสฏฺฐา, จิตฺตสมุฏฺฐานา, จิตฺตสหภุโน, จิตฺตานุปริวตฺติโน, จิตฺตสํสฏฺฐสมุฏฺฐานา, จิตฺตสํสฏฺฐสมุฏฺฐานสหภุโน, จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติโน, พาหิรา.{{sp1}} โน อุปาทา, อนุปาทินฺนา, โน อุปาทานา ฯเปฯ โน กิเลสา ฯเปฯ น ทสฺสเนน ปหาตพฺพา, น ภาวนาย ปหาตพฺพา.{{sp1}} น ทสฺสเนน ปหาตพฺพเหตุกา, น ภาวนาย ปหาตพฺพเหตุกา.",
+          "runs": [
+            {
+              "value": "โน โยคา ฯเปฯ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " โน นีวรณา ฯเปฯ.",
+              "bold": true
+            },
+            {
+              "value": "",
+              "bold": false
+            },
+            {
+              "value": " โน ปรามาสา ฯเปฯ สารมฺมณา, โน จิตฺตา,",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "เจตสิกา, จิตฺตสมฺปยุตฺตา, จิตฺตสํสฏฺฐา, จิตฺตสมุฏฺฐานา, จิตฺตสหภุโน,",
+              "bold": true
+            },
+            {
+              "value": " จิตฺตานุปริวตฺติโน, จิตฺตสํสฏฺฐสมุฏฺฐานา, จิตฺตสํสฏฺฐสมุฏฺฐานสหภุโน, จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติโน, พาหิรา. โน อุปาทา, อนุปาทินฺนา, โน อุปาทานา ฯเปฯ โน กิเลสา ฯเปฯ น ทสฺสเนน ปหาตพฺพา, น ภาวนาย ปหาตพฺพา. น ทสฺสเนน ปหาตพฺพเหตุกา, น ภาวนาย ปหาตพฺพเหตุกา.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -25445,7 +25513,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} ปญฺหาปุจฺฉก",
+              "value": "3. ปญฺหาปุจฺฉก",
               "bold": true
             }
           ]
@@ -26608,7 +26676,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} จิตฺติทฺธิปาท",
+              "value": "3. จิตฺติทฺธิปาท",
               "bold": true
             }
           ]
@@ -32588,7 +32656,7 @@
               "bold": false
             },
             {
-              "value": "5.{{sp1}} อรูปาวจรวิปาก",
+              "value": "5. อรูปาวจรวิปาก",
               "bold": true
             }
           ]
@@ -32850,7 +32918,7 @@
               "bold": false
             },
             {
-              "value": "3.{{sp1}} ปญฺหาปุจฺฉก",
+              "value": "3. ปญฺหาปุจฺฉก",
               "bold": true
             }
           ]
@@ -33546,39 +33614,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "“Karuṇāsahagatena cetasā”ti tattha katamā karuṇā, yā sattesu karuṇā karuṇāyanā karuṇāyitattaṃ karuṇācetovimutti, ayaṃ vuccati karuṇā.",
-          "runs": [
-            {
-              "value": "“",
-              "bold": false
-            },
-            {
-              "value": "Karuṇā",
-              "bold": true
-            },
-            {
-              "value": "sahagatena cetasā”ti tattha katamā karuṇā, yā sattesu karuṇā karuṇāyanā karuṇāyitattaṃ karuṇācetovimutti, ayaṃ vuccati karuṇā.",
-              "bold": false
-            }
-          ]
+          "value": "“Karuṇāsahagatena cetasā”ti tattha katamā karuṇā, yā sattesu karuṇā karuṇāyanā karuṇāyitattaṃ karuṇācetovimutti, ayaṃ vuccati karuṇā."
         },
         {
           "script": "thai",
-          "value": "“กรุณาสหคเตน เจตสา”ติ ตตฺถ กตมา กรุณา, ยา สตฺเตสุ กรุณา กรุณายนา กรุณายิตตฺตํ กรุณาเจโตวิมุตฺติ, อยํ วุจฺจติ กรุณา.",
-          "runs": [
-            {
-              "value": "“",
-              "bold": false
-            },
-            {
-              "value": "กรุณา",
-              "bold": true
-            },
-            {
-              "value": "สหคเตน เจตสา”ติ ตตฺถ กตมา กรุณา, ยา สตฺเตสุ กรุณา กรุณายนา กรุณายิตตฺตํ กรุณาเจโตวิมุตฺติ, อยํ วุจฺจติ กรุณา.",
-              "bold": false
-            }
-          ]
+          "value": "“กรุณาสหคเตน เจตสา”ติ ตตฺถ กตมา กรุณา, ยา สตฺเตสุ กรุณา กรุณายนา กรุณายิตตฺตํ กรุณาเจโตวิมุตฺติ, อยํ วุจฺจติ กรุณา."
         }
       ]
     },
@@ -34952,7 +34992,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} ติก",
+              "value": "1. ติก",
               "bold": true
             }
           ]
@@ -35855,7 +35895,7 @@
               "bold": true
             },
             {
-              "value": " จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติโน, พาหิรา, โน อุปาทา, อนุปาทินฺนา, โน อุปาทานา ฯเปฯ.{{sp1}} โน กิเลสา ฯเปฯ.",
+              "value": " จิตฺตสํสฏฺฐสมุฏฺฐานานุปริวตฺติโน, พาหิรา, โน อุปาทา, อนุปาทินฺนา, โน อุปาทานา ฯเปฯ. โน กิเลสา ฯเปฯ.",
               "bold": false
             }
           ]
@@ -42617,7 +42657,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} เอกกนิทฺเทส",
+              "value": "1. เอกกนิทฺเทส",
               "bold": true
             }
           ]
@@ -49285,31 +49325,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kāmadhātuyā kati khandhā, kati āyatanāni, kati dhātuyo, kati saccāni, kati indriyāni, kati hetū, kati āhārā, kati phassā, kati vedanā, kati saññā, kati cetanā, kati cittāni.",
-          "runs": [
-            {
-              "value": "Kāmadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā kati khandhā, kati āyatanāni, kati dhātuyo, kati saccāni, kati indriyāni, kati hetū, kati āhārā, kati phassā, kati vedanā, kati saññā, kati cetanā, kati cittāni.",
-              "bold": false
-            }
-          ]
+          "value": "Kāmadhātuyā kati khandhā, kati āyatanāni, kati dhātuyo, kati saccāni, kati indriyāni, kati hetū, kati āhārā, kati phassā, kati vedanā, kati saññā, kati cetanā, kati cittāni."
         },
         {
           "script": "thai",
-          "value": "กามธาตุยา กติ ขนฺธา, กติ อายตนานิ, กติ ธาตุโย, กติ สจฺจานิ, กติ อินฺทฺริยานิ, กติ เหตู, กติ อาหารา, กติ ผสฺสา, กติ เวทนา, กติ สญฺญา, กติ เจตนา, กติ จิตฺตานิ.",
-          "runs": [
-            {
-              "value": "กามธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา กติ ขนฺธา, กติ อายตนานิ, กติ ธาตุโย, กติ สจฺจานิ, กติ อินฺทฺริยานิ, กติ เหตู, กติ อาหารา, กติ ผสฺสา, กติ เวทนา, กติ สญฺญา, กติ เจตนา, กติ จิตฺตานิ.",
-              "bold": false
-            }
-          ]
+          "value": "กามธาตุยา กติ ขนฺธา, กติ อายตนานิ, กติ ธาตุโย, กติ สจฺจานิ, กติ อินฺทฺริยานิ, กติ เหตู, กติ อาหารา, กติ ผสฺสา, กติ เวทนา, กติ สญฺญา, กติ เจตนา, กติ จิตฺตานิ."
         }
       ]
     },
@@ -49321,31 +49341,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kāmadhātuyā pañcakkhandhā, dvādasāyatanāni, aṭṭhārasa dhātuyo, tiṇi saccāni, bāvīsatindriyāni, nava hetū, cattāro āhārā, satta phassā, satta vedanā, satta saññā, satta cetanā, satta cittāni.",
-          "runs": [
-            {
-              "value": "Kāmadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā pañcakkhandhā, dvādasāyatanāni, aṭṭhārasa dhātuyo, tiṇi saccāni, bāvīsatindriyāni, nava hetū, cattāro āhārā, satta phassā, satta vedanā, satta saññā, satta cetanā, satta cittāni.",
-              "bold": false
-            }
-          ]
+          "value": "Kāmadhātuyā pañcakkhandhā, dvādasāyatanāni, aṭṭhārasa dhātuyo, tiṇi saccāni, bāvīsatindriyāni, nava hetū, cattāro āhārā, satta phassā, satta vedanā, satta saññā, satta cetanā, satta cittāni."
         },
         {
           "script": "thai",
-          "value": "กามธาตุยา ปญฺจกฺขนฺธา, ทฺวาทสายตนานิ, อฏฺฐารส ธาตุโย, ติณิ สจฺจานิ, พาวีสตินฺทฺริยานิ, นว เหตู, จตฺตาโร อาหารา, สตฺต ผสฺสา, สตฺต เวทนา, สตฺต สญฺญา, สตฺต เจตนา, สตฺต จิตฺตานิ.",
-          "runs": [
-            {
-              "value": "กามธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา ปญฺจกฺขนฺธา, ทฺวาทสายตนานิ, อฏฺฐารส ธาตุโย, ติณิ สจฺจานิ, พาวีสตินฺทฺริยานิ, นว เหตู, จตฺตาโร อาหารา, สตฺต ผสฺสา, สตฺต เวทนา, สตฺต สญฺญา, สตฺต เจตนา, สตฺต จิตฺตานิ.",
-              "bold": false
-            }
-          ]
+          "value": "กามธาตุยา ปญฺจกฺขนฺธา, ทฺวาทสายตนานิ, อฏฺฐารส ธาตุโย, ติณิ สจฺจานิ, พาวีสตินฺทฺริยานิ, นว เหตู, จตฺตาโร อาหารา, สตฺต ผสฺสา, สตฺต เวทนา, สตฺต สญฺญา, สตฺต เจตนา, สตฺต จิตฺตานิ."
         }
       ]
     },
@@ -49594,31 +49594,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā kati khandhā, kati āyatanā, kati dhātuyo, kati saccāni, kati indriyāni -pa- kati cittāni.",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā kati khandhā, kati āyatanā, kati dhātuyo, kati saccāni, kati indriyāni -pa- kati cittāni.",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā kati khandhā, kati āyatanā, kati dhātuyo, kati saccāni, kati indriyāni -pa- kati cittāni."
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา กติ ขนฺธา, กติ อายตนา, กติ ธาตุโย, กติ สจฺจานิ, กติ อินฺทฺริยานิ ฯเปฯ กติ จิตฺตานิ.",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา กติ ขนฺธา, กติ อายตนา, กติ ธาตุโย, กติ สจฺจานิ, กติ อินฺทฺริยานิ ฯเปฯ กติ จิตฺตานิ.",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา กติ ขนฺธา, กติ อายตนา, กติ ธาตุโย, กติ สจฺจานิ, กติ อินฺทฺริยานิ ฯเปฯ กติ จิตฺตานิ."
         }
       ]
     },
@@ -49630,31 +49610,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā pañcakkhandhā, cha āyatanāni, nava dhātuyo, tīṇi saccāni, cuddasindriyāni, aṭṭha hetū, tayo āhārā, cattāro phassā, catasso vedanā, catasso saññā, catasso cetanā, cattāri cittāni.",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā pañcakkhandhā, cha āyatanāni, nava dhātuyo, tīṇi saccāni, cuddasindriyāni, aṭṭha hetū, tayo āhārā, cattāro phassā, catasso vedanā, catasso saññā, catasso cetanā, cattāri cittāni.",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā pañcakkhandhā, cha āyatanāni, nava dhātuyo, tīṇi saccāni, cuddasindriyāni, aṭṭha hetū, tayo āhārā, cattāro phassā, catasso vedanā, catasso saññā, catasso cetanā, cattāri cittāni."
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา ปญฺจกฺขนฺธา, ฉ อายตนานิ, นว ธาตุโย, ตีณิ สจฺจานิ, จุทฺทสินฺทฺริยานิ, อฏฺฐ เหตู, ตโย อาหารา, จตฺตาโร ผสฺสา, จตสฺโส เวทนา, จตสฺโส สญฺญา, จตสฺโส เจตนา, จตฺตาริ จิตฺตานิ.",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา ปญฺจกฺขนฺธา, ฉ อายตนานิ, นว ธาตุโย, ตีณิ สจฺจานิ, จุทฺทสินฺทฺริยานิ, อฏฺฐ เหตู, ตโย อาหารา, จตฺตาโร ผสฺสา, จตสฺโส เวทนา, จตสฺโส สญฺญา, จตสฺโส เจตนา, จตฺตาริ จิตฺตานิ.",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา ปญฺจกฺขนฺธา, ฉ อายตนานิ, นว ธาตุโย, ตีณิ สจฺจานิ, จุทฺทสินฺทฺริยานิ, อฏฺฐ เหตู, ตโย อาหารา, จตฺตาโร ผสฺสา, จตสฺโส เวทนา, จตสฺโส สญฺญา, จตสฺโส เจตนา, จตฺตาริ จิตฺตานิ."
         }
       ]
     },
@@ -49889,31 +49849,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Arūpadhātuyā kati khandhā -pa- kati cittāni.",
-          "runs": [
-            {
-              "value": "Arūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā kati khandhā -pa- kati cittāni.",
-              "bold": false
-            }
-          ]
+          "value": "Arūpadhātuyā kati khandhā -pa- kati cittāni."
         },
         {
           "script": "thai",
-          "value": "อรูปธาตุยา กติ ขนฺธา ฯเปฯ กติ จิตฺตานิ.",
-          "runs": [
-            {
-              "value": "อรูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา กติ ขนฺธา ฯเปฯ กติ จิตฺตานิ.",
-              "bold": false
-            }
-          ]
+          "value": "อรูปธาตุยา กติ ขนฺธา ฯเปฯ กติ จิตฺตานิ."
         }
       ]
     },
@@ -49925,31 +49865,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Arūpadhātuyā cattāro khandhā, dve āyatanāni, dve dhātuyo, tīṇi saccāni, ekādasindriyāni, aṭṭha hetū, tayo āhārā, eko phasso, ekā vedanā, ekā saññā, ekā cetanā, ekaṃ cittaṃ.",
-          "runs": [
-            {
-              "value": "Arūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā cattāro khandhā, dve āyatanāni, dve dhātuyo, tīṇi saccāni, ekādasindriyāni, aṭṭha hetū, tayo āhārā, eko phasso, ekā vedanā, ekā saññā, ekā cetanā, ekaṃ cittaṃ.",
-              "bold": false
-            }
-          ]
+          "value": "Arūpadhātuyā cattāro khandhā, dve āyatanāni, dve dhātuyo, tīṇi saccāni, ekādasindriyāni, aṭṭha hetū, tayo āhārā, eko phasso, ekā vedanā, ekā saññā, ekā cetanā, ekaṃ cittaṃ."
         },
         {
           "script": "thai",
-          "value": "อรูปธาตุยา จตฺตาโร ขนฺธา, เทฺว อายตนานิ, เทฺว ธาตุโย, ตีณิ สจฺจานิ, เอกาทสินฺทฺริยานิ, อฏฺฐ เหตู, ตโย อาหารา, เอโก ผสฺโส, เอกา เวทนา, เอกา สญฺญา, เอกา เจตนา, เอกํ จิตฺตํ.",
-          "runs": [
-            {
-              "value": "อรูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา จตฺตาโร ขนฺธา, เทฺว อายตนานิ, เทฺว ธาตุโย, ตีณิ สจฺจานิ, เอกาทสินฺทฺริยานิ, อฏฺฐ เหตู, ตโย อาหารา, เอโก ผสฺโส, เอกา เวทนา, เอกา สญฺญา, เอกา เจตนา, เอกํ จิตฺตํ.",
-              "bold": false
-            }
-          ]
+          "value": "อรูปธาตุยา จตฺตาโร ขนฺธา, เทฺว อายตนานิ, เทฺว ธาตุโย, ตีณิ สจฺจานิ, เอกาทสินฺทฺริยานิ, อฏฺฐ เหตู, ตโย อาหารา, เอโก ผสฺโส, เอกา เวทนา, เอกา สญฺญา, เอกา เจตนา, เอกํ จิตฺตํ."
         }
       ]
     },
@@ -51218,31 +51138,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kāmadhātuyā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti.",
-          "runs": [
-            {
-              "value": "Kāmadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti.",
-              "bold": false
-            }
-          ]
+          "value": "Kāmadhātuyā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti."
         },
         {
           "script": "thai",
-          "value": "กามธาตุยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ.",
-          "runs": [
-            {
-              "value": "กามธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ.",
-              "bold": false
-            }
-          ]
+          "value": "กามธาตุยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ."
         }
       ]
     },
@@ -51254,31 +51154,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Kāmadhātuyā upapattikkhaṇe sabbesaṃ pañcakkhandhā pātubhavanti.{{sp1}} Kassaci ekādasāyatanāni pātubhavanti, kassaci dasāyatanāni pātubhavanti,",
-          "runs": [
-            {
-              "value": "Kāmadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe sabbesaṃ pañcakkhandhā pātubhavanti.{{sp1}} Kassaci ekādasāyatanāni pātubhavanti, kassaci dasāyatanāni pātubhavanti,",
-              "bold": false
-            }
-          ]
+          "value": "Kāmadhātuyā upapattikkhaṇe sabbesaṃ pañcakkhandhā pātubhavanti.{{sp1}} Kassaci ekādasāyatanāni pātubhavanti, kassaci dasāyatanāni pātubhavanti,"
         },
         {
           "script": "thai",
-          "value": "กามธาตุยา อุปปตฺติกฺขเณ สพฺเพสํ ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} กสฺสจิ เอกาทสายตนานิ ปาตุภวนฺติ, กสฺสจิ ทสายตนานิ ปาตุภวนฺติ,",
-          "runs": [
-            {
-              "value": "กามธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ สพฺเพสํ ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} กสฺสจิ เอกาทสายตนานิ ปาตุภวนฺติ, กสฺสจิ ทสายตนานิ ปาตุภวนฺติ,",
-              "bold": false
-            }
-          ]
+          "value": "กามธาตุยา อุปปตฺติกฺขเณ สพฺเพสํ ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} กสฺสจิ เอกาทสายตนานิ ปาตุภวนฺติ, กสฺสจิ ทสายตนานิ ปาตุภวนฺติ,"
         }
       ]
     },
@@ -51857,31 +51737,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti.",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti.",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti."
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ.",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ.",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ."
         }
       ]
     },
@@ -51893,31 +51753,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā upapattikkhaṇe ṭhapetvā asaññasattānaṃ devānaṃ pañcakkhandhā pātubhavanti.{{sp1}} Pañcāyatanāni pātubhavanti.{{sp1}} Pañca dhātuyo pātubhavanti.{{sp1}} Ekaṃ saccaṃ pātubhavati.{{sp1}} Dasindriyāni pātubhavanti.{{sp1}} Tayo hetū pātubhavanti.{{sp1}} Tayo āhārā pātubhavanti.{{sp1}} Eko phasso pātubhavati.{{sp1}} Ekā vedanā.{{sp1}} Ekā saññā.{{sp1}} Ekā cetanā.{{sp1}} Ekaṃ cittaṃ pātubhavati.",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe ṭhapetvā asaññasattānaṃ devānaṃ pañcakkhandhā pātubhavanti.{{sp1}} Pañcāyatanāni pātubhavanti.{{sp1}} Pañca dhātuyo pātubhavanti.{{sp1}} Ekaṃ saccaṃ pātubhavati.{{sp1}} Dasindriyāni pātubhavanti.{{sp1}} Tayo hetū pātubhavanti.{{sp1}} Tayo āhārā pātubhavanti.{{sp1}} Eko phasso pātubhavati.{{sp1}} Ekā vedanā.{{sp1}} Ekā saññā.{{sp1}} Ekā cetanā.{{sp1}} Ekaṃ cittaṃ pātubhavati.",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā upapattikkhaṇe ṭhapetvā asaññasattānaṃ devānaṃ pañcakkhandhā pātubhavanti.{{sp1}} Pañcāyatanāni pātubhavanti.{{sp1}} Pañca dhātuyo pātubhavanti.{{sp1}} Ekaṃ saccaṃ pātubhavati.{{sp1}} Dasindriyāni pātubhavanti.{{sp1}} Tayo hetū pātubhavanti.{{sp1}} Tayo āhārā pātubhavanti.{{sp1}} Eko phasso pātubhavati.{{sp1}} Ekā vedanā.{{sp1}} Ekā saññā.{{sp1}} Ekā cetanā.{{sp1}} Ekaṃ cittaṃ pātubhavati."
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา อุปปตฺติกฺขเณ ฐเปตฺวา อสญฺญสตฺตานํ เทวานํ ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} ปญฺจายตนานิ ปาตุภวนฺติ.{{sp1}} ปญฺจ ธาตุโย ปาตุภวนฺติ.{{sp1}} เอกํ สจฺจํ ปาตุภวติ.{{sp1}} ทสินฺทฺริยานิ ปาตุภวนฺติ.{{sp1}} ตโย เหตู ปาตุภวนฺติ.{{sp1}} ตโย อาหารา ปาตุภวนฺติ.{{sp1}} เอโก ผสฺโส ปาตุภวติ.{{sp1}} เอกา เวทนา.{{sp1}} เอกา สญฺญา.{{sp1}} เอกา เจตนา.{{sp1}} เอกํ จิตฺตํ ปาตุภวติ.",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ ฐเปตฺวา อสญฺญสตฺตานํ เทวานํ ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} ปญฺจายตนานิ ปาตุภวนฺติ.{{sp1}} ปญฺจ ธาตุโย ปาตุภวนฺติ.{{sp1}} เอกํ สจฺจํ ปาตุภวติ.{{sp1}} ทสินฺทฺริยานิ ปาตุภวนฺติ.{{sp1}} ตโย เหตู ปาตุภวนฺติ.{{sp1}} ตโย อาหารา ปาตุภวนฺติ.{{sp1}} เอโก ผสฺโส ปาตุภวติ.{{sp1}} เอกา เวทนา.{{sp1}} เอกา สญฺญา.{{sp1}} เอกา เจตนา.{{sp1}} เอกํ จิตฺตํ ปาตุภวติ.",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา อุปปตฺติกฺขเณ ฐเปตฺวา อสญฺญสตฺตานํ เทวานํ ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} ปญฺจายตนานิ ปาตุภวนฺติ.{{sp1}} ปญฺจ ธาตุโย ปาตุภวนฺติ.{{sp1}} เอกํ สจฺจํ ปาตุภวติ.{{sp1}} ทสินฺทฺริยานิ ปาตุภวนฺติ.{{sp1}} ตโย เหตู ปาตุภวนฺติ.{{sp1}} ตโย อาหารา ปาตุภวนฺติ.{{sp1}} เอโก ผสฺโส ปาตุภวติ.{{sp1}} เอกา เวทนา.{{sp1}} เอกา สญฺญา.{{sp1}} เอกา เจตนา.{{sp1}} เอกํ จิตฺตํ ปาตุภวติ."
         }
       ]
     },
@@ -51929,31 +51769,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā upapattikkhaṇe katame pañcakkhandhā pātubhavanti.{{sp1}} Rūpakkhandho vedanākkhandho saññākkhandho saṅkhārakkhandho viññāṇakkhandho.{{sp1}} Rūpadhātuyā upapattikkhaṇe ime pañcakkhandhā pātubhavanti. (1)",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe katame pañcakkhandhā pātubhavanti.{{sp1}} Rūpakkhandho vedanākkhandho saññākkhandho saṅkhārakkhandho viññāṇakkhandho.{{sp1}} Rūpadhātuyā upapattikkhaṇe ime pañcakkhandhā pātubhavanti. (1)",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā upapattikkhaṇe katame pañcakkhandhā pātubhavanti.{{sp1}} Rūpakkhandho vedanākkhandho saññākkhandho saṅkhārakkhandho viññāṇakkhandho.{{sp1}} Rūpadhātuyā upapattikkhaṇe ime pañcakkhandhā pātubhavanti. (1)"
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตเม ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} รูปกฺขนฺโธ เวทนากฺขนฺโธ สญฺญากฺขนฺโธ สงฺขารกฺขนฺโธ วิญฺญาณกฺขนฺโธ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิเม ปญฺจกฺขนฺธา ปาตุภวนฺติ. (1)",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กตเม ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} รูปกฺขนฺโธ เวทนากฺขนฺโธ สญฺญากฺขนฺโธ สงฺขารกฺขนฺโธ วิญฺญาณกฺขนฺโธ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิเม ปญฺจกฺขนฺธา ปาตุภวนฺติ. (1)",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตเม ปญฺจกฺขนฺธา ปาตุภวนฺติ.{{sp1}} รูปกฺขนฺโธ เวทนากฺขนฺโธ สญฺญากฺขนฺโธ สงฺขารกฺขนฺโธ วิญฺญาณกฺขนฺโธ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิเม ปญฺจกฺขนฺธา ปาตุภวนฺติ. (1)"
         }
       ]
     },
@@ -51965,31 +51785,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā upapattikkhaṇe katamāni pañcāyatanāni pātubhavanti.{{sp1}} Cakkhāyatanaṃ rūpāyatanaṃ sotāyatanaṃ manāyatanaṃ dhammāyatanaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe imāni pañcāyatanāni pātubhavanti. (2)",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe katamāni pañcāyatanāni pātubhavanti.{{sp1}} Cakkhāyatanaṃ rūpāyatanaṃ sotāyatanaṃ manāyatanaṃ dhammāyatanaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe imāni pañcāyatanāni pātubhavanti. (2)",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā upapattikkhaṇe katamāni pañcāyatanāni pātubhavanti.{{sp1}} Cakkhāyatanaṃ rūpāyatanaṃ sotāyatanaṃ manāyatanaṃ dhammāyatanaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe imāni pañcāyatanāni pātubhavanti. (2)"
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตมานิ ปญฺจายตนานิ ปาตุภวนฺติ.{{sp1}} จกฺขายตนํ รูปายตนํ โสตายตนํ มนายตนํ ธมฺมายตนํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมานิ ปญฺจายตนานิ ปาตุภวนฺติ. (2)",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กตมานิ ปญฺจายตนานิ ปาตุภวนฺติ.{{sp1}} จกฺขายตนํ รูปายตนํ โสตายตนํ มนายตนํ ธมฺมายตนํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมานิ ปญฺจายตนานิ ปาตุภวนฺติ. (2)",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตมานิ ปญฺจายตนานิ ปาตุภวนฺติ.{{sp1}} จกฺขายตนํ รูปายตนํ โสตายตนํ มนายตนํ ธมฺมายตนํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมานิ ปญฺจายตนานิ ปาตุภวนฺติ. (2)"
         }
       ]
     },
@@ -52001,31 +51801,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā upapattikkhaṇe katamā pañca dhātuyo pātubhavanti.{{sp1}} Cakkhudhātu rūpadhātu sotadhātu manoviññāṇadhātu dhammadhātu.{{sp1}} Rūpadhātuyā upapattikkhaṇe imā pañca dhātuyo pātubhavanti. (3)",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe katamā pañca dhātuyo pātubhavanti.{{sp1}} Cakkhudhātu rūpadhātu sotadhātu manoviññāṇadhātu dhammadhātu.{{sp1}} Rūpadhātuyā upapattikkhaṇe imā pañca dhātuyo pātubhavanti. (3)",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā upapattikkhaṇe katamā pañca dhātuyo pātubhavanti.{{sp1}} Cakkhudhātu rūpadhātu sotadhātu manoviññāṇadhātu dhammadhātu.{{sp1}} Rūpadhātuyā upapattikkhaṇe imā pañca dhātuyo pātubhavanti. (3)"
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตมา ปญฺจ ธาตุโย ปาตุภวนฺติ.{{sp1}} จกฺขุธาตุ รูปธาตุ โสตธาตุ มโนวิญฺญาณธาตุ ธมฺมธาตุ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมา ปญฺจ ธาตุโย ปาตุภวนฺติ. (3)",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กตมา ปญฺจ ธาตุโย ปาตุภวนฺติ.{{sp1}} จกฺขุธาตุ รูปธาตุ โสตธาตุ มโนวิญฺญาณธาตุ ธมฺมธาตุ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมา ปญฺจ ธาตุโย ปาตุภวนฺติ. (3)",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตมา ปญฺจ ธาตุโย ปาตุภวนฺติ.{{sp1}} จกฺขุธาตุ รูปธาตุ โสตธาตุ มโนวิญฺญาณธาตุ ธมฺมธาตุ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมา ปญฺจ ธาตุโย ปาตุภวนฺติ. (3)"
         }
       ]
     },
@@ -52037,31 +51817,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā upapattikkhaṇe katamaṃ ekaṃ saccaṃ pātubhavati.{{sp1}} Dukkhasaccaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe idaṃ ekaṃ saccaṃ pātubhavati. (4)",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe katamaṃ ekaṃ saccaṃ pātubhavati.{{sp1}} Dukkhasaccaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe idaṃ ekaṃ saccaṃ pātubhavati. (4)",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā upapattikkhaṇe katamaṃ ekaṃ saccaṃ pātubhavati.{{sp1}} Dukkhasaccaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe idaṃ ekaṃ saccaṃ pātubhavati. (4)"
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตมํ เอกํ สจฺจํ ปาตุภวติ.{{sp1}} ทุกฺขสจฺจํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิทํ เอกํ สจฺจํ ปาตุภวติ. (4)",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กตมํ เอกํ สจฺจํ ปาตุภวติ.{{sp1}} ทุกฺขสจฺจํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิทํ เอกํ สจฺจํ ปาตุภวติ. (4)",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตมํ เอกํ สจฺจํ ปาตุภวติ.{{sp1}} ทุกฺขสจฺจํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิทํ เอกํ สจฺจํ ปาตุภวติ. (4)"
         }
       ]
     },
@@ -52073,31 +51833,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā upapattikkhaṇe katamāni dasindriyāni pātubhavanti.{{sp1}} Cakkhundriyaṃ sotindriyaṃ manindriyaṃ jīvitindriyaṃ somanassindriyaṃ vā upekkhindriyaṃ vā saddhindriyaṃ vīriyindriyaṃ satindriyaṃ samādhindriyaṃ paññindriyaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe imāni dasindriyāni pātubhavanti. (5)",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe katamāni dasindriyāni pātubhavanti.{{sp1}} Cakkhundriyaṃ sotindriyaṃ manindriyaṃ jīvitindriyaṃ somanassindriyaṃ vā upekkhindriyaṃ vā saddhindriyaṃ vīriyindriyaṃ satindriyaṃ samādhindriyaṃ paññindriyaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe imāni dasindriyāni pātubhavanti. (5)",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā upapattikkhaṇe katamāni dasindriyāni pātubhavanti.{{sp1}} Cakkhundriyaṃ sotindriyaṃ manindriyaṃ jīvitindriyaṃ somanassindriyaṃ vā upekkhindriyaṃ vā saddhindriyaṃ vīriyindriyaṃ satindriyaṃ samādhindriyaṃ paññindriyaṃ.{{sp1}} Rūpadhātuyā upapattikkhaṇe imāni dasindriyāni pātubhavanti. (5)"
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตมานิ ทสินฺทฺริยานิ ปาตุภวนฺติ.{{sp1}} จกฺขุนฺทฺริยํ โสตินฺทฺริยํ มนินฺทฺริยํ ชีวิตินฺทฺริยํ โสมนสฺสินฺทฺริยํ วา อุเปกฺขินฺทฺริยํ วา สทฺธินฺทฺริยํ วีริยินฺทฺริยํ สตินฺทฺริยํ สมาธินฺทฺริยํ ปญฺญินฺทฺริยํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมานิ ทสินฺทฺริยานิ ปาตุภวนฺติ. (5)",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กตมานิ ทสินฺทฺริยานิ ปาตุภวนฺติ.{{sp1}} จกฺขุนฺทฺริยํ โสตินฺทฺริยํ มนินฺทฺริยํ ชีวิตินฺทฺริยํ โสมนสฺสินฺทฺริยํ วา อุเปกฺขินฺทฺริยํ วา สทฺธินฺทฺริยํ วีริยินฺทฺริยํ สตินฺทฺริยํ สมาธินฺทฺริยํ ปญฺญินฺทฺริยํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมานิ ทสินฺทฺริยานิ ปาตุภวนฺติ. (5)",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตมานิ ทสินฺทฺริยานิ ปาตุภวนฺติ.{{sp1}} จกฺขุนฺทฺริยํ โสตินฺทฺริยํ มนินฺทฺริยํ ชีวิตินฺทฺริยํ โสมนสฺสินฺทฺริยํ วา อุเปกฺขินฺทฺริยํ วา สทฺธินฺทฺริยํ วีริยินฺทฺริยํ สตินฺทฺริยํ สมาธินฺทฺริยํ ปญฺญินฺทฺริยํ.{{sp1}} รูปธาตุยา อุปปตฺติกฺขเณ อิมานิ ทสินฺทฺริยานิ ปาตุภวนฺติ. (5)"
         }
       ]
     },
@@ -52109,31 +51849,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Rūpadhātuyā upapattikkhaṇe katame tayo hetū pātubhavanti.{{sp1}} Alobho vipākahetu adoso vipākahetu amoho",
-          "runs": [
-            {
-              "value": "Rūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe katame tayo hetū pātubhavanti.{{sp1}} Alobho vipākahetu adoso vipākahetu amoho",
-              "bold": false
-            }
-          ]
+          "value": "Rūpadhātuyā upapattikkhaṇe katame tayo hetū pātubhavanti.{{sp1}} Alobho vipākahetu adoso vipākahetu amoho"
         },
         {
           "script": "thai",
-          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตเม ตโย เหตู ปาตุภวนฺติ.{{sp1}} อโลโภ วิปากเหตุ อโทโส วิปากเหตุ อโมโห",
-          "runs": [
-            {
-              "value": "รูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กตเม ตโย เหตู ปาตุภวนฺติ.{{sp1}} อโลโภ วิปากเหตุ อโทโส วิปากเหตุ อโมโห",
-              "bold": false
-            }
-          ]
+          "value": "รูปธาตุยา อุปปตฺติกฺขเณ กตเม ตโย เหตู ปาตุภวนฺติ.{{sp1}} อโลโภ วิปากเหตุ อโทโส วิปากเหตุ อโมโห"
         }
       ]
     },
@@ -52303,31 +52023,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Arūpadhātuyā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti.",
-          "runs": [
-            {
-              "value": "Arūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti.",
-              "bold": false
-            }
-          ]
+          "value": "Arūpadhātuyā upapattikkhaṇe kati khandhā pātubhavanti -pa- kati cittāni pātubhavanti."
         },
         {
           "script": "thai",
-          "value": "อรูปธาตุยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ.",
-          "runs": [
-            {
-              "value": "อรูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ.",
-              "bold": false
-            }
-          ]
+          "value": "อรูปธาตุยา อุปปตฺติกฺขเณ กติ ขนฺธา ปาตุภวนฺติ ฯเปฯ กติ จิตฺตานิ ปาตุภวนฺติ."
         }
       ]
     },
@@ -52339,31 +52039,11 @@
       "text": [
         {
           "script": "roman",
-          "value": "Arūpadhātuyā upapattikkhaṇe cattāro khandhā pātubhavanti, dve āyatanāni pātubhavanti, dve dhātuyo pātubhavanti, ekaṃ saccaṃ pātubhavati, aṭṭhindriyāni pātubhavanti tayo hetū pātubhavanti, tayo āhārā pātubhavanti, eko phasso pātubhavati, ekā vedanā.{{sp1}} Ekā saññā.{{sp1}} Ekā cetanā.{{sp1}} Ekaṃ cittaṃ pātubhavati.",
-          "runs": [
-            {
-              "value": "Arūpadhātu",
-              "bold": true
-            },
-            {
-              "value": "yā upapattikkhaṇe cattāro khandhā pātubhavanti, dve āyatanāni pātubhavanti, dve dhātuyo pātubhavanti, ekaṃ saccaṃ pātubhavati, aṭṭhindriyāni pātubhavanti tayo hetū pātubhavanti, tayo āhārā pātubhavanti, eko phasso pātubhavati, ekā vedanā.{{sp1}} Ekā saññā.{{sp1}} Ekā cetanā.{{sp1}} Ekaṃ cittaṃ pātubhavati.",
-              "bold": false
-            }
-          ]
+          "value": "Arūpadhātuyā upapattikkhaṇe cattāro khandhā pātubhavanti, dve āyatanāni pātubhavanti, dve dhātuyo pātubhavanti, ekaṃ saccaṃ pātubhavati, aṭṭhindriyāni pātubhavanti tayo hetū pātubhavanti, tayo āhārā pātubhavanti, eko phasso pātubhavati, ekā vedanā.{{sp1}} Ekā saññā.{{sp1}} Ekā cetanā.{{sp1}} Ekaṃ cittaṃ pātubhavati."
         },
         {
           "script": "thai",
-          "value": "อรูปธาตุยา อุปปตฺติกฺขเณ จตฺตาโร ขนฺธา ปาตุภวนฺติ, เทฺว อายตนานิ ปาตุภวนฺติ, เทฺว ธาตุโย ปาตุภวนฺติ, เอกํ สจฺจํ ปาตุภวติ, อฏฺฐินฺทฺริยานิ ปาตุภวนฺติ ตโย เหตู ปาตุภวนฺติ, ตโย อาหารา ปาตุภวนฺติ, เอโก ผสฺโส ปาตุภวติ, เอกา เวทนา.{{sp1}} เอกา สญฺญา.{{sp1}} เอกา เจตนา.{{sp1}} เอกํ จิตฺตํ ปาตุภวติ.",
-          "runs": [
-            {
-              "value": "อรูปธาตุ",
-              "bold": true
-            },
-            {
-              "value": "ยา อุปปตฺติกฺขเณ จตฺตาโร ขนฺธา ปาตุภวนฺติ, เทฺว อายตนานิ ปาตุภวนฺติ, เทฺว ธาตุโย ปาตุภวนฺติ, เอกํ สจฺจํ ปาตุภวติ, อฏฺฐินฺทฺริยานิ ปาตุภวนฺติ ตโย เหตู ปาตุภวนฺติ, ตโย อาหารา ปาตุภวนฺติ, เอโก ผสฺโส ปาตุภวติ, เอกา เวทนา.{{sp1}} เอกา สญฺญา.{{sp1}} เอกา เจตนา.{{sp1}} เอกํ จิตฺตํ ปาตุภวติ.",
-              "bold": false
-            }
-          ]
+          "value": "อรูปธาตุยา อุปปตฺติกฺขเณ จตฺตาโร ขนฺธา ปาตุภวนฺติ, เทฺว อายตนานิ ปาตุภวนฺติ, เทฺว ธาตุโย ปาตุภวนฺติ, เอกํ สจฺจํ ปาตุภวติ, อฏฺฐินฺทฺริยานิ ปาตุภวนฺติ ตโย เหตู ปาตุภวนฺติ, ตโย อาหารา ปาตุภวนฺติ, เอโก ผสฺโส ปาตุภวติ, เอกา เวทนา.{{sp1}} เอกา สญฺญา.{{sp1}} เอกา เจตนา.{{sp1}} เอกํ จิตฺตํ ปาตุภวติ."
         }
       ]
     },
@@ -52736,12 +52416,8 @@
           "value": "Uppādakakamma",
           "runs": [
             {
-              "value": "Uppādakakamm",
+              "value": "Uppādakakamma",
               "bold": true
-            },
-            {
-              "value": "a",
-              "bold": false
             }
           ]
         },
@@ -52750,12 +52426,8 @@
           "value": "อุปฺปาทกกมฺม",
           "runs": [
             {
-              "value": "อุปฺปาทกกมฺมฺ",
+              "value": "อุปฺปาทกกมฺม",
               "bold": true
-            },
-            {
-              "value": "อ",
-              "bold": false
             }
           ]
         }

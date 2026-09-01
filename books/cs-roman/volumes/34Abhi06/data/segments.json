@@ -1390,7 +1390,7 @@
           "value": "ปวตฺติ 1. อุปฺปาทวาร",
           "runs": [
             {
-              "value": "ปวตฺติ 1.{{sp1}} อุปฺปาทวาร",
+              "value": "ปวตฺติ 1. อุปฺปาทวาร",
               "bold": true
             }
           ]
@@ -3832,7 +3832,7 @@
           "value": "ปวตฺติ 2. นิโรธวาร",
           "runs": [
             {
-              "value": "ปวตฺติ 2.{{sp1}} นิโรธวาร",
+              "value": "ปวตฺติ 2. นิโรธวาร",
               "bold": true
             }
           ]
@@ -5959,11 +5959,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Pavatti 3. Uppādanirodhavāra"
+          "value": "Pavatti 3. Uppādanirodhavāra",
+          "runs": [
+            {
+              "value": "Pavatti 3. Uppādanirodhavāra",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร"
+          "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร",
+          "runs": [
+            {
+              "value": "ปวตฺติ 3. อุปฺปาทนิโรธวาร",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -7353,7 +7365,7 @@
               "bold": true
             },
             {
-              "value": "อาโร จ นิรุชฺฌิสฺสติ.{{sp1}}{{sp1}}ยสฺส วา ปน วจีสงฺขาโร นิรุชฺฌิสฺสติ ตสฺส กายสงฺขาโร อุปฺปชฺชิตฺถาติ, อามนฺตา.",
+              "value": "อาโร จ นิรุชฺฌิสฺสติ. ยสฺส วา ปน วจีสงฺขาโร นิรุชฺฌิสฺสติ ตสฺส กายสงฺขาโร อุปฺปชฺชิตฺถาติ, อามนฺตา.",
               "bold": false
             }
           ]
@@ -7504,11 +7516,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Saṅkhārayamakapāḷi niṭṭhitā."
+          "value": "Saṅkhārayamakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Saṅkhārayamakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "สงฺขารยมกปาฬิ นิฏฺฐิตา."
+          "value": "สงฺขารยมกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "สงฺขารยมกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -20374,7 +20398,7 @@
               "bold": false
             },
             {
-              "value": "5.{{sp1}} ปหีนวาร",
+              "value": "5. ปหีนวาร",
               "bold": true
             }
           ]
@@ -24104,7 +24128,7 @@
               "bold": false
             },
             {
-              "value": "7.{{sp1}} ธาตุวิสชฺชนาวาร",
+              "value": "7. ธาตุวิสชฺชนาวาร",
               "bold": true
             }
           ]
@@ -24646,11 +24670,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Anusayayamakapāḷi niṭṭhitā."
+          "value": "Anusayayamakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Anusayayamakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "อนุสยยมกปาฬิ นิฏฺฐิตา."
+          "value": "อนุสยยมกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "อนุสยยมกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
@@ -25142,7 +25178,7 @@
               "bold": false
             },
             {
-              "value": "6.{{sp1}} อุปฺปาทนิโรธวาร",
+              "value": "6. อุปฺปาทนิโรธวาร",
               "bold": true
             }
           ]
@@ -25239,11 +25275,39 @@
       "text": [
         {
           "script": "roman",
-          "value": "Yassa cittaṃ uppajjati, tassa cittaṃ na nirujjhati.{{sp1}} Yassa vā pana cittaṃ na nirujjhati, tassa cittaṃ uppajjati.{{sp1}}{{sp1}}Yassa cittaṃ na uppajjati, tassa cittaṃ nirujjhati.{{sp1}} Yassa vā pana cittaṃ nirujjhati, tassa cittaṃ na uppajjati."
+          "value": "Yassa cittaṃ uppajjati, tassa cittaṃ na nirujjhati.{{sp1}} Yassa vā pana cittaṃ na nirujjhati, tassa cittaṃ uppajjati.{{sp1}}{{sp1}}Yassa cittaṃ na uppajjati, tassa cittaṃ nirujjhati.{{sp1}} Yassa vā pana cittaṃ nirujjhati, tassa cittaṃ na uppajjati.",
+          "runs": [
+            {
+              "value": "Yassa cittaṃ uppajjati, tassa cittaṃ na nirujjhati",
+              "bold": false
+            },
+            {
+              "value": ".",
+              "bold": true
+            },
+            {
+              "value": "{{sp1}} Yassa vā pana cittaṃ na nirujjhati, tassa cittaṃ uppajjati.{{sp1}}{{sp1}}Yassa cittaṃ na uppajjati, tassa cittaṃ nirujjhati.{{sp1}} Yassa vā pana cittaṃ nirujjhati, tassa cittaṃ na uppajjati.",
+              "bold": false
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "ยสฺส จิตฺตํ อุปฺปชฺชติ, ตสฺส จิตฺตํ น นิรุชฺฌติ.{{sp1}} ยสฺส วา ปน จิตฺตํ น นิรุชฺฌติ, ตสฺส จิตฺตํ อุปฺปชฺชติ.{{sp1}}{{sp1}}ยสฺส จิตฺตํ น อุปฺปชฺชติ, ตสฺส จิตฺตํ นิรุชฺฌติ.{{sp1}} ยสฺส วา ปน จิตฺตํ นิรุชฺฌติ, ตสฺส จิตฺตํ น อุปฺปชฺชติ."
+          "value": "ยสฺส จิตฺตํ อุปฺปชฺชติ, ตสฺส จิตฺตํ น นิรุชฺฌติ.{{sp1}} ยสฺส วา ปน จิตฺตํ น นิรุชฺฌติ, ตสฺส จิตฺตํ อุปฺปชฺชติ.{{sp1}}{{sp1}}ยสฺส จิตฺตํ น อุปฺปชฺชติ, ตสฺส จิตฺตํ นิรุชฺฌติ.{{sp1}} ยสฺส วา ปน จิตฺตํ นิรุชฺฌติ, ตสฺส จิตฺตํ น อุปฺปชฺชติ.",
+          "runs": [
+            {
+              "value": "ยสฺส จิตฺตํ อุปฺปชฺชติ, ตสฺส จิตฺตํ น นิรุชฺฌติ",
+              "bold": false
+            },
+            {
+              "value": ".",
+              "bold": true
+            },
+            {
+              "value": " ยสฺส วา ปน จิตฺตํ น นิรุชฺฌติ, ตสฺส จิตฺตํ อุปฺปชฺชติ. ยสฺส จิตฺตํ น อุปฺปชฺชติ, ตสฺส จิตฺตํ นิรุชฺฌติ. ยสฺส วา ปน จิตฺตํ นิรุชฺฌติ, ตสฺส จิตฺตํ น อุปฺปชฺชติ.",
+              "bold": false
+            }
+          ]
         }
       ]
     },
@@ -25315,7 +25379,7 @@
               "bold": true
             },
             {
-              "value": "{{sp1}} ยสฺส วา ปน จิตฺตํ อุปฺปนฺนํ, ตสฺส จิตฺตํ อุปฺปชฺชมานํ.{{sp1}}{{sp1}}ยสฺส จิตฺตํ น อุปฺปชฺชมานํ, ตสฺส จิตฺตํ น อุปฺปนฺนํ.{{sp1}} ยสฺส วา ปน จิตฺตํ น อุปฺปนฺนํ, ตสฺส จิตฺตํ น อุปฺปชฺชมานํ.",
+              "value": " ยสฺส วา ปน จิตฺตํ อุปฺปนฺนํ, ตสฺส จิตฺตํ อุปฺปชฺชมานํ. ยสฺส จิตฺตํ น อุปฺปชฺชมานํ, ตสฺส จิตฺตํ น อุปฺปนฺนํ. ยสฺส วา ปน จิตฺตํ น อุปฺปนฺนํ, ตสฺส จิตฺตํ น อุปฺปชฺชมานํ.",
               "bold": false
             }
           ]
@@ -25648,7 +25712,7 @@
               "bold": false
             },
             {
-              "value": "1.{{sp1}} สุทฺธจิตฺตสามญฺญ",
+              "value": "1. สุทฺธจิตฺตสามญฺญ",
               "bold": true
             }
           ]
@@ -26102,7 +26166,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} อุปฺปชฺชมานุปฺปนฺนวาร",
+              "value": "8. อุปฺปชฺชมานุปฺปนฺนวาร",
               "bold": true
             }
           ]
@@ -26651,7 +26715,7 @@
               "bold": false
             },
             {
-              "value": "4.{{sp1}} อุปฺปาทวาร",
+              "value": "4. อุปฺปาทวาร",
               "bold": true
             }
           ]
@@ -28184,7 +28248,7 @@
               "bold": false
             },
             {
-              "value": "8.{{sp1}} อุปฺปชฺชมานุปฺปนฺนวาร",
+              "value": "8. อุปฺปชฺชมานุปฺปนฺนวาร",
               "bold": true
             }
           ]
@@ -28618,7 +28682,7 @@
               "bold": false
             },
             {
-              "value": "14.{{sp1}} อติกฺกนฺตกาลวาร",
+              "value": "14. อติกฺกนฺตกาลวาร",
               "bold": true
             }
           ]
@@ -30359,11 +30423,47 @@
       "text": [
         {
           "script": "roman",
-          "value": "na nirujjhissati tassa taṃ cittaṃ na nirujjhitthāti, atītaṃ cittaṃ na nirujjhissati no ca tassa taṃ cittaṃ na nirujjhittha, bhaṅgakkhaṇe cittaṃ na ceva nirujjhissati na ca nirujjhittha."
+          "value": "na nirujjhissati tassa taṃ cittaṃ na nirujjhitthāti, atītaṃ cittaṃ na nirujjhissati no ca tassa taṃ cittaṃ na nirujjhittha, bhaṅgakkhaṇe cittaṃ na ceva nirujjhissati na ca nirujjhittha.",
+          "runs": [
+            {
+              "value": "na nirujjhissati tassa taṃ cittaṃ na nirujjhitthāti, atītaṃ cittaṃ na ",
+              "bold": false
+            },
+            {
+              "value": "nirujjhissati no ca tassa taṃ cittaṃ na nirujjhittha, bhaṅgakkhaṇe cittaṃ na",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "ceva nirujjhissati na ca nirujjhittha.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "น นิรุชฺฌิสฺสติ ตสฺส ตํ จิตฺตํ น นิรุชฺฌิตฺถาติ, อตีตํ จิตฺตํ น นิรุชฺฌิสฺสติ โน จ ตสฺส ตํ จิตฺตํ น นิรุชฺฌิตฺถ, ภงฺคกฺขเณ จิตฺตํ น เจว นิรุชฺฌิสฺสติ น จ นิรุชฺฌิตฺถ."
+          "value": "น นิรุชฺฌิสฺสติ ตสฺส ตํ จิตฺตํ น นิรุชฺฌิตฺถาติ, อตีตํ จิตฺตํ น นิรุชฺฌิสฺสติ โน จ ตสฺส ตํ จิตฺตํ น นิรุชฺฌิตฺถ, ภงฺคกฺขเณ จิตฺตํ น เจว นิรุชฺฌิสฺสติ น จ นิรุชฺฌิตฺถ.",
+          "runs": [
+            {
+              "value": "น นิรุชฺฌิสฺสติ ตสฺส ตํ จิตฺตํ น นิรุชฺฌิตฺถาติ, อตีตํ จิตฺตํ น ",
+              "bold": false
+            },
+            {
+              "value": "นิรุชฺฌิสฺสติ โน จ ตสฺส ตํ จิตฺตํ น นิรุชฺฌิตฺถ, ภงฺคกฺขเณ จิตฺตํ น",
+              "bold": true
+            },
+            {
+              "value": " ",
+              "bold": false
+            },
+            {
+              "value": "เจว นิรุชฺฌิสฺสติ น จ นิรุชฺฌิตฺถ.",
+              "bold": true
+            }
+          ]
         }
       ]
     },
@@ -30522,11 +30622,23 @@
       "text": [
         {
           "script": "roman",
-          "value": "Cittayamakapāḷi niṭṭhitā."
+          "value": "Cittayamakapāḷi niṭṭhitā.",
+          "runs": [
+            {
+              "value": "Cittayamakapāḷi niṭṭhitā.",
+              "bold": true
+            }
+          ]
         },
         {
           "script": "thai",
-          "value": "จิตฺตยมกปาฬิ นิฏฺฐิตา."
+          "value": "จิตฺตยมกปาฬิ นิฏฺฐิตา.",
+          "runs": [
+            {
+              "value": "จิตฺตยมกปาฬิ นิฏฺฐิตา.",
+              "bold": true
+            }
+          ]
         }
       ],
       "source_layout": "center",
