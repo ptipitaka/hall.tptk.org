@@ -3,7 +3,9 @@
 
 Detects:
   - widow_stub: short non-heading continuation at page head, then a new
-    paragraph (numbered / indented) — classic last-line-of-paragraph alone
+    paragraph (numbered / indented) — classic last-line-of-paragraph alone.
+    Unnumbered ``heading_kind`` titles (keep-with-next at page head) are not
+    widows.
   - closer_stub: short end-of-section formula (นิฏฺฐิตํ / สมตฺตํ / …) alone
     at page head with no prior body of the same paragraph on that page
 
@@ -140,10 +142,15 @@ def is_short_stub(line: Line) -> bool:
     return len(words) <= 6 and line.w <= W_STUB_MAX
 
 
-def looks_like_heading(line: Line) -> bool:
+def looks_like_heading(line: Line, heading_keys: set[str] | None = None) -> bool:
     # Numbered section titles are short but intentional page openers.
     if NEW_PARA_RE.match(line.text) and line.w < 220 and not line.text.rstrip().endswith("."):
         return True
+    if heading_keys:
+        from scan_orphan_headings import norm_key
+
+        if norm_key(line.text) in heading_keys:
+            return True
     return False
 
 
@@ -152,7 +159,9 @@ def is_closer(text: str) -> bool:
     return bool(CLOSER_RE.search(text.strip()))
 
 
-def scan_pdf(pdf_path: Path) -> list[StubHit]:
+def scan_pdf(
+    pdf_path: Path, heading_keys: set[str] | None = None
+) -> list[StubHit]:
     hits: list[StubHit] = []
     doc = fitz.open(pdf_path)
     try:
@@ -165,7 +174,7 @@ def scan_pdf(pdf_path: Path) -> list[StubHit]:
                 continue
             if not is_short_stub(first):
                 continue
-            if looks_like_heading(first):
+            if looks_like_heading(first, heading_keys):
                 continue
 
             nxt = body[1] if len(body) >= 2 else None
@@ -236,6 +245,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--volume", required=True, help="Volume id, e.g. 02Vin02")
     p.add_argument("--pdf", type=Path, default=None, help="Override reading PDF path")
     p.add_argument(
+        "--segments",
+        type=Path,
+        default=None,
+        help="Override segments.json (default: volumes/<id>/data/segments.json)",
+    )
+    p.add_argument(
         "-o",
         "--output",
         type=Path,
@@ -250,7 +265,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"missing PDF: {pdf}", file=sys.stderr)
         return 1
 
-    hits = scan_pdf(pdf)
+    segments = args.segments or vol_dir / "data" / "segments.json"
+    heading_keys: set[str] | None = None
+    if segments.is_file():
+        from scan_orphan_headings import load_headings
+
+        heading_keys = {h.key for h in load_headings(segments)}
+
+    hits = scan_pdf(pdf, heading_keys)
     report = format_report(args.volume, pdf, hits)
     out = args.output
     if out is None:

@@ -163,6 +163,78 @@ class RebindOrphanFootnoteTests(unittest.TestCase):
             "Etthantare pāṭhā Syāmapotthake natthi.",
         )
 
+    def test_binds_glued_star_after_dash(self) -> None:
+        segments = [
+            {
+                "page": 492,
+                "order": 1,
+                "segment_type": "prose",
+                "item": 447,
+                "text": [
+                    {
+                        "script": "roman",
+                        "value": "Bhagavā bhikkhū āmantesi– *cattārome bhikkhave",
+                    }
+                ],
+            },
+            {
+                "page": 492,
+                "order": 2,
+                "segment_type": "note",
+                "flags": ["star"],
+                "text": [{"script": "roman", "value": "Aṃ 1. 362 piṭṭhepi."}],
+                "needs_review": True,
+                "review_reasons": ["orphan_note"],
+            },
+        ]
+        fixed = rebind_orphan_footnote_callouts(segments)
+        self.assertEqual(fixed, 1)
+        self.assertEqual(len(segments), 1)
+        roman = segments[0]["text"][0]["value"]
+        self.assertIn("{{*}}", roman)
+        self.assertEqual(
+            segments[0]["symbol_notes"]["*"], "Aṃ 1. 362 piṭṭhepi."
+        )
+
+    def test_attaches_leftover_page_note_without_callout(self) -> None:
+        segments = [
+            {
+                "page": 177,
+                "order": 1,
+                "segment_type": "prose",
+                "item": 183,
+                "text": [
+                    {
+                        "script": "roman",
+                        "value": "Idha pana bhikkhave bhikkhu sambahulā.",
+                    }
+                ],
+            },
+            {
+                "page": 177,
+                "order": 2,
+                "segment_type": "note",
+                "item": 10,
+                "text": [
+                    {
+                        "script": "roman",
+                        "value": "Mūlāyavisuddhinavaka (Sī, Syā)",
+                    }
+                ],
+                "needs_review": True,
+                "review_reasons": ["orphan_note"],
+            },
+        ]
+        fixed = rebind_orphan_footnote_callouts(segments)
+        self.assertEqual(fixed, 1)
+        self.assertEqual(len(segments), 1)
+        roman = segments[0]["text"][0]["value"]
+        self.assertTrue(roman.endswith("{{n0}}"))
+        self.assertEqual(
+            segments[0]["notes"],
+            ["Mūlāyavisuddhinavaka (Sī, Syā)"],
+        )
+
     def test_repairs_folio_stolen_paren_onto_numbered_callout(self) -> None:
         """``({{()}}150)`` + literal ``(te)2`` → folio restored, ``{{n0}}`` bound."""
         segments = [

@@ -831,6 +831,95 @@ class AttachNumberedCalloutTests(unittest.TestCase):
         self.assertEqual(body.symbol_notes.get("+"), "Vi 4. 284 piṭṭhādīsupi.")
         self.assertFalse(any(s.segment_type == "note" for s in out))
 
+    def test_glued_star_callout_after_dash_binds_note(self) -> None:
+        """``āmantesi– *cattārome`` (04Vin04 p.492) binds the star apparatus."""
+        segs = [
+            Segment(
+                page=492,
+                order=1,
+                item=447,
+                segment_type="prose",
+                text="Bhagavā bhikkhū āmantesi– *cattārome bhikkhave",
+            ),
+            Segment(
+                page=492,
+                order=2,
+                item=None,
+                segment_type="note",
+                text="Aṃ 1. 362 piṭṭhepi.",
+                flags=["star"],
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        body = next(s for s in out if s.segment_type == "prose")
+        self.assertIn("{{*}}", body.text)
+        self.assertIn("cattārome", body.text)
+        self.assertEqual(body.symbol_notes.get("*"), "Aṃ 1. 362 piṭṭhepi.")
+        self.assertFalse(any(s.segment_type == "note" for s in out))
+
+    def test_leftover_page_note_attaches_to_last_body(self) -> None:
+        """Foot-area recension with no callout (04Vin04 p.177) stays on the page."""
+        segs = [
+            Segment(
+                page=177,
+                order=1,
+                item=None,
+                segment_type="title",
+                text="Dutiyanavaka",
+            ),
+            Segment(
+                page=177,
+                order=2,
+                item=183,
+                segment_type="prose",
+                text="Idha pana bhikkhave bhikkhu sambahulā saṃghādisesā.",
+            ),
+            Segment(
+                page=177,
+                order=3,
+                item=10,
+                segment_type="note",
+                text="Mūlāyavisuddhinavaka (Sī, Syā)",
+            ),
+            Segment(
+                page=177,
+                order=4,
+                item=183,
+                segment_type="note",
+                text="Idha pana bhikkhave visuddho tāhi āpattīhi.",
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        self.assertFalse(any(s.segment_type == "note" for s in out))
+        prose = next(s for s in out if s.segment_type == "prose")
+        self.assertTrue(prose.text.endswith("{{n0}}"))
+        self.assertEqual(len(prose.notes), 1)
+        self.assertIn("Mūlāyavisuddhinavaka (Sī, Syā)", prose.notes[0])
+        self.assertIn("visuddho tāhi āpattīhi", prose.notes[0])
+
+    def test_outline_numbered_note_stays_orphan(self) -> None:
+        """``vagga 1.`` is not a callout; leftover attach must not steal note 1."""
+        segs = [
+            Segment(
+                page=10,
+                order=1,
+                item=None,
+                segment_type="chapter",
+                text="Cīvaravagga 1. Paṭhamakathinasikkhāpada",
+            ),
+            Segment(
+                page=10,
+                order=2,
+                item=1,
+                segment_type="note",
+                text="Variant (Itipi)",
+            ),
+        ]
+        out = attach_notes_sacred_style(segs)
+        notes = [s for s in out if s.segment_type == "note"]
+        self.assertEqual(len(notes), 1)
+        self.assertIn("orphan_note", notes[0].review_reasons)
+
     def test_bracket_note_binds_to_omission_bracket(self) -> None:
         """``[  ] Etthantare…`` binds next to body ``[`` (01Vin01 p.134)."""
         segs = [

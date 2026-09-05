@@ -899,7 +899,8 @@ class SacredTranslationRenderTests(WagtailPageTestCase):
         self.assertIn('id="navbar-menu"', html)
         self.assertIn("hall-navbar__menu-toggler", html)
         self.assertIn("hall-lang-switcher", html)
-        self.assertIn('class="collapse hall-navbar__menu w-100"', html)
+        self.assertIn("hall-navbar__menu w-100", html)
+        self.assertIn("d-print-none", html)
         self.assertIn("hall-navbar__search--bar", html)
         self.assertIn("hall-navbar__search--menu", html)
 

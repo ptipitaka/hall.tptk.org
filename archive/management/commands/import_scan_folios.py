@@ -4,14 +4,15 @@ Import ScanFolio rows for an edition from the public scan CDN (or Spaces).
 Discovers page counts by probing HTTP HEAD on
   {SCAN_BASE_URL}/{SCAN_PREFIX}/{collection}/{edition}/{volume_index}/{n}.{ext}
 
-Does not use book-viewer.json. Catalog VolumePage.code stays vol-01;
-storage folders use volume_index (1, 2, …).
+Does not use book-viewer.json. Writes rows only on the default-locale
+VolumePage (one scan image = one ScanFolio). Catalog VolumePage.code stays
+vol-01; storage folders use volume_index (1, 2, …).
 
 Examples:
   docker compose exec web python manage.py import_scan_folios \\
       --collection ch --edition pali2552ro --volume 1 --dry-run
   docker compose exec web python manage.py import_scan_folios \\
-      --collection ch --edition pali2552ro
+      --all --rediscover --count-only
 """
 
 from __future__ import annotations
@@ -22,16 +23,31 @@ import urllib.request
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
-from archive.models import ScanFolio, build_scan_relative_path, _scan_root
+from archive.models import (
+    ScanFolio,
+    build_scan_relative_path,
+    _scan_root,
+    generate_scan_folio_rows,
+    scan_folios_for,
+    scan_owner_volume,
+    set_declared_scan_folio_count,
+)
 from website.models import EditionPage, VolumePage
+from wagtail.models import Locale
 
 
 class Command(BaseCommand):
     help = "Import ScanFolio rows for a catalog edition from remote scan storage."
 
     def add_arguments(self, parser):
-        parser.add_argument("--collection", required=True, help="Collection code (e.g. ch)")
-        parser.add_argument("--edition", required=True, help="Edition code (e.g. pali2552ro)")
+        parser.add_argument("--collection", help="Collection code (e.g. ch)")
+        parser.add_argument("--edition", help="Edition code (e.g. pali2552ro)")
+        parser.add_argument(
+            "--all",
+            action="store_true",
+            dest="all_editions",
+            help="Every default-locale edition that has remote scans (or existing rows).",
+        )
         parser.add_argument(
             "--volume",
             type=int,
@@ -48,7 +64,17 @@ class Command(BaseCommand):
         parser.add_argument(
             "--dry-run",
             action="store_true",
-            help="Discover and report without writing ScanFolio rows.",
+            help="Discover and report without writing ScanFolio rows or counts.",
+        )
+        parser.add_argument(
+            "--rediscover",
+            action="store_true",
+            help="Probe storage even when ScanFolio rows already exist.",
+        )
+        parser.add_argument(
+            "--count-only",
+            action="store_true",
+            help="Write VolumePage.scan_folio_count only; do not create ScanFolio rows.",
         )
         parser.add_argument(
             "--probe-timeout",
@@ -60,41 +86,49 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         collection_code = options["collection"]
         edition_code = options["edition"]
+        all_editions = options["all_editions"]
         volume_indexes = options["volumes"]
         forced_pages = options["pages"]
         dry_run = options["dry_run"]
+        rediscover = options["rediscover"]
+        count_only = options["count_only"]
         timeout = options["probe_timeout"]
 
-        editions = list(
-            EditionPage.objects.live()
-            .specific()
-            .filter(code=edition_code)
-            .select_related("locale")
-        )
-        if not editions:
-            raise CommandError(f"No live EditionPage with code={edition_code!r}")
+        if all_editions:
+            if collection_code or edition_code:
+                raise CommandError("--all cannot be combined with --collection/--edition")
+            if forced_pages is not None:
+                raise CommandError("--pages cannot be combined with --all")
+        elif not collection_code or not edition_code:
+            raise CommandError("Pass --collection and --edition, or --all")
 
-        # Prefer default locale; still require matching collection parent.
-        matched: list[EditionPage] = []
-        for ed in editions:
-            parent = ed.get_parent().specific
-            if getattr(parent, "code", None) == collection_code:
-                matched.append(ed)
-        if not matched:
-            raise CommandError(
-                f"No edition {edition_code!r} under collection {collection_code!r}"
-            )
+        targets = self._edition_targets(collection_code, edition_code)
+        if not targets:
+            raise CommandError("No matching default-locale live EditionPage")
 
-        # Import for every locale tree (en, th, …) that shares the same codes.
-        editions = sorted(matched, key=lambda e: e.locale.language_code)
-        totals = {"created": 0, "updated": 0, "volumes": 0, "folios": 0}
-        # Cache discovered page counts by volume_index (same files for all locales).
-        page_counts: dict[int, int] = {}
+        totals = {
+            "created": 0,
+            "updated": 0,
+            "volumes": 0,
+            "folios": 0,
+            "counts_updated": 0,
+            "editions": 0,
+        }
 
-        for edition in editions:
+        for collection_code, edition in targets:
+            if all_editions and not self._edition_has_scans(
+                collection_code, edition, timeout=timeout
+            ):
+                self.stdout.write(
+                    f"Skip {collection_code}/{edition.code}: no remote scans"
+                )
+                continue
+
+            totals["editions"] += 1
             self.stdout.write(
-                f"Edition: {edition.title} ({edition.locale.language_code}) "
-                f"id={edition.id}  scan root={_scan_root()}"
+                f"Edition: {collection_code}/{edition.code} {edition.title} "
+                f"({edition.locale.language_code}) id={edition.id}  "
+                f"scan root={_scan_root()}"
             )
 
             volumes = (
@@ -117,6 +151,7 @@ class Command(BaseCommand):
             if forced_pages is not None and len(volumes) != 1:
                 raise CommandError("--pages requires exactly one --volume")
 
+            page_counts: dict[int, int] = {}
             for volume in volumes:
                 pages = forced_pages
                 if pages is None:
@@ -124,12 +159,12 @@ class Command(BaseCommand):
                         pages = page_counts[volume.volume_index]
                     else:
                         existing_max = (
-                            ScanFolio.objects.filter(volume=volume)
+                            scan_folios_for(volume)
                             .order_by("-sequence")
                             .values_list("sequence", flat=True)
                             .first()
                         )
-                        if existing_max:
+                        if existing_max and not rediscover:
                             pages = existing_max
                             self.stdout.write(
                                 f"  Reusing existing folio count for "
@@ -137,14 +172,15 @@ class Command(BaseCommand):
                             )
                         else:
                             self.stdout.write(
-                                f"  Discovering pages for volume_index={volume.volume_index} "
-                                f"({volume.code}) …"
+                                f"  Discovering pages for volume_index="
+                                f"{volume.volume_index} ({volume.code}) …"
                             )
                             pages = self._discover_page_count(
                                 collection_code,
-                                edition_code,
+                                edition.code,
                                 volume.volume_index,
                                 timeout=timeout,
+                                hint=existing_max,
                             )
                         page_counts[volume.volume_index] = pages
                 if pages <= 0:
@@ -165,25 +201,64 @@ class Command(BaseCommand):
                 if dry_run:
                     continue
 
-                created, updated = self._upsert_folios(
-                    volume,
-                    collection_code,
-                    edition_code,
-                    pages,
-                )
+                if set_declared_scan_folio_count(volume, pages):
+                    totals["counts_updated"] += 1
+                    self.stdout.write(f"    scan_folio_count={pages}")
+                else:
+                    self.stdout.write(
+                        f"    scan_folio_count unchanged ({pages})"
+                    )
+
+                if count_only:
+                    continue
+
+                created, updated = self._upsert_folios(volume, pages)
                 totals["created"] += created
                 totals["updated"] += updated
 
         verb = "Would import" if dry_run else "Imported"
+        extra = ""
+        if not dry_run:
+            extra = (
+                f" (created={totals['created']}, updated={totals['updated']}, "
+                f"counts_updated={totals['counts_updated']})"
+            )
         self.stdout.write(
             self.style.SUCCESS(
-                f"{verb}: {totals['volumes']} volumes, {totals['folios']} folios"
-                + (
-                    f" (created={totals['created']}, updated={totals['updated']})"
-                    if not dry_run
-                    else ""
-                )
+                f"{verb}: {totals['editions']} editions, {totals['volumes']} volumes, "
+                f"{totals['folios']} folios{extra}"
             )
+        )
+
+    def _edition_targets(
+        self, collection_code: str | None, edition_code: str | None
+    ) -> list[tuple[str, EditionPage]]:
+        default_locale = Locale.get_default()
+        qs = EditionPage.objects.live().specific().select_related("locale")
+        if edition_code:
+            qs = qs.filter(code=edition_code)
+        matched: list[tuple[str, EditionPage]] = []
+        for ed in qs:
+            if ed.locale_id != default_locale.pk:
+                continue
+            parent = ed.get_parent().specific
+            parent_code = getattr(parent, "code", None)
+            if not parent_code:
+                continue
+            if collection_code and parent_code != collection_code:
+                continue
+            matched.append((parent_code, ed))
+        matched.sort(key=lambda item: (item[0], item[1].code))
+        return matched
+
+    def _edition_has_scans(
+        self, collection_code: str, edition: EditionPage, *, timeout: float
+    ) -> bool:
+        volume_ids = VolumePage.objects.child_of(edition).values_list("id", flat=True)
+        if ScanFolio.objects.filter(volume_id__in=volume_ids).exists():
+            return True
+        return self._head_ok(
+            self._object_url(collection_code, edition.code, 1, 1), timeout
         )
 
     def _object_url(
@@ -228,59 +303,62 @@ class Command(BaseCommand):
         volume_index: int,
         *,
         timeout: float,
+        hint: int | None = None,
     ) -> int:
         """Binary search highest sequence with HTTP 200."""
-        if not self._head_ok(
-            self._object_url(collection_code, edition_code, volume_index, 1),
-            timeout,
-        ):
+
+        def exists(sequence: int) -> bool:
+            return self._head_ok(
+                self._object_url(
+                    collection_code, edition_code, volume_index, sequence
+                ),
+                timeout,
+            )
+
+        def search(low: int, high: int) -> int:
+            while low + 1 < high:
+                mid = (low + high) // 2
+                if exists(mid):
+                    low = mid
+                else:
+                    high = mid
+            return low
+
+        if hint and hint >= 1:
+            if exists(hint):
+                if not exists(hint + 1):
+                    return hint
+                low, high = hint, hint
+                while exists(high):
+                    low = high
+                    high *= 2
+                    if high > 100_000:
+                        raise CommandError(
+                            f"Page discovery exceeded 100000 for "
+                            f"volume_index={volume_index}"
+                        )
+                return search(low, high)
+            if exists(1):
+                return search(1, hint)
+
+        if not exists(1):
             return 0
 
         # Expand high bound
         low, high = 1, 1
-        while self._head_ok(
-            self._object_url(collection_code, edition_code, volume_index, high),
-            timeout,
-        ):
+        while exists(high):
             low = high
             high *= 2
             if high > 100_000:
                 raise CommandError(
                     f"Page discovery exceeded 100000 for volume_index={volume_index}"
                 )
-
-        # Binary search in (low, high)
-        while low + 1 < high:
-            mid = (low + high) // 2
-            if self._head_ok(
-                self._object_url(collection_code, edition_code, volume_index, mid),
-                timeout,
-            ):
-                low = mid
-            else:
-                high = mid
-        return low
+        return search(low, high)
 
     @transaction.atomic
-    def _upsert_folios(
-        self,
-        volume: VolumePage,
-        collection_code: str,
-        edition_code: str,
-        pages: int,
-    ) -> tuple[int, int]:
-        created = updated = 0
-        for seq in range(1, pages + 1):
-            _obj, was_created = ScanFolio.objects.update_or_create(
-                volume=volume,
-                sequence=seq,
-                defaults={
-                    "status": ScanFolio.Status.PRESENT,
-                    "image_path": "",
-                },
-            )
-            if was_created:
-                created += 1
-            else:
-                updated += 1
-        return created, updated
+    def _upsert_folios(self, volume: VolumePage, pages: int) -> tuple[int, int]:
+        owner = scan_owner_volume(volume)
+        created, existing = generate_scan_folio_rows(
+            owner, pages, status=ScanFolio.Status.PRESENT
+        )
+        return created, existing

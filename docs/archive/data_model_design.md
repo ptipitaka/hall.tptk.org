@@ -2,7 +2,7 @@
 
 > **ประเภทเอกสาร:** Design Spec (ratified-pending) — ใช้เป็นจุดอ้างอิงสำหรับการ implement
 > **สถานะ:** Draft สำหรับทบทวน · ออกแบบ field พร้อมระบุ **บังคับ/ไม่บังคับ**
-> **อัปเดตล่าสุด:** 2026-06-25 (rev. publication defaults ครบชุด, M2M ภาษา/อักษร, catalog extent)
+> **อัปเดตล่าสุด:** 2026-09-04 (Scan folios ใน Digital archive: กรอง Collection → Edition → Book, จำค่ากรอง, กระโดดเลขหน้า, เปิดภาพสแกนหรือแจ้งว่าไม่มี)
 > **ขอบเขต:** โครงข้อมูลหลักของ `hall.tptk.org` — แทนที่ catalog snippets เดิมด้วย Wagtail Page tree + ตารางข้อมูลใน `archive/`
 
 ---
@@ -165,6 +165,7 @@ parent_page_types = ["website.CollectionPage"]
 | --- | --- | :---: | --- |
 | `code` | CharField | ✓ | รหัสเล่ม เช่น `vol-01` · เป็นส่วนของ scan path + citation · `slug` default = slugify(code) |
 | `volume_index` | IntegerField | ✓ | ลำดับเรียงจริงในฉบับ (มีเสมอ แม้ไม่มีเลขเล่ม) |
+| `scan_folio_count` | PositiveIntegerField | – | จำนวนหน้าสแกนที่ประกาศของเล่ม · บันทึกที่ locale หลัก · `generate_scan_folios` สร้างแถว `1..N` จากค่านี้ |
 | `number` | CharField | – | เลขเล่มที่แสดง เช่น "๑" — **ไม่บังคับ** (บางฉบับใช้ชื่อเล่มแทน) |
 | `part_label` | CharField | – | ภาค/ตอน เช่น "ภาค ๒" |
 | `section` | FK → CanonicalSection | – | ปิฏก/นิกายที่เล่มนี้สังกัด (ดู §3.5) |
@@ -228,7 +229,7 @@ URL ระดับ folio สำหรับแชร์/อ้างอิง �
 
 | field | ชนิด | บังคับ | หมายเหตุ |
 | --- | --- | :---: | --- |
-| `volume` | FK → VolumePage | ✓ | สังกัดเล่ม (on_delete=PROTECT) |
+| `volume` | FK → VolumePage | ✓ | หน้าเล่ม **locale หลัก** เท่านั้น — หนึ่งภาพหนึ่งแถว หน้าแปลอ่านชุดเดียวกัน |
 | `sequence` | IntegerField | ✓ | ลำดับกายภาพในเล่ม (ใช้ path/nav/sort) |
 | `page_no` | CharField | – | เลขหน้าที่พิมพ์จริง (อาจ "ก", "iv", "42") |
 | `image_path` | CharField | – | override path เต็ม; ว่าง = derive จาก composite (ดู §4.2 URL) |
@@ -242,6 +243,8 @@ URL ระดับ folio สำหรับแชร์/อ้างอิง �
 
 - `UniqueConstraint(volume, sequence)`
 - index `(volume, sequence)` สำหรับ nav
+- จำนวนหน้าประกาศที่ `VolumePage.scan_folio_count` แล้ว `generate_scan_folios` สร้างแถว `1..N` — ไม่ใช้การไล่ไฟล์ CDN เป็นทางสร้างรายการ
+- หน้าเล่มทุก locale ใช้ `scan_folios_for(volume)` ไม่กรอง `volume=self` ตรง ๆ
 
 **URL ภาพ = property (ไม่เก็บ URL เต็มใน DB)**
 
@@ -266,165 +269,111 @@ scan path เป็น **hierarchical** ตาม composite code → unique ท�
 
 ## 5. Segment + SegmentRevision (`archive/models.py`)
 
-### 5.1 Segment
+> มติ (ล็อก 2026-09-03): **ไม่มีระบบหน่วยอ้างอิงข้ามฉบับ (`cref`)** แล้ว
+> และ **ไม่มี `text` สตริงเดียว** — เนื้อหาเป็น payload ตามรูป extract
+> (`text[]` หลายอักษร + `runs`, `bats`, `notes`, `symbol_notes`, …)
+> โมเดลออกแบบให้รับไฟล์ถอดจริง (`books/cs-roman/output/*.segments.json`) ได้ตรง ๆ
+
+### 5.1 Segment — หนึ่งแถวต่อหนึ่งหน่วยของไฟล์ถอด
+
+หนึ่งแถว = **หนึ่งหน่วยบนหน้าพิมพ์หนึ่งหน้า** (ตรง `segment` ใน `*.segments.json`)
+ย่อหน้าที่ไหลไปหน้าถัดไปเป็นแถว `prose_continuation` คนละแถว — ไม่มี `folio_end` คร่อมหน้า
 
 | field | ชนิด | บังคับ | หมายเหตุ |
 | --- | --- | :---: | --- |
-| `volume` | FK → VolumePage | ✓ | ขอบเขตหลัก (on_delete=PROTECT) |
-| `order` | IntegerField | ✓ | ลำดับอ่านในเล่ม |
-| `kind` | FK → SegmentKind | ✓ | heading / prose / gāthā / structural … |
-| `text` | TextField | ✓ | ข้อความถอด |
-| `cref` | CharField (index) | ✓ | **canonical reference** ของเรา (§7) — edition-independent |
-| `cref_end` | CharField | – | กรณี segment คร่อมหลายหน่วย |
-| `structural_ref` | CharField | – | เลขข้อ/ย่อหน้าที่พิมพ์ในฉบับนี้ (เช่น VRI para) |
-| `parent` | FK → self | – | โครงสร้างย่อยในเล่ม (vagga→sutta→para) |
-| **anchor → ภาพ** | | | |
-| `folio` | FK → ScanFolio | ✓ | folio หลักที่ข้อความนี้อยู่ |
-| `folio_end` | FK → ScanFolio | – | กรณีข้อความคร่อมหน้า |
-| `region` | JSONField | ✓¹ | bbox normalized `{x,y,w,h}` (0–1) — overlay บนภาพ |
-| `region_note` | CharField | – | คำอธิบายตำแหน่ง (เช่น "คอลัมน์ขวา") |
-| **metadata** | | | |
+| `volume` | FK → VolumePage | ✓ | ขอบเขตหลัก (PROTECT); ผูกเล่ม locale หลักเหมือน `ScanFolio` |
+| `folio` | FK → ScanFolio | – | ภาพสแกนที่หน่วยนี้อยู่ ว่างได้ตอน draft import |
+| `order` | IntegerField | ✓ | ลำดับอ่านในเล่ม **unique** (`UniqueConstraint(volume, order)`) — ตรง `order` ของ extract |
+| `kind` | FK → SegmentKind | ✓ | `code` ตรง `segment_type` ของ extract 1:1 (§5.3) |
+| `item` | IntegerField (index) | – | เลขข้อฉบับพิมพ์ (Tipiṭaka `item`) ว่างสำหรับ heading/gāthā |
+| `section_no` | IntegerField | – | เลขโครงหัวข้อที่พิมพ์ (เช่น `1` ใน `1. Pārājikakaṇḍa`) — คนละชั้นกับ `item` |
+| `content` | JSONField (default `{}`) | – | **ต้นฉบับ** — payload รูป extract: `text[]`, `bats`, `hanging_lines`, `notes`, `symbol_notes`, `flags`, `heading_kind`, `in_toc`, `source_layout`, `closer_level`, `needs_review`, `review_reasons` |
+| `plain_roman` | TextField | – | โรมันแบนสำหรับค้น/ลิสต์ — สร้างจาก `content` **ไม่ใช่ต้นฉบับ** |
+| `plain_thai` | TextField | – | ไทยแบนสำหรับค้น/ลิสต์ — สร้างจาก `content` **ไม่ใช่ต้นฉบับ** |
+| `region` | JSONField | – | bbox normalized `{x,y,w,h}` (0–1) ผูกกับ segment นี้ — ออกแบบการใช้งานภายหลัง |
 | `status` | CharField choices | ✓ (default `draft`) | `draft` / `review` / `published` |
-| `citation_key` | CharField | ✓ | ID คงที่สำหรับลิงก์ `?seg=` (unique-in-volume) |
-| `source_note` | TextField | – | หมายเหตุวิชาการ |
+| `created_at` / `updated_at` | DateTimeField | ✓ (auto) | housekeeping |
 
-> **¹ region บังคับทุก segment (ตามมติ)** แต่เพื่อรองรับ bulk import ข้อมูลเดิมที่ยังไม่มี bbox:
-> - import เข้ามาเป็น `status=draft` ได้โดย `region` ยังว่างชั่วคราว
-> - `clean()` **บังคับ `region`** เมื่อจะเลื่อนเป็น `status=review` หรือ `published`
-> - ผลคือ **ทุก segment ที่ถูกเผยแพร่/ให้บริการ มี region เสมอ** ตามเจตนา (ตรวจเทียบภาพ↔ข้อความได้)
+> **ไม่มี** `cref` / `cref_end` / `structural_ref` / `parent` / `folio_end` /
+> `citation_key` / `source_note` / `region_note` ในโมเดลนี้แล้ว (ถอดออกตามมติ)
+> `structural_ref` แยกเป็น `item` + `section_no` ที่เป็นคอลัมน์ชัด
+> อัตลักษณ์หน่วยในเล่มคือ `order` (ใช้กับ `?seg={order}` บนหน้า folio)
 
 **Constraints / Index**
 
-- `UniqueConstraint(volume, citation_key)`
-- index `cref` (สำคัญมาก — ใช้ join cross-edition)
-- index `(volume, order)`
-- พิจารณา GIN index บน `text` ถ้าทำ full-text search
+- `UniqueConstraint(volume, order)` — อัตลักษณ์เดียวกับ extract
+- index `(volume, order)`, index `item`, index `kind`
+- ไม่มี index `cref` แล้ว (ไม่มีระบบ cref)
 
 **หัวใจการทำงาน**
 
-- `folio` + `region` → viewer วาดกรอบบนภาพตรงกับ segment text → ผู้ตรวจเทียบทันที
-- `cref` → query segment เดียวกันข้ามหลาย Edition มาวางคู่กัน → "เทียบเคียง" โดยไม่ต้องมีตาราง mapping หนักตั้งแต่แรก
+- `content` เป็นที่เก็บต้นฉบับรูป extract — ฟอร์มเจ้าหน้าที่ (เมนู Digital archive ที่จะสร้าง) แก้โครงนี้ทีละหน้า
+- `plain_roman` / `plain_thai` คือข้อความแบนสำหรับค้น/ลิสต์เท่านั้น ไม่ใช่แหล่งความจริง
+- `region` ผูก bbox กับ segment นี้ — การใช้งานบน viewer ออกแบบภายหลัง
+- `folio` + `region` บังคับเมื่อจะเลื่อนเป็น `review`/`published` (`clean()`) — draft จาก import ว่างได้
 
-### 5.2 SegmentRevision
+### 5.2 SegmentRevision — snapshot ทั้ง payload
 
-ประวัติแยกจาก Wagtail (segment มี workflow เฉพาะ — รองรับ four-eyes/branch ตาม `migrate_discussion.md`)
+ประวัติแยกจาก Wagtail (segment มี workflow เฉพาะ — รองรับ four-eyes ตาม `migrate_discussion.md`)
 
 | field | ชนิด | บังคับ | หมายเหตุ |
 | --- | --- | :---: | --- |
-| `segment` | FK → Segment | ✓ | (on_delete=CASCADE) |
-| `text` | TextField | ✓ | snapshot ข้อความ |
+| `segment` | FK → Segment | ✓ | (CASCADE) |
+| `content` | JSONField | – | snapshot payload (ตาม segment) |
 | `kind` | FK → SegmentKind | ✓ | snapshot |
-| `cref` | CharField | ✓ | snapshot |
-| `region` | JSONField | – | snapshot (ตาม segment) |
-| `created_by` | FK → User | ✓ | ผู้แก้ |
+| `item` | IntegerField | – | snapshot |
+| `section_no` | IntegerField | – | snapshot |
+| `region` | JSONField | – | snapshot |
+| `status` | CharField choices | ✓ (default `draft`) | snapshot |
+| `created_by` | FK → User | – | ผู้แก้ |
 | `created_at` | DateTimeField | ✓ (auto) | |
 | `change_note` | CharField | – | สรุปการแก้ |
 | `is_current` | BooleanField | ✓ (default False) | รุ่นที่ใช้แสดง |
 
 > revision ของ **metadata เล่ม/ฉบับ** ใช้ Wagtail Page revision; revision ของ **ข้อความ segment** ใช้ตารางนี้ — แยกชั้นชัดเจน
+> snapshot ทั้ง `content` + คอลัมน์สาระ ไม่ใช่แค่ `text` เดิม
+
+### 5.3 SegmentKind — `code` ตรง `segment_type` ของ extract
+
+`snippets.SegmentKind.code` ตั้งให้ตรงกับ `segment_type` ของ extract 1:1
+(ดู `books/cs-roman/SCHEMA.md` "segment_type vocabulary") เพื่อ import แมปตรง:
+
+| `code` | หมายเหตุ |
+| --- | --- |
+| `piṭaka` / `gambhīra` / `namakkāraṃ` / `chapter` / `title` / `niṭṭhitaṃ` / `tassuddānaṃ` | โครงสร้าง |
+| `prose` / `prose_continuation` | ข้อความร้อย |
+| `gatha` / `gatha_continuation` | คาถา |
+| `note` | เชิงอรรถลอย |
+
+> `heading_kind` (nik/boo/cha/h1…h6) และ `source_layout` (center/bat_line/wak_line/hanging)
+> **ไม่ใช่ kind** — อยู่ใน `content` ของ segment ไม่ใช่ `SegmentKind`
+> seed เดิมที่มี `centered` / `prose-indented` / `prose-plain` เป็น kind ถอดออกแล้ว
 
 ---
 
 ## 6. URL อ้างอิงถาวร (Citation URLs)
 
-> มติ: **ต้องมี URL อ้างอิงถาวรแยก** เพื่อการศึกษา/แชร์/อ้างอิงข้ามฉบับ
+> มติ (ล็อก 2026-09-03): **ไม่มีระบบ `cref` ข้ามฉบับและ `/cite/` route แล้ว**
+> `archive.ReferenceAlias` และ view/url/template ของ cite ถูกถอดออก
 
-### 6.1 รูปแบบ URL
+URL ที่เหลือสำหรับอ้างอิงคือ **folio viewer ใต้ Volume** (RoutablePageMixin):
 
 | ประเภท | รูปแบบ | ทำหน้าที่ |
 | --- | --- | --- |
-| Folio viewer (ใต้ Volume) | `/{volume-path}/f/{sequence}/` | เปิด viewer ที่หน้านั้น (RoutablePageMixin) |
-| Segment ในหน้า | `/{volume-path}/f/{sequence}/?seg={citation_key}` | เลื่อนไป segment |
-| **Citation ถาวร (edition-independent)** | `/cite/{cref}/` | แสดงตัวเลือก/เทียบทุก Edition ที่มี cref นี้ |
-| Citation เจาะ Edition | `/cite/{collection.code}/{edition.code}/{cref}/` | ไปยัง segment ของฉบับนั้นตรง ๆ (composite เพราะ edition.code unique แค่ใน collection) |
-| Legacy alias | `/cite/{scheme}:{value}/` | แปลงอ้างอิงเดิม → 302 → canonical |
+| Folio viewer | `/{volume-path}/f/{sequence}/` | เปิด viewer ที่หน้านั้น |
+| Segment ในหน้า | `/{volume-path}/f/{sequence}/?seg={order}` | เลื่อนไป segment ตาม `order` |
 
-- URL `/cite/...` **ไม่ผูกกับ slug ของ Page** → คงที่แม้ปรับโครง/เปลี่ยนชื่อหน้า
-- `/cite/{cref}/` คือ "ที่อยู่ทางวิชาการ" ของข้อความ — เหมาะใส่ในงานวิจัย/อ้างอิง
-
-### 6.2 ตัวอย่าง
-
-```
-/cite/sut.mn.1/                          → Mūlapariyāya across all editions (picker/compare)
-/cite/pali-tipitaka/pali-2e/sut.mn.1/   → ฉบับ pali-2e ของ MN 1 ตรง ๆ
-/cite/pts:M.i.1/                         → PTS Majjhima เล่ม i หน้า 1 → 302 → /cite/sut.mn.1/
-```
+- อัตลักษณ์ segment คือ `order` ในเล่ม (unique) — ไม่มี `citation_key` แยก
+- ไม่มี `/cite/{cref}/` หรือ `/cite/{scheme}:{value}/` อีก
+- หากภายหลังต้องการอ้างอิงข้ามฉบับ จะออกแบบเป็นชั้นใหม่ ไม่ใช่ `cref` บน `Segment`
 
 ---
 
-## 7. Canonical Reference System (`cref`)
+## 7. (ถอดออก — Canonical Reference System)
 
-> มติ: **ศึกษาระบบเดิมของทุกสถาบัน แล้วสร้างของเราเองที่ดีกว่า** + แปลงอ้างอิงเก่ามาเข้าถึงข้อมูลเราได้
-
-### 7.1 บทเรียนจากระบบเดิม
-
-| ระบบ | รูปแบบ | จุดแข็ง | จุดอ่อน |
-| --- | --- | --- | --- |
-| **PTS** | `M i 1` (เล่ม/หน้า) | มาตรฐานวิชาการตะวันตก | ผูกกับเล่ม/หน้าของฉบับ PTS · หยาบ (ระดับหน้า) · ต่างฉบับเลขไม่ตรง |
-| **VRI/CST** | เลขย่อหน้า (paragraph) | ละเอียดระดับ para · ดิจิทัล | ผูกกับฉบับฉัฏฐสังคีติ |
-| **Thai (สยามรัฐ/มหาจุฬาฯ)** | เล่ม/ข้อ/หน้า | ใช้ในไทยแพร่หลาย | ผูกฉบับ · เลขข้อต่างฉบับไม่ตรง |
-| **BJT (สิงหล)** | เล่ม/หน้า | parallel แปลสิงหล | ผูกฉบับ |
-| **SuttaCentral (MST)** | `mn1:1.2` (โครงสร้าง+segment id) | **edition-independent** · ละเอียดระดับ segment · เทียบข้ามฉบับได้ | ต้อง map กับฉบับสิ่งพิมพ์ |
-
-**ข้อสรุป:** ไม่มีระบบเดียวที่ใช้ได้ทุกฉบับ — ระบบที่ดีที่สุด (SuttaCentral) เป็นแบบ
-**edition-independent + structural + segment-level** เราจะออกแบบ `cref` แนวนี้แต่ปรับให้เหมาะกับงานเรา
-
-### 7.2 ออกแบบ `cref` ของเรา
-
-**หลักการ**
-
-1. **Edition-independent** — อ้างถึง "หน่วยตรรกะของ Work" ไม่ผูกเล่ม/หน้าของฉบับใด → segment ของหลายฉบับที่มี `cref` เดียวกัน = ข้อความคู่ขนาน → เทียบเคียงได้
-2. **Hierarchical + URL-safe** — เป็น path จุดคั่น ใช้รหัสสั้นมาตรฐาน
-3. **Segment-level** — ละเอียดถึงย่อหน้า/หน่วยย่อย
-4. **Stable** — กำหนดครั้งเดียวคงที่ตลอด
-
-**รูปแบบ**
-
-```
-{pitaka}.{division}.{book}.{section}.{unit}[.{sub}]
-```
-
-| ส่วน | ความหมาย | ตัวอย่างรหัส |
-| --- | --- | --- |
-| `pitaka` | ปิฏก | `vin` `sut` `abh` |
-| `division` | นิกาย/หมวดใหญ่ | `dn` `mn` `sn` `an` `kn` (สำหรับ Sutta) |
-| `book/section/unit` | หนังสือ/วรรค/สูตร/ข้อ | ตามโครงสร้างคัมภีร์ |
-
-**ตัวอย่าง**
-
-```
-sut.mn.1            → Mūlapariyāya Sutta (MN 1)
-sut.mn.1.2          → ย่อหน้า/section ที่ 2 ของ MN 1
-sut.sn.22.150       → SN samyutta 22 sutta 150
-vin.para.1          → Vinaya ย่อหน้า 1 (โครง Vinaya ใช้ schema ย่อยของตน)
-abh.dhs.1           → Abhidhamma Dhammasaṅgaṇī หน่วย 1
-```
-
-> รายละเอียด schema ต่อปิฏก/นิกาย (รหัสและความลึกของ unit) จัดทำเป็นภาคผนวกแยกเมื่อเริ่ม import จริง
-> โดยอ้าง mapping ของ SuttaCentral/VRI เป็นจุดตั้งต้น
-
-### 7.3 ReferenceAlias — แปลงอ้างอิงเดิม → ของเรา
-
-ตารางแยกสำหรับ resolve อ้างอิงเก่าทุกระบบมายัง `cref` (และ segment)
-
-| field | ชนิด | บังคับ | หมายเหตุ |
-| --- | --- | :---: | --- |
-| `scheme` | CharField choices | ✓ | `pts` / `vri` / `thai_siam` / `mahachula` / `burmese_cs` / `sinhala_bjt` … |
-| `value` | CharField | ✓ | สตริงอ้างอิง normalize แล้ว (เช่น `M.i.1`) |
-| `cref` | CharField (index) | ✓ | ชี้หน่วยตรรกะของเรา |
-| `edition` | FK → EditionPage | – | เมื่อ scheme ผูกฉบับเฉพาะ (เช่น เลขหน้าฉบับนั้น) |
-| `note` | CharField | – | |
-
-**Constraints**
-
-- `UniqueConstraint(scheme, value, edition)`
-- index `cref`
-
-**การใช้งาน**
-
-- `/cite/pts:M.i.1/` → ค้น `ReferenceAlias(scheme=pts, value=M.i.1)` → ได้ `cref` → 302 → `/cite/{cref}/`
-- รองรับ "อ้างอิงแบบเก่าเพื่อเข้าถึงข้อมูลแบบใหม่ของเรา" ตามมติ
-- หนึ่ง segment มีได้หลาย alias (PTS, VRI, Thai, …) → แสดงเป็น "อ้างอิงเทียบ" บนหน้า segment
+> ระบบ `cref` / `ReferenceAlias` และการเทียบเคียงข้ามฉบับที่ขับด้วย `cref`
+> ถูกถอดออกตามมติ 2026-09-03 ส่วนนี้เก็บไว้เป็นประวัติเท่านั้น
+> หากจะกลับมาทำอ้างอิงข้ามฉบับ ให้ออกแบบเป็นชั้นแยกใหม่ ไม่ใช่คอลัมน์บน `Segment`
 
 ---
 
@@ -450,31 +399,39 @@ abh.dhs.1           → Abhidhamma Dhammasaṅgaṇī หน่วย 1
 | --- | --- | --- |
 | Collection/Edition/Volume Pages | ร้อย–พัน | Wagtail tree ปกติ + index |
 | ScanFolio | หลักหมื่น–แสน/Collection | bulk import command · index DB · ไฟล์บน Spaces/CDN |
-| Segment | หลายแสน/Edition | pagination ผ่าน API · ไม่โหลดทั้งเล่มครั้งเดียว · index `cref` |
+| Segment | หลายแสน/Edition | pagination ในหน้า list ของ Wagtail admin · ไม่โหลดทั้งเล่มครั้งเดียว · index `(volume, order)` / `item` / `kind` |
 
-**กฎเหล็ก:** ห้าม `InlinePanel` ScanFolio/Segment บน VolumePage — แก้ผ่าน **Vue island + API** เท่านั้น
-Wagtail admin ใช้เฉพาะ metadata (Collection/Edition/Volume) และ trigger import
+**กฎเหล็ก:** ห้าม `InlinePanel` ScanFolio/Segment บน VolumePage — หน้า Page explorer จะต้องไม่โหลด
+หลักหมื่น–แสนแถว แก้ผ่าน **เมนู Digital archive ใน Wagtail admin** เท่านั้น (standalone list + filter +
+paginate, รายละเอียดใน §10) Wagtail admin ใช้ metadata (Collection/Edition/Volume) และ trigger import ตามปกติ
 
 ---
 
 ## 10. การทำงานคู่ ScanFolio ↔ Segment (transcription)
 
+> มติ (ล็อก 2026-09-03): เจ้าหน้าที่ทำงานผ่าน **Wagtail admin (เมนู "Digital archive")**
+> ไม่ใช้ Vue island + REST API ดังที่เคยร่างไว้ การเปลี่ยนนี้อยู่ในระดับข้อกำหนดทางเทคนิค (§๑๒ นโยบาย)
+> ไม่ขัดนโยบาย/ยุทธศาสตร์ — ยุทธศาสตร์ §๕.๔ และแผนงานระยะ ๕ กำหนดให้ต้องมีเครื่องมือเจ้าหน้าที่
+> สำหรับรับเข้า/ตรวจทานอยู่แล้ว
+
 ```
-VolumePage template → #edition-app (Vue island)
-   ┌───────────────┬────────────────────────┐
-   │ ScanFolio     │ Segment editor          │
-   │ viewer (ภาพ)  │ text + kind + cref      │
-   │ + วาด region  │ + region (bbox)         │
-   └───────┬───────┴───────────┬────────────┘
-           │ REST API (archive/) │
-           ▼                     ▼
-       ScanFolio              Segment.save → SegmentRevision
-       (Spaces URL)           (audit / four-eyes)
+Wagtail admin → เมนู "Digital archive" (SnippetViewSetGroup, archive/wagtail_hooks.py)
+   ├── Scan folios (ScanFolio)        list + paginate
+   │     · กรองแบบ cascade: Collection → Edition → Book (VolumePage) · จำค่ากรองใน session
+   │     · ยังไม่แสดงรายการจนกว่าจะเลือก Book — เลือกชั้นแม่แล้วโหลดตัวเลือกชั้นลูกทันที (options JSON)
+   │     · เรียงตามเลขหน้า (sequence) น้อย→มากเป็นค่าเริ่มต้น หรือมาก→น้อย
+   │     · ระบุเลขหน้า (page_no หรือ sequence) เพื่อกระโดดไปแถวนั้นโดยตรง
+   │     · คลิก folio → หน้า inspect: มีภาพเมื่อ status=present · ไม่มีแล้วบอกว่าไม่มี
+   │     · สร้างแถวด้วย management command (import/generate) ไม่ใช่มือ
+   └── Segments (รอบถัดไป)           list + filter (volume/kind/status) + paginate
+         · แก้ content (payload extract) + kind + item + section_no
+         · folio + region บังคับก่อนเลื่อนเป็น review/published (clean())
+         · ทุก save สร้าง SegmentRevision (audit / four-eyes)
 ```
 
-- ผู้บันทึกดูภาพ → ลากกรอบ (region) → พิมพ์ข้อความ → ผูก `cref`
-- ทุก save สร้าง `SegmentRevision`
-- ไม่ผ่าน Wagtail admin
+- ผู้บันทึกคลิก folio ในรายการแล้วเปิดภาพสแกน (หรือข้อความว่าไม่มีภาพ) — เครื่องมือถอด Segment ต่อภาพจะตามมาในรอบถัดไป
+- ระบบ region viewer (bbox) ยังเป็นแบบออกแบบไว้ (`region` field มีอยู่) จะเชื่อมเข้า admin ภายหลัง
+- ไม่มี Vue island และไม่มี REST API สาธารณะใน `archive/` (เอา `/cite/` ออกแล้วใน §๖)
 
 ---
 
@@ -485,9 +442,9 @@ VolumePage template → #edition-app (Vue island)
 - Collection = **พระไตรปิฎกทั้งชุด** (Work) · Edition = ภาษา/อักษร · Volume = **Page**
 - ภาษา/อักษรอยู่ที่ **Edition เท่านั้น** — Collection ไม่มี `content_languages`
 - ScanFolio = model + path (ไม่ใช่ Image/Page) · ScanFolioPage = ไม่ทำ
-- URL folio ผ่าน RoutablePageMixin + **citation URL ถาวรแยก** `/cite/...`
+- URL folio ผ่าน RoutablePageMixin (`/{volume-path}/f/{sequence}/`) — ไม่มี `/cite/` route และไม่มี `cref` (ถอดออกตามมติ 2026-09-03, ดู §๖–§๗)
 - Segment + SegmentRevision ใน `archive/` · **region บังคับก่อน publish**
-- `cref` = canonical ref ของเรา (edition-independent) + `ReferenceAlias` แปลงระบบเก่า
+- เครื่องมือเจ้าหน้าที่ = **Wagtail admin (เมนู "Digital archive")** ไม่ใช่ Vue island (มติ 2026-09-03, ดู §๙–§๑๐)
 - มี `CatalogIndexPage`
 - ปิฏก/นิกาย = snippet `CanonicalSection` (controlled vocabulary แบบ tree) FK จาก VolumePage — ไม่ใช้ free tag, ไม่เพิ่มชั้น Page
 - ยังไม่เพิ่ม `taggit` ในชั้นนี้ (เก็บไว้พิจารณาภายหลังสำหรับ subject tags)
@@ -499,9 +456,10 @@ VolumePage template → #edition-app (Vue island)
 
 ### ยังเปิด (จัดทำเมื่อเริ่ม import จริง)
 
-- schema `cref` ละเอียดต่อปิฏก/นิกาย (ภาคผนวกแยก)
-- ตาราง Master TOC แบบเต็ม (cross-edition mapping ขั้นสูง) — เริ่มจาก `cref` ก่อน
+- ระบบอ้างอิงข้ามฉบับ — หากจะทำ ออกแบบเป็นชั้นใหม่ ไม่ใช่ `cref` บน `Segment` (ดู §๗)
+- ตาราง Master TOC แบบเต็ม (cross-edition mapping ขั้นสูง)
 - รายละเอียด workflow four-eyes/lock (สืบจาก sacred-app)
+- region viewer (bbox) บนหน้า edit Segment ใน Wagtail admin
 - การรองรับ IIIF เต็มรูปแบบ
 
 ---
@@ -514,7 +472,7 @@ VolumePage template → #edition-app (Vue island)
 4. RoutablePageMixin + view `/cite/...` + resolver `ReferenceAlias`
 5. management command: import metadata → Page tree, import segment/scan, import alias
 6. ลบ catalog snippets + `CatalogGroup`
-7. Vue island (edition) + REST API ใน `archive/`
+7. Wagtail admin (เมนู "Digital archive" ใน `archive/wagtail_hooks.py`) สำหรับ ScanFolio/Segment
 
 > หมายเหตุ: เอกสารนี้เป็น **design reference** — สอดคล้องกับ `development_guide.md` (§โครงสร้าง, §ภาพสแกน)
 > และ `migrate_discussion.md` (§4 โมเดล/revision) เมื่อ implement ให้ยึดเอกสารนี้เป็นสเปกหลักของชั้น catalog/archive

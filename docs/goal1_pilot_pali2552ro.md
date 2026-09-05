@@ -31,7 +31,7 @@
 |-------|--------|
 | A สำรวจ path | ✅ |
 | B ScanFolio URL / settings | ✅ |
-| C Import ทั้ง 40 เล่ม (en + th) | ✅ · **16 709** folio / locale · รวม **33 418** แถว |
+| C Import ทั้ง 40 เล่ม | ✅ · รายการหน้าควรเป็นชุดเดียวต่อเล่ม (locale หลัก) · แถวซ้ำ en/th เดิมเป็นมรดกนำเข้าเก่า |
 | D หน้าเปิดอ่านขั้นต่ำ | ✅ |
 | E ปิด pilot docs | ✅ |
 
@@ -44,11 +44,18 @@
 
 ```bash
 docker compose exec web python manage.py import_scan_folios \
-  --collection ch --edition pali2552ro
+  --all --rediscover --count-only
 
-docker compose exec web python manage.py import_scan_folios \
-  --collection ch --edition pali2552ro --volume 1 --dry-run
+docker compose exec web python manage.py generate_scan_folios \
+  --all --replace --dry-run
+
+docker compose exec web python manage.py generate_scan_folios \
+  --all --replace
 ```
+
+`import_scan_folios --all --rediscover --count-only` นับไฟล์บน CDN แล้วบันทึก `VolumePage.scan_folio_count` ที่ locale หลัก
+
+`generate_scan_folios --all --replace` ลบแถวซ้ำทุก locale แล้วสร้าง `1..N` บนหน้าเล่ม locale หลัก หน้าแปลอ่านชุดเดียวกัน
 
 ### Settings ที่เกี่ยวข้อง
 

@@ -7,10 +7,11 @@ lifecycle unsuited to the page tree or Wagtail revisions. See
 docs/archive/data_model_design.md §4–§7.
 """
 
+from __future__ import annotations
+
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.text import slugify
 
 
 def _scan_prefix() -> str:
@@ -54,11 +55,130 @@ def build_scan_relative_path(
     )
 
 
+def scan_owner_volume(volume):
+    """
+    VolumePage that owns ScanFolio rows for this physical volume.
+
+    One scan image is one row. Wagtail has an EN and TH VolumePage; rows
+    attach only to the default-locale translation. Other locales read that set.
+    """
+    from wagtail.models import Locale
+
+    volume = volume.specific
+    default_locale = Locale.get_default()
+    if volume.locale_id == default_locale.pk:
+        return volume
+    owner = volume.get_translation_or_none(default_locale)
+    if owner is not None:
+        return owner.specific
+    return volume
+
+
+def scan_folios_for(volume):
+    """ScanFolio queryset for a volume page in any locale."""
+    return ScanFolio.objects.filter(volume=scan_owner_volume(volume))
+
+
+def declared_scan_folio_count(volume) -> int:
+    """Declared page count: default-locale volume, then the given page."""
+    owner = scan_owner_volume(volume)
+    for page in (owner, volume):
+        count = getattr(page, "scan_folio_count", None)
+        if count:
+            return int(count)
+    return 0
+
+
+def set_declared_scan_folio_count(volume, pages: int) -> bool:
+    """
+    Publish scan_folio_count on the default-locale volume.
+
+    Returns True when the stored value changed. Other locales share this
+    count via declared_scan_folio_count(); they are not written separately.
+    """
+    if pages < 1:
+        raise ValueError("pages must be at least 1")
+    owner = scan_owner_volume(volume)
+    if owner.scan_folio_count == pages:
+        return False
+    owner.scan_folio_count = pages
+    owner.save_revision().publish()
+    return True
+
+
+def generate_scan_folio_rows(volume, pages: int, *, status: str | None = None) -> tuple[int, int]:
+    """Create ScanFolio 1..N on the owner volume. Does not delete extras."""
+    if pages < 1:
+        raise ValueError("pages must be at least 1")
+    owner = scan_owner_volume(volume)
+    row_status = status or ScanFolio.Status.PENDING
+    created = existing = 0
+    for seq in range(1, pages + 1):
+        _obj, was_created = ScanFolio.objects.get_or_create(
+            volume=owner,
+            sequence=seq,
+            defaults={"status": row_status, "image_path": ""},
+        )
+        if was_created:
+            created += 1
+        else:
+            existing += 1
+    return created, existing
+
+
+def scan_translation_volume_ids(volume) -> list[int]:
+    """Page ids of every UI locale of this physical volume."""
+    owner = scan_owner_volume(volume)
+    ids = list(owner.get_translations(inclusive=True).values_list("pk", flat=True))
+    if owner.pk not in ids:
+        ids.append(owner.pk)
+    return ids
+
+
+def replace_scan_folio_rows(
+    volume, pages: int, *, status: str | None = None
+) -> tuple[int, int]:
+    """
+    Delete ScanFolio rows on every locale of this volume, then create 1..N
+    on the default-locale owner. Other locales share that set.
+
+    Returns (deleted, created). Refuses if any Segment is attached.
+    """
+    if pages < 1:
+        raise ValueError("pages must be at least 1")
+
+    owner = scan_owner_volume(volume)
+    volume_ids = scan_translation_volume_ids(owner)
+    qs = ScanFolio.objects.filter(volume_id__in=volume_ids)
+    folio_ids = list(qs.values_list("id", flat=True))
+    if folio_ids and Segment.objects.filter(folio_id__in=folio_ids).exists():
+        raise ValidationError(
+            "Cannot replace ScanFolio rows while segments are attached."
+        )
+    deleted = qs.count()
+    qs.delete()
+    row_status = status or ScanFolio.Status.PRESENT
+    ScanFolio.objects.bulk_create(
+        [
+            ScanFolio(
+                volume=owner,
+                sequence=seq,
+                status=row_status,
+                image_path="",
+            )
+            for seq in range(1, pages + 1)
+        ],
+        batch_size=500,
+    )
+    return deleted, pages
+
+
 class ScanFolio(models.Model):
     """
-    A single preserved scan page within a volume.
+    One preserved scan page of a physical volume (not per UI locale).
 
     Files live on Spaces/CDN (or local media), not Wagtail Images.
+    Rows attach to the default-locale VolumePage; other locale pages share them.
     Derived path (when image_path is blank):
         {SCAN_PREFIX}/{collection.code}/{edition.code}/{volume_index}/{sequence}.{ext}
     Catalog page slug/code remains vol-01; storage folder uses volume_index.
@@ -74,6 +194,7 @@ class ScanFolio(models.Model):
         "website.VolumePage",
         on_delete=models.PROTECT,
         related_name="scan_folios",
+        help_text="Default-locale volume page; other locales share these rows.",
     )
     sequence = models.IntegerField(
         help_text="Physical order within the volume; used in path and nav.",
@@ -134,9 +255,30 @@ class ScanFolio(models.Model):
     def image_url(self) -> str:
         return f"{_scan_root()}/{self.relative_path}"
 
+    @property
+    def has_scan_image(self) -> bool:
+        """True when a scan file is expected (status present)."""
+        return self.status == self.Status.PRESENT
+
+    @property
+    def folio_label(self) -> str:
+        """Printed page no. when set, otherwise the physical sequence."""
+        return self.page_no or str(self.sequence)
+
 
 class Segment(models.Model):
-    """A transcribed unit of text anchored to a scan folio."""
+    """
+    One transcribed unit of a volume, anchored to a scan folio.
+
+    The row mirrors a unit of the extract pipeline (one printed-page unit; a
+    paragraph that flows to the next page is a separate ``prose_continuation``
+    row, not a single row with ``folio_end``). There is no cross-edition
+    canonical reference (``cref``) and no single ``text`` string: the rich,
+    multi-script / multi-run / gāthā body lives in ``content`` as the extract
+    payload, with flat ``plain_roman`` / ``plain_thai`` columns for search and
+    listing. ``region`` binds a bounding box to this segment; its viewer use is
+    designed later.
+    """
 
     class Status(models.TextChoices):
         DRAFT = "draft", "Draft"
@@ -148,66 +290,67 @@ class Segment(models.Model):
         on_delete=models.PROTECT,
         related_name="segments",
     )
-    order = models.IntegerField(help_text="Reading order within the volume.")
-    kind = models.ForeignKey(
-        "snippets.SegmentKind",
-        on_delete=models.PROTECT,
-        related_name="segments",
-    )
-    text = models.TextField()
-
-    cref = models.CharField(
-        max_length=128,
-        db_index=True,
-        help_text="Edition-independent canonical reference (e.g. sut.mn.1.2).",
-    )
-    cref_end = models.CharField(max_length=128, blank=True)
-    structural_ref = models.CharField(
-        max_length=128,
-        blank=True,
-        help_text="Edition's own printed numbering (e.g. VRI paragraph).",
-    )
-    parent = models.ForeignKey(
-        "self",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="children",
-    )
-
-    # Anchor to the scan image
     folio = models.ForeignKey(
         ScanFolio,
         null=True,
         blank=True,
         on_delete=models.PROTECT,
         related_name="segments",
-        help_text="Primary scan folio this text appears on.",
+        help_text="Scan folio this unit sits on. May be empty on draft import.",
     )
-    folio_end = models.ForeignKey(
-        ScanFolio,
+    order = models.IntegerField(
+        help_text="Reading order within the volume; unique. Matches extract `order`.",
+    )
+    kind = models.ForeignKey(
+        "snippets.SegmentKind",
+        on_delete=models.PROTECT,
+        related_name="segments",
+        help_text="Structural kind; code matches extract `segment_type` 1:1.",
+    )
+    item = models.IntegerField(
         null=True,
         blank=True,
-        on_delete=models.PROTECT,
-        related_name="segments_end",
+        db_index=True,
+        help_text="Edition's printed item number (Tipiṭaka item). Null for headings/gāthā.",
     )
+    section_no = models.IntegerField(
+        null=True,
+        blank=True,
+        help_text="Outline number printed before a heading (e.g. `1` in `1. Pārājikakaṇḍa`).",
+    )
+
+    # Source of truth for the unit body: the extract payload (text[] / bats /
+    # hanging_lines / notes / symbol_notes / flags / heading_kind / in_toc /
+    # source_layout / closer_level / needs_review / review_reasons). Not edited
+    # as a flat string; the staff form (planned Digital archive menu) edits
+    # this structure per folio.
+    content = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text="Extract payload — multi-script text[], bats, notes, flags, …",
+    )
+    plain_roman = models.TextField(
+        blank=True,
+        help_text="Flat Roman text derived from content for search/listing. Not source.",
+    )
+    plain_thai = models.TextField(
+        blank=True,
+        help_text="Flat Thai text derived from content for search/listing. Not source.",
+    )
+
     region = models.JSONField(
         null=True,
         blank=True,
-        help_text="Normalized bbox {x,y,w,h} (0–1). Required before publishing.",
+        help_text="Per-segment bbox {x,y,w,h} (0–1) on the folio image. Designed later.",
     )
-    region_note = models.CharField(max_length=255, blank=True)
 
     status = models.CharField(
         max_length=16,
         choices=Status.choices,
         default=Status.DRAFT,
     )
-    citation_key = models.CharField(
-        max_length=64,
-        help_text="Stable id for ?seg= links (unique within the volume).",
-    )
-    source_note = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "segment"
@@ -215,34 +358,31 @@ class Segment(models.Model):
         ordering = ["volume", "order"]
         constraints = [
             models.UniqueConstraint(
-                fields=["volume", "citation_key"],
-                name="archive_segment_unique_volume_citation_key",
+                fields=["volume", "order"],
+                name="archive_segment_unique_volume_order",
             ),
         ]
         indexes = [
-            models.Index(fields=["cref"]),
             models.Index(fields=["volume", "order"]),
+            models.Index(fields=["item"]),
+            models.Index(fields=["kind"]),
         ]
 
     def __str__(self) -> str:
-        return f"{self.cref} ({self.citation_key})"
-
-    def save(self, *args, **kwargs):
-        if not self.citation_key and self.cref:
-            self.citation_key = slugify(self.cref)
-        super().save(*args, **kwargs)
+        return f"{self.volume_id}:{self.order}"
 
     def clean(self) -> None:
         super().clean()
-        # region + folio mandatory before a segment is served (review/published)
+        # folio + region are mandatory before a segment is served. Draft rows
+        # imported from extract may lack both until the region viewer lands.
         if self.status in (self.Status.REVIEW, self.Status.PUBLISHED):
-            if not self.region:
-                raise ValidationError(
-                    {"region": "A bounding-box region is required before publishing."}
-                )
             if not self.folio_id:
                 raise ValidationError(
                     {"folio": "A scan folio anchor is required before publishing."}
+                )
+            if not self.region:
+                raise ValidationError(
+                    {"region": "A bounding-box region is required before publishing."}
                 )
 
 
@@ -254,14 +394,18 @@ class SegmentRevision(models.Model):
         on_delete=models.CASCADE,
         related_name="revisions",
     )
-    text = models.TextField()
+    content = models.JSONField(default=dict, blank=True)
     kind = models.ForeignKey(
         "snippets.SegmentKind",
         on_delete=models.PROTECT,
         related_name="+",
     )
-    cref = models.CharField(max_length=128)
+    item = models.IntegerField(null=True, blank=True)
+    section_no = models.IntegerField(null=True, blank=True)
     region = models.JSONField(null=True, blank=True)
+    status = models.CharField(
+        max_length=16, choices=Segment.Status.choices, default=Segment.Status.DRAFT
+    )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,
@@ -283,48 +427,3 @@ class SegmentRevision(models.Model):
 
     def __str__(self) -> str:
         return f"rev of {self.segment_id} @ {self.created_at:%Y-%m-%d %H:%M}"
-
-
-class ReferenceAlias(models.Model):
-    """Map a legacy citation (PTS/VRI/Thai/…) to our canonical reference."""
-
-    class Scheme(models.TextChoices):
-        PTS = "pts", "PTS"
-        VRI = "vri", "VRI / CST"
-        THAI_SIAM = "thai_siam", "Thai (Siam Rath)"
-        MAHACHULA = "mahachula", "Mahāchulā"
-        BURMESE_CS = "burmese_cs", "Burmese (Chaṭṭha Saṅgāyana)"
-        SINHALA_BJT = "sinhala_bjt", "Sinhala (BJT)"
-
-    scheme = models.CharField(max_length=32, choices=Scheme.choices)
-    value = models.CharField(
-        max_length=128,
-        help_text="Normalized legacy citation string (e.g. M.i.1).",
-    )
-    cref = models.CharField(max_length=128, db_index=True)
-    edition = models.ForeignKey(
-        "website.EditionPage",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="reference_aliases",
-        help_text="Set when the scheme is edition-specific (e.g. a page number).",
-    )
-    note = models.CharField(max_length=255, blank=True)
-
-    class Meta:
-        verbose_name = "reference alias"
-        verbose_name_plural = "reference aliases"
-        ordering = ["scheme", "value"]
-        constraints = [
-            models.UniqueConstraint(
-                fields=["scheme", "value", "edition"],
-                name="archive_referencealias_unique_scheme_value_edition",
-            ),
-        ]
-        indexes = [
-            models.Index(fields=["cref"]),
-        ]
-
-    def __str__(self) -> str:
-        return f"{self.scheme}:{self.value} → {self.cref}"

@@ -4,7 +4,7 @@
 Intended to run inside the `web` container, which already has boto3 and sees the
 repo at /app. Credentials and endpoint come from the environment:
   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY  (required)
-  AWS_S3_ENDPOINT_URL                        (default: DigitalOcean sgp1)
+  AWS_S3_ENDPOINT_URL                        (required, e.g. https://<region>.digitaloceanspaces.com)
 """
 import argparse
 import os
@@ -26,7 +26,8 @@ def main() -> None:
     parser.add_argument("--file", required=True, help="Local path (inside the container)")
     parser.add_argument(
         "--endpoint",
-        default=os.environ.get("AWS_S3_ENDPOINT_URL", "https://sgp1.digitaloceanspaces.com"),
+        default=os.environ.get("AWS_S3_ENDPOINT_URL"),
+        help="S3-compatible endpoint URL (defaults to AWS_S3_ENDPOINT_URL)",
     )
     args = parser.parse_args()
 
@@ -34,6 +35,8 @@ def main() -> None:
     secret_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
     if not access_key or not secret_key:
         sys.exit("ERROR: AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY are not set in the environment.")
+    if not args.endpoint:
+        sys.exit("ERROR: AWS_S3_ENDPOINT_URL is not set (pass --endpoint or set the env var).")
 
     s3 = boto3.client(
         "s3",

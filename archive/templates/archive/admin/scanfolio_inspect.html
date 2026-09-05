@@ -1,0 +1,38 @@
+{% extends "wagtailadmin/generic/inspect.html" %}
+{% load i18n %}
+
+{% block main_content %}
+    {% if has_scan_image %}
+        <p>
+            <a href="{{ scan_url }}" target="_blank" rel="noopener">{% trans "Open scan image in a new tab" %}</a>
+        </p>
+        <img
+            class="scanfolio-inspect-image"
+            src="{{ scan_url }}"
+            alt="{% blocktrans with label=object.folio_label %}Scan folio {{ label }}{% endblocktrans %}"
+        />
+    {% else %}
+        <div class="help-block help-warning" role="status">
+            <p>{% trans "No scan image is available for this folio." %}</p>
+        </div>
+    {% endif %}
+
+    {{ block.super }}
+{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        .scanfolio-inspect-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0.5rem 0 1.5rem;
+            border: 1px solid var(--w-color-border-furniture, #e0e0e0);
+        }
+        .help-block.help-warning {
+            margin: 0 0 1.5rem;
+            padding: 1rem 1.25rem;
+        }
+    </style>
+{% endblock %}

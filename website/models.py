@@ -868,6 +868,14 @@ class VolumePage(
         default=0,
         help_text="Physical ordering within the edition (always set).",
     )
+    scan_folio_count = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        help_text=(
+            "Declared number of scan pages in this volume. "
+            "Generate ScanFolio rows 1..N on the default-locale volume only."
+        ),
+    )
     number = models.CharField(
         max_length=64,
         blank=True,
@@ -920,6 +928,7 @@ class VolumePage(
         MultiFieldPanel(
             [
                 FieldPanel("volume_index"),
+                FieldPanel("scan_folio_count"),
                 FieldPanel("number"),
                 FieldPanel("part_label"),
                 FieldPanel("section", widget=forms.Select),
@@ -975,10 +984,10 @@ class VolumePage(
     @path("f/<int:sequence>/")
     def folio_view(self, request, sequence):
         """Folio viewer at a specific scan within this volume."""
-        from archive.models import ScanFolio
+        from archive.models import scan_folios_for
 
-        folio = ScanFolio.objects.filter(volume=self, sequence=sequence).first()
-        folio_qs = ScanFolio.objects.filter(volume=self).order_by("sequence")
+        folio_qs = scan_folios_for(self).order_by("sequence")
+        folio = folio_qs.filter(sequence=sequence).first()
         sequences = list(folio_qs.values_list("sequence", flat=True))
         prev_sequence = next_sequence = None
         if sequences:
@@ -1005,12 +1014,12 @@ class VolumePage(
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        from archive.models import ScanFolio
+        from archive.models import scan_folios_for
 
-        context["folio_count"] = ScanFolio.objects.filter(volume=self).count()
+        folio_qs = scan_folios_for(self)
+        context["folio_count"] = folio_qs.count()
         context["first_folio_sequence"] = (
-            ScanFolio.objects.filter(volume=self)
-            .order_by("sequence")
+            folio_qs.order_by("sequence")
             .values_list("sequence", flat=True)
             .first()
         )

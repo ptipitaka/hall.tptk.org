@@ -16,13 +16,11 @@ urlpatterns = [
 
 if settings.WAGTAIL_I18N_ENABLED:
     urlpatterns += i18n_patterns(
-        path("cite/", include("archive.urls")),
         path("", include(crx_urls)),
         prefix_default_language=False,
     )
 else:
     urlpatterns += [
-        path("cite/", include("archive.urls")),
         path("", include(crx_urls)),
     ]
 
