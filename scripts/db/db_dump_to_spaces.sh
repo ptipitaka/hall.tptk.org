@@ -20,7 +20,16 @@ cd "$REPO_ROOT"
 # Load the compose env file so AWS_*/SPACES_* work even if not exported in the shell.
 if [ -f "$REPO_ROOT/.env" ]; then set -a; . "$REPO_ROOT/.env"; set +a; fi
 
-DC=(docker compose)
+# Pick a working docker invocation (plain for Docker Desktop / docker group,
+# passwordless sudo for the nested Cloud Agent VM).
+if docker info >/dev/null 2>&1; then
+  DC=(docker compose)
+elif sudo -n docker info >/dev/null 2>&1; then
+  DC=(sudo docker compose)
+else
+  echo "ERROR: cannot access the Docker daemon (tried plain and sudo)." >&2
+  exit 1
+fi
 BUCKET="${SPACES_BUCKET:-${AWS_STORAGE_BUCKET_NAME:-sacred}}"
 PREFIX="${SPACES_PREFIX:-archive}"
 DB_USER="${POSTGRES_USER:-hall}"
