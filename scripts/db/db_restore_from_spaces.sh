@@ -13,7 +13,7 @@
 # Optional overrides:
 #   SPACES_BUCKET (default: AWS_STORAGE_BUCKET_NAME or "sacred")
 #   SPACES_PREFIX (default: "archive")
-#   AWS_S3_ENDPOINT_URL (default: https://sgp1.digitaloceanspaces.com)
+#   AWS_S3_ENDPOINT_URL (your Spaces regional endpoint, e.g. https://<region>.digitaloceanspaces.com)
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -21,6 +21,11 @@ cd "$REPO_ROOT"
 
 # Load the compose env file so AWS_*/SPACES_* work even if not exported in the shell.
 if [ -f "$REPO_ROOT/.env" ]; then set -a; . "$REPO_ROOT/.env"; set +a; fi
+
+# Git Bash on Windows rewrites leading-/ arguments (e.g. /app/...) to
+# C:/Program Files/Git/app/... before docker sees them.
+export MSYS_NO_PATHCONV=1
+export MSYS2_ARG_CONV_EXCL='*'
 
 # Pick a working docker invocation (plain for Docker Desktop / docker group,
 # passwordless sudo for the nested Cloud Agent VM).

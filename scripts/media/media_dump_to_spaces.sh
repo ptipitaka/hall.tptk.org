@@ -21,6 +21,11 @@ cd "$REPO_ROOT"
 # Load the compose env file so AWS_*/SPACES_* work even if not exported in the shell.
 if [ -f "$REPO_ROOT/.env" ]; then set -a; . "$REPO_ROOT/.env"; set +a; fi
 
+# Git Bash on Windows rewrites leading-/ arguments (e.g. /app/...) to
+# C:/Program Files/Git/app/... before docker sees them.
+export MSYS_NO_PATHCONV=1
+export MSYS2_ARG_CONV_EXCL='*'
+
 # Pick a working docker invocation (plain for Docker Desktop / docker group,
 # passwordless sudo for the nested Cloud Agent VM).
 if docker info >/dev/null 2>&1; then
