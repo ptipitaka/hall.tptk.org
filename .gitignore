@@ -19,7 +19,9 @@ venv/
 env/
 
 # Django / Wagtail
-media/
+# Anchored to repo root (MEDIA_ROOT = BASE_DIR/media) so it does not also ignore
+# unrelated dirs like scripts/media/.
+/media/
 staticfiles/
 *.log
 local_settings.py
