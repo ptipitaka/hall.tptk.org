@@ -112,7 +112,11 @@ PLUS_BLOCK_RE = re.compile(r"^\+\s+(.*)$")
 _INLINE_PLUS_NOTE_RE = re.compile(r"(?<=\.)\s+\+\s+(?=[A-ZĀĪŪÑÉÓ])")
 # Mid-paragraph apparatus callouts (e.g. ``Te + evarūpaṃ`` on 01Vin01 p.274).
 _INLINE_PLUS_CALLOUT_RE = re.compile(r"(?<=\S)\s+\+\s+(?=\S)")
-_INLINE_STAR_CALLOUT_RE = re.compile(r"(?<=\S)\s+\*\s+(?=\S)")
+# Spaced ``word * word`` or glued ``– *cattārome`` (04Vin04 p.492).
+_INLINE_STAR_CALLOUT_RE = re.compile(
+    r"(?<=\S)\s+\*(?:\s+(?=\S)|(?=[A-Za-zĀāĪīŪūṄṅÑñṆṇṬṭḌḍḶḷṂṃŒœ]))"
+)
+_ITEM_DIGITS_IN_TEXT_RE_CACHE: dict[int, re.Pattern[str]] = {}
 # Bracket apparatus note: ``[  ] Etthantare pāṭhā Syāmapotthake natthi.``
 _BRACKET_NOTE_RE = re.compile(r"^\[\s*\]\s*(.+)$", re.DOTALL)
 # Empty-paren apparatus: ``(  ) (katthaci natthi)`` (02Vin02 p.317).
@@ -210,6 +214,15 @@ FOOTNOTE_CALLOUT_RE = re.compile(
 )
 # Sacred-style note markers after attach_notes ({{n0}}, {{n1}}, …).
 _NOTE_MARKER_RE = re.compile(r"\{\{n(\d+)\}\}")
+
+
+def item_digits_in_text(text: str, item: int) -> bool:
+    """True when ``item`` appears as a standalone digit run (not inside 110)."""
+    compiled = _ITEM_DIGITS_IN_TEXT_RE_CACHE.get(item)
+    if compiled is None:
+        compiled = re.compile(rf"(?<!\d){item}(?!\d)")
+        _ITEM_DIGITS_IN_TEXT_RE_CACHE[item] = compiled
+    return compiled.search(text or "") is not None
 
 
 def remap_note_markers(text: str, offset: int) -> str:
@@ -1753,6 +1766,23 @@ def _bind_inline_symbol_callouts(
     return callout_re.sub(marker, text, count=1), symbol_notes
 
 
+_NOTE_HOST_TYPES = frozenset(
+    {
+        "prose",
+        "prose_continuation",
+        "verse",
+        "verse_continuation",
+        "gatha",
+        "gatha_continuation",
+        "chapter",
+        "title",
+        "subhead",
+        "centered",
+        "niṭṭhitaṃ",
+    }
+)
+
+
 def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
     """
     Fold page footnotes into body segments (sacred-app style).
@@ -1766,7 +1796,9 @@ def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
     Numbered footnotes whose body starts with ``( )`` / ``[ ]`` stay
     numbered (they are not symbol apparatus). Folio markers like
     ``(150)`` never host ``{{()}}``.
-    Unmatched leftover notes remain as segment_type=note with needs_review.
+    Leftover notes with no callout (parallel recension in the foot
+    area) attach to the last body on that page. Unmatched notes remain
+    as segment_type=note with needs_review.
     """
     notes_by_page: dict[int, list[Segment]] = {}
     for seg in segments:
@@ -1922,7 +1954,39 @@ def attach_notes_sacred_style(segments: list[Segment]) -> list[Segment]:
         ),
         key=lambda s: (s.page, s.order),
     )
+    last_host_by_page: dict[int, Segment] = {}
+    body_roman_by_page: dict[int, list[str]] = {}
+    for seg in out:
+        if seg.segment_type in _NOTE_HOST_TYPES:
+            last_host_by_page[seg.page] = seg
+            body_roman_by_page.setdefault(seg.page, []).append(seg.text or "")
+    leftovers_by_page: dict[int, list[Segment]] = {}
+    still_orphan: list[Segment] = []
     for note in orphans:
+        flags = note.flags or []
+        if "star" in flags or "plus" in flags:
+            still_orphan.append(note)
+            continue
+        page_roman = "\n".join(body_roman_by_page.get(note.page, []))
+        if isinstance(note.item, int) and item_digits_in_text(
+            page_roman, int(note.item)
+        ):
+            still_orphan.append(note)
+            continue
+        leftovers_by_page.setdefault(note.page, []).append(note)
+    for page, page_leftovers in leftovers_by_page.items():
+        host = last_host_by_page.get(page)
+        texts = [(n.text or "").strip() for n in page_leftovers]
+        texts = [t for t in texts if t]
+        if host is None or not texts:
+            still_orphan.extend(page_leftovers)
+            continue
+        existing = list(host.notes or [])
+        idx = len(existing)
+        existing.append(" ".join(texts))
+        host.notes = existing
+        host.text = (host.text or "").rstrip() + "{{" + f"n{idx}" + "}}"
+    for note in still_orphan:
         note.needs_review = True
         if "orphan_note" not in note.review_reasons:
             note.review_reasons.append("orphan_note")

@@ -87,10 +87,14 @@ class ReferenceSnippetModelTests(TestCase):
     def test_seed_reference_command(self):
         from django.core.management import call_command
 
+        from snippets.management.commands.seed_catalog_reference import (
+            SEGMENT_KINDS,
+        )
+
         call_command("seed_catalog_reference")
         self.assertEqual(
             SegmentKind.objects.filter(locale__language_code="en").count(),
-            14,
+            len(SEGMENT_KINDS),
         )
         self.assertEqual(Classification.objects.filter(siglum="TP").count(), 2)
         self.assertEqual(

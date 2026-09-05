@@ -1,0 +1,41 @@
+{% load i18n %}
+{% if scanfolio_filterset %}
+<div class="nice-padding scanfolio-filter-bar">
+    <p class="help">{% trans "Select a collection first. Edition choices then appear, then book. Folios list after a book is chosen." %}</p>
+    <form
+        id="scanfolio-filter-form"
+        method="get"
+        action="{{ index_url }}"
+        data-editions-url="{% url 'wagtailsnippets_archive_scanfolio:edition_options' %}"
+        data-books-url="{% url 'wagtailsnippets_archive_scanfolio:book_options' %}"
+        novalidate
+    >
+        <div class="scanfolio-filter-bar__grid">
+            <div class="scanfolio-filter-bar__field">
+                <label for="{{ scanfolio_filterset.form.collection.id_for_label }}">{% trans "Collection" %}</label>
+                {{ scanfolio_filterset.form.collection }}
+            </div>
+            <div class="scanfolio-filter-bar__field">
+                <label for="{{ scanfolio_filterset.form.edition.id_for_label }}">{% trans "Edition" %}</label>
+                {{ scanfolio_filterset.form.edition }}
+            </div>
+            <div class="scanfolio-filter-bar__field">
+                <label for="{{ scanfolio_filterset.form.volume.id_for_label }}">{% trans "Book" %}</label>
+                {{ scanfolio_filterset.form.volume }}
+            </div>
+            <div class="scanfolio-filter-bar__field scanfolio-filter-bar__field--narrow">
+                <label for="{{ scanfolio_filterset.form.folio_page.id_for_label }}">{% trans "Page no." %}</label>
+                {{ scanfolio_filterset.form.folio_page }}
+            </div>
+            <div class="scanfolio-filter-bar__field scanfolio-filter-bar__field--narrow">
+                <label for="{{ scanfolio_filterset.form.page_order.id_for_label }}">{% trans "Sort by page no." %}</label>
+                {{ scanfolio_filterset.form.page_order }}
+            </div>
+            <div class="scanfolio-filter-bar__actions">
+                <button type="submit" class="button">{% trans "Show folios" %}</button>
+                <a href="{{ index_url }}?reset=1" class="button button-secondary">{% trans "Reset" %}</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endif %}

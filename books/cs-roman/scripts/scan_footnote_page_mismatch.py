@@ -45,6 +45,8 @@ NOTE_MARK_RE = re.compile(
 BODY_CALLOUT_RE = re.compile(
     r"([\u0E00-\u0E7FA-Za-z])([1-9]\d{0,2})(?=\s|$|[^\d])"
 )
+# Callout after empty / outline parens: "( ) 1" / "(8) 1".
+PAREN_CALLOUT_RE = re.compile(r"\)\s*([1-9]\d{0,2})(?=\s|$|[^\d])")
 DIGIT_RE = re.compile(r"[1-9]\d{0,2}")
 
 
@@ -140,15 +142,17 @@ def marks_in_body(body: list[dict]) -> list[int]:
         # Prefer glued callouts (โลหิติกา1). Bare digit spans are ambiguous
         # (folio / outline) and over-fire as orphan callouts.
         glued = [int(m.group(2)) for m in BODY_CALLOUT_RE.finditer(row["text"])]
-        if glued:
+        paren = [int(m.group(1)) for m in PAREN_CALLOUT_RE.finditer(row["text"])]
+        if glued or paren:
             found.extend(glued)
+            found.extend(paren)
             continue
         span_marks = _digit_spans(
             row, size_max=SIZE_BODY_CALLOUT_MAX, size_min=SIZE_NOTE_MARK_MAX
         )
-        # Only keep span digits when the row also has Thai/Latin letters
-        # immediately before a same-size mark (callout), not a lone folio digit.
-        if span_marks and re.search(r"[\u0E00-\u0E7FA-Za-z]", row["text"]):
+        # Keep span digits when the row has letters or a closing paren (empty
+        # "( ) 1" callouts). Lone folio digits are skipped via ฉ. above.
+        if span_marks and re.search(r"[\u0E00-\u0E7FA-Za-z)]", row["text"]):
             found.extend(span_marks)
     return found
 

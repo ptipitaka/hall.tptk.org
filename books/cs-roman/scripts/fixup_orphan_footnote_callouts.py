@@ -7,6 +7,8 @@ Covers:
   - bracket ``[  ] …`` apparatus orphans (Syāma omission notes)
   - empty-paren ``(  ) …`` apparatus orphans (non-folio body ``(``)
   - repair folio-stolen ``({{()}}150)`` back onto numbered callouts
+  - leftover page-foot notes with no callout (parallel recension) onto the
+    last body on that page
 
   python books/cs-roman/scripts/fixup_orphan_footnote_callouts.py --volume 01Vin01
   python books/cs-roman/scripts/fixup_orphan_footnote_callouts.py --all
@@ -39,6 +41,7 @@ from extract_cs_roman_pdf import (  # noqa: E402
     _insert_empty_paren_marker,
     apply_numbered_footnote_callouts,
     is_spaced_outline_number,
+    item_digits_in_text,
 )
 
 _BODY_TYPES = frozenset(
@@ -91,11 +94,15 @@ def _is_orphan_note(seg: dict[str, Any]) -> bool:
     return "orphan_note" in reasons
 
 
-def _rewrite_roman(seg: dict[str, Any], new_roman: str) -> None:
+def _rewrite_text_field(container: dict[str, Any], new_roman: str) -> None:
     entries, _rule, _bold_lost = ensure_script_text(
         new_roman, force=True, normalize_spacing=True
     )
-    seg["text"] = entries
+    container["text"] = entries
+
+
+def _rewrite_roman(seg: dict[str, Any], new_roman: str) -> None:
+    _rewrite_text_field(seg, new_roman)
 
 
 def _rebind_numbered(segments: list[dict[str, Any]], bound_ids: set[int]) -> int:
@@ -426,6 +433,109 @@ def _repair_folio_bound_paren_notes(segments: list[dict[str, Any]]) -> int:
     return fixed
 
 
+def _append_callout_to_host(seg: dict[str, Any], note_text: str) -> bool:
+    """Append ``{{nK}}`` + note body onto the last roman of a host segment."""
+    notes = list(seg.get("notes") or [])
+    marker = "{{" + f"n{len(notes)}" + "}}"
+    kind = seg.get("segment_type") or ""
+    if kind in {"gatha", "gatha_continuation"}:
+        bats = seg.get("bats") or []
+        if not bats:
+            return False
+        waks = bats[-1].get("waks") or []
+        if not waks:
+            return False
+        wak = waks[-1]
+        roman = roman_value_from_text_field(wak.get("text"))
+        if not roman:
+            return False
+        _rewrite_text_field(wak, roman.rstrip() + marker)
+    else:
+        roman = roman_value_from_text_field(seg.get("text"))
+        if not roman:
+            return False
+        _rewrite_roman(seg, roman.rstrip() + marker)
+    notes.append(note_text)
+    seg["notes"] = notes
+    return True
+
+
+def _page_body_roman(segments: list[dict[str, Any]], page: int) -> str:
+    parts: list[str] = []
+    for seg in segments:
+        if seg.get("page") != page:
+            continue
+        if (seg.get("segment_type") or "") not in _BODY_TYPES:
+            continue
+        roman = roman_value_from_text_field(seg.get("text"))
+        if roman:
+            parts.append(roman)
+        for bat in seg.get("bats") or []:
+            if not isinstance(bat, dict):
+                continue
+            for wak in bat.get("waks") or []:
+                if not isinstance(wak, dict):
+                    continue
+                wroman = roman_value_from_text_field(wak.get("text"))
+                if wroman:
+                    parts.append(wroman)
+    return "\n".join(parts)
+
+
+def _attach_leftover_page_notes(
+    segments: list[dict[str, Any]], bound_ids: set[int]
+) -> int:
+    """Bind leftover page-foot notes (no callout) onto the last body on the page.
+
+    Skip ``*`` / ``+`` leftovers (need the symbol at the callout) and numbered
+    notes whose item digits already appear in the page body (outline ``1.`` or
+    a missed in-text mark — those stay orphan for the numbered/star binders).
+    """
+    leftovers_by_page: dict[int, list[dict[str, Any]]] = {}
+    for seg in segments:
+        if not _is_orphan_note(seg) or id(seg) in bound_ids:
+            continue
+        flags = seg.get("flags") or []
+        if "star" in flags or "plus" in flags:
+            continue
+        page = seg.get("page")
+        if not isinstance(page, int):
+            continue
+        roman = roman_value_from_text_field(seg.get("text"))
+        if not roman:
+            continue
+        if isinstance(seg.get("item"), int) and item_digits_in_text(
+            _page_body_roman(segments, page), int(seg["item"])
+        ):
+            continue
+        leftovers_by_page.setdefault(page, []).append(seg)
+
+    last_host: dict[int, dict[str, Any]] = {}
+    for seg in segments:
+        if (seg.get("segment_type") or "") not in _BODY_TYPES:
+            continue
+        page = seg.get("page")
+        if isinstance(page, int):
+            last_host[page] = seg
+
+    fixed = 0
+    for page, notes in leftovers_by_page.items():
+        host = last_host.get(page)
+        texts = [
+            (roman_value_from_text_field(n.get("text")) or "").strip()
+            for n in notes
+        ]
+        texts = [t for t in texts if t]
+        if host is None or not texts:
+            continue
+        if not _append_callout_to_host(host, " ".join(texts)):
+            continue
+        for note in notes:
+            bound_ids.add(id(note))
+        fixed += len(notes)
+    return fixed
+
+
 def rebind_orphan_footnote_callouts(segments: list[dict[str, Any]]) -> int:
     """Mutate ``segments`` in place; return number of notes bound."""
     bound_ids: set[int] = set()
@@ -436,6 +546,7 @@ def rebind_orphan_footnote_callouts(segments: list[dict[str, Any]]) -> int:
     fixed += _rebind_inline_symbol(segments, bound_ids, mark="*")
     fixed += _rebind_bracket(segments, bound_ids)
     fixed += _rebind_paren(segments, bound_ids)
+    fixed += _attach_leftover_page_notes(segments, bound_ids)
 
     if not fixed:
         return 0

@@ -1,0 +1,197 @@
+{% extends "wagtailadmin/generic/index.html" %}
+{% load i18n %}
+
+{% block listing %}
+    {% include "archive/admin/scanfolio_filter_bar.html" %}
+    {{ block.super }}
+{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        .scanfolio-filter-bar {
+            padding-top: 1.25rem;
+        }
+        .scanfolio-filter-bar__grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.25rem;
+            align-items: flex-end;
+        }
+        .scanfolio-filter-bar__field {
+            min-width: 14rem;
+            flex: 1 1 14rem;
+        }
+        .scanfolio-filter-bar__field--narrow {
+            min-width: 8rem;
+            flex: 0 1 10rem;
+        }
+        .scanfolio-filter-bar__field label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+        .scanfolio-filter-bar__field select,
+        .scanfolio-filter-bar__field input[type="text"] {
+            width: 100%;
+        }
+        .scanfolio-filter-bar__field select:disabled,
+        .scanfolio-filter-bar__field input:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+        .scanfolio-filter-bar__actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            padding-bottom: 0.15rem;
+        }
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    {# Wagtail puts extra_js at the start of <body>, before the form. Wait for DOM. #}
+    <script>
+        (function () {
+            function onReady(fn) {
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", fn);
+                } else {
+                    fn();
+                }
+            }
+
+            onReady(function () {
+                const form = document.getElementById("scanfolio-filter-form");
+                if (!form) return;
+
+                const editionsUrl = form.getAttribute("data-editions-url");
+                const booksUrl = form.getAttribute("data-books-url");
+
+                function field(name) {
+                    return form.querySelector('[name="' + name + '"]');
+                }
+
+                function setEnabled(el, enabled) {
+                    if (el) el.disabled = !enabled;
+                }
+
+                function placeholderOf(select) {
+                    const blank = select && select.querySelector('option[value=""]');
+                    return blank ? blank.textContent : "";
+                }
+
+                function fillSelect(select, choices, placeholder) {
+                    select.innerHTML = "";
+                    const blank = document.createElement("option");
+                    blank.value = "";
+                    blank.textContent = placeholder;
+                    select.appendChild(blank);
+                    (choices || []).forEach(function (item) {
+                        const opt = document.createElement("option");
+                        opt.value = String(item.id);
+                        opt.textContent = item.label;
+                        select.appendChild(opt);
+                    });
+                    select.value = "";
+                }
+
+                async function loadChoices(url, param, value) {
+                    const query =
+                        encodeURIComponent(param) + "=" + encodeURIComponent(value);
+                    const resp = await fetch(url + "?" + query, {
+                        headers: { Accept: "application/json" },
+                    });
+                    if (!resp.ok) {
+                        throw new Error("cascade");
+                    }
+                    const data = await resp.json();
+                    return data.choices || [];
+                }
+
+                const collection = field("collection");
+                const edition = field("edition");
+                const volume = field("volume");
+                const folioPage = field("folio_page");
+                const pageOrder = field("page_order");
+                const editionPlaceholder = placeholderOf(edition);
+                const bookPlaceholder = placeholderOf(volume);
+                let editionLoad = 0;
+                let bookLoad = 0;
+
+                function syncEnabled() {
+                    const hasCollection = Boolean(collection && collection.value);
+                    const hasEdition = Boolean(edition && edition.value);
+                    const hasBook = Boolean(volume && volume.value);
+                    setEnabled(edition, hasCollection);
+                    setEnabled(volume, hasEdition);
+                    setEnabled(folioPage, hasBook);
+                    setEnabled(pageOrder, hasBook);
+                }
+
+                async function onCollectionChange() {
+                    const seq = ++editionLoad;
+                    bookLoad += 1;
+                    fillSelect(edition, [], editionPlaceholder);
+                    fillSelect(volume, [], bookPlaceholder);
+                    syncEnabled();
+                    if (!collection.value) return;
+                    try {
+                        const choices = await loadChoices(
+                            editionsUrl,
+                            "collection",
+                            collection.value
+                        );
+                        if (seq !== editionLoad) return;
+                        fillSelect(edition, choices, editionPlaceholder);
+                        syncEnabled();
+                    } catch (err) {
+                        form.submit();
+                    }
+                }
+
+                async function onEditionChange() {
+                    const seq = ++bookLoad;
+                    fillSelect(volume, [], bookPlaceholder);
+                    syncEnabled();
+                    if (!edition.value) return;
+                    try {
+                        const choices = await loadChoices(
+                            booksUrl,
+                            "edition",
+                            edition.value
+                        );
+                        if (seq !== bookLoad) return;
+                        fillSelect(volume, choices, bookPlaceholder);
+                        syncEnabled();
+                    } catch (err) {
+                        form.submit();
+                    }
+                }
+
+                function onBookChange() {
+                    syncEnabled();
+                    if (volume && volume.value) {
+                        form.submit();
+                    }
+                }
+
+                form.addEventListener("change", function (event) {
+                    const name = event.target && event.target.name;
+                    if (name === "collection") {
+                        onCollectionChange();
+                    } else if (name === "edition") {
+                        onEditionChange();
+                    } else if (name === "volume") {
+                        onBookChange();
+                    } else if (name === "page_order" && volume && volume.value) {
+                        form.submit();
+                    }
+                });
+
+                syncEnabled();
+            });
+        })();
+    </script>
+{% endblock %}

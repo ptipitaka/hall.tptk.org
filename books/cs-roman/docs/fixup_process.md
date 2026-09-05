@@ -55,7 +55,7 @@ Entrypoint: `books/cs-roman/pipeline.ps1` (มี `-SkipFixups` / `-SkipFixupGat
 | case | อาการ | สคริปต์ |
 |------|--------|---------|
 | `unbound_footnote_callout` | เลข callout ติดคำ / `{{n0}}` ชนกันหลังพับ gāthā | `fixup_unbound_footnote_callouts` (PDF) |
-| `footnote_callout` | callout หลุด / folio ขโมยเลขหมายเหตุ | `fixup_orphan_footnote_callouts` |
+| `footnote_callout` | callout หลุด / folio ขโมยเลขหมายเหตุ / เชิงอรรถท้ายหน้าที่ไม่มี callout | `fixup_orphan_footnote_callouts` |
 | `printable_dash` | U+23AF วาดไม่ได้ | `fixup_printable_dashes` |
 | `midword_hyphen` | ยัติภังค์กลางคำ editorial ใน Roman | `fixup_solid_midword_hyphens` |
 | `glued_section_closer` | closer ติดท้ายประโยค | `fixup_glued_section_closers` |

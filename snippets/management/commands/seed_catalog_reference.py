@@ -23,16 +23,25 @@ CLASSIFICATION_SLUGS = {
     "AN": "annya",
 }
 
+# Segment kind ``code`` mirrors the extract pipeline ``segment_type`` 1:1
+# (see books/cs-roman/SCHEMA.md "segment_type vocabulary"). The extract uses
+# Pali diacritics in `segment_type`; we keep them in `code` so import maps
+# directly, and store the ASCII slug in `slug`.
 SEGMENT_KINDS = (
     {
-        "code": "nikaya",
-        "slug": "nikaya",
-        "names": {"en": "Nikāya", "th": "นิกาย"},
+        "code": "piṭaka",
+        "slug": "pitaka",
+        "names": {"en": "Piṭaka", "th": "ปิฏก"},
     },
     {
-        "code": "book",
-        "slug": "book",
-        "names": {"en": "Book", "th": "คัมภีร์"},
+        "code": "gambhīra",
+        "slug": "gambhira",
+        "names": {"en": "Gambhīra (book)", "th": "คัมภีร์"},
+    },
+    {
+        "code": "namakkāraṃ",
+        "slug": "namakkaram",
+        "names": {"en": "Namakkāraṃ", "th": "นมการ"},
     },
     {
         "code": "chapter",
@@ -45,54 +54,39 @@ SEGMENT_KINDS = (
         "names": {"en": "Title", "th": "ชื่อเรื่อง"},
     },
     {
-        "code": "subhead",
-        "slug": "subhead",
-        "names": {"en": "Subhead", "th": "หัวย่อย"},
-    },
-    {
-        "code": "centered",
-        "slug": "centered",
-        "names": {"en": "Centered", "th": "ข้อความกึ่งกลาง"},
-    },
-    {
-        "code": "namakkaram",
-        "slug": "namakkaram",
-        "names": {"en": "Namakkāraṃ", "th": "นมการ"},
-    },
-    {
-        "code": "nitthitam",
+        "code": "niṭṭhitaṃ",
         "slug": "nitthitam",
         "names": {"en": "Niṭṭhitaṃ", "th": "นิฏฺฐิตํ"},
     },
     {
-        "code": "tassuddanam",
+        "code": "tassuddānaṃ",
         "slug": "tassuddanam",
         "names": {"en": "Tassuddānaṃ", "th": "ตัสสุทฺทานํ"},
     },
     {
         "code": "prose",
         "slug": "prose",
-        "names": {"en": "Prose", "th": "ข้อ"},
+        "names": {"en": "Prose", "th": "ข้อความ"},
     },
     {
-        "code": "prose-continuation",
+        "code": "prose_continuation",
         "slug": "prose-continuation",
         "names": {"en": "Prose continuation", "th": "ข้อความต่อเนื่อง"},
     },
     {
-        "code": "prose-indented",
-        "slug": "prose-indented",
-        "names": {"en": "Indented prose", "th": "ข้อความย่อหน้า"},
-    },
-    {
-        "code": "prose-plain",
-        "slug": "prose-plain",
-        "names": {"en": "Plain prose", "th": "ข้อความธรรมดา"},
-    },
-    {
         "code": "gatha",
         "slug": "gatha",
-        "names": {"en": "Gāthā", "th": "ฉบ์"},
+        "names": {"en": "Gāthā", "th": "คาถา"},
+    },
+    {
+        "code": "gatha_continuation",
+        "slug": "gatha-continuation",
+        "names": {"en": "Gāthā continuation", "th": "คาถาต่อเนื่อง"},
+    },
+    {
+        "code": "note",
+        "slug": "note",
+        "names": {"en": "Note (orphan footnote)", "th": "เชิงอรรถลอย"},
     },
 )
 
