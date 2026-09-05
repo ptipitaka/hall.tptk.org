@@ -12,6 +12,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
+COPY packages/ ./packages/
 RUN pip install -r requirements.txt
 
 COPY . .
