@@ -50,6 +50,17 @@ for _ in $(seq 1 60); do
   sleep 2
 done
 
+# Optional: restore dev data from Spaces (opt-in). Enable by setting
+# RESTORE_DB_FROM_SPACES=1 and providing AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY
+# (e.g. as Cloud Agent Secrets). Safe no-op otherwise.
+if [ "${RESTORE_DB_FROM_SPACES:-0}" = "1" ] && [ -n "${AWS_ACCESS_KEY_ID:-}" ] && [ -n "${AWS_SECRET_ACCESS_KEY:-}" ]; then
+  echo "Restoring database from Spaces (RESTORE_DB_FROM_SPACES=1)..."
+  bash "$REPO_ROOT/scripts/db/db_restore_from_spaces.sh" \
+    || echo "WARN: Spaces restore failed; continuing with the seeded database."
+else
+  echo "Skipping Spaces DB restore (set RESTORE_DB_FROM_SPACES=1 + AWS creds to enable)."
+fi
+
 echo "Building Vue frontend (islands)..."
 cd "$REPO_ROOT/frontend"
 npm install
