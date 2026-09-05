@@ -5,7 +5,7 @@
 # iptables. dockerd is launched detached and logged to /tmp/dockerd.log.
 set -euo pipefail
 
-DOCKERD_LOG="/tmp/dockerd.log"
+DOCKERD_LOG="/var/log/dockerd.log"
 
 configure_daemon() {
   sudo mkdir -p /etc/docker
@@ -33,6 +33,11 @@ start_dockerd() {
   else
     # Clean up any stale socket/pid from a previous boot before relaunching.
     sudo rm -f /var/run/docker.pid /var/run/docker.sock 2>/dev/null || true
+    # Recreate the log fresh each boot as a root-owned, world-writable file so
+    # the redirect never fails on a stale file carried over in a snapshot
+    # (regardless of which user's shell opens it).
+    sudo rm -f "$DOCKERD_LOG" 2>/dev/null || true
+    sudo install -m 0666 /dev/null "$DOCKERD_LOG"
     echo "starting dockerd..."
     sudo bash -c "nohup dockerd >>'$DOCKERD_LOG' 2>&1 &"
     for _ in $(seq 1 30); do
