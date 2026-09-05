@@ -1,0 +1,7 @@
+{
+  "name": "hall.tptk.org",
+  "user": "ubuntu",
+  "install": "bash .cursor/cloud/install.sh",
+  "start": "bash .cursor/cloud/start.sh",
+  "ports": [8000]
+}
